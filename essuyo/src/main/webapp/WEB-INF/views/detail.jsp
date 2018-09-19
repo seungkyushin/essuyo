@@ -169,11 +169,20 @@
         </div>
     </section>
     <!--//END RESERVE A SEAT -->
+<!--     탭기능 설정 -->
+    <div class="container">
+        <ul class="tabs" >
+            <li class="tab-link current" data-tab="tab-1">Information</li>
+            <li class="tab-link" data-tab="tab-2">Review</li>
+        </ul>
+    </div>
+<!-- 탭기능 설정 종료-->
     <!--============================= BOOKING DETAILS =============================-->
     <section class="light-bg booking-details_wrap">
         <div class="container">
             <div class="row">
                 <div class="col-md-8 responsive-wrap">
+                <div id="tab-1" class="tab-content current">
                     <div class="booking-checkbox_wrap">
                         <div class="booking-checkbox">
                             <p>Tasty Hand-Pulled Noodles is a 1950s style diner located in Madison, Wisconsin. Opened in 1946 by Mickey Weidman, and located just across the street from Camp Randall Stadium, it has become a popular game day tradition amongst
@@ -219,6 +228,8 @@
                             </div>
                         </div>
                     </div>
+                    </div>
+                    <div id="tab-2" class="tab-content">
                     <div class="booking-checkbox_wrap mt-4">
                         <h5>34 Reviews</h5>
                         <hr>
@@ -285,7 +296,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div></div>
                 <div class="col-md-4 responsive-wrap">
                     <div class="contact-info">
                         <img src="resources/images/map.jpg" class="img-fluid" alt="#">
@@ -398,6 +409,20 @@
                 }
             });
         }
+    </script>
+    <script>
+            $(document).ready(function(){
+            
+            $('ul.tabs li').click(function(){
+                var tab_id = $(this).attr('data-tab');
+        
+                $('ul.tabs li').removeClass('current');
+                $('.tab-content').removeClass('current');
+        
+                $(this).addClass('current');
+                $("#"+tab_id).addClass('current');
+            })
+        })
     </script>
 </body>
 
