@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class UserVO {
 
-	private Integer user_num;
+	private Integer id;
 	private String name; /* 이름 */
 	private String email; /* 이메일 */
 	private String pw; /* 비밀번호 */
@@ -14,12 +14,12 @@ public class UserVO {
 	private Integer totalreply; /* 총덧글수 */
 	private Integer business_num; /* 사업번호 */
 
-	public Integer getUser_num() {
-		return user_num;
+	public Integer getId() {
+		return id;
 	}
 
-	public void setUser_num(Integer user_num) {
-		this.user_num = user_num;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getName() {
@@ -88,7 +88,7 @@ public class UserVO {
 
 	@Override
 	public String toString() {
-		return "CompVO [user_num=" + user_num + ", name=" + name + ", email=" + email + ", pw=" + pw + ", failPw="
+		return "CompVO [id=" + id + ", name=" + name + ", email=" + email + ", pw=" + pw + ", failPw="
 				+ failPw + ", first_date=" + first_date + ", last_date=" + last_date + ", totalreply=" + totalreply
 				+ ", business_num=" + business_num + "]";
 	}

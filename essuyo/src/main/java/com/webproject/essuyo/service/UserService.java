@@ -2,15 +2,33 @@ package com.webproject.essuyo.service;
 
 import java.util.Date;
 
+import javax.inject.Inject;
+
+import org.springframework.stereotype.Service;
+
+import com.webproject.essuyo.dao.UserDAO;
 import com.webproject.essuyo.domain.UserVO;
-import com.webproject.essuyo.dto.LoginDTO;
 
-public interface UserService {
+@Service
+public class UserService {
 
-	public UserVO login(LoginDTO dto) throws Exception;
+	@Inject
+	private UserDAO dao;
 
-	public void keepLogin(String uid, String seesionId, Date next) throws Exception;
+	
+	public UserVO login(UserVO	vo) throws Exception {
+		
+		return dao.login(vo);
+	}
 
-	public UserVO checkLoginBefore(String value);
+	
+	public void keepLogin(String email, String seesionId, Date next) throws Exception {
+		dao.keepLogin(email, seesionId, next);
 
+	}
+
+	
+	public UserVO checkLoginBefore(String value) {
+		return dao.checkUserWithSessionkey(value);
+	}
 }
