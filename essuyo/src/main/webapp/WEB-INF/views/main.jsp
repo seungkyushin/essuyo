@@ -256,11 +256,11 @@
 			<div class="row">
 				<div class="col-md-3 featured-responsive">
 					<div class="featured-place-wrap">
-						<a href="/detail"> <img src="resources/images/featured1.jpg"
+						<a href="/detail"> <img src="resources/images/menu-restraunt2.jpg"
 							class="img-fluid" alt="#"> <span
 							class="featured-rating-orange">6.5</span>
 							<div class="featured-title-box">
-								<h6>Burger & Lobster</h6>
+								<h6>아웃백-SteakHouse</h6>
 								<p>Restaurant</p>
 								<span>• </span>
 								<p>3 Reviews</p>
@@ -287,11 +287,11 @@
 				</div>
 				<div class="col-md-3 featured-responsive">
 					<div class="featured-place-wrap">
-						<a href="/detail"> <img src="resources/images/featured2.jpg"
+						<a href="/detail"> <img src="resources/images/menu-hotel2.jpg"
 							class="img-fluid" alt="#"> <span
 							class="featured-rating-green">9.5</span>
 							<div class="featured-title-box">
-								<h6>Joe’s Shanghai</h6>
+								<h6>이세상 어딘가 호텔</h6>
 								<p>Restaurant</p>
 								<span>• </span>
 								<p>3 Reviews</p>
@@ -318,10 +318,10 @@
 				</div>
 				<div class="col-md-3 featured-responsive">
 					<div class="featured-place-wrap">
-						<a href="/detail"> <img src="resources/images/featured3.jpg"
+						<a href="/detail"> <img src="resources/images/menu-rentcar2.jpg"
 							class="img-fluid" alt="#"> <span class="featured-rating">3.2</span>
 							<div class="featured-title-box">
-								<h6>Tasty Hand-Pulled Noodles</h6>
+								<h6>쏘쏘카</h6>
 								<p>Restaurant</p>
 								<span>• </span>
 								<p>3 Reviews</p>
@@ -348,10 +348,10 @@
 				</div>
 				<div class="col-md-3 featured-responsive">
 					<div class="featured-place-wrap">
-						<a href="/detail"> <img src="resources/images/featured3.jpg"
+						<a href="/detail"> <img src="resources/images/menu-museum2.jpg"
 							class="img-fluid" alt="#"> <span class="featured-rating">3.2</span>
 							<div class="featured-title-box">
-								<h6>Tasty Hand-Pulled Noodles</h6>
+								<h6>상어박물관?</h6>
 								<p>Restaurant</p>
 								<span>• </span>
 								<p>3 Reviews</p>
