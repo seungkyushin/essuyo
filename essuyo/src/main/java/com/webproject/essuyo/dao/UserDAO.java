@@ -20,19 +20,19 @@ public class UserDAO {
 	@Inject
 	private SqlSession session;
 	//네임스페이스에 매퍼 주소 변경해 줘야 함
-	private static String namespace = "com.spring.mapper.UserMapper";
+	private static String namespace = "com.webproject.essuyo.dao";
 
 	//로그인 기능을 해 준다. vo 객체에서 이메일과 비번을 받아서 dto에 배열로 넣어줌.
 	public UserVO login(UserVO vo) throws Exception {
 		
-		String dto[] = {vo.getEmail(), vo.getPw()};
+		String dto[] = {vo.getEmail(), vo.getPassword()};
 		return session.selectOne(namespace+".login", dto);
 	}
 
 	//회원가입 기능. session 뒤의 insert라는 변수는 변경할 수도 있다.
 	public void regist(UserVO vo) throws Exception{
 		// dto 배열에 이름, 이메일, 비번, 나이, 성별 을 넣었다. 그냥, 파라미터로 받은 vo 객체를 바로 집어 넣어도 괜찮은지, 차후 테스트 요망
-		String dto[] = {vo.getName(), vo.getEmail(), vo.getPw(), vo.getAge(), vo.getGender()};
+		String dto[] = {vo.getName(), vo.getEmail(), vo.getPassword(), vo.getAge(), vo.getGender()};
 		session.insert(namespace+".regist", dto);
 	}
 	

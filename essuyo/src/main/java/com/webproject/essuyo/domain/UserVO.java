@@ -7,7 +7,7 @@ public class UserVO {
 	private Integer id;
 	private String name; /* 이름 */
 	private String email; /* 이메일 */
-	private String pw; /* 비밀번호 */	
+	private String password; /* 비밀번호 */	
 	private Integer failPw; /* 비밀번호실패 */
 	private String age;
 	private String gender;
@@ -58,12 +58,12 @@ public class UserVO {
 		this.email = email;
 	}
 
-	public String getPw() {
-		return pw;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setPw(String pw) {
-		this.pw = pw;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public Integer getFailPw() {
@@ -108,7 +108,7 @@ public class UserVO {
 
 	@Override
 	public String toString() {
-		return "CompVO [id=" + id + ", name=" + name + ", email=" + email + ", pw=" + pw + ", failPw="
+		return "CompVO [id=" + id + ", name=" + name + ", email=" + email + ", password=" + password + ", failPw="
 				+ failPw + ", first_date=" + first_date + ", last_date=" + last_date + ", totalreply=" + totalreply
 				+ ", business_num=" + business_num + "]";
 	}
