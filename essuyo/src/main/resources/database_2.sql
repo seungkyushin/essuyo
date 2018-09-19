@@ -98,6 +98,8 @@ CREATE TABLE user (
 	total_reply INTEGER, /* 총덧글수 */
 	business_id INTEGER, /* 사업번호 */
 	image_info_id INTEGER,
+	sessionkey varchar(50) not null default 'none', /*세션키*/
+	sessionlimit timestamp, /*세션유효기간*/
 	
 	FOREIGN KEY (business_id) REFERENCES business(id),
 	FOREIGN KEY (image_info_id) REFERENCES image_info(id)
