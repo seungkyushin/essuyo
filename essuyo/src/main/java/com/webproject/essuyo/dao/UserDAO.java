@@ -29,6 +29,13 @@ public class UserDAO {
 		return session.selectOne(namespace+".login", dto);
 	}
 
+	//회원가입 기능. session 뒤의 insert라는 변수는 변경할 수도 있다.
+	public void regist(UserVO vo) throws Exception{
+		// dto 배열에 이름, 이메일, 비번, 나이, 성별 을 넣었다. 그냥, 파라미터로 받은 vo 객체를 바로 집어 넣어도 괜찮은지, 차후 테스트 요망
+		String dto[] = {vo.getName(), vo.getEmail(), vo.getPw(), vo.getAge(), vo.getGender()};
+		session.insert(namespace+".regist", dto);
+	}
+	
 	
 	//로그인 유지 기능. 여유가 생기면 마저 손보고, 작동 안 하는데 시간이 없을 경우엔 삭제
 	public void keepLogin(String email, String seesionId, Date next) {

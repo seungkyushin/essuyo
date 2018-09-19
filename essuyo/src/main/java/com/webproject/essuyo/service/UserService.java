@@ -15,10 +15,16 @@ public class UserService {
 	@Inject
 	private UserDAO dao;
 
-	
+	//로그인 서비스
 	public UserVO login(UserVO	vo) throws Exception {
 		
 		return dao.login(vo);
+	}
+	
+	//회원가입 서비스
+	public void regist(UserVO vo) throws Exception{
+		
+		dao.regist(vo);
 	}
 
 	

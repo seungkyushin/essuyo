@@ -7,12 +7,32 @@ public class UserVO {
 	private Integer id;
 	private String name; /* 이름 */
 	private String email; /* 이메일 */
-	private String pw; /* 비밀번호 */
+	private String pw; /* 비밀번호 */	
 	private Integer failPw; /* 비밀번호실패 */
+	private String age;
+	private String gender;
 	private Date first_date; /* 생성날짜 */
 	private Date last_date; /* 마지막로그인날짜 */
 	private Integer totalreply; /* 총덧글수 */
 	private Integer business_num; /* 사업번호 */
+
+	
+	
+	public String getAge() {
+		return age;
+	}
+
+	public void setAge(String age) {
+		this.age = age;
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
 
 	public Integer getId() {
 		return id;
