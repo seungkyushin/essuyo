@@ -6,7 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.SelectProvider;
 
 import com.webproject.essuyo.domain.ImageInfoVO;
-import com.webproject.essuyo.mappers.sqlprovider.ImageAdminSQLProvider;
+import mappers.sqlprovider.ImageAdminSQLProvider;
 
 public interface ImageAdminMapper {
 
