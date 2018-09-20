@@ -15,10 +15,6 @@ public class HomeController {
 
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
-	@GetMapping(path = "/list")
-	public String showListPage(Locale locale, Model model) {
-		return "list";
-	}
 
 	@GetMapping(path = "/detail")
 	public String showdetailPage(Locale locale, Model model) {
