@@ -24,19 +24,17 @@ CREATE TABLE business_type (
 )DEFAULT CHARSET=utf8; 
 
 
-/* 취소 약관 */
-CREATE TABLE cancel (
-	id INTEGER PRIMARY KEY auto_increment, /* 번호 */
-	content VARCHAR(255) NOT NULL /* 설명 */
-)DEFAULT CHARSET=utf8;
 
 /* 상품 */
 CREATE TABLE product (
 	id INTEGER PRIMARY KEY auto_increment, /* 번호 */
-	name VARCHAR(255) NOT NULL, /* 이름 */
+	name VARCHAR(255) NOT NULL,			 /* 이름 */
+	count INTEGER NOT NULL,							 /*상품개수*/
 	discription VARCHAR(255) NOT NULL, /* 설명 */
 	price INTEGER NOT NULL /* 가격 */
 )DEFAULT CHARSET=utf8; 
+
+
 
 /* 이미지파일정보 */
 CREATE TABLE image_info (
@@ -131,6 +129,59 @@ CREATE TABLE message (
 	FOREIGN KEY (user_id) REFERENCES user(id) ON DELETE CASCADE
 )DEFAULT CHARSET=utf8; 
 
+
+
+/* 상품관리 */
+CREATE TABLE product_admin (
+	id INTEGER PRIMARY KEY auto_increment, /*상품 관리 번호*/
+	business_id INTEGER, /* 사업종류번호 */
+	product_id INTEGER,
+	
+	FOREIGN KEY (business_id) REFERENCES business(id) ON DELETE CASCADE,
+	FOREIGN KEY (product_id) REFERENCES product(id) ON DELETE CASCADE
+);
+
+/* 사용가능시설 */
+CREATE TABLE facility (
+	company_id INTEGER , /* 회사번호 */
+	facility_list_id INTEGER,  /* 사용가능시설목록번호 */
+	
+	FOREIGN KEY (company_id) REFERENCES company(id) ON DELETE CASCADE,
+	FOREIGN KEY (facility_list_id) REFERENCES facility_list(id) ON DELETE CASCADE
+);
+
+
+/* 회사이미지관리 */
+CREATE TABLE company_image_admin (
+	id INTEGER PRIMARY KEY auto_increment, /*회사이미지관리 번호*/
+	company_id INTEGER, /* 회사번호 */
+	image_info_id INTEGER, /* 이미지정보번호 */
+	
+	FOREIGN KEY (company_id) REFERENCES company(id) ON DELETE CASCADE,
+	FOREIGN KEY (image_info_id) REFERENCES image_info(id) ON DELETE CASCADE
+)DEFAULT CHARSET=utf8;
+
+/* 상품이미지관리 */
+CREATE TABLE product_image_admin (
+	id INTEGER PRIMARY KEY auto_increment, /*상품 관리 번호*/
+	product_id INTEGER, /* 상품 번호 */
+	image_info_id INTEGER, /* 이미지 관리 번호 */
+	
+	FOREIGN KEY (product_id) REFERENCES product(id) ON DELETE CASCADE,
+	FOREIGN KEY (image_info_id) REFERENCES image_info(id) ON DELETE CASCADE
+)DEFAULT CHARSET=utf8; 
+
+/* 덧글이미지관리 */
+CREATE TABLE comment_image_admin (
+	id INTEGER PRIMARY KEY auto_increment, /*덧글이미지관리 번호*/
+	image_info_id INTEGER, /* 이미지정보번호 */
+	comment_id INTEGER, /* 덧글번호 */
+	
+	FOREIGN KEY (comment_id) REFERENCES comment(id) ON DELETE CASCADE,
+	FOREIGN KEY (image_info_id) REFERENCES image_info(id) ON DELETE CASCADE
+)DEFAULT CHARSET=utf8; 
+
+
 /* 예약 */
 CREATE TABLE reservation (
 	id INTEGER PRIMARY KEY  auto_increment, /* 번호 */
@@ -150,75 +201,27 @@ CREATE TABLE reservation (
 )DEFAULT CHARSET=utf8; 
 
 
-
-/* 상품관리 */
-CREATE TABLE product_admin (
-	product_count INTEGER, /*상품개수*/
-	business_id INTEGER, /* 사업종류번호 */
-	product_id INTEGER,	 /* 상품번호 */
-	
-	FOREIGN KEY (business_id) REFERENCES business(id) ON DELETE CASCADE,
-	FOREIGN KEY (product_id) REFERENCES product(id) ON DELETE CASCADE
-);
-
-/* 사용가능시설 */
-CREATE TABLE facility (
-	company_id INTEGER , /* 회사번호 */
-	facility_list_id INTEGER,  /* 사용가능시설목록번호 */
-	
-	FOREIGN KEY (company_id) REFERENCES company(id) ON DELETE CASCADE,
-	FOREIGN KEY (facility_list_id) REFERENCES facility_list(id) ON DELETE CASCADE
-);
-
-
-/* 회사이미지관리 */
-CREATE TABLE company_image_admin (
-	company_id INTEGER, /* 회사번호 */
-	image_info_id INTEGER, /* 이미지정보번호 */
-	
-	FOREIGN KEY (company_id) REFERENCES company(id) ON DELETE CASCADE,
-	FOREIGN KEY (image_info_id) REFERENCES image_info(id) ON DELETE CASCADE
-)DEFAULT CHARSET=utf8; 
-
-/* 덧글이미지관리 */
-CREATE TABLE comment_image_admin (
-	image_info_id INTEGER, /* 이미지정보번호 */
-	comment_id INTEGER, /* 덧글번호 */
-	
-	FOREIGN KEY (comment_id) REFERENCES comment(id) ON DELETE CASCADE,
-	FOREIGN KEY (image_info_id) REFERENCES image_info(id) ON DELETE CASCADE
-)DEFAULT CHARSET=utf8; 
-
-/* 상품이미지관리 */
-CREATE TABLE product_image_admin (
-	product_id INTEGER, /* 번호 */
-	image_info_id INTEGER, /* 번호2 */
-	
-	FOREIGN KEY (product_id) REFERENCES product(id) ON DELETE CASCADE,
-	FOREIGN KEY (image_info_id) REFERENCES image_info(id) ON DELETE CASCADE
-)DEFAULT CHARSET=utf8; 
-
 /*********************************************************************************/
 /************************************ 데이터 입력 ************************************/
 /*********************************************************************************/
 
-/*취소 약관*/
-INSERT INTO cancel(content) VALUES ("취소규정 및 약관동의");
-INSERT INTO cancel(content) VALUES ("연박의 취소수수료는 일할 계산합니다.");
-INSERT INTO cancel(content) VALUES ("예약 변경을 위한 취소시에도 취소수수료가 부과되오니 양해하여 주시기 바랍니다.");
-INSERT INTO cancel(content) VALUES ("투숙일 이후에는 반환되지 않습니다.");
-INSERT INTO cancel(content) VALUES ("노쇼(No-Show: 사전 연락없이 예약된 숙소를 이용하지 않음)의 경우 요금이 100% 정상 청구됩니다.");
-INSERT INTO cancel(content) VALUES ("실시간예약의 특성상 하나의 객실에 중복예약이 발생될 수 있으며, 이 경우 먼저 결제된 예약 건에 우선권이 있습니다.");
-INSERT INTO cancel(content) VALUES ("성수기 요금이 확정되지 않았거나 요금표가 잘못 등록된 경우 예약이 취소될 수 있습니다.");
 
 /*이미지*/
 INSERT INTO image_info ( save_path, type ,name, cre_date ) VALUES("resources/images/hotel.jpg","image/jpg","hotel", now());
+INSERT INTO image_info ( save_path, type ,name, cre_date ) VALUES("resources/images/car.jpg","image/jpg","car", now());
+INSERT INTO image_info ( save_path, type ,name, cre_date ) VALUES("resources/images/food.jpg","image/jpg","food", now());
+INSERT INTO image_info ( save_path, type ,name, cre_date ) VALUES("resources/images/museum.jpg","image/jpg","museum", now());
+
 
 /*사업 종류*/
 INSERT INTO business_type(name) VALUES("호텔");
+INSERT INTO business_type(name) VALUES("렌트카");
+INSERT INTO business_type(name) VALUES("음식점");
+INSERT INTO business_type(name) VALUES("박물관");
 
 /* 지역명목록 */
 INSERT INTO area_list (name)  VALUES("부산");
+INSERT INTO area_list (name)  VALUES("서울");
 
 
 /* 업체 */
@@ -236,14 +239,28 @@ cre_date,last_date,total_reply,business_id) VALUES("이써요", 20,"남","test@e
 "123",3,now(),now(),10,1);
 
 
+
 /*상품*/
-INSERT INTO product(name,discription,price) VALUES("비싼 호텔", "세계에서 가장 비싼 호텔이다.",1000000);
+INSERT INTO product(name, count, discription,price) VALUES("비싼 호텔", 10, "한국에서 가장 비싼 호텔입니다.",1000000);
+INSERT INTO product(name, count, discription,price) VALUES("람보르기니 SUV", 0, "람보르기니기니",300000);
+INSERT INTO product(name, count, discription,price) VALUES("돈까스 맛집", 10, "돈까스 장인이 매일 직접 만들어 판매합니다.",7000);
+INSERT INTO product(name, count, discription,price) VALUES("박물관이 살아있다.", 10, "영화 아님",4000);
+
+
+/*상품 관리*/
+INSERT INTO product_admin(business_id,product_id) VALUES(1,1);
+INSERT INTO product_admin(business_id,product_id) VALUES(1,2);
+INSERT INTO product_admin(business_id,product_id) VALUES(1,3);
+INSERT INTO product_admin(business_id,product_id) VALUES(1,4);
+
 
 /*상품 이미지 관리*/
 INSERT INTO product_image_admin(product_id,image_info_id) VALUES(1, 1);
+INSERT INTO product_image_admin(product_id,image_info_id) VALUES(2, 2);
+INSERT INTO product_image_admin(product_id,image_info_id) VALUES(3, 3);
+INSERT INTO product_image_admin(product_id,image_info_id) VALUES(4, 4);
 
-/*상품*/
-INSERT INTO product_admin(product_count,business_id,product_id) VALUES(10,1,1);
+
 
 
 

@@ -1,276 +1,301 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 
 <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="author" content="Colorlib">
-    <meta name="description" content="자리있어요?">
-    <meta name="keywords" content="이써요">
-    <!-- Favicons -->
-    <link rel="shortcut icon" href="#">
-    <!-- Page Title -->
-    <title>자리 있어요?</title>
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="resources/css/bootstrap/bootstrap.min.css">
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,500,700,900" rel="stylesheet">
-    <!-- Simple line Icon -->
-    <link rel="stylesheet" href="resources/css/simple-line-icons.css">
-    <!-- Themify Icon -->
-    <link rel="stylesheet" href="resources/css/themify-icons.css">
-    <!-- Hover Effects -->
-    <link rel="stylesheet" href="resources/css/set1.css">
-    <!-- Swipper Slider -->
-    <link rel="stylesheet" href="resources/css/swiper.min.css">
-    <!-- Magnific Popup CSS -->
-    <link rel="stylesheet" href="resources/css/magnific-popup.css">
-    <!-- Main CSS -->
-    <link rel="stylesheet" href="resources/css/style.css">
-    
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="Colorlib">
+<meta name="description" content="자리있어요?">
+<meta name="keywords" content="이써요">
 
-
-
-
+<link rel="shortcut icon" href="#">
+<title>자리 있어요?</title>
+<link rel="stylesheet" href="resources/css/bootstrap/bootstrap.min.css">
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,500,700,900" rel="stylesheet">
+<link rel="stylesheet" href="resources/css/simple-line-icons.css">
+<link rel="stylesheet" href="resources/css/themify-icons.css">
+<link rel="stylesheet" href="resources/css/set1.css">
+<link rel="stylesheet" href="resources/css/swiper.min.css">
+<link rel="stylesheet" href="resources/css/magnific-popup.css">
+<link rel="stylesheet" href="resources/css/style.css">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 </head>
 <body>
-   	<%@ include file="/pageframe/header.jsp" %>
-   	
-    <!--============================= RESERVE A SEAT =============================-->
-    <section class="reserve-block">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6">
-                    <h5>${product.name}</h5>
-                    <p><span>￦￦￦</span>￦￦</p><br>
-                    <p class="reserve-description">${product.discription}</p>
-                </div>
-                <div class="col-md-6">
-                    <div class="reserve-seat-block">
-                        <div class="reserve-rating">
-                            <span>${product.status}</span>
-                        </div>
+	<%@ include file="/pageframe/header.jsp"%>
 
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!--//END RESERVE A SEAT -->
-    <!--============================= BOOKING DETAILS =============================-->
-    <section class="light-bg booking-details_wrap">
-        <div class="container"> 
-            <div class="row">
-      
-     		 <div class="col-md-3 responsive-wrap">
-           		 <img src="${image.path}" class="img-fluid" alt="${image.name}">              
-        	</div>
-               
-               <div class="col-md-5 responsive-wrap">
-            	   <div id="item" class="booking-checkbox_wrap">
-            	   </div>
-               </div>
-                
+	<!--============================= RESERVE A SEAT =============================-->
+	<section class="reserve-block">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6">
+					<h5>${product.name}</h5>
+					<p><span>￦￦￦</span>￦￦
+					</p>
+					<br>
+					<span class="icon-direction"></span><p class="reserve-description">${product.discription}</p>
+				</div>
+				<div class="col-md-6">
+					<div class="reserve-seat-block">
+					<c:choose>
+						<c:when test="${product.state == '예약불가'}">
+							<div class="reserve-rating reserve-rating-red">
+								<span>${product.state}</span>
+							</div>
+						</c:when>
+						<c:otherwise>
+							<div class="reserve-rating">
+								<span>${product.state}</span>
+							</div>
+						</c:otherwise>
+					</c:choose>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
 
-                <div class="col-md-4 responsive-wrap">
-                    <div class="contact-info">
-            		   <div class="address">
-                            <span class="icon-clock"></span>
-                            <p>예약 날짜<br> <span id="reservation-date"></span><br>
-                         	 <h6 id="use-count"></h6>
-                            </p>
-                        </div>
-                     
-                        <div class="address">
-                            <span class="icon-screen-smartphone"></span>
-                            <p>쿠폰 할인 : -0원</p>
-                           
-                        </div>
-                        
-                    </div>
-                    <div class="follow">
-                        <div class="follow-img">
-                            <h6>결제 금액</h6>
-                            <h3 style="color:red">100,000원</h3>
-                        </div>
-                        <hr>
-                    </div>
-                    <a href="#" class="btn btn-outline-danger btn-contact">결제하기</a>
- 
-                </div>
-            </div> 
-            <hr>
-    
-            <div class="row">
-     
-                <div class="col-md-8 responsive-wrap">
-                
-   				<div class="booking-checkbox_wrap"> 
-                		<h5>할인</h5> 
-         		</div>
-            	<hr>
-                
-           
-                       <div class="booking-checkbox_wrap">    
-                             <h5>취소규정 및 약관동의</h5>      
-                        			<ul>
-                        			<li>연박의 취소수수료는 일할 계산합니다.</li>
-                        			<li>취소수수료는 현금 결제액, 포인트 결제액 순으로 차감됩니다.</li>
-                        			<li>취소수수료가 실 결제금액(현금+포인트)를 초과하는 경우, 초과금액을 부과하지 않습니다.</li><li>· 투숙일 이전 취소 시에는 쿠폰이 반환되며, 투숙일 이후에는 반환되지 않습니다.</li><li>. 예약 변경을 위한 취소시에도 취소수수료가 부과되오니 양해하여 주시기 바랍니다.</li>
-                        			<li>노쇼(No-Show: 사전 연락없이 예약된 숙소를 이용하지 않음)의 경우 요금이 100% 정상 청구됩니다.</li>
-                        			<li>실시간예약의 특성상 하나의 객실에 중복예약이 발생될 수 있으며, 이 경우 먼저 결제된 예약 건에 우선권이 있습니다.</li>
-                        			<li>성수기 요금이 확정되지 않았거나 요금표가 잘못 등록된 경우 예약이 취소될 수 있습니다.</li>
-                        			<li>펜션 예약은 24시간 이내 확정됩니다.</li>
-                        			<li>모텔은 예약완료 후 15분 이내 고객센터를 통해 전액취소가 가능합니다.</li>
-                        			<li>호텔은 예약완료 후 10분 이내 고객센터를 통해 전액취소가 가능합니다.</li>
-                        			</ul>
-                    </div>
-                    
-                </div>
-            </div>
-        </div>
-    </section>
-    <!--//END BOOKING DETAILS -->
- 
+	<!--============================= BOOKING DETAILS =============================-->
+	<section class="light-bg booking-details_wrap">
+		<div class="container">
+			<form id="reservation-info" action="./reserve" method="POST">
+			<div class="row">
+				
+			<div class="col-md-4 responsive-wrap">
+				<img src="${product.url}" class="img-fluid"	alt="${product.imageName}">
+			</div>
+			
+				<div class="col-md-4 responsive-wrap">
 
-    <!-- jQuery, Bootstrap JS. -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="resources/js/jquery/jquery-3.2.1.min.js"></script>
-    <script src="resources/js/popper/popper.min.js"></script>
-    <script src="resources/js/bootstrap/bootstrap.min.js"></script>
-    <!-- Magnific popup JS -->
-    <script src="resources/js/jquery/jquery.magnific-popup.js"></script>
-    <!-- Swipper Slider JS -->
-    <script src="resources/js/swiper.min.js"></script>
-    
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+					<div id="item" class="booking-checkbox_wrap">
+						
+						<div class="row">
+							<div class="col-md-12">
+								<label class="custom-checkbox"> <span
+									class="ti-check-box"></span> <span
+									class="custom-control-description">NONE</span>
+								</label>
+							</div>
+	
+							
+							<div class="col-md-12">
+							<p style="font-size:20px"><span class="icon-bulb"></span>&nbsp;&nbsp;예약 날짜</p>
+									<c:choose>
+										<c:when test="${businessType <= 2}">
+										
+										<input style="border-right:none; width: 48%;" type="text" name="startDate" id="startDate" class="input-border" readOnly>
+                                        <input style="border-left:none; width: 48%;" type="text" name="endDate" id="endDate"  class="input-border" readOnly>
+   
+										</c:when>
+										<c:when test="${businessType > 2}">
+												<input type="text"  name="startDate" id="startDate"
+												placeholder="날짜선택" class="input-border" readOnly>
+											
+											<br><br>
+											<p style="font-size:20px"><span class="icon-bulb"></span>&nbsp;&nbsp;수량</p>
+											<ul>
+												<li style="display:inline-block"><a id="minus" class="nav-link" href="javascript:void(0)"><span class="icon-minus"></span></a></li>
+												<li style="display:inline-block"><input id="count" style="text-align:center; border:none;"size="2" type="text" value="0" readOnly></li> 
+												<li style="display:inline-block"><a id="plus" class="nav-link" href="javascript:void(0)"><span class="icon-plus"></span></a></li>
+											</ul>
+										</c:when>
+									</c:choose>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+		<div class="col-md-4 responsive-wrap">
+					<div class="contact-info">
+						<div class="address">
+							<span class="icon-calendar"></span>
+							<p> 예약 날짜<br> <span id="reservation-date"></span><br>
+							<h6 id="use-count"></h6>
+							</p>
+						</div>
+
+						<div class="address">
+							<span class="icon-screen-smartphone"></span>
+							<p>쿠폰 할인</p>
+
+						</div>
+
+					</div>
+					<div class="follow">
+						<div class="follow-img">
+							<h6>결제 금액</h6>
+							<h3 id="total-price"style="color: red"></h3>
+						</div>
+					
+						<a id="res-submit" href="javascript:void(0)" class="btn btn-outline-danger btn-contact">결제하기</a>
+					</div>
+				</div>
+			</div>
+			</form>
+			
+			<hr>
+
+			<div class="row">
+				<div class="col-md-8 responsive-wrap">
+					<div class="booking-checkbox_wrap">
+						<h5>할인</h5>
+					</div>
+					<hr>
+
+					<div  class="booking-checkbox_wrap">
+						<h5>취소규정 및 약관동의</h5>
+						<ul style="display: none" id="cancel">
+							<li>결제와 동시예 예약이 확정됩니다.</li>
+							<li>투숙일 이전 취소 시에는 쿠폰이 반환되며, 투숙일 이후에는 반환되지 않습니다.</li>
+							<li>예약 변경을 위한 취소시에도 취소수수료가 부과되오니 양해하여 주시기 바랍니다.</li>
+							<li>노쇼(No-Show: 사전 연락없이 예약된 숙소를 이용하지 않음)의 경우 요금이 100% 정상 청구됩니다.</li>
+							<li>성수기 요금이 확정되지 않았거나 요금표가 잘못 등록된 경우 예약이 취소될 수 있습니다.</li>
+							<li>예약 상품에 대한 문의사항은 판매자를 통해 문의해 주시길 바랍니다.</li>
+						</ul>
+						<h5><a class="nav-link" href="javascript:cancelSlideToggle()">
+                              	  		 <span id="arrow-silde" class="icon-arrow-down"></span>
+                 		</a></h5>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</section>
+	<!--//END BOOKING DETAILS -->
+
+	<script src="resources/js/jquery/jquery-3.2.1.min.js"></script>
+	<script src="resources/js/popper/popper.min.js"></script>
+	<script src="resources/js/jquery/jquery.magnific-popup.js"></script>
+	<script src="resources/js/swiper.min.js"></script>
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<script src="resources/js/datepicker-ko.js"></script>
 	<script src="resources/js/handlebars.min.js"></script>
-
+	<script src="resources/js/utility.js"></script>
+	
 	<script>
-	$(document).ready(function(){
-		
+		$(document).ready(function() {
 
-		    $("#date1").datepicker({
-		        onSelect:function(dateText, inst) {
-		
-					
-					$("#reservation-date").text( dateText );
-		        }
-		    });
-		    
-		    $("#date2").datepicker({
-		        onSelect:function(dateText, inst) {
-		   
-		        	$("#reservation-date").text( dateText );
-		        	
-		        	var startDate =  $("#date1").val() ;
-					var endDate =  $("#date2").val() ;
-					
-					
-					
-					var startDateAry = startDate.split("-");
-					var endDateAry =  endDate.split("-");
-					
-					var start = new Date(startDateAry[0],startDateAry[1],startDateAry[2]);
-					var end = new Date(endDateAry[0],endDateAry[1],endDateAry[2]);
-					
-					var result = end - start;
-					var day = 1000*60*60*24; 
-					result /= day;
-				
-					$("#use-count").text( "사용 기간: " + result + "박");
-					
-		        }
-		    });
-		
-	
-		var data = {};
-		var resultHTML = templateParserAfter("#template-item-hotel", data,"#item");
+			$("#startDate").datepicker({
+					showAnim : "slideDown",
+					minDate : 0,
+					onSelect : function(dateText, inst) {
+						 calReserveReuslt();
+					}
+			});
+
+			$("#endDate").datepicker({
+					showAnim : "slideDown",
+					minDate : 0,
+					onSelect : function(dateText, inst) {
+							 calReserveReuslt();
+					}
+			});
+
+			$("#plus").on("click", function() {
+				var count = parseInt($("#count").val());
+				if( count <= 9)
+					$("#count").val(count + 1);
+			});
+			$("#minus").on("click", function() {
+				var count = parseInt($("#count").val());
+				if( count != 0)
+					$("#count").val(count - 1);
+			});
 			
+			$("#res-submit").on("click", function() {
+				$("#reservation-info").submit();
+			});
+			
+});
 
-			 
- 		$("#plus").on("click",function(){
-			var count = parseInt($("#count").val()) + 1;
-			$("#count").val(count);
-		 });
-		 $("#minus").on("click",function(){
-			 var count = parseInt($("#count").val()) - 1;
-			 $("#count").val(count);
-		 });
-	});
 	
-	function templateParserAfter(templateId, data, output){
-		var parser = Handlebars.compile( $(templateId).text());
-		var resultHTML = parser(data);
+		function cancelSlideToggle(){
+			var className =  $('#arrow-silde').attr("class");
+			if( className == "icon-arrow-down"){
+				 $('#arrow-silde').attr("class","icon-arrow-up");
+			}else{
+				 $('#arrow-silde').attr("class","icon-arrow-down");
+			}
+				
+			$('#cancel').slideToggle();
+		}
+		function calReserveReuslt(){
+			var startDate = $("#startDate").val();
+			var endDate = $("#endDate").val();
+			
+			if( startDate != "" && endDate != ""){
+				var count = calDayCount(startDate,endDate);
+				if( count != 0){
+					$("#reservation-date").text(startDate + " - " + endDate);
+					$("#use-count").text("사용 기간: " + count + "박");
+				
+					var totalPrice =  count * parseInt("${product.price}");
+					totalPrice = dotSplit(totalPrice);
+					$("#total-price").text( totalPrice + "원");
+				}else{
+					alert("1박이상 선택해주세요");
+					$("#reservation-date").text("");
+					$("#use-count").text("");
+					$("#total-price").text( "0원");
+				}
+			}
 
-		$(output).append(function(){
-			return resultHTML; 
-		});
+		}
+		function calDayCount(startDate, endDate){
+			var startDateAry = startDate.split("-");
+			var endDateAry = endDate.split("-");
 
-	}
+			var start = new Date(startDateAry[0],
+					startDateAry[1], startDateAry[2]);
+			var end = new Date(endDateAry[0],
+					endDateAry[1], endDateAry[2]);
+
+			var result = end - start;
+			var day = 1000 * 60 * 60 * 24;
+
+			return parseInt(result /= day);
+		}
 	</script>
-    <script>
-        var swiper = new Swiper('.swiper-container', {
-            slidesPerView: 3,
-            slidesPerGroup: 3,
-            loop: true,
-            loopFillGroupWithBlank: true,
-            pagination: {
-                el: '.swiper-pagination',
-                clickable: true,
-            },
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
-        });
-    </script>
-    <script>
-        if ($('.image-link').length) {
-            $('.image-link').magnificPopup({
-                type: 'image',
-                gallery: {
-                    enabled: true
-                }
-            });
-        }
-        if ($('.image-link2').length) {
-            $('.image-link2').magnificPopup({
-                type: 'image',
-                gallery: {
-                    enabled: true
-                }
-            });
-        }
-    </script>
-   <script type="template" id="template-item-hotel">
-	<div class="row">
-           <div class="col-md-12">
-                <label class="custom-checkbox">
-                <span class="ti-check-box"></span>
-                <span class="custom-control-description">최대 인원수 표시 </span>
-                </label> 
-           </div> 
-                      		
-            <div class="col-md-12">
-                  <span class="icon-clock"></span>
-                  <span class="custom-control-description">이용 날짜 </span> <br>
-                  <div class="btn-group" role="group" aria-label="Basic example">
-					<input type="text" size="20" name="date" id="date1" placeholder="체크인" class="btn-group1" readOnly><br>
-					<input type="text"size="20"  name="date" id="date2" placeholder="체크아웃" class="btn-group2" readOnly>
-				  </div>
-			</div>
-       </div>
-     </script>
-    
-    <%@ include file="/pageframe/footer.jsp"%>
+	<script>
+		var swiper = new Swiper('.swiper-container', {
+			slidesPerView : 3,
+			slidesPerGroup : 3,
+			loop : true,
+			loopFillGroupWithBlank : true,
+			pagination : {
+				el : '.swiper-pagination',
+				clickable : true,
+			},
+			navigation : {
+				nextEl : '.swiper-button-next',
+				prevEl : '.swiper-button-prev',
+			},
+		});
+	</script>
+	<script>
+		if ($('.image-link').length) {
+			$('.image-link').magnificPopup({
+				type : 'image',
+				gallery : {
+					enabled : true
+				}
+			});
+		}
+		if ($('.image-link2').length) {
+			$('.image-link2').magnificPopup({
+				type : 'image',
+				gallery : {
+					enabled : true
+				}
+			});
+		}
+	</script>
+	<%@ include file="/pageframe/footer.jsp"%>
 </body>
 
 </html>

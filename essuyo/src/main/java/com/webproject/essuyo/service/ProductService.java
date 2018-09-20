@@ -1,10 +1,11 @@
 package com.webproject.essuyo.service;
 
-import com.webproject.essuyo.domain.ProductVO;
+
+import java.util.Map;
 
 public interface ProductService {
 	
-	//< 상품 ID를 통해 상품 검색
-	public ProductVO getProduct(int projecId);
+	//< 예약페이지 : 상품 ID를 통해 상품 검색
+	public Map<String,Object> getProduct(int productId);
 
 }
