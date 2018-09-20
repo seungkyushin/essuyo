@@ -1,3 +1,8 @@
+<%@page import ="java.sql.Connection"%>
+<%@page import ="java.sql.ResultSet"%>
+<%@page import ="java.sql.DriverManager" %>
+<%@page import ="java.sql.Statement"%>
+<%@page import="com.webproject.essuyo.ConnectionTest2"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -195,9 +200,26 @@
                                     </div>
                                     <div class="customer-rating">8.0</div>
                                 </div>
-                                <p class="customer-text">I love the noodles here but it is so rare that I get to come here. Tasty Hand-Pulled Noodles is the best type of whole in the wall restaurant. The staff are really nice, and you should be seated quickly. I usually get the
-                                    hand pulled noodles in a soup. House Special #1 is amazing and the lamb noodles are also great. If you want your noodles a little chewier, get the knife cut noodles, which are also amazing. Their dumplings are great
-                                    dipped in their chili sauce.
+                                <p class="customer-text">
+                               
+<%
+		Connection conn = ConnectionTest2.getConnection();
+		Statement stmt = conn.createStatement();
+		
+		String sql = "select review FROM texture";
+		ResultSet rs = stmt.executeQuery(sql); 
+		
+		if(rs.next()) {
+			do {
+		%>
+		<p>
+			<%=rs.getString("review") %>
+		</p>
+		<%				
+			}while(rs.next());
+		}
+		
+%>
                                 </p>
                                 <p class="customer-text">I love how you can see into the kitchen and watch them make the noodles and you can definitely tell that this is a family run establishment. The prices are are great with one dish maybe being $9. You just have to remember
                                     to bring cash.
