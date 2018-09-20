@@ -11,5 +11,10 @@
     
     </insert>
     
+<!--     로그인용 sql문. email과 password를 user 테이블에서 찾는다 -->
+    <select id="login" resultType="UserVO">
+    select email, password from user where email = #{email} and password = #{password}
+    </select>
+    
     
     </mapper>
