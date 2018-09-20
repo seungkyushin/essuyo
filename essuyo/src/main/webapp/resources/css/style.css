@@ -214,7 +214,7 @@ p {
 .btn-group2 {
   position: relative;
   padding: 24px;
-  width: 33%;
+  width: 50%;
   border-top: none;
   border-right: none;
   border-bottom: none;
@@ -226,6 +226,20 @@ p {
       margin: 0 0 10px;
       padding: 17px; } }
 
+.input-border {
+  position: relative;
+  padding: 24px;
+  width: 98%;
+  border-top: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  border-left: 1px solid #ccc;
+   text-align:center;
+  }
+
+   
+      
+      
 .btn-form {
   font-weight: 400;
   font-size: 18px;
@@ -668,6 +682,9 @@ footer {
   display: inline-block;
   vertical-align: top; }
 
+.reserve-rating-red {
+  background: #ff5a5a !important; }
+  
 .review-btn {
   display: inline-block;
   text-align: center;

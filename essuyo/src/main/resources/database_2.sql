@@ -219,6 +219,7 @@ INSERT INTO business_type(name) VALUES("박물관");
 
 /* 지역명목록 */
 INSERT INTO area_list (name)  VALUES("부산");
+INSERT INTO area_list (name)  VALUES("서울");
 
 
 /* 업체 */
