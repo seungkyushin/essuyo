@@ -243,6 +243,7 @@ INSERT INTO product(name, count, discription,price) VALUES("람보르기니 SUV"
 INSERT INTO product(name, count, discription,price) VALUES("돈까스 맛집", 10, "돈까스 장인이 매일 직접 만들어 판매합니다.",7000);
 INSERT INTO product(name, count, discription,price) VALUES("박물관이 살아있다.", 10, "영화 아님",4000);
 
+
 /*상품 관리*/
 INSERT INTO product_admin(business_id,product_id) VALUES(1,1);
 INSERT INTO product_admin(business_id,product_id) VALUES(1,2);
