@@ -1,7 +1,5 @@
 package com.webproject.essuyo.dao;
 
-import java.util.List;
-import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +12,7 @@ public class ProductDao {
 
 	@Autowired
 	private SqlSession sqlSession;
-	private String NAME_SPACE = "mappers.ProductMapper";
+	private String NAME_SPACE = "com.webproject.essuyo.mappers.ProductMapper";
 	
 	public ProductVO selectProductByProductId(int id) throws Exception{
 		return sqlSession.selectOne(NAME_SPACE + ".getById" , id);

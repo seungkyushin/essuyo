@@ -6,8 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.webproject.essuyo.domain.ReservationVO;
 import com.webproject.essuyo.service.ProductService;
 
 @Controller
@@ -29,16 +32,12 @@ public class ProductController {
 		return "reservation";
 	}
 	
-	@GetMapping("/reserve")
-	public String setReserve(@RequestParam("id") int productId,
-			@RequestParam("type") int businessTypeId,
+	@PostMapping("/reserve")
+	public String setReserve(@ModelAttribute ReservationVO reservationInfo,
 			Model model) {
 		
-		Map<String,Object> result = productService.getProduct(productId);
-
-		model.addAttribute("product", result);
-		model.addAttribute("businessType", businessTypeId);
+		System.out.println(reservationInfo);
 		
-		return "reservation";
+		return "/";
 	}
 }
