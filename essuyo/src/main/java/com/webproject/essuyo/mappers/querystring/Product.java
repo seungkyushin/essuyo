@@ -1,4 +1,4 @@
-package mappers.querystring;
+package com.webproject.essuyo.mappers.querystring;
 
 public class Product {
 

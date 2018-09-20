@@ -1,6 +1,6 @@
-package mappers.sqlprovider;
+package com.webproject.essuyo.mappers.sqlprovider;
 
-import static mappers.querystring.ImageInfo.*;
+import static com.webproject.essuyo.mappers.querystring.ImageInfo.*;
 
 import java.util.Map;
 
