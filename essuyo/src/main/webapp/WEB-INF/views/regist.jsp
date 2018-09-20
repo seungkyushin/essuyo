@@ -52,6 +52,10 @@
                                     <label>[비밀번호]</label>
                                     <input type="password" class="form-control" value="password">
                                 </div>
+                                <div class="form-group">
+                                    <label>[비밀번호 확인]</label>
+                                    <input type="password" class="form-control" value="password">
+                                </div>
                                  <div class="form-group">
                                     <label>[이 름] <span class="help"> 예) "홍길동"</span></label>
                                     <input type="text" class="form-control" value="이름">
