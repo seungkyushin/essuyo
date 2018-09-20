@@ -247,8 +247,9 @@
 				console.log(agree);
 				
 						
-				if(productCount != 0 && agree == true)
+				if(productCount != 0 && agree == true){
 					/*  $("#reservation-info").submit();*/
+				}
 				else
 					alert("데이터 입력 바람");
 			});
