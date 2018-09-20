@@ -8,11 +8,10 @@ public class ReservationVO {
 	private String resDate;		/* 예약한날짜 */
 	private int productCount;	/* 상품 개수 */
 	private String regDate;		/* 등록날짜 */
-	private int agree;			/* 취소 및 약관 동의 */
+	private String agree;			/* 취소 및 약관 동의 */
 	private int companyId;		/* 회사_번호 */
 	private int productId;		/* 상품_번호 */
 	private int userId;			/* 사용자_번호 */
-	
 	public int getId() {
 		return id;
 	}
@@ -49,10 +48,10 @@ public class ReservationVO {
 	public void setRegDate(String regDate) {
 		this.regDate = regDate;
 	}
-	public int getAgree() {
+	public String getAgree() {
 		return agree;
 	}
-	public void setAgree(int agree) {
+	public void setAgree(String agree) {
 		this.agree = agree;
 	}
 	public int getCompanyId() {
@@ -79,5 +78,6 @@ public class ReservationVO {
 				+ ", productCount=" + productCount + ", regDate=" + regDate + ", agree=" + agree + ", companyId="
 				+ companyId + ", productId=" + productId + ", userId=" + userId + "]";
 	}
+	
 
 }
