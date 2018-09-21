@@ -64,7 +64,7 @@
 		<div class="container">
 		
 			<div class="row">
-				<input type="hidden" id="companyId" name="companyId" value="333">
+				<input type="hidden" id="companyId" name="CompanyId" value="1">
 				<input type="hidden" id="productId" name="productId" value="${productId}" >
 				
 			<div class="col-md-4 responsive-wrap">

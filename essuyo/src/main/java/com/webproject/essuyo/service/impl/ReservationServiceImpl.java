@@ -1,5 +1,10 @@
 package com.webproject.essuyo.service.impl;
 
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +26,13 @@ public class ReservationServiceImpl implements ReservationService{
 	public int regReservationInfo(ReservationVO reservationInfo)  {
 		int result = 0;
 		try {
+
+				DateFormat dataFormat = new SimpleDateFormat("yyyy-MM-dd");
 				reservationInfo.setState("성공");
+				reservationInfo.setRegDate( dataFormat.format(new Date()) );
+			
+				System.out.println(reservationInfo);
+				
 				result = reservationDao.insert(reservationInfo);
 		} catch (Exception e) {
 			logger.error("예약 등록 실패.. | {} ", e.toString());
