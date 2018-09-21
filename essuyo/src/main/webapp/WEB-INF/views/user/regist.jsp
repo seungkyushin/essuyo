@@ -45,16 +45,18 @@
 		$("#registForm").validate();
 	});
 
-	// 	아직 작업중
+	// 	회원가입에 성공하면, 일단 대쉬보드로 가게 설정해 놓음
+	//실패하면, 일단 다시 회원가입 페이지로 가게 함
 	function doReg() {
 		if ($("#registForm").valid()) {
 			var url = "/user/regist";
 			$.post(url, $("#registForm").serialize(), function(data) {
 				if (data == 1) {
 					alert("회원가입에 성공했습니다.");
-					document.location.href = "/main";
+					document.location.href = "/dashboard";
 				} else {
 					alert("회원가입에 실패했습니다. 관리자에게 문의해 주세요.");
+					document.location.href = "/user/regist";
 				}
 			});
 		}
@@ -70,7 +72,7 @@
 			<div class="card card-body">
 				<h4 class="card-title">회원가입</h4>
 				<h5 class="card-subtitle">요구사항에 따라 빈 칸을 채워주세요</h5>
-				<form class="form-horizontal m-t-30" id="registForm" method="post">
+				<form class="form-horizontal m-t-30" id="registForm" method="post" enctype="multipart/form-data">
 					<div class="form-group">
 						<label for="email">[이메일] <span class="help"> 예) "example@gmail.com"</span></label>
 						<input type="email" id="email" name="email" class="form-control" placeholder="이메일" required>
@@ -101,7 +103,7 @@
 					<div class="form-group">
 						<label>[프로필 사진 업로드]</label> <input type="file" class="form-control">
 					</div>
-					<a href="#" class="loginBtn" onclick="doReg();">회원가입</a>
+					<a href="#" class="btn-reg" onclick="doReg();">회원가입</a>
 				</form>
 			</div>
 		</div>
