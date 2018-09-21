@@ -67,6 +67,7 @@ public class HomeController {
 	@GetMapping(path = "/regist")
 	public String showregistPage(Locale locale, Model model) {
 		return "regist";
+	}
 
 	@GetMapping(path = "/test")
 	public String showtestPage(Locale locale, Model model) {
