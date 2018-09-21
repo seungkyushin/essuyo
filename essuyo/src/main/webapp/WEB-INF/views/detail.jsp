@@ -197,25 +197,8 @@
                                 </div>
 
                                 <p class="customer-text">
-                               
-<%-- <% --%>
-// 		Connection conn = ConnectionTest2.getConnection();
-// 		Statement stmt = conn.createStatement();
-		
-// 		String sql = "select review FROM texture";
-// 		ResultSet rs = stmt.executeQuery(sql); 
-		
-// 		if(rs.next()) {
-// 			do {
-<%-- 		%> --%>
-<!-- 		<p> -->
-<%-- 			<%=rs.getString("review") %> --%>
-<!-- 		</p> -->
-<%-- 		<%				 --%>
-// 			}while(rs.next());
-// 		}
-		
-<%-- %> --%>
+                               	
+
                                 <ul>
                                     <li><img src="resources/images/review-img1.jpg" class="img-fluid" alt="#"></li>
                                     <li><img src="resources/images/review-img2.jpg" class="img-fluid" alt="#"></li>
