@@ -38,7 +38,6 @@
 		<property name="dataSource" ref="dataSource" />
 		<property name="mapperLocations" value="classpath:mappers/**/*Mapper.xml"></property>
 		<property name="configLocation" value="classpath:/mybatis-config.xml"></property>
-			
 	</bean>
 
 	<mybatis-spring:scan base-package="com.webproject.essuyo.mappers" /> 
