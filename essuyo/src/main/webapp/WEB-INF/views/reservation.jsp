@@ -60,9 +60,12 @@
 
 	<!--============================= BOOKING DETAILS =============================-->
 	<section class="light-bg booking-details_wrap">
+		<form id="reservation-info" action="./reserve" method="POST">
 		<div class="container">
-			<form id="reservation-info" action="./reserve" method="POST">
+		
 			<div class="row">
+				<input type="hidden" id="companyId" name="companyId" value="333">
+				<input type="hidden" id="productId" name="productId" value="${productId}" >
 				
 			<div class="col-md-4 responsive-wrap">
 				<img src="${product.url}" class="img-fluid"	alt="${product.imageName}">
@@ -148,7 +151,7 @@
 					</div>
 				</div>
 			</div>
-			</form>
+			
 			
 			<hr>
 
@@ -186,6 +189,7 @@
 				</div>
 			</div>
 		</div>
+		</form>
 	</section>
 	<!--//END BOOKING DETAILS -->
 
