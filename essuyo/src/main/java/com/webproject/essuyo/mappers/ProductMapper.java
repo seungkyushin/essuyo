@@ -1,6 +1,6 @@
-package mappers;
+package com.webproject.essuyo.mappers;
 
-import static mappers.querystring.Product.*;
+import static com.webproject.essuyo.mappers.querystring.Product.*;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 

@@ -86,19 +86,19 @@
 									<c:choose>
 										<c:when test="${businessType <= 2}">
 										
-										<input style="border-right:none; width: 48%;" type="text" name="startDate" id="startDate" class="input-border" readOnly>
-                                        <input style="border-left:none; width: 48%;" type="text" name="endDate" id="endDate"  class="input-border" readOnly>
+										<input style="border-right:none; width: 48%;" type="text" name="resDate" id="startDate" class="input-border" readOnly>
+                                        <input style="border-left:none; width: 48%;" type="text" id="endDate"  class="input-border" readOnly>
    
 										</c:when>
 										<c:when test="${businessType > 2}">
-												<input type="text"  name="startDate" id="startDate"
+												<input type="text"  name="resDate" id="startDate"
 												placeholder="날짜선택" class="input-border" readOnly>
 											
 											<br><br>
 											<p style="font-size:20px"><span class="icon-bulb"></span>&nbsp;&nbsp;수량</p>
 											<ul>
 												<li style="display:inline-block"><a id="minus" class="nav-link" href="javascript:void(0)"><span class="icon-minus"></span></a></li>
-												<li style="display:inline-block"><input id="count" style="text-align:center; border:none;"size="2" type="text" value="0" readOnly></li> 
+												<li style="display:inline-block"><input id="count" name="productCount" style="text-align:center; border:none;"size="2" type="text" value="0" readOnly></li> 
 												<li style="display:inline-block"><a id="plus" class="nav-link" href="javascript:void(0)"><span class="icon-plus"></span></a></li>
 											</ul>
 										</c:when>
@@ -113,22 +113,35 @@
 					<div class="contact-info">
 						<div class="address">
 							<span class="icon-calendar"></span>
-							<p> 예약 날짜<br> <span id="reservation-date"></span><br>
-							<h6 id="use-count"></h6>
-							</p>
-						</div>
-
-						<div class="address">
-							<span class="icon-screen-smartphone"></span>
-							<p>쿠폰 할인</p>
-
-						</div>
+							<p>예약 날짜</p>
+						
+							<c:choose>
+								<c:when test="${businessType <= 2}">
+									<p><div class= "toggle-string" style="display:none">
+										<span id="reservation-date"></span><br>
+										<input type="text" size="1" style=" text-align:center; border:none" id="productCount" name="productCount"  readOnly>
+										<span>박</span>
+									</div></p>
+								</c:when>
+								<c:when test="${businessType > 2}">
+									<p><div class= "toggle-string" style="display:none">
+										<span id="reservation-date"></span><br>
+										<input type="text" size="2" style=" text-align:center; border:none" id="productCount" name="productCount"  readOnly>
+										<span>개</span>
+									</div></p>
+								</c:when>
+							</c:choose>
+						</div>					
 
 					</div>
 					<div class="follow">
 						<div class="follow-img">
+						
 							<h6>결제 금액</h6>
-							<h3 id="total-price"style="color: red"></h3>
+							<div class="toggle-string2" style=" font-size:25px; display:none; color:red">
+								<input type="hidden" id="totalPrice" name="totalPrice" >
+								<span id="totalPriceSrc"></span>
+							</div>
 						</div>
 					
 						<a id="res-submit" href="javascript:void(0)" class="btn btn-outline-danger btn-contact">결제하기</a>
@@ -148,7 +161,9 @@
 
 					<div  class="booking-checkbox_wrap">
 						<h5>취소규정 및 약관동의</h5>
-						<ul style="display: none" id="cancel">
+						
+                        <div style="display: none" id="cancel">         
+						<ul>
 							<li>결제와 동시예 예약이 확정됩니다.</li>
 							<li>투숙일 이전 취소 시에는 쿠폰이 반환되며, 투숙일 이후에는 반환되지 않습니다.</li>
 							<li>예약 변경을 위한 취소시에도 취소수수료가 부과되오니 양해하여 주시기 바랍니다.</li>
@@ -156,6 +171,12 @@
 							<li>성수기 요금이 확정되지 않았거나 요금표가 잘못 등록된 경우 예약이 취소될 수 있습니다.</li>
 							<li>예약 상품에 대한 문의사항은 판매자를 통해 문의해 주시길 바랍니다.</li>
 						</ul>
+						<div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" name="agree" id="customCheck1">
+                                            <label class="custom-control-label" for="customCheck1">취소규정 및 약관에 모두 동의합니다.</label>
+                        </div>
+                        </div>  
+                        
 						<h5><a class="nav-link" href="javascript:cancelSlideToggle()">
                               	  		 <span id="arrow-silde" class="icon-arrow-down"></span>
                  		</a></h5>
@@ -198,22 +219,50 @@
 
 			$("#plus").on("click", function() {
 				var count = parseInt($("#count").val());
-				if( count <= 9)
-					$("#count").val(count + 1);
+				if( count <= 9){
+					count += 1;
+					$("#count").val(count);
+								
+					
+					calTotalPrice(count);
+					
+				}
 			});
 			$("#minus").on("click", function() {
 				var count = parseInt($("#count").val());
-				if( count != 0)
-					$("#count").val(count - 1);
+				if( count != 0){
+					count -= 1;
+					$("#count").val(count);
+					
+					calTotalPrice(count);
+					
+				}
+				
 			});
 			
 			$("#res-submit").on("click", function() {
-				$("#reservation-info").submit();
+				var productCount = $("#productCount").val();
+				var agree = $('input:checkbox[id="customCheck1"]').is(":checked");
+				console.log(productCount);
+				console.log(agree);
+				
+						
+				if(productCount != 0 && agree == true){
+					/*  $("#reservation-info").submit();*/
+				}
+				else
+					alert("데이터 입력 바람");
 			});
 			
 });
 
 	
+		function calTotalPrice(count){
+			var totalPrice =  count * parseInt("${product.price}");
+			totalPrice = dotSplit(totalPrice);
+			$("#totalPriceSrc").text( totalPrice + "원");
+			$("#totalPrice").val( totalPrice );
+		}
 		function cancelSlideToggle(){
 			var className =  $('#arrow-silde').attr("class");
 			if( className == "icon-arrow-down"){
@@ -225,27 +274,35 @@
 			$('#cancel').slideToggle();
 		}
 		function calReserveReuslt(){
+			
 			var startDate = $("#startDate").val();
 			var endDate = $("#endDate").val();
 			
-			if( startDate != "" && endDate != ""){
+			if( startDate != "" && endDate != undefined && endDate != ""){
 				var count = calDayCount(startDate,endDate);
 				if( count != 0){
+					$(".toggle-string").show();
+					$(".toggle-string2").show();
+					
 					$("#reservation-date").text(startDate + " - " + endDate);
-					$("#use-count").text("사용 기간: " + count + "박");
-				
-					var totalPrice =  count * parseInt("${product.price}");
-					totalPrice = dotSplit(totalPrice);
-					$("#total-price").text( totalPrice + "원");
+					$("#productCount").val(count);
+			
+					calTotalPrice(count);
 				}else{
 					alert("1박이상 선택해주세요");
-					$("#reservation-date").text("");
-					$("#use-count").text("");
-					$("#total-price").text( "0원");
+					$(".toggle-string").hide();
+			
 				}
+			}else{
+				
+				$(".toggle-string2").show();
+				
+				$("#reservation-date").text(startDate);
 			}
 
 		}
+		
+		
 		function calDayCount(startDate, endDate){
 			var startDateAry = startDate.split("-");
 			var endDateAry = endDate.split("-");
