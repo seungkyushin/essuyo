@@ -45,8 +45,8 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="slider-content_wrap">
-                                    <h1 style="color:#ff6347">여행준비는 잘 되나요??</h1>
-                                    <h5 style="color:yellowgreen">필요한건 다 이써Yo!</h5>
+                                    <h1 style="color:#ff6347">ESSUYO??</h1>
+                                    <h5 style="color:yellowgreen">ESSUYO!</h5>
                                 </div>
                             </div>
                         </div>

@@ -195,13 +195,27 @@
                                     </div>
                                     <div class="customer-rating">8.0</div>
                                 </div>
-                                <p class="customer-text">I love the noodles here but it is so rare that I get to come here. Tasty Hand-Pulled Noodles is the best type of whole in the wall restaurant. The staff are really nice, and you should be seated quickly. I usually get the
-                                    hand pulled noodles in a soup. House Special #1 is amazing and the lamb noodles are also great. If you want your noodles a little chewier, get the knife cut noodles, which are also amazing. Their dumplings are great
-                                    dipped in their chili sauce.
-                                </p>
-                                <p class="customer-text">I love how you can see into the kitchen and watch them make the noodles and you can definitely tell that this is a family run establishment. The prices are are great with one dish maybe being $9. You just have to remember
-                                    to bring cash.
-                                </p>
+
+                                <p class="customer-text">
+                               
+<%
+		Connection conn = ConnectionTest2.getConnection();
+		Statement stmt = conn.createStatement();
+		
+		String sql = "select review FROM texture";
+		ResultSet rs = stmt.executeQuery(sql); 
+		
+		if(rs.next()) {
+			do {
+		%>
+		<p>
+			<%=rs.getString("review") %>
+		</p>
+		<%				
+			}while(rs.next());
+		}
+		
+%>
                                 <ul>
                                     <li><img src="resources/images/review-img1.jpg" class="img-fluid" alt="#"></li>
                                     <li><img src="resources/images/review-img2.jpg" class="img-fluid" alt="#"></li>
@@ -211,33 +225,7 @@
                                 <a href="#"><span class="icon-like"></span>Helpful</a>
                             </div>
                         </div>
-                        <hr>
-                        <div class="customer-review_wrap">
-                            <div class="customer-img">
-                                <img src="resources/images/customer-img2.jpg" class="img-fluid" alt="#">
-                                <p>Kevin W</p>
-                                <span>17 Reviews</span>
-                            </div>
-                            <div class="customer-content-wrap">
-                                <div class="customer-content">
-                                    <div class="customer-review">
-                                        <h6>A hole-in-the-wall old school shop.</h6>
-                                        <span class="customer-rating-red"></span>
-                                        <span class="round-icon-blank"></span>
-                                        <span class="round-icon-blank"></span>
-                                        <span class="round-icon-blank"></span>
-                                        <span class="round-icon-blank"></span>
-                                        <p>Reviewed 3 months ago</p>
-                                    </div>
-                                    <div class="customer-rating customer-rating-red">2.0</div>
-                                </div>
-                                <p class="customer-text">The dumplings were so greasy...the pan-fried shrimp noodles were the same. So much oil and grease it was difficult to eat. The shrimp noodles only come with 3 shrimp (luckily the dish itself is cheap) </p>
-                                <p class="customer-text">The beef noodle soup was okay. I added black vinegar into the broth to give it some extra flavor. The soup has bok choy which I liked - it's a nice textural element. The shop itself is really unclean (which is the case
-                                    in many restaurants in Chinatown) They don't wipe down the tables after customers have eaten. If you peak into the kitchen many of their supplies are on the ground which is unsettling... </p>
-                                <span>10 people marked this review as helpful</span>
-                                <a href="#"><span class="icon-like"></span>Helpful</a>
-                            </div>
-                        </div>
+                        
                     </div>
                 </div></div>
                 <div class="col-md-4 responsive-wrap">
