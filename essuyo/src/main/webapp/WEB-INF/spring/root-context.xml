@@ -29,14 +29,20 @@
 	<!-- Transaction DB설정 -->
 	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource"></property>
+		
 	</bean>
 
 
-	<mybatis-spring:scan base-package="com.webproject.essuyo.mappers" />
-
+	
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
+		<property name="mapperLocations" value="classpath:mappers/**/*Mapper.xml"></property>
+		<property name="configLocation" value="classpath:/mybatis-config.xml"></property>
+			
 	</bean>
+
+	<mybatis-spring:scan base-package="com.webproject.essuyo.mappers" /> 
+
 
 <!-- sql세션 추가 -->
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate" destroy-method="clearCache">

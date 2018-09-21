@@ -5,16 +5,6 @@
  
     
     <mapper namespace="com.webproject.essuyo.dao">
-<!--     회원가입용 sql문. 프라이머리 키인 id는 자동 증가고, cre_date는 now()를 이용했다.-->
-    <insert id="regist">
-    insert into user(name, email, password, age, gender, cre_date) values(#{name},#{email},#{password},#{age},#{gender}, NOW())
-    
-    </insert>
-    
-<!--     로그인용 sql문. email과 password를 user 테이블에서 찾는다 -->
-    <select id="login" resultType="UserVO">
-    select email, password from user where email = #{email} and password = #{password}
-    </select>
-    
+
     
     </mapper>
