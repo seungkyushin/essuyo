@@ -271,3 +271,4 @@ total_visit, today_visit,grade,area_list_id,business_type_id)
 VALUES("알촌", "알밥파는 집", "서울 서대문구 이화여대7길 14","02-1111-1111",
 "http://alchon.com/","휴무중","am 10:00 ~ pm 10:00",10,10,3,2,2);
 
+
