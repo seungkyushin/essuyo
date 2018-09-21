@@ -45,14 +45,14 @@
 		$("#registForm").validate();
 	});
 
-// 	아직 작업중
+	// 	아직 작업중
 	function doReg() {
 		if ($("#registForm").valid()) {
 			var url = "/user/regist";
-			$.post(url, $("#registForm").serialize(), function (data) {
-				if(data == 1){
+			$.post(url, $("#registForm").serialize(), function(data) {
+				if (data == 1) {
 					alert("회원가입에 성공했습니다.");
-					document.location.href="/main";
+					document.location.href = "/main";
 				} else {
 					alert("회원가입에 실패했습니다. 관리자에게 문의해 주세요.");
 				}
@@ -72,16 +72,20 @@
 				<h5 class="card-subtitle">요구사항에 따라 빈 칸을 채워주세요</h5>
 				<form class="form-horizontal m-t-30" id="registForm" method="post">
 					<div class="form-group">
-						<label for="email">[이메일] <span class="help"> 예) "example@gmail.com"</span></label> <input type="email" id="email" name="email" class="form-control" placeholder="이메일" required>
+						<label for="email">[이메일] <span class="help"> 예) "example@gmail.com"</span></label>
+						<input type="email" id="email" name="email" class="form-control" placeholder="이메일" required>
 					</div>
 					<div class="form-group">
-						<label>[비밀번호]</label> <input type="password" id="password" class="form-control" minlength="4" data-msg-minlength="최소 {0} 자리 이상 입력해야 합니다." maxlength="12" placeholder="비밀번호" required>
+						<label>[비밀번호]</label>
+						<input type="password" id="password" name="password" class="form-control" minlength="4" data-msg-minlength="최소 {0} 자리 이상 입력해야 합니다." maxlength="12" placeholder="비밀번호" required>
+					</div>
+					<div>
+						<label>[비밀번호 확인]</label>
+						<input type="password" id="passwordCheck" class="form-control" placeholder="비밀번호를 다시 입력해 주세요" equalTo="#password">
 					</div>
 					<div class="form-group">
-						<label>[비밀번호 확인]</label> <input type="password" id="passwordCheck" class="form-control" placeholder="비밀번호를 다시 입력해 주세요" equalTo="#password">
-					</div>
-					<div class="form-group">
-						<label>[이 름] <span class="help"> 예) "홍길동"</span></label> <input type="text" id="name" name="name" class="form-control" placeholder="이름" required="true">
+						<label>[이 름] <span class="help"> 예) "홍길동"</span></label>
+						<input type="text" id="name" name="name" class="form-control" placeholder="이름" required="true">
 					</div>
 					<div class="form-group">
 						<label for="age">[나이] <span class="help"> ※ 숫자로만 입력해 주세요. 예) 28살 -> 28</span></label>
@@ -95,8 +99,7 @@
 						</select>
 					</div>
 					<div class="form-group">
-						<label>[프로필 사진 업로드]</label>
-						<input type="file" class="form-control">
+						<label>[프로필 사진 업로드]</label> <input type="file" class="form-control">
 					</div>
 					<a href="#" class="loginBtn" onclick="doReg();">회원가입</a>
 				</form>
