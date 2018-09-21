@@ -12,13 +12,13 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import org.springframework.web.util.WebUtils;
 
 import com.webproject.essuyo.domain.UserVO;
-import com.webproject.essuyo.service.UserService;
+import com.webproject.essuyo.service.impl.UserServiceImpl;
 
 public class AuthInterceptor extends HandlerInterceptorAdapter {
 	private static final Logger logger = LoggerFactory.getLogger(AuthInterceptor.class);
 
 	@Inject
-	private UserService service;
+	private UserServiceImpl service;
 
 	//로그인 화면으로 이동하기 전에 들어가려 했던 페이지 정보를 저장하는 메소드
 	private void saveDest(HttpServletRequest req) {
