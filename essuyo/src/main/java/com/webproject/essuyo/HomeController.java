@@ -62,10 +62,20 @@ public class HomeController {
 		return "reservation";
 	}
 	
+
 	// 회원가입 페이지로 보내준다
 	@GetMapping(path = "/regist")
 	public String showregistPage(Locale locale, Model model) {
 		return "regist";
+
+	@GetMapping(path = "/test")
+	public String showtestPage(Locale locale, Model model) {
+		return "test";
+	}
+	
+	@GetMapping(path = "/userList")
+	public String showuserListPage(Locale locale, Model model) {
+		return "userList";
 	}
 
 	// doA 경로로 들어왔을 때, 콘솔에 doA.... 를 출력하고, views 폴더의 main.jsp로 보내준다.
