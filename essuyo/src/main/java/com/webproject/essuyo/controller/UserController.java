@@ -33,8 +33,8 @@ public class UserController {
 	public String registPost(UserVO vo, HttpSession session, Model model) throws Exception{
 		
 		service.regist(vo);
-		//회원가입이 끝나면 메인 화면으로 리다이렉트
-		return "redirect:/main";
+		//회원가입이 끝나면 로그인 화면으로 리다이렉트
+		return "redirect:/user/login";
 		
 	}
 }

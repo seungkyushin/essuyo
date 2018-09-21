@@ -45,6 +45,7 @@
 		$("#registForm").validate();
 	});
 
+// 	아직 작업중
 	function doReg() {
 		if ($("#registForm").valid()) {
 			var url = "/user/join";
@@ -54,6 +55,7 @@
 		}
 	}
 </script>
+
 <title>회원가입</title>
 </head>
 <body>
