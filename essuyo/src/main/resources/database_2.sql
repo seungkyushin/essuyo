@@ -224,7 +224,7 @@ INSERT INTO area_list (name)  VALUES("부산");
 INSERT INTO area_list (name)  VALUES("서울");
 
 
-/* 업체 */
+/* 업체1 */
 INSERT INTO company(name, discription, address,number, url, state, time, 
 total_visit, today_visit,grade,area_list_id,business_type_id)
 VALUES("힐튼호텔", "돈만 있으면 쾌적한 곳", "부산광역시 기장군 기장읍 기장해안로 268-32 힐튼부산","010-0000-0000",
@@ -260,7 +260,15 @@ INSERT INTO product_image_admin(product_id,image_info_id) VALUES(2, 2);
 INSERT INTO product_image_admin(product_id,image_info_id) VALUES(3, 3);
 INSERT INTO product_image_admin(product_id,image_info_id) VALUES(4, 4);
 
+/*업체2*/
+INSERT INTO company(name, discription, address,number, url, state, time, 
+total_visit, today_visit,grade,area_list_id,business_type_id)
+VALUES("아웃백-신촌점", "빵 맛있는 식당", "서울 서대문구 연세로12길 33","02-0000-0000",
+"http://outback.co.kr/shinchon/","open now","am 10:00 ~ pm 10:00",10,10,1,1,2);
 
-
+INSERT INTO company(name, discription, address,number, url, state, time, 
+total_visit, today_visit,grade,area_list_id,business_type_id)
+VALUES("알촌", "알밥파는 집", "서울 서대문구 이화여대7길 14","02-1111-1111",
+"http://alchon.com/","휴무중","am 10:00 ~ pm 10:00",10,10,3,2,2);
 
 

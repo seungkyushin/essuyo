@@ -17,10 +17,10 @@ public class ImageAdminDao {
 
 	@Autowired
 	private SqlSession sqlSession;
-	private String NAME_SPACE = "com.webproject.essuyo.mappers.ImageAdminMapper";
+	private String NAME_SPACE = "essuyo.mappers.ImageAdmin";
 	
 	public List<ImageInfoVO> selectImageById(Map<String,Object> param) throws Exception{
-		return sqlSession.selectList(NAME_SPACE + ".getById" , param);
+		return sqlSession.selectList(NAME_SPACE + ".selectById" , param);
 	}
 	
 	

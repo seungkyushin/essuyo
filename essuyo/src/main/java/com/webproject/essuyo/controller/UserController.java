@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.webproject.essuyo.domain.UserVO;
-import com.webproject.essuyo.service.UserService;
+import com.webproject.essuyo.service.impl.UserServiceImpl;
 
 @Controller
 @RequestMapping("/user/*")
@@ -20,7 +20,7 @@ public class UserController {
 	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 	
 	@Inject
-	private UserService service;
+	private UserServiceImpl service;
 	
 	//GET 방식으로 회원가입 페이지에 접근. 그냥 회원가입 페이지로 보내준다
 	@RequestMapping(value="/regist", method=RequestMethod.GET)
