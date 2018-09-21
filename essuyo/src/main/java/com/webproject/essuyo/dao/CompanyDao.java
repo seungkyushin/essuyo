@@ -26,6 +26,7 @@ public class CompanyDao {
 	}
 	public List<CompanyVO> listAll() throws Exception{
 		return session.selectList(namespace+".listAll");
+		
 	}
 	
 }
