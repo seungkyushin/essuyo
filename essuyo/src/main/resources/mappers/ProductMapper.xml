@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+    
+<mapper namespace="essuyo.mappers.Product">
+    
+    
+	<!-- 상품 ID를 통해 상품 정보를 받아온다. -->
+    <select id="selectById" resultType="ProductVO">
+    	SELECT id, name, count, discription, price FROM  product WHERE id=#{id};
+    </select>
+  
+    
+ </mapper>

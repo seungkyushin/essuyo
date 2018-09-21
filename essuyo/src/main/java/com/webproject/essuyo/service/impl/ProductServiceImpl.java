@@ -37,7 +37,7 @@ public class ProductServiceImpl implements ProductService {
 		try {
 
 			// < 상품 정보
-			product = productDao.selectProductByProductId(productId);
+			product = productDao.selectByProductId(productId);
 
 			// < 이미지 정보
 			Map<String, Object> params = new HashMap<>();
