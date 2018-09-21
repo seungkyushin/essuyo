@@ -15,21 +15,21 @@
 <!-- Page Title -->
 <title>자리 있어요?</title>
 <!-- Bootstrap CSS -->
-<link rel="stylesheet" href="resources/css/bootstrap/bootstrap.min.css">
+<link rel="stylesheet" href="/resources/css/bootstrap/bootstrap.min.css">
 <!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,500,700,900" rel="stylesheet">
 <!-- Simple line Icon -->
-<link rel="stylesheet" href="resources/css/simple-line-icons.css">
+<link rel="stylesheet" href="/resources/css/simple-line-icons.css">
 <!-- Themify Icon -->
-<link rel="stylesheet" href="resources/css/themify-icons.css">
+<link rel="stylesheet" href="/resources/css/themify-icons.css">
 <!-- Hover Effects -->
-<link rel="stylesheet" href="resources/css/set1.css">
+<link rel="stylesheet" href="/resources/css/set1.css">
 <!-- Swipper Slider -->
-<link rel="stylesheet" href="resources/css/swiper.min.css">
+<link rel="stylesheet" href="/resources/css/swiper.min.css">
 <!-- Magnific Popup CSS -->
-<link rel="stylesheet" href="resources/css/magnific-popup.css">
+<link rel="stylesheet" href="/resources/css/magnific-popup.css">
 <!-- Main CSS -->
-<link rel="stylesheet" href="resources/css/style.css">
+<link rel="stylesheet" href="/resources/css/style.css">
 
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
@@ -48,9 +48,14 @@
 // 	아직 작업중
 	function doReg() {
 		if ($("#registForm").valid()) {
-			var url = "/user/join";
+			var url = "/user/regist";
 			$.post(url, $("#registForm").serialize(), function (data) {
-				
+				if(data == 1){
+					alert("회원가입에 성공했습니다.");
+					document.location.href="/main";
+				} else {
+					alert("회원가입에 실패했습니다. 관리자에게 문의해 주세요.");
+				}
 			});
 		}
 	}
@@ -59,7 +64,7 @@
 <title>회원가입</title>
 </head>
 <body>
-	<%@ include file="/pageframe/header.jsp"%>
+	<%@ include file="//pageframe/header.jsp"%>
 	<div class="row">
 		<div class="col-12">
 			<div class="card card-body">
@@ -99,6 +104,6 @@
 		</div>
 	</div>
 
-	<%@ include file="/pageframe/footer.jsp"%>
+	<%@ include file="//pageframe/footer.jsp"%>
 </body>
 </html>

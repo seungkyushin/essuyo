@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.webproject.essuyo.domain.UserVO;
 import com.webproject.essuyo.service.UserService;
@@ -29,12 +30,18 @@ public class UserController {
 
 	
 	//POST 방식으로 회원가입 페이지 접근, form에 입력된 정보들은 받아야 하는데...
+	@ResponseBody
 	@RequestMapping(value="/regist", method=RequestMethod.POST)
-	public String registPost(UserVO vo, HttpSession session, Model model) throws Exception{
+	public Integer registPost(UserVO vo, HttpSession session, Model model) throws Exception{
+		logger.info("registPost.......");
+		try {
+			service.regist(vo);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return 0;
+		}
 		
-		service.regist(vo);
-		//회원가입이 끝나면 로그인 화면으로 리다이렉트
-		return "redirect:/user/login";
+		return 1;
 		
 	}
 }

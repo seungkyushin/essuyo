@@ -63,6 +63,8 @@
 
 	</mvc:interceptors>
 	
+<!-- 	제이슨뷰 빈 생성 -->
+<beans:bean id="jsonView" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView"></beans:bean>
 	
 </beans:beans>
 
