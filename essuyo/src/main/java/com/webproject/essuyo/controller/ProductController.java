@@ -9,15 +9,20 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.webproject.essuyo.domain.ReservationVO;
 import com.webproject.essuyo.service.ProductService;
+import com.webproject.essuyo.service.ReservationService;
 
 @Controller
 public class ProductController {
 
 	@Autowired
 	ProductService productService;
+	
+	@Autowired
+	ReservationService reservationService;
 	
 	@GetMapping("/reservation")
 	public String showReservationPage(@RequestParam("id") int productId,
@@ -27,6 +32,7 @@ public class ProductController {
 		Map<String,Object> result = productService.getProduct(productId);
 
 		model.addAttribute("product", result);
+		model.addAttribute("productId", productId);
 		model.addAttribute("businessType", businessTypeId);
 		
 		return "reservation";
@@ -35,9 +41,16 @@ public class ProductController {
 	@PostMapping("/reserve")
 	public String setReserve(@ModelAttribute ReservationVO reservationInfo,
 			Model model) {
-		
-		System.out.println(reservationInfo);
-		
-		return "/";
+			String viewName = "main";
+	
+			int resultId = reservationService.regReservationInfo(reservationInfo);
+			
+			if(resultId == 0 ) {
+				
+			}else {
+				viewName = "redirect:reservation?id=1&type=1";
+			}
+
+		return viewName;
 	}
 }

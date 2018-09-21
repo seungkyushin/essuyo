@@ -190,7 +190,7 @@ CREATE TABLE reservation (
 	res_date DATE NOT NULL, /* 예약한날짜 */
 	product_count INTEGER NOT NULL, /* 상품 개수 */
 	reg_date DATE NOT NULL, /* 등록날짜 */
-	agree INTEGER NULL, /* 취소 및 약관 동의 */
+	agree VARCHAR(255) NULL, /* 취소 및 약관 동의 */
 	company_id INTEGER , /* 회사_번호 */
 	product_id INTEGER , /* 상품_번호 */
 	user_id INTEGER ,  /* 사용자_번호 */
