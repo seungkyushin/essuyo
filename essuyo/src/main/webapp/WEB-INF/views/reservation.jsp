@@ -161,7 +161,11 @@
 
 					<div  class="booking-checkbox_wrap">
 						<h5>취소규정 및 약관동의</h5>
-						
+						<div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" name="agree" id="customCheck1">
+                                            <label class="custom-control-label" for="customCheck1">취소규정 및 약관에 모두 동의합니다.</label>
+                        </div>
+                        
                         <div style="display: none" id="cancel">         
 						<ul>
 							<li>결제와 동시예 예약이 확정됩니다.</li>
@@ -171,10 +175,7 @@
 							<li>성수기 요금이 확정되지 않았거나 요금표가 잘못 등록된 경우 예약이 취소될 수 있습니다.</li>
 							<li>예약 상품에 대한 문의사항은 판매자를 통해 문의해 주시길 바랍니다.</li>
 						</ul>
-						<div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" name="agree" id="customCheck1">
-                                            <label class="custom-control-label" for="customCheck1">취소규정 및 약관에 모두 동의합니다.</label>
-                        </div>
+						
                         </div>  
                         
 						<h5><a class="nav-link" href="javascript:cancelSlideToggle()">
@@ -243,15 +244,18 @@
 			$("#res-submit").on("click", function() {
 				var productCount = $("#productCount").val();
 				var agree = $('input:checkbox[id="customCheck1"]').is(":checked");
-				console.log(productCount);
-				console.log(agree);
-				
-						
-				if(productCount != 0 && agree == true){
-					/*  $("#reservation-info").submit();*/
+				console.log( $("#reservation-info").serialize());
+				if(productCount != "" && agree == true){
+					  $("#reservation-info").submit();
 				}
-				else
-					alert("데이터 입력 바람");
+				else{
+					if( productCount == "" && agree == false)
+						alert("날짜,수량 선택 및 취소규정에 동의해 주세요");
+					else if( agree == false )
+						alert("취소규정에 동의해 주세요");
+					else if( productCount == "" )
+						alert("하루이상 날짜 혹은 수량을 선택해 주세요");
+				}
 			});
 			
 });
@@ -259,9 +263,10 @@
 	
 		function calTotalPrice(count){
 			var totalPrice =  count * parseInt("${product.price}");
+			$("#totalPrice").val( totalPrice );
+			
 			totalPrice = dotSplit(totalPrice);
 			$("#totalPriceSrc").text( totalPrice + "원");
-			$("#totalPrice").val( totalPrice );
 		}
 		function cancelSlideToggle(){
 			var className =  $('#arrow-silde').attr("class");
@@ -290,13 +295,11 @@
 					calTotalPrice(count);
 				}else{
 					alert("1박이상 선택해주세요");
+					$("#productCount").val("");
 					$(".toggle-string").hide();
-			
 				}
 			}else{
-				
 				$(".toggle-string2").show();
-				
 				$("#reservation-date").text(startDate);
 			}
 
