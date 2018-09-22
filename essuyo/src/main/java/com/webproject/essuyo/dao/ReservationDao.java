@@ -1,5 +1,8 @@
 package com.webproject.essuyo.dao;
 
+import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -15,6 +18,10 @@ public class ReservationDao {
 	
 	public int insert(ReservationVO reservationInfo) throws Exception{
 		return sqlSession.insert(NAME_SPACE + ".insertData", reservationInfo);
+	}
+	
+	public List<ReservationVO> select(Map<String,Object> param) throws Exception{
+		return sqlSession.selectList(NAME_SPACE + ".selectData", param);
 	}
 	
 }

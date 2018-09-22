@@ -65,7 +65,8 @@
 		
 			<div class="row">
 				<input type="hidden" id="companyId" name="CompanyId" value="1">
-				<input type="hidden" id="productId" name="productId" value="${productId}" >
+				<input type="hidden" id="productId" name="productId" value="${product.id}" >
+				<input type="hidden" id="userId" name="UserId" value="1" >
 				
 			<div class="col-md-4 responsive-wrap">
 				<img src="${product.url}" class="img-fluid"	alt="${product.imageName}">
@@ -200,7 +201,6 @@
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<script src="resources/js/datepicker-ko.js"></script>
-	<script src="resources/js/handlebars.min.js"></script>
 	<script src="resources/js/utility.js"></script>
 	
 	<script>

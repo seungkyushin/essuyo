@@ -133,61 +133,22 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Latest Sales</h4>
+                                <h4 class="card-title">예약 리스트</h4>
                             </div>
                             <div class="table-responsive">
                                 <table class="table table-hover">
                                     <thead>
                                         <tr>
-                                            <th class="border-top-0">NAME</th>
-                                            <th class="border-top-0">STATUS</th>
-                                            <th class="border-top-0">DATE</th>
-                                            <th class="border-top-0">PRICE</th>
+                                            <th class="border-top-0">카테고리</th>
+                                            <th class="border-top-0">이름</th>
+                                            <th class="border-top-0">상태</th>
+                                            <th class="border-top-0">예약날짜</th>
+                                            <th class="border-top-0">결제가격</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        <tr>
-                                            
-                                            <td class="txt-oflo">Elite admin</td>
-                                            <td><span class="label label-success label-rounded">SALE</span> </td>
-                                            <td class="txt-oflo">April 18, 2017</td>
-                                            <td><span class="font-medium">$24</span></td>
-                                        </tr>
-                                        <tr>
-                                            
-                                            <td class="txt-oflo">Real Homes WP Theme</td>
-                                            <td><span class="label label-info label-rounded">EXTENDED</span></td>
-                                            <td class="txt-oflo">April 19, 2017</td>
-                                            <td><span class="font-medium">$1250</span></td>
-                                        </tr>
-                                        <tr>
-                                            
-                                            <td class="txt-oflo">Ample Admin</td>
-                                            <td><span class="label label-purple label-rounded">Tax</span></td>
-                                            <td class="txt-oflo">April 19, 2017</td>
-                                            <td><span class="font-medium">$1250</span></td>
-                                        </tr>
-                                        <tr>
-                                            
-                                            <td class="txt-oflo">Medical Pro WP Theme</td>
-                                            <td><span class="label label-success label-rounded">Sale</span></td>
-                                            <td class="txt-oflo">April 20, 2017</td>
-                                            <td><span class="font-medium">-$24</span></td>
-                                        </tr>
-                                        <tr>
-                                            
-                                            <td class="txt-oflo">Hosting press html</td>
-                                            <td><span class="label label-success label-rounded">SALE</span></td>
-                                            <td class="txt-oflo">April 21, 2017</td>
-                                            <td><span class="font-medium">$24</span></td>
-                                        </tr>
-                                        <tr>
-                                            
-                                            <td class="txt-oflo">Digital Agency PSD</td>
-                                            <td><span class="label label-danger label-rounded">Tax</span> </td>
-                                            <td class="txt-oflo">April 23, 2017</td>
-                                            <td><span class="font-medium">-$14</span></td>
-                                        </tr>
+                                    <tbody id="reservation-list">
+                               
+                                        
                                     </tbody>
                                 </table>
                             </div>
@@ -369,51 +330,65 @@
 
                     </div>
                 </div>
-                <!-- ============================================================== -->
-                <!-- Recent comment and chats -->
-                <!-- ============================================================== -->
+     
             </div>
-            <!-- ============================================================== -->
-            <!-- End Container fluid  -->
-            <!-- ============================================================== -->
-            <!-- ============================================================== -->
-            <!-- footer -->
-            <!-- ============================================================== -->
+ 
             <footer class="footer text-center">
                 All Rights Reserved by Nice admin. Designed and Developed by
                 <a href="https://wrappixel.com">WrapPixel</a>.
             </footer>
-            <!-- ============================================================== -->
-            <!-- End footer -->
-            <!-- ============================================================== -->
-        </div>
-        <!-- ============================================================== -->
-        <!-- End Page wrapper  -->
-        <!-- ============================================================== -->
+         </div>
+  
     </div>
-    <!-- ============================================================== -->
-    <!-- End Wrapper -->
-    <!-- ============================================================== -->
-    <!-- ============================================================== -->
-    <!-- All Jquery -->
-    <!-- ============================================================== -->
+ 
     <script src="resources/js/jquery/jquery.min.js"></script>
-    <!-- Bootstrap tether Core JavaScript -->
     <script src="resources/js/popper/umd/popper.min.js"></script>
     <script src="resources/js/bootstrap/bootstrap.min.js"></script>
-    <!-- slimscrollbar scrollbar JavaScript -->
     <script src="resources/js/sparkline.js"></script>
-    <!--Wave Effects -->
     <script src="resources/js/userpage/waves.js"></script>
-    <!--Menu sidebar -->
     <script src="resources/js/userpage/sidebarmenu.js"></script>
-    <!--Custom JavaScript -->
     <script src="resources/js/userpage/custom.min.js"></script>
-    <!--This page JavaScript -->
-    <!--chartis chart-->
     <script src="resources/js/chartist/chartist.min.js"></script>
     <script src="resources/js/chartist/chartist-plugin-tooltip.min.js"></script>
     <script src="resources/js/userpage/pages/dashboards/dashboard1.js"></script>
+    <script src="resources/js/utility.js"></script>
+    <script src="resources/js/handlebars.min.js"></script>
+    <script id="reservation-item" type="template">
+		<tr>
+           <td class="txt-oflo">{{category}}</td>
+		   <td class="txt-oflo">{{name}}</td>
+           <td><span class="label label-success label-rounded">{{state}}</span> </td>
+           <td class="txt-oflo">{{date}}</td>
+           <td><span class="font-medium">{{totalPrice}} 원</span></td>
+        </tr>
+	</script>
+	<script>
+	$(document).ready(function(){
+		Ajax("GET","api/reservationList/user/1",null,function(dataList){
+			
+			dataList.forEach(function(data){
+				var template = $("#reservation-item").html();
+				var compiler = Handlebars.compile(template);
+				var tempData = {};
+				
+				tempData['category'] = "카테고리 : " + data.companyId;
+				tempData['name'] = "이름 : " + data.productId;
+				tempData['state'] = data.state;
+				tempData['date'] = data.resDate;
+				tempData['totalPrice'] = data.totalPrice;
+				var resultHTML = compiler(tempData);
+				
+				
+				$("#reservation-list").append(resultHTML);
+			});
+				
+		
+			
+		});
+		
+	});
+
+	</script>
 </body>
 
 </html>

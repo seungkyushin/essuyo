@@ -12,5 +12,20 @@ VALUES(#{state}, #{totalPrice}, #{resDate}, #{productCount},
 #{regDate},#{agree},#{companyId},#{productId},#{userId});
 </insert>
 
+<select id="selectData" resultType="ReservationVO">
+SELECT id, state, total_price AS totalPrice , res_date AS resDate, product_count AS productCount,
+reg_date AS regDate, agree, company_id AS companyId, product_id AS productId, user_id AS userId
+FROM reservation WHERE 
+		<choose>
+   			 <when test="type != null and type.equals('user')">
+					user_id = #{id}
+   			 </when>
+    		 <when test="type != null and type.equals('company')">
+					company_id = #{id}
+    		</when>
+ 		</choose>
+  		limit #{start}, #{limit};
+ </select>
+
 
 </mapper>

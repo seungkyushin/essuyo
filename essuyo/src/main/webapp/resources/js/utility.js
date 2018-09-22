@@ -30,4 +30,19 @@ function dotSplit(number) {
 			});	
 			return result;
 			
+}
+
+function Ajax(method,requestUrl,sendData,success){
+	$.ajax({
+		type : method,
+		url : requestUrl,
+		data : sendData,
+		success : success,
+		error : function(error){
+			alert("Ajax error : " + error);
 		}
+		
+	});
+	
+}
+
