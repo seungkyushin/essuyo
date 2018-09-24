@@ -110,12 +110,14 @@ CREATE TABLE comment (
 	content  VARCHAR(255), /* 내용 */
 	state VARCHAR(255) NOT NULL, /* 상태 */
 	helpful INTEGER, /* 도움점수 */
-	scroe DECIMAL(2,1) NOT NULL, /* 점수 */
+	score DECIMAL(2,1) NOT NULL, /* 점수 */
 	mod_date DATE, /* 수정날짜 */
 	reg_date DATE NOT NULL, /* 등록날짜 */
 	user_id INTEGER NOT NULL,/* 사용자번호 */
+	company_id INTEGER NOT NULL,/* 회사번호 */
 	
-	FOREIGN KEY (user_id) REFERENCES user(id) ON DELETE CASCADE
+	FOREIGN KEY (user_id) REFERENCES user(id) ON DELETE CASCADE,
+	FOREIGN KEY (company_id) REFERENCES company(id) ON DELETE CASCADE
 )DEFAULT CHARSET=utf8; 
 
 /* 메시지 */
@@ -211,6 +213,8 @@ INSERT INTO image_info ( save_path, type ,name, cre_date ) VALUES("resources/ima
 INSERT INTO image_info ( save_path, type ,name, cre_date ) VALUES("resources/images/car.jpg","image/jpg","car", now());
 INSERT INTO image_info ( save_path, type ,name, cre_date ) VALUES("resources/images/food.jpg","image/jpg","food", now());
 INSERT INTO image_info ( save_path, type ,name, cre_date ) VALUES("resources/images/museum.jpg","image/jpg","museum", now());
+INSERT INTO image_info ( save_path, type ,name, cre_date ) VALUES("resources/images/users/1.jpg","image/jpg","user1", now());
+
 
 
 /*사업 종류*/
@@ -235,8 +239,8 @@ INSERT INTO business(good,comment,company_id,business_type_id) VALUES(10, "돈�
 
 /*유저*/
 INSERT INTO user(name, age, gender, email, password,fail_password,
-cre_date,last_date,total_reply,business_id) VALUES("이써요", 20,"남","test@essuyo.com",
-"123",3,now(),now(),10,1);
+cre_date,last_date,total_reply,business_id,image_info_id) VALUES("이써요", 20,"남","test@essuyo.com",
+"123",3,now(),now(),10,1,5);
 
 
 
@@ -271,4 +275,34 @@ total_visit, today_visit,grade,area_list_id,business_type_id)
 VALUES("알촌", "알밥파는 집", "서울 서대문구 이화여대7길 14","02-1111-1111",
 "http://alchon.com/","휴무중","am 10:00 ~ pm 10:00",10,10,3,2,2);
 
+/*덧글*/
+INSERT INTO comment(title, content, state, helpful, score, reg_date, user_id, company_id) 
+VALUES("comment title 1", "이써요이써요이써요이써요", "상태", 0, 1.0,"2018-09-21",1,1);
+
+INSERT INTO comment(title, content, state, helpful, score, reg_date, user_id, company_id) 
+VALUES("comment title 2", "이써요이써요이써요이써요", "상태", 0, 2.0,"2018-09-21",1,1);
+
+INSERT INTO comment(title, content, state, helpful, score, reg_date, user_id, company_id) 
+VALUES("comment title 3", "이써요이써요이써요이써요", "상태", 0, 5.0,"2018-09-22",1,1);
+
+INSERT INTO comment(title, content, state, helpful, score, reg_date, user_id, company_id) 
+VALUES("comment title 4", "이써요이써요이써요이써요", "상태", 0, 4.0,"2018-09-22",1,2);
+
+INSERT INTO comment(title, content, state, helpful, score, reg_date, user_id, company_id) 
+VALUES("comment title 5", "이써요이써요이써요이써요", "상태", 0, 5.0,"2018-09-22",1,2);
+
+INSERT INTO comment(title, content, state, helpful, score, reg_date, user_id, company_id) 
+VALUES("comment title 6", "이써요이써요이써요이써요", "상태", 0, 6.0,"2018-09-23",1,2);
+
+INSERT INTO comment(title, content, state, helpful, score, reg_date, user_id, company_id) 
+VALUES("comment title 7", "이써요이써요이써요이써요", "상태", 0, 7.0,"2018-09-24",1,1);
+
+INSERT INTO comment(title, content, state, helpful, score, reg_date, user_id, company_id) 
+VALUES("comment title 8", "이써요이써요이써요이써요", "상태", 0, 8.0,"2018-09-25",1,2);
+
+INSERT INTO comment(title, content, state, helpful, score, reg_date, user_id, company_id) 
+VALUES("comment title 9", "이써요이써요이써요이써요", "상태", 0, 9.0,"2018-09-25",1,1);
+
+INSERT INTO comment(title, content, state, helpful, score, reg_date, user_id, company_id) 
+VALUES("comment title 10", "이써요이써요이써요이써요", "상태", 0, 9.5,"2018-09-25",1,2);
 
