@@ -12,7 +12,7 @@ public class ProductDao {
 
 	@Autowired
 	private SqlSession sqlSession;
-	private String NAME_SPACE = "essuyo.mappers.Product";
+	private String NAME_SPACE = "mappers.Product";
 	
 	public ProductVO selectByProductId(int id) throws Exception{
 		return sqlSession.selectOne(NAME_SPACE + ".selectById" , id);

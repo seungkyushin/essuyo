@@ -39,11 +39,8 @@ public class ProductServiceImpl implements ProductService {
 			// < 상품 정보
 			product = productDao.selectByProductId(productId);
 
-			// < 이미지 정보
-			Map<String, Object> params = new HashMap<>();
-			params.put("type", "product");
-			params.put("id", productId);
-			imageInfoList = imageAdminDao.selectImageById(params);
+			//< 이미지 리스트
+			imageInfoList = this.getImagePath(productId);
 
 		} catch (Exception e) {
 			logger.error("상품 조회 실패.. | {} ", e.toString());
@@ -53,10 +50,42 @@ public class ProductServiceImpl implements ProductService {
 		resultParam.put("state", product.getCount() > 0 ? "예약가능" : "예약불가");
 		resultParam.put("discription", product.getDiscription());
 		resultParam.put("price",product.getPrice());
-		resultParam.put("url", imageInfoList.get(0).getSavePath());
-		resultParam.put("imageName", imageInfoList.get(0).getName());
+	
+		
+		if( imageInfoList.size() == 1) {
+			Map<String, Object> imageMap = new HashMap<>();
+			imageMap.put("url", imageInfoList.get(0).getSavePath());
+			imageMap.put("name", imageInfoList.get(0).getName());
+			resultParam.put("image",imageMap);
+		}else {
+			Map<String, Object> imageMap = new HashMap<>();
+			List<Object> imageList = new ArrayList<>();
+			
+			for( ImageInfoVO data: imageInfoList) {
+				imageMap.put("url", data.getSavePath());
+				imageMap.put("name", data.getName());
+				imageList.add(imageMap);
+				resultParam.put("image",imageList);
+			}
+		}
 
 		return resultParam;
+	}
+	
+	@Override
+	public List<ImageInfoVO> getImagePath(int productId) {
+		
+		// < 이미지 정보
+		Map<String, Object> params = new HashMap<>();
+		params.put("type", "product");
+		params.put("id", productId);
+
+		try {
+			 return imageAdminDao.selectImageById(params);
+		} catch (Exception e) {
+			logger.error("이미지 조회 실패.. | {} ", e.toString());
+		}
+		return null;
 	}
 
 }

@@ -68,7 +68,7 @@
 				<input type="hidden" id="productId" name="productId" value="${productId}" >
 				
 			<div class="col-md-4 responsive-wrap">
-				<img src="${product.url}" class="img-fluid"	alt="${product.imageName}">
+				<img src="${product.image.url}" class="img-fluid"	alt="${product.image.name}">
 			</div>
 			
 				<div class="col-md-4 responsive-wrap">
