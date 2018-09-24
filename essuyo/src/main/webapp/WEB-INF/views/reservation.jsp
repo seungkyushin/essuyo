@@ -228,7 +228,8 @@
 					count += 1;
 					$("#count").val(count);
 								
-					
+					$(".toggle-string").show();
+					$("#productCount").val(count);
 					calTotalPrice(count);
 					
 				}
@@ -239,6 +240,8 @@
 					count -= 1;
 					$("#count").val(count);
 					
+					$(".toggle-string").show();
+					$("#productCount").val(count);
 					calTotalPrice(count);
 					
 				}
