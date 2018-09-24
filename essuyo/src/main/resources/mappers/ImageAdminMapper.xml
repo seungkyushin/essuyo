@@ -4,10 +4,8 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
     
-<mapper namespace="essuyo.mappers.ImageAdmin">
-    
-    
-	<!-- 상품 ID를 통해 상품 정보를 받아온다. -->
+<mapper namespace="mappers.ImageAdmin">
+
     <select id="selectById" resultType="ImageInfoVO">
         	SELECT id, save_path AS savePath, type, name, 
         	cre_date AS creDate, mod_date AS modDate FROM image_info
@@ -21,9 +19,9 @@
    			 <when test="type != null and type.equals('company')">
      				 WHERE id = (SELECT  image_info_id FROM company_image_admin WHERE product_id=#{id});
     		</when>
+    		 <when test="type != null and type.equals('user')">
+     				WHERE id = (SELECT  image_info_id FROM user WHERE id=#{id});
+    		</when>
   		</choose>
     </select>
-  
-
-
  </mapper>
