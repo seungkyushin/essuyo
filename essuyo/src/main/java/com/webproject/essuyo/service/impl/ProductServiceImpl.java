@@ -71,7 +71,8 @@ public class ProductServiceImpl implements ProductService {
 		}
 
 		return resultParam;
-	}
+}
+	
 	
 	@Override
 	public List<ImageInfoVO> getImagePath(int productId) {

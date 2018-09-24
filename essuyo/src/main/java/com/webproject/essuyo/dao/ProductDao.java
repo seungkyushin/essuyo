@@ -17,9 +17,5 @@ public class ProductDao {
 	public ProductVO selectByProductId(int id) throws Exception{
 		return sqlSession.selectOne(NAME_SPACE + ".selectById" , id);
 	}
-	
 
-	
-
-	
 }

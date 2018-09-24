@@ -12,5 +12,4 @@ public interface ProductService {
 	public Map<String,Object> getProduct(int productId);
 	
 	public List<ImageInfoVO> getImagePath(int productId);
-
 }

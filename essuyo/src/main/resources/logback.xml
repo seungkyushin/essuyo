@@ -35,7 +35,7 @@
 <logger name="org.springframework" level="info">
 </logger>
 
-<logger name="org.springproject.kyu" level="info">
+<logger name="com.webproject.essuyo" level="info">
 	 <appender-ref ref="MY_LOG_FILE"/>
 </logger>
 

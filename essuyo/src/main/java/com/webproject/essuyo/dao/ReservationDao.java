@@ -17,11 +17,11 @@ public class ReservationDao {
 	private String NAME_SPACE = "mappers.Reservation";
 	
 	public int insert(ReservationVO reservationInfo) throws Exception{
-		return sqlSession.insert(NAME_SPACE + ".insertData", reservationInfo);
+		return sqlSession.insert(NAME_SPACE + ".insert", reservationInfo);
 	}
 	
 	public List<ReservationVO> select(Map<String,Object> param) throws Exception{
-		return sqlSession.selectList(NAME_SPACE + ".selectData", param);
+		return sqlSession.selectList(NAME_SPACE + ".selectById", param);
 	}
 	
 }

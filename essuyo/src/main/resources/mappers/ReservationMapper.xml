@@ -6,14 +6,14 @@
 <mapper namespace="mappers.Reservation">
 
 
-<insert id="insertData" parameterType="ReservationVO">
+<insert id="insert" parameterType="ReservationVO">
 INSERT INTO reservation
 (state, total_price, res_date, product_count, reg_date, agree, company_id, product_id, user_id) 
 VALUES(#{state}, #{totalPrice}, #{resDate}, #{productCount},
 #{regDate},#{agree},#{companyId},#{productId},#{userId});
 </insert>
 
-<select id="selectData" resultType="ReservationVO">
+<select id="selectById" resultType="ReservationVO">
 SELECT id, state, total_price AS totalPrice , res_date AS resDate, product_count AS productCount,
 reg_date AS regDate, agree, company_id AS companyId, product_id AS productId, user_id AS userId
 FROM reservation WHERE 

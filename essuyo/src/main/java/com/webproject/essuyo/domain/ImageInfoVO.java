@@ -6,8 +6,8 @@ public class ImageInfoVO {
 	private String savePath;
 	private String type;
 	private String name;
-	private String cre_date;
-	private String mod_date;
+	private String creDate;
+	private String modDate;
 	public int getId() {
 		return id;
 	}
@@ -32,23 +32,24 @@ public class ImageInfoVO {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getCre_date() {
-		return cre_date;
+	public String getCreDate() {
+		return creDate;
 	}
-	public void setCre_date(String cre_date) {
-		this.cre_date = cre_date;
+	public void setCreDate(String creDate) {
+		this.creDate = creDate;
 	}
-	public String getMod_date() {
-		return mod_date;
+	public String getModDate() {
+		return modDate;
 	}
-	public void setMod_date(String mod_date) {
-		this.mod_date = mod_date;
+	public void setModDate(String modDate) {
+		this.modDate = modDate;
 	}
 	@Override
 	public String toString() {
-		return "ImageInfoVO [id=" + id + ", savePath=" + savePath + ", type=" + type + ", name=" + name + ", cre_date="
-				+ cre_date + ", mod_date=" + mod_date + "]";
+		return "ImageInfoVO [id=" + id + ", savePath=" + savePath + ", type=" + type + ", name=" + name + ", creDate="
+				+ creDate + ", modDate=" + modDate + "]";
 	}
+	
 	
 	
 }
