@@ -227,6 +227,7 @@
     <script src="resources/js/chartist/chartist.min.js"></script>
     <script src="resources/js/chartist/chartist-plugin-tooltip.min.js"></script>
     <script src="resources/js/userpage/pages/dashboards/dashboard1.js"></script>
+    <script src="resources/js/utility.js"></script>
     <script src="resources/js/handlebars.min.js"></script>
     
     <script type="template" id="comment-template">
