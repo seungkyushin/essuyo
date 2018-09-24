@@ -69,7 +69,7 @@
 				<input type="hidden" id="userId" name="UserId" value="1" >
 				
 			<div class="col-md-4 responsive-wrap">
-				<img src="${product.url}" class="img-fluid"	alt="${product.imageName}">
+				<img src="${product.image.url}" class="img-fluid"	alt="${product.image.name}">
 			</div>
 			
 				<div class="col-md-4 responsive-wrap">
