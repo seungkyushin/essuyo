@@ -19,10 +19,10 @@ import com.webproject.essuyo.service.ReservationService;
 public class ProductController {
 
 	@Autowired
-	ProductService productService;
+	private ProductService productService;
 	
 	@Autowired
-	ReservationService reservationService;
+	private ReservationService reservationService;
 	
 	@GetMapping("/reservation")
 	public String showReservationPage(@RequestParam("id") int productId,
@@ -32,7 +32,6 @@ public class ProductController {
 		Map<String,Object> result = productService.getProduct(productId);
 
 		model.addAttribute("product", result);
-		model.addAttribute("productId", productId);
 		model.addAttribute("businessType", businessTypeId);
 		
 		return "reservation";
@@ -46,9 +45,8 @@ public class ProductController {
 			int resultId = reservationService.regReservationInfo(reservationInfo);
 			
 			if(resultId == 0 ) {
-				
-			}else {
-				viewName = "redirect:reservation?id=1&type=1";
+				viewName = "redirect:reservation?id=" + reservationInfo.getProductId() +
+							"&type="+reservationInfo.getCompanyId();
 			}
 
 		return viewName;

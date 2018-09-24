@@ -4,6 +4,9 @@ package com.webproject.essuyo.service.impl;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,6 +22,8 @@ public class ReservationServiceImpl implements ReservationService{
 
 	@Autowired
 	ReservationDao reservationDao;
+	
+	private int SEARCH_LIMIT = 3;
 	
 	private Logger logger = LoggerFactory.getLogger(ProductServiceImpl.class);
 	
@@ -40,6 +45,24 @@ public class ReservationServiceImpl implements ReservationService{
 		}
 		
 		return result;
+	}
+
+	@Override
+	public List<ReservationVO> getReservationListAll(String findType, int start) {
+		
+		Map<String,Object> param = new HashMap<>();
+		param.put("type", findType);
+		param.put("id", 1);
+		param.put("start", (start-1)*SEARCH_LIMIT);
+		param.put("limit", SEARCH_LIMIT);
+	
+		try {
+			  return reservationDao.select(param);
+		} catch (Exception e) {
+			logger.error("예약 등록 실패.. | {} ", e.toString());
+		}
+		
+		return null;
 	}
 
 }

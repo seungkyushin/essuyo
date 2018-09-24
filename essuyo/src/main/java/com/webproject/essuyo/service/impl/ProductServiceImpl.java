@@ -20,10 +20,10 @@ import com.webproject.essuyo.service.ProductService;
 public class ProductServiceImpl implements ProductService {
 
 	@Autowired
-	ProductDao productDao;
+	private ProductDao productDao;
 
 	@Autowired
-	ImageAdminDao imageAdminDao;
+	private ImageAdminDao imageAdminDao;
 
 	private Logger logger = LoggerFactory.getLogger(ProductServiceImpl.class);
 
@@ -50,6 +50,7 @@ public class ProductServiceImpl implements ProductService {
 		}
 
 		resultParam.put("name", product.getName());
+		resultParam.put("id", product.getId());
 		resultParam.put("state", product.getCount() > 0 ? "예약가능" : "예약불가");
 		resultParam.put("discription", product.getDiscription());
 		resultParam.put("price",product.getPrice());

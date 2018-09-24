@@ -39,3 +39,29 @@ function makeHTML(templateName, appendName, data){
 	
 	$(appendName).append(resultHTML);
 }
+
+function Ajax(method,requestUrl,sendData,success){
+	$.ajax({
+		type : method,
+		url : requestUrl,
+		data : sendData,
+		success : success,
+		error : function(error){
+			alert("Ajax error : " + error);
+		}
+	});
+}
+
+function Ajax(method,requestUrl,success){
+	$.ajax({
+		type : method,
+		url : requestUrl,
+		success : success,
+		error : function(error){
+			alert("Ajax error : " + error);
+		}
+	});
+}
+
+
+
