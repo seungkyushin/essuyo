@@ -30,7 +30,8 @@ function dotSplit(number) {
 			});	
 			return result;
 			
-		}
+}
+
 function makeHTML(templateName, appendName, data){
 	var templateHTML = $(templateName).html();
 	var compiler = Handlebars.compile(templateHTML);
