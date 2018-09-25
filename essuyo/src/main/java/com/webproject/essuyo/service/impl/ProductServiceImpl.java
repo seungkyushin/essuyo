@@ -53,9 +53,6 @@ public class ProductServiceImpl implements ProductService {
 		resultMap.put("discription", product.getDiscription());
 		resultMap.put("price",product.getPrice());
 	
-		
-	
-		
 		List<Object> imageList = new ArrayList<>();
 			
 		for( ImageInfoVO data: imageInfoList) {

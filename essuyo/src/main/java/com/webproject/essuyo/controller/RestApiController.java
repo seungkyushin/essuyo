@@ -1,7 +1,5 @@
 package com.webproject.essuyo.controller;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -16,9 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.webproject.essuyo.domain.CommentVO;
 import com.webproject.essuyo.domain.CompanyVO;
-import com.webproject.essuyo.domain.ReservationVO;
 import com.webproject.essuyo.service.CommentService;
 import com.webproject.essuyo.service.CompanyService;
 import com.webproject.essuyo.service.ReservationService;
@@ -56,7 +52,6 @@ public class RestApiController {
 			@PathVariable int id) {
 
 		//< 요청자 화인
-		
 		return commentService.getCommentList(type, id,  start);
 	}
 
@@ -70,7 +65,6 @@ public class RestApiController {
 
 		
 		//< 요청자 화인
-		
 		return reservationService.getReservationList(type, id, start);
 	}
 
