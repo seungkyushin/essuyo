@@ -14,6 +14,7 @@ import com.webproject.essuyo.dao.ImageAdminDao;
 import com.webproject.essuyo.dao.ProductDao;
 import com.webproject.essuyo.domain.ImageInfoVO;
 import com.webproject.essuyo.domain.ProductVO;
+import com.webproject.essuyo.domain.SQLParamVO;
 import com.webproject.essuyo.service.ProductService;
 
 @Service
@@ -29,7 +30,7 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public Map<String, Object> getProduct(int productId) {
-		Map<String, Object> resultParam = new HashMap<>();
+		Map<String, Object> resultMap = new HashMap<>();
 
 		ProductVO product = null;
 		List<ImageInfoVO> imageInfoList = null;
@@ -46,48 +47,45 @@ public class ProductServiceImpl implements ProductService {
 			logger.error("상품 조회 실패.. | {} ", e.toString());
 		}
 
-		resultParam.put("name", product.getName());
-		resultParam.put("id", product.getId());
-		resultParam.put("state", product.getCount() > 0 ? "예약가능" : "예약불가");
-		resultParam.put("discription", product.getDiscription());
-		resultParam.put("price",product.getPrice());
+		resultMap.put("name", product.getName());
+		resultMap.put("id", product.getId());
+		resultMap.put("state", product.getCount() > 0 ? "예약가능" : "예약불가");
+		resultMap.put("discription", product.getDiscription());
+		resultMap.put("price",product.getPrice());
 	
 		
-		if( imageInfoList.size() == 1) {
-			Map<String, Object> imageMap = new HashMap<>();
-			imageMap.put("url", imageInfoList.get(0).getSavePath());
-			imageMap.put("name", imageInfoList.get(0).getName());
-			resultParam.put("image",imageMap);
-		}else {
-			Map<String, Object> imageMap = new HashMap<>();
-			List<Object> imageList = new ArrayList<>();
-			
-			for( ImageInfoVO data: imageInfoList) {
-				imageMap.put("url", data.getSavePath());
-				imageMap.put("name", data.getName());
-				imageList.add(imageMap);
-				resultParam.put("image",imageList);
-			}
-		}
-
-		return resultParam;
-}
 	
+		
+		List<Object> imageList = new ArrayList<>();
+			
+		for( ImageInfoVO data: imageInfoList) {
+			Map<String, Object> imageMap = new HashMap<>();
+			imageMap.put("url", data.getSavePath());
+			imageMap.put("name", data.getName());
+			imageList.add(imageMap);
+		}
+		resultMap.put("image",imageList);
+		
+
+		return resultMap;
+}
 	
 	@Override
 	public List<ImageInfoVO> getImagePath(int productId) {
 		
+		List<ImageInfoVO> resultList = null;
 		// < 이미지 정보
-		Map<String, Object> params = new HashMap<>();
-		params.put("type", "product");
-		params.put("id", productId);
+		SQLParamVO params = new  SQLParamVO();
+		params.setType("product");
+		params.setId(productId);
+
 
 		try {
-			 return imageAdminDao.selectImageById(params);
+			resultList = imageAdminDao.selectImageById(params);
 		} catch (Exception e) {
 			logger.error("이미지 조회 실패.. | {} ", e.toString());
 		}
-		return null;
+		return resultList;
 	}
 
 }

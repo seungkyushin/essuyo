@@ -18,8 +18,8 @@
 					WHERE company_id=#{id} 
     		</when>
   		</choose>
-    		
-    	ORDER BY reg_date DESC;
+    	
+    	ORDER BY id DESC limit #{start}, #{limit};
     </select>
   
     

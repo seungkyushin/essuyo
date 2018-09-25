@@ -8,7 +8,6 @@ public class ReservationVO {
 	private String resDate;		/* 예약한날짜 */
 	private int productCount;	/* 상품 개수 */
 	private String regDate;		/* 등록날짜 */
-	private String agree;		/* 취소 및 약관 동의 */
 	private int companyId;		/* 회사_번호 */
 	private int productId;		/* 상품_번호 */
 	private int userId;			/* 사용자_번호 */
@@ -48,12 +47,6 @@ public class ReservationVO {
 	public void setRegDate(String regDate) {
 		this.regDate = regDate;
 	}
-	public String getAgree() {
-		return agree;
-	}
-	public void setAgree(String agree) {
-		this.agree = agree;
-	}
 	public int getCompanyId() {
 		return companyId;
 	}
@@ -75,8 +68,8 @@ public class ReservationVO {
 	@Override
 	public String toString() {
 		return "ReservationVO [id=" + id + ", state=" + state + ", totalPrice=" + totalPrice + ", resDate=" + resDate
-				+ ", productCount=" + productCount + ", regDate=" + regDate + ", agree=" + agree + ", companyId="
-				+ companyId + ", productId=" + productId + ", userId=" + userId + "]";
+				+ ", productCount=" + productCount + ", regDate=" + regDate + ", companyId=" + companyId
+				+ ", productId=" + productId + ", userId=" + userId + "]";
 	}
 	
 
