@@ -27,6 +27,8 @@ public class CompanyController {
 		model.addAttribute("list", service.listAll());
 
 	}
+	
+	
 
 	
 	
