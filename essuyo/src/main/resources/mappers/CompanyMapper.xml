@@ -9,6 +9,7 @@
 select *
 from company
 order by id
+limit 0, 4;
 ]]>
 </select>
 </mapper>
