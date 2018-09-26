@@ -6,6 +6,7 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
+import org.joda.time.LocalDate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -109,12 +110,26 @@ public class UserController {
 		model.addAttribute("dounutChart",dounutChart);
 		model.addAttribute("totalReservtionCount",reservationList.size());
 		
+		
+		int [] monthPayment = new int[12]; //
+		int totalPayment = 0;
+		for( ReservationVO data : reservationList) {
+				LocalDate ld = new LocalDate(data.getRegDate());
+				int month = ld.getMonthOfYear();
+				monthPayment[month-1] +=  data.getTotalPrice();
+				totalPayment +=  data.getTotalPrice();
+			}
+		
 		List<Integer> sparkline = new ArrayList<Integer>();
-		int [] sparklineArry = {2,9,5,10,9,10,12,10,9,11,9,10};
-
-		for( int data : sparklineArry ) {
+		int test = 0;
+		for(int data : monthPayment) {
+			test += 100000;
+			data += test;
 			sparkline.add(data);
 		}
+		
+		model.addAttribute("totalPayment",totalPayment);
+
 		
 		if( type.equals("user") == true ) {
 			model.addAttribute("sparkLineName","올해 지출");
@@ -122,12 +137,7 @@ public class UserController {
 			model.addAttribute("sparkLineName","올해 수입");
 		}
 		model.addAttribute("sparkLine",sparkline);
-				 
-		 int totalPayment = 0;
-		 for( ReservationVO data : reservationList) {
-			 totalPayment +=  data.getTotalPrice();
-		 }
-		model.addAttribute("totalPayment",totalPayment);
+	
 		
 		return "dashboard";
 		

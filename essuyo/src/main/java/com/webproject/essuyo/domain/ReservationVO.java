@@ -1,5 +1,7 @@
 package com.webproject.essuyo.domain;
 
+import java.util.Date;
+
 public class ReservationVO {
 	
 	private int id ; 			/* 번호 */

@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.joda.time.LocalDate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,11 +38,9 @@ public class ReservationServiceImpl implements ReservationService{
 	public int regReservationInfo(ReservationVO reservationInfo)  {
 		int result = 0;
 		try {
-
-				DateFormat dataFormat = new SimpleDateFormat("yyyy-MM-dd");
 				reservationInfo.setState("성공");
 				reservationInfo.setUserId(2);
-				reservationInfo.setRegDate( dataFormat.format(new Date()) );
+				reservationInfo.setRegDate( new LocalDate().toString() );
 			
 				System.out.println(reservationInfo);
 				
@@ -73,7 +72,7 @@ public class ReservationServiceImpl implements ReservationService{
 					}
 					
 					resultMap.put("productName", productDao.selectByProductId(data.getProductId()).getName());
-					resultMap.put("resDate", data.getResDate());
+					resultMap.put("resDate", data.getRegDate());
 					resultMap.put("state", data.getState());
 					resultMap.put("totalPrice", data.getTotalPrice());
 					

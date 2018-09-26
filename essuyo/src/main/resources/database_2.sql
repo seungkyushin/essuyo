@@ -328,31 +328,31 @@ VALUES("comment title 10", "이써요이써요이써요이써요", "상태", 0, 
 
 /*예약*/
 INSERT INTO reservation(state, total_price, res_date, product_count, reg_date, company_id, product_id, user_id) 
-VALUES("성공", 5000000, "2018-09-20", 1, "2018-09-19", 1, 1, 3);
+VALUES("성공", 100000, "2018-09-20", 1, "2018-09-19", 1, 1, 3);
 
 INSERT INTO reservation(state, total_price, res_date, product_count, reg_date, company_id, product_id, user_id) 
-VALUES("취소", 400000, "2018-09-21", 2, "2018-09-19", 1, 2, 2);
+VALUES("취소", 200000, "2018-09-21", 2, "2018-09-19", 1, 2, 2);
 
 INSERT INTO reservation(state, total_price, res_date, product_count, reg_date, company_id, product_id, user_id) 
-VALUES("완료", 3583812, "2018-09-22", 3, "2018-09-19", 1, 3, 2);
+VALUES("완료", 300000, "2018-09-22", 3, "2018-09-19", 1, 3, 2);
 
 INSERT INTO reservation(state, total_price, res_date, product_count, reg_date, company_id, product_id, user_id) 
-VALUES("성공", 6838957, "2018-09-23", 4, "2018-09-19", 2, 4, 3);
+VALUES("성공", 400000, "2018-09-23", 4, "2018-09-19", 2, 4, 3);
 
 INSERT INTO reservation(state, total_price, res_date, product_count, reg_date, company_id, product_id, user_id) 
-VALUES("취소", 200000, "2018-09-24", 5, "2018-09-19", 2, 1, 3);
+VALUES("취소", 500000, "2018-09-24", 5, "2018-09-19", 2, 1, 3);
 
 INSERT INTO reservation(state, total_price, res_date, product_count, reg_date, company_id, product_id, user_id) 
-VALUES("완료", 589000, "2018-09-25", 6, "2018-09-19", 2, 2, 2);
+VALUES("완료", 600000, "2018-09-25", 6, "2018-09-19", 2, 2, 2);
 
 INSERT INTO reservation(state, total_price, res_date, product_count, reg_date, company_id, product_id, user_id) 
-VALUES("성공", 18234444, "2018-09-26", 7, "2018-09-19", 1, 3, 2);
+VALUES("성공", 700000, "2018-09-26", 7, "2018-09-19", 1, 3, 2);
 
 INSERT INTO reservation(state, total_price, res_date, product_count, reg_date, company_id, product_id, user_id) 
-VALUES("취소", 100000, "2018-09-27", 8, "2018-09-19", 2, 4, 3);
+VALUES("취소", 800000, "2018-09-27", 8, "2018-09-19", 2, 4, 3);
 
 INSERT INTO reservation(state, total_price, res_date, product_count, reg_date, company_id, product_id, user_id) 
-VALUES("완료", 25000, "2018-09-28", 9, "2018-09-19", 1, 3, 3);
+VALUES("완료", 1000000, "2018-09-28", 9, "2018-09-19", 1, 3, 3);
 
 
 
