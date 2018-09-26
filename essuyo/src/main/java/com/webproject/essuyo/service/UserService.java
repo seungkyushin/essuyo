@@ -13,5 +13,7 @@ public interface UserService {
 	public void keepLogin(String email, String seesionId, Date next) throws Exception;
 	
 	public UserVO checkLoginBefore(String value);
+	
+	public boolean checkId(String email);
 
 }

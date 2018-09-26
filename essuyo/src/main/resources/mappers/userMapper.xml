@@ -15,6 +15,11 @@
     <select id="login" resultType="UserVO">
     select email, password from user where email = #{email} and password = #{password}
     </select>
+    
+<!--     이메일 중복체크용 sql 입력된 이메일을 카운트한다-->
+<select id="checkId" resultType="int">
+select count(*) from user where email = #{email}
+</select>
    
     
     </mapper>

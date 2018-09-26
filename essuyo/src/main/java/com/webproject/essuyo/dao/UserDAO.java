@@ -61,5 +61,10 @@ public class UserDAO {
 		
 		return session.selectOne(namespace+".checkUserWithSessionkey", value);
 	}
+	
+	public int checkId(String email) {
+		
+		return session.selectOne(namespace+".checkId", email);
+	}
 
 }

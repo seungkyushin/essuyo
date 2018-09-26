@@ -42,4 +42,17 @@ public class UserServiceImpl implements UserService{
 	public UserVO checkLoginBefore(String value) {
 		return dao.checkUserWithSessionkey(value);
 	}
+
+	
+	//이메일 중복 체크. 같은 이메일이 이미 DB에 존재하면 false, 아니면 true를 리턴
+	@Override
+	public boolean checkId(String email) {
+		int emailCnt = dao.checkId(email);
+		
+		if(emailCnt > 0) {
+			return false;
+		} else {
+		return true;
+		}
+	}
 }

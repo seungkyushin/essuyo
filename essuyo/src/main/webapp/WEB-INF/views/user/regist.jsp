@@ -41,13 +41,36 @@
 
 <!-- 유효성 검증. 각 항목의 유효성이 검증되지 않으면 넘어가지 않는다 -->
 <script>
-	$(function() {
+	$(function() { 
 		$("#registForm").validate();
+		// 버튼을 눌렀을 때 이메일의 유효성, 중복은 검사하는 기능. 지금은 
+		$("#btnCheckId").click(function() {
+			var email = $("#email").val();
+			if(! email_check(email)){
+				alert("형식에 맞는 이메일 주소를 입력해주세요.");
+			} else {
+				var url = "/user/checkId";
+				$.post(url, {email : email}, function(json) {
+					alert(json.msg);
+					
+					//이메일을 사용할 수 있으면 isCheckedEmail의 값을 Y로 해준다
+					if(json.code == 99){
+						$("#isCheckedEmail").val("Y");
+					}
+				});
+			}
+			
+		});
 	});
 
 	// 	회원가입에 성공하면, 일단 대쉬보드로 가게 설정해 놓음
 	//실패하면, 일단 다시 회원가입 페이지로 가게 함
 	function doReg() {
+		
+		if ($("#isCheckedEmail").val() == "N") {
+			alert("Email 중복 검사를 통과해야 합니다.");			
+		}
+		
 		if ($("#registForm").valid()) {
 			var url = "/user/regist";
 			$.post(url, $("#registForm").serialize(), function(data) {
@@ -61,6 +84,14 @@
 			});
 		}
 	}
+	//정규식으로 이메일을 체크하는 펑션. 아직 미 테스트
+	function email_check( email ) {
+	    
+	    var regex=/([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+	    return (email != '' && email != 'undefined' && regex.test(email));
+	 
+	}
+		
 </script>
 
 <title>회원가입</title>
@@ -73,9 +104,11 @@
 				<h4 class="card-title">회원가입</h4>
 				<h5 class="card-subtitle">요구사항에 따라 빈 칸을 채워주세요</h5>
 				<form class="form-horizontal m-t-30" id="registForm" method="post" enctype="multipart/form-data">
+				<input type="hidden" name="isCheckedEmail" id="isCheckedEmail" value="N"/>
 					<div class="form-group">
 						<label for="email">[이메일] <span class="help"> 예) "example@gmail.com"</span></label>
 						<input type="email" id="email" name="email" class="form-control" placeholder="이메일" required>
+						<button type="button" id="btnCheckId" style="height: 35px;">이메일 중복확인</button>
 					</div>
 					<div class="form-group">
 						<label>[비밀번호]</label>
