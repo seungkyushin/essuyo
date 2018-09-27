@@ -37,7 +37,7 @@
 	
 	<!-- SLIDER -->
 	<section class="slider d-flex align-items-center">
-        <!-- <img src="images/slider.jpg" class="img-fluid" alt="#"> -->
+<!--         <img src="images/slider.jpg" class="img-fluid" alt="#"> -->
         <div class="container">
             <div class="row d-flex justify-content-center">
                 <div class="col-md-12">
@@ -54,9 +54,15 @@
                             <div class="col-md-10">
                                 <form class="form-wrap mt-4">
                                     <div class="btn-group" role="group" aria-label="Basic example">
-                                        <input type="text" placeholder="어디를 찾으시나요??" class="btn-group1">
-                                        <input type="text" placeholder="Seoul" class="btn-group2">
-                                        <button type="submit" class="btn-form"><span class="icon-magnifier search-icon"></span>검색<i class="pe-7s-angle-right"></i></button>
+                                        	<input list="list" placeholder="☆★☆★☆골라주세요★☆★☆★" name="list1" class="btn-group1">
+											<datalist id="list">
+												<option value="숙박">
+                                        		<option value="차량">
+                                        		<option value="식사">
+                                        		<option value="박물관">
+											</datalist>
+                                        <input type="text" placeholder="어느 지역을 찾으세요??" class="btn-group2"> 
+                                       <button type="submit" class="btn-form" ><span class="icon-magnifier search-icon"></span>검색<i class="pe-7s-angle-right"></i></button>
                                     </div>
                                 </form>
                                 <div class="slider-link">
@@ -84,13 +90,13 @@
 				<div class="col-md-4">
 					<div class="find-place-img_wrap">
 						<div class="grid">
-							<figure class="effect-ruby">
+							<figure class="effect-ruby"><a href="/list">
 								<img src="resources/images/menu-rentcar.jpg" class="img-fluid"
 									alt="img13" />
 								<figcaption>
 									<h5>CAR-RENT</h5>
                                     <p>385 Listings</p>
-								</figcaption>
+								</figcaption></a>
 							</figure>
 						</div>
 					</div>
@@ -100,13 +106,13 @@
 						<div class="col-md-12">
 							<div class="find-place-img_wrap">
 								<div class="grid">
-									<figure class="effect-ruby">
+									<figure class="effect-ruby"><a href="/list">
 										<img src="resources/images/menu-restraunt.jpg" class="img-fluid"
-											alt="img13" />
+											alt="img13"/>
 										<figcaption>
 											<h5>Restaurants</h5>
 											<p>210 Listings</p>
-										</figcaption>
+										</figcaption></a>
 									</figure>
 								</div>
 							</div>
@@ -116,13 +122,13 @@
 						<div class="col-md-12">
 							<div class="find-place-img_wrap">
 								<div class="grid">
-									<figure class="effect-ruby">
+									<figure class="effect-ruby"><a href="/list">
 										<img src="resources/images/menu-museum.jpg" class="img-fluid"
 											alt="img13" />
 										<figcaption>
 											<h5>MUSEUM</h5>
-                                            <p>114 Listings</p>
-										</figcaption>
+                                            <p>${count} Listings</p>
+										</figcaption></a>
 									</figure>
 								</div>
 							</div>
@@ -134,13 +140,13 @@
 						<div class="col-md-12">
 							<div class="find-place-img_wrap">
 								<div class="grid">
-									<figure class="effect-ruby">
+									<figure class="effect-ruby"><a href="/list">
 										<img src="resources/images/menu-hotel.jpg" class="img-fluid"
 											alt="img13" />
 										<figcaption>
-											<h5>Hotels</h5>
+											<h5>Hotels</h5> 
                                             <p>577 Listings</p>
-										</figcaption>
+										</figcaption></a>
 									</figure>
 								</div>
 							</div>
@@ -150,13 +156,13 @@
 						<div class="col-md-12">
 							<div class="find-place-img_wrap">
 								<div class="grid">
-									<figure class="effect-ruby">
+									<figure class="effect-ruby"><a href="/list">
 										<img src="resources/images/menu-QnA.jpg" class="img-fluid"
 											alt="img13" />
 										<figcaption>
 											<h5>질문 이써Yo?</h5>
                                             <p>Do you have any Question?</p>
-										</figcaption>
+										</figcaption></a>
 									</figure>
 								</div>
 							</div>
