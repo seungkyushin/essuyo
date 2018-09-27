@@ -22,9 +22,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-
+import com.webproject.essuyo.domain.CompanyVO;
 import com.webproject.essuyo.domain.ReservationVO;
 import com.webproject.essuyo.domain.UserVO;
+import com.webproject.essuyo.service.CompanyService;
 import com.webproject.essuyo.service.ReservationService;
 import com.webproject.essuyo.service.impl.UserServiceImpl;
 
@@ -38,6 +39,9 @@ public class UserController {
 
 	@Autowired
 	private ReservationService reservationService;
+	
+	@Autowired
+	private CompanyService companyService;
 
 	// GET 방식으로 회원가입 페이지에 접근. 그냥 회원가입 페이지로 보내준다
 	@RequestMapping(value = "/regist", method = RequestMethod.GET)
@@ -96,86 +100,115 @@ public class UserController {
 		} 
 		//만약 그렇지 않다면 해당 로그인 정보가 든 vo 객체를 model 어트리뷰트에 세트해 주고, 일단은 대쉬보드로 리다이렉트해 
 		model.addAttribute("userVO", vo);
-		return "redirect:/user/dashboard";
+		return "redirect:/user/loginPost";
 	}
 
 	@GetMapping("/dashboard")
-	public String showDashboardPage(Model model) throws Exception {
-
+	public String showDashboardPage(Model model) throws Exception{
+		
+		
 		String type = "user";
+		model.addAttribute("userType",type);
+		
+		List<ReservationVO> reservationList = reservationService.getReservationListNotState(type, 2);
+		List<List<Integer>> comprehensiveGraph = new ArrayList<List<Integer>>();
+		List<Integer> MonthsPaymentList = new ArrayList<Integer>(); //< 월별 지불/수입 리스트
+		List<Integer> categoryReservationList = new ArrayList<Integer>(); //< 카테고리별 예약 횟수 리스트
 
-		/**/
-		model.addAttribute("userType", type);
 
-		List<List<Integer>> lineGraph = new ArrayList<List<Integer>>();
-
-		int[][] lineGraphArry = { { 24, 28, 42, 32, 34, 48, 40, 24, 28, 42, 32, 34 },
-				{ 4, 21, 30, 46, 56, 81, 70, 66, 28, 31, 20, 34 }, { 0, 32, 21, 30, 46, 56, 64, 21, 30, 46, 56, 64 },
-				{ 100, 95, 81, 70, 66, 56, 44, 31, 20, 16, 6, 0 } };
-
-		for (int[] data : lineGraphArry) {
-			List<Integer> pointList = new ArrayList<Integer>();
-			for (int d : data) {
-				pointList.add(d);
+		int MaxCategory = 4;
+		int MaxMonth = 12;
+		
+		//< List 변수 초기화
+		for(int i=0 ; i < MaxMonth; i++) {
+			MonthsPaymentList.add(0);
+		}
+		for(int c=0 ; c < MaxCategory; c++) {
+			List<Integer> monthList = new ArrayList<Integer>();
+				for(int m=0 ; m < MaxMonth; m++) {
+					monthList.add(0);
+				}
+			categoryReservationList.add(0);
+			comprehensiveGraph.add(monthList);
+		}
+		
+		
+		for( ReservationVO data : reservationList) {
+			
+			if( data.getState().equals("취소") == true ) 
+				continue;
+			
+				CompanyVO test = companyService.getCompany(data.getCompanyId());
+			
+				int categoryIndex =  test.getBusinessTypeId() - 1;
+						
+				//< 카테고리 별 개수 
+				int value = categoryReservationList.get(categoryIndex);
+				categoryReservationList.set(categoryIndex,value + 1);
+			
+				//< 월별 지불/수입 
+				LocalDate ld = new LocalDate(data.getRegDate());
+				int month = ld.getMonthOfYear() - 1;
+				int monthPrice = MonthsPaymentList.get(month).intValue();
+				MonthsPaymentList.set(month, (monthPrice + data.getTotalPrice()) );
+							
+				//< 카테고리 별로 월마다 예약한 횟수
+				int count = comprehensiveGraph.get(categoryIndex).get(month);
+				comprehensiveGraph.get(categoryIndex).set(month,  count + 1);
+				
 			}
-			lineGraph.add(pointList);
+
+		
+		
+		/*****************************************************************************/
+		/******************************* 사용자별 종합 그래프 ******************************/
+		/*****************************************************************************/
+		
+		//< 1. 
+		model.addAttribute("lineGraph",comprehensiveGraph);
+		
+		//< 3. 화면단 표시 문자열
+		if( type.equals("user") == true ) {
+			model.addAttribute("lineGraphName","카테고리별 예약 종합");
+		}if( type.equals("company") == true ) {
+			model.addAttribute("lineGraphName","사용자 선호도");
 		}
-
-		if (type.equals("user") == true) {
-			model.addAttribute("lineGraphName", "카테고리별 예약 종합");
+			
+		/*****************************************************************************/
+		/******************************* 사용자별 예약 횟수 ********************************/
+		/*****************************************************************************/
+	
+		//< 1. 년 단위 사용자별 예약 횟수
+		model.addAttribute("totalReservtionCount",reservationList.size());
+		
+		//< 2. 카테고리별 예약 분포도
+		model.addAttribute("dounutChart",categoryReservationList);
+	
+		//< 3. 화면단 표시 문자열
+		if( type.equals("user") == true ) {
+			model.addAttribute("dounutChartName","카테고리 별 예약횟수");
+		}if( type.equals("company") == true ) {
+			model.addAttribute("dounutChartName","방문자 별");
 		}
-		if (type.equals("company") == true) {
-			model.addAttribute("lineGraphName", "사용자 선호도");
+		
+		/*****************************************************************************/
+		/******************************* 사용자별 지출/수입 *******************************/
+		/*****************************************************************************/
+		
+		//< 1.  년 단위 총 지출/수입 내용
+		model.addAttribute("totalPayment",reservationService.getReservationTotalPrice(type, 2));
+		
+		//< 2. 월 단위 총 지출/수입 내용
+		model.addAttribute("MonthsPaymentList",MonthsPaymentList);
+
+		//< 3. 화면단 표시 문자열
+		if( type.equals("user") == true ) {
+			model.addAttribute("sparkLineName","올해 지출");
+		}if( type.equals("company") == true ) {
+			model.addAttribute("sparkLineName","올해 수입");
 		}
-
-		model.addAttribute("lineGraph", lineGraph);
-
-		List<Integer> dounutChart = new ArrayList<Integer>();
-		int[] dounutChartArry = { 28, 32, 10, 30 };
-
-		for (int data : dounutChartArry) {
-			dounutChart.add(data);
-		}
-
-		if (type.equals("user") == true) {
-			model.addAttribute("dounutChartName", "카테고리 별 예약횟수");
-		}
-		if (type.equals("company") == true) {
-			model.addAttribute("dounutChartName", "방문자 별");
-		}
-		List<ReservationVO> reservationList = reservationService.getReservationListAll(type, 2);
-
-		model.addAttribute("dounutChart", dounutChart);
-		model.addAttribute("totalReservtionCount", reservationList.size());
-
-		int[] monthPayment = new int[12]; //
-		int totalPayment = 0;
-		for (ReservationVO data : reservationList) {
-			LocalDate ld = new LocalDate(data.getRegDate());
-			int month = ld.getMonthOfYear();
-			monthPayment[month - 1] += data.getTotalPrice();
-			totalPayment += data.getTotalPrice();
-		}
-
-		List<Integer> sparkline = new ArrayList<Integer>();
-		int test = 0;
-		for (int data : monthPayment) {
-			test += 100000;
-			data += test;
-			sparkline.add(data);
-		}
-
-		model.addAttribute("totalPayment", totalPayment);
-
-		if (type.equals("user") == true) {
-			model.addAttribute("sparkLineName", "올해 지출");
-		}
-		if (type.equals("company") == true) {
-			model.addAttribute("sparkLineName", "올해 수입");
-		}
-		model.addAttribute("sparkLine", sparkline);
-
+		
 		return "dashboard";
-
+		
 	}
 }

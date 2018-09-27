@@ -8,7 +8,7 @@
 </head>
 <body>
 	<script type="text/javascript">
-		self.location = "/dashboard";
+		self.location = "/user/dashboard";
 	</script>
 
 </body>
