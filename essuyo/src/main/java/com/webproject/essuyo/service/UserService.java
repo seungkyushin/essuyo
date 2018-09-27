@@ -1,6 +1,7 @@
 package com.webproject.essuyo.service;
 
 import java.util.Date;
+import java.util.Map;
 
 import com.webproject.essuyo.domain.UserVO;
 
@@ -15,5 +16,7 @@ public interface UserService {
 	public UserVO checkLoginBefore(String value);
 	
 	public boolean checkId(String email);
+
+	public Map<String,Object> test(int CompanyId);
 
 }

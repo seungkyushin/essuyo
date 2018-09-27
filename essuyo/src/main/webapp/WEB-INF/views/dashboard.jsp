@@ -169,7 +169,7 @@
 
         <div class="p-2">
 		<a href="#">  
-            <img src="{{imageUrl}}" alt="{{imageUrl}}" width="50" class="rounded-circle">
+            <img src="{{imageUrl}}" alt="#" width="50" class="rounded-circle">
 		</a>
         </div>
         <div class="comment-text w-100">
@@ -257,7 +257,7 @@
 			dataList.forEach(function(data){
 				
     				var tempData = {};
-        			tempData['imageUrl'] = data.imageUrl[0].savePath;
+        			tempData['imageUrl'] = data.imageUrl;
         			tempData['title'] = data.title;
         			tempData['content'] = data.content;
         			tempData['regDate'] = data.regDate;

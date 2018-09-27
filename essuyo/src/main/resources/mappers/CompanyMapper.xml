@@ -15,9 +15,9 @@ limit 0, 4;
 
 <select id="select" resultType="CompanyVO">
 <![CDATA[
-SELECT id, name, discription, address, number, url, state, time, 
-total_visit AS totalVisit, today_visit AS todayVisit, grade, area_list_id AS areaListId, 
-business_type_id AS businessTypeId FROM company WHERE id = #{companyId};
+SELECT id, name, type, score, discription, address, number, url, state, time, 
+total_visit AS totalVisit, today_visit AS todayVisit, area_list_id AS areaListId 
+FROM company WHERE id = #{companyId};
 ]]>
 </select>
 

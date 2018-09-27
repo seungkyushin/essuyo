@@ -6,7 +6,7 @@ CREATE DATABASE essuyo;
 USE essuyo;
 
 /* 사용가능시설목록 */
-CREATE TABLE facility_list (
+CREATE TABLE facility (
 	id INTEGER PRIMARY KEY auto_increment, /* 번호 */
 	name VARCHAR(255) NOT NULL/* 이름 */
 )DEFAULT CHARSET=utf8; 
@@ -132,12 +132,12 @@ CREATE TABLE product_admin (
 );
 
 /* 사용가능시설 */
-CREATE TABLE facility (
+CREATE TABLE facility_admin (
 	company_id INTEGER , /* 회사번호 */
-	facility_list_id INTEGER,  /* 사용가능시설목록번호 */
+	facility_id INTEGER,  /* 사용가능시설목록번호 */
 	
 	FOREIGN KEY (company_id) REFERENCES company(id) ON DELETE CASCADE,
-	FOREIGN KEY (facility_list_id) REFERENCES facility_list(id) ON DELETE CASCADE
+	FOREIGN KEY (facility_id) REFERENCES facility(id) ON DELETE CASCADE
 );
 
 
@@ -212,45 +212,69 @@ INSERT INTO area_list (name)  VALUES("부산");
 INSERT INTO area_list (name)  VALUES("서울");
 
 
+
+INSERT INTO facility(name)  VALUES("와이파이");
+INSERT INTO facility(name)  VALUES("흡연가능");
+INSERT INTO facility(name)  VALUES("금연구역");
+INSERT INTO facility(name)  VALUES("주차가능");
+INSERT INTO facility(name)  VALUES("애견동반가능");
+
 /* 업체 */
 INSERT INTO company(name, type, score, discription, address, number, url, state, time, 
 total_visit, today_visit, area_list_id)
 VALUES("힐튼호텔", "호텔", 9.0 , "돈만 있으면 쾌적한 곳", "부산광역시 기장군 기장읍 기장해안로 268-32 힐튼부산","010-0000-0000",
-"http://hiltonbusan.co.kr/","open now","ALL TIME",0,0,1);
+"http://hiltonbusan.co.kr/","OPEN NOW","ALL TIME",0,0,1);
 
 INSERT INTO company(name, type, score, discription, address,number, url, state, time, 
 total_visit, today_visit, area_list_id)
 VALUES("아웃백-신촌점", "음식점", 8.0 , "빵 맛있는 식당", "서울 서대문구 연세로12길 33","02-0000-0000",
-"http://outback.co.kr/shinchon/","open now","am 10:00 ~ pm 10:00",0,0,1);
+"http://outback.co.kr/shinchon/","OPEN NOW","am 10:00 ~ pm 10:00",0,0,1);
 
 INSERT INTO company(name, type, score, discription, address,number, url, state, time, 
 total_visit, today_visit, area_list_id)
 VALUES("알촌", "음식점", 4.0 , "알밥파는 집", "서울 서대문구 이화여대7길 14","02-1111-1111",
-"http://alchon.com/","휴무중","am 10:00 ~ pm 10:00",0,0,1);
+"http://alchon.com/","CLOSE NOW","am 10:00 ~ pm 10:00",0,0,1);
 
 INSERT INTO company(name, type, score, discription, address,number, url, state, time, 
 total_visit, today_visit, area_list_id)
 VALUES("SOCAR", "렌트카", 1.0 , "카 쉐어", "서울 서대문구 남가좌동 7길 14","02-2222-2222",
-"http://socar.com/","휴무중","am 10:00 ~ pm 10:00",0,0,1);
+"http://socar.com/","CLOSE NOW","am 10:00 ~ pm 10:00",0,0,1);
 
+
+INSERT INTO facility_admin(company_id, facility_id) VALUES(1,1);
+INSERT INTO facility_admin(company_id, facility_id) VALUES(1,3);
+INSERT INTO facility_admin(company_id, facility_id) VALUES(1,4);
+
+
+INSERT INTO facility_admin(company_id, facility_id) VALUES(2,1);
+INSERT INTO facility_admin(company_id, facility_id) VALUES(2,2);
+INSERT INTO facility_admin(company_id, facility_id) VALUES(2,4);
+
+INSERT INTO facility_admin(company_id, facility_id) VALUES(3,1);
+INSERT INTO facility_admin(company_id, facility_id) VALUES(3,3);
+INSERT INTO facility_admin(company_id, facility_id) VALUES(2,4);
+
+INSERT INTO facility_admin(company_id, facility_id) VALUES(4,1);
+INSERT INTO facility_admin(company_id, facility_id) VALUES(4,2);
+INSERT INTO facility_admin(company_id, facility_id) VALUES(4,5);
 
 /* 사업 */
 INSERT INTO business(good,comment,company_id) VALUES(10, "힐튼호텔", 1);
-INSERT INTO business(good,comment,company_id) VALUES(10, "아웃백-신촌점", 1);
-INSERT INTO business(good,comment,company_id) VALUES(10, "알촌", 1);
+INSERT INTO business(good,comment,company_id) VALUES(10, "아웃백-신촌점", 2);
+INSERT INTO business(good,comment,company_id) VALUES(10, "알촌", 3);
 
 /*유저*/
 INSERT INTO user(name, age, gender, email, password,fail_password,
 cre_date,last_date,total_reply,business_id,image_info_id) VALUES("이써요", 10,"남","test@essuyo.com",
-"123",3,now(),now(),10,1,5);
+"1234",3,now(),now(),10,1,5);
 
 INSERT INTO user(name, age, gender, email, password,fail_password,
-cre_date,last_date,total_reply,image_info_id) VALUES("이써요2", 20,"남","test2@essuyo.com",
-"123",3,now(),now(),0,6);
+cre_date,last_date,total_reply,image_info_id) VALUES("이써요2", 20,"남","test@esy.com",
+"1234",3,now(),now(),0,6);
 
 INSERT INTO user(name, age, gender, email, password,fail_password,
 cre_date,last_date,total_reply,image_info_id) VALUES("이써요3", 30,"남","test3@essuyo.com",
-"123",3,now(),now(),0,7);
+"1234",3,now(),now(),0,7);
 
 
 

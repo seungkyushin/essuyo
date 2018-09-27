@@ -34,32 +34,35 @@ public class ReservationServiceImpl implements ReservationService{
 	
 	@Override
 	public int regReservationInfo(ReservationVO reservationInfo)  {
-		int result = 0;
 		try {
 				reservationInfo.setState("성공");
 				reservationInfo.setUserId(2);
-				reservationInfo.setRegDate( new LocalDate().toString() );
-			
+						
 				System.out.println(reservationInfo);
 				
-				result = reservationDao.insert(reservationInfo);
+				return reservationDao.insert(reservationInfo);
 		} catch (Exception e) {
 			logger.error("예약 등록 실패.. | {} ", e.toString());
+			return 0;
 		}
-		
-		return result;
+	
 	}
 
 	@Override
 	public List<Map<String,Object>> getReservationList(String findType, int id, int start) {
 		
-		List<Map<String,Object>> resultList = new ArrayList<Map<String,Object>>();
-		
+		if( findType == null || findType.equals("") || id == 0 || start == 0) {
+			return null;
+		}
+
 		SQLParamVO params = new SQLParamVO(findType,id,(start-1),SEARCH_LIMIT);
 
 		try {
-				List<ReservationVO> reservationList = reservationDao.select(params);
+			
+			List<Map<String,Object>> resultList = new ArrayList<Map<String,Object>>();
+			List<ReservationVO> reservationList = reservationDao.select(params);
 				
+			if( reservationList != null ) {
 				for(ReservationVO data : reservationList) {
 					Map<String,Object> resultMap =  new HashMap<>();
 					
@@ -75,56 +78,72 @@ public class ReservationServiceImpl implements ReservationService{
 					resultMap.put("totalPrice", data.getTotalPrice());
 					
 					resultList.add(resultMap);
-	
 				}
+				
+				return resultList;
+			}
+			return null;
 		} catch (Exception e) {
 			logger.error("예약 조회 실패.. | {} ", e.toString());
+			return null;
 		}
-		
-		return resultList;
+
 	}
 
 	@Override
 	public List<ReservationVO> getReservationListAll(String findType, int id) {
-		List<ReservationVO> resultList = null;
 		
-			SQLParamVO params = new SQLParamVO(findType,id);
-
-		try {
-				resultList = reservationDao.select(params);
-		} catch (Exception e) {
-			logger.error("예약 조회 실패.. | {} ", e.toString());
+		if( findType == null || findType.equals("") || id == 0) {
+			return null;
 		}
 		
-		return resultList;
+		SQLParamVO params = new SQLParamVO(findType,id);
+
+		try {
+				return  reservationDao.select(params);
+		} catch (Exception e) {
+			logger.error("예약 조회 실패.. | {} ", e.toString());
+			return null;
+		}
+		
+		
 	}
 
 	@Override
 	public int getReservationTotalPrice(String findType, int id) {
 		
-		int result = 0;
+		if( findType == null || findType.equals("") || id == 0) {
+			return 0;
+		}
+	
 		SQLParamVO params = new SQLParamVO(findType,id);
 		
 		try {
-				result = reservationDao.selectTotalPrice(params);
+				return reservationDao.selectTotalPrice(params);
 		} catch (Exception e) {
 			logger.error("예약 조회 실패.. | {} ", e.toString());
+			return 0;
 		}
 		
-		return result;
+		
 	}
 
 	@Override
 	public List<ReservationVO> getReservationListNotState(String findType, int id) {
-		SQLParamVO params = new SQLParamVO(findType,id);
-		List<ReservationVO> resultList = null;
-		try {
-				resultList = reservationDao.selectNotState(params);
-		} catch (Exception e) {
-			logger.error("예약 조회 실패.. | {} ", e.toString());
+		
+		if( findType == null || findType.equals("") || id == 0) {
+			return null;
 		}
 		
-		return resultList;
+		SQLParamVO params = new SQLParamVO(findType,id);
+
+		try {
+				return reservationDao.selectNotState(params);
+		} catch (Exception e) {
+			logger.error("예약 조회 실패.. | {} ", e.toString());
+			return null;
+		}
+
 		
 	}
 

@@ -20,6 +20,27 @@
 <select id="checkId" resultType="int">
 select count(*) from user where email = #{email}
 </select>
+
+
+
+	
+<select id="selectById" resultType="UserVO">
+	SELECT id, name, age, gender, email, password, fail_password, cre_date AS creDate, last_date AS lastDate,
+	total_reply AS totalReply, business_id AS businessId, image_info_id AS imageInfoId FROM user
+
+	<choose>
+   			 <when test="type != null and type.equals('user')">
+					WHERE id = #{id}
+   			 </when>
+    		 <when test="type != null and type.equals('business')">
+					WHERE business_id = #{id}
+    		</when>
+    		
+    </choose>
+
+</select>
+
+
    
     
     </mapper>

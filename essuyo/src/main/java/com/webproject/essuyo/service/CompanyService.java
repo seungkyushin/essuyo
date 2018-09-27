@@ -17,6 +17,7 @@ public interface CompanyService {
 	public List<CompanyVO> listAll() throws Exception;
 	Map<String, Object> getList(int ListId) throws Exception;
 	
-
+	public List<String> getCompanyFacility(int companyId) throws Exception;
+	List<String> getImagePath(int companyId) throws Exception;
 	
 }

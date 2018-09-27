@@ -28,6 +28,10 @@ public class ImageAdminDao {
 		return sqlSession.selectList(NAME_SPACE + ".selectById" , params);
 	}
 	
+	public ImageInfoVO selectImageById(int id) throws Exception{
+		return sqlSession.selectOne(NAME_SPACE + ".selectById1" , id);
+	}
+	
 	
 	
 

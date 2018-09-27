@@ -9,6 +9,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.webproject.essuyo.domain.SQLParamVO;
 import com.webproject.essuyo.domain.UserVO;
 
 
@@ -66,6 +67,10 @@ public class UserDAO {
 	public int checkId(String email) {
 		
 		return session.selectOne(namespace+".checkId", email);
+	}
+	
+	public UserVO selectById(SQLParamVO params) {
+		return session.selectOne(namespace + ".selectById", params);
 	}
 
 }
