@@ -1,10 +1,8 @@
 package com.webproject.essuyo.service.impl;
 
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
+
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -88,7 +86,7 @@ public class ReservationServiceImpl implements ReservationService{
 
 	@Override
 	public List<ReservationVO> getReservationListAll(String findType, int id) {
-		List<ReservationVO> resultList = new ArrayList<ReservationVO>();
+		List<ReservationVO> resultList = null;
 		
 			SQLParamVO params = new SQLParamVO(findType,id);
 
@@ -99,6 +97,35 @@ public class ReservationServiceImpl implements ReservationService{
 		}
 		
 		return resultList;
+	}
+
+	@Override
+	public int getReservationTotalPrice(String findType, int id) {
+		
+		int result = 0;
+		SQLParamVO params = new SQLParamVO(findType,id);
+		
+		try {
+				result = reservationDao.selectTotalPrice(params);
+		} catch (Exception e) {
+			logger.error("예약 조회 실패.. | {} ", e.toString());
+		}
+		
+		return result;
+	}
+
+	@Override
+	public List<ReservationVO> getReservationListNotState(String findType, int id) {
+		SQLParamVO params = new SQLParamVO(findType,id);
+		List<ReservationVO> resultList = null;
+		try {
+				resultList = reservationDao.selectNotState(params);
+		} catch (Exception e) {
+			logger.error("예약 조회 실패.. | {} ", e.toString());
+		}
+		
+		return resultList;
+		
 	}
 
 }

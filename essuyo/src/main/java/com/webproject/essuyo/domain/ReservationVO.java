@@ -1,6 +1,5 @@
 package com.webproject.essuyo.domain;
 
-import java.util.Date;
 
 public class ReservationVO {
 	
