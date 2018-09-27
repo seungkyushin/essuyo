@@ -64,7 +64,7 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 					return true;
 				}
 			}
-//만약 로그인하지 않았고, 쿠키도 없다면, 로그인 화면으로 리다이렉트 시킨다. 현재 경로는 교재에 나온 것, 나중에 수정해야 함
+//만약 로그인하지 않았고, 쿠키도 없다면, 로그인 화면으로 리다이렉트 시킨다. 
 			response.sendRedirect("/user/login");
 			return false;
 		}

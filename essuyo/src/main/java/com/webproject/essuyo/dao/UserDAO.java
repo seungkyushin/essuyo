@@ -19,7 +19,7 @@ public class UserDAO {
 
 	@Inject
 	private SqlSession session;
-	//네임스페이스에 매퍼 주소 변경해 줘야 함
+	
 	private static String namespace = "com.webproject.essuyo.dao";
 
 	//로그인 기능을 해 준다. vo 객체에서 이메일과 비번을 받아서 dto 맵에 넣어줌.
@@ -31,7 +31,7 @@ public class UserDAO {
 		return session.selectOne(namespace+".login", dto);
 	}
 
-	//회원가입 기능. session 뒤의 insert라는 변수는 변경할 수도 있다.
+	//회원가입 기능. 
 	public void regist(UserVO vo) throws Exception{
 		// dto 맵에 이름, 이메일, 비번, 나이, 성별을 넣었다. 그냥, 파라미터로 받은 vo 객체를 바로 집어 넣어도 괜찮은지, 차후 테스트 요망
 		Map<String, Object> dto = new HashMap<>();
@@ -62,6 +62,7 @@ public class UserDAO {
 		return session.selectOne(namespace+".checkUserWithSessionkey", value);
 	}
 	
+	// 회원 가입 시 이메일 중복체크 기능
 	public int checkId(String email) {
 		
 		return session.selectOne(namespace+".checkId", email);

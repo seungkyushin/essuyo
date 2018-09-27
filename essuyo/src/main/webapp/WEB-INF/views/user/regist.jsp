@@ -76,7 +76,7 @@
 			$.post(url, $("#registForm").serialize(), function(data) {
 				if (data == 1) {
 					alert("회원가입에 성공했습니다.");
-					document.location.href = "/dashboard";
+					document.location.href = "/user/dashboard";
 				} else {
 					alert("회원가입에 실패했습니다. 관리자에게 문의해 주세요.");
 					document.location.href = "/user/regist";

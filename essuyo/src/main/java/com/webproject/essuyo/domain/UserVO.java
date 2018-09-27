@@ -10,7 +10,8 @@ public class UserVO {
 	private String fail_password; /* 비밀번호 실패*/
 	private String age;
 	private String gender;
-	private Date first_date; /* 생성날짜 */
+	private Date first_date = null; /* 생성날짜 */
+	
 	public String getName() {
 		return name;
 	}
