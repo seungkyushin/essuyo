@@ -21,8 +21,16 @@ public class ReservationDao {
 	}
 	
 	public List<ReservationVO> select(SQLParamVO param) throws Exception{
-		return sqlSession.selectList(NAME_SPACE + ".selectById", param);
+		return sqlSession.selectList(NAME_SPACE + ".selectLimitById", param);
 	}
 	
+	public List<ReservationVO> selectNotState(SQLParamVO param) throws Exception{
+		return sqlSession.selectList(NAME_SPACE + ".selectNotStateById", param);
+	}
 	
+		
+	public int selectTotalPrice(SQLParamVO param) throws Exception{
+		return sqlSession.selectOne(NAME_SPACE + ".selectTotalPrice", param);
+	}
+
 }

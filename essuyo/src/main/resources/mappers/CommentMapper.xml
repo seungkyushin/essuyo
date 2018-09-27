@@ -19,8 +19,12 @@
     		</when>
   		</choose>
     	
-    	ORDER BY id DESC limit #{start}, #{limit};
-    </select>
+    	ORDER BY id DESC 
+    	
+    	<if test="start != null and limit != null and limit > 0">
+    		limit #{start}, #{limit};
+    	</if>
+ </select>
   
     
  </mapper>

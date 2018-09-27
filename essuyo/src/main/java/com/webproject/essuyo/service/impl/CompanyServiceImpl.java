@@ -2,11 +2,10 @@ package com.webproject.essuyo.service.impl;
 
 
 
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import javax.inject.Inject;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,8 +15,6 @@ import org.springframework.stereotype.Service;
 import com.webproject.essuyo.dao.CompanyDao;
 import com.webproject.essuyo.dao.ImageInfoDao;
 import com.webproject.essuyo.domain.CompanyVO;
-import com.webproject.essuyo.domain.ImageInfoVO;
-import com.webproject.essuyo.domain.ProductVO;
 import com.webproject.essuyo.service.CompanyService;
 
 @Service
@@ -33,9 +30,8 @@ public class CompanyServiceImpl implements CompanyService {
 
 	
 	@Override
-	public CompanyVO getCompany(int a) throws Exception {
-
-		return null;
+	public CompanyVO getCompany(int companyId) throws Exception {
+		return companyDao.getCompany(companyId);
 	}
 
 	@Override
@@ -69,4 +65,5 @@ public class CompanyServiceImpl implements CompanyService {
 		
 		return result;
 	}
-	}
+}
+

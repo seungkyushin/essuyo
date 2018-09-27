@@ -94,7 +94,7 @@ public class UserController {
 		if(vo == null) {			
 			return "user/login";
 		} 
-		//만약 그렇지 않다면 해당 로그인 정보가 든 vo 객체를 model 어트리뷰트에 세트해 주고, 일단은 대쉬보드로 리다이렉트해 준다
+		//만약 그렇지 않다면 해당 로그인 정보가 든 vo 객체를 model 어트리뷰트에 세트해 주고, 일단은 대쉬보드로 리다이렉트해 
 		model.addAttribute("userVO", vo);
 		return "redirect:/user/dashboard";
 	}

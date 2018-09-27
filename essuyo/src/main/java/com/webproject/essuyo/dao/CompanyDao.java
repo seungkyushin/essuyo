@@ -18,10 +18,9 @@ public class CompanyDao {
 	private SqlSession session;
 	
 	private static String namespace = "com.webproject.essuyo.dao.CompanyDao";
-
 	
-	public CompanyVO getCompany(int a) throws Exception{
-		return null;
+	public CompanyVO getCompany(int companyId) throws Exception{
+		return session.selectOne(namespace + ".select", companyId);
 		
 	}
 	public List<CompanyVO> listAll() throws Exception{

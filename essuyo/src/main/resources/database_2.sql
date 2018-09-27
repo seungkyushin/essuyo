@@ -239,12 +239,17 @@ VALUES("힐튼호텔", "돈만 있으면 쾌적한 곳", "부산광역시 기장
 INSERT INTO company(name, discription, address,number, url, state, time, 
 total_visit, today_visit,grade,area_list_id,business_type_id)
 VALUES("아웃백-신촌점", "빵 맛있는 식당", "서울 서대문구 연세로12길 33","02-0000-0000",
-"http://outback.co.kr/shinchon/","open now","am 10:00 ~ pm 10:00",10,10,1,1,2);
+"http://outback.co.kr/shinchon/","open now","am 10:00 ~ pm 10:00",10,10,1,1,3);
 
 INSERT INTO company(name, discription, address,number, url, state, time, 
 total_visit, today_visit,grade,area_list_id,business_type_id)
 VALUES("알촌", "알밥파는 집", "서울 서대문구 이화여대7길 14","02-1111-1111",
-"http://alchon.com/","휴무중","am 10:00 ~ pm 10:00",10,10,3,2,2);
+"http://alchon.com/","휴무중","am 10:00 ~ pm 10:00",10,10,3,2,3);
+
+INSERT INTO company(name, discription, address,number, url, state, time, 
+total_visit, today_visit,grade,area_list_id,business_type_id)
+VALUES("SOCAR", "카 쉐어", "서울 서대문구 남가좌동 7길 14","02-2222-2222",
+"http://socar.com/","휴무중","am 10:00 ~ pm 10:00",0,0,3,2,2);
 
 
 /* 사업 */
@@ -327,32 +332,49 @@ VALUES("comment title 10", "이써요이써요이써요이써요", "상태", 0, 
 
 
 /*예약*/
+
+INSERT INTO reservation(state, total_price, res_date, product_count, reg_date, company_id, product_id, user_id) 
+VALUES("완료", 300000, "2018-03-01", 2, "2018-03-03", 1, 1, 2);
+
+INSERT INTO reservation(state, total_price, res_date, product_count, reg_date, company_id, product_id, user_id) 
+VALUES("완료", 300000, "2018-03-01", 2, "2018-03-03", 1, 1, 2);
+
+INSERT INTO reservation(state, total_price, res_date, product_count, reg_date, company_id, product_id, user_id) 
+VALUES("완료", 300000, "2018-03-01", 2, "2018-03-03", 4, 2, 2);
+
+INSERT INTO reservation(state, total_price, res_date, product_count, reg_date, company_id, product_id, user_id) 
+VALUES("완료", 300000, "2018-03-01", 2, "2018-03-03", 3, 3, 2);
+
+INSERT INTO reservation(state, total_price, res_date, product_count, reg_date, company_id, product_id, user_id) 
+VALUES("완료", 300000, "2018-03-01", 2, "2018-03-03", 3, 3, 2);
+
+INSERT INTO reservation(state, total_price, res_date, product_count, reg_date, company_id, product_id, user_id) 
+VALUES("완료", 200000, "2018-09-21", 2, "2018-09-19", 1, 1, 2);
+
+INSERT INTO reservation(state, total_price, res_date, product_count, reg_date, company_id, product_id, user_id) 
+VALUES("완료", 300000, "2018-09-22", 3, "2018-09-19", 4, 2, 2);
+
+INSERT INTO reservation(state, total_price, res_date, product_count, reg_date, company_id, product_id, user_id) 
+VALUES("취소", 500000, "2018-09-24", 5, "2018-09-19", 4, 2, 2);
+
+INSERT INTO reservation(state, total_price, res_date, product_count, reg_date, company_id, product_id, user_id) 
+VALUES("완료", 600000, "2018-09-25", 6, "2018-09-19", 4, 2, 2);
+
+INSERT INTO reservation(state, total_price, res_date, product_count, reg_date, company_id, product_id, user_id) 
+VALUES("성공", 700000, "2018-09-26", 7, "2018-09-19", 4, 2, 2);
+
+INSERT INTO reservation(state, total_price, res_date, product_count, reg_date, company_id, product_id, user_id) 
+VALUES("완료", 800000, "2018-09-27", 8, "2018-09-19", 3, 3, 2);
+
+
+INSERT INTO reservation(state, total_price, res_date, product_count, reg_date, company_id, product_id, user_id) 
+VALUES("완료", 1000000, "2018-09-28", 9, "2018-09-19", 3, 3, 3);
+
 INSERT INTO reservation(state, total_price, res_date, product_count, reg_date, company_id, product_id, user_id) 
 VALUES("성공", 100000, "2018-09-20", 1, "2018-09-19", 1, 1, 3);
 
 INSERT INTO reservation(state, total_price, res_date, product_count, reg_date, company_id, product_id, user_id) 
-VALUES("취소", 200000, "2018-09-21", 2, "2018-09-19", 1, 2, 2);
-
-INSERT INTO reservation(state, total_price, res_date, product_count, reg_date, company_id, product_id, user_id) 
-VALUES("완료", 300000, "2018-09-22", 3, "2018-09-19", 1, 3, 2);
-
-INSERT INTO reservation(state, total_price, res_date, product_count, reg_date, company_id, product_id, user_id) 
-VALUES("성공", 400000, "2018-09-23", 4, "2018-09-19", 2, 4, 3);
-
-INSERT INTO reservation(state, total_price, res_date, product_count, reg_date, company_id, product_id, user_id) 
-VALUES("취소", 500000, "2018-09-24", 5, "2018-09-19", 2, 1, 3);
-
-INSERT INTO reservation(state, total_price, res_date, product_count, reg_date, company_id, product_id, user_id) 
-VALUES("완료", 600000, "2018-09-25", 6, "2018-09-19", 2, 2, 2);
-
-INSERT INTO reservation(state, total_price, res_date, product_count, reg_date, company_id, product_id, user_id) 
-VALUES("성공", 700000, "2018-09-26", 7, "2018-09-19", 1, 3, 2);
-
-INSERT INTO reservation(state, total_price, res_date, product_count, reg_date, company_id, product_id, user_id) 
-VALUES("취소", 800000, "2018-09-27", 8, "2018-09-19", 2, 4, 3);
-
-INSERT INTO reservation(state, total_price, res_date, product_count, reg_date, company_id, product_id, user_id) 
-VALUES("완료", 1000000, "2018-09-28", 9, "2018-09-19", 1, 3, 3);
+VALUES("성공", 400000, "2018-09-23", 4, "2018-09-19", 4, 2, 3);
 
 
 

@@ -300,11 +300,9 @@ function setDounutChart(ArrayData){
 	  var seriesData = ArrayData;
 	  var chartPie = new Chartist.Pie('.analyzeReservation', {
 		  series: seriesData,
-		  labels:ArrayData
+		  
 		}, {
-			
-		  donut: true,
-		  showLabel: true,
+		
 		  labelInterpolationFnc: function(value) {
 			  	var cal = (value / seriesData.reduce(sum)) * 100;
 			  	return cal.toFixed(1) + "%";

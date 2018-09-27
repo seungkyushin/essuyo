@@ -60,6 +60,11 @@
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title">${lineGraphName}</h4>
+                                 <span style="background-color:#137eff" class="font-16 font-medium label label-rounded">호텔</span>
+                                 <span style="background-color:#ced4da" class="font-16 font-medium label label-rounded">렌트카</span>
+                               	 <span style="background-color:#f4c63d" class="font-16 font-medium label label-rounded">박물관</span>
+                               	 <span style="background-color:#d17905" class="font-16 font-medium label label-rounded">음식점</span> 
+                                
                                 <div class="sales ct-charts mt-3"></div>
                             </div>
                         </div>
@@ -78,27 +83,13 @@
                             <div class="card-body">
                                 <h4 class="card-title m-b-0">${dounutChartName}</h4>
                                 <h2 class="font-light">${totalReservtionCount} 회<span class="font-16 text-success font-medium">+23%</span></h2>
+                            	  <span style="background-color:#d70206" class="font-16 font-medium label label-rounded">호텔</span>
+                                 <span style="background-color:#f05b4f" class="font-16 font-medium label label-rounded">렌트카</span>
+                               	 <span style="background-color:#f4c63d" class="font-16 font-medium label label-rounded">박물관</span>
+                               	 <span style="background-color:#d17905" class="font-16 font-medium label label-rounded">음식점</span> 
+								
                                 <div class="analyzeReservation ct-charts mt-3"></div>
-                         <!--        <div class="m-t-30">
-                                    <div class="row text-center">
-                                        <div class="col-6 border-right">
-                                            <h4 class="m-b-0">58%</h4>
-                                            <span class="font-14 text-muted">호텔</span>
-                                        </div>
-                                        <div class="col-6 border-bottom">
-                                            <h4 class="m-b-0">42%</h4>
-                                            <span class="font-14 text-muted">렌트카</span>
-                                        </div>
-                                        <div class="col-6 border-top">
-                                            <h4 class="m-b-0">78%</h4>
-                                            <span class="font-14 text-muted">박물관</span>
-                                        </div>
-                                        <div class="col-6 border-left">
-                                            <h4 class="m-b-0">10%</h4>
-                                            <span class="font-14 text-muted">음식점</span>
-                                        </div>
-                                    </div>
-                                </div> -->
+                         
                             </div>
                         </div>
                     </div>
@@ -201,7 +192,7 @@
 		<tr>
   		    <td class="txt-oflo"><a href="#">{{typeName}}</a></td>
 		   <td class="txt-oflo"><a href="#">{{productName}}</a></td>
-           <td><span class="label label-success label-rounded">{{state}}</span> </td>
+           <td><span class="label label-{{stateClass}} label-rounded">{{state}}</span> </td>
            <td class="txt-oflo">{{resDate}}</td>
            <td><span class="font-medium">{{totalPrice}} 원</span></td>
         </tr>
@@ -223,8 +214,8 @@
     	var dounutChart = ${dounutChart};
 	   	setDounutChart(dounutChart);
 	   	
-	   	var sparkLine = ${sparkLine};
-    	setSparkline(sparkLine);
+	   	var monthsPaymentList = ${MonthsPaymentList};
+    	setSparkline(monthsPaymentList);
     
     	
     	//< 유저 타입에 따라 예약 리스트 컬럼명 변경
@@ -245,8 +236,15 @@
 				tempData['typeName'] = data.typeName;
 				tempData['productName'] = data.productName;
 				tempData['state'] = data.state;
+				if(  data.state == "성공" ){
+					tempData['stateClass'] = "success";
+				}else if(  data.state == "취소" ){
+					tempData['stateClass'] = "danger";
+				}else if(  data.state == "완료" ){
+					tempData['stateClass'] = "info";
+				}
 				tempData['resDate'] = data.resDate;
-				tempData['totalPrice'] = data.totalPrice;
+				tempData['totalPrice'] = dotSplit(data.totalPrice);
 						
 				makeHTML("#reservation-template", "#reservation-list", tempData);
 			});
