@@ -16,6 +16,7 @@ import com.webproject.essuyo.domain.CommentVO;
 import com.webproject.essuyo.domain.ImageInfoVO;
 import com.webproject.essuyo.domain.SQLParamVO;
 import com.webproject.essuyo.service.CommentService;
+import com.webproject.essuyo.service.ImageAdminService;
 
 @Service
 public class CommentServiceImpl implements CommentService{
@@ -24,7 +25,7 @@ public class CommentServiceImpl implements CommentService{
 	private CommentDao commentDao;
 	
 	@Autowired
-	private ImageAdminDao imageAdminDao;
+	private ImageAdminService imageAdminService;
 	
 	private final int SEARCH_LIMIT = 5;
 		
@@ -52,9 +53,9 @@ public class CommentServiceImpl implements CommentService{
 						paramMap.put("state", data.getState());
 
 						if (type.equals("user") == true) {
-							paramMap.put("imageUrl", this.getImagePath("company",data.getCompanyId()) );
+							paramMap.put("imageUrl", "/resources/images/users/5.jpg");
 						}else if (type.equals("company") == true) {
-							paramMap.put("imageUrl", this.getImagePath("user",data.getUserId()) );
+							paramMap.put("imageUrl", "/resources/images/users/6.jpg" );
 						}
 						
 						resultList.add(paramMap);
@@ -68,20 +69,9 @@ public class CommentServiceImpl implements CommentService{
 		return resultList;
 	}
 
-	@Override
-	public List<ImageInfoVO> getImagePath(String type, int id) {
-
-		List<ImageInfoVO> resultList = null;
-		SQLParamVO params = new  SQLParamVO();
-		params.setType(type);
-		params.setId(id);
-
-		try {
-			resultList = imageAdminDao.selectImageById(params);
-		} catch (Exception e) {
-			logger.error("이미지 조회 실패.. | {} ", e.toString());
-		}
-		return resultList;
-	}
+	/*@Override
+	public String getImagePath(int id) {
+		return imageAdminService.getImagePath(id);
+	}*/
 
 }

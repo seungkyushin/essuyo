@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.webproject.essuyo.domain.CompanyVO;
 import com.webproject.essuyo.domain.ReservationVO;
 import com.webproject.essuyo.domain.UserVO;
 import com.webproject.essuyo.service.CompanyService;
@@ -133,14 +132,26 @@ public class UserController {
 		
 		
 		for( ReservationVO data : reservationList) {
+
+			String CompanyType = companyService.getCompany(data.getCompanyId()).getType();
 			
-			if( data.getState().equals("취소") == true ) 
-				continue;
-			
-				CompanyVO test = companyService.getCompany(data.getCompanyId());
-			
-				int categoryIndex =  test.getBusinessTypeId() - 1;
-						
+				int categoryIndex = 0;
+				switch( CompanyType ) {
+					case "호텔":
+						categoryIndex = 0;
+						break;
+					case "렌트카":
+						categoryIndex = 1;
+						break;
+					case "박물관":
+						categoryIndex = 2;
+						break;
+					case "음식점":
+						categoryIndex = 3;
+						break;
+					
+				}
+							
 				//< 카테고리 별 개수 
 				int value = categoryReservationList.get(categoryIndex);
 				categoryReservationList.set(categoryIndex,value + 1);

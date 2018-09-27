@@ -16,11 +16,6 @@ public class HomeController {
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
 
-	@GetMapping(path = "/detail")
-	public String showdetailPage(Locale locale, Model model) {
-		logger.info("{}", "detail 페이지 요청");
-		return "detail";
-	}
 
 	@GetMapping(path = "/error")
 	public String showerrorPage(Locale locale, Model model) {

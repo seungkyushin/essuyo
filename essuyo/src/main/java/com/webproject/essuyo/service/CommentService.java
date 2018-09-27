@@ -10,5 +10,5 @@ public interface CommentService {
 	//< 덧글 리스트를 반환한다.
 	public List<Map<String,Object>> getCommentList(String type, int id, int start);
 	
-	public List<ImageInfoVO> getImagePath(String type, int id);
+	//public String getImagePath(String findType, int id);
 }

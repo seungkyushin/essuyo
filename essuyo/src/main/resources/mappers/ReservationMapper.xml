@@ -9,7 +9,7 @@
 <insert id="insert" parameterType="ReservationVO">
 INSERT INTO reservation
 (state, total_price, res_date, product_count, reg_date, company_id, product_id, user_id) 
-VALUES(#{state}, #{totalPrice}, #{resDate}, #{productCount}, #{regDate},#{companyId},#{productId},#{userId});
+VALUES(#{state}, #{totalPrice}, #{resDate}, #{productCount}, NOW(),#{companyId},#{productId},#{userId});
 </insert>
 
 <select id="selectLimitById" resultType="ReservationVO">

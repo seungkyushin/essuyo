@@ -74,10 +74,10 @@
 					<div class="swiper-container">
 						<div id="image-list" class="swiper-wrapper">
 							
-							<c:forEach items="${product.image}" var="item">
+							<c:forEach items="${product.url}" var="item">
 							 	<div class="swiper-slide">
-								<a href="${item.url}" class="grid image-link"> 
-									<img src="${item.url}" class="img-fluid" alt="#">
+								<a href="${item}" class="grid image-link"> 
+									<img src="${item}" class="img-fluid" alt="#">
 								</a>
 							</div>
 							</c:forEach>

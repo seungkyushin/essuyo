@@ -1,17 +1,30 @@
 package com.webproject.essuyo.domain;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 public class UserVO {
 
+	private int id;
 	private String name; /* 이름 */
 	private String email; /* 이메일 */
 	private String password; /* 비밀번호 */
 	private String fail_password; /* 비밀번호 실패*/
 	private String age;
 	private String gender;
-	private Date first_date = null; /* 생성날짜 */
-	
+	private Date creDate; /* 생성날짜 */
+	private Date lastDate; /* 생성날짜 */
+	private int todayReply; /* 생성날짜 */
+	private int businessId;
+	private int imageInfoId;
+	private String sessionKey;
+	private Timestamp sessionlimit;
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	public String getName() {
 		return name;
 	}
@@ -48,18 +61,59 @@ public class UserVO {
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
-	public Date getFirst_date() {
-		return first_date;
+	public Date getCreDate() {
+		return creDate;
 	}
-	public void setFirst_date(Date first_date) {
-		this.first_date = first_date;
+	public void setCreDate(Date creDate) {
+		this.creDate = creDate;
+	}
+	public Date getLastDate() {
+		return lastDate;
+	}
+	public void setLastDate(Date lastDate) {
+		this.lastDate = lastDate;
+	}
+	public int getTodayReply() {
+		return todayReply;
+	}
+	public void setTodayReply(int todayReply) {
+		this.todayReply = todayReply;
+	}
+	public int getBusinessId() {
+		return businessId;
+	}
+	public void setBusinessId(int businessId) {
+		this.businessId = businessId;
+	}
+	public int getImageInfoId() {
+		return imageInfoId;
+	}
+	public void setImageInfoId(int imageInfoId) {
+		this.imageInfoId = imageInfoId;
+	}
+	public String getSessionKey() {
+		return sessionKey;
+	}
+	public void setSessionKey(String sessionKey) {
+		this.sessionKey = sessionKey;
+	}
+	public Timestamp getSessionlimit() {
+		return sessionlimit;
+	}
+	public void setSessionlimit(Timestamp sessionlimit) {
+		this.sessionlimit = sessionlimit;
 	}
 	@Override
 	public String toString() {
-		return "UserVO [name=" + name + ", email=" + email + ", password=" + password + ", fail_password="
-				+ fail_password + ", age=" + age + ", gender=" + gender + ", first_date=" + first_date + "]";
+		return "UserVO [id=" + id + ", name=" + name + ", email=" + email + ", password=" + password
+				+ ", fail_password=" + fail_password + ", age=" + age + ", gender=" + gender + ", creDate=" + creDate
+				+ ", lastDate=" + lastDate + ", todayReply=" + todayReply + ", businessId=" + businessId
+				+ ", imageInfoId=" + imageInfoId + ", sessionKey=" + sessionKey + ", sessionlimit=" + sessionlimit
+				+ "]";
 	}
-
+	
+	
+	
 	
 	
 }
