@@ -22,11 +22,6 @@ public class HomeController {
 		return "detail";
 	}
 
-	@GetMapping(path = "/dashboard")
-	public String showdashboardPage(Locale locale, Model model) {
-		return "dashboard";
-	}
-
 	@GetMapping(path = "/error")
 	public String showerrorPage(Locale locale, Model model) {
 		return "error-404";

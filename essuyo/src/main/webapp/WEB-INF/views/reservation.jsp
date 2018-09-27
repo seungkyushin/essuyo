@@ -14,19 +14,23 @@
 
 <link rel="shortcut icon" href="#">
 <title>자리 있어요?</title>
-<link rel="stylesheet" href="resources/css/bootstrap/bootstrap.min.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" 
+	  integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,500,700,900" rel="stylesheet">
-<link rel="stylesheet" href="resources/css/simple-line-icons.css">
-<link rel="stylesheet" href="resources/css/themify-icons.css">
-<link rel="stylesheet" href="resources/css/set1.css">
-<link rel="stylesheet" href="resources/css/swiper.min.css">
-<link rel="stylesheet" href="resources/css/magnific-popup.css">
-<link rel="stylesheet" href="resources/css/style.css">
+<link rel="stylesheet" href="/resources/css/simple-line-icons.css">
+<link rel="stylesheet" href="/resources/css/themify-icons.css">
+<link rel="stylesheet" href="/resources/css/set1.css">
+<link rel="stylesheet" href="/resources/css/swiper.min.css">
+<link rel="stylesheet" href="/resources/css/magnific-popup.css">
+<link rel="stylesheet" href="/resources/css/style.css">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+    
 </head>
 <body>
 	<%@ include file="/pageframe/header.jsp"%>
 
+      
 	<!--============================= RESERVE A SEAT =============================-->
 	<section class="reserve-block">
 		<div class="container">
@@ -58,106 +62,130 @@
 		</div>
 	</section>
 
+
+    
 	<!--============================= BOOKING DETAILS =============================-->
 	<section class="light-bg booking-details_wrap">
-		<form id="reservation-info" action="./reserve" method="POST">
 		<div class="container">
 		
-			<div class="row">
-				<input type="hidden" id="companyId" name="CompanyId" value="1">
-				<input type="hidden" id="productId" name="productId" value="${product.id}" >
-				<input type="hidden" id="userId" name="UserId" value="1" >
-				
-			<div class="col-md-4 responsive-wrap">
-				<img src="${product.image.url}" class="img-fluid"	alt="${product.image.name}">
-			</div>
-			
-				<div class="col-md-4 responsive-wrap">
-
-					<div id="item" class="booking-checkbox_wrap">
-						
-						<div class="row">
-							<div class="col-md-12">
-								<label class="custom-checkbox"> <span
-									class="ti-check-box"></span> <span
-									class="custom-control-description">NONE</span>
-								</label>
-							</div>
-	
+		<div class="row">
+				<div class="col-md-12 responsive-wrap">
+					<!-- Swiper -->
+					<div class="swiper-container">
+						<div id="image-list" class="swiper-wrapper">
 							
-							<div class="col-md-12">
-							<p style="font-size:20px"><span class="icon-bulb"></span>&nbsp;&nbsp;예약 날짜</p>
-									<c:choose>
-										<c:when test="${businessType <= 2}">
-										
-										<input style="border-right:none; width: 48%;" type="text" name="resDate" id="startDate" class="input-border" readOnly>
-                                        <input style="border-left:none; width: 48%;" type="text" id="endDate"  class="input-border" readOnly>
-   
-										</c:when>
-										<c:when test="${businessType > 2}">
-												<input type="text"  name="resDate" id="startDate"
-												placeholder="날짜선택" class="input-border" readOnly>
-											
-											<br><br>
-											<p style="font-size:20px"><span class="icon-bulb"></span>&nbsp;&nbsp;수량</p>
-											<ul>
-												<li style="display:inline-block"><a id="minus" class="nav-link" href="javascript:void(0)"><span class="icon-minus"></span></a></li>
-												<li style="display:inline-block"><input id="count" name="productCount" style="text-align:center; border:none;"size="2" type="text" value="0" readOnly></li> 
-												<li style="display:inline-block"><a id="plus" class="nav-link" href="javascript:void(0)"><span class="icon-plus"></span></a></li>
-											</ul>
-										</c:when>
-									</c:choose>
+							<c:forEach items="${product.image}" var="item">
+							 	<div class="swiper-slide">
+								<a href="${item.url}" class="grid image-link"> 
+									<img src="${item.url}" class="img-fluid" alt="#">
+								</a>
 							</div>
+							</c:forEach>
+							
+							
 						</div>
-					</div>
-				</div>
-
-
-		<div class="col-md-4 responsive-wrap">
-					<div class="contact-info">
-						<div class="address">
-							<span class="icon-calendar"></span>
-							<p>예약 날짜</p>
-						
-							<c:choose>
-								<c:when test="${businessType <= 2}">
-									<p><div class= "toggle-string" style="display:none">
-										<span id="reservation-date"></span><br>
-										<input type="text" size="1" style=" text-align:center; border:none" id="productCount" name="productCount"  readOnly>
-										<span>박</span>
-									</div></p>
-								</c:when>
-								<c:when test="${businessType > 2}">
-									<p><div class= "toggle-string" style="display:none">
-										<span id="reservation-date"></span><br>
-										<input type="text" size="2" style=" text-align:center; border:none" id="productCount" name="productCount"  readOnly>
-										<span>개</span>
-									</div></p>
-								</c:when>
-							</c:choose>
-						</div>					
-
-					</div>
-					<div class="follow">
-						<div class="follow-img">
-						
-							<h6>결제 금액</h6>
-							<div class="toggle-string2" style=" font-size:25px; display:none; color:red">
-								<input type="hidden" id="totalPrice" name="totalPrice" >
-								<span id="totalPriceSrc"></span>
-							</div>
-						</div>
-					
-						<a id="res-submit" href="javascript:void(0)" class="btn btn-outline-danger btn-contact">결제하기</a>
+						<!-- Add Pagination -->
+						<div class="swiper-pagination swiper-pagination-white"></div>
+						<!-- Add Arrows -->
+						<div class="swiper-button-next swiper-button-white"></div>
+						<div class="swiper-button-prev swiper-button-white"></div>
 					</div>
 				</div>
 			</div>
-			
 			
 			<hr>
-
+			<form id="reservation-info" action="./reserve" method="POST">
+			
 			<div class="row">
-				<div class="col-md-8 responsive-wrap">
+				
+				<%-- <div class="col-md-6 responsive-wrap">
+						<img src="${product.image.url}" class="img-fluid"	alt="${product.image.name}">
+				</div> --%>
+			 
+			 	<div class="col-md-8 responsive-wrap">
+					
+							<input type="hidden" id="companyId" name="CompanyId" value="1">
+							<input type="hidden" id="productId" name="productId" value="${product.id}" >
+							
+							
+							<div id="item" class="booking-checkbox_wrap">	
+								<div class="row">
+									<div class="col-md-12">
+										<label class="custom-checkbox"> <span
+												class="ti-check-box"></span> <span
+												class="custom-control-description">NONE</span>
+										</label>
+									</div>
+	
+							
+									<div class="col-md-12">
+										<p style="font-size:20px"><span class="icon-bulb"></span>&nbsp;&nbsp;예약 날짜</p>
+											<c:choose>
+												<c:when test="${businessType <= 2}">
+													<input style="border-right:none; width: 48%;" type="text" name="resDate" id="startDate" class="input-border" readOnly>
+                                    			    <input style="border-left:none; width: 48%;" type="text" id="endDate"  class="input-border" readOnly>
+ 
+												</c:when>
+												<c:when test="${businessType > 2}">
+														<input type="text"  name="resDate" id="startDate" placeholder="날짜선택" class="input-border" readOnly>
+														<br><br>
+														<p style="font-size:20px"><span class="icon-bulb"></span>&nbsp;&nbsp;수량</p>
+													<ul>
+														<li style="display:inline-block"><a id="minus" class="nav-link" href="javascript:void(0)"><span class="icon-minus"></span></a></li>
+														<li style="display:inline-block"><input id="count" name="productCount" style="text-align:center; border:none;"size="2" type="text" value="0" readOnly></li> 
+														<li style="display:inline-block"><a id="plus" class="nav-link" href="javascript:void(0)"><span class="icon-plus"></span></a></li>
+													</ul>
+												</c:when>
+											</c:choose>
+									</div>
+								</div>
+							</div>
+				</div>
+		
+				<div class="col-md-4 responsive-wrap">
+						<div class="contact-info">
+							<div class="address">
+								<span class="icon-calendar"></span>
+								<p>예약 날짜</p>
+						
+								<c:choose>
+									<c:when test="${businessType <= 2}">
+										<p><div class= "toggle-string" style="display:none">
+											<span id="reservation-date"></span><br>
+											<input type="text" size="1" style=" text-align:center; border:none" id="productCount" name="productCount"  readOnly>
+											<span>박</span>
+										</div></p>
+									</c:when>
+									<c:when test="${businessType > 2}">
+										<p><div class= "toggle-string" style="display:none">
+											<span id="reservation-date"></span><br>
+											<input type="text" size="2" style=" text-align:center; border:none" id="productCount" name="productCount"  readOnly>
+											<span>개</span>
+										</div></p>
+									</c:when>
+								</c:choose>
+							</div>					
+						</div>
+					
+						<div class="follow">
+							<div class="follow-img">
+								<h6>결제 금액</h6>
+								<div class="toggle-string2" style=" font-size:25px; display:none; color:red">
+									<input type="hidden" id="totalPrice" name="totalPrice" >
+									<span id="totalPriceSrc"></span>
+								</div>
+							</div>
+					
+							<a id="res-submit" href="javascript:void(0)" class="btn btn-outline-danger btn-contact">결제하기</a>
+						</div>
+				</div>
+			
+			</div>
+	</form>
+			<hr>
+			
+			<div class="row">
+				<div class="col-md-12 responsive-wrap">
 					<div class="booking-checkbox_wrap">
 						<h5>할인</h5>
 					</div>
@@ -166,7 +194,7 @@
 					<div  class="booking-checkbox_wrap">
 						<h5>취소규정 및 약관동의</h5>
 						<div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" name="agree" id="customCheck1">
+                                            <input type="checkbox" class="custom-control-input" id="customCheck1">
                                             <label class="custom-control-label" for="customCheck1">취소규정 및 약관에 모두 동의합니다.</label>
                         </div>
                         
@@ -178,32 +206,44 @@
 							<li>노쇼(No-Show: 사전 연락없이 예약된 숙소를 이용하지 않음)의 경우 요금이 100% 정상 청구됩니다.</li>
 							<li>성수기 요금이 확정되지 않았거나 요금표가 잘못 등록된 경우 예약이 취소될 수 있습니다.</li>
 							<li>예약 상품에 대한 문의사항은 판매자를 통해 문의해 주시길 바랍니다.</li>
-						</ul>
+							</ul>
 						
-                        </div>  
+                       	 </div>  
                         
-						<h5><a class="nav-link" href="javascript:cancelSlideToggle()">
+							<h5><a class="nav-link" href="javascript:cancelSlideToggle()">
                               	  		 <span id="arrow-silde" class="icon-arrow-down"></span>
-                 		</a></h5>
-					</div>
+                 			</a></h5>
+						</div>
 
+					</div>
 				</div>
-			</div>
 		</div>
-		</form>
 	</section>
+	
+	   
 	<!--//END BOOKING DETAILS -->
 
-	<script src="resources/js/jquery/jquery-3.2.1.min.js"></script>
-	<script src="resources/js/popper/popper.min.js"></script>
-	<script src="resources/js/jquery/jquery.magnific-popup.js"></script>
-	<script src="resources/js/swiper.min.js"></script>
-	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-	<script src="resources/js/datepicker-ko.js"></script>
-	<script src="resources/js/utility.js"></script>
-	
-	<script>
+	<script src="https://code.jquery.com/jquery-3.3.1.js"
+  			integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+  			crossorigin="anonymous"></script>
+	<script src="/resources/js/popper/popper.min.js"></script>
+	<script src="/resources/js/jquery/jquery.magnific-popup.js"></script>
+	<script src="/resources/js/swiper.min.js"></script>
+	<script	src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"
+ 			integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30="
+ 			crossorigin="anonymous"></script>
+
+	<script src="/resources/js/datepicker-ko.js"></script>
+	<script src="/resources/js/utility.js"></script>
+	<script type="template" id="imageList-template">
+		<div class="swiper-slide">
+			<a href="{{url}}" class="grid image-link"> 
+				<img src="{{url}}" class="img-fluid" alt="#">
+			</a>
+		</div>
+	</script>
+
+<script>
 		$(document).ready(function() {
 
 			$("#startDate").datepicker({
@@ -218,7 +258,7 @@
 					showAnim : "slideDown",
 					minDate : 0,
 					onSelect : function(dateText, inst) {
-							 calReserveReuslt();
+						calReserveReuslt();
 					}
 			});
 
@@ -292,7 +332,7 @@
 			
 			if( startDate != "" && endDate != undefined && endDate != ""){
 				var count = calDayCount(startDate,endDate);
-				if( count != 0){
+				if( count > 0){
 					$(".toggle-string").show();
 					$(".toggle-string2").show();
 					
@@ -300,7 +340,12 @@
 					$("#productCount").val(count);
 			
 					calTotalPrice(count);
-				}else{
+				}else if( count < 0 ){
+					alert("종료 날짜보다 시작날짜가 클수 없습니다.");
+					$("#productCount").val("");
+					$(".toggle-string").hide();
+				}
+				else{
 					alert("1박이상 선택해주세요");
 					$("#productCount").val("");
 					$(".toggle-string").hide();
@@ -341,7 +386,7 @@
 			navigation : {
 				nextEl : '.swiper-button-next',
 				prevEl : '.swiper-button-prev',
-			},
+			}
 		});
 	</script>
 	<script>

@@ -11,10 +11,12 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="resources/images/favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/images/favicon.png">
     <title>관리자페이지</title>
-    <link href="resources/css/chartist/chartist.min.css" rel="stylesheet">
-    <link href="resources/css/style.min.css" rel="stylesheet">
+    <link href="/resources/css/chartist/chartist.min.css" rel="stylesheet">
+    <link href="/resources/css/style.min.css" rel="stylesheet">
+    <link href="/resources/css/simple-line-icons.css" rel="stylesheet">
+ 
     
 </head>
 
@@ -54,19 +56,19 @@
 
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-8">
+                    <div class="col-md-9">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">그래프</h4>
+                                <h4 class="card-title">${lineGraphName}</h4>
                                 <div class="sales ct-charts mt-3"></div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="card">
                             <div class="card-body">
-                                <h5 class="card-title m-b-5">이번여행 총 경비</h5>
-                                <h3 class="font-light">769,800원</h3>
+                                <h5 class="card-title m-b-5">${sparkLineName}</h5>
+                                <h3 class="font-light" id="totalPayment"></h3>
                                 <div class="m-t-20 text-center">
                                     <div id="earnings"></div>
                                 </div>
@@ -74,9 +76,10 @@
                         </div>
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title m-b-0">예약횟수</h4>
-                                <h2 class="font-light">25회<span class="font-16 text-success font-medium">+23%</span></h2>
-                                <div class="m-t-30">
+                                <h4 class="card-title m-b-0">${dounutChartName}</h4>
+                                <h2 class="font-light">${totalReservtionCount} 회<span class="font-16 text-success font-medium">+23%</span></h2>
+                                <div class="analyzeReservation ct-charts mt-3"></div>
+                         <!--        <div class="m-t-30">
                                     <div class="row text-center">
                                         <div class="col-6 border-right">
                                             <h4 class="m-b-0">58%</h4>
@@ -95,7 +98,7 @@
                                             <span class="font-14 text-muted">음식점</span>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </div>
@@ -106,17 +109,13 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">예약 리스트</h4>
+                                <h4 class="card-title">예약 리스트  <a href="javascript:refreshList('reservation')"><span class="icon-refresh"></span></a></h4>
                             </div>
                             <div class="table-responsive">
                                 <table class="table table-hover">
                                     <thead>
-                                        <tr>
-                                            <th class="border-top-0">카테고리</th>
-                                            <th class="border-top-0">이름</th>
-                                            <th class="border-top-0">상태</th>
-                                            <th class="border-top-0">예약날짜</th>
-                                            <th class="border-top-0">결제가격</th>
+                                        <tr id="reservation-columns">
+                        
                                         </tr>
                                     </thead>
                                     <tbody id="reservation-list">
@@ -128,18 +127,15 @@
                         </div>
                     </div>
                 </div>
-                <!-- ============================================================== -->
-                <!-- Ravenue - page-view-bounce rate -->
-                <!-- ============================================================== -->
-                <!-- ============================================================== -->
-                <!-- Recent comment and chats -->
-                <!-- ============================================================== -->
+
                 <div class="row">
                     <!-- column -->
                     <div class="col-lg-6">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">최근 댓글 목록</h4>
+                                <h4 class="card-title">최근 댓글 목록   <a href="javascript:refreshList('comment')"><span class="icon-refresh"></span></a>
+                                
+                                </h4>
                             </div>
                             <div id="comment-list" class="comment-widgets" style="height:430px;">
                        
@@ -160,28 +156,30 @@
          </div>
   
     </div>
-<<<<<<< HEAD
 
-=======
- 
->>>>>>> refs/heads/reservation_kyu
-    <script src="resources/js/jquery/jquery.min.js"></script>
-    <script src="resources/js/popper/umd/popper.min.js"></script>
-    <script src="resources/js/bootstrap/bootstrap.min.js"></script>
-    <script src="resources/js/sparkline.js"></script>
-    <script src="resources/js/userpage/waves.js"></script>
-    <script src="resources/js/userpage/sidebarmenu.js"></script>
-    <script src="resources/js/userpage/custom.min.js"></script>
-    <script src="resources/js/chartist/chartist.min.js"></script>
-    <script src="resources/js/chartist/chartist-plugin-tooltip.min.js"></script>
-    <script src="resources/js/userpage/pages/dashboards/dashboard1.js"></script>
-    <script src="resources/js/utility.js"></script>
-    <script src="resources/js/handlebars.min.js"></script>
 
+    <script src="/resources/js/jquery/jquery.min.js"></script>
+    <script src="/resources/js/popper/umd/popper.min.js"></script>
+    <script src="/resources/js/bootstrap/bootstrap.min.js"></script>
+    <script src="/resources/js/sparkline.js"></script>
+    <script src="/resources/js/userpage/waves.js"></script>
+    <script src="/resources/js/userpage/sidebarmenu.js"></script>
+    <script src="/resources/js/userpage/custom.min.js"></script>
+    <script src="/resources/js/chartist/chartist.min.js"></script>
+    <script src="/resources/js/chartist/chartist-plugin-tooltip.min.js"></script>
+    <script src="/resources/js/userpage/pages/dashboards/dashboard1.js"></script>
+    <script src="/resources/js/utility.js"></script>
+    <script src="/resources/js/handlebars.min.js"></script>
+
+  
     <script type="template" id="comment-template">
-    <div class="d-flex flex-row comment-row">
+	  
+	<div class="d-flex flex-row comment-row">
+
         <div class="p-2">
-            <img src="{{imageUrl}}" alt="user" width="50" class="rounded-circle">
+		<a href="#">  
+            <img src="{{imageUrl}}" alt="{{imageUrl}}" width="50" class="rounded-circle">
+		</a>
         </div>
         <div class="comment-text w-100">
             <h6 class="font-medium">{{title}}</h6>
@@ -193,49 +191,75 @@
                     <a href="javascript:void(0)">
                         <i class="ti-pencil-alt"></i>
                     </a>
-                    <a href="javascript:void(0)">
-                        <i class="ti-check"></i>
-                    </a>
-                    <a href="javascript:void(0)">
-                        <i class="ti-heart"></i>
-                    </a>
-                </span>
+                  </span>
             </div>
         </div>
-    </div>
+	  </div>
+
     </script>
     <script type="template" id="reservation-template" >
 		<tr>
-           <td class="txt-oflo">{{category}}</td>
-		   <td class="txt-oflo">{{name}}</td>
+  		    <td class="txt-oflo"><a href="#">{{typeName}}</a></td>
+		   <td class="txt-oflo"><a href="#">{{productName}}</a></td>
            <td><span class="label label-success label-rounded">{{state}}</span> </td>
-           <td class="txt-oflo">{{date}}</td>
+           <td class="txt-oflo">{{resDate}}</td>
            <td><span class="font-medium">{{totalPrice}} 원</span></td>
         </tr>
 	</script>
 	
+	
     <script>
     $(document).ready(function(){
+   	
+    	var total = "${totalPayment}";
+    	$("#totalPayment").text(dotSplit(total) + " 원");
     	
-		Ajax("GET","api/reservationList/user/1",function(dataList){
+    	var type = "${userType}";
+    
+    	//< 차트를 설정한다.
+    	var lineGraph = ${lineGraph};
+    	setLineGraph(lineGraph);
+    	
+    	var dounutChart = ${dounutChart};
+	   	setDounutChart(dounutChart);
+	   	
+	   	var sparkLine = ${sparkLine};
+    	setSparkline(sparkLine);
+    
+    	
+    	//< 유저 타입에 따라 예약 리스트 컬럼명 변경
+    	setHTMLReservationColumns(type);
+        
+    	//< Ajax
+    	requestReservationList(type,1)
+    	requestCommentList(type,1);
+    	
+  });
+    
+    function requestReservationList(type,startPageNum){
+    	var requestURL = "/api/reservationList/" + type + "/" + startPageNum +"/2";
+    	Ajax("GET",requestURL,function(dataList){
 			
 			dataList.forEach(function(data){
 				var tempData = {};
-				tempData['category'] = "카테고리 : " + data.companyId;
-				tempData['name'] = "이름 : " + data.productId;
+				tempData['typeName'] = data.typeName;
+				tempData['productName'] = data.productName;
 				tempData['state'] = data.state;
-				tempData['date'] = data.resDate;
+				tempData['resDate'] = data.resDate;
 				tempData['totalPrice'] = data.totalPrice;
 						
 				makeHTML("#reservation-template", "#reservation-list", tempData);
 			});
 		});
-		
-	Ajax("GET","api/commentList/user/1",function(dataList){
+    }
+	function requestCommentList(type,startPageNum){
+		var requestURL = "/api/commentList/" + type + "/" + startPageNum +"/2";
+		Ajax("GET",requestURL,function(dataList){
 			
 			dataList.forEach(function(data){
+				
     				var tempData = {};
-        			tempData['imageUrl'] = data.imageUrl;
+        			tempData['imageUrl'] = data.imageUrl[0].savePath;
         			tempData['title'] = data.title;
         			tempData['content'] = data.content;
         			tempData['regDate'] = data.regDate;
@@ -244,9 +268,19 @@
            	    	makeHTML("#comment-template", "#comment-list", tempData);
 				});
     			
-			});
+			}); 
+    }
+    
+    function refreshList(type){
+    	if("reservation" == type){
+    		$("#reservation-list").empty();
+    		requestReservationList("${userType}",1);
+    	}else if( "comment" == type){
+    		$("#comment-list").empty();
+    		requestCommentList("${userType}",1);
+    	}
     	
-  });
+    }
     </script>
 
 </body>
