@@ -4,34 +4,22 @@
 <html>
 
 <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="author" content="Colorlib">
     <meta name="description" content="자리있어요?">
     <meta name="keywords" content="이써요">
-    <!-- Favicons -->
     <link rel="shortcut icon" href="#">
-    <!-- Page Title -->
     <title>자리 있어요?</title>
-    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="resources/css/bootstrap/bootstrap.min.css">
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,500,700,900" rel="stylesheet">
-    <!-- Simple line Icon -->
     <link rel="stylesheet" href="resources/css/simple-line-icons.css">
-    <!-- Themify Icon -->
     <link rel="stylesheet" href="resources/css/themify-icons.css">
-    <!-- Hover Effects -->
     <link rel="stylesheet" href="resources/css/set1.css">
-    <!-- Swipper Slider -->
     <link rel="stylesheet" href="resources/css/swiper.min.css">
-    <!-- Magnific Popup CSS -->
     <link rel="stylesheet" href="resources/css/magnific-popup.css">
-    <!-- Main CSS -->
     <link rel="stylesheet" href="resources/css/style.css">
-    <!-- Tab Function-->
     <link rel="stylesheet" href="resources/css/tab.css">
 </head>
 <body>
@@ -88,9 +76,9 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
-                    <h5>Tasty Hand-Pulled Noodles</h5>
+                    <h5>${name}</h5>
                     <p><span>$$$</span>$$</p>
-                    <p class="reserve-description">Innovative cooking, paired with fine wines in a modern setting.</p>
+                    <p class="reserve-description">${discription}</p>
                 </div>
                 <div class="col-md-6">
                     <div class="reserve-seat-block">
@@ -98,14 +86,10 @@
                             <span>9.5</span>
                         </div>
                         <div class="review-btn">
-                            <a href="#" class="btn btn-outline-danger">WRITE A REVIEW</a>
+                            <a href="#" class="btn btn-outline-danger">댓글</a>
                             <span>34 reviews</span>
                         </div>
-                        <div class="reserve-btn">
-                            <div class="featured-btn-wrap">
-                                <a href="#" class="btn btn-danger">RESERVE A SEAT</a>
-                            </div>
-                        </div>
+                
                     </div>
                 </div>
             </div>
@@ -128,48 +112,17 @@
                 <div id="tab-1" class="tab-content current">
                     <div class="booking-checkbox_wrap">
                         <div class="booking-checkbox">
-                            <p>Tasty Hand-Pulled Noodles is a 1950s style diner located in Madison, Wisconsin. Opened in 1946 by Mickey Weidman, and located just across the street from Camp Randall Stadium, it has become a popular game day tradition amongst
-                                many Badger fans. The diner is well known for its breakfast selections, especially the Scrambler, which is a large mound of potatoes, eggs, cheese, gravy, and a patrons’ choice of other toppings.</p>
-                            <p>Mickies has also been featured on “Todd’s Taste of the Town” during one of ESPN’s college football broadcasts. We are one of the best Chinese restaurants in the New York, New York area. We have been recognized for our outstanding
-                                Chinese & Asian cuisine, excellent Chinese menu, and great restaurant specials. We are one of the best Chinese restaurants in the New York, New York area. We have been recognized for our outstanding Chinese & Asian cuisine,
-                                excellent Chinese menu, and great restaurant specials.</p>
+                            <p>${discription}</p>
                             <hr>
                         </div>
                         <div class="row">
-                            <div class="col-md-4">
+                   			<div class="col-md-4">
                                 <label class="custom-checkbox">
-                        <span class="ti-check-box"></span>
-                        <span class="custom-control-description">Bike Parking</span>
-                      </label> </div>
-                            <div class="col-md-4">
-                                <label class="custom-checkbox">
-                       <span class="ti-check-box"></span>
-                       <span class="custom-control-description">Wireless Internet  </span>
-                     </label>
-                            </div>
-                            <div class="col-md-4">
-                                <label class="custom-checkbox">
-                     <span class="ti-check-box"></span>
-                     <span class="custom-control-description">Smoking Allowed  </span>
-                   </label> </div>
-                            <div class="col-md-4">
-                                <label class="custom-checkbox">
-                    <span class="ti-check-box"></span>
-                    <span class="custom-control-description">Street Parking</span>
-                  </label>
-                            </div>
-                            <div class="col-md-4">
-                                <label class="custom-checkbox">
-                   <span class="ti-check-box"></span>
-                   <span class="custom-control-description">Special</span>
-                 </label> </div>
-                            <div class="col-md-4">
-                                <label class="custom-checkbox">
-                  <span class="ti-check-box"></span>
-                  <span class="custom-control-description">Accepts Credit cards</span>
-                </label>
-                            </div>
-                        </div>
+                        		<span class="ti-check-box"></span>
+                        		<span class="custom-control-description">Bike Parking</span>
+                      			</label> 
+                      		</div>
+                          </div>
                     </div>
                     </div>
                     <div id="tab-2" class="tab-content">
@@ -216,22 +169,22 @@
                         <img src="resources/images/map.jpg" class="img-fluid" alt="#">
                         <div class="address">
                             <span class="icon-location-pin"></span>
-                            <p> Doyers St<br> New York, NY 10013<br> b/t Division St & St James Pl <br> Chinatown, Civic Center</p>
+                            <p>${address}</p>
                         </div>
                         <div class="address">
                             <span class="icon-screen-smartphone"></span>
-                            <p> +44 20 7336 8898</p>
+                            <p>${number}</p>
                         </div>
                         <div class="address">
                             <span class="icon-link"></span>
-                            <p>https://burgerandlobster.com</p>
+                            <p>${url}</p>
                         </div>
                         <div class="address">
                             <span class="icon-clock"></span>
-                            <p>Mon - Sun 09:30 am - 05:30 pm <br>
-                                <span class="open-now">OPEN NOW</span></p>
+                            <p>${time}<br>
+                                <span class="open-now">${state}</span></p>
                         </div>
-                        <a href="#" class="btn btn-outline-danger btn-contact">SEND A MESSAGE</a>
+                        <a href="#" class="btn btn-outline-danger btn-contact">메시지 보내기</a>
                     </div>
                     <div class="follow">
                         <div class="follow-img">

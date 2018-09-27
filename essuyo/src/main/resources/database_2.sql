@@ -17,14 +17,6 @@ CREATE TABLE area_list (
 	name VARCHAR(255) NOT NULL/* 이름 */
 )DEFAULT CHARSET=utf8; 
 
-/* 사업종류 */
-CREATE TABLE business_type (
-	id INTEGER PRIMARY KEY auto_increment, /* 번호 */
-	name VARCHAR(255) NOT NULL /* 이름 */
-)DEFAULT CHARSET=utf8; 
-
-
-
 /* 상품 */
 CREATE TABLE product (
 	id INTEGER PRIMARY KEY auto_increment, /* 번호 */
@@ -51,7 +43,9 @@ CREATE TABLE image_info (
 CREATE TABLE company (
 	id INTEGER PRIMARY KEY auto_increment, /* 번호 */
 	name VARCHAR(255) NOT NULL, /* 이름 */
+	type VARCHAR(255) NOT NULL, /* 회사 종류*/
 	discription VARCHAR(255), /* 설명 */
+	score  DECIMAL(2,1), /* 점수 */
 	address VARCHAR(255) NOT NULL, /* 주소 */
 	number VARCHAR(255) NOT NULL, /* 전화번호 */
 	url VARCHAR(255), /* 홈페이지 */
@@ -59,12 +53,9 @@ CREATE TABLE company (
 	time VARCHAR(255) NOT NULL, /* 영업시간 */
 	total_visit INTEGER, /* 총방문자수 */
 	today_visit INTEGER, /* 금일방문자수 */
-	grade  INTEGER, /* 등급 */
 	area_list_id INTEGER , /* 지역명목록번호 */
-	business_type_id INTEGER ,  /* 사업종류번호 */
 	
-	FOREIGN KEY (area_list_id) REFERENCES area_list(id) ,
-	FOREIGN KEY (business_type_id) REFERENCES business_type(id) 	
+	FOREIGN KEY (area_list_id) REFERENCES area_list(id)
 )DEFAULT CHARSET=utf8; 
 
 
@@ -74,11 +65,8 @@ CREATE TABLE business (
 	good INTEGER, /* 좋아요 */
 	comment VARCHAR(255), /* 한마디 */
 	company_id INTEGER, /* 상점번호 */
-	business_type_id INTEGER NOT NULL,  /* 사업종류번호 */
 	
-	FOREIGN KEY (company_id) REFERENCES company(id),
-	FOREIGN KEY (business_type_id) REFERENCES business_type(id)
-	
+	FOREIGN KEY (company_id) REFERENCES company(id)
 )DEFAULT CHARSET=utf8; 
 
 
@@ -219,43 +207,37 @@ INSERT INTO image_info ( save_path, type ,name, cre_date ) VALUES("/resources/im
 INSERT INTO image_info ( save_path, type ,name, cre_date ) VALUES("/resources/images/reserve-slide3.jpg","image/jpg","reserve-slide3", now());
 INSERT INTO image_info ( save_path, type ,name, cre_date ) VALUES("/resources/images/reserve-slide2.jpg","image/jpg","reserve-slide2", now());
 
-/*사업 종류*/
-INSERT INTO business_type(name) VALUES("호텔");
-INSERT INTO business_type(name) VALUES("렌트카");
-INSERT INTO business_type(name) VALUES("음식점");
-INSERT INTO business_type(name) VALUES("박물관");
-
 /* 지역명목록 */
 INSERT INTO area_list (name)  VALUES("부산");
 INSERT INTO area_list (name)  VALUES("서울");
 
 
 /* 업체 */
-INSERT INTO company(name, discription, address,number, url, state, time, 
-total_visit, today_visit,grade,area_list_id,business_type_id)
-VALUES("힐튼호텔", "돈만 있으면 쾌적한 곳", "부산광역시 기장군 기장읍 기장해안로 268-32 힐튼부산","010-0000-0000",
-"http://hiltonbusan.co.kr/","open now","ALL TIME",10,10,1,1,1);
+INSERT INTO company(name, type, score, discription, address, number, url, state, time, 
+total_visit, today_visit, area_list_id)
+VALUES("힐튼호텔", "호텔", 9.0 , "돈만 있으면 쾌적한 곳", "부산광역시 기장군 기장읍 기장해안로 268-32 힐튼부산","010-0000-0000",
+"http://hiltonbusan.co.kr/","open now","ALL TIME",0,0,1);
 
-INSERT INTO company(name, discription, address,number, url, state, time, 
-total_visit, today_visit,grade,area_list_id,business_type_id)
-VALUES("아웃백-신촌점", "빵 맛있는 식당", "서울 서대문구 연세로12길 33","02-0000-0000",
-"http://outback.co.kr/shinchon/","open now","am 10:00 ~ pm 10:00",10,10,1,1,3);
+INSERT INTO company(name, type, score, discription, address,number, url, state, time, 
+total_visit, today_visit, area_list_id)
+VALUES("아웃백-신촌점", "음식점", 8.0 , "빵 맛있는 식당", "서울 서대문구 연세로12길 33","02-0000-0000",
+"http://outback.co.kr/shinchon/","open now","am 10:00 ~ pm 10:00",0,0,1);
 
-INSERT INTO company(name, discription, address,number, url, state, time, 
-total_visit, today_visit,grade,area_list_id,business_type_id)
-VALUES("알촌", "알밥파는 집", "서울 서대문구 이화여대7길 14","02-1111-1111",
-"http://alchon.com/","휴무중","am 10:00 ~ pm 10:00",10,10,3,2,3);
+INSERT INTO company(name, type, score, discription, address,number, url, state, time, 
+total_visit, today_visit, area_list_id)
+VALUES("알촌", "음식점", 4.0 , "알밥파는 집", "서울 서대문구 이화여대7길 14","02-1111-1111",
+"http://alchon.com/","휴무중","am 10:00 ~ pm 10:00",0,0,1);
 
-INSERT INTO company(name, discription, address,number, url, state, time, 
-total_visit, today_visit,grade,area_list_id,business_type_id)
-VALUES("SOCAR", "카 쉐어", "서울 서대문구 남가좌동 7길 14","02-2222-2222",
-"http://socar.com/","휴무중","am 10:00 ~ pm 10:00",0,0,3,2,2);
+INSERT INTO company(name, type, score, discription, address,number, url, state, time, 
+total_visit, today_visit, area_list_id)
+VALUES("SOCAR", "렌트카", 1.0 , "카 쉐어", "서울 서대문구 남가좌동 7길 14","02-2222-2222",
+"http://socar.com/","휴무중","am 10:00 ~ pm 10:00",0,0,1);
 
 
 /* 사업 */
-INSERT INTO business(good,comment,company_id,business_type_id) VALUES(10, "힐튼호텔", 1,1);
-INSERT INTO business(good,comment,company_id,business_type_id) VALUES(10, "아웃백-신촌점", 1,2);
-INSERT INTO business(good,comment,company_id,business_type_id) VALUES(10, "알촌", 1,3);
+INSERT INTO business(good,comment,company_id) VALUES(10, "힐튼호텔", 1);
+INSERT INTO business(good,comment,company_id) VALUES(10, "아웃백-신촌점", 1);
+INSERT INTO business(good,comment,company_id) VALUES(10, "알촌", 1);
 
 /*유저*/
 INSERT INTO user(name, age, gender, email, password,fail_password,
