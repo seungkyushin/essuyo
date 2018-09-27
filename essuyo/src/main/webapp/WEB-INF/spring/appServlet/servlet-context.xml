@@ -57,7 +57,7 @@
 		</mvc:interceptor>
 
 		<mvc:interceptor>
-			<mvc:mapping path="/sboard/register" />
+			<mvc:mapping path="/user/dashboard" />
 			<beans:ref bean="authInterceptor" />
 		</mvc:interceptor>
 

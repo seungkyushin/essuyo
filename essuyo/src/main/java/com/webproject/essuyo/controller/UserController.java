@@ -1,11 +1,10 @@
 package com.webproject.essuyo.controller;
 
-import java.util.HashMap;
-import java.util.Map;
 
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
@@ -37,14 +36,15 @@ public class UserController {
 	@Inject
 	private UserServiceImpl service;
 
+
 	@Autowired
 	private ReservationService reservationService;
 	
 	@Autowired
 	private CompanyService companyService;
-
-	// GET 방식으로 회원가입 페이지에 접근. 그냥 회원가입 페이지로 보내준다
-	@RequestMapping(value = "/regist", method = RequestMethod.GET)
+	
+	//GET 방식으로 회원가입 페이지에 접근. 그냥 회원가입 페이지로 보내준다
+	@RequestMapping(value="/regist", method=RequestMethod.GET)
 	public void registGet(UserVO vo, Model model) throws Exception {
 		logger.info("registGet.......");
 	}
@@ -65,44 +65,43 @@ public class UserController {
 
 	// 회원가입 시 이메일 중복 체크
 	@ResponseBody
-	@RequestMapping(value = "/checkId", method = RequestMethod.POST)
+	@RequestMapping(value = "checkId", method = RequestMethod.POST)
 	public Map<String, Object> checkId(String email) {
 		Map<String, Object> map = new HashMap<>();
 
 		if (service.checkId(email)) {
 			map.put("code", 99);
 			map.put("msg", "사용가능한 이메일 입니다.");
-
+			
 		} else {
 			map.put("code", -1);
 			map.put("msg", "이미 등록된 이메일입니다.");
-
+			
 		}
 		return map;
 	}
-
-	// 로그인 컨트롤. 로그인 페이지에 들어갈 때
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public void loginGET(@ModelAttribute UserVO vo) {
-
-	}
-
-	// 로그인 페이지에서, form을 전송할 때.
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String loginPOST(UserVO userVO, HttpSession session, Model model) throws Exception {
 	
-		//서비스의 로그인 메소드를 실행해서 UserVO 객체에 넣는다.
-		UserVO vo = service.login(userVO);				
+	// 로그인 컨트롤. 로그인 페이지에 들어갈 때
+		@RequestMapping(value = "/login", method = RequestMethod.GET)
+		public void loginGET(@ModelAttribute UserVO vo) {
 
-		//그 vo 객체가 null 이라면 해당되는 이메일, 비밀번호가 없다는 뜻이니까 다시 로그인 페이지로.
-		if(vo == null) {			
-			return "user/login";
-		} 
-		//만약 그렇지 않다면 해당 로그인 정보가 든 vo 객체를 model 어트리뷰트에 세트해 주고, 일단은 대쉬보드로 리다이렉트해 
-		model.addAttribute("userVO", vo);
-		return "redirect:/user/loginPost";
-	}
+		}
 
+		// 로그인 페이지에서, form을 전송할 때.
+		@RequestMapping(value = "/login", method = RequestMethod.POST)
+		public void loginPOST(UserVO userVO, HttpSession session, Model model) throws Exception {
+		
+			//서비스의 로그인 메소드를 실행해서 UserVO 객체에 넣는다.
+			UserVO vo = service.login(userVO);				
+
+			//그 vo 객체가 null 이라면 해당되는 이메일, 비밀번호가 없다는 뜻이니까 다시 로그인 페이지로.
+			if(vo == null) {			
+				return ;
+			} 
+			//만약 그렇지 않다면 해당 로그인 정보가 든 vo 객체를 model 어트리뷰트에 세트해 주고, 일단은 ㄷ
+			model.addAttribute("userVO", vo);		
+		}
+	
 	@GetMapping("/dashboard")
 	public String showDashboardPage(Model model) throws Exception{
 		

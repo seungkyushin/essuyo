@@ -67,7 +67,7 @@ function doLogin() {
 			<div class="card card-body">
 				<h4 class="card-title">로그인</h4>
 				<h5 class="card-subtitle">가입하신 이메일과 비밀번호를 입력해주세요.</h5>
-				<form class="form-horizontal m-t-30" id="loginForm" method="post" action="/user/login">
+				<form class="form-horizontal m-t-30" id="loginForm" method="post" action="/user/loginPost">
 					
 					<div class="form-group">
 						<label for="email">[이메일]</label> <input type="email" id="email" name="email" class="form-control" placeholder="이메일" required>
