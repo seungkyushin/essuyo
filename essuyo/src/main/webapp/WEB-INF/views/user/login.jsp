@@ -42,11 +42,17 @@
 <script>
 
 $(function() {
+	
+	msgCheck();
+	
+	
 	$("#password").keyup(function(event) {
 		if (event.keyCode == 13) {
 			doLogin();
 		}
-	});
+	});	
+
+	
 });
 
 //로그인 기능
@@ -56,6 +62,14 @@ function doLogin() {
 		loginForm.submit();
 	}
 }
+
+//로그아웃 실패시 메시지 띄우는 기능
+// function msgCheck() {
+// 	if($("${msg}") != null){
+// 		alert("${msg}");
+// 	}
+// }
+
 </script>
 
 <title>로그인</title>
@@ -68,10 +82,10 @@ function doLogin() {
 				<h4 class="card-title">로그인</h4>
 				<h5 class="card-subtitle">가입하신 이메일과 비밀번호를 입력해주세요.</h5>
 				<form class="form-horizontal m-t-30" id="loginForm" method="post" action="/user/loginPost">
-					
+
 					<div class="form-group">
 						<label for="email">[이메일]</label> <input type="email" id="email" name="email" class="form-control" placeholder="이메일" required>
-						
+
 					</div>
 					<div class="form-group">
 						<label>[비밀번호]</label> <input type="password" id="password" name="password" class="form-control" minlength="4" data-msg-minlength="최소 {0} 자리 이상 입력해야 합니다." maxlength="12" placeholder="비밀번호" required>

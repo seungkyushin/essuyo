@@ -13,7 +13,7 @@
     
 <!--     로그인용 sql문. email과 password를 user 테이블에서 찾는다 -->
     <select id="login" resultType="com.webproject.essuyo.domain.UserVO">
-    select email, password from user where email = #{email} and password = #{password}
+    select * from user where email = #{email} and password = #{password}
     </select>
     
 <!--     이메일 중복체크용 sql 입력된 이메일을 카운트한다-->

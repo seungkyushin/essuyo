@@ -48,13 +48,13 @@
 
  <!-- 로그인 인터셉터와 인증 인터셉터 -->
 <!--  매핑의 경로는 교재에 나왔던 것. 나중에 뷰 페이지 만든 다음에 수정해야 함 -->
-	<beans:bean id="loginInterceptor" class="com.webproject.essuyo.interceptor.LoginInterceptor"></beans:bean>
+<!-- 	<beans:bean id="loginInterceptor" class="com.webproject.essuyo.interceptor.LoginInterceptor"></beans:bean> -->
 	<beans:bean id="authInterceptor" class="com.webproject.essuyo.interceptor.AuthInterceptor"></beans:bean>
 	<mvc:interceptors>
-		<mvc:interceptor>		
-			<mvc:mapping path="/user/loginPost"/>
-			<beans:ref bean="loginInterceptor" />
-		</mvc:interceptor>
+<!-- 		<mvc:interceptor>		 -->
+<!-- 			<mvc:mapping path="/user/loginPost"/> -->
+<!-- 			<beans:ref bean="loginInterceptor" /> -->
+<!-- 		</mvc:interceptor> -->
 
 		<mvc:interceptor>
 			<mvc:mapping path="/user/dashboard" />

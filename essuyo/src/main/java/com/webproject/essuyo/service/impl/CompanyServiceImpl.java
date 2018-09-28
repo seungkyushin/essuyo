@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
 import com.webproject.essuyo.dao.CompanyDao;
 import com.webproject.essuyo.dao.FacilityAdminDao;
 import com.webproject.essuyo.dao.ImageAdminDao;
-import com.webproject.essuyo.dao.ImageInfoDao;
+
 import com.webproject.essuyo.domain.CompanyVO;
 import com.webproject.essuyo.domain.ImageInfoVO;
 import com.webproject.essuyo.domain.SQLParamVO;
@@ -31,8 +31,7 @@ public class CompanyServiceImpl implements CompanyService {
 	@Autowired
 	private CompanyDao companyDao;
 	
-	@Autowired
-	private ImageInfoDao imageInfoDao;
+	
 
 	@Autowired
 	private FacilityAdminDao facilityAdminDao;
@@ -51,32 +50,6 @@ public class CompanyServiceImpl implements CompanyService {
 		return companyDao.listAll();
 	}
 
-
-	@Override
-	public Map<String, Object> getList(int ListId) {
-		Map<String, Object> result = new HashMap<>();
-
-		List<CompanyVO> list = null;
-		List<Object> imageInfoList = null;
-
-		try {
-
-			//  리스트 정보
-			list = companyDao.listAll();
-
-			//  이미지 정보
-			Map<String, Object> lists = new HashMap<>();		
-			lists.put("id", ListId);
-			imageInfoList = imageInfoDao.selectByImageId(ListId);
-			
-		} catch (Exception e) {
-			logger.error("리스트 조회 실패");
-		}
-		
-		result.put(null, imageInfoList);
-		
-		return result;
-	}
 
 	@Override
 	public List<String> getCompanyFacility(int companyId) throws Exception {

@@ -132,10 +132,7 @@
 							<option value="남자">남자</option>
 							<option value="여자">여자</option>
 						</select>
-					</div>
-					<div class="form-group">
-						<label>[프로필 사진 업로드]</label> <input type="file" class="form-control">
-					</div>
+					</div>					
 					<a href="#" class="btn-reg" onclick="doReg();">회원가입</a>
 				</form>
 			</div>

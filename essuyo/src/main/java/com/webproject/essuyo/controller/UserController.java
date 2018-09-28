@@ -2,11 +2,15 @@ package com.webproject.essuyo.controller;
 
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.joda.time.LocalDate;
@@ -20,6 +24,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.util.WebUtils;
 
 import com.webproject.essuyo.domain.ReservationVO;
 import com.webproject.essuyo.domain.UserVO;
@@ -64,7 +70,7 @@ public class UserController {
 
 	// 회원가입 시 이메일 중복 체크
 	@ResponseBody
-	@RequestMapping(value = "checkId", method = RequestMethod.POST)
+	@RequestMapping(value = "/checkId", method = RequestMethod.POST)
 	public Map<String, Object> checkId(String email) {
 		Map<String, Object> map = new HashMap<>();
 
@@ -87,18 +93,56 @@ public class UserController {
 		}
 
 		// 로그인 페이지에서, form을 전송할 때.
-		@RequestMapping(value = "/login", method = RequestMethod.POST)
-		public void loginPOST(UserVO userVO, HttpSession session, Model model) throws Exception {
+		@RequestMapping(value = "/loginPost", method = RequestMethod.POST)
+		public String loginPOST(@ModelAttribute UserVO userVO, HttpSession session, Model model, HttpServletRequest request, HttpServletResponse response) throws Exception {
+			
+			session = request.getSession();
+			//세션이 이미 login 값이 들어있다면 이 값을 지워준다.
+					if (session.getAttribute("login") != null) {
+						logger.info("clear login data before");
+						session.removeAttribute("login");
+					}
 		
 			//서비스의 로그인 메소드를 실행해서 UserVO 객체에 넣는다.
 			UserVO vo = service.login(userVO);				
 
 			//그 vo 객체가 null 이라면 해당되는 이메일, 비밀번호가 없다는 뜻이니까 다시 로그인 페이지로.
 			if(vo == null) {			
-				return ;
-			} 
-			//만약 그렇지 않다면 해당 로그인 정보가 든 vo 객체를 model 어트리뷰트에 세트해 주고, 일단은 ㄷ
-			model.addAttribute("userVO", vo);		
+				logger.info("login failed......");		
+//				if(!model.containsAttribute("msg")) {
+//				model.addAttribute("msg", "이메일이나 비밀번호가 잘못됐습니다.");
+//				} 
+				return "/user/login";
+			} else {
+				logger.info("new login success");				
+				session.setAttribute("login",  vo.getEmail());
+				return "redirect:/";
+			}
+		}
+		
+		//로그 아웃 기능
+		@RequestMapping(value="/logout", method=RequestMethod.GET)
+		public String logout(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception{
+			
+			Object obj = session.getAttribute("login");
+			
+			if(obj != null) {
+				UserVO vo = (UserVO) obj;
+				
+				session.removeAttribute("login");
+				session.invalidate();
+				
+				// 이 아래는 쿠키 기능. 아직 미구현
+				Cookie loginCookie = WebUtils.getCookie(request, "loginCookie");
+				
+				if(loginCookie != null) {
+					loginCookie.setPath("/");
+					loginCookie.setMaxAge(0);
+					response.addCookie(loginCookie);
+					service.keepLogin(vo.getEmail(), session.getId(), new Date());
+				}
+			}
+			return "user/logout";
 		}
 	
 	@GetMapping("/dashboard")
