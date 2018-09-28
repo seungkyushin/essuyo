@@ -35,5 +35,4 @@ public class BusinessVO {
 		return "BusinessVO [id=" + id + ", good=" + good + ", comment=" + comment + ", companyId=" + companyId + "]";
 	}
 
-	
 }
