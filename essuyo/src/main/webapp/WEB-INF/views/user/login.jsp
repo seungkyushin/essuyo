@@ -43,16 +43,13 @@
 
 $(function() {
 	
-	msgCheck();
-	
-	
 	$("#password").keyup(function(event) {
 		if (event.keyCode == 13) {
 			doLogin();
 		}
 	});	
 
-	
+	msgCheck();
 });
 
 //로그인 기능
@@ -63,12 +60,14 @@ function doLogin() {
 	}
 }
 
-//로그아웃 실패시 메시지 띄우는 기능
-// function msgCheck() {
-// 	if($("${msg}") != null){
-// 		alert("${msg}");
-// 	}
-// }
+//로그아웃 실패시 메시지 띄우는 기능. 여기까지 하다가 말았음
+function msgCheck() {
+	var msg = "${msg}";
+	
+	if(msg != null){
+		alert(msg);
+	}
+}
 
 </script>
 

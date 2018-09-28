@@ -109,9 +109,9 @@ public class UserController {
 			//그 vo 객체가 null 이라면 해당되는 이메일, 비밀번호가 없다는 뜻이니까 다시 로그인 페이지로.
 			if(vo == null) {			
 				logger.info("login failed......");		
-//				if(!model.containsAttribute("msg")) {
-//				model.addAttribute("msg", "이메일이나 비밀번호가 잘못됐습니다.");
-//				} 
+				if(!model.containsAttribute("msg")) {
+				model.addAttribute("msg", "이메일이나 비밀번호가 잘못됐습니다.");
+				} 
 				return "/user/login";
 			} else {
 				logger.info("new login success");				
@@ -127,20 +127,22 @@ public class UserController {
 			Object obj = session.getAttribute("login");
 			
 			if(obj != null) {
-				UserVO vo = (UserVO) obj;
+				
+				//이것도 쿠키 기능을 위한 형변환
+				//UserVO vo = (UserVO) obj;
 				
 				session.removeAttribute("login");
 				session.invalidate();
 				
 				// 이 아래는 쿠키 기능. 아직 미구현
-				Cookie loginCookie = WebUtils.getCookie(request, "loginCookie");
-				
-				if(loginCookie != null) {
-					loginCookie.setPath("/");
-					loginCookie.setMaxAge(0);
-					response.addCookie(loginCookie);
-					service.keepLogin(vo.getEmail(), session.getId(), new Date());
-				}
+//				Cookie loginCookie = WebUtils.getCookie(request, "loginCookie");
+//				
+//				if(loginCookie != null) {
+//					loginCookie.setPath("/");
+//					loginCookie.setMaxAge(0);
+//					response.addCookie(loginCookie);
+//					service.keepLogin(vo.getEmail(), session.getId(), new Date());
+//				}
 			}
 			return "user/logout";
 		}
