@@ -264,7 +264,7 @@ public class UserController {
 			model.addAttribute("sparkLineName","올해 수입");
 		}
 		
-		return "dashboard";
+		return "/user/dashboard";
 		
 	}
 }

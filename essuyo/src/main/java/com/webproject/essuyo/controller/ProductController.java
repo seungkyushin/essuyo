@@ -25,20 +25,25 @@ public class ProductController {
 	
 	@GetMapping("/reservation")
 	public String showReservationPage(@RequestParam("id") int productId,
-			@RequestParam("type") int businessTypeId,
-			Model model) {
+			@RequestParam("type") int businessTypeId, Model model) {
 		
 		Map<String,Object> result = productService.getProduct(productId);
 
-		model.addAttribute("product", result);
-		model.addAttribute("businessType", businessTypeId);
+		if( result != null ) {
+			model.addAttribute("product", result);
+			model.addAttribute("businessType", businessTypeId);
+			
+			return "reservation";
+		}
+
+		return "main";
 		
-		return "reservation";
 	}
 	
 	@PostMapping("/reserve")
 	public String setReserve(@ModelAttribute ReservationVO reservationInfo,
 			Model model) {
+		
 			String viewName = "main";
 	
 			int resultId = reservationService.regReservationInfo(reservationInfo);

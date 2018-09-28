@@ -13,9 +13,9 @@
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="/resources/images/favicon.png">
     <title>관리자페이지</title>
-    <link href="/resources/css/chartist/chartist.min.css" rel="stylesheet">
-    <link href="/resources/css/style.min.css" rel="stylesheet">
-    <link href="/resources/css/simple-line-icons.css" rel="stylesheet">
+    <link href="../resources/css/chartist/chartist.min.css" rel="stylesheet">
+    <link href="../resources/css/style.min.css" rel="stylesheet">
+    <link href="../resources/css/simple-line-icons.css" rel="stylesheet">
  
     
 </head>
@@ -149,18 +149,18 @@
     </div>
 
 
-    <script src="/resources/js/jquery/jquery.min.js"></script>
-    <script src="/resources/js/popper/umd/popper.min.js"></script>
-    <script src="/resources/js/bootstrap/bootstrap.min.js"></script>
-    <script src="/resources/js/sparkline.js"></script>
-    <script src="/resources/js/userpage/waves.js"></script>
-    <script src="/resources/js/userpage/sidebarmenu.js"></script>
-    <script src="/resources/js/userpage/custom.min.js"></script>
-    <script src="/resources/js/chartist/chartist.min.js"></script>
-    <script src="/resources/js/chartist/chartist-plugin-tooltip.min.js"></script>
-    <script src="/resources/js/userpage/pages/dashboards/dashboard1.js"></script>
-    <script src="/resources/js/utility.js"></script>
-    <script src="/resources/js/handlebars.min.js"></script>
+    <script src="../resources/js/jquery/jquery.min.js"></script>
+    <script src="../resources/js/popper/umd/popper.min.js"></script>
+    <script src="../resources/js/bootstrap/bootstrap.min.js"></script>
+    <script src="../resources/js/sparkline.js"></script>
+    <script src="../resources/js/userpage/waves.js"></script>
+    <script src="../resources/js/userpage/sidebarmenu.js"></script>
+    <script src="../resources/js/userpage/custom.min.js"></script>
+    <script src="../resources/js/chartist/chartist.min.js"></script>
+    <script src="../resources/js/chartist/chartist-plugin-tooltip.min.js"></script>
+    <script src="../resources/js/userpage/pages/dashboards/dashboard1.js"></script>
+    <script src="../resources/js/utility.js"></script>
+    <script src="../resources/js/handlebars.min.js"></script>
 
   
     <script type="template" id="comment-template">
