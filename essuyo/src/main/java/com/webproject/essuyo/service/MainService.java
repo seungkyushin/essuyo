@@ -12,7 +12,6 @@ import com.webproject.essuyo.domain.MainVO;
 @Service
 public interface MainService {
 	
-	public MainVO getMain(int a) throws Exception;
-	public List<MainVO> listOne() throws Exception;
-	Map<String, Object> getList(int ListId) throws Exception;
+	public List<MainVO> getMain(int mainId) throws Exception;
+	public List<MainVO> listAll() throws Exception;
 }
