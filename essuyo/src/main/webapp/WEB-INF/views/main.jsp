@@ -95,7 +95,7 @@
 									alt="img13" />
 								<figcaption>
 									<h5>CAR-RENT</h5>
-                                    <p>385 Listings</p>
+                                    <p>Listings</p>
 								</figcaption></a>
 							</figure>
 						</div>
@@ -127,7 +127,7 @@
 											alt="img13" />
 										<figcaption>
 											<h5>MUSEUM</h5>
-                                            <p>${count} Listings</p>
+                                            <p>${main[0].id}  Listings</p>
 										</figcaption></a>
 									</figure>
 								</div>

@@ -1,6 +1,8 @@
 package com.webproject.essuyo.controller;
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,18 +21,8 @@ public class MainController {
 	@GetMapping("/main")
 	public String showMainPage(@RequestParam("id") int mainId, Model model) throws Exception {
 
-		//< service
-		  //< dao 
-		/////////////////////
-		
-		MainVO result = mainService.getMain(mainId);
-	
-		model.addAttribute("id", result);
-			
+		model.addAttribute("main",mainService.getMain(mainId));
 		return "main";
 	}
 	
-	
-	
-
 }

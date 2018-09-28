@@ -16,17 +16,15 @@ import com.webproject.essuyo.domain.MainVO;
 public class MainDao {
 	
 	@Inject
-	private static SqlSession session;
-	
+	private SqlSession session;
 	private static String namespace = "com.webproject.essuyo.dao.MainDao";
 
-	
-	public MainVO getMain(int a) throws Exception{
-		return null;
+	public List<MainVO> getMain(int mainId) throws Exception{
+		return session.selectList(namespace + ".selectOne", mainId);
 		
 	}
-	public static List<MainVO> listOne() throws Exception{
-		return session.selectList(namespace+".listOne");
+	public List<MainVO> listAll() throws Exception{
+		return session.selectList(namespace+".listAll");
 		
 	}
 	
