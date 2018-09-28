@@ -18,10 +18,10 @@ public class MainController {
 	@Autowired
 	private MainService mainService;
 	
-	@GetMapping("/main")
-	public String showMainPage(@RequestParam("id") int mainId, Model model) throws Exception {
+	@GetMapping("/")
+	public String showMainPage(Model model) throws Exception {
 
-		model.addAttribute("main",mainService.getMain(mainId));
+		model.addAttribute("main",mainService.getMain(0));
 		return "main";
 	}
 	
