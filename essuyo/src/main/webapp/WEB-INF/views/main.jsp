@@ -127,7 +127,7 @@
 											alt="img13" />
 										<figcaption>
 											<h5>MUSEUM</h5>
-                                            <p>${main[0].id}  Listings</p>
+                                            <p>${main[4].count}  Listings</p>
 										</figcaption></a>
 									</figure>
 								</div>
