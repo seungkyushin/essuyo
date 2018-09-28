@@ -33,7 +33,44 @@
 
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
-<!-- 제이쿼리로 유효성 검사 -->
+
+<title>로그인</title>
+</head>
+<body>
+	<%@ include file="/pageframe/header.jsp"%>
+	
+<section class="light-bg booking-details_wrap">
+	<div class="container">
+	<div class="row">
+		<div class="col-2">
+		</div>
+		<div class="col-8">
+			<div class="card card-body">
+				<h4 class="card-title">로그인</h4>
+				<h5 class="card-subtitle">가입하신 이메일과 비밀번호를 입력해주세요.</h5>
+				<form class="form-horizontal m-t-30" id="loginForm" method="post" action="/user/loginPost">
+					<br><br>
+					<div class="form-group">
+						<label for="email">[이메일]</label> <input  type="email" id="email" name="email" class="form-control" placeholder="이메일" required >
+						
+					</div>
+					<div class="form-group">
+						<label>[비밀번호]</label> <input type="password" id="password" name="password" class="form-control" minlength="4" data-msg-minlength="최소 {0} 자리 이상 입력해야 합니다." size="30" maxlength="12" placeholder="비밀번호" required>
+					</div>
+					<a href="javascript:doLogin()" class="btn btn-danger">로그인</a>
+					<a href="javascript:void(0)" onclick="location.href='/user/regist'" class="btn btn-danger">회원가입</a>
+				</form>
+			</div>
+		</div>
+		<div class="col-2">
+		</div>
+	</div>
+	</div>
+</section>
+
+	<%@ include file="/pageframe/footer.jsp"%>
+	
+	<!-- 제이쿼리로 유효성 검사 -->
 <script type="text/javascript" src="/resources/js/jquery/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="/resources/js/jquery/jquery.validate.js"></script>
 <script type="text/javascript" src="/resources/js/jquery/additional-methods.js"></script>
@@ -57,32 +94,6 @@ function doLogin() {
 	}
 }
 </script>
-
-<title>로그인</title>
-</head>
-<body>
-	<%@ include file="//pageframe/header.jsp"%>
-	<div class="row">
-		<div class="col-12">
-			<div class="card card-body">
-				<h4 class="card-title">로그인</h4>
-				<h5 class="card-subtitle">가입하신 이메일과 비밀번호를 입력해주세요.</h5>
-				<form class="form-horizontal m-t-30" id="loginForm" method="post" action="/user/loginPost">
-					
-					<div class="form-group">
-						<label for="email">[이메일]</label> <input type="email" id="email" name="email" class="form-control" placeholder="이메일" required>
-						
-					</div>
-					<div class="form-group">
-						<label>[비밀번호]</label> <input type="password" id="password" name="password" class="form-control" minlength="4" data-msg-minlength="최소 {0} 자리 이상 입력해야 합니다." maxlength="12" placeholder="비밀번호" required>
-					</div>
-					<button type="button" id="loginBtn" onclick="doLogin();">로그인</button>
-					<button type="button" id="goReg" onclick="location.href='/user/regist' ">회원가입</button>
-				</form>
-			</div>
-		</div>
-	</div>
-
-	<%@ include file="//pageframe/footer.jsp"%>
+	
 </body>
 </html>
