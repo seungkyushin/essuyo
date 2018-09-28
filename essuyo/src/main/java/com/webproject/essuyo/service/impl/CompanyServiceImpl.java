@@ -3,10 +3,8 @@ package com.webproject.essuyo.service.impl;
 
 
 
-import java.util.ArrayList;
-import java.util.HashMap;
+
 import java.util.List;
-import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,11 +13,10 @@ import org.springframework.stereotype.Service;
 
 import com.webproject.essuyo.dao.CompanyDao;
 import com.webproject.essuyo.dao.FacilityAdminDao;
-import com.webproject.essuyo.dao.ImageAdminDao;
+
+
 
 import com.webproject.essuyo.domain.CompanyVO;
-import com.webproject.essuyo.domain.ImageInfoVO;
-import com.webproject.essuyo.domain.SQLParamVO;
 import com.webproject.essuyo.service.CompanyService;
 import com.webproject.essuyo.service.ImageAdminService;
 
@@ -30,7 +27,6 @@ public class CompanyServiceImpl implements CompanyService {
 	
 	@Autowired
 	private CompanyDao companyDao;
-	
 	
 
 	@Autowired
@@ -49,8 +45,7 @@ public class CompanyServiceImpl implements CompanyService {
 	public List<CompanyVO> listAll() throws Exception {
 		return companyDao.listAll();
 	}
-
-
+	
 	@Override
 	public List<String> getCompanyFacility(int companyId) throws Exception {
 		return facilityAdminDao.selectById(companyId);
