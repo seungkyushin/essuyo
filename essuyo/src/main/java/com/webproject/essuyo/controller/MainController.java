@@ -21,7 +21,7 @@ public class MainController {
 	@GetMapping("/")
 	public String showMainPage(Model model) throws Exception {
 
-		model.addAttribute("main",mainService.getMain(0));
+		//model.addAttribute("main",mainService.getMain(0));
 		return "main";
 	}
 	

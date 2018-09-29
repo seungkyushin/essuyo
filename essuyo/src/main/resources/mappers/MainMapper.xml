@@ -13,7 +13,7 @@ from main;
 
 <select id="listAll" resultType="MainVO">
 <![CDATA[
-select *
+select *z
 from main;
 ]]>
 </select>
