@@ -17,6 +17,8 @@ public interface UserService {
 	
 	public boolean checkId(String email);
 
-	public Map<String,Object> test(int CompanyId);
+	public Map<String,Object> getSaleUserInfo(int CompanyId);
+	
+	public UserVO getUser(String email);
 
 }

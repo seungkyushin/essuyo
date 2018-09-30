@@ -42,7 +42,7 @@ public class CompanyController {
 		model.addAttribute("company",service.getCompany(companyId));
 		model.addAttribute("companyImage",service.getImagePath(companyId));
 		model.addAttribute("facilityList",service.getCompanyFacility(companyId));
-		model.addAttribute("user",userService.test(companyId));
+		model.addAttribute("user",userService.getSaleUserInfo(companyId));
 		
 		
 		return "detail";

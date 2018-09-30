@@ -2,13 +2,11 @@ package com.webproject.essuyo.controller;
 
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -24,12 +22,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.util.WebUtils;
 
 import com.webproject.essuyo.domain.ReservationVO;
 import com.webproject.essuyo.domain.UserVO;
 import com.webproject.essuyo.service.CompanyService;
+import com.webproject.essuyo.service.ProductService;
 import com.webproject.essuyo.service.ReservationService;
 import com.webproject.essuyo.service.impl.UserServiceImpl;
 
@@ -47,6 +44,9 @@ public class UserController {
 	
 	@Autowired
 	private CompanyService companyService;
+	
+	@Autowired
+	private ProductService productService;
 	
 	//GET 방식으로 회원가입 페이지에 접근. 그냥 회원가입 페이지로 보내준다
 	@RequestMapping(value="/regist", method=RequestMethod.GET)
@@ -148,25 +148,26 @@ public class UserController {
 		}
 	
 	@GetMapping("/dashboard")
-	public String showDashboardPage(Model model) throws Exception{
+	public String showDashboardPage(HttpSession httpSession, Model model) throws Exception{
 		
 		
+		String email = (String)httpSession.getAttribute("login");
 		String type = "user";
+		UserVO user = service.getUser(email);
+		if( user.getBusinessId() != 0) {
+			type = "company";
+		}
+		
 		model.addAttribute("userType",type);
 		
-		List<ReservationVO> reservationList = reservationService.getReservationListNotState(type, 2);
+		List<ReservationVO> reservationList = reservationService.getReservationListNotState(type, user.getId());
 		List<List<Integer>> comprehensiveGraph = new ArrayList<List<Integer>>();
-		List<Integer> MonthsPaymentList = new ArrayList<Integer>(); //< 월별 지불/수입 리스트
+		List<Integer> MonthsPaymentList = reservationService.getMonthlyPrice(type, user.getId()); //< 월별 지불/수입 리스트
 		List<Integer> categoryReservationList = new ArrayList<Integer>(); //< 카테고리별 예약 횟수 리스트
-
 
 		int MaxCategory = 4;
 		int MaxMonth = 12;
-		
-		//< List 변수 초기화
-		for(int i=0 ; i < MaxMonth; i++) {
-			MonthsPaymentList.add(0);
-		}
+	
 		for(int c=0 ; c < MaxCategory; c++) {
 			List<Integer> monthList = new ArrayList<Integer>();
 				for(int m=0 ; m < MaxMonth; m++) {
@@ -202,19 +203,14 @@ public class UserController {
 				int value = categoryReservationList.get(categoryIndex);
 				categoryReservationList.set(categoryIndex,value + 1);
 			
-				//< 월별 지불/수입 
-				LocalDate ld = new LocalDate(data.getRegDate());
-				int month = ld.getMonthOfYear() - 1;
-				int monthPrice = MonthsPaymentList.get(month).intValue();
-				MonthsPaymentList.set(month, (monthPrice + data.getTotalPrice()) );
 							
 				//< 카테고리 별로 월마다 예약한 횟수
+				LocalDate date = new LocalDate(data.getRegDate());
+				int month = date.getMonthOfYear();
 				int count = comprehensiveGraph.get(categoryIndex).get(month);
 				comprehensiveGraph.get(categoryIndex).set(month,  count + 1);
 				
 			}
-
-		
 		
 		/*****************************************************************************/
 		/******************************* 사용자별 종합 그래프 ******************************/

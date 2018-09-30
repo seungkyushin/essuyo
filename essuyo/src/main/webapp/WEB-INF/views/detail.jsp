@@ -14,9 +14,7 @@
 <link rel="shortcut icon" href="#">
 <title>자리 있어요?</title>
 <link rel="stylesheet" href="resources/css/bootstrap/bootstrap.min.css">
-<link
-	href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,500,700,900"
-	rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+KR" >
 <link rel="stylesheet" href="resources/css/simple-line-icons.css">
 <link rel="stylesheet" href="resources/css/themify-icons.css">
 <link rel="stylesheet" href="resources/css/set1.css">
@@ -73,21 +71,13 @@
 			</div>
 		</div>
 	</section>
-	<!--//END RESERVE A SEAT -->
-	<!--     탭기능 설정 -->
-	<div class="container">
-		<ul class="tabs">
-			<li class="tab-link current" data-tab="tab-1">Information</li>
-			<li class="tab-link" data-tab="tab-2">Review</li>
-		</ul>
-	</div>
-	<!-- 탭기능 설정 종료-->
+
 	<!--============================= BOOKING DETAILS =============================-->
 	<section class="light-bg booking-details_wrap">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-8 responsive-wrap">
-					<div id="tab-1" class="tab-content current">
+					
 						<div class="booking-checkbox_wrap">
 							<div class="booking-checkbox">
 								<p>${company.discription}</p>
@@ -105,45 +95,15 @@
 
 							</div>
 						</div>
-					</div>
-					<div id="tab-2" class="tab-content">
-						<div class="booking-checkbox_wrap mt-4">
-							<h5>34 Reviews</h5>
-							<hr>
-							<div class="customer-review_wrap">
-								<div class="customer-img">
-									<img src="resources/images/customer-img1.jpg" class="img-fluid"
-										alt="#">
-									<p>Amanda G</p>
-									<span>35 Reviews</span>
-								</div>
-								<div class="customer-content-wrap">
-									<div class="customer-content">
-										<div class="customer-review">
-											<h6>Best noodles in the Newyork city</h6>
-											<span></span> <span></span> <span></span> <span></span> <span
-												class="round-icon-blank"></span>
-											<p>Reviewed 2 days ago</p>
-										</div>
-										<div class="customer-rating">8.0</div>
-									</div>
-
-									<p class="customer-text">
-									<ul>
-										<li><img src="resources/images/review-img1.jpg"
-											class="img-fluid" alt="#"></li>
-										<li><img src="resources/images/review-img2.jpg"
-											class="img-fluid" alt="#"></li>
-										<li><img src="resources/images/review-img3.jpg"
-											class="img-fluid" alt="#"></li>
-									</ul>
-									<span>28 people marked this review as helpful</span> <a
-										href="#"><span class="icon-like"></span>Helpful</a>
-								</div>
-							</div>
-
-						</div>
-					</div>
+				
+				
+						<div id="comment-list" class="booking-checkbox_wrap mt-4">
+                        <h5>34 Reviews</h5>
+                        <hr>
+                  
+                        
+                    </div>
+					
 				</div>
 				<div class="col-md-4 responsive-wrap">
 					<div class="contact-info">
@@ -162,14 +122,24 @@
 						</div>
 						<div class="address">
 							<span class="icon-clock"></span>
-							<p>${company.time}<br> <span class="close-now">${company.state}</span>
+							<p>${company.time}<br>
+							<c:choose>
+								<c:when test="${company.state == 'OPEN'}">
+									 <span class="open-now">${company.state} NOW</span>
+								</c:when>
+								<c:when test="${company.state == 'CLOSED'}">
+									 <span class="closed-now">${company.state} NOW</span>
+								</c:when>
+							</c:choose>
+							
+							
 							</p>
 						</div>
-						<a href="#" class="btn btn-outline-danger btn-contact">메시지 보내기</a>
+						<a href="/message/register?receiverID=${user.id}" class="btn btn-outline-danger btn-contact">메시지 보내기</a>
 					</div>
 					<div class="follow">
 						<div class="follow-img">
-							<img style="max-width: 50%" src="${user.image}" class="img-fluid"
+							<img style="max-width: 45%" src="${user.image}" class="img-fluid"
 								alt="${user.name}">
 							<h6>${user.name}</h6>
 							<span>${user.comment}</span>
@@ -193,6 +163,38 @@
 	<script src="resources/js/bootstrap/bootstrap.min.js"></script>
 	<script src="resources/js/jquery/jquery.magnific-popup.js"></script>
 	<script src="resources/js/swiper.min.js"></script>
+	<script src="resources/js/utility.js"></script>
+	<script src="resources/js/handlebars.min.js"></script>
+	<script type="template" id="comment-template">
+	   <div class="customer-review_wrap">
+       <div class="customer-img">
+           <img src="{{image}}" class="img-fluid" alt="{{name}}">
+           <p>{{name}}</p>
+           <span>35 Reviews</span>
+       </div>
+       <div class="customer-content-wrap">
+           <div class="customer-content">
+               <div class="customer-review">
+                   <h6>{{title}}</h6>
+                   <p>등록 날짜 : {{regDate}}</p>
+               </div>
+               <div class="customer-rating">{{score}}</div>
+           </div>
+           <p class="customer-text">{{content}}</p>
+          
+           <ul>
+				{{images}}
+               <li><img src="images/review-img1.jpg" class="img-fluid" alt="#"></li>
+               <li><img src="images/review-img2.jpg" class="img-fluid" alt="#"></li>
+               <li><img src="images/review-img3.jpg" class="img-fluid" alt="#"></li>
+           </ul>
+
+           <span>{{helpful}}명이 이 댓글에 도움을 받았습니다.</span>
+           <a href="#"><span class="icon-like"></span>Helpful</a>
+       </div>
+   </div>
+   <hr>
+	</script>
 	<script>
 		var swiper = new Swiper('.swiper-container', {
 			slidesPerView : 3,
@@ -230,16 +232,27 @@
 	<script>
 		$(document).ready(function() {
 
-			$('ul.tabs li').click(function() {
-				var tab_id = $(this).attr('data-tab');
-
-				$('ul.tabs li').removeClass('current');
-				$('.tab-content').removeClass('current');
-
-				$(this).addClass('current');
-				$("#" + tab_id).addClass('current');
-			})
-		})
+			var requestURL = "/api/commentList/company/" + 1 +"/" + ${company.id};
+			Ajax("GET",requestURL,function(dataList){
+				
+				dataList.forEach(function(data){
+					
+	    				var tempData = {};
+	        			tempData['image'] = data.imageUrl;
+	        			tempData['name'] = data.name;
+	        			tempData['title'] = data.title;
+	        			tempData['regDate'] = data.regDate;
+	        			tempData['score'] = data.score;
+	        			tempData['content'] = data.content;
+	        			tempData['helpful'] = data.helpful;
+	        			tempData['state'] = data.state;
+	        			
+	           	    	makeHTML("#comment-template", "#comment-list", tempData);
+					});
+	    			
+				}); 
+			
+		});
 	</script>
 
 	<%@ include file="/pageframe/footer.jsp"%>

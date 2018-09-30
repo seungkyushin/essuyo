@@ -72,5 +72,12 @@ public class UserDAO {
 	public UserVO selectById(SQLParamVO params) {
 		return session.selectOne(namespace + ".selectById", params);
 	}
+	
+	public UserVO selectByEmail(String email) {
+		return session.selectOne(namespace + ".selectByEmail", email);
+	}
+	
+	
+	
 
 }

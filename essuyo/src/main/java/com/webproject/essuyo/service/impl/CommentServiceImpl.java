@@ -47,10 +47,14 @@ public class CommentServiceImpl implements CommentService{
 					for (CommentVO data : commentList) {
 						Map<String, Object> paramMap = new HashMap<>();
 
+						
 						paramMap.put("title", data.getTitle());
 						paramMap.put("content", data.getContent());
 						paramMap.put("regDate", data.getRegDate());
 						paramMap.put("state", data.getState());
+						paramMap.put("score", data.getScore());
+						paramMap.put("helpful", data.getHelpful());
+						paramMap.put("userId", data.getUserId());
 
 						if (type.equals("user") == true) {
 							paramMap.put("imageUrl", "/resources/images/users/5.jpg");

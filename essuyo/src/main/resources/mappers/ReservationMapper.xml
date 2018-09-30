@@ -60,6 +60,40 @@ SELECT SUM(total_price) FROM reservation WHERE
  		AND NOT state="취소"
  		
  </select>
+ 
+ <select id="selectMonthlyPrice" resultType="hashMap">
+		SELECT MONTH(reg_date) AS month, sum(total_price) AS monthlyTotalPrice from reservation 
+		
+			 
+			 <choose>
+   				 <when test="type != null and type.equals('user')">
+					WHERE user_id=#{id} AND
+   			 	</when>
+    		 	<when test="type != null and type.equals('company')">
+					WHERE company_id=#{id} AND
+    			</when>
+  			</choose>
+  		
+  		 NOT state="취소" GROUP BY reg_date
+			 
+	</select>
+	
+	<select id="selectMonthlyReservationCount" resultType="hashMap">
+		SELECT MONTH(reg_date) AS month, count(*) AS count from reservation 
+		
+		 <choose>
+   				 <when test="type != null and type.equals('user')">
+					WHERE user_id=#{id} AND
+   			 	</when>
+    		 	<when test="type != null and type.equals('company')">
+					WHERE company_id=#{id} AND
+    			</when>
+  			</choose>
+  		
+  		 NOT state="취소" GROUP BY reg_date
+			 
+	</select>
+	
 
 
 </mapper>

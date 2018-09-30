@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.webproject.essuyo.domain.ImageInfoVO;
+import com.webproject.essuyo.domain.ReservationVO;
 
 public interface ProductService {
 	
@@ -12,4 +13,7 @@ public interface ProductService {
 	public Map<String,Object> getProduct(int productId);
 	
 	public List<String> getImagePath(int productId);
+	
+	public List<String> getDisableDate(int productId);
+	
 }

@@ -13,7 +13,7 @@ import com.webproject.essuyo.domain.CompanyVO;
 public interface CompanyService {
 
 	
-	public CompanyVO getCompany(int companyId) throws Exception;
+	public CompanyVO getCompany(int companyId);
 	public List<CompanyVO> listAll() throws Exception;
 	
 	public List<String> getCompanyFacility(int companyId) throws Exception;

@@ -5,15 +5,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.joda.time.LocalDate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.webproject.essuyo.dao.ImageAdminDao;
 import com.webproject.essuyo.dao.ProductDao;
-import com.webproject.essuyo.domain.ImageInfoVO;
+
+import com.webproject.essuyo.domain.ProductManagerVO;
 import com.webproject.essuyo.domain.ProductVO;
+import com.webproject.essuyo.domain.ReservationVO;
 import com.webproject.essuyo.domain.SQLParamVO;
 import com.webproject.essuyo.service.ImageAdminService;
 import com.webproject.essuyo.service.ProductService;
@@ -42,11 +44,14 @@ public class ProductServiceImpl implements ProductService {
 
 				resultMap.put("name", product.getName());
 				resultMap.put("id", product.getId());
-				resultMap.put("state", product.getCount() > 0 ? "예약가능" : "예약불가");
+				resultMap.put("saleStartDate", product.getSaleStartDate());
+				resultMap.put("saleEndDate", product.getSaleEndDate());
+				LocalDate endDate = new LocalDate(product.getSaleEndDate());
+				resultMap.put("state", LocalDate.now().isAfter(endDate) == false ? "예약가능" : "판매종료");
 				resultMap.put("discription", product.getDiscription());
 				resultMap.put("price", product.getPrice());
 				resultMap.put("url", this.getImagePath(productId));
-				
+
 				return resultMap;
 			}
 
@@ -61,5 +66,17 @@ public class ProductServiceImpl implements ProductService {
 	public List<String> getImagePath(int productId) {
 		return imageAdminService.getImagePathList("product", productId);
 	}
+
+	@Override
+	public List<String> getDisableDate(int productId) {
+		try {
+			return productDao.selectManagerDisableDateList(productId);
+		} catch (Exception e) {
+			logger.error("상품 조회 실패.. | {} ", e.toString());
+			return null;
+		}
+	}
+
+	
 
 }

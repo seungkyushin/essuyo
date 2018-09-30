@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!DOCTYPE html>
 <html>
 
@@ -16,7 +17,7 @@
 <title>자리 있어요?</title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" 
 	  integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,500,700,900" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+KR" >
 <link rel="stylesheet" href="/resources/css/simple-line-icons.css">
 <link rel="stylesheet" href="/resources/css/themify-icons.css">
 <link rel="stylesheet" href="/resources/css/set1.css">
@@ -24,12 +25,11 @@
 <link rel="stylesheet" href="/resources/css/magnific-popup.css">
 <link rel="stylesheet" href="/resources/css/style.css">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-
-    
+ 
 </head>
+
 <body>
 	<%@ include file="/pageframe/header.jsp"%>
-
       
 	<!--============================= RESERVE A SEAT =============================-->
 	<section class="reserve-block">
@@ -37,7 +37,7 @@
 			<div class="row">
 				<div class="col-md-6">
 					<h5>${product.name}</h5>
-					<p><span>￦￦￦</span>￦￦
+		
 					</p>
 					<br>
 					<span class="icon-direction"></span><p class="reserve-description">${product.discription}</p>
@@ -121,12 +121,12 @@
 									<div class="col-md-12">
 										<p style="font-size:20px"><span class="icon-bulb"></span>&nbsp;&nbsp;예약 날짜</p>
 											<c:choose>
-												<c:when test="${businessType <= 2}">
+												<c:when test="${resType == 0}">
 													<input style="border-right:none; width: 48%;" type="text" name="resDate" id="startDate" class="input-border" readOnly>
                                     			    <input style="border-left:none; width: 48%;" type="text" id="endDate"  class="input-border" readOnly>
  
 												</c:when>
-												<c:when test="${businessType > 2}">
+												<c:when test="${resType == 1}">
 														<input type="text"  name="resDate" id="startDate" placeholder="날짜선택" class="input-border" readOnly>
 														<br><br>
 														<p style="font-size:20px"><span class="icon-bulb"></span>&nbsp;&nbsp;수량</p>
@@ -149,14 +149,14 @@
 								<p>예약 날짜</p>
 						
 								<c:choose>
-									<c:when test="${businessType <= 2}">
+									<c:when test="${resType == 0}">
 										<p><div class= "toggle-string" style="display:none">
 											<span id="reservation-date"></span><br>
 											<input type="text" size="1" style=" text-align:center; border:none" id="productCount" name="productCount"  readOnly>
 											<span>박</span>
 										</div></p>
 									</c:when>
-									<c:when test="${businessType > 2}">
+									<c:when test="${resType == 1}">
 										<p><div class= "toggle-string" style="display:none">
 											<span id="reservation-date"></span><br>
 											<input type="text" size="2" style=" text-align:center; border:none" id="productCount" name="productCount"  readOnly>
@@ -244,11 +244,19 @@
 	</script>
 
 <script>
-		$(document).ready(function() {
+var disabledDays = [];
 
+$(document).ready(function() {
+			
+			Ajax("GET","api/disableDate/" + ${product.id},function(data){
+				disabledDays = data;
+			});
+			
 			$("#startDate").datepicker({
 					showAnim : "slideDown",
 					minDate : 0,
+					maxDate : new Date("${product.saleEndDate}"),
+					beforeShowDay: disableAllTheseDays,
 					onSelect : function(dateText, inst) {
 						 calReserveReuslt();
 					}
@@ -257,11 +265,14 @@
 			$("#endDate").datepicker({
 					showAnim : "slideDown",
 					minDate : 0,
+					maxDate : new Date("${product.saleEndDate}"),
+					beforeShowDay: disableAllTheseDays,
 					onSelect : function(dateText, inst) {
 						calReserveReuslt();
 					}
 			});
 
+	
 			$("#plus").on("click", function() {
 				var count = parseInt($("#count").val());
 				if( count <= 9){
@@ -282,20 +293,23 @@
 					
 					$(".toggle-string").show();
 					$("#productCount").val(count);
-					calTotalPrice(count);
-					
-				}
-				
+					calTotalPrice(count);	
+				}			
 			});
 			
 			$("#res-submit").on("click", function() {
+				
+				if("${sessionScope.login}" == ""){
+					alert("로그인 후 이용가능한 서비스입니다.\n로그인 페이지로 이동합니다.");
+					location.href = "/user/login";
+				}
+				
 				var productCount = $("#productCount").val();
 				var agree = $('input:checkbox[id="customCheck1"]').is(":checked");
-				console.log( $("#reservation-info").serialize());
+
 				if(productCount != "" && agree == true){
 					  $("#reservation-info").submit();
-				}
-				else{
+				}else{
 					if( productCount == "" && agree == false)
 						alert("날짜,수량 선택 및 취소규정에 동의해 주세요");
 					else if( agree == false )
@@ -307,6 +321,16 @@
 			
 });
 
+		function disableAllTheseDays(date) {
+			var m = date.getMonth(), d = date.getDate(), y = date.getFullYear();
+				for (i = 0; i < disabledDays.length; i++) {
+					        if($.inArray(y + '-' +(m+1) + '-' + d,disabledDays) != -1) {
+					            return [false];
+				      		  }
+				}
+					    return [true];
+			}
+		
 	
 		function calTotalPrice(count){
 			var totalPrice =  count * parseInt("${product.price}");

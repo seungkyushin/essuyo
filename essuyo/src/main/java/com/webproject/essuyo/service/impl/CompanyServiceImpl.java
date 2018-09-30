@@ -37,8 +37,13 @@ public class CompanyServiceImpl implements CompanyService {
 	
 	
 	@Override
-	public CompanyVO getCompany(int companyId) throws Exception {
-		return companyDao.getCompany(companyId);
+	public CompanyVO getCompany(int companyId)  {
+		try {
+			return companyDao.getCompany(companyId);
+		} catch (Exception e) {
+			logger.error("Company Table 조회 실패.. {}",e.toString());
+			return null;
+		}
 	}
 
 	@Override

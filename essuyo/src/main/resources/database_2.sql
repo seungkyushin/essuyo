@@ -7,35 +7,46 @@ USE essuyo;
 
 /* 사용가능시설목록 */
 CREATE TABLE facility (
-	id INTEGER PRIMARY KEY auto_increment, /* 번호 */
-	name VARCHAR(255) NOT NULL/* 이름 */
+	id INTEGER PRIMARY KEY auto_increment,	/* 번호 */
+	name VARCHAR(255) NOT NULL				/* 이름 */
 )DEFAULT CHARSET=utf8; 
 
 /* 지역명목록 */
 CREATE TABLE area_list (
-	id INTEGER PRIMARY KEY auto_increment, /* 번호 */
-	name VARCHAR(255) NOT NULL/* 이름 */
+	id INTEGER PRIMARY KEY auto_increment,	/* 번호 */
+	name VARCHAR(255) NOT NULL				/* 이름 */
 )DEFAULT CHARSET=utf8; 
 
 /* 상품 */
 CREATE TABLE product (
-	id INTEGER PRIMARY KEY auto_increment, /* 번호 */
-	name VARCHAR(255) NOT NULL,			 /* 이름 */
-	count INTEGER NOT NULL,							 /*상품개수*/
-	discription VARCHAR(255) NOT NULL, /* 설명 */
-	price INTEGER NOT NULL /* 가격 */
+	id INTEGER PRIMARY KEY auto_increment,		/* 번호 */
+	name VARCHAR(255) NOT NULL,					/* 이름 */
+	sale_start_date DATE NOT NULL,				/* 판매시작일 */
+	sale_end_date DATE NOT NULL,				/* 판매종료일 */
+	discription VARCHAR(255) NOT NULL,			/* 설명 */
+	price INTEGER NOT NULL						/* 가격 */
+)DEFAULT CHARSET=utf8; 
+
+/* 상품 재고 */
+CREATE TABLE product_manager (
+	id INTEGER PRIMARY KEY auto_increment,	/* 번호 */
+	sale_date DATE NOT NULL,				/* 판매일 */
+	count INTEGER NOT NULL,					/* 개수 */
+	product_id INTEGER NOT NULL,			/* 상품번호 */
+	
+	FOREIGN KEY (product_id) REFERENCES product(id) ON DELETE CASCADE 
 )DEFAULT CHARSET=utf8; 
 
 
 
 /* 이미지파일정보 */
 CREATE TABLE image_info (
-	id INTEGER PRIMARY KEY auto_increment, /* 번호 */
-	save_path VARCHAR(255) NOT NULL, /* 저장위치 */
-	type VARCHAR(255) NOT NULL, /* 종류 */
-	name VARCHAR(255) NOT NULL, /* 이름 */
-	cre_date DATE NOT NULL, /* 생성날짜 */
-	mod_date DATE /* 수정_날짜 */
+	id INTEGER PRIMARY KEY auto_increment,	/* 번호 */
+	save_path VARCHAR(255) NOT NULL, 		/* 저장위치 */
+	type VARCHAR(255) NOT NULL,				/* 종류 */
+	name VARCHAR(255) NOT NULL,				/* 이름 */
+	cre_date DATE NOT NULL,					/* 생성날짜 */
+	mod_date DATE							/* 수정_날짜 */
 )DEFAULT CHARSET=utf8; 
 
 
@@ -223,22 +234,22 @@ INSERT INTO facility(name)  VALUES("애견동반가능");
 INSERT INTO company(name, type, score, discription, address, number, url, state, time, 
 total_visit, today_visit, area_list_id)
 VALUES("힐튼호텔", "호텔", 9.0 , "돈만 있으면 쾌적한 곳", "부산광역시 기장군 기장읍 기장해안로 268-32 힐튼부산","010-0000-0000",
-"http://hiltonbusan.co.kr/","OPEN NOW","ALL TIME",0,0,1);
+"http://hiltonbusan.co.kr/","OPEN","ALL TIME",0,0,1);
 
 INSERT INTO company(name, type, score, discription, address,number, url, state, time, 
 total_visit, today_visit, area_list_id)
 VALUES("아웃백-신촌점", "음식점", 8.0 , "빵 맛있는 식당", "서울 서대문구 연세로12길 33","02-0000-0000",
-"http://outback.co.kr/shinchon/","OPEN NOW","am 10:00 ~ pm 10:00",0,0,1);
+"http://outback.co.kr/shinchon/","OPEN","am 10:00 ~ pm 10:00",0,0,1);
 
 INSERT INTO company(name, type, score, discription, address,number, url, state, time, 
 total_visit, today_visit, area_list_id)
 VALUES("알촌", "음식점", 4.0 , "알밥파는 집", "서울 서대문구 이화여대7길 14","02-1111-1111",
-"http://alchon.com/","CLOSE NOW","am 10:00 ~ pm 10:00",0,0,1);
+"http://alchon.com/","CLOSED","am 10:00 ~ pm 10:00",0,0,1);
 
 INSERT INTO company(name, type, score, discription, address,number, url, state, time, 
 total_visit, today_visit, area_list_id)
 VALUES("SOCAR", "렌트카", 1.0 , "카 쉐어", "서울 서대문구 남가좌동 7길 14","02-2222-2222",
-"http://socar.com/","CLOSE NOW","am 10:00 ~ pm 10:00",0,0,1);
+"http://socar.com/","CLOSED","am 10:00 ~ pm 10:00",0,0,1);
 
 
 INSERT INTO facility_admin(company_id, facility_id) VALUES(1,1);
@@ -279,10 +290,14 @@ cre_date,last_date,total_reply,image_info_id) VALUES("이써요3", 30,"남","tes
 
 
 /*상품*/
-INSERT INTO product(name, count, discription,price) VALUES("비싼 호텔", 10, "한국에서 가장 비싼 호텔입니다.",1000000);
-INSERT INTO product(name, count, discription,price) VALUES("람보르기니 SUV", 0, "람보르기니기니",300000);
-INSERT INTO product(name, count, discription,price) VALUES("돈까스 맛집", 10, "돈까스 장인이 매일 직접 만들어 판매합니다.",7000);
-INSERT INTO product(name, count, discription,price) VALUES("박물관이 살아있다.", 10, "영화 아님",4000);
+INSERT INTO product(name, sale_start_date, sale_end_date, discription, price)
+VALUES("비싼 호텔", "2018-10-01","2018-10-15", "한국에서 가장 비싼 호텔입니다.",1000000);
+INSERT INTO product(name, sale_start_date, sale_end_date, discription, price) 
+VALUES("람보르기니 SUV", "2018-10-01","2018-10-30", "람보르기니기니",300000);
+INSERT INTO product(name, sale_start_date, sale_end_date, discription, price) 
+VALUES("돈까스 맛집", "2018-10-01","2018-11-01", "돈까스 장인이 매일 직접 만들어 판매합니다.",7000);
+INSERT INTO product(name, sale_start_date, sale_end_date, discription, price)
+VALUES("박물관이 살아있다.", "2018-10-01","2018-10-15",  "영화 아님",4000);
 
 
 /*상품 관리*/
@@ -290,6 +305,12 @@ INSERT INTO product_admin(business_id,product_id) VALUES(1,1);
 INSERT INTO product_admin(business_id,product_id) VALUES(1,2);
 INSERT INTO product_admin(business_id,product_id) VALUES(1,3);
 INSERT INTO product_admin(business_id,product_id) VALUES(1,4);
+
+/*상품 제고*/
+INSERT INTO product_manager(sale_date,count,product_id) VALUES
+("2018-10-01",1,1),("2018-10-02",1,1),("2018-10-03",0,1),("2018-10-04",1,1),("2018-10-05",1,1),
+("2018-10-06",1,1),("2018-10-07",1,1),("2018-10-08",1,1),("2018-10-09",1,1),("2018-10-10",0,1),
+("2018-10-11",1,1),("2018-10-12",1,1),("2018-10-13",1,1),("2018-10-14",1,1),("2018-10-15",1,1);
 
 
 /*회사 이미지*/
@@ -381,6 +402,9 @@ VALUES("성공", 100000, "2018-09-20", 1, "2018-09-19", 1, 1, 3);
 
 INSERT INTO reservation(state, total_price, res_date, product_count, reg_date, company_id, product_id, user_id) 
 VALUES("성공", 400000, "2018-09-23", 4, "2018-09-19", 4, 2, 3);
+
+
+
 
 
 

@@ -1,6 +1,7 @@
 package com.webproject.essuyo.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,5 +33,17 @@ public class ReservationDao {
 	public int selectTotalPrice(SQLParamVO param) throws Exception{
 		return sqlSession.selectOne(NAME_SPACE + ".selectTotalPrice", param);
 	}
+	
+	
+	public List<Map<String,Integer>> selectMonthlyPrice(SQLParamVO params) throws Exception{
+		return sqlSession.selectList(NAME_SPACE + ".selectMonthlyPrice" , params);
+	}
+	
+	public List<Map<String,Integer>> selectMonthlyReservationCount(SQLParamVO params) throws Exception{
+		return sqlSession.selectList(NAME_SPACE + ".selectMonthlyReservationCount" , params);
+	}
+	
+	
+	
 
 }

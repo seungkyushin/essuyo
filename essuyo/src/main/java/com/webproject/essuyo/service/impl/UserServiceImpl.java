@@ -10,12 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.webproject.essuyo.dao.BusinessDao;
-import com.webproject.essuyo.dao.ImageAdminDao;
 import com.webproject.essuyo.dao.UserDAO;
 import com.webproject.essuyo.domain.BusinessVO;
 import com.webproject.essuyo.domain.ImageInfoVO;
 import com.webproject.essuyo.domain.SQLParamVO;
 import com.webproject.essuyo.domain.UserVO;
+import com.webproject.essuyo.service.ImageAdminService;
 import com.webproject.essuyo.service.UserService;
 
 @Service
@@ -28,7 +28,7 @@ public class UserServiceImpl implements UserService{
 	private BusinessDao businessDao;
 	
 	@Autowired
-	private ImageAdminDao imageAdminDao;
+	private ImageAdminService imageAdminService;
 	
 
 	//로그인 서비스
@@ -61,6 +61,11 @@ public class UserServiceImpl implements UserService{
 	
 	//이메일 중복 체크. 같은 이메일이 이미 DB에 존재하면 false, 아니면 true를 리턴
 	@Override
+	public UserVO getUser(String email) {
+		return dao.selectByEmail(email);
+	}
+
+	@Override
 	public boolean checkId(String email) {
 		int emailCnt = dao.checkId(email);
 		
@@ -71,8 +76,9 @@ public class UserServiceImpl implements UserService{
 		}
 	}
 
+	
 	@Override
-	public Map<String, Object> test(int CompanyId) {
+	public Map<String, Object> getSaleUserInfo(int CompanyId) {
 		
 		Map<String, Object> resultMap = new HashMap<>();
 		
@@ -86,9 +92,7 @@ public class UserServiceImpl implements UserService{
 				
 				resultMap.put("id",user.getId());
 				resultMap.put("name",user.getName());
-				ImageInfoVO test = imageAdminDao.selectImageById(user.getImageInfoId());
-				
-				resultMap.put("image",test.getSavePath());
+				resultMap.put("image",imageAdminService.getImagePath(user.getImageInfoId()));
 				resultMap.put("comment", business.getComment());
 				resultMap.put("good", business.getGood());
 		

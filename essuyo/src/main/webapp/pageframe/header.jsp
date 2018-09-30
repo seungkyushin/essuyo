@@ -9,13 +9,13 @@
             <div class="row">
                 <div class="col-md-12">
                     <nav class="navbar navbar-expand-lg navbar-light">
-                        <a class="navbar-brand" href="/"><img src="resources/images/essuyo.png"/></a>
+                        <a class="navbar-brand" href="/"><img src=""/></a>
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
               <span class="icon-menu"></span>
             </button>
                         <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
                             <ul class="navbar-nav">
-                                <li class="nav-item dropdown">
+                              <!--   <li class="nav-item dropdown">
                                     <a class="nav-link" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                    						카테고리
                    						<span class="icon-arrow-down"></span>
@@ -25,8 +25,20 @@
                                         <a class="dropdown-item" href="#">렌트카</a>
                                         <a class="dropdown-item" href="#">박물관</a>
                                         <a class="dropdown-item" href="#">음식점</a>                                    </div>
-                                </li>
+                                </li> -->
                                
+                                 <li class="nav-item">
+                                    <a class="nav-link" href="/user/regist">호텔</a>
+                                </li>
+                                  <li class="nav-item">
+                                    <a class="nav-link" href="/user/regist">렌트카</a>
+                                </li>
+                                  <li class="nav-item">
+                                    <a class="nav-link" href="/user/regist">박물관</a>
+                                </li>
+                                 <li class="nav-item">
+                                    <a class="nav-link" href="/user/regist">식당</a>
+                                </li>
                                 
                                 <li class="nav-item">
                                     <a class="nav-link" href="/user/regist">회원가입</a>

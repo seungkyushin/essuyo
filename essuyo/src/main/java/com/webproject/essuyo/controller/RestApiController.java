@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.webproject.essuyo.domain.CompanyVO;
 import com.webproject.essuyo.service.CommentService;
 import com.webproject.essuyo.service.CompanyService;
+import com.webproject.essuyo.service.ProductService;
 import com.webproject.essuyo.service.ReservationService;
 
 @RestController
@@ -31,6 +32,9 @@ public class RestApiController {
 	
 	@Autowired
 	private ReservationService reservationService;
+	
+	@Autowired
+	private ProductService productService;
 	
 	@RequestMapping(value="/list",method=RequestMethod.GET)
 	public ResponseEntity<List<CompanyVO>> list(){
@@ -67,5 +71,14 @@ public class RestApiController {
 		//< 요청자 화인
 		return reservationService.getReservationList(type, id, start);
 	}
+	
+	@GetMapping("/disableDate/{productId}")
+	public List<String> getProductDisableDate(@PathVariable int productId){
+
+		return productService.getDisableDate(productId);
+
+	}
+	
+	
 
 }
