@@ -94,7 +94,7 @@
 								<img src="resources/images/menu-rentcar.jpg" class="img-fluid"
 									alt="img13" />
 								<figcaption>
-									<h5>CAR-RENT</h5>
+									<h5>렌트</h5>
                                     <p>134 Listings</p>
 								</figcaption></a>
 							</figure>
@@ -110,10 +110,10 @@
 										<img src="resources/images/menu-restraunt.jpg" class="img-fluid"
 											alt="img13"/>
 										<figcaption>
-											<h5>Restaurants</h5>
+											<h5>식당</h5>
 											<p>210 Listings</p>
 										</figcaption></a>
-									</figure>
+									</figure>	
 								</div>
 							</div>
 						</div>
@@ -126,8 +126,8 @@
 										<img src="resources/images/menu-museum.jpg" class="img-fluid"
 											alt="img13" />
 										<figcaption>
-											<h5>MUSEUM</h5>
-                                            <p>${main[2].count}  Listings</p>
+											<h5>문화시설</h5>
+                                            <p>${main[0].score} Listings</p>
 										</figcaption></a>
 									</figure>
 								</div>
@@ -144,7 +144,7 @@
 										<img src="resources/images/menu-hotel.jpg" class="img-fluid"
 											alt="img13" />
 										<figcaption>
-											<h5>Hotels</h5> 
+											<h5>숙박</h5> 
                                             <p>577 Listings</p>
 										</figcaption></a>
 									</figure>
@@ -691,29 +691,6 @@
 		</div>
 	</section>
 	<!--//END CATEGORIES -->
-	<!--============================= ADD LISTING =============================-->
-	<section class="main-block light-bg">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-					<div class="add-listing-wrap">
-						<h2>Reach millions of People</h2>
-						<p>Add your Business infront of millions and earn 3x profits
-							from our listing</p>
-					</div>
-				</div>
-			</div>
-			<div class="row justify-content-center">
-				<div class="col-md-4">
-					<div class="featured-btn-wrap">
-						<a href="#" class="btn btn-danger"><span class="ti-plus"></span>
-							ADD LISTING</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!--//END ADD LISTING -->
 	
 	<%@ include file="/pageframe/footer.jsp"%>
 
