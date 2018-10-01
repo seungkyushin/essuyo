@@ -15,7 +15,11 @@
     <link href="../resources/css/chartist/chartist.min.css" rel="stylesheet">
     <link href="../resources/css/style.min.css" rel="stylesheet">
     <link href="../resources/css/simple-line-icons.css" rel="stylesheet">
-    
+   <style>
+   body {
+ 	 font-family: 'Noto Sans KR', sans-serif;
+}
+   </style>
 </head>
 
 <body>
@@ -58,11 +62,21 @@
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title">${lineGraphName}</h4>
-                                 <span style="background-color:#137eff" class="font-16 font-medium label label-rounded">호텔</span>
-                                 <span style="background-color:#ced4da" class="font-16 font-medium label label-rounded">렌트카</span>
-                               	 <span style="background-color:#f4c63d" class="font-16 font-medium label label-rounded">박물관</span>
-                               	 <span style="background-color:#d17905" class="font-16 font-medium label label-rounded">음식점</span> 
                                 
+                                <c:choose>
+                                	<c:when test="${userType == 'user'}">
+                                	    <span style="background-color:#137eff" class="font-16 font-medium label label-rounded">호텔</span>
+                                 		<span style="background-color:#ced4da" class="font-16 font-medium label label-rounded">렌트카</span>
+                               	 		<span style="background-color:#f4c63d" class="font-16 font-medium label label-rounded">박물관</span>
+                               	 		<span style="background-color:#d17905" class="font-16 font-medium label label-rounded">음식점</span> 
+                                    </c:when>
+                                	
+                                	<c:when test="${userType == 'company'}">
+                                		<span style="background-color:#137eff" class="font-16 font-medium label label-rounded">예약횟수</span>
+                                	</c:when>
+                                	
+                                </c:choose>
+                          
                                 <div class="sales ct-charts mt-3"></div>
                             </div>
                         </div>
@@ -81,11 +95,22 @@
                             <div class="card-body">
                                 <h4 class="card-title m-b-0">${dounutChartName}</h4>
                                 <h2 class="font-light">${totalReservtionCount} 회<span class="font-16 text-success font-medium">+23%</span></h2>
-                            	  <span style="background-color:#d70206" class="font-16 font-medium label label-rounded">호텔</span>
-                                 <span style="background-color:#f05b4f" class="font-16 font-medium label label-rounded">렌트카</span>
-                               	 <span style="background-color:#f4c63d" class="font-16 font-medium label label-rounded">박물관</span>
-                               	 <span style="background-color:#d17905" class="font-16 font-medium label label-rounded">음식점</span> 
-								
+                            	
+								              <c:choose>
+                                	<c:when test="${userType == 'user'}">
+                                	    <span style="background-color:#d70206" class="font-16 font-medium label label-rounded">호텔</span>
+                                 		<span style="background-color:#f05b4f" class="font-16 font-medium label label-rounded">렌트카</span>
+                               	 		<span style="background-color:#f4c63d" class="font-16 font-medium label label-rounded">박물관</span>
+                               	 		<span style="background-color:#d17905" class="font-16 font-medium label label-rounded">음식점</span> 
+								     </c:when>
+                                	
+                                	<c:when test="${userType == 'company'}">
+                                		 <span style="background-color:#d70206" class="font-16 font-medium label label-rounded">남자</span>
+                                		 <span style="background-color:#f05b4f" class="font-16 font-medium label label-rounded">여자</span>
+                                	</c:when>
+                                	
+                                </c:choose>
+                                
                                 <div class="analyzeReservation ct-charts mt-3"></div>
                          
                             </div>
@@ -226,7 +251,7 @@
   });
     
     function requestReservationList(type,startPageNum){
-    	var requestURL = "/api/reservationList/" + type + "/" + startPageNum +"/2";
+    	var requestURL = "/api/reservationList/" + type + "/" + startPageNum +"/" + ${id};
     	Ajax("GET",requestURL,function(dataList){
 			
 			dataList.forEach(function(data){
@@ -249,7 +274,7 @@
 		});
     }
 	function requestCommentList(type,startPageNum){
-		var requestURL = "/api/commentList/" + type + "/" + startPageNum +"/2";
+		var requestURL = "/api/commentList/" + type + "/" + startPageNum +"/" + ${id};
 		Ajax("GET",requestURL,function(dataList){
 			
 			dataList.forEach(function(data){

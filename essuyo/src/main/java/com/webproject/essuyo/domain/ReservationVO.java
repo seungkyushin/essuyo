@@ -4,6 +4,7 @@ package com.webproject.essuyo.domain;
 public class ReservationVO {
 	
 	private int id ; 			/* 번호 */
+	private String productType;
 	private String state; 		/* 상태 */
 	private int totalPrice; 	/* 총가격 */
 	private String resDate;		/* 예약한날짜 */
@@ -17,6 +18,12 @@ public class ReservationVO {
 	}
 	public void setId(int id) {
 		this.id = id;
+	}
+	public String getProductType() {
+		return productType;
+	}
+	public void setProductType(String productType) {
+		this.productType = productType;
 	}
 	public String getState() {
 		return state;
@@ -68,10 +75,10 @@ public class ReservationVO {
 	}
 	@Override
 	public String toString() {
-		return "ReservationVO [id=" + id + ", state=" + state + ", totalPrice=" + totalPrice + ", resDate=" + resDate
-				+ ", productCount=" + productCount + ", regDate=" + regDate + ", companyId=" + companyId
-				+ ", productId=" + productId + ", userId=" + userId + "]";
+		return "ReservationVO [id=" + id + ", productType=" + productType + ", state=" + state + ", totalPrice="
+				+ totalPrice + ", resDate=" + resDate + ", productCount=" + productCount + ", regDate=" + regDate
+				+ ", companyId=" + companyId + ", productId=" + productId + ", userId=" + userId + "]";
 	}
-	
+
 
 }

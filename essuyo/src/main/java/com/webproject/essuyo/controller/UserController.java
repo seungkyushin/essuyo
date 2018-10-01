@@ -44,9 +44,7 @@ public class UserController {
 	
 	@Autowired
 	private CompanyService companyService;
-	
-	@Autowired
-	private ProductService productService;
+
 	
 	//GET 방식으로 회원가입 페이지에 접근. 그냥 회원가입 페이지로 보내준다
 	@RequestMapping(value="/regist", method=RequestMethod.GET)
@@ -152,115 +150,108 @@ public class UserController {
 		
 		
 		String email = (String)httpSession.getAttribute("login");
-		String type = "user";
 		UserVO user = service.getUser(email);
-		if( user.getBusinessId() != 0) {
-			type = "company";
+		
+		if( user.getBusinessId() == 0) {
+			model.addAttribute("userType","user");
+			model.addAttribute("id",user.getId());
+			setUserDashboard(email, "user", user.getId(), model);
+		}else {
+			int id = service.getBusinessInfo(email).getCompanyId();
+			model.addAttribute("userType","company");
+			model.addAttribute("id",id);
+			setCompanyDashboard(email, "company", id, model);
 		}
 		
-		model.addAttribute("userType",type);
+		return "/user/dashboard";
 		
-		List<ReservationVO> reservationList = reservationService.getReservationListNotState(type, user.getId());
-		List<List<Integer>> comprehensiveGraph = new ArrayList<List<Integer>>();
-		List<Integer> MonthsPaymentList = reservationService.getMonthlyPrice(type, user.getId()); //< 월별 지불/수입 리스트
-		List<Integer> categoryReservationList = new ArrayList<Integer>(); //< 카테고리별 예약 횟수 리스트
-
-		int MaxCategory = 4;
-		int MaxMonth = 12;
+	}
+	public void setCompanyDashboard(String email, String type, int id, Model model) {
 	
-		for(int c=0 ; c < MaxCategory; c++) {
-			List<Integer> monthList = new ArrayList<Integer>();
-				for(int m=0 ; m < MaxMonth; m++) {
-					monthList.add(0);
-				}
-			categoryReservationList.add(0);
-			comprehensiveGraph.add(monthList);
-		}
-		
-		
-		for( ReservationVO data : reservationList) {
+		/*****************************************************************************/
+		/********************************** 종합 그래프 *********************************/
+		/*****************************************************************************/
 
-			String CompanyType = companyService.getCompany(data.getCompanyId()).getType();
-			
-				int categoryIndex = 0;
-				switch( CompanyType ) {
-					case "호텔":
-						categoryIndex = 0;
-						break;
-					case "렌트카":
-						categoryIndex = 1;
-						break;
-					case "박물관":
-						categoryIndex = 2;
-						break;
-					case "음식점":
-						categoryIndex = 3;
-						break;
-					
-				}
-							
-				//< 카테고리 별 개수 
-				int value = categoryReservationList.get(categoryIndex);
-				categoryReservationList.set(categoryIndex,value + 1);
-			
-							
-				//< 카테고리 별로 월마다 예약한 횟수
-				LocalDate date = new LocalDate(data.getRegDate());
-				int month = date.getMonthOfYear();
-				int count = comprehensiveGraph.get(categoryIndex).get(month);
-				comprehensiveGraph.get(categoryIndex).set(month,  count + 1);
-				
-			}
-		
-		/*****************************************************************************/
-		/******************************* 사용자별 종합 그래프 ******************************/
-		/*****************************************************************************/
-		
-		//< 1. 
+		//< 1. 예약 관련 종합적인 데이터 
+		List<List<Integer>> comprehensiveGraph = reservationService.getMonthlyReservationCount(type,id);
 		model.addAttribute("lineGraph",comprehensiveGraph);
 		
 		//< 3. 화면단 표시 문자열
-		if( type.equals("user") == true ) {
-			model.addAttribute("lineGraphName","카테고리별 예약 종합");
-		}if( type.equals("company") == true ) {
-			model.addAttribute("lineGraphName","사용자 선호도");
-		}
+		model.addAttribute("lineGraphName","월별 상품 판매");
+		
 			
 		/*****************************************************************************/
 		/******************************* 사용자별 예약 횟수 ********************************/
 		/*****************************************************************************/
 	
 		//< 1. 년 단위 사용자별 예약 횟수
-		model.addAttribute("totalReservtionCount",reservationList.size());
+		model.addAttribute("totalReservtionCount",reservationService.getReservationListNotState(type, id).size());
 		
-		//< 2. 카테고리별 예약 분포도
+		//< 2. 남여 예약 분포도
+		List<Integer> categoryReservationList = reservationService.getGenderReservationCount(id); //< 카테고리별 예약 횟수 리스트
 		model.addAttribute("dounutChart",categoryReservationList);
 	
 		//< 3. 화면단 표시 문자열
-		if( type.equals("user") == true ) {
-			model.addAttribute("dounutChartName","카테고리 별 예약횟수");
-		}if( type.equals("company") == true ) {
-			model.addAttribute("dounutChartName","방문자 별");
-		}
+		model.addAttribute("dounutChartName","예약 성별 비율");
 		
 		/*****************************************************************************/
 		/******************************* 사용자별 지출/수입 *******************************/
 		/*****************************************************************************/
 		
 		//< 1.  년 단위 총 지출/수입 내용
-		model.addAttribute("totalPayment",reservationService.getReservationTotalPrice(type, 2));
+		model.addAttribute("totalPayment",reservationService.getReservationTotalPrice(type, id));
 		
 		//< 2. 월 단위 총 지출/수입 내용
+		List<Integer> MonthsPaymentList = reservationService.getMonthlyPrice(type, id); //< 월별 지불/수입 리스트
 		model.addAttribute("MonthsPaymentList",MonthsPaymentList);
 
 		//< 3. 화면단 표시 문자열
-		if( type.equals("user") == true ) {
-			model.addAttribute("sparkLineName","올해 지출");
-		}if( type.equals("company") == true ) {
-			model.addAttribute("sparkLineName","올해 수입");
-		}
+		model.addAttribute("sparkLineName","한해 수입");
 		
-		return "/user/dashboard";
+		
+	}
+	
+	public void setUserDashboard(String email, String type, int id, Model model) {
+		
+		/*****************************************************************************/
+		/******************************* 사용자별 종합 그래프 ******************************/
+		/*****************************************************************************/
+		
+		//< 1. 예약 관련 종합적인 데이터 
+		List<List<Integer>> comprehensiveGraph = reservationService.getComprehensiveReservation(type, id);
+		model.addAttribute("lineGraph",comprehensiveGraph);
+		
+		//< 3. 화면단 표시 문자열
+		model.addAttribute("lineGraphName","카테고리별 예약 종합");
+	
+		
+		/*****************************************************************************/
+		/******************************* 사용자별 예약 횟수 ********************************/
+		/*****************************************************************************/
+	
+		//< 1. 년 단위 사용자별 예약 횟수
+		model.addAttribute("totalReservtionCount",reservationService.getReservationListNotState(type, id).size());
+		
+		//< 2. 카테고리별 예약 분포도
+		List<Integer> categoryReservationList = reservationService.getCategoryReservationCount(type, id); //< 카테고리별 예약 횟수 리스트
+		model.addAttribute("dounutChart",categoryReservationList);
+	
+		//< 3. 화면단 표시 문자열
+		model.addAttribute("dounutChartName","카테고리 별 예약횟수");
+	
+		/*****************************************************************************/
+		/******************************* 사용자별 지출/수입 *******************************/
+		/*****************************************************************************/
+		
+		//< 1.  년 단위 총 지출/수입 내용
+		model.addAttribute("totalPayment",reservationService.getReservationTotalPrice(type, id));
+		
+		//< 2. 월 단위 총 지출/수입 내용
+		List<Integer> MonthsPaymentList = reservationService.getMonthlyPrice(type, id); //< 월별 지불/수입 리스트
+		model.addAttribute("MonthsPaymentList",MonthsPaymentList);
+
+		//< 3. 화면단 표시 문자열
+		model.addAttribute("sparkLineName","올해 지출");
 		
 	}
 }
