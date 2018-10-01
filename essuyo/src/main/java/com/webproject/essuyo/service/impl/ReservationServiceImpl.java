@@ -32,6 +32,7 @@ public class ReservationServiceImpl implements ReservationService {
 	private UserDAO userDao;
 
 	private final int SEARCH_LIMIT = 5;
+	private final int CATEGORY_COUNT = 4;
 
 	private Logger logger = LoggerFactory.getLogger(ProductServiceImpl.class);
 
@@ -180,7 +181,7 @@ public class ReservationServiceImpl implements ReservationService {
 					if (key.equals("month") == true) {
 						month = data.get(key).intValue();
 					} else if (key.equals("monthlyTotalPrice") == true) {
-						String test =  String.valueOf(data.get(key));
+						String test = String.valueOf(data.get(key));
 						monthlyTotalPrice = Integer.parseInt(test);
 					}
 				}
@@ -200,6 +201,60 @@ public class ReservationServiceImpl implements ReservationService {
 	public List<Integer> getMonthlyReservationCount(String type, int id) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	public int getCategoryIndex(String category) {
+		switch (category) {
+		case "호텔":
+			 return 0;
+		case "렌트카":
+			 return 1;
+		case "박물관":
+			 return 2;
+		case "식당":
+			 return 3;
+		}
+		
+		return -1;
+	}
+
+	@Override
+	public List<Integer> getCategoryReservationCount(String type, int id) {
+		List<Integer> category = new ArrayList<Integer>(); // < 월별 지불/수입 리스트
+
+		for (int i = 0; i < CATEGORY_COUNT; i++) {
+			category.add(0);
+		}
+
+		List<Map<String, Object>> resultMap;
+
+		try {
+			resultMap = reservationDao.selectCategoryCount(new SQLParamVO(type, id));
+
+			for (Map<String, Object> data : resultMap) {
+				int categoryIndex = 0;
+				int categroyCount = 0;
+			
+				for (String key : data.keySet()) {
+					if (key.equals("productType") == true) {
+						String categoryName = String.valueOf(data.get(key));
+						categoryIndex = this.getCategoryIndex(categoryName);
+
+					} else if (key.equals("count") == true) {
+						String count = String.valueOf(data.get(key));
+						categroyCount = Integer.parseInt(count);
+					}
+				}
+				category.set(categoryIndex, categroyCount);
+
+			}
+
+			return category;
+		} catch (Exception e) {
+			logger.error("상품 월별 합계 조회 실패.. | {} ", e.toString());
+			return null;
+		}
+
 	}
 
 }

@@ -43,6 +43,11 @@ public class ReservationDao {
 		return sqlSession.selectList(NAME_SPACE + ".selectMonthlyReservationCount" , params);
 	}
 	
+	public List<Map<String,Object>> selectCategoryCount(SQLParamVO params) throws Exception{
+		return sqlSession.selectList(NAME_SPACE + ".selectCategoryReservationCount" , params);
+	}
+	
+	
 	
 	
 

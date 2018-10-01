@@ -162,9 +162,7 @@ public class UserController {
 		
 		List<ReservationVO> reservationList = reservationService.getReservationListNotState(type, user.getId());
 		List<List<Integer>> comprehensiveGraph = new ArrayList<List<Integer>>();
-		List<Integer> MonthsPaymentList = reservationService.getMonthlyPrice(type, user.getId()); //< 월별 지불/수입 리스트
-		List<Integer> categoryReservationList = new ArrayList<Integer>(); //< 카테고리별 예약 횟수 리스트
-
+		
 		int MaxCategory = 4;
 		int MaxMonth = 12;
 	
@@ -173,7 +171,6 @@ public class UserController {
 				for(int m=0 ; m < MaxMonth; m++) {
 					monthList.add(0);
 				}
-			categoryReservationList.add(0);
 			comprehensiveGraph.add(monthList);
 		}
 		
@@ -200,10 +197,7 @@ public class UserController {
 				}
 							
 				//< 카테고리 별 개수 
-				int value = categoryReservationList.get(categoryIndex);
-				categoryReservationList.set(categoryIndex,value + 1);
-			
-							
+								
 				//< 카테고리 별로 월마다 예약한 횟수
 				LocalDate date = new LocalDate(data.getRegDate());
 				int month = date.getMonthOfYear();
@@ -234,6 +228,7 @@ public class UserController {
 		model.addAttribute("totalReservtionCount",reservationList.size());
 		
 		//< 2. 카테고리별 예약 분포도
+		List<Integer> categoryReservationList = reservationService.getCategoryReservationCount(type, user.getId()); //< 카테고리별 예약 횟수 리스트
 		model.addAttribute("dounutChart",categoryReservationList);
 	
 		//< 3. 화면단 표시 문자열
@@ -251,6 +246,7 @@ public class UserController {
 		model.addAttribute("totalPayment",reservationService.getReservationTotalPrice(type, 2));
 		
 		//< 2. 월 단위 총 지출/수입 내용
+		List<Integer> MonthsPaymentList = reservationService.getMonthlyPrice(type, user.getId()); //< 월별 지불/수입 리스트
 		model.addAttribute("MonthsPaymentList",MonthsPaymentList);
 
 		//< 3. 화면단 표시 문자열

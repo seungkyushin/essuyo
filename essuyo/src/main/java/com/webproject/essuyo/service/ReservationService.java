@@ -25,5 +25,7 @@ public interface ReservationService {
 	//< 월별 예약 횟수
 	public List<Integer> getMonthlyReservationCount(String type, int id);
 	
+	//< 카테고리 별 예약 횟수
+	public List<Integer> getCategoryReservationCount(String type, int id);
 	
 }

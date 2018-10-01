@@ -11,9 +11,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" type="image/png" sizes="16x16" href="resources/images/favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="http://localhost:8080/resources/images/favicon.png">
     <title>오류 페이지</title>
-    <link href="resources/css/style.min.css" rel="stylesheet">
+    <link href="http://localhost:8080/resources/css/style.min.css" rel="stylesheet">
 </head>
 
 <body>
@@ -30,13 +30,15 @@
                 <h1 class="error-title text-danger">ERROR</h1>
                 <h3 class="text-uppercase error-subtitle">요청하신 페이지를 찾을 수 없습니다.</h3>
                 <p class="text-muted m-t-30 m-b-30">다시 확인하시길 바랍니다.</p>
-                <a href="/" class="btn btn-danger btn-rounded waves-effect waves-light m-b-40">메인으로..</a> </div>
-        </div>
+                <a href="/" class="btn btn-danger btn-rounded waves-effect waves-light m-b-40">메인으로..</a>
+               </div>
+       		 </div>
+    	</div>
     </div>
     
-    <script src="resources/js/jquery/jquery.min.js"></script>
-    <script src="resources/js/popper/umd/popper.min.js"></script>
-    <script src="resources/js/bootstrap/bootstrap.min.js"></script>
+    <script src="http://localhost:8080/resources/js/jquery/jquery.min.js"></script>
+    <script src="http://localhost:8080/resources/js/popper/umd/popper.min.js"></script>
+    <script src="http://localhost:8080/resources/js/bootstrap/bootstrap.min.js"></script>
   
   <script>
     $('[data-toggle="tooltip"]').tooltip();
