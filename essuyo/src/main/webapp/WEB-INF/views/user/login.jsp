@@ -114,7 +114,9 @@
 		function msgCheck() {
 			var msg = "${msg}";
 
-			if (msg != null) {
+			if (msg === null || msg === "" || msg === undefined) {
+				
+			} else {
 				alert(msg);
 			}
 		}
