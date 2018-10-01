@@ -9,7 +9,7 @@
 
 	<!-- 로그인용 sql문. email과 password를 user 테이블에서 찾는다 -->
 	<select id="login" resultType="com.webproject.essuyo.domain.UserVO">
-		select * from user where email = #{email} and password = #{password}
+		select name, email, password, fail_password, age, gender, cre_date AS creDate, last_date AS lastDate, total_reply AS todayReply, business_id AS businessId, image_info_id AS imageInfoId from user where email = #{email} and password = #{password}
 	</select>
 
 	<!-- 이메일 중복체크용 sql 입력된 이메일을 카운트한다 -->
