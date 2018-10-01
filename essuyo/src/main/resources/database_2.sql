@@ -121,15 +121,17 @@ CREATE TABLE comment (
 
 /* 메시지 */
 CREATE TABLE message (
-	id INTEGER PRIMARY KEY auto_increment, /* 번호 */
-	content VARCHAR(255), /* 내용 */
-	send_date DATE NOT NULL, /* 보낸날짜 */
-	read_check INTEGER NOT NULL, /* 읽음확인 */
-	user_id INTEGER NOT NULL, /* 사용자번호 */
+	megNum INTEGER PRIMARY KEY auto_increment, /* 번호 */
+	title VARCHAR(255) NOT  NULL, /* 제목 */	
+	content TEXT, /* 내용 */
+	send_date timestamp not null default now(), /* 보낸날짜 */	
+	read_check INTEGER , /* 읽음확인 */
+	user_id VARCHAR(255) NOT NULL, /* 발송자 사용자번호 */
+    receiver_id VARCHAR(255) NOT NULL, /* 수신자 사용자번호 */	
 	
-	FOREIGN KEY (user_id) REFERENCES user(id) ON DELETE CASCADE
+    FOREIGN KEY (user_id) REFERENCES user(email) ON DELETE CASCADE,
+	FOREIGN KEY (receiver_id) REFERENCES user(email) ON DELETE CASCADE
 )DEFAULT CHARSET=utf8; 
-
 
 
 /* 상품관리 */
