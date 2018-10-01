@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.webproject.essuyo.domain.CompanyVO;
 import com.webproject.essuyo.service.CommentService;
 import com.webproject.essuyo.service.CompanyService;
 import com.webproject.essuyo.service.ProductService;
@@ -37,10 +37,10 @@ public class RestApiController {
 	private ProductService productService;
 	
 	@RequestMapping(value="/list",method=RequestMethod.GET)
-	public ResponseEntity<List<CompanyVO>> list(){
-		ResponseEntity<List<CompanyVO>> entity = null;	
+	public ResponseEntity<Map<String, Object>> list(@RequestParam int start){
+		ResponseEntity<Map<String, Object>> entity = null;	
 		try {
-			entity= new ResponseEntity<>(service.listAll(),HttpStatus.OK);
+			entity= new ResponseEntity<>(service.getList(start),HttpStatus.OK);
 		} catch (Exception e) {
      		e.printStackTrace();
      		entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);

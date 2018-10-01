@@ -9,7 +9,7 @@
 select *
 from company
 order by id
-limit 0, 4;
+limit #{start}, #{limit};
 ]]>
 </select>
 
@@ -20,7 +20,6 @@ total_visit AS totalVisit, today_visit AS todayVisit, area_list_id AS areaListId
 FROM company WHERE id = #{companyId};
 ]]>
 </select>
-
 
 
 </mapper>
