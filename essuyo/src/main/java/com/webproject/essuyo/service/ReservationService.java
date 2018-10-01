@@ -28,4 +28,7 @@ public interface ReservationService {
 	//< 카테고리 별 예약 횟수
 	public List<Integer> getCategoryReservationCount(String type, int id);
 	
+	//< 카테고리 별 예약 횟수
+	public List<List<Integer>> getComprehensiveReservation(String type, int id);
+	
 }

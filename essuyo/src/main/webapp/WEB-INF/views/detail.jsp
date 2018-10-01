@@ -14,14 +14,13 @@
 <link rel="shortcut icon" href="#">
 <title>자리 있어요?</title>
 <link rel="stylesheet" href="resources/css/bootstrap/bootstrap.min.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+KR" >
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+KR">
 <link rel="stylesheet" href="resources/css/simple-line-icons.css">
 <link rel="stylesheet" href="resources/css/themify-icons.css">
 <link rel="stylesheet" href="resources/css/set1.css">
 <link rel="stylesheet" href="resources/css/swiper.min.css">
 <link rel="stylesheet" href="resources/css/magnific-popup.css">
 <link rel="stylesheet" href="resources/css/style.css">
-<link rel="stylesheet" href="resources/css/tab.css">
 </head>
 <body>
 

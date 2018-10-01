@@ -20,5 +20,7 @@ public interface UserService {
 	public Map<String,Object> getSaleUserInfo(int CompanyId);
 	
 	public UserVO getUser(String email);
+	
+
 
 }

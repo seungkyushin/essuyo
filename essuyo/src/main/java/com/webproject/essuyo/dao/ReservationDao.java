@@ -47,6 +47,10 @@ public class ReservationDao {
 		return sqlSession.selectList(NAME_SPACE + ".selectCategoryReservationCount" , params);
 	}
 	
+	public List<Map<String,Object>> selectComprehensiveReservation(SQLParamVO params) throws Exception{
+		return sqlSession.selectList(NAME_SPACE + ".selectComprehensiveReservation" , params);
+	}
+	
 	
 	
 	

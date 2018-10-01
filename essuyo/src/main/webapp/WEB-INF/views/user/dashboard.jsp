@@ -15,7 +15,11 @@
     <link href="../resources/css/chartist/chartist.min.css" rel="stylesheet">
     <link href="../resources/css/style.min.css" rel="stylesheet">
     <link href="../resources/css/simple-line-icons.css" rel="stylesheet">
-    
+   <style>
+   body {
+ 	 font-family: 'Noto Sans KR', sans-serif;
+}
+   </style>
 </head>
 
 <body>

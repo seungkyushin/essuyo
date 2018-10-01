@@ -44,9 +44,7 @@ public class UserController {
 	
 	@Autowired
 	private CompanyService companyService;
-	
-	@Autowired
-	private ProductService productService;
+
 	
 	//GET 방식으로 회원가입 페이지에 접근. 그냥 회원가입 페이지로 보내준다
 	@RequestMapping(value="/regist", method=RequestMethod.GET)
@@ -152,65 +150,25 @@ public class UserController {
 		
 		
 		String email = (String)httpSession.getAttribute("login");
-		String type = "user";
+		String type = "";
+		int id = 0;
 		UserVO user = service.getUser(email);
-		if( user.getBusinessId() != 0) {
+		if( user.getBusinessId() == 0) {
+			type = "user";
+			id = user.getId();
+		}else {
 			type = "company";
+			id = user.getBusinessId();
 		}
 		
 		model.addAttribute("userType",type);
-		
-		List<ReservationVO> reservationList = reservationService.getReservationListNotState(type, user.getId());
-		List<List<Integer>> comprehensiveGraph = new ArrayList<List<Integer>>();
-		
-		int MaxCategory = 4;
-		int MaxMonth = 12;
-	
-		for(int c=0 ; c < MaxCategory; c++) {
-			List<Integer> monthList = new ArrayList<Integer>();
-				for(int m=0 ; m < MaxMonth; m++) {
-					monthList.add(0);
-				}
-			comprehensiveGraph.add(monthList);
-		}
-		
-		
-		for( ReservationVO data : reservationList) {
-
-			String CompanyType = companyService.getCompany(data.getCompanyId()).getType();
 			
-				int categoryIndex = 0;
-				switch( CompanyType ) {
-					case "호텔":
-						categoryIndex = 0;
-						break;
-					case "렌트카":
-						categoryIndex = 1;
-						break;
-					case "박물관":
-						categoryIndex = 2;
-						break;
-					case "음식점":
-						categoryIndex = 3;
-						break;
-					
-				}
-							
-				//< 카테고리 별 개수 
-								
-				//< 카테고리 별로 월마다 예약한 횟수
-				LocalDate date = new LocalDate(data.getRegDate());
-				int month = date.getMonthOfYear();
-				int count = comprehensiveGraph.get(categoryIndex).get(month);
-				comprehensiveGraph.get(categoryIndex).set(month,  count + 1);
-				
-			}
-		
 		/*****************************************************************************/
 		/******************************* 사용자별 종합 그래프 ******************************/
 		/*****************************************************************************/
 		
-		//< 1. 
+		//< 1. 예약 관련 종합적인 데이터 
+		List<List<Integer>> comprehensiveGraph = reservationService.getComprehensiveReservation(type, id);
 		model.addAttribute("lineGraph",comprehensiveGraph);
 		
 		//< 3. 화면단 표시 문자열
@@ -225,10 +183,10 @@ public class UserController {
 		/*****************************************************************************/
 	
 		//< 1. 년 단위 사용자별 예약 횟수
-		model.addAttribute("totalReservtionCount",reservationList.size());
+		model.addAttribute("totalReservtionCount",reservationService.getReservationListNotState(type, id).size());
 		
 		//< 2. 카테고리별 예약 분포도
-		List<Integer> categoryReservationList = reservationService.getCategoryReservationCount(type, user.getId()); //< 카테고리별 예약 횟수 리스트
+		List<Integer> categoryReservationList = reservationService.getCategoryReservationCount(type, id); //< 카테고리별 예약 횟수 리스트
 		model.addAttribute("dounutChart",categoryReservationList);
 	
 		//< 3. 화면단 표시 문자열
@@ -243,10 +201,10 @@ public class UserController {
 		/*****************************************************************************/
 		
 		//< 1.  년 단위 총 지출/수입 내용
-		model.addAttribute("totalPayment",reservationService.getReservationTotalPrice(type, 2));
+		model.addAttribute("totalPayment",reservationService.getReservationTotalPrice(type, id));
 		
 		//< 2. 월 단위 총 지출/수입 내용
-		List<Integer> MonthsPaymentList = reservationService.getMonthlyPrice(type, user.getId()); //< 월별 지불/수입 리스트
+		List<Integer> MonthsPaymentList = reservationService.getMonthlyPrice(type, id); //< 월별 지불/수입 리스트
 		model.addAttribute("MonthsPaymentList",MonthsPaymentList);
 
 		//< 3. 화면단 표시 문자열
