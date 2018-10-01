@@ -3,6 +3,30 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 
+<html>
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="Colorlib">
+<meta name="description" content="자리있어요?">
+<meta name="keywords" content="이써요">
+
+<link rel="shortcut icon" href="#">
+<title>자리 있어요?</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" 
+	  integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+KR" >
+<link rel="stylesheet" href="/resources/css/simple-line-icons.css">
+<link rel="stylesheet" href="/resources/css/themify-icons.css">
+<link rel="stylesheet" href="/resources/css/set1.css">
+<link rel="stylesheet" href="/resources/css/swiper.min.css">
+<link rel="stylesheet" href="/resources/css/magnific-popup.css">
+<link rel="stylesheet" href="/resources/css/style.css">
+ 
+</head>
+<body>
 
     <div class="dark-bg sticky-top">
         <div class="container-fluid">
@@ -51,5 +75,6 @@
             </div>
         </div>
     </div>
-
+</body>
+</html>
    
