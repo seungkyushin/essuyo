@@ -28,9 +28,9 @@
 
 	<div class="box-body">
 		<div class="form-group">
-			<label for="exInputWriter"> WRITER </label> <input type="text"
-				name="writer" class="form-control" value="${messageVO.userID }"
-				readonly="readonly">
+			<label for="exInputWriter"> WRITER </label> 
+			<input type="text"	name="writer" class="form-control" 
+				value="${messageVO.userID }" readonly="readonly">
 		</div>
 		<div class="form-group">
 			<label for="exInputWriter"> RECEIVER </label> <input type="text"
@@ -76,12 +76,28 @@
 					formObj.attr("action", "/message/remove");
 					formObj.submit();
 				}); */
-
-			$(".goListBtn").on("click", function() {
-				formObj.attr("method", "get");
-				formObj.attr("action", "/message/listPage");
-				formObj.submit();
-			});
+			var referrer =  document.referrer;
+				
+				//	alert(referrer.substring(22));
+			if(referrer.substring(21) == "/message/recevieMeg?")	{
+				$(".goListBtn").on("click", function() {
+					formObj.attr("method", "get");
+					formObj.attr("action", "/message/recevieMeg");
+					formObj.submit();
+				});	
+			}else if(referrer.substring(21) == "/message/sendMeg?"){
+				$(".goListBtn").on("click", function() {
+					formObj.attr("method", "get");
+					formObj.attr("action", "/message/sendMeg");
+					formObj.submit();
+				});	
+			}else{
+			 	$(".goListBtn").on("click", function() {
+					formObj.attr("method", "get");
+					formObj.attr("action", "/message/listPage");
+					formObj.submit();
+				}); 
+			}
 
 			$(".removeBtn").on("click", function() {
 				formObj.attr("action", "/message/removePage");

@@ -1,8 +1,7 @@
 package com.webproject.essuyo.controller;
 
-import java.util.Date;
-
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,35 +25,41 @@ public class MessageController {
 
 	@Inject
 	private MessageService service;
+	
+	@Inject
+	private HttpSession session;
 
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public void registerGET(MessageVO message, Model model) throws Exception {
 
-		/*
-		 * message.setTitle("하하하"); message.setContent("안녕"); message.setReadCheck(1);
-		 * message.setSendDate(new Date()); message.setReceiverID(1);
-		 * message.setUserID(2);
-		 */
-
-		logger.info("register get...");
-		// service.regist(message);
-
+			logger.info("register get...");
+	
 	}
 
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public String registerPOST(MessageVO message, RedirectAttributes rttr,
-			@RequestParam("userID") String userID, @RequestParam("receiverID") String receiverID) throws Exception {
+	public String registerPOST(MessageVO message, RedirectAttributes rttr, Model model) throws Exception {
+		/* @RequestParam("receiverID") String receiverID) throws Exception { */
 		logger.info("register POST...");
 		logger.info(message.toString());
 		
+		// 현재 로그인 된 ID 가져오기
+		String userID = (String) session.getAttribute("login");
+		logger.info("user : " +userID);
 		message.setUserID(userID);
-		message.setReceiverID(receiverID);
-		service.regist(message);
 		
-		// model.addAttribute("result", "success");
+		String receiverID = (String) session.getAttribute("receiverID");
+		logger.info("receiver : " +receiverID);
+		message.setReceiverID(receiverID);
+		
+		model.addAttribute("messageVO",message);
+		
+		logger.info(message.toString());
+		
+		service.regist(message);
+
+		
 		rttr.addFlashAttribute("msg", "success");
 
-		// return "/message/messageSuccess";
 		return "redirect:/message/listPage";
 	}
 
@@ -101,21 +106,21 @@ public class MessageController {
 		model.addAttribute("list", service.listCriteria(cri));
 	}
 
-	@RequestMapping(value = "/listPage", method = RequestMethod.GET)
-	public void listPage(@ModelAttribute("cri") MessageCriteria cri, Model model) throws Exception {
-
+	
+	@RequestMapping(value = "/listPage", method = RequestMethod.GET) 
+	public void	listPage(@ModelAttribute("cri") MessageCriteria cri, Model model) 
+			throws Exception {
+	
 		logger.info(cri.toString());
-
-		model.addAttribute("list", service.listCriteria(cri));
-		MessagePageMaker pageMaker = new MessagePageMaker();
-		cri.setPage(1);
-		pageMaker.setCri(cri);
-
+	
+		model.addAttribute("list", service.listCriteria(cri)); MessagePageMaker
+		pageMaker = new MessagePageMaker(); cri.setPage(1); pageMaker.setCri(cri);
+	
 		pageMaker.setTotalCount(service.listCountCriteria(cri));
-
-		model.addAttribute("pageMaker", pageMaker);
+	
+		model.addAttribute("pageMaker", pageMaker); 
 	}
-
+	 
 	@RequestMapping(value = "/readPage", method = RequestMethod.GET)
 	public void read(@RequestParam("megNum") int megNum, @ModelAttribute("cri") MessageCriteria cri, Model model)
 			throws Exception {
@@ -123,28 +128,55 @@ public class MessageController {
 		model.addAttribute(service.read(megNum));
 
 	}
-	
+
 	// 보낸 쪽지함
-	@RequestMapping(value = "/sendMeg", method = RequestMethod.POST)
-	public String sendMeg(@ModelAttribute("cri") MessageCriteria cri, Model model,
-			@RequestParam("userID") String userID) throws Exception {
+	@RequestMapping(value = "/sendMeg", method = RequestMethod.GET)
+	public void sendMeg(@ModelAttribute("cri") MessageCriteria cri, Model model)throws Exception {
+
+		logger.info(cri.toString());
 		
-	//	service.sendMeg(userID);
-		return "redirect:/message/listPage";
-	}
-	
-	// 받은 편지함
-	@RequestMapping(value = "/recevieMeg", method = RequestMethod.POST)
-	public void recevieMeg(@ModelAttribute("cri") MessageCriteria cri, Model model) throws Exception {
+		// 현재 로그인 된 ID 가져오기
+		String userID = (String) session.getAttribute("login");
+		logger.info("user : " +userID);
 		
 		logger.info(cri.toString());
 
-		model.addAttribute("list", service.listCriteria(cri));
 		MessagePageMaker pageMaker = new MessagePageMaker();
+		cri.setPage(1);
 		pageMaker.setCri(cri);
 
 		pageMaker.setTotalCount(service.listCountCriteria(cri));
 
 		model.addAttribute("pageMaker", pageMaker);
+		
+		int page = cri.getPage();
+
+		model.addAttribute("sendList", service.sendMeg(userID, page));
+
+	}
+
+	// 받은 편지함
+	@RequestMapping(value = "/recevieMeg", method = RequestMethod.GET)
+	public void recevieMeg(@ModelAttribute("cri") MessageCriteria cri, Model model) throws Exception {
+
+		logger.info(cri.toString());
+
+		// 현재 로그인 된 ID 가져오기
+		String userID = (String) session.getAttribute("login");
+		logger.info("user : " +userID);
+		
+		logger.info(cri.toString());
+
+		MessagePageMaker pageMaker = new MessagePageMaker();
+		cri.setPage(1);
+		pageMaker.setCri(cri);
+
+		pageMaker.setTotalCount(service.listCountCriteria(cri));
+
+		model.addAttribute("pageMaker", pageMaker);
+		
+		int page = cri.getPage();
+
+		model.addAttribute("recevieList", service.recevieMeg(userID, page));
 	}
 }

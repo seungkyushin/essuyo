@@ -24,16 +24,28 @@
 <body>
 	<form role="form" method="get">
 		<div class="text-center">
+			<h3> 받은 쪽지함</h3>
+			<div>
+				<button type="submit" class="btn allBtn"
+					style="float: left; text-align: center; text-color: white; background-color: #D8D8D8; border-radius: 1px;">
+					All LIST BOX</button>
+				<button type="submit" class="btn sentBtn"
+					style="float: left; text-align: center; text-color: white; background-color: #D8D8D8; border-radius: 1px;">
+					RECEIVED BOX</button>
+				<button type="submit" class="btn receivedBtn"
+					style="float: left; text-align: center; text-color: white; background-color: #D8D8D8; border-radius: 1px;">
+					SENT BOX</button>
+			</div>
 			<table class="table table-bordered">
 				<tr>
 					<th style="width: 10px">N</th>
 					<th>TITLE</th>
-					<th>RECEIVER</th>
+					<th>SENDER</th>
 					<!-- <th> SENDER </th> -->
 					<th>DATE</th>
 					<th>READ</th>
 				</tr>
-				<c:forEach items="${list }" var="MessageVO">
+				<c:forEach items="${recevieList }" var="MessageVO">
 					<tr>
 						<td>${MessageVO.megNum }</td>
 						<td><a
@@ -42,8 +54,15 @@
 						<td>${MessageVO.userID }</td>
 						<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"
 								value="${MessageVO.sendDate }" /></td>
-						<td><span class="badge bg-red">${MessageVO.readCheck}</span>
-						</td>
+								
+						<c:if test="${MessageVO.readCheck == 1 }">
+							<td><strong><span class="badge bg-red">읽음</span></strong></td>
+						</c:if>
+						<c:if test="${MessageVO.readCheck == 0 }">
+							<td><span class="badge bg-red">읽지 않음</span></td>
+						</c:if>
+						<%-- <td><span class="badge bg-red">${MessageVO.readCheck}</span></td> --%>
+						
 					</tr>
 				</c:forEach>
 			</table>
@@ -56,7 +75,7 @@
 				<ul class="pagination">
 					<c:if test="${pageMaker.prev }">
 						<li><a
-							href="listPage${pageMaker.makeQuery(pageMaker.startPage - 1) }">&laquo;</a>
+							href="recevieMeg${pageMaker.makeQuery(pageMaker.startPage - 1) }">&laquo;</a>
 						</li>
 					</c:if>
 
@@ -64,13 +83,13 @@
 						end="${pageMaker.endPage }" var="idx">
 						<li
 							<c:out value="${pageMaker.cri.page == idx?'class =active':'' }"/>>
-							<a href="listPage${pageMaker.makeQuery(idx)}">${idx }</a>
+							<a href="recevieMeg${pageMaker.makeQuery(idx)}">${idx }</a>
 						</li>
 					</c:forEach>
 
 					<c:if test="${pageMaker.next && pageMaker.endPage > 0} ">
 						<li><a
-							href="listPage${pageMaker.makeQuery(pageMaker.endPage +1) }">&raquo;</a>
+							href="recevieMeg${pageMaker.makeQuery(pageMaker.endPage +1) }">&raquo;</a>
 						</li>
 					</c:if>
 				</ul>
@@ -97,6 +116,21 @@
 			console.log(formObj);
 			$(".registerBtn").on("click", function() {
 				formObj.attr("action", "/message/register");
+				formObj.submit();
+			});
+			console.log(formObj);
+			$(".allBtn").on("click", function() {
+				formObj.attr("action", "/message/listPage");
+				formObj.submit();
+			});
+			console.log(formObj);
+			$(".sentBtn").on("click", function() {
+				formObj.attr("action", "/message/recevieMeg");
+				formObj.submit();
+			});
+			console.log(formObj);
+			$(".receivedBtn").on("click", function() {
+				formObj.attr("action", "/message/sendMeg");
 				formObj.submit();
 			});
 		});

@@ -6,6 +6,8 @@ import java.util.Map;
 
 import javax.inject.Inject;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,6 +34,8 @@ public class UserServiceImpl implements UserService{
 	private ImageAdminService imageAdminService;
 	
 
+	private Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
+	
 	//로그인 서비스
 	@Override
 	public UserVO login(UserVO	vo) throws Exception {
@@ -98,8 +102,7 @@ public class UserServiceImpl implements UserService{
 				resultMap.put("good", business.getGood());
 		
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error("유저 조회 오류.. {} ", e.toString());
 		}
 		
 		 
@@ -122,5 +125,19 @@ public class UserServiceImpl implements UserService{
 	public void ownerRegist(UserVO vo) throws Exception {
 		dao.ownerRegist(vo);
 		
+	}
+	
+	@Override
+	public BusinessVO getBusinessInfo(String email) {
+		
+		UserVO user = dao.selectByEmail(email);
+		
+		try {
+				return businessDao.selectById(user.getBusinessId());
+		} catch (Exception e) {
+			logger.error("유저 조회 오류.. {} ", e.toString());
+		}
+				
+		return null;
 	}
 }

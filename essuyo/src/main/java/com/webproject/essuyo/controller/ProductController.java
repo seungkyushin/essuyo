@@ -31,14 +31,14 @@ public class ProductController {
 	private CompanyService companyService;
 
 	@GetMapping("/reservation")
-	public String showReservationPage(@RequestParam("id") int productId, @RequestParam("type") int resType,
+	public String showReservationPage(@RequestParam("company") int companyId, @RequestParam("product") int productId,
 			Model model) {
 
 		Map<String, Object> result = productService.getProduct(productId);
 
 		if (result != null) {
 			model.addAttribute("product", result);
-			model.addAttribute("resType", resType);
+			model.addAttribute("companyType", companyService.getCompany(companyId).getType());
 
 			return "reservation";
 		}
@@ -49,37 +49,23 @@ public class ProductController {
 	}
 
 	@PostMapping("/reserve")
-	public String setReserve(@ModelAttribute ReservationVO reservationInfo,
-			HttpSession httpSession, Model model) {
+	public String setReserve(@ModelAttribute ReservationVO reservationInfo, HttpSession httpSession, Model model) {
 
 		String viewName = "";
 		String email = (String) httpSession.getAttribute("login");
-		
+
 		if (email != null && email.equals("") == false) {
 			int resultId = reservationService.regReservationInfo(email, reservationInfo);
 
 			if (resultId == 0) {
-				CompanyVO company = null;
-				try {
-					company = companyService.getCompany(reservationInfo.getCompanyId());
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
 
-				if (company != null) {
-					String companyType = company.getType();
-					int type = 0;
-					if (companyType.equals("음식점") || companyType.equals("박물관")) {
-						type = 1;
-					}
-					viewName = "redirect:reservation?id=" + reservationInfo.getProductId() + "&type=" + type;
-				}
-				
-				viewName = "redirect:/user/dashboard";
+				viewName = "redirect:reservation?company=" + reservationInfo.getCompanyId() + "&product="
+						+ reservationInfo.getProductId();
 			}
+
+			viewName = "redirect:/user/dashboard";
 		}
-		
+
 		return viewName;
 	}
 }

@@ -24,12 +24,24 @@
 <body>
 	<form role="form" method="get">
 		<div class="text-center">
+			<h3> 전체 쪽지함 </h3>
+			<div>
+				<button type="submit" class="btn allBtn"
+					style="float: left; text-align: center; text-color: white; background-color: #D8D8D8; border-radius: 1px;">
+					All LIST BOX</button>
+				<button type="submit" class="btn sentBtn"
+					style="float: left; text-align: center; text-color: white; background-color: #D8D8D8; border-radius: 1px;">
+					RECEIVED BOX</button>
+				<button type="submit" class="btn receivedBtn"
+					style="float: left; text-align: center; text-color: white; background-color: #D8D8D8; border-radius: 1px;">
+					SENT BOX</button>
+			</div>
 			<table class="table table-bordered">
 				<tr>
 					<th style="width: 10px">N</th>
 					<th>TITLE</th>
 					<th>RECEIVER</th>
-					<!-- <th> SENDER </th> -->
+					<th> SENDER </th>
 					<th>DATE</th>
 					<th>READ</th>
 				</tr>
@@ -41,13 +53,12 @@
 							href='/message/readPage${pageMaker.makeQuery(pageMaker.cri.page)}&megNum=${MessageVO.megNum }'>
 								${MessageVO.title } </a></td>
 						<td>${MessageVO.userID }</td>
+						<td>${MessageVO.receiverID }</td>
 						<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"
 								value="${MessageVO.sendDate }" /></td>
 					
 						<c:if test="${MessageVO.readCheck == 1 }">
-					        <td>
-							<span class="badge bg-red">읽음</span>
-						</td>
+					        <td><strong><span class="badge bg-red">읽음</span></strong></td>
 						</c:if>
 						<c:if test="${MessageVO.readCheck == 0 }">
 					        <td>
@@ -104,6 +115,7 @@
 	<script src="/resources/js/jquery/jquery-3.2.1.min.js"></script>
 
 	<script type="text/javascript">
+	
 		$(document).ready(function() {
 			var formObj = $("form[role='form']");
 
@@ -112,7 +124,23 @@
 				formObj.attr("action", "/message/register");
 				formObj.submit();
 			});
+			console.log(formObj);
+			$(".allBtn").on("click", function() {
+				formObj.attr("action", "/message/listPage");
+				formObj.submit();
+			});
+			console.log(formObj);
+			$(".sentBtn").on("click", function() {
+				formObj.attr("action", "/message/recevieMeg");
+				formObj.submit();
+			});
+			console.log(formObj);
+			$(".receivedBtn").on("click", function() {
+				formObj.attr("action", "/message/sendMeg");
+				formObj.submit();
+			});
 		});
 	</script>
+	
 </body>
 </html>

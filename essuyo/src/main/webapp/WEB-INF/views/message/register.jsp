@@ -25,9 +25,8 @@
 			<div class="form-group">
 				<label for="exInputWriter"> WRITER </label>
 				<!-- 발송자 아이디 받아오기 -->
-				<input type="text" name='userID' class="form-control">
-				 <%-- value="${message.userID }">> --%>
-
+				<input type="text" name='userID' class="form-control"
+				 	 value="${messageVO.userID }" readonly="readonly">  
 			</div>
 			<div class="form-group">
 				<label for="exInputWriter"> RECEIVER </label>

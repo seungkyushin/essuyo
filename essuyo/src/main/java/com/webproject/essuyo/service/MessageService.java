@@ -13,6 +13,7 @@ public interface MessageService {
 	public List<MessageVO> listAll() throws Exception;
 	public List<MessageVO> listCriteria(MessageCriteria cri)throws Exception;
 	public int listCountCriteria(MessageCriteria cri)throws Exception;
-//	public MessageVO sendMeg(String userID) throws Exception;
+	public List<MessageVO> sendMeg(String userID , int page) throws Exception;
+	public List<MessageVO> recevieMeg(String userID, int page)throws Exception;
 	
 }
