@@ -5,13 +5,11 @@
   
 <mapper namespace="com.webproject.essuyo.dao.MainDao">
 <select id="selectOne" resultType="CompanyVO">
-select *
-from company;
-</select>
-
-<select id="countRow" resultType="CompanyVO">
-select *
-from company;
+select count(*)
+from company
+where type="음식점";
+<!-- select count(id) -->
+<!-- from company; -->
 </select>
 
 </mapper>
