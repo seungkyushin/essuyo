@@ -16,6 +16,8 @@ public class CompanyVO {
 	private int todayVisit; /* 금일방문자수 */
 	private int grade; /* 등급 */
 	private int areaListId; /* 지역명목록번호 */
+	
+	
 	public int getId() {
 		return id;
 	}
