@@ -72,12 +72,12 @@
     <!-- 보낸 쪽지함 -->
     <select id="sendMeg" resultType="com.webproject.essuyo.domain.MessageVO">
     <![CDATA[
-    	select megNum, title, content,  send_date AS sendDate, read_check AS readCheck, 
+    	select megNum, title, content, send_date AS sendDate, read_check AS readCheck, 
     					user_id AS userID, receiver_id AS receiverID
     	from message
-    	where megNum > 0 AND user_id = #{userID}
+    	where megNum > 0 AND receiver_id = #{userID}
     	order by megNum desc, sendDate desc
-    	limit #{startPage}, 10
+    	limit #{page}, 10
     ]]>
     </select>
     
@@ -87,9 +87,9 @@
     	select megNum, title, content,  send_date AS sendDate, read_check AS readCheck, 
     					user_id AS userID, receiver_id AS receiverID
     	from message
-    	where megNum > 0 AND receiver_id = #{receiverID}
+    	where megNum > 0 AND user_id = #{userID}
     	order by megNum desc, sendDate desc
-    	limit #{startPage}, 10
+    	limit #{page}, 10
     ]]>
     </select>
     

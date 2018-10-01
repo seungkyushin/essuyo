@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.webproject.essuyo.domain.MessageCriteria;
+import com.webproject.essuyo.domain.MessageListVO;
 import com.webproject.essuyo.domain.MessageVO;
 
 @Repository
@@ -63,4 +64,21 @@ public class MessageDao {
 		
 		session.update(namespace + ".updateReadCheck", megNum);
 	}
+
+	
+	public List<MessageVO> sendMeg(String userID, int page) throws Exception{
+		
+		MessageListVO vo = new MessageListVO(userID, page);
+		
+		return session.selectList(namespace + ".sendMeg", vo);
+	}
+
+	public List<MessageVO> recevieMeg(String userID, int page) throws Exception{
+		
+		MessageListVO vo = new MessageListVO(userID, page);
+		
+		return session.selectList(namespace + ".recevieMeg", vo);
+	}
+	
+	
 }

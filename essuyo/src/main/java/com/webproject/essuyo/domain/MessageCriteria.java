@@ -1,6 +1,8 @@
 package com.webproject.essuyo.domain;
 
-public class MessageCriteria {
+import java.io.Serializable;
+
+public class MessageCriteria implements Serializable{
 	private int page;
 	private int perPageNum;
 	
