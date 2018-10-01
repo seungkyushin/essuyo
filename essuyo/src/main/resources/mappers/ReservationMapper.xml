@@ -117,6 +117,8 @@ SELECT SUM(total_price) FROM reservation WHERE
 		
 		 <choose>
    				 <when test="type != null and type.equals('user')">
+   				 
+   				 
 					WHERE user_id=#{id} AND
    			 	</when>
     		 	<when test="type != null and type.equals('company')">
@@ -129,7 +131,13 @@ SELECT SUM(total_price) FROM reservation WHERE
 	</select>
 	
 	
+	<select id="selectGenderReservationCount" resultType="hashMap">
+		SELECT gender, COUNT(*) AS count FROM user WHERE 
+		id = ANY (SELECT user_id FROM reservation WHERE company_id=#{id}) GROUP BY gender;
+ 	</select>
 	
+	
+
 
 
 </mapper>

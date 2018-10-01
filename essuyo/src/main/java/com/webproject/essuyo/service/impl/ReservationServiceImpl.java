@@ -32,6 +32,7 @@ public class ReservationServiceImpl implements ReservationService {
 	private UserDAO userDao;
 
 	private final int SEARCH_LIMIT = 5;
+	private final int MAX_GENDER_COUNT = 2;
 	private final int MAX_CATEGORY_COUNT = 4;
 
 	private Logger logger = LoggerFactory.getLogger(ProductServiceImpl.class);
@@ -198,23 +199,56 @@ public class ReservationServiceImpl implements ReservationService {
 	}
 
 	@Override
-	public List<Integer> getMonthlyReservationCount(String type, int id) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<List<Integer>> getMonthlyReservationCount(String type, int id) {
+
+		try {
+				List<Integer> monthly = new ArrayList<Integer>(); // < 월별 지불/수입 리스트
+
+				for (int i = 0; i < 12; i++) {
+					monthly.add(0);
+				}
+		
+				 List<Map<String, Integer>> resultMap = reservationDao.selectMonthlyReservationCount(new SQLParamVO(type, id));
+
+				for (Map<String, Integer> data : resultMap) {
+					int month = 0;
+					int Totalcount = 0;
+					
+					for (String key : data.keySet()) {
+						if (key.equals("month") == true) {
+							String categoryName = String.valueOf(data.get(key));
+							month = Integer.parseInt(categoryName);
+
+						} else if (key.equals("count") == true) {
+							String count = String.valueOf(data.get(key));
+							Totalcount = Integer.parseInt(count);
+						}
+					}
+					
+					monthly.set(month-1, Totalcount);
+				}
+				List<List<Integer>> result = new ArrayList<List<Integer>>();
+				result.add(monthly);
+				
+				return result;
+		} catch (Exception e) {
+			logger.error("상품 월별 합계 조회 실패.. | {} ", e.toString());
+			return null;
+		}
 	}
-	
+
 	public int getCategoryIndex(String category) {
 		switch (category) {
 		case "호텔":
-			 return 0;
+			return 0;
 		case "렌트카":
-			 return 1;
+			return 1;
 		case "박물관":
-			 return 2;
+			return 2;
 		case "식당":
-			 return 3;
+			return 3;
 		}
-		
+
 		return -1;
 	}
 
@@ -234,7 +268,7 @@ public class ReservationServiceImpl implements ReservationService {
 			for (Map<String, Object> data : resultMap) {
 				int categoryIndex = 0;
 				int categroyCount = 0;
-			
+
 				for (String key : data.keySet()) {
 					if (key.equals("productType") == true) {
 						String categoryName = String.valueOf(data.get(key));
@@ -259,49 +293,45 @@ public class ReservationServiceImpl implements ReservationService {
 
 	@Override
 	public List<List<Integer>> getComprehensiveReservation(String type, int id) {
-		
+
 		List<List<Integer>> comprehensive = new ArrayList<>();
-		
-		
+
 		int MaxMonth = 12;
-	
-		for(int i=0 ; i < MAX_CATEGORY_COUNT; i++) {
+
+		for (int i = 0; i < MAX_CATEGORY_COUNT; i++) {
 			List<Integer> monthlyList = new ArrayList<>();
-				for(int m=0 ; m < MaxMonth; m++) {
-					monthlyList.add(0);
-				}
-				comprehensive.add(monthlyList);
+			for (int m = 0; m < MaxMonth; m++) {
+				monthlyList.add(0);
+			}
+			comprehensive.add(monthlyList);
 		}
 
-
-
 		try {
-			List<Map<String, Object>> resultMap = reservationDao.selectComprehensiveReservation(new SQLParamVO(type, id));
-			
-			
+			List<Map<String, Object>> resultMap = reservationDao
+					.selectComprehensiveReservation(new SQLParamVO(type, id));
+
 			for (Map<String, Object> data : resultMap) {
 				int month = 0;
 				int categoryIndex = 0;
 				int count = 0;
-				
+
 				for (String key : data.keySet()) {
 					if (key.equals("productType") == true) {
 						String categoryName = String.valueOf(data.get(key));
 						categoryIndex = this.getCategoryIndex(categoryName);
-						
+
 					} else if (key.equals("count") == true) {
 						String categoryCount = String.valueOf(data.get(key));
 						count = Integer.parseInt(categoryCount);
-						
+
 					} else if (key.equals("month") == true) {
 						String categroyMonth = String.valueOf(data.get(key));
 						month = Integer.parseInt(categroyMonth) - 1;
 					}
-					
-					comprehensive.get(categoryIndex).set(month, count);
-							
-				}
 
+					comprehensive.get(categoryIndex).set(month, count);
+
+				}
 
 			}
 
@@ -312,5 +342,51 @@ public class ReservationServiceImpl implements ReservationService {
 		}
 
 	}
+
+	@Override
+	public List<Integer> getGenderReservationCount(int id) {
+
+		List<Integer> genderList = new ArrayList<Integer>(); // < 월별 지불/수입 리스트
+
+		for (int i = 0; i < MAX_GENDER_COUNT; i++) {
+			genderList.add(0);
+		}
+		
+
+		try {
+			List<Map<String, Object>> resultMap = reservationDao.selectGenderReservationCount(id);
+			
+			for (Map<String, Object> data : resultMap) {
+				int genderIndex = 0;
+				int count = 0;
+
+				for (String key : data.keySet()) {
+					if (key.equals("gender") == true) {
+						String gender = String.valueOf(data.get(key));
+						if( gender.equals("남") == true ) {
+							genderIndex = 0;
+						}else {
+							genderIndex = 1 ;
+						}
+	
+					} else if (key.equals("count") == true) {
+						String countStr = String.valueOf(data.get(key));
+						count = Integer.parseInt(countStr);
+					} 
+
+					genderList.set(genderIndex,count);
+
+				}
+
+			}
+
+			return genderList;
+			
+		} catch (Exception e) {
+			logger.error("상품 월별 합계 조회 실패.. | {} ", e.toString());
+			return null;
+		}
+	}
+
 
 }

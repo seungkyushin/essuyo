@@ -23,12 +23,16 @@ public interface ReservationService {
 	public List<Integer> getMonthlyPrice(String type, int id);
 	
 	//< 월별 예약 횟수
-	public List<Integer> getMonthlyReservationCount(String type, int id);
+	public  List<List<Integer>> getMonthlyReservationCount(String type, int id);
 	
 	//< 카테고리 별 예약 횟수
 	public List<Integer> getCategoryReservationCount(String type, int id);
 	
-	//< 카테고리 별 예약 횟수
+	//< 사용자 종합  예약 횟수
 	public List<List<Integer>> getComprehensiveReservation(String type, int id);
 	
+	public List<Integer> getGenderReservationCount(int id);
+	
+	
+
 }

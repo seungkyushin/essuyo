@@ -51,6 +51,13 @@ public class ReservationDao {
 		return sqlSession.selectList(NAME_SPACE + ".selectComprehensiveReservation" , params);
 	}
 	
+	public List<Map<String,Object>> selectGenderReservationCount(int id) throws Exception{
+		return sqlSession.selectList(NAME_SPACE + ".selectGenderReservationCount" , id);
+	}
+	
+	
+	
+	
 	
 	
 	

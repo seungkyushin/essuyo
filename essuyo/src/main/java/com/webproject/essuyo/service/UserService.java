@@ -3,6 +3,7 @@ package com.webproject.essuyo.service;
 import java.util.Date;
 import java.util.Map;
 
+import com.webproject.essuyo.domain.BusinessVO;
 import com.webproject.essuyo.domain.UserVO;
 
 public interface UserService {
@@ -18,6 +19,8 @@ public interface UserService {
 	public boolean checkId(String email);
 
 	public Map<String,Object> getSaleUserInfo(int CompanyId);
+	
+	public BusinessVO getBusinessInfo(String email);
 	
 	public UserVO getUser(String email);
 	
