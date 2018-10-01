@@ -51,6 +51,7 @@ public class MessageVO {
 		return receiverID;
 	}
 	public void setReceiverID(String receiverID) {
+		this.receiverID = null;
 		this.receiverID = receiverID;
 	}
 	

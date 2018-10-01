@@ -64,7 +64,14 @@
 		total_reply AS totalReply, business_id AS businessId, image_info_id AS imageInfoId FROM user
 		WHERE email = #{email}
 	</select>
-
-
-
+	
+	 <select id="recevieID" resultType="UserVO">
+   	<![CDATA[
+   		select email
+   		from user
+   		where id = #{id}
+    ]]>
+    </select>
 </mapper>
+
+  

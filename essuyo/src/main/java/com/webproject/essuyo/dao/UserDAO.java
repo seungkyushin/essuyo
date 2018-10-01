@@ -113,6 +113,9 @@ public class UserDAO {
 		return session.selectOne(namespace + ".selectByEmail", email);
 	}
 	
+	public UserVO selectMessageEmail(String id) throws Exception {
+		return session.selectOne(namespace + ".recevieID", id);
+	}
 	
 	
 
