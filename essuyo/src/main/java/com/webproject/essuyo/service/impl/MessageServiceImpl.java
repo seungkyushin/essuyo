@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.webproject.essuyo.dao.MessageDao;
 import com.webproject.essuyo.domain.MessageCriteria;
+import com.webproject.essuyo.domain.MessageListVO;
 import com.webproject.essuyo.domain.MessageVO;
 import com.webproject.essuyo.service.MessageService;
 
@@ -51,13 +52,20 @@ public class MessageServiceImpl implements MessageService {
 		
 		return dao.countPaging(cri);
 	}
-
-	/*@Override
-	public MessageVO sendMeg(String userID) throws Exception {
+	
+	
+	@Override
+	public List<MessageVO> sendMeg(String userID, int page) throws Exception {
 		
-		return dao.sendMeg(userID);
+		return dao.sendMeg(userID, page);
 	}
-	*/
+
+	@Override
+	public List<MessageVO> recevieMeg(String userID, int page) throws Exception {
+		
+		return dao.recevieMeg(userID, page);
+	}
+	
 	
 
 }

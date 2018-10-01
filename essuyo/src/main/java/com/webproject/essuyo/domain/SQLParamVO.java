@@ -6,6 +6,9 @@ public class SQLParamVO {
 	private int id;
 	private int start;
 	private int limit;
+
+				
+				
 	
 	public SQLParamVO() {
 
@@ -13,6 +16,12 @@ public class SQLParamVO {
 	public SQLParamVO(String type, int id) {
 		this.type = type;
 		this.id = id;
+	}
+	
+	public SQLParamVO(String type, int id,int start) {
+		this.type = type;
+		this.id = id;
+		this.start = start;
 	}
 	
 	public SQLParamVO(String type, int id, int start, int limit) {
