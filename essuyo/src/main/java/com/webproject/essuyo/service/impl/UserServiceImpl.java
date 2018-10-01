@@ -133,7 +133,7 @@ public class UserServiceImpl implements UserService{
 		UserVO user = dao.selectByEmail(email);
 		
 		try {
-				return businessDao.selectById(user.getBusinessId());
+				return businessDao.selectById(user.getBusiness_id());
 		} catch (Exception e) {
 			logger.error("유저 조회 오류.. {} ", e.toString());
 		}

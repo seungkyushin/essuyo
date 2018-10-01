@@ -15,11 +15,10 @@ public class UserVO {
 	private Date creDate; /* 생성날짜 */
 	private Date lastDate; /* 생성날짜 */
 	private int todayReply; /* 생성날짜 */
-	private int businessId = -1;
+	private int business_id = -1;
 	private int imageInfoId;
 	private String sessionKey;
 	private Timestamp sessionlimit;
-	
 	public int getId() {
 		return id;
 	}
@@ -80,11 +79,11 @@ public class UserVO {
 	public void setTodayReply(int todayReply) {
 		this.todayReply = todayReply;
 	}
-	public int getBusinessId() {
-		return businessId;
+	public int getBusiness_id() {
+		return business_id;
 	}
-	public void setBusinessId(int businessId) {
-		this.businessId = businessId;
+	public void setBusiness_id(int business_id) {
+		this.business_id = business_id;
 	}
 	public int getImageInfoId() {
 		return imageInfoId;
@@ -108,9 +107,11 @@ public class UserVO {
 	public String toString() {
 		return "UserVO [id=" + id + ", name=" + name + ", email=" + email + ", password=" + password
 				+ ", fail_password=" + fail_password + ", age=" + age + ", gender=" + gender + ", creDate=" + creDate
-				+ ", lastDate=" + lastDate + ", todayReply=" + todayReply + ", businessId=" + businessId
+				+ ", lastDate=" + lastDate + ", todayReply=" + todayReply + ", business_id=" + business_id
 				+ ", imageInfoId=" + imageInfoId + ", sessionKey=" + sessionKey + ", sessionlimit=" + sessionlimit
 				+ "]";
 	}
+	
+	
 	
 }

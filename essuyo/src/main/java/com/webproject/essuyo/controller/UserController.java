@@ -138,11 +138,11 @@ public class UserController {
 				model.addAttribute("msg", "이메일이나 비밀번호가 잘못됐습니다.");
 				} 
 				return "/user/login";
-			} else if(vo.getBusinessId() != -1){
+			} else if(vo.getBusiness_id() != -1){
 				//만약 비즈니스 아이디가 -1(기본값)이 아닐 경우,
 				//세션에 companyLogin과 login, 두가지 어트리뷰트를 세트해 주고, 메인 페이지로 보낸다.
 				logger.info("new company login success");
-				session.setAttribute("companyLogin", vo.getBusinessId());
+				session.setAttribute("companyLogin", vo.getBusiness_id());
 				session.setAttribute("login",  vo.getEmail());
 				return "redirect:/";
 			} else {
@@ -187,7 +187,7 @@ public class UserController {
 		String email = (String)httpSession.getAttribute("login");
 		UserVO user = service.getUser(email);
 		
-		if( user.getBusinessId() == 0) {
+		if( user.getBusiness_id() == 0) {
 			model.addAttribute("userType","user");
 			model.addAttribute("id",user.getId());
 			setUserDashboard(email, "user", user.getId(), model);
