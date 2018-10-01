@@ -12,5 +12,5 @@ import com.webproject.essuyo.domain.CompanyVO;
 public interface MainService {
 	
 	public List<CompanyVO> getMain() throws Exception;
-//	public List<CompanyVO> listAll() throws Exception;
+	
 }
