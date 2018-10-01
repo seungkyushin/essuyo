@@ -108,6 +108,6 @@ public class CompanyVO {
 				+ ", areaListId=" + areaListId + "]";
 	}
 	
-
-
+	
+	
 }

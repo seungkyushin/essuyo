@@ -9,6 +9,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.webproject.essuyo.domain.CompanyVO;
 import com.webproject.essuyo.domain.SQLParamVO;
 import com.webproject.essuyo.domain.UserVO;
 
@@ -34,7 +35,7 @@ public class UserDAO {
 
 	//회원가입 기능. 
 	public void regist(UserVO vo) throws Exception{
-		// dto 맵에 이름, 이메일, 비번, 나이, 성별을 넣었다. 그냥, 파라미터로 받은 vo 객체를 바로 집어 넣어도 괜찮은지, 차후 테스트 요망
+		// dto 맵에 이름, 이메일, 비번, 나이, 성별을 넣었다.
 		Map<String, Object> dto = new HashMap<>();
 		dto.put("name", vo.getName());
 		dto.put("email", vo.getEmail());
@@ -43,6 +44,22 @@ public class UserDAO {
 		dto.put("gender", vo.getGender());
 		
 		session.insert(namespace+".regist", dto);
+	}
+	
+	//사업체 회원가입 기능.
+	public void companyRegist(CompanyVO cvo) throws Exception{
+		Map<String, Object> map = new HashMap<>();
+		map.put("name", cvo.getName());
+		map.put("type", cvo.getType());
+		map.put("discription", cvo.getDiscription());
+		map.put("address", cvo.getAddress());
+		map.put("number", cvo.getNumber());
+		map.put("url", cvo.getUrl());
+		map.put("state", cvo.getState());
+		map.put("time", cvo.getTime());
+		
+		session.insert(namespace+".companyRegist", map);
+		
 	}
 	
 	

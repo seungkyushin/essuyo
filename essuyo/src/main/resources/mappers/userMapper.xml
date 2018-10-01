@@ -2,51 +2,71 @@
 <!DOCTYPE mapper
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
- 
-    
-    <mapper namespace="com.webproject.essuyo.dao">
-<!--     회원가입용 sql문. 프라이머리 키인 id는 자동 증가고, cre_date는 now()를 이용했다.-->
-    <insert id="regist">
-    insert into user(name, email, password, fail_password, age, gender, cre_date) values(#{name},#{email},#{password}, 0, #{age},#{gender}, NOW());
-    
-    </insert>
-    
-<!--     로그인용 sql문. email과 password를 user 테이블에서 찾는다 -->
-    <select id="login" resultType="com.webproject.essuyo.domain.UserVO">
-    select * from user where email = #{email} and password = #{password}
-    </select>
-    
-<!--     이메일 중복체크용 sql 입력된 이메일을 카운트한다-->
-<select id="checkId" resultType="int">
-select count(*) from user where email = #{email}
-</select>
 
 
+<mapper namespace="com.webproject.essuyo.dao">
 
+
+	<!-- 로그인용 sql문. email과 password를 user 테이블에서 찾는다 -->
+	<select id="login" resultType="com.webproject.essuyo.domain.UserVO">
+		select * from user where email = #{email} and password = #{password}
+	</select>
+
+	<!-- 이메일 중복체크용 sql 입력된 이메일을 카운트한다 -->
+	<select id="checkId" resultType="int">
+		select count(*) from user where email = #{email}
+	</select>
 	
-<select id="selectById" resultType="UserVO">
-	SELECT id, name, age, gender, email, password, fail_password, cre_date AS creDate, last_date AS lastDate,
-	total_reply AS totalReply, business_id AS businessId, image_info_id AS imageInfoId FROM user
+<!-- 일반유저 회원가입용 sql문. 프라이머리 키인 id는 자동 증가고, cre_date는 now()를 이용했다. -->
+	<insert id="regist">
+		insert into user(name, email, password, fail_password, age, gender, cre_date)
+		values(#{name},#{email},#{password}, 0, #{age},#{gender}, NOW());
+	</insert>
+	
+<!-- 	사업체 회원가입은 LAST_INSERT_ID() 때문에 순서대로 서비스를 실행시키는 게 중요하다 -->
+	<!-- 사업체 회원가입용 sql, 컴퍼니 정보를 입력 -->
+	<insert id="companyRegist">
+		insert into company (name, type, discription, address, number, url, state, time)
+		values(#{name}, #{type}, #{discription}, #{address}, #{number}, #{url}, #{state}, #{time})
+	</insert>
+	
+	<!-- 	비즈니스 테이블에 컴퍼니 아이디 입력 -->
+<!-- 	컴퍼니 레지스트가 실행된 다음에 LAST_INSERT_ID()가 실행되면, 컴퍼니 id가 -->
+	<insert id="businessRegist">
+	insert into business (company_id) values(LAST_INSERT_ID())
+	</insert>
+	
+<!-- 	사업체 오너의 회원가입 비즈니스 아이디가 추가됐음-->
+<!-- 비즈니스 레지스트가 실행된 다음에 실행되면 LAST_INSERT_ID()에 비즈니스 아이디가 -->
+	<insert id="ownerRegist">
+	insert into user (name, email, password, fail_password, age, gender, cre_date, business_id)
+	values(#{name},#{email},#{password}, 0, #{age},#{gender}, NOW(), LAST_INSERT_ID())
+	</insert>
+	
+	
 
-	<choose>
-   			 <when test="type != null and type.equals('user')">
-					WHERE id = #{id}
-   			 </when>
-    		 <when test="type != null and type.equals('business')">
-					WHERE business_id = #{id}
-    		</when>
-    		
-    </choose>
+	<select id="selectById" resultType="UserVO">
+		SELECT id, name, age, gender, email, password, fail_password, cre_date AS creDate, last_date AS lastDate,
+		total_reply AS totalReply, business_id AS businessId, image_info_id AS imageInfoId FROM user
 
-</select>
+		<choose>
+			<when test="type != null and type.equals('user')">
+				WHERE id = #{id}
+			</when>
+			<when test="type != null and type.equals('business')">
+				WHERE business_id = #{id}
+			</when>
 
-<select id="selectByEmail" resultType="UserVO">
-	SELECT id, name, age, gender, email, password, fail_password, cre_date AS creDate, last_date AS lastDate,
-	total_reply AS totalReply, business_id AS businessId, image_info_id AS imageInfoId FROM user
-	WHERE email = #{email}
-</select>
+		</choose>
+
+	</select>
+
+	<select id="selectByEmail" resultType="UserVO">
+		SELECT id, name, age, gender, email, password, fail_password, cre_date AS creDate, last_date AS lastDate,
+		total_reply AS totalReply, business_id AS businessId, image_info_id AS imageInfoId FROM user
+		WHERE email = #{email}
+	</select>
 
 
-   
-    
-    </mapper>
+
+</mapper>

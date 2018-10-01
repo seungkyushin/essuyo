@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.webproject.essuyo.dao.BusinessDao;
 import com.webproject.essuyo.dao.UserDAO;
 import com.webproject.essuyo.domain.BusinessVO;
+import com.webproject.essuyo.domain.CompanyVO;
 import com.webproject.essuyo.domain.ImageInfoVO;
 import com.webproject.essuyo.domain.SQLParamVO;
 import com.webproject.essuyo.domain.UserVO;
@@ -103,5 +104,11 @@ public class UserServiceImpl implements UserService{
 		
 		 
 		return resultMap;
+	}
+
+	@Override
+	public void companyRegist(CompanyVO cvo) throws Exception {
+		dao.companyRegist(cvo);
+		
 	}
 }

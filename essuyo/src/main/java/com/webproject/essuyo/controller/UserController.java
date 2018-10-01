@@ -16,6 +16,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.webproject.essuyo.domain.CompanyVO;
 import com.webproject.essuyo.domain.ReservationVO;
 import com.webproject.essuyo.domain.UserVO;
 import com.webproject.essuyo.service.CompanyService;
@@ -53,6 +55,13 @@ public class UserController {
 	public void registGet(UserVO vo, Model model) throws Exception {
 		logger.info("registGet.......");
 	}
+	//GET 방식으로 사업체 회원가입 페이지에 접근.
+	@RequestMapping(value="/companyRegist", method=RequestMethod.GET)
+	public void companyRegistGet(UserVO vo, CompanyVO cvo, Model model) throws Exception {
+		logger.info("companyRegistGet.......");
+	}
+
+	
 
 	// POST 방식으로 회원가입 페이지 접근
 	@ResponseBody
@@ -61,6 +70,22 @@ public class UserController {
 		logger.info("registPost.......");
 		try {
 			service.regist(vo);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return 0;
+		}
+		return 1;
+	}
+	//POST 방식으로 사업체 회원가입 접근.
+	//일반 회원가입 서비스와, 사업체 회원가입 서비스를 트랜잭션으로 묶음
+	@Transactional
+	@ResponseBody
+	@RequestMapping(value = "/companyRegist", method = RequestMethod.POST)
+	public Integer companyRegistPost(UserVO vo, CompanyVO cvo, HttpSession session, Model model) throws Exception {
+		logger.info("companyRegistPost.......");
+		try {
+			service.regist(vo);
+			service.companyRegist(cvo);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return 0;
