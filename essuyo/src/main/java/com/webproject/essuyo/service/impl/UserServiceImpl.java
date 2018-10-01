@@ -136,9 +136,10 @@ public class UserServiceImpl implements UserService{
 				return businessDao.selectById(user.getBusinessId());
 		} catch (Exception e) {
 			logger.error("유저 조회 오류.. {} ", e.toString());
+			return null;
 		}
 				
-		return null;
+		
 	}
 	// 메시지에서 받는 email 찾기 위한 service
 	@Override
