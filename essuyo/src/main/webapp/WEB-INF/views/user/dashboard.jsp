@@ -11,15 +11,10 @@
     <meta name="author" content="">
     <link rel="icon" type="image/png" sizes="16x16" href="/resources/images/favicon.png">
     <title>관리자페이지</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+KR" >
     <link href="../resources/css/chartist/chartist.min.css" rel="stylesheet">
     <link href="../resources/css/style.min.css" rel="stylesheet">
     <link href="../resources/css/simple-line-icons.css" rel="stylesheet">
-   <style>
-   body {
- 	 font-family: 'Noto Sans KR', sans-serif;
-}
-   </style>
+
 </head>
 
 <body>
