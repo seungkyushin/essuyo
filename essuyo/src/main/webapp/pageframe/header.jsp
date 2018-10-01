@@ -24,9 +24,10 @@
 <link rel="stylesheet" href="/resources/css/swiper.min.css">
 <link rel="stylesheet" href="/resources/css/magnific-popup.css">
 <link rel="stylesheet" href="/resources/css/style.css">
- 
+
 </head>
 <body>
+
 
     <div class="dark-bg sticky-top">
         <div class="container-fluid">

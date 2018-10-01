@@ -12,7 +12,7 @@
 <meta name="description" content="자리있어요?">
 <meta name="keywords" content="이써요">
 <!-- Page Title -->
-<title>자리 있어요??</title>
+<title>판매 리스트</title>
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="resources/css/bootstrap/bootstrap.min.css">
 <!-- Google Fonts -->
@@ -31,11 +31,11 @@
 <body>
 	<!--============================= HEADER =============================-->
 	<%@ include file="/pageframe/header.jsp"%>
-	<!--//END HEADER -->
 	<!--============================= DETAIL =============================-->
 	<section>
 		<div class="container-fluid">
 			<div class="row">
+			
 				<div class="col-md-7 responsive-wrap">
 					<div class="row detail-filter-wrap">
 						<div class="col-md-4 featured-responsive">
@@ -50,8 +50,7 @@
 							<div class="detail-filter">
 								<p>필터</p>
 								<form class="filter-dropdown">
-									<select class="custom-select mb-2 mr-sm-2 mb-sm-0"
-										id="inlineFormCustomSelect">
+									<select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="inlineFormCustomSelect">
 										<option selected>기본순</option>
 										<option value="1">인기순</option>
 										<option value="2">댓글 많은순</option>
@@ -69,25 +68,26 @@
 					<!-- 필터 세부사항 div -->
 					<div class="row detail-checkbox-wrap">
 						<div class="col-sm-12 col-md-6 col-lg-4 col-xl-3">
-							<label class="custom-control custom-checkbox"> <input
-								type="checkbox"> <span class="custom-control-indicator"></span>
+							<label class="custom-control custom-checkbox">
+							 <input	type="checkbox"> <span class="custom-control-indicator"></span>
 								<span class="custom-control-description">주차공간 여부</span>
 							</label>
 						</div>
 						<div class="col-sm-12 col-md-6 col-lg-4 col-xl-3">
-							<label class="custom-control custom-checkbox"> <input
-								type="checkbox"> <span class="custom-control-indicator"></span>
+							<label class="custom-control custom-checkbox"> 
+							<input	type="checkbox"> <span class="custom-control-indicator"></span>
 								<span class="custom-control-description">와이파이 / 인터넷 </span>
 							</label>
 						</div>
 						<div class="col-sm-12 col-md-6 col-lg-4 col-xl-3">
-							<label class="custom-control custom-checkbox"> <input
-								type="checkbox"> <span class="custom-control-indicator"></span>
+							<label class="custom-control custom-checkbox"> 
+							<input type="checkbox"> <span class="custom-control-indicator"></span>
 								<span class="custom-control-description">흡연 / 금연 </span>
 							</label>
 						</div>
 						<div class="col-sm-12 col-md-6 col-lg-4 col-xl-3">
-							<label class="custom-control custom-checkbox"> <input
+							<label class="custom-control custom-checkbox">
+							 <input
 								type="checkbox"> <span class="custom-control-indicator"></span>
 								<span class="custom-control-description">신용카드 가능 여부</span>
 							</label>
@@ -96,125 +96,131 @@
 					</div>
 
 
-
 					<!-- 판매리스트 div -->
 					<div id="salesList" class="row light-bg detail-options-wrap">
 
 					</div>
 				</div>
 
-
-				<!-- 맵 div -->
+<!-- 맵 div -->
 				<div class="col-md-5 responsive-wrap map-wrap">
-					<div class="map-fix" data-toggle="affix">
-						<div id="map" data-lat="37.556537" data-lon="126.945200"
-							data-zoom="14"></div>
+					<div class="map-fix">
+						
+							<div id="map" data-lat="37.556537" data-lon="126.945" data-zoom="14"></div>
 					</div>
 				</div>
 			</div>
 		</div>
-
 	</section>
+	
 	<!--//END DETAIL -->
 	<!--============================= FOOTER =============================-->
 	<%@ include file="/pageframe/footer.jsp"%>
 	<!--//END FOOTER -->
+
 	<!-- jQuery, Bootstrap JS. -->
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-	<script src="resources/js/jquery/jquery-3.2.1.min.js"></script>
+		<script src="resources/js/jquery/jquery-3.2.1.min.js"></script>
 	<script src="resources/js/popper/popper.min.js"></script>
 	<script src="resources/js/bootstrap/bootstrap.min.js"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+	<script	src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 
-
-	<!-- 지도 JQuery -->
 	<script>
-				$(".map-icon").click(function() {
-					$(".map-fix").toggle();
-				});
+ 		$(".map-icon").click(function() {
+ 			$(".map-fix").toggle();
+ 		});
 	</script>
-
-
 	<script>
-        
-        function myMap() {
-            var maplat = $('#map').data('lat');
-            var maplon = $('#map').data('lon');
-            var mapzoom = $('#map').data('zoom');
-
-            var map = new google.maps.Map(document.getElementById('map'), {
-                setCenter: {
-                    lat: maplat,
-                    lng: maplon
-                },
-                zoom: mapzoom,
-                scrollwheel: false
-            });
-            var marker = new google.maps.Marker({
-                setPosition: {
-                    lat: maplat,
-                    lng: maplon
-                },
-                map: map,
-                title: 'We are here!'
-            });
-        }
-    </script>
+		// Want to customize colors? go to snazzymaps.com
+		function myMap() {
+			var maplat = $('#map').data('lat');
+			var maplon = $('#map').data('lon');
+			var mapzoom = $('#map').data('zoom');
+			// Styles a map in night mode.
+			var map = new google.maps.Map(document.getElementById('map'), {
+				center : {
+					lat : maplat,
+					lng : maplon
+				},
+				zoom : mapzoom,
+				scrollwheel : false
+			});
+			var marker = new google.maps.Marker({
+				position : {
+					lat : maplat,
+					lng : maplon
+				},
+				map : map,
+				title : '현재 위치!'
+			});
+		}
+	</script>
 
 
 	<!-- ajaxJQuery -->
 	<script>
-	function test(){
-		$.ajax({
-			type : 'GET',
-			url : '/api/list?start=' + start,
-			headers : {
-				"Content-Type" : "application/json",
-				"X-HTTP-Method-Override" : "GET"
-			},	
-				
-			success : function(data) {
-				$("#type1").text(data.sales[0].type);
-				
-				var source = $("#template").html();
-				var template = Handlebars.compile(source);
-				var resultHTML = "";
-				data.sales.forEach(function(data2){
-					$("#salesList").append(template(data2));
-					//resultHTML += template(data2);
-				})
-				//$("#salesList").html(resultHTML);
-			}
+		function test() {
+			$.ajax({
+				type : 'GET',
+				url : '/api/list?start=' + start,
+				headers : {
+					"Content-Type" : "application/json",
+					"X-HTTP-Method-Override" : "GET"
+				},
+
+				success : function(data) {
+					$("#type1").text(data.sales[0].type);
+
+					var source = $("#template").html();
+					var template = Handlebars.compile(source);
+					var resultHTML = "";
+					data.sales.forEach(function(data2) {
+						$("#salesList").append(template(data2));
+
+						
+						if (data2.score >= 8) {
+							$(".a").attr('class', 'featured-rating-green');
+						} else if (data2.score >= 4) {
+							$(".a").attr('class', 'featured-rating-orange');
+						} else {
+							$(".a").attr('class', 'featured-rating');
+						}
+
+						if (data2.state == 'OPEN') {
+							$(".b").attr('class', 'open-now');
+						} else {
+							$(".b").attr('class','closed-now');
+						}
+
+					})
+				}
+			//$("#salesList").html(resultHTML);
+			});
+		}
+	</script>
+
+
+
+	<script>
+		var start = 0;
+		$(document).ready(function() {
+		test();
+	    $(window).scroll(function() {
+		if ($(window).scrollTop() == $(document).height()- $(window).height()) {
+		start++;
+	    test();
+	    }
+
+	    });
+					
 		});
-	}
-		</script>
-
-
-
-	<script>		
-	var start = 0;
-		 $(document).ready(function(){
-		 test();
-            
-            $(window).scroll(function(){
-                if($(window).scrollTop() == $(document).height() - $(window).height()){
-                	start++;
-                	test();
-                }
-                 
-            });
-
-		});
-		
-		
 	</script>
 	<!-- 판매리스트 소스 -->
 	<script id=template type="text/x-handlerbars-template">
 	 <div class="col-sm-6 col-lg-12 col-xl-6 featured-responsive">
 								<div class="featured-place-wrap">
 									<a href="/detail"> <img	src="{{image}}" class="img-fluid" alt="#">
-										<span class="featured-rating-orange">{{score}}</span>
+										<span class="a">{{score}}</span>
 										<div class="featured-title-box">
 											<h6>{{name}}</h6>
 											<p>{{type}}</p>
@@ -230,20 +236,15 @@
 													<p>{{url}}</p></li>
  											</ul>
 											<div class="bottom-icons">
-												<div class="closed-now">{{state}}</div>
-												<span class="ti-heart"></span> <span class="ti-bookmark"></span>
+												<div class="b">{{state}}</div>
 											</div>
 										</div>
 									</a>
 								</div>		
 </div>			
 </script>
-
-
-
 	<!-- Map JS (Please change the API key below. Read documentation for more info) -->
-	<script	src="https://maps.googleapis.com/maps/api/js?callback=myMap&key=AIzaSyB_SsV7PnpCZxu2cphySVYNkiKehtF_ogY">
-	</script>
-
+	 <script src="https://maps.googleapis.com/maps/api/js?callback=myMap&key=AIzaSyB_SsV7PnpCZxu2cphySVYNkiKehtF_ogY"></script>
 </body>
+
 </html>
