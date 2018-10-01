@@ -83,9 +83,11 @@ public class UserController {
 	@RequestMapping(value = "/companyRegist", method = RequestMethod.POST)
 	public Integer companyRegistPost(UserVO vo, CompanyVO cvo, HttpSession session, Model model) throws Exception {
 		logger.info("companyRegistPost.......");
+		//LAST_INSERT_ID()를 사용하기 때문에 반드시 아래의 순서대로 실행하는 게 중요하다
 		try {
-			service.regist(vo);
 			service.companyRegist(cvo);
+			service.businessRegist();
+			service.ownerRegist(vo);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return 0;

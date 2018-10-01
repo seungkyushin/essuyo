@@ -26,16 +26,14 @@
 <!-- 	사업체 회원가입은 LAST_INSERT_ID() 때문에 순서대로 서비스를 실행시키는 게 중요하다 -->
 	<!-- 사업체 회원가입용 sql, 컴퍼니 정보를 입력 -->
 	<insert id="companyRegist">
-		insert into company (name, type, discription, address, number, url, state, time)
-		values(#{name}, #{type}, #{discription}, #{address}, #{number}, #{url}, #{state}, #{time})
-	</insert>
-	
+		insert into company(name, type, discription, address, number, url, state, time)
+		values(#{companyName}, #{type}, #{discription}, #{address}, #{number}, #{url}, #{state}, #{time})
+	</insert>	
 	<!-- 	비즈니스 테이블에 컴퍼니 아이디 입력 -->
 <!-- 	컴퍼니 레지스트가 실행된 다음에 LAST_INSERT_ID()가 실행되면, 컴퍼니 id가 -->
 	<insert id="businessRegist">
 	insert into business (company_id) values(LAST_INSERT_ID())
-	</insert>
-	
+	</insert>	
 <!-- 	사업체 오너의 회원가입 비즈니스 아이디가 추가됐음-->
 <!-- 비즈니스 레지스트가 실행된 다음에 실행되면 LAST_INSERT_ID()에 비즈니스 아이디가 -->
 	<insert id="ownerRegist">

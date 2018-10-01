@@ -14,6 +14,10 @@ public interface UserService {
 	
 	public void companyRegist(CompanyVO cvo) throws Exception;
 	
+	public void businessRegist() throws Exception;
+	
+	public void ownerRegist(UserVO vo) throws Exception;
+	
 	public void keepLogin(String email, String seesionId, Date next) throws Exception;
 	
 	public UserVO checkLoginBefore(String value);

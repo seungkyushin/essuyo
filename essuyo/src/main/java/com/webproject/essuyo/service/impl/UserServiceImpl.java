@@ -111,4 +111,16 @@ public class UserServiceImpl implements UserService{
 		dao.companyRegist(cvo);
 		
 	}
+
+	@Override
+	public void businessRegist() throws Exception {
+		dao.businessRegist();
+		
+	}
+
+	@Override
+	public void ownerRegist(UserVO vo) throws Exception {
+		dao.ownerRegist(vo);
+		
+	}
 }

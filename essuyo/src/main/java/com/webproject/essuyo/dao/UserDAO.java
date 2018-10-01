@@ -49,7 +49,7 @@ public class UserDAO {
 	//사업체 회원가입 기능.
 	public void companyRegist(CompanyVO cvo) throws Exception{
 		Map<String, Object> map = new HashMap<>();
-		map.put("name", cvo.getName());
+		map.put("companyName", cvo.getCompanyName());
 		map.put("type", cvo.getType());
 		map.put("discription", cvo.getDiscription());
 		map.put("address", cvo.getAddress());
@@ -59,6 +59,25 @@ public class UserDAO {
 		map.put("time", cvo.getTime());
 		
 		session.insert(namespace+".companyRegist", map);
+		
+	}
+	//비즈니스 테이블에 컴퍼니 아이디를 등록하는 기능
+	//컴퍼니 아이디는 LAST_INSERT_ID()로 들어가서 파라미터는 불필요
+	public void businessRegist() throws Exception{
+		session.insert(namespace+".businessRegist");
+	}
+	
+	//사업자(오너)의 회원가입 부분.
+	//map에 넣는 건 같지만, 마찬가지로 business_id를 LAST_INSERT_ID()로 입력한다.
+	public void ownerRegist(UserVO vo) throws Exception{
+		Map<String, Object> dto = new HashMap<>();
+		dto.put("name", vo.getName());
+		dto.put("email", vo.getEmail());
+		dto.put("password", vo.getPassword());
+		dto.put("age", vo.getAge());
+		dto.put("gender", vo.getGender());
+		
+		session.insert(namespace+".ownerRegist", dto);
 		
 	}
 	
