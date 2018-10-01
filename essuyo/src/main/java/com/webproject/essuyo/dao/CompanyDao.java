@@ -10,6 +10,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.webproject.essuyo.domain.CompanyVO;
+import com.webproject.essuyo.domain.SQLParamVO;
 
 @Repository
 public class CompanyDao {
@@ -23,8 +24,8 @@ public class CompanyDao {
 		return session.selectOne(namespace + ".select", companyId);
 		
 	}
-	public List<CompanyVO> listAll() throws Exception{
-		return session.selectList(namespace+".listAll");
+	public List<CompanyVO> listAll(SQLParamVO param) throws Exception{
+		return session.selectList(namespace+".listAll", param);
 		
 	}
 	

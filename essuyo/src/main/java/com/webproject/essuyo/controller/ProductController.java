@@ -59,7 +59,13 @@ public class ProductController {
 			int resultId = reservationService.regReservationInfo(email, reservationInfo);
 
 			if (resultId == 0) {
-				CompanyVO company = companyService.getCompany(reservationInfo.getCompanyId());
+				CompanyVO company = null;
+				try {
+					company = companyService.getCompany(reservationInfo.getCompanyId());
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 
 				if (company != null) {
 					String companyType = company.getType();

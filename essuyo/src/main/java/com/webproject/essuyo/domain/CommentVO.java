@@ -12,6 +12,8 @@ public class CommentVO {
 	private String regDate;
 	private int userId;
 	private int companyId;
+	
+	
 	public int getId() {
 		return id;
 	}
