@@ -15,7 +15,7 @@ public class UserVO {
 	private Date creDate; /* 생성날짜 */
 	private Date lastDate; /* 생성날짜 */
 	private int todayReply; /* 생성날짜 */
-	private int businessId;
+	private int businessId = -1;
 	private int imageInfoId;
 	private String sessionKey;
 	private Timestamp sessionlimit;

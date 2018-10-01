@@ -28,7 +28,7 @@ public class UserDAO {
 	public UserVO login(UserVO vo) throws Exception {
 		Map<String, Object> dto = new HashMap<>();
 		dto.put("email", vo.getEmail());
-		dto.put("password", vo.getPassword());
+		dto.put("password", vo.getPassword());		
 		
 		return session.selectOne(namespace+".login", dto);
 	}

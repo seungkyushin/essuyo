@@ -140,7 +140,15 @@ public class UserController {
 				model.addAttribute("msg", "이메일이나 비밀번호가 잘못됐습니다.");
 				} 
 				return "/user/login";
+			} else if(vo.getBusinessId() != -1){
+				//만약 비즈니스 아이디가 -1(기본값)이 아닐 경우,
+				//세션에 companyLogin과 login, 두가지 어트리뷰트를 세트해 주고, 메인 페이지로 보낸다.
+				logger.info("new company login success");
+				session.setAttribute("companyLogin", vo.getBusinessId());
+				session.setAttribute("login",  vo.getEmail());
+				return "redirect:/";
 			} else {
+				//비즈니스 아이디가 -1일 경우 그냥 login 어트리뷰트만 세트해 준다.
 				logger.info("new login success");				
 				session.setAttribute("login",  vo.getEmail());
 				return "redirect:/";
