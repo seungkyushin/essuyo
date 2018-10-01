@@ -1,9 +1,6 @@
 package com.webproject.essuyo.controller;
 
 
-
-import java.util.Map;
-
 import javax.inject.Inject;
 
 import org.slf4j.Logger;
@@ -33,10 +30,6 @@ public class CompanyController {
 	@RequestMapping(value="/list",method=RequestMethod.GET)
 	public void salesList(Model model) throws Exception{
 		logger.info("ListGET()....");
-/*		
-		Map<String,Object> result = service.getList(start);
-		model.addAttribute("result", result);*/
-
 	}
 	
 	
@@ -52,10 +45,6 @@ public class CompanyController {
 		
 		return "detail";
 	}
-	
-	
-	
-	
-	
+
 	
 }
