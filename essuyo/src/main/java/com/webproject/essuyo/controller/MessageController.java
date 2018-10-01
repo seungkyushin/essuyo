@@ -16,7 +16,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.webproject.essuyo.domain.MessageCriteria;
 import com.webproject.essuyo.domain.MessagePageMaker;
 import com.webproject.essuyo.domain.MessageVO;
+import com.webproject.essuyo.domain.UserVO;
 import com.webproject.essuyo.service.MessageService;
+import com.webproject.essuyo.service.UserService;
 
 @Controller
 @RequestMapping("/message/*")
@@ -25,39 +27,63 @@ public class MessageController {
 
 	@Inject
 	private MessageService service;
-	
+
+	@Inject
+	private UserService userService;
+
 	@Inject
 	private HttpSession session;
 
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
-	public void registerGET(MessageVO message, Model model) throws Exception {
+	public void registerGET(MessageVO message, RedirectAttributes rttr, Model model) throws Exception {
 
-			logger.info("register get...");
-	
+		// 현재 로그인 된 ID 가져오기
+		String userID = (String) session.getAttribute("login");
+		logger.info("user : " + userID);
+		message.setUserID(userID);
+
+		// receiverID 받아오기
+		String id = message.getReceiverID();
+		logger.info("receiver : " + id);
+
+		// UserVO 의 id 값으로 들어온 값을 email로 변환
+		UserVO user = userService.selectMessageEmail(id);
+		String receiverID = user.getEmail();
+		logger.info("receiver : " + receiverID);
+		// receiverID 초기화
+		message.setReceiverID(receiverID);
+
+		model.addAttribute("messageVO", message);
+
+		logger.info(message.toString());
+		logger.info("register get...");
+
 	}
 
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public String registerPOST(MessageVO message, RedirectAttributes rttr, Model model) throws Exception {
-		/* @RequestParam("receiverID") String receiverID) throws Exception { */
+
 		logger.info("register POST...");
 		logger.info(message.toString());
 		
-		// 현재 로그인 된 ID 가져오기
-		String userID = (String) session.getAttribute("login");
-		logger.info("user : " +userID);
-		message.setUserID(userID);
+		// receiverID 받아오기
+		String id = message.getReceiverID();
+		logger.info("receiver : " + id);
+
+		// UserVO 의 id 값으로 들어온 값을 email로 변환
+		UserVO user = userService.selectMessageEmail(id);
+		String receiverID = user.getEmail();
+		logger.info("user : " + receiverID);
 		
-		String receiverID = (String) session.getAttribute("receiverID");
-		logger.info("receiver : " +receiverID);
+		// receiverID 초기화
 		message.setReceiverID(receiverID);
+		logger.info("receiver : " + receiverID);
 		
-		model.addAttribute("messageVO",message);
-		
-		logger.info(message.toString());
+		model.addAttribute("messageVO", message);
 		
 		service.regist(message);
-
 		
+
 		rttr.addFlashAttribute("msg", "success");
 
 		return "redirect:/message/listPage";
@@ -106,21 +132,21 @@ public class MessageController {
 		model.addAttribute("list", service.listCriteria(cri));
 	}
 
-	
-	@RequestMapping(value = "/listPage", method = RequestMethod.GET) 
-	public void	listPage(@ModelAttribute("cri") MessageCriteria cri, Model model) 
-			throws Exception {
-	
+	@RequestMapping(value = "/listPage", method = RequestMethod.GET)
+	public void listPage(@ModelAttribute("cri") MessageCriteria cri, Model model) throws Exception {
+
 		logger.info(cri.toString());
-	
-		model.addAttribute("list", service.listCriteria(cri)); MessagePageMaker
-		pageMaker = new MessagePageMaker(); cri.setPage(1); pageMaker.setCri(cri);
-	
+
+		model.addAttribute("list", service.listCriteria(cri));
+		MessagePageMaker pageMaker = new MessagePageMaker();
+		cri.setPage(1);
+		pageMaker.setCri(cri);
+
 		pageMaker.setTotalCount(service.listCountCriteria(cri));
-	
-		model.addAttribute("pageMaker", pageMaker); 
+
+		model.addAttribute("pageMaker", pageMaker);
 	}
-	 
+
 	@RequestMapping(value = "/readPage", method = RequestMethod.GET)
 	public void read(@RequestParam("megNum") int megNum, @ModelAttribute("cri") MessageCriteria cri, Model model)
 			throws Exception {
@@ -131,16 +157,17 @@ public class MessageController {
 
 	// 보낸 쪽지함
 	@RequestMapping(value = "/sendMeg", method = RequestMethod.GET)
-	public void sendMeg(@ModelAttribute("cri") MessageCriteria cri, Model model)throws Exception {
+	public void sendMeg(@ModelAttribute("cri") MessageCriteria cri, Model model) throws Exception {
 
 		logger.info(cri.toString());
-		
+
 		// 현재 로그인 된 ID 가져오기
 		String userID = (String) session.getAttribute("login");
-		logger.info("user : " +userID);
-		
-		logger.info(cri.toString());
+		logger.info("user : " + userID);
 
+		logger.info(cri.toString());
+		
+		model.addAttribute("sendList", service.listCriteria(cri));
 		MessagePageMaker pageMaker = new MessagePageMaker();
 		cri.setPage(1);
 		pageMaker.setCri(cri);
@@ -148,7 +175,7 @@ public class MessageController {
 		pageMaker.setTotalCount(service.listCountCriteria(cri));
 
 		model.addAttribute("pageMaker", pageMaker);
-		
+
 		int page = cri.getPage();
 
 		model.addAttribute("sendList", service.sendMeg(userID, page));
@@ -163,8 +190,8 @@ public class MessageController {
 
 		// 현재 로그인 된 ID 가져오기
 		String userID = (String) session.getAttribute("login");
-		logger.info("user : " +userID);
-		
+		logger.info("user : " + userID);
+
 		logger.info(cri.toString());
 
 		MessagePageMaker pageMaker = new MessagePageMaker();
@@ -174,7 +201,7 @@ public class MessageController {
 		pageMaker.setTotalCount(service.listCountCriteria(cri));
 
 		model.addAttribute("pageMaker", pageMaker);
-		
+
 		int page = cri.getPage();
 
 		model.addAttribute("recevieList", service.recevieMeg(userID, page));

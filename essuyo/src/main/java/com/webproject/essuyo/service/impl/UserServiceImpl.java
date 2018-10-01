@@ -104,4 +104,10 @@ public class UserServiceImpl implements UserService{
 		 
 		return resultMap;
 	}
+
+	// 메시지에서 받는 email 찾기 위한 service
+	@Override
+	public UserVO selectMessageEmail(String id) throws Exception {
+		return dao.selectMessageEmail(id);
+	}
 }

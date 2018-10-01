@@ -47,6 +47,12 @@ select count(*) from user where email = #{email}
 </select>
 
 
-   
-    
+    <select id="recevieID" resultType="UserVO">
+   	<![CDATA[
+   		select email
+   		from user
+   		where id = #{id}
+    ]]>
+    </select>
+
     </mapper>

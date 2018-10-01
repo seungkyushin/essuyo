@@ -67,15 +67,7 @@
 			var formObj = $("form[role='form']");
 
 			console.log(formObj);
-			/* 	
-				$(".btn-primary").on("click", function(){
-					self.location = "/message/listAll";
-				});
-				
-				$(".btn-danger").on("click", function(){
-					formObj.attr("action", "/message/remove");
-					formObj.submit();
-				}); */
+			
 			var referrer =  document.referrer;
 				
 				//	alert(referrer.substring(22));
