@@ -55,7 +55,7 @@
 			</div>
 
 			<!-- Login Form -->
-			<form id="loginForm" method="post"	action="/user/loginPost">
+			<form id="loginForm" method="post" action="/login">
 			
 			
 				<input type="email" id="email" name="email" class="fadeIn second" placeholder="이메일" required>
@@ -70,6 +70,7 @@
 			<!-- Remind Passowrd -->
 			<div id="formFooter">
 				<a class="underlineHover" href="/user/regist">회원 가입</a>
+				<a class="underlineHover" href="/user/companyRegist">사업자 등록</a>
 			</div>
 
 		</div>
@@ -83,6 +84,7 @@
 	<script type="text/javascript" src="/resources/js/jquery/jquery.validate.js"></script>
 	<script type="text/javascript" src="/resources/js/jquery/additional-methods.js"></script>
 	<script type="text/javascript" src="/resources/js/jquery/messages_ko.js"></script>
+	<script type="text/javascript" src="/resources/js/utility.js"></script>
 
 
 	<script>
@@ -104,14 +106,14 @@
 			}
 		}
 
-		//로그아웃 실패시 메시지 띄우는 기능. 여기까지 하다가 말았음
+		//로그인 실패시 메시지 띄우는 기능.
 		function msgCheck() {
 			var msg = "${msg}";
 
 			if (msg === null || msg === "" || msg === undefined) {
 				
 			} else {
-				alert(msg);
+				myAlert("로그인 실패", msg);
 			}
 		}
 	</script>
