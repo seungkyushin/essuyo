@@ -40,6 +40,7 @@
 			<mvc:mapping path="/api/*" />
 			<mvc:exclude-mapping path="/user/regist" />
 			<mvc:exclude-mapping path="/user/companyRegist" />
+			<mvc:exclude-mapping path="/api/checkId" />			
 			<beans:ref bean="authInterceptor" />
 		</mvc:interceptor>
 

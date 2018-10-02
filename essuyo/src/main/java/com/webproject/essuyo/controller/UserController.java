@@ -101,23 +101,7 @@ public class UserController {
 		return 1;
 	}
 
-	// 회원가입 시 이메일 중복 체크
-	@ResponseBody
-	@RequestMapping(value = "/checkId", method = RequestMethod.POST)
-	public Map<String, Object> checkId(String email) {
-		Map<String, Object> map = new HashMap<>();
-
-		if (service.checkId(email)) {
-			map.put("code", 99);
-			map.put("msg", "사용가능한 이메일 입니다.");
-			
-		} else {
-			map.put("code", -1);
-			map.put("msg", "이미 등록된 이메일입니다.");
-			
-		}
-		return map;
-	}
+	
 			
 		
 	@GetMapping("/dashboard")

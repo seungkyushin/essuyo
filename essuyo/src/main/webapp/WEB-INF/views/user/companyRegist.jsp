@@ -34,78 +34,11 @@
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
 <!-- 제이쿼리로 유효성 검사 -->
-<script type="text/javascript" src="/resources/js/jquery/jquery-3.2.1.min.js"></script>
-<script type="text/javascript" src="/resources/js/jquery/jquery.validate.js"></script>
-<script type="text/javascript" src="/resources/js/jquery/additional-methods.js"></script>
-<script type="text/javascript" src="/resources/js/jquery/messages_ko.js"></script>
+
+
 
 <!-- 유효성 검증. 각 항목의 유효성이 검증되지 않으면 넘어가지 않는다 -->
-<script>
-	$(function() {
-		$("#registForm").validate();
-		// 버튼을 눌렀을 때 이메일의 유효성, 중복은 검사하는 기능. 지금은 
-		$("#btnCheckId").click(function() {
-			var email = $("#email").val();
-			if (!email_check(email)) {
-				alert("형식에 맞는 이메일 주소를 입력해주세요.");
-			} else {
-				var url = "/user/checkId";
-				$.post(url, {
-					email : email
-				}, function(json) {
-					alert(json.msg);
 
-					//이메일을 사용할 수 있으면 isCheckedEmail의 값을 Y로 해준다
-					if (json.code == 99) {
-						$("#isCheckedEmail").val("Y");
-					}
-				});
-			}
-
-		});
-	});
-
-	// 	회원가입에 성공하면, 일단 대쉬보드로 가게 설정해 놓음
-	//실패하면, 일단 다시 회원가입 페이지로 가게 함
-	function doReg() {
-
-		if ($("#isCheckedEmail").val() == "N") {
-			alert("Email 중복 검사를 통과해야 합니다.");
-		}
-
-		if ($("#registForm").valid()) {
-			var url = "/user/companyRegist";
-			$.post(url, $("#registForm").serialize(), function(data) {
-				if (data == 1) {
-					alert("회원가입에 성공했습니다.");
-					document.location.href = "/user/login";
-				} else {
-					alert("회원가입에 실패했습니다. 관리자에게 문의해 주세요.");
-					document.location.href = "/user/companyRegist";
-				}
-			});
-		}
-	}
-	//정규식으로 이메일을 체크하는 펑션.
-	function email_check(email) {
-
-		var regex = /([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
-		return (email != '' && email != 'undefined' && regex.test(email));
-
-	}
-	
-	//글자수 제한 체크 
-	function len_chk(){  
-	  var frm = document.registForm.discription; 
-	     
-	  if(frm.value.length > 250){  
-	       alert("250자 이내로 작성하셔야 합니다.");  
-	       frm.value = frm.value.substring(0,250);  
-	       frm.focus();  
-	  } 
-	 
-	} 
-</script>
 
 <title>사업자 회원가입</title>
 </head>
@@ -132,7 +65,7 @@
 							<label>[비밀번호 확인]</label> <input type="password" id="passwordCheck" class="form-control" placeholder="비밀번호를 다시 입력해 주세요" equalTo="#password">
 						</div>
 						<div class="form-group">
-							<label>[이 름] <span class="help"> 예) "홍길동"</span></label> <input type="text" id="name" name="name" class="form-control" placeholder="이름" required="true">
+							<label>[이 름] <span class="help"> 예) "홍길동"</span></label> <input type="text" id="userName" name="userName" class="form-control" placeholder="이름" required>
 						</div>
 						<div class="form-group">
 							<label for="age">[나이] <span class="help"> ※ 숫자로만 입력해 주세요. 예) 28살 -> 28</span></label> <input type="text" id="age" name="age" class="form-control" placeholder="나이" required>
@@ -146,8 +79,7 @@
 						</div>
 
 						<div class="form-group">
-							<label>[회사명] </label>
-							<input type="text" id="companyName" name="companyName" class="form-control" placeholder="회사명" required="true">
+							<label>[회사명] </label> <input type="text" id="companyName" name="companyName" class="form-control" placeholder="회사명" required>
 						</div>
 
 						<div class="form-group">
@@ -163,34 +95,30 @@
 							<label>[회사 소개문]<span class="help"> ※ 250자 이내로 입력해 주세요</span></label>
 							<textarea name="discription" id="discription" class="form-control" rows="5" onkeyup="len_chk()"></textarea>
 						</div>
-						
+
 						<div class="form-group">
-							<label>[회사 주소] </label>
-							<input type="text" id="address" name="address" class="form-control" placeholder="회사주소" required="true">
+							<label>[회사 주소] </label> <input type="text" id="address" name="address" class="form-control" placeholder="회사주소" required>
 						</div>
-						
+
 						<div class="form-group">
-							<label>[회사 전화번호] <span class="help"> ※ 010-1234-5793 혹은, 02-123-4567</span></label>
-							<input type="text" id="number" name="number" class="form-control" placeholder="회사 전화번호" pattern="[0-9]{2,3}-[0-9]{3,4}-[0-9]{3,4}" maxlength="13" required="true">
+							<label>[회사 전화번호] <span class="help"> ※ 010-1234-5793 혹은, 02-123-4567</span></label> <input type="text" id="number" name="number" class="form-control" placeholder="회사 전화번호" pattern="[0-9]{2,3}-[0-9]{3,4}-[0-9]{3,4}" maxlength="13" required>
 						</div>
-						
+
 						<div class="form-group">
-							<label>[회사 홈페이지] <span class="help"> ※ www.example.com 혹은, www.example.co.kr</span></label>
-							<input type="text" id="url" name="url" class="form-control" placeholder="회사 홈페이지" required="true">
-						</div>	
-							<div class="form-group">
+							<label>[회사 홈페이지] <span class="help"> ※ www.example.com 혹은, www.example.co.kr</span></label> <input type="text" id="url" name="url" class="form-control" placeholder="회사 홈페이지" required>
+						</div>
+						<div class="form-group">
 							<label>[영업 상태]</label> <select class="custom-select col-12" id="state" name="state" required>
 								<option selected="selected" value="">영업상태</option>
 								<option value="OPEN">영업중</option>
-								<option value="CLOSED">휴업중</option>								
+								<option value="CLOSED">휴업중</option>
 							</select>
 						</div>
-						
+
 						<div class="form-group">
-							<label>[영업 시간] </label>
-							<input type="text" id="time" name="time" class="form-control" placeholder="영업시간" required="true">
-						</div>	
-						
+							<label>[영업 시간] </label> <input type="text" id="time" name="time" class="form-control" placeholder="영업시간" required>
+						</div>
+
 						<a href="#" class="btn-reg" onclick="doReg();">회원가입</a>
 					</form>
 				</div>
@@ -200,5 +128,78 @@
 	</div>
 	</section>
 	<%@ include file="//pageframe/footer.jsp"%>
+
+	<script type="text/javascript" src="/resources/js/jquery/jquery-3.3.1.js"></script>
+	<script type="text/javascript" src="/resources/js/jquery/jquery.validate.js"></script>
+	<script type="text/javascript" src="/resources/js/jquery/additional-methods.js"></script>
+	<script type="text/javascript" src="/resources/js/jquery/messages_ko.js"></script>
+	<script type="text/javascript" src="/resources/js/utility.js"></script>
+	<script>
+		$(function() {
+			$("#registForm").validate();
+			// 버튼을 눌렀을 때 이메일의 유효성, 중복은 검사하는 기능. 지금은 
+			$("#btnCheckId").click(function() {
+				var email = $("#email").val();
+				if (!email_check(email)) {
+					myAlert("잘못된 이메일 형식", "형식에 맞는 이메일 주소를 입력해주세요.");
+				} else {
+					var url = "/api/checkId";
+					$.post(url, {
+						email : email
+					}, function(json) {						
+						//이메일을 사용할 수 있으면 isCheckedEmail의 값을 Y로 해준다
+						if (json.code === 99) {
+							myAlert("이메일 중복체크", "사용가능한 이메일입니다.");
+							$("#isCheckedEmail").val("Y");
+						} else if(json.code === -1){
+							myAlert("이메일 중복체크", "이미 등록된 이메일입니다.");
+						}
+					});
+				}
+
+			});
+		});
+
+		// 	회원가입에 성공하면, 일단 대쉬보드로 가게 설정해 놓음
+		//실패하면, 일단 다시 회원가입 페이지로 가게 함
+		function doReg() {
+
+			if ($("#isCheckedEmail").val() == "N") {
+				myAlert("ERROR", "Email 중복 검사를 통과해야 합니다.");
+			}
+
+			if ($("#registForm").valid()) {
+				var url = "/user/companyRegist";
+				$.post(url, $("#registForm").serialize(), function(data) {
+					if (data == 1) {
+						myAlert("가입 성공", "회원가입에 성공했습니다.");
+						document.location.href = "/login";
+					} else {
+						myAlert("가입 실패", "회원가입에 실패했습니다. 관리자에게 문의해 주세요.");
+						document.location.href = "/user/companyRegist";
+					}
+				});
+			}
+		}
+		//정규식으로 이메일을 체크하는 펑션.
+		function email_check(email) {
+			var regex = /([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+			return (email != '' && email != 'undefined' && regex.test(email));
+
+		}
+
+		//글자수 제한 체크 
+		function len_chk() {
+			var frm = document.registForm.discription;
+
+			if (frm.value.length > 250) {
+				myAlert("글자수 제한", "250자 이내로 작성하셔야 합니다.");
+				frm.value = frm.value.substring(0, 250);
+				frm.focus();
+			}
+
+		}
+	</script>
+
 </body>
 </html>

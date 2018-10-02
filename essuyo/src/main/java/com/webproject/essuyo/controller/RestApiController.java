@@ -1,5 +1,6 @@
 package com.webproject.essuyo.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.webproject.essuyo.service.CommentService;
@@ -28,7 +30,7 @@ import com.webproject.essuyo.service.UserService;
 public class RestApiController {
 
 	@Inject
-	private CompanyService service;
+	private CompanyService service;	
 
 	@Autowired
 	private CommentService commentService;
@@ -113,6 +115,24 @@ public class RestApiController {
 		}
 		return 0;
 	}
+	
+	// 회원가입 시 이메일 중복 체크
+		
+		@RequestMapping(value = "/checkId", method = RequestMethod.POST)
+		public Map<String, Object> checkId(String email) {
+			Map<String, Object> map = new HashMap<>();
+
+			if (userService.checkId(email)) {
+				map.put("code", 99);
+				map.put("msg", "사용가능한 이메일 입니다.");
+				
+			} else {
+				map.put("code", -1);
+				map.put("msg", "이미 등록된 이메일입니다.");
+				
+			}
+			return map;
+		}
 	
 
 }

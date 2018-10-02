@@ -33,66 +33,7 @@
 
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
-<!-- 제이쿼리로 유효성 검사 -->
-<script type="text/javascript" src="/resources/js/jquery/jquery-3.2.1.min.js"></script>
-<script type="text/javascript" src="/resources/js/jquery/jquery.validate.js"></script>
-<script type="text/javascript" src="/resources/js/jquery/additional-methods.js"></script>
-<script type="text/javascript" src="/resources/js/jquery/messages_ko.js"></script>
 
-<!-- 유효성 검증. 각 항목의 유효성이 검증되지 않으면 넘어가지 않는다 -->
-<script>
-	$(function() { 
-		$("#registForm").validate();
-		// 버튼을 눌렀을 때 이메일의 유효성, 중복은 검사하는 기능. 지금은 
-		$("#btnCheckId").click(function() {
-			var email = $("#email").val();
-			if(! email_check(email)){
-				alert("형식에 맞는 이메일 주소를 입력해주세요.");
-			} else {
-				var url = "/user/checkId";
-				$.post(url, {email : email}, function(json) {
-					alert(json.msg);
-					
-					//이메일을 사용할 수 있으면 isCheckedEmail의 값을 Y로 해준다
-					if(json.code == 99){
-						$("#isCheckedEmail").val("Y");
-					}
-				});
-			}
-			
-		});
-	});
-
-	// 	회원가입에 성공하면, 일단 대쉬보드로 가게 설정해 놓음
-	//실패하면, 일단 다시 회원가입 페이지로 가게 함
-	function doReg() {
-		
-		if ($("#isCheckedEmail").val() == "N") {
-			alert("Email 중복 검사를 통과해야 합니다.");			
-		}
-		
-		if ($("#registForm").valid()) {
-			var url = "/user/regist";
-			$.post(url, $("#registForm").serialize(), function(data) {
-				if (data == 1) {
-					alert("회원가입에 성공했습니다.");
-					document.location.href = "/user/login";
-				} else {
-					alert("회원가입에 실패했습니다. 관리자에게 문의해 주세요.");
-					document.location.href = "/user/regist";
-				}
-			});
-		}
-	}
-	//정규식으로 이메일을 체크하는 펑션. 아직 미 테스트
-	function email_check( email ) {
-	    
-	    var regex=/([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
-	    return (email != '' && email != 'undefined' && regex.test(email));
-	 
-	}
-		
-</script>
 
 <title>회원가입</title>
 </head>
@@ -145,5 +86,70 @@
 </div>
 </section>
 	<%@ include file="//pageframe/footer.jsp"%>
+	<!-- 제이쿼리로 유효성 검사 -->
+<script type="text/javascript" src="/resources/js/jquery/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="/resources/js/jquery/jquery.validate.js"></script>
+<script type="text/javascript" src="/resources/js/jquery/additional-methods.js"></script>
+<script type="text/javascript" src="/resources/js/jquery/messages_ko.js"></script>
+<script type="text/javascript" src="/resources/js/utility.js"></script>
+
+
+<!-- 유효성 검증. 각 항목의 유효성이 검증되지 않으면 넘어가지 않는다 -->
+<script>
+	$(function() { 
+		$("#registForm").validate();
+		
+		// 버튼을 눌렀을 때 이메일의 유효성, 중복은 검사하는 기능. 지금은 
+		$("#btnCheckId").click(function() {
+			var email = $("#email").val();
+			
+			if(! email_check(email)){
+				myAlert("잘못된 이메일 형식", "형식에 맞는 이메일 주소를 입력해주세요.");
+			} else {
+				var url = "/api/checkId";
+				$.post(url, {email : email}, function(json) {
+					myAlert("이메일 중복체크", json.msg);
+					
+					//이메일을 사용할 수 있으면 isCheckedEmail의 값을 Y로 해준다
+					if(json.code == 99){
+						$("#isCheckedEmail").val("Y");
+					}
+				});
+			}
+			
+		});
+	});
+
+	// 	회원가입에 성공하면, 일단 대쉬보드로 가게 설정해 놓음
+	//실패하면, 일단 다시 회원가입 페이지로 가게 함
+	function doReg() {
+		
+		if ($("#isCheckedEmail").val() == "N") {
+			myAlert("ERROR","Email 중복 검사를 통과해야 합니다.");			
+		}
+		
+		if ($("#registForm").valid()) {
+			var url = "/user/regist";
+			$.post(url, $("#registForm").serialize(), function(data) {
+				if (data == 1) {
+					myAlert("가입 성공","회원가입에 성공했습니다.");
+					document.location.href = "/login";
+				} else {
+					myAlert("가입 실패", "회원가입에 실패했습니다. 관리자에게 문의해 주세요.");
+					document.location.href = "/user/regist";
+				}
+			});
+		}
+	}
+	//정규식으로 이메일을 체크하는 펑션. 아직 미 테스트
+	function email_check( email ) {
+	    
+	    var regex=/([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+	    return (email != '' && email != 'undefined' && regex.test(email));
+	 
+	}
+		
+</script>
+	
 </body>
 </html>
