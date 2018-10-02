@@ -21,6 +21,13 @@ public class MainServiceImpl implements MainService {
 		
 		return mainDao.getMain();
 	}
+
+
+	@Override
+	public String getMainCount() throws Exception {
+
+		return mainDao.getMainCount();
+	}
 	
 
 
