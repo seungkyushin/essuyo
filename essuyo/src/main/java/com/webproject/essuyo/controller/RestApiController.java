@@ -94,12 +94,25 @@ public class RestApiController {
 	public String getUserImagePath(HttpSession httpSeesion){
 
 		String email = (String)httpSeesion.getAttribute("login");
+		
 		int imageInfoId = userService.getUser(email).getImageInfoId();
 		
 		return imageAdminService.getImagePath(imageInfoId);
 
 	}
 	
+	@GetMapping("/good")
+	public Integer setGoodCount(HttpSession httpSeesion){
+
+		String email = (String)httpSeesion.getAttribute("login");
+		
+		int result = userService.setGoodCount(email);
+		
+		if( result != 0) {
+			return result;
+		}
+		return 0;
+	}
 	
 
 }

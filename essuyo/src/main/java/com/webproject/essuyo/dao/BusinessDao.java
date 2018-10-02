@@ -22,4 +22,12 @@ public class BusinessDao {
 		return sqlSession.selectOne(NAME_SPACE + ".selectById" , id);
 	}
 	
+	public int updateGoodCountByBusinessId(int id) throws Exception{
+		return sqlSession.selectOne(NAME_SPACE + ".updateGoodCount" , id);
+	}
+
+
+	
+	
+	
 }

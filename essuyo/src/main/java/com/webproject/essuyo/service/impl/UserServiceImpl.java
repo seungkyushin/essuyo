@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.webproject.essuyo.dao.BusinessDao;
 import com.webproject.essuyo.dao.UserDAO;
@@ -147,4 +148,18 @@ public class UserServiceImpl implements UserService{
 		return dao.selectMessageEmail(id);
 
 	}
+
+	@Override
+	@Transactional
+	public int setGoodCount(String email) {
+		UserVO user = dao.selectByEmail(email);
+		try {
+				return businessDao.updateGoodCountByBusinessId(user.getBusinessId());
+		} catch (Exception e) {
+			logger.error("비지니스 조회 오류.. {} ", e.toString());
+			return 0;
+		}
+		
+	}
+
 }

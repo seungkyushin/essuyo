@@ -112,7 +112,7 @@ public class UserController {
 	}
 	
 	// 로그인 컨트롤. 로그인 페이지에 들어갈 때
-		@RequestMapping(value = "/login", method = RequestMethod.GET)
+		@RequestMapping(value = "/login1", method = RequestMethod.GET)
 		public void loginGET(@ModelAttribute UserVO vo) {
 
 		}
