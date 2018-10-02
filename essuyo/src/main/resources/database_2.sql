@@ -222,8 +222,10 @@ INSERT INTO image_info ( save_path, type ,name, cre_date ) VALUES("/resources/im
 INSERT INTO image_info ( save_path, type ,name, cre_date ) VALUES("/resources/images/reserve-slide2.jpg","image/jpg","reserve-slide2", now());
 
 /* 지역명목록 */
-INSERT INTO area_list (name)  VALUES("부산");
 INSERT INTO area_list (name)  VALUES("서울");
+INSERT INTO area_list (name)  VALUES("부산");
+INSERT INTO area_list (name)  VALUES("광주");
+INSERT INTO area_list (name)  VALUES("강원도");
 
 
 
@@ -236,23 +238,83 @@ INSERT INTO facility(name)  VALUES("애견동반가능");
 /* 업체 */
 INSERT INTO company(name, type, score, discription, address, number, url, state, time, 
 total_visit, today_visit, area_list_id)
-VALUES("힐튼호텔", "호텔", 9.0 , "돈만 있으면 쾌적한 곳", "부산광역시 기장군 기장읍 기장해안로 268-32 힐튼부산","010-0000-0000",
-"http://hiltonbusan.co.kr/","OPEN","ALL TIME",0,0,1);
+VALUES("힐튼호텔1", "호텔", 9.0 , "돈만 있으면 쾌적한 곳1", "서울특별시 기장군 기장읍 기장해안로 268-32 힐튼서울","010-1111-1111",
+"http://hiltonbusan1.co.kr/","OPEN","ALL TIME",0,0,1);
+
+INSERT INTO company(name, type, score, discription, address, number, url, state, time, 
+total_visit, today_visit, area_list_id)
+VALUES("힐튼호텔2", "호텔", 7.0 , "돈만 있으면 쾌적한 곳2", "부산광역시 기장군 기장읍 기장해안로 268-32 힐튼부산","010-2222-2222",
+"http://hiltonbusan2.co.kr/","OPEN","ALL TIME",0,0,2);
+
+INSERT INTO company(name, type, score, discription, address, number, url, state, time, 
+total_visit, today_visit, area_list_id)
+VALUES("힐튼호텔3", "호텔", 6.0 , "돈만 있으면 쾌적한 곳3", "광주광역시 기장군 기장읍 기장해안로 268-32 힐튼광주","010-3333-3333",
+"http://hiltonbusan.co.kr/","CLOSE","ALL TIME",0,0,3);
+
+INSERT INTO company(name, type, score, discription, address, number, url, state, time, 
+total_visit, today_visit, area_list_id)
+VALUES("힐튼호텔4", "호텔", 2.0 , "돈만 있으면 쾌적한 곳4", "강원도 기장군 기장읍 기장해안로 268-32 힐튼강원도","010-4444-4444",
+"http://hiltonbusan.co.kr/","CLOSE","ALL TIME",0,0,4);
 
 INSERT INTO company(name, type, score, discription, address,number, url, state, time, 
 total_visit, today_visit, area_list_id)
-VALUES("아웃백-신촌점", "식당", 8.0 , "빵 맛있는 식당", "서울 서대문구 연세로12길 33","02-0000-0000",
-"http://outback.co.kr/shinchon/","OPEN","am 10:00 ~ pm 10:00",0,0,1);
+VALUES("아웃백1", "음식점", 9.0 , "빵 맛있는 식당", "서울 서대문구 연세로12길 33","02-1111-1111",
+"http://outback1.co.kr/shinchon/","OPEN","am 10:00 ~ pm 10:00",0,0,1);
 
 INSERT INTO company(name, type, score, discription, address,number, url, state, time, 
 total_visit, today_visit, area_list_id)
-VALUES("알촌", "식당", 4.0 , "알밥파는 집", "서울 서대문구 이화여대7길 14","02-1111-1111",
-"http://alchon.com/","CLOSED","am 10:00 ~ pm 10:00",0,0,1);
+VALUES("아웃백2", "음식점", 7.0 , "빵 맛있는 식당", "부산 서대문구 연세로12길 33","02-2222-2222",
+"http://outback2.co.kr/shinchon/","OPEN","am 10:00 ~ pm 10:00",0,0,2);
+INSERT INTO company(name, type, score, discription, address,number, url, state, time, 
+total_visit, today_visit, area_list_id)
+VALUES("아웃백3", "음식점", 6.0 , "빵 맛있는 식당", "광주 서대문구 연세로12길 33","02-3333-3333",
+"http://outback3.co.kr/shinchon/","CLOSE","am 10:00 ~ pm 10:00",0,0,3);
+INSERT INTO company(name, type, score, discription, address,number, url, state, time, 
+total_visit, today_visit, area_list_id)
+VALUES("아웃백4", "음식점", 2.0 , "빵 맛있는 식당", "강원도 서대문구 연세로12길 33","02-4444-4444",
+"http://outback4.co.kr/shinchon/","CLOSE","am 10:00 ~ pm 10:00",0,0,4);
 
 INSERT INTO company(name, type, score, discription, address,number, url, state, time, 
 total_visit, today_visit, area_list_id)
-VALUES("SOCAR", "렌트카", 1.0 , "카 쉐어", "서울 서대문구 남가좌동 7길 14","02-2222-2222",
-"http://socar.com/","CLOSED","am 10:00 ~ pm 10:00",0,0,1);
+VALUES("알촌1", "음식점", 9.0 , "알밥파는 집11", "서울 서대문구 이화여대7길 14","02-111-111",
+"http://alchon1.com/","OPEN","am 10:00 ~ pm 10:00",0,0,1);
+
+INSERT INTO company(name, type, score, discription, address,number, url, state, time, 
+total_visit, today_visit, area_list_id)
+VALUES("알촌2", "음식점", 7.0 , "알밥파는 집2", "부산 서대문구 이화여대7길 14","02-222-222",
+"http://alchon2.com/","OPEN","am 10:00 ~ pm 10:00",0,0,2);
+
+INSERT INTO company(name, type, score, discription, address,number, url, state, time, 
+total_visit, today_visit, area_list_id)
+VALUES("알촌3", "음식점", 6.0 , "알밥파는 집3", "광주 서대문구 이화여대7길 14","02-333-333",
+"http://alchon3.com/","CLOSED","am 10:00 ~ pm 10:00",0,0,3);
+
+INSERT INTO company(name, type, score, discription, address,number, url, state, time, 
+total_visit, today_visit, area_list_id)
+VALUES("알촌4", "음식점", 2.0 , "알밥파는 집4", "강원도 서대문구 이화여대7길 14","02-444-444",
+"http://alchon4.com/","CLOSED","am 10:00 ~ pm 10:00",0,0,4);
+
+
+INSERT INTO company(name, type, score, discription, address,number, url, state, time, 
+total_visit, today_visit, area_list_id)
+VALUES("쏘카1", "렌트카", 9.0 , "카 쉐어1", "서울 서대문구 남가좌동 7길 14","02-11-11",
+"http://socar1.com/","OPEN","am 10:00 ~ pm 10:00",0,0,1);
+
+INSERT INTO company(name, type, score, discription, address,number, url, state, time, 
+total_visit, today_visit, area_list_id)
+VALUES("쏘카2", "렌트카", 7.0 , "카 쉐어2", "부산 서대문구 남가좌동 7길 14","02-22-22",
+"http://socar2.com/","OPEN","am 10:00 ~ pm 10:00",0,0,2);
+
+INSERT INTO company(name, type, score, discription, address,number, url, state, time, 
+total_visit, today_visit, area_list_id)
+VALUES("쏘카3", "렌트카", 6.0 , "카 쉐어3", "광주 서대문구 남가좌동 7길 14","02-33-33",
+"http://socar3.com/","CLOSED","am 10:00 ~ pm 10:00",0,0,3);
+
+INSERT INTO company(name, type, score, discription, address,number, url, state, time, 
+total_visit, today_visit, area_list_id)
+VALUES("쏘카4", "렌트카", 2.0 , "카 쉐어4", "강원도 서대문구 남가좌동 7길 14","02-44-44",
+"http://socar4.com/","CLOSED","am 10:00 ~ pm 10:00",0,0,4);
+
 
 
 INSERT INTO facility_admin(company_id, facility_id) VALUES(1,1);
