@@ -49,7 +49,7 @@
     	select megNum, title, content, send_date AS sendDate, read_check AS readCheck, 
     					user_id AS userID, receiver_id AS receiverID
     	from message
-    	where megNum > 0
+    	where megNum > 0 AND user_id = #{userID} OR receiver_id = #{userID}
     	order by megNum desc, sendDate desc
     	limit #{page}, #{perPageNum}
     ]]>
@@ -59,37 +59,54 @@
     <![CDATA[
     	select count(megNum)
     	from message
-    	where megNum > 0
+    	where megNum > 0 AND user_id = #{userID} OR receiver_id = #{userID}
     ]]>
     </select>
     
     <update id="updateReadCheck">
     	UPDATE message
     	SET read_check = 1
-    	WHERE megNum = #{megNum}
+    	WHERE megNum = #{megNum} AND receiver_id = #{userID}
     </update>
     
-    <!-- 보낸 쪽지함 -->
-    <select id="sendMeg" resultType="com.webproject.essuyo.domain.MessageVO">
+    <!-- 보낸 쪽지함 페이징처리  -->
+    <select id="sendCri" resultType="com.webproject.essuyo.domain.MessageVO">
+    <![CDATA[
+    	select megNum, title, content, send_date AS sendDate, read_check AS readCheck, 
+    					user_id AS userID, receiver_id AS receiverID
+    	from message
+    	where megNum > 0 AND user_id = #{userID}
+    	order by megNum desc, sendDate desc
+    	limit #{page}, #{perPageNum}
+    ]]>
+    </select>
+    
+    <!-- 받은 쪽지함 페이징처리  -->
+     <select id="recevieCri" resultType="com.webproject.essuyo.domain.MessageVO">
     <![CDATA[
     	select megNum, title, content, send_date AS sendDate, read_check AS readCheck, 
     					user_id AS userID, receiver_id AS receiverID
     	from message
     	where megNum > 0 AND receiver_id = #{userID}
     	order by megNum desc, sendDate desc
-    	limit #{page}, 10
+    	limit #{page}, #{perPageNum}
+    ]]>
+    </select>
+   
+    
+    <select id="sendCountPaging" resultType="int">
+    <![CDATA[
+    	select count(megNum)
+    	from message
+    	where megNum > 0 AND user_id = #{userID}
     ]]>
     </select>
     
-    <!-- 받은 쪽지함 -->
-    <select id="recevieMeg" resultType="com.webproject.essuyo.domain.MessageVO">
+    <select id="recevieCountPaging" resultType="int">
     <![CDATA[
-    	select megNum, title, content,  send_date AS sendDate, read_check AS readCheck, 
-    					user_id AS userID, receiver_id AS receiverID
+    	select count(megNum)
     	from message
-    	where megNum > 0 AND user_id = #{userID}
-    	order by megNum desc, sendDate desc
-    	limit #{page}, 10
+    	where megNum > 0  AND receiver_id = #{userID}
     ]]>
     </select>
     

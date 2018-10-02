@@ -9,7 +9,7 @@
 select *
 from company
 order by id
-limit #{start}, #{limit};
+limit 0,4;
 ]]>
 </select>
 
