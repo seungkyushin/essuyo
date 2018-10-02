@@ -9,10 +9,10 @@ select *
 from company;
 </select>
 
-<select id="count" resultType="CompanyVO">
+<select id="count" resultType="Integer">
 select count(*)
 from company
-where state="open"
+where type=#{type};
 </select>
 
 </mapper>

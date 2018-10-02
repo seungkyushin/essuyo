@@ -22,7 +22,7 @@ public class MainDao {
 		return session.selectList(namespace + ".selectOne");
 	}
 	
-	public String getMainCount() throws Exception{
+	public Integer getMainCount() throws Exception{
 		return session.selectOne(namespace + ".count");
 		
 	}
