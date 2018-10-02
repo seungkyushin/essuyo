@@ -102,10 +102,10 @@ public class CompanyVO {
 	}
 	@Override
 	public String toString() {
-		return "CompanyVO [id=" + id + ", name=" + name + ", type=" + type + ", discription="
-				+ discription + ", score=" + score + ", address=" + address + ", number=" + number + ", url=" + url
-				+ ", state=" + state + ", time=" + time + ", totalVisit=" + totalVisit + ", todayVisit=" + todayVisit
-				+ ", grade=" + grade + ", areaListId=" + areaListId + "]";
+		return "CompanyVO [id=" + id + ", name=" + name + ", type=" + type + ", discription=" + discription + ", score="
+				+ score + ", address=" + address + ", number=" + number + ", url=" + url + ", state=" + state
+				+ ", time=" + time + ", totalVisit=" + totalVisit + ", todayVisit=" + todayVisit + ", grade=" + grade
+				+ ", areaListId=" + areaListId + "]";
 	}
 	
 	

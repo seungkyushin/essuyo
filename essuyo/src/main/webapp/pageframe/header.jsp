@@ -89,7 +89,7 @@
 									<c:when test="${ empty sessionScope.login }">
 										<li class="nav-item"><a class="nav-link"
 											href="/user/regist">회원가입</a></li>
-										<li><a href="/user/login"
+										<li><a href="/login"
 											class="btn btn-outline-light top-btn">로그인</a></li>
 									</c:when>
 
@@ -111,7 +111,7 @@
 													<div class="dropdown-menu dropdown-menu-right user-dd animated">
 														<a class="dropdown-item" href="javascript:void(0)"><i
 															class="ti-user m-r-5 m-l-5"></i> 프로필</a> <a
-															class="dropdown-item" href="/user/logout"><i
+															class="dropdown-item" href="/logout"><i
 															class="ti-wallet m-r-5 m-l-5"></i> 로그아웃</a> 
 													</div></li>
 											

@@ -1,6 +1,7 @@
 package com.webproject.essuyo.interceptor;
 
 import javax.inject.Inject;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -65,7 +66,12 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 				}
 			}
 //만약 로그인하지 않았고, 쿠키도 없다면, 로그인 화면으로 리다이렉트 시킨다. 
-			response.sendRedirect("/user/login");
+			RequestDispatcher rd = request.getRequestDispatcher("/login");
+			request.setAttribute("errorMessageTitle", "INFOMATION !");
+			request.setAttribute("errorMessage", "로그인이 필요한 서비스 입니다.");
+			rd.forward(request, response);
+
+			
 			return false;
 		}
 
