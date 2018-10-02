@@ -119,6 +119,30 @@ public class CompanyServiceImpl implements CompanyService {
 	public List<String> getImagePath(int companyId) throws Exception {
 		return imageAdminService.getImagePathList("company", companyId);
 	}
+	
+	public Map<String,Object> getDetailCompany(int companyId)  {
+		
+		 Map<String,Object> resultMap = new HashMap<>();
+		try {
+			
+				CompanyVO company = this.getCompany(companyId);
+				
+				resultMap.put("id", company.getId());
+				resultMap.put("name", company.getName());
+				resultMap.put("discription", company.getDiscription());
+				resultMap.put("address", company.getAddress());
+				resultMap.put("number", company.getNumber());
+				resultMap.put("state", company.getState());
+				resultMap.put("time", company.getTime());
+				resultMap.put("url", company.getUrl());
+				
+				return resultMap;
+				
+		} catch (Exception e) {
+			logger.error("Company Table 조회 실패.. {}",e.toString());
+			return null;
+		}
+	}
 
 	
 }

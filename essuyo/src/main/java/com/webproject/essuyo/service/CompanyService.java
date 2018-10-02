@@ -14,7 +14,8 @@ import com.webproject.essuyo.domain.SQLParamVO;
 public interface CompanyService {
 
 	
-	public CompanyVO getCompany(int companyId) ;
+	public CompanyVO getCompany(int companyId);
+	public Map<String,Object> getDetailCompany(int companyId) ;
 	public List<CompanyVO> listAll(SQLParamVO param) throws Exception;
 	public Map<String, Object> getList(int start) throws Exception;
 	public List<String> getCompanyFacility(int companyId) throws Exception;
