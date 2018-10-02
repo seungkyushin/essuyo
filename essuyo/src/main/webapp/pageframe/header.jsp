@@ -20,8 +20,7 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
 	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
 	crossorigin="anonymous">
-<link rel="stylesheet"
-	href="https://fonts.googleapis.com/css?family=Noto+Sans+KR">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+KR">
 <link rel="stylesheet" href="/resources/css/simple-line-icons.css">
 <link rel="stylesheet" href="/resources/css/themify-icons.css">
 <link rel="stylesheet" href="/resources/css/set1.css">
@@ -89,8 +88,7 @@
 									<c:when test="${ empty sessionScope.login }">
 										<li class="nav-item"><a class="nav-link"
 											href="/user/regist">회원가입</a></li>
-										<li><a href="/login"
-											class="btn btn-outline-light top-btn">로그인</a></li>
+										<li><a href="/login" class="btn btn-outline-light top-btn">로그인 <i class="icon-login"></i></a></li>
 									</c:when>
 
 									<c:when test="${ !empty sessionScope.login }">
@@ -109,7 +107,7 @@
 													<img id="userImage" src="" alt="user" class="rounded-circle" width="31">
 												</a>
 													<div class="dropdown-menu dropdown-menu-right user-dd animated">
-														<a class="dropdown-item" href="javascript:void(0)"><i
+														<a class="dropdown-item" href="/user/profile"><i
 															class="ti-user m-r-5 m-l-5"></i> 프로필</a> <a
 															class="dropdown-item" href="/logout"><i
 															class="ti-wallet m-r-5 m-l-5"></i> 로그아웃</a> 

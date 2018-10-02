@@ -30,7 +30,7 @@
 		<!-- Swiper -->
 		<div class="swiper-container">
 			<div class="swiper-wrapper">
-				<c:forEach items="${companyImage}" var="imageUrl">
+				<c:forEach items="${company.image}" var="imageUrl">
 					<div class="swiper-slide">
 						<a href="${imageUrl}" class="grid image-link"> 
 						<img src="${imageUrl}" class="img-fluid" alt="#">
@@ -82,11 +82,11 @@
 								<hr>
 							</div>
 							<div class="row">
-								<c:forEach var="facility" items="${facilityList}">
+								<c:forEach var="item" items="${company.facility}">
 									<div class="col-md-4">
 										<label class="custom-checkbox"> <span
 											class="ti-check-box"></span> <span
-											class="custom-control-description">${facility}</span>
+											class="custom-control-description">${item}</span>
 										</label>
 									</div>
 								</c:forEach>
@@ -122,11 +122,11 @@
 							<span class="icon-clock"></span>
 							<p>${company.time}<br>
 							<c:choose>
-								<c:when test="${company.state == 'OPEN'}">
-									 <span class="open-now">${company.state} NOW</span>
+								<c:when test="${company.state == '영업중'}">
+									 <span class="open-now">${company.state}</span>
 								</c:when>
-								<c:when test="${company.state == 'CLOSED'}">
-									 <span class="closed-now">${company.state} NOW</span>
+								<c:when test="${company.state == '영업종료'}">
+									 <span class="closed-now">${company.state}</span>
 								</c:when>
 							</c:choose>
 							

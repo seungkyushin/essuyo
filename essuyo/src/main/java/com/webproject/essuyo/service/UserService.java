@@ -29,13 +29,17 @@ public interface UserService {
 
 	public Map<String,Object> getSaleUserInfo(int CompanyId);
 	
-	public BusinessVO getBusinessInfo(String email);
+		public BusinessVO getBusinessInfo(String email);
+	public BusinessVO getBusinessInfo(int BusinessId);
+
 	
-	public UserVO getUser(String email);
+	public UserVO getUserVO(String email);
+	public Map<String,Object> getUserInfo(String email);
 	
 	//< 판매자의 좋아요수를 올려준다.
 	public int setGoodCount(String email);
-
+	
+	public int setUserInfo(UserVO user);
 	
 
 	// 메시지에서 받는 email 찾기 위한 service

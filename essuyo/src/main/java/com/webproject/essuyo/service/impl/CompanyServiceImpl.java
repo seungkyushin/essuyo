@@ -37,9 +37,63 @@ public class CompanyServiceImpl implements CompanyService {
 	
 	
 	@Override
-	public CompanyVO getCompany(int companyId)  {
+	public CompanyVO getCompanyVO(int companyId)  {
 		try {
 			return companyDao.getCompany(companyId);
+		} catch (Exception e) {
+			logger.error("Company Table 조회 실패.. {}",e.toString());
+			return null;
+		}
+	}
+	
+	@Override
+	public Map<String,Object> getSimpleCompanyInfo(int companyId)  {
+		try {
+			Map<String, Object> resultMap = new HashMap<>();
+			CompanyVO company = this.getCompanyVO(companyId);
+
+			if (company != null) {
+				resultMap.put("id", company.getId());
+				resultMap.put("score", company.getScore());
+				resultMap.put("name", company.getName());
+				resultMap.put("type", company.getType());
+				resultMap.put("address", company.getAddress());
+				resultMap.put("number", company.getNumber());
+				resultMap.put("state", company.getState());
+				resultMap.put("url", company.getUrl());
+				resultMap.put("image", this.getImagePath(companyId).get(0));
+				
+				return resultMap;
+			}
+			
+			return null;
+		} catch (Exception e) {
+			logger.error("Company 조회 실패.. {}", e.toString());
+			return null;
+		}
+	}
+	
+	public Map<String,Object> getDetailCompanyInfo(int companyId)  {
+		
+		 Map<String,Object> resultMap = new HashMap<>();
+		try {
+			
+				CompanyVO company = this.getCompanyVO(companyId);
+				
+				resultMap.put("id", company.getId());
+				resultMap.put("name", company.getName());
+				resultMap.put("discription", company.getDiscription());
+				resultMap.put("address", company.getAddress());
+				resultMap.put("number", company.getNumber());
+				resultMap.put("state", company.getState());
+				resultMap.put("time", company.getTime());
+				resultMap.put("url", company.getUrl());
+				resultMap.put("image", this.getImagePath(companyId));
+				resultMap.put("facility", this.getCompanyFacility(companyId));
+				
+				
+				return resultMap;
+				
 		} catch (Exception e) {
 			logger.error("Company Table 조회 실패.. {}",e.toString());
 			return null;
@@ -120,29 +174,7 @@ public class CompanyServiceImpl implements CompanyService {
 		return imageAdminService.getImagePathList("company", companyId);
 	}
 	
-	public Map<String,Object> getDetailCompany(int companyId)  {
-		
-		 Map<String,Object> resultMap = new HashMap<>();
-		try {
-			
-				CompanyVO company = this.getCompany(companyId);
-				
-				resultMap.put("id", company.getId());
-				resultMap.put("name", company.getName());
-				resultMap.put("discription", company.getDiscription());
-				resultMap.put("address", company.getAddress());
-				resultMap.put("number", company.getNumber());
-				resultMap.put("state", company.getState());
-				resultMap.put("time", company.getTime());
-				resultMap.put("url", company.getUrl());
-				
-				return resultMap;
-				
-		} catch (Exception e) {
-			logger.error("Company Table 조회 실패.. {}",e.toString());
-			return null;
-		}
-	}
+	
 
 	
 }

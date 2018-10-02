@@ -38,7 +38,7 @@ public class ProductController {
 
 		if (result != null) {
 			model.addAttribute("product", result);
-			model.addAttribute("companyType", companyService.getCompany(companyId).getType());
+			model.addAttribute("companyType", companyService.getCompanyVO(companyId).getType());
 
 			return "reservation";
 		}

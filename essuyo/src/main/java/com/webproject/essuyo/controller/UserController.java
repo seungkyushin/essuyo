@@ -1,17 +1,13 @@
 package com.webproject.essuyo.controller;
 
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.joda.time.LocalDate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,17 +15,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.webproject.essuyo.domain.BusinessVO;
 import com.webproject.essuyo.domain.CompanyVO;
-import com.webproject.essuyo.domain.ReservationVO;
 import com.webproject.essuyo.domain.UserVO;
 import com.webproject.essuyo.service.CompanyService;
-import com.webproject.essuyo.service.ProductService;
 import com.webproject.essuyo.service.ReservationService;
 import com.webproject.essuyo.service.impl.UserServiceImpl;
 
@@ -101,15 +96,54 @@ public class UserController {
 		return 1;
 	}
 
+	@GetMapping("/profile")
+	public String showProfilePage(HttpSession httpSession, Model model) {
+		
+		String email = (String)httpSession.getAttribute("login");
+		
+		Map<String,Object> userInfo = service.getUserInfo(email);
+		model.addAttribute("user", userInfo);
+		
+		if( userInfo.get("business") != null ) {
+			BusinessVO business = (BusinessVO)userInfo.get("business");
+			model.addAttribute("company", companyService.getSimpleCompanyInfo(business.getCompanyId()));
+		}
+	
+		
+		return "/user/profile";
+	}
+	
+	@PostMapping("/profileUpdate")
+	public String showProfilePage(UserVO newUserInfo, 
+			RedirectAttributes redirectAttr, 
+			HttpSession httpSession, Model model) {
+		
+		UserVO user = service.getUserVO((String)httpSession.getAttribute("login"));
+		newUserInfo.setId(user.getId());
+	
+		int update = service.setUserInfo(newUserInfo);
+		
+		if(update > 0) {
+			redirectAttr.addFlashAttribute("errorMessageTitle", "SUCCESS !");
+			redirectAttr.addFlashAttribute("errorMessage", "회원 정보가 성공적으로 수정되었습니다.");
+			
+		}else {
+			redirectAttr.addFlashAttribute("errorMessageTitle", "ERROR !");
+			redirectAttr.addFlashAttribute("errorMessage", "회원 정보 수정에 실패하였습니다.");
+		}
+		
+		return "redirect:/user/profile";
+	}
+
 	
 			
 		
 	@GetMapping("/dashboard")
-	public String showDashboardPage(HttpSession httpSession, Model model) throws Exception{
+	public String showDashboardPage(HttpSession httpSession, Model model) {
 		
 		
 		String email = (String)httpSession.getAttribute("login");
-		UserVO user = service.getUser(email);
+		UserVO user = service.getUserVO(email);
 		
 		if( user.getBusinessId() == 0) {
 			model.addAttribute("userType","user");

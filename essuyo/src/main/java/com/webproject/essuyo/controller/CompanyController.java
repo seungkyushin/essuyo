@@ -37,12 +37,9 @@ public class CompanyController {
 	@GetMapping("/detail")
 	public String showCompanyDetailPage(@RequestParam("id") int companyId, Model model) throws Exception{
 	
-		model.addAttribute("company",service.getDetailCompany(companyId));
-		model.addAttribute("companyImage",service.getImagePath(companyId));
-		model.addAttribute("facilityList",service.getCompanyFacility(companyId));
+		model.addAttribute("company",service.getDetailCompanyInfo(companyId));
 		model.addAttribute("user",userService.getSaleUserInfo(companyId));
-		
-		
+				
 		return "detail";
 	}
 

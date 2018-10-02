@@ -118,6 +118,11 @@ public class UserDAO {
 		return session.selectOne(namespace + ".recevieID", id);
 	}
 	
+	public int update(UserVO user) throws Exception {
+		return session.update(namespace + ".update", user);
+	}
+	
+	
 	
 
 }

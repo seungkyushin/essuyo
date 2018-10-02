@@ -97,7 +97,7 @@ public class RestApiController {
 
 		String email = (String)httpSeesion.getAttribute("login");
 		
-		int imageInfoId = userService.getUser(email).getImageInfoId();
+		int imageInfoId = userService.getUserVO(email).getImageInfoId();
 		
 		return imageAdminService.getImagePath(imageInfoId);
 
