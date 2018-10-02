@@ -7,8 +7,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.webproject.essuyo.dao.MessageDao;
-import com.webproject.essuyo.domain.MessageCriteria;
-import com.webproject.essuyo.domain.MessageListVO;
+import com.webproject.essuyo.domain.MessageListCri;
 import com.webproject.essuyo.domain.MessageVO;
 import com.webproject.essuyo.service.MessageService;
 
@@ -24,8 +23,9 @@ public class MessageServiceImpl implements MessageService {
 	}
 
 	@Override
-	public MessageVO read(Integer megNum) throws Exception {
-		dao.updateReadCheck(megNum);
+	public MessageVO read(Integer megNum, String userID) throws Exception {
+		
+		dao.updateReadCheck(megNum, userID);
 		return dao.read(megNum);
 	}
 
@@ -42,30 +42,46 @@ public class MessageServiceImpl implements MessageService {
 	}
 
 	@Override
-	public List<MessageVO> listCriteria(MessageCriteria cri) throws Exception {
+	public List<MessageVO> listCriteria(MessageListCri cri) throws Exception {
 		
 		return dao.listCriteria(cri);
 	}
 
 	@Override
-	public int listCountCriteria(MessageCriteria cri) throws Exception {
+	public int listCountCriteria(MessageListCri cri) throws Exception {
 		
 		return dao.countPaging(cri);
 	}
 	
 	
+	
+	// 보낸 쪽지함 페이징 처리	
 	@Override
-	public List<MessageVO> sendMeg(String userID, int page) throws Exception {
+	public List<MessageVO> sendCri(MessageListCri listCri) throws Exception {
 		
-		return dao.sendMeg(userID, page);
+		return dao.sendCri(listCri);
 	}
 
+	// 받은 쪽지함 페이징 처리
 	@Override
-	public List<MessageVO> recevieMeg(String userID, int page) throws Exception {
+	public List<MessageVO> recevieCri(MessageListCri cri) throws Exception {
 		
-		return dao.recevieMeg(userID, page);
+		return dao.recevieCri(cri);
 	}
 	
+	// 받은 쪽지함 게시물 수 검색
+	@Override
+	public int sendCountPaging(String userID) throws Exception {
+		
+		return dao.sendCountPaging(userID);
+	}
+	
+	// 받은 쪽지함 게시물 수 검색
+	@Override
+	public int recevieCountPaging(String userID) throws Exception {
+		
+		return dao.recevieCountPaging(userID);
+	}
 	
 
 }

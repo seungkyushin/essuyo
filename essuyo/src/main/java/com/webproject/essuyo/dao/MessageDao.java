@@ -7,8 +7,8 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
-import com.webproject.essuyo.domain.MessageCriteria;
-import com.webproject.essuyo.domain.MessageListVO;
+import com.webproject.essuyo.domain.MessageListCri;
+import com.webproject.essuyo.domain.MessageReadVO;
 import com.webproject.essuyo.domain.MessageVO;
 
 @Repository
@@ -36,7 +36,7 @@ public class MessageDao {
 		
 	}
 	
-	public List<MessageVO> listPage(int page) throws Exception{
+	/*public List<MessageVO> listPage(int page) throws Exception{
 	
 		if(page <= 0) {
 			page = 1;
@@ -45,40 +45,52 @@ public class MessageDao {
 		page = (page -1) *10;
 		
 		return session.selectList(namespace + ".listPage", page);
-	}
+	}*/
 	
 	
-	public List<MessageVO> listCriteria(MessageCriteria cri)throws Exception{
-		
+	public List<MessageVO> listCriteria(MessageListCri cri)throws Exception{
+				
 		return session.selectList(namespace + ".listCriteria", cri);
 		
 	}
 	
-	public int countPaging(MessageCriteria cri) throws Exception{
+	public int countPaging(MessageListCri cri) throws Exception{
 		
 		return session.selectOne(namespace + ".countPaging", cri);
 	}
 	
 	// 조회수 카운트
-	public void updateReadCheck(Integer megNum) throws Exception{
+	public void updateReadCheck(Integer megNum, String userID) throws Exception{
+		MessageReadVO vo = new MessageReadVO(megNum, userID);
 		
-		session.update(namespace + ".updateReadCheck", megNum);
+		session.update(namespace + ".updateReadCheck", vo);
 	}
 
 	
-	public List<MessageVO> sendMeg(String userID, int page) throws Exception{
+	
+	// 보낸 쪽지함 페이징 처리
+	public List<MessageVO> sendCri(MessageListCri listCri)throws Exception{
 		
-		MessageListVO vo = new MessageListVO(userID, page);
+		return session.selectList(namespace + ".sendCri", listCri);
 		
-		return session.selectList(namespace + ".sendMeg", vo);
 	}
-
-	public List<MessageVO> recevieMeg(String userID, int page) throws Exception{
+	// 받은 쪽지함 페이징 처리
+	public List<MessageVO> recevieCri(MessageListCri listCri)throws Exception{
 		
-		MessageListVO vo = new MessageListVO(userID, page);
-		
-		return session.selectList(namespace + ".recevieMeg", vo);
+		return session.selectList(namespace + ".recevieCri", listCri);
+	
 	}
 	
 	
+	// 보낸 쪽지함 페이징 처리를 위한 게시물 개수 검색
+	public int sendCountPaging(String userID) throws Exception{
+		
+		return session.selectOne(namespace + ".sendCountPaging", userID);
+	}
+	
+	// 받은 쪽지함 페이징 처리를 위한 게시물 개수 검색	
+	public int recevieCountPaging(String userID) throws Exception{
+		
+		return session.selectOne(namespace + ".recevieCountPaging", userID);
+	}
 }

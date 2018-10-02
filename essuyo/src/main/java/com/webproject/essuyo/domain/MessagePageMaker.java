@@ -14,7 +14,9 @@ public class MessagePageMaker {
 	private int displayPageNum = 10;
 	
 	private MessageCriteria cri;
+	private MessageListCri listCri;
 
+	// 전체 게시물
 	public void setTotalCount(int totalCount) {
 		this.totalCount = totalCount;
 		
@@ -40,7 +42,37 @@ public class MessagePageMaker {
 		
 		UriComponents uriComponents = UriComponentsBuilder.newInstance()
 									  .queryParam("page", page)
-									  .queryParam("perPageNum", cri.getPerPageNum())
+									  .queryParam("perPageNum", listCri.getPerPageNum())
+									  .build();
+		return uriComponents.toUriString();
+	}
+	
+	// UserID 게시물
+	public void setListTotalCount(int totalCount) {
+		this.totalCount = totalCount;
+		
+		listCalcData();
+	}
+		
+	public void listCalcData() {
+		endPage = (int) (Math.ceil((listCri.getPage()+1) / (double) displayPageNum) * displayPageNum);
+		
+		startPage = (endPage - displayPageNum) + 1;
+		int tempEndPage = (int) (Math.ceil(totalCount / (double) listCri.getPerPageNum()));
+		
+		if(endPage > tempEndPage) {
+			endPage = tempEndPage;
+		}
+				
+		prev = startPage == 10 ? false : true;
+		next = endPage * listCri.getPerPageNum() >= totalCount ? false : true;
+	}
+	
+	public String listMakeQuery(int page) {
+		
+		UriComponents uriComponents = UriComponentsBuilder.newInstance()
+									  .queryParam("page", page)
+									  .queryParam("perPageNum", listCri.getPerPageNum())
 									  .build();
 		return uriComponents.toUriString();
 	}
@@ -89,12 +121,31 @@ public class MessagePageMaker {
 		this.displayPageNum = displayPageNum;
 	}
 
+	// 전체 쪽지
 	public MessageCriteria getCri() {
 		return cri;
 	}
 
 	public void setCri(MessageCriteria cri) {
 		this.cri = cri;
+	}
+	
+	// 보낸, 받은 쪽지
+	public MessageListCri  getListCri() {
+		return listCri;
+	}
+
+	public void setListCri(MessageListCri  listCri) {
+		this.listCri = listCri;
+	}
+	
+	
+	@Override
+	public String toString() {
+		String result = "[ totalCount : " + totalCount + ", startPage : " + startPage + ", endPage : " 
+					+ endPage + ", prev : " + prev + ", next : " + next + ", displayPageNum : " 
+					+ displayPageNum + "]";
+		return result;
 	}
 	
 	

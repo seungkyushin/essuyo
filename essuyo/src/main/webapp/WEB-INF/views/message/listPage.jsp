@@ -50,10 +50,10 @@
 					<tr>
 						<td>${MessageVO.megNum }</td>
 						<td><a
-							href='/message/readPage${pageMaker.makeQuery(pageMaker.cri.page)}&megNum=${MessageVO.megNum }'>
+							href='/message/readPage${pageMaker.listMakeQuery(pageMaker.cri.page)}&megNum=${MessageVO.megNum }'>
 								${MessageVO.title } </a></td>
-						<td>${MessageVO.userID }</td>
 						<td>${MessageVO.receiverID }</td>
+						<td>${MessageVO.userID }</td>
 						<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"
 								value="${MessageVO.sendDate }" /></td>
 					
@@ -63,11 +63,8 @@
 						<c:if test="${MessageVO.readCheck == 0 }">
 					        <td>
 							<span class="badge bg-red">읽지 않음</span>
-						</td>
+							</td>
     					</c:if>
-						<%-- <td>
-							<span class="badge bg-red">${MessageVO.readCheck}</span>
-						</td> --%>
 					</tr>
 				</c:forEach>
 			</table>
@@ -80,7 +77,7 @@
 				<ul class="pagination">
 					<c:if test="${pageMaker.prev }">
 						<li><a
-							href="listPage${pageMaker.makeQuery(pageMaker.startPage - 1) }">&laquo;</a>
+							href="listPage${pageMaker.listMakeQuery(pageMaker.startPage - 1) }">&laquo;</a>
 						</li>
 					</c:if>
 
@@ -88,13 +85,13 @@
 						end="${pageMaker.endPage }" var="idx">
 						<li
 							<c:out value="${pageMaker.cri.page == idx?'class =active':'' }"/>>
-							<a href="listPage${pageMaker.makeQuery(idx)}">${idx }</a>
+							<a href="listPage${pageMaker.listMakeQuery(idx)}">${idx }</a>
 						</li>
 					</c:forEach>
 
 					<c:if test="${pageMaker.next && pageMaker.endPage > 0} ">
 						<li><a
-							href="listPage${pageMaker.makeQuery(pageMaker.endPage +1) }">&raquo;</a>
+							href="listPage${pageMaker.listMakeQuery(pageMaker.endPage + 1) }">&raquo;</a>
 						</li>
 					</c:if>
 				</ul>

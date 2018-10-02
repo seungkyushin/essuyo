@@ -2,11 +2,22 @@ package com.webproject.essuyo.domain;
 
 import java.io.Serializable;
 
-public class MessageCriteria implements Serializable{
+public class MessageListCri implements Serializable{
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int page;
 	private int perPageNum;
+	private String userID;
 	
-	public MessageCriteria() {
+	public MessageListCri() {
+		this.page = 1;
+		this.perPageNum = 10;
+	}
+	public MessageListCri(String userID, MessageListCri cri) {
+		this.userID = userID;
 		this.page = 0;
 		this.perPageNum = 10;
 	}
@@ -16,10 +27,6 @@ public class MessageCriteria implements Serializable{
 	}
 
 	public void setPage(int page) {
-		if(page <= 0) {
-			this.page = 1;
-			return;
-		}
 		
 		this.page = page;
 	}
@@ -38,16 +45,23 @@ public class MessageCriteria implements Serializable{
 		this.perPageNum = perPageNum;
 	}
 	
+	public String getUserID() {
+		return userID;
+	}
+
+	public void setUserID(String userID) {
+		this.userID = userID;
+	}
+	
 	// MyBatis SQL Mapper
 	public int getPageStart() {
-		return (this.page - 1) * perPageNum;
+		return (this.page -1) * perPageNum;
 	}
 	
 	@Override
 	public String toString() {
-		String result = "Criteria [page = " + page + ", perPageNum = " + perPageNum + "]";
+		String result = "ListCri [page = " + page + ", perPageNum = " + perPageNum + ", userID = " + userID + "]";
 		return result;
 	}
-	
 
 }
