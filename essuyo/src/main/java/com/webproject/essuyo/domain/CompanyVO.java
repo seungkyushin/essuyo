@@ -3,7 +3,7 @@ package com.webproject.essuyo.domain;
 public class CompanyVO {
 	
 	private int id; /* 번호 */
-	private String companyName; /* 이름 */
+	private String name; /* 이름 */
 	private String type; /* 회사 종류*/
 	private String discription; /* 설명 */
 	private float score; /* 점수 */
@@ -22,11 +22,11 @@ public class CompanyVO {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getCompanyName() {
-		return companyName;
+	public String getName() {
+		return name;
 	}
-	public void setCompanyName(String companyName) {
-		this.companyName = companyName;
+	public void setName(String name) {
+		this.name = name;
 	}
 	public String getType() {
 		return type;
@@ -102,7 +102,7 @@ public class CompanyVO {
 	}
 	@Override
 	public String toString() {
-		return "CompanyVO [id=" + id + ", companyName=" + companyName + ", type=" + type + ", discription="
+		return "CompanyVO [id=" + id + ", name=" + name + ", type=" + type + ", discription="
 				+ discription + ", score=" + score + ", address=" + address + ", number=" + number + ", url=" + url
 				+ ", state=" + state + ", time=" + time + ", totalVisit=" + totalVisit + ", todayVisit=" + todayVisit
 				+ ", grade=" + grade + ", areaListId=" + areaListId + "]";

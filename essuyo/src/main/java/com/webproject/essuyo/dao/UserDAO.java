@@ -49,9 +49,9 @@ public class UserDAO {
 	//사업체 회원가입 기능.
 	public void companyRegist(CompanyVO cvo) throws Exception{
 		Map<String, Object> map = new HashMap<>();
-		map.put("companyName", cvo.getCompanyName());
+		//map.put("companyName", cvo.getCompanyName());
 		map.put("type", cvo.getType());
-		map.put("discription", cvo.getDiscription());
+		map.put("discription", cvo.getName());
 		map.put("address", cvo.getAddress());
 		map.put("number", cvo.getNumber());
 		map.put("url", cvo.getUrl());
