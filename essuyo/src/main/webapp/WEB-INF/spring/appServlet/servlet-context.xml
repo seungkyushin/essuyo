@@ -37,7 +37,6 @@
 	<mvc:interceptors>
 		<mvc:interceptor>			
 			<mvc:mapping path="/user/*" />
-			<mvc:mapping path="/api/*" />
 			<mvc:exclude-mapping path="/user/regist" />
 			<mvc:exclude-mapping path="/user/companyRegist" />
 			<mvc:exclude-mapping path="/api/checkId" />			
