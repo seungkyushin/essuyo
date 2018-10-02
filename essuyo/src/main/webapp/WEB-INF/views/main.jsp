@@ -127,7 +127,7 @@
 											alt="img13" />
 										<figcaption>
 											<h5>문화시설</h5>
-                                            <p>${main[0].score} Listings</p>
+                                            <p>${main} Listings</p>
 										</figcaption></a>
 									</figure>
 								</div>

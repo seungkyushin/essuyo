@@ -19,7 +19,6 @@ public class UserVO {
 	private int imageInfoId;
 	private String sessionKey;
 	private Timestamp sessionlimit;
-	
 	public int getId() {
 		return id;
 	}
@@ -112,5 +111,8 @@ public class UserVO {
 				+ ", imageInfoId=" + imageInfoId + ", sessionKey=" + sessionKey + ", sessionlimit=" + sessionlimit
 				+ "]";
 	}
+	
+	
+	
 	
 }

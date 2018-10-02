@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import com.webproject.essuyo.dao.BusinessDao;
 import com.webproject.essuyo.dao.UserDAO;
 import com.webproject.essuyo.domain.BusinessVO;
+import com.webproject.essuyo.domain.CompanyVO;
 import com.webproject.essuyo.domain.ImageInfoVO;
 import com.webproject.essuyo.domain.SQLParamVO;
 import com.webproject.essuyo.domain.UserVO;
@@ -109,6 +110,24 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
+	public void companyRegist(CompanyVO cvo) throws Exception {
+		dao.companyRegist(cvo);
+		
+	}
+
+	@Override
+	public void businessRegist() throws Exception {
+		dao.businessRegist();
+		
+	}
+
+	@Override
+	public void ownerRegist(UserVO vo) throws Exception {
+		dao.ownerRegist(vo);
+		
+	}
+	
+	@Override
 	public BusinessVO getBusinessInfo(String email) {
 		
 		UserVO user = dao.selectByEmail(email);
@@ -117,8 +136,15 @@ public class UserServiceImpl implements UserService{
 				return businessDao.selectById(user.getBusinessId());
 		} catch (Exception e) {
 			logger.error("유저 조회 오류.. {} ", e.toString());
+			return null;
 		}
 				
-		return null;
+		
+	}
+	// 메시지에서 받는 email 찾기 위한 service
+	@Override
+	public UserVO selectMessageEmail(String id) throws Exception {
+		return dao.selectMessageEmail(id);
+
 	}
 }

@@ -74,5 +74,18 @@ function Ajax(method,requestUrl,success){
 	});
 }
 
+function myAlert( title, message){
+	$(".overlay").show();
+	$("#myModal").css("display", "block");
+	
+	$("#modal-title").text(title);
+	$("#modal-body").text(message);
+	
+}
+
+function ColseMyAlert(){
+	$(".overlay").hide();
+	$("#myModal").css("display", "none");
+}
 
 

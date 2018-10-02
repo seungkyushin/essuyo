@@ -16,6 +16,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.webproject.essuyo.domain.CompanyVO;
 import com.webproject.essuyo.domain.ReservationVO;
 import com.webproject.essuyo.domain.UserVO;
 import com.webproject.essuyo.service.CompanyService;
@@ -51,6 +53,13 @@ public class UserController {
 	public void registGet(UserVO vo, Model model) throws Exception {
 		logger.info("registGet.......");
 	}
+	//GET 방식으로 사업체 회원가입 페이지에 접근.
+	@RequestMapping(value="/companyRegist", method=RequestMethod.GET)
+	public void companyRegistGet(UserVO vo, CompanyVO cvo, Model model) throws Exception {
+		logger.info("companyRegistGet.......");
+	}
+
+	
 
 	// POST 방식으로 회원가입 페이지 접근
 	@ResponseBody
@@ -59,6 +68,24 @@ public class UserController {
 		logger.info("registPost.......");
 		try {
 			service.regist(vo);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return 0;
+		}
+		return 1;
+	}
+	//POST 방식으로 사업체 회원가입 접근.
+	//일반 회원가입 서비스와, 사업체 회원가입 서비스를 트랜잭션으로 묶음
+	@Transactional
+	@ResponseBody
+	@RequestMapping(value = "/companyRegist", method = RequestMethod.POST)
+	public Integer companyRegistPost(UserVO vo, CompanyVO cvo, HttpSession session, Model model) throws Exception {
+		logger.info("companyRegistPost.......");
+		//LAST_INSERT_ID()를 사용하기 때문에 반드시 아래의 순서대로 실행하는 게 중요하다
+		try {
+			service.companyRegist(cvo);
+			service.businessRegist();
+			service.ownerRegist(vo);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return 0;
@@ -111,7 +138,15 @@ public class UserController {
 				model.addAttribute("msg", "이메일이나 비밀번호가 잘못됐습니다.");
 				} 
 				return "/user/login";
+			} else if(vo.getBusinessId() != -1){
+				//만약 비즈니스 아이디가 -1(기본값)이 아닐 경우,
+				//세션에 companyLogin과 login, 두가지 어트리뷰트를 세트해 주고, 메인 페이지로 보낸다.
+				logger.info("new company login success");
+				session.setAttribute("companyLogin", vo.getBusinessId());
+				session.setAttribute("login",  vo.getEmail());
+				return "redirect:/";
 			} else {
+				//비즈니스 아이디가 -1일 경우 그냥 login 어트리뷰트만 세트해 준다.
 				logger.info("new login success");				
 				session.setAttribute("login",  vo.getEmail());
 				return "redirect:/";

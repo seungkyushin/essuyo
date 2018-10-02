@@ -9,6 +9,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.webproject.essuyo.domain.CompanyVO;
 import com.webproject.essuyo.domain.SQLParamVO;
 import com.webproject.essuyo.domain.UserVO;
 
@@ -27,14 +28,14 @@ public class UserDAO {
 	public UserVO login(UserVO vo) throws Exception {
 		Map<String, Object> dto = new HashMap<>();
 		dto.put("email", vo.getEmail());
-		dto.put("password", vo.getPassword());
+		dto.put("password", vo.getPassword());		
 		
 		return session.selectOne(namespace+".login", dto);
 	}
 
 	//회원가입 기능. 
 	public void regist(UserVO vo) throws Exception{
-		// dto 맵에 이름, 이메일, 비번, 나이, 성별을 넣었다. 그냥, 파라미터로 받은 vo 객체를 바로 집어 넣어도 괜찮은지, 차후 테스트 요망
+		// dto 맵에 이름, 이메일, 비번, 나이, 성별을 넣었다.
 		Map<String, Object> dto = new HashMap<>();
 		dto.put("name", vo.getName());
 		dto.put("email", vo.getEmail());
@@ -43,6 +44,41 @@ public class UserDAO {
 		dto.put("gender", vo.getGender());
 		
 		session.insert(namespace+".regist", dto);
+	}
+	
+	//사업체 회원가입 기능.
+	public void companyRegist(CompanyVO cvo) throws Exception{
+		Map<String, Object> map = new HashMap<>();
+		//map.put("companyName", cvo.getCompanyName());
+		map.put("type", cvo.getType());
+		map.put("discription", cvo.getName());
+		map.put("address", cvo.getAddress());
+		map.put("number", cvo.getNumber());
+		map.put("url", cvo.getUrl());
+		map.put("state", cvo.getState());
+		map.put("time", cvo.getTime());
+		
+		session.insert(namespace+".companyRegist", map);
+		
+	}
+	//비즈니스 테이블에 컴퍼니 아이디를 등록하는 기능
+	//컴퍼니 아이디는 LAST_INSERT_ID()로 들어가서 파라미터는 불필요
+	public void businessRegist() throws Exception{
+		session.insert(namespace+".businessRegist");
+	}
+	
+	//사업자(오너)의 회원가입 부분.
+	//map에 넣는 건 같지만, 마찬가지로 business_id를 LAST_INSERT_ID()로 입력한다.
+	public void ownerRegist(UserVO vo) throws Exception{
+		Map<String, Object> dto = new HashMap<>();
+		dto.put("name", vo.getName());
+		dto.put("email", vo.getEmail());
+		dto.put("password", vo.getPassword());
+		dto.put("age", vo.getAge());
+		dto.put("gender", vo.getGender());
+		
+		session.insert(namespace+".ownerRegist", dto);
+		
 	}
 	
 	
@@ -77,6 +113,9 @@ public class UserDAO {
 		return session.selectOne(namespace + ".selectByEmail", email);
 	}
 	
+	public UserVO selectMessageEmail(String id) throws Exception {
+		return session.selectOne(namespace + ".recevieID", id);
+	}
 	
 	
 

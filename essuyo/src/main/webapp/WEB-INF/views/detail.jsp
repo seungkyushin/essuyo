@@ -50,7 +50,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-6">
-					<h5>${company.name}</h5>
+					<h5>${company.companyName}</h5>
 					<br>
 					<p class="reserve-description">${company.discription}</p>
 				</div>

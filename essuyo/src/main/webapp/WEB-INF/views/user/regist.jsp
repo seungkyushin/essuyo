@@ -76,7 +76,7 @@
 			$.post(url, $("#registForm").serialize(), function(data) {
 				if (data == 1) {
 					alert("회원가입에 성공했습니다.");
-					document.location.href = "/user/dashboard";
+					document.location.href = "/user/login";
 				} else {
 					alert("회원가입에 실패했습니다. 관리자에게 문의해 주세요.");
 					document.location.href = "/user/regist";
@@ -98,8 +98,11 @@
 </head>
 <body>
 	<%@ include file="//pageframe/header.jsp"%>
+	<section class="light-bg booking-details_wrap">
+	<div class="container">
 	<div class="row">
-		<div class="col-12">
+	<div class="col-2"></div>
+		<div class="col-8">
 			<div class="card card-body">
 				<h4 class="card-title">회원가입</h4>
 				<h5 class="card-subtitle">요구사항에 따라 빈 칸을 채워주세요</h5>
@@ -137,8 +140,10 @@
 				</form>
 			</div>
 		</div>
+		<div class="col-2"></div>
 	</div>
-
+</div>
+</section>
 	<%@ include file="//pageframe/footer.jsp"%>
 </body>
 </html>

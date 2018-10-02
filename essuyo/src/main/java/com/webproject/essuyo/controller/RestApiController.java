@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,8 +18,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.webproject.essuyo.service.CommentService;
 import com.webproject.essuyo.service.CompanyService;
+import com.webproject.essuyo.service.ImageAdminService;
 import com.webproject.essuyo.service.ProductService;
 import com.webproject.essuyo.service.ReservationService;
+import com.webproject.essuyo.service.UserService;
 
 @RestController
 @RequestMapping(path = "/api")
@@ -35,6 +38,14 @@ public class RestApiController {
 	
 	@Autowired
 	private ProductService productService;
+	
+	@Autowired
+	private UserService userService;
+	
+	
+	@Autowired
+	private ImageAdminService imageAdminService;
+	
 	
 	@RequestMapping(value="/list",method=RequestMethod.GET)
 	public ResponseEntity<Map<String, Object>> list(@RequestParam int start){
@@ -76,6 +87,16 @@ public class RestApiController {
 	public List<String> getProductDisableDate(@PathVariable int productId){
 
 		return productService.getDisableDate(productId);
+
+	}
+	
+	@GetMapping("/loginImage")
+	public String getUserImagePath(HttpSession httpSeesion){
+
+		String email = (String)httpSeesion.getAttribute("login");
+		int imageInfoId = userService.getUser(email).getImageInfoId();
+		
+		return imageAdminService.getImagePath(imageInfoId);
 
 	}
 	

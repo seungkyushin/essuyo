@@ -31,8 +31,7 @@
 			<div class="form-group">
 				<label for="exInputWriter"> RECEIVER </label>
 				<!-- 수신자 아이디 받아오기 -->
-				<input type="text" name='receiverID' class="form-control">
-				<%-- value="${message.receiverID }"> --%>
+				<input type="text" name='receiverID' class="form-control" value="${messageVO.receiverID }"> 
 
 			</div>
 			<div class="form-group">

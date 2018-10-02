@@ -78,7 +78,7 @@ public class CompanyServiceImpl implements CompanyService {
 			Map<String, Object> salesMap = new HashMap<>();
 						
 			salesMap.put("id", data.getId());
-			salesMap.put("name",data.getName() );
+			salesMap.put("name",data.getName());
 			salesMap.put("type", data.getType());
 			salesMap.put("discription",data.getDiscription() );
 			salesMap.put("score", data.getScore());
