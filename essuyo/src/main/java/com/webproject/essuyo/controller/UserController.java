@@ -120,7 +120,7 @@ public class UserController {
 		
 		UserVO user = service.getUserVO((String)httpSession.getAttribute("login"));
 		newUserInfo.setId(user.getId());
-	
+
 		int update = service.setUserInfo(newUserInfo);
 		
 		if(update > 0) {

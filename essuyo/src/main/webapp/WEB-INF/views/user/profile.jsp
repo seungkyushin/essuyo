@@ -62,12 +62,16 @@
                     <div class="col-lg-4 col-xlg-3 col-md-5">
                         <div class="card">
                             <div class="card-body">
-                                <center class="m-t-30"> <img src="${user.url}" class="rounded-circle" width="150" />
+                                <center class="m-t-30"> 
+                                	<span  onclick=document.all.file.click();>
+	                               		<img  id="userImage" src="${user.url}" class="rounded-circle" width="150" />
+                                	</span>
+                                	
                                     <h4 class="card-title m-t-10">${user.name}</h4>
                                     
-                                    <c:choose>
-                                    	<c:when test="${ user.business.id != 0 }">
-                                    	<h6 class="card-subtitle">${ user.business.comment }</h6>
+                                  
+                                    	<c:if test="${ !empty user.business }">
+                                    		<h6 class="card-subtitle">${ user.business.comment }</h6>
                                     		<div class="row text-center justify-content-md-center">
                                      			<div class="col-4">
                                      				<a href="javascript:void(0)" class="link">
@@ -76,9 +80,9 @@
                                      				</a>
                                      			</div>
                                     		</div>
-                                    	</c:when>
+                                    	</c:if>
                                     	
-                                    </c:choose>
+                                   
                                     
                                 </center>
                             </div>
@@ -121,7 +125,8 @@
                         </div>
                     </div>
                     
-                    <div class="col-lg-4 col-xlg-3 col-md-5">
+                    <c:if test="${!empty company}">
+                    	     <div class="col-lg-4 col-xlg-3 col-md-5">
 								<div class="featured-place-wrap">
 									<a href="/detail"> <img	src="${company.image}" class="img-fluid" alt="#">
 										<span class="featured-rating-green">${company.score}</span>
@@ -153,13 +158,15 @@
 										</div>
 									</a>
 								</div>		
-					</div>			
-
+						</div>			
+                    	
+                    </c:if>
+               
                                                            
                      <div id="toggle" style="display:none" class="col-lg-3 col-xlg-1 col-md-1">
                         <div class="card">
                             <div class="card-body">
-                                <form id="formData" class="form-horizontal form-material" action="/user/profileUpdate" method="POST">
+                                <form id="formData" class="form-horizontal form-material" action="/user/profileUpdate" method="POST" enctype="multipart/form-data">
                                     <div class="form-group">
                                         <label class="col-md-12">이름</label>
                                         <div class="col-md-12">
@@ -176,7 +183,7 @@
                                     <div class="form-group">
                                         <label class="col-md-12">비밀번호 확인</label>
                                         <div class="col-md-12">
-                                            <input type="password" id="comfrimPassword" placeholder="●●●●●●●●"   class="form-control form-control-line">
+                                            <input type="password" id=checkPassword placeholder="●●●●●●●●"   class="form-control form-control-line">
                                         </div>
                                     </div>
                                     
@@ -214,11 +221,13 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="form-group">
+                                  
+                                 	 <input type="file" name="file" id="imageFile" style="display:none">
+                                  
                                         <div class="col-sm-12">
                                             <button id="userInfoUpdate" class="btn btn-success">업데이트</button>
                                         </div>
-                                    </div>
+                                   
                                 </form>
                             </div>
                         </div>
@@ -251,21 +260,51 @@
 	    	  $( "#toggle" ).toggle( "slide" );
 	    	});
 	   		 */
+	
 	   		$("#modify").on("click",function(){
 	   		  $( "#toggle" ).toggle( "slide" );
-	   			
 	   		});
 	   		
 	   		
 	   		$("#userInfoUpdate").on("click",function(){
 	   			
-	   			$("#formData").submit();
-	   			
+	   			if( checkInfo() == true ){
+	   				$("#formData").submit();
+	   			}else{
+	   				return false;
+	   			}
+   			
 	   		});
-    	
+	   		
+	   		//< 유저 썸네일
+	   		ImageThumbnail("#userImage");
+
     	
     });
    
+
+		function checkInfo(){
+			
+			var name = $("#name").val();
+			var age =  $("#age").val();
+			var password = $("#password").val();
+			var checkPassword =  $("#checkPassword").val();
+			var gender = $("#gender").val();
+			
+			if( name == "" && age == "" && password == "" && checkPassword == "" &&  gender == "${user.gender}"){
+				myAlert("WARNNING !","입력값없이 정보를 수정할 수 없습니다.");
+				return false;
+			}else if( password != "" && checkPassword == ""  ){
+			myAlert("WARNNING !","비밀번호 확인란을 입력해주세요.");
+				return false;
+			}else if( password != checkPassword ){
+				myAlert("WARNNING !","비밀번호가 일치하지 않습니다!");
+				return false;
+			}
+				
+			return true;
+		}
+		
    		
     </script>
 </body>
