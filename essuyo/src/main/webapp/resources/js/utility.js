@@ -88,4 +88,30 @@ function ColseMyAlert(){
 	$("#myModal").css("display", "none");
 }
 
+function ImageThumbnail(imageElementId){
+	
+	const elImage = document.querySelector("#imageFile");
+	elImage.addEventListener("change", function(evt){
+	    const image = evt.target.files[0];
+	    if(!valideImageType(image)) { 
+	    	myAlert("ERROR !", "파일이 이미지 타입이 아닙니다.");
+	        return;
+	    }
+	    //이렇게 넣으면 이미지 정보가 화면에 노출됩니다.
+	    const elImage = document.querySelector(imageElementId);
+	    elImage.src = window.URL.createObjectURL(image);
+	});
+	
+}
+
+function valideImageType(image) {
+	const result = ([ 'image/jpeg',
+					  'image/png',
+					  'image/jpg' ].indexOf(image.type) > -1);
+	return result;
+}
+
+
+
+
 

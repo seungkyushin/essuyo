@@ -69,10 +69,10 @@
 		UPDATE user 
 		
 		<trim prefix="SET" suffixOverrides=",">
-			<if test="name != null">name = #{name} ,</if>
-			<if test="password != null">password = #{password} ,</if>
-			<if test="gender != null">gender = #{gender} ,</if>
-			<if test="age != null"> age = #{age} ,</if>
+			<if test="name != null and name != '' ">name = #{name} ,</if>
+			<if test="password != null and password !=''">password = #{password} ,</if>
+			<if test="gender != null and gender !=''">gender = #{gender} ,</if>
+			<if test="age != null and age !=''"> age = #{age} ,</if>
 		</trim>
   		
   		WHERE id=#{id}
