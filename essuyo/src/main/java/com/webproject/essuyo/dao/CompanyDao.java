@@ -3,6 +3,7 @@ package com.webproject.essuyo.dao;
 
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -29,4 +30,8 @@ public class CompanyDao {
 		
 	}
 	
+	public Map<String,Object> getDetailCompanyInfo(int companyId) throws Exception{
+		return session.selectOne(namespace+".score", companyId);
+		
+	}
 }

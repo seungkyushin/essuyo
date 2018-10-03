@@ -87,6 +87,7 @@ public class CompanyServiceImpl implements CompanyService {
 				resultMap.put("number", company.getNumber());
 				resultMap.put("state", company.getState());
 				resultMap.put("time", company.getTime());
+				resultMap.put("score", company.getScore());
 				resultMap.put("url", company.getUrl());
 				resultMap.put("image", this.getImagePath(companyId));
 				resultMap.put("facility", this.getCompanyFacility(companyId));

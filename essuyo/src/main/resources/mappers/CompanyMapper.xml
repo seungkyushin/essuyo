@@ -29,6 +29,11 @@ from company where
 		</trim>
 </select>
 
+<select id="score" resultType="CompanyVO">
+select score
+from company;
+</select>
+
 
 
 
