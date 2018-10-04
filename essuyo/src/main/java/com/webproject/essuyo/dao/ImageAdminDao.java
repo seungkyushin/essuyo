@@ -33,8 +33,13 @@ public class ImageAdminDao {
 	}
 	
 	public int insert(ImageInfoVO ImageInfo) throws Exception{
-		return sqlSession.selectOne(NAME_SPACE + ".insert" , ImageInfo);
+		return sqlSession.insert(NAME_SPACE + ".insert" , ImageInfo);
 	}
+	
+	public int delete(int id) throws Exception{
+		return sqlSession.delete(NAME_SPACE + ".delete" , id);
+	}
+	
 	
 	
 	

@@ -169,13 +169,19 @@ public class UserServiceImpl implements UserService{
 	
 	@Override
 	@Transactional
-	public int setUserInfo(UserVO user,MultipartFile file) {
+	public int setUserInfo(UserVO user, MultipartFile file) {
 		try {
-				int imageInfoId = fileService.uplodaFile(file);
-				
-				user.setImageInfoId(imageInfoId);
-				
-			return dao.update(user);
+			int deleteImageInfoId = user.getImageInfoId();
+			int imageInfoId = fileService.uplodaFile(file);
+			user.setImageInfoId(imageInfoId);
+			dao.update(user);
+			
+			//ImageInfoVO image = imageAdminService.getImageInfo(deleteImageInfoId);
+			
+			//fileService.delectFile(image.getName(),image.getId());
+		
+			return 1;
+			
 		} catch (Exception e) {
 			logger.error("유저 업데이트 오류.. {} ", e.toString());
 			return 0;

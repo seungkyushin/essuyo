@@ -24,7 +24,7 @@ public class FileServiceImpl implements FileService{
 	 private static final Logger logger = LoggerFactory.getLogger(FileServiceImpl.class);
 
 	    // 업로드하실 경우 각자의 컴퓨터에 경로수정하셔서 사용하세요!!!
-	    private String UPLOAD_PATH = "C:\\Users\\Administrator\\git\\essuyo\\essuyo\\src\\main\\webapp\\resources\\images\\upload";
+	    private String UPLOAD_PATH = "C:\\Users\\kyu\\git\\essuyo\\essuyo\\src\\main\\webapp\\resources\\images\\upload";
 
 	    
 	    public int uplodaFile(MultipartFile file) {
@@ -47,8 +47,8 @@ public class FileServiceImpl implements FileService{
 				FileCopyUtils.copy(file.getBytes(), targetFile);
 				
 				  ImageInfoVO imageInfo = new ImageInfoVO();
-			        imageInfo.setSavePath(savePath);
-			        imageInfo.setName(uuid.toString());
+			        imageInfo.setSavePath("/resources/images/upload/" + savePath);
+			        imageInfo.setName(savePath);
 			        imageInfo.setType(file.getContentType());
 			        
 			       return  imageAdminService.addImageInfo(imageInfo);
@@ -61,6 +61,37 @@ public class FileServiceImpl implements FileService{
 	      
 	     }
 
+	    @Override
+	    public boolean delectFile(String filePath, int imageInfoId)  throws Exception{
+			
+	    	
+			 File file = new File(UPLOAD_PATH+"//"+filePath);
+	         
+		        if( file.exists() ){ //파일존재여부확인
+		           if(file.delete()){
+		        	   logger.info("파일 삭제 성공 | {} ",  filePath);
+		        	   if( imageAdminService.deleteImageInfo(imageInfoId) > 0) {
+		        		   logger.info("ImageInfo DB 삭제 성공 | {} ",  filePath);
+		        	     	return true;
+		        	   }
+		        	   else {
+		        		   logger.info("ImageInfo DB 삭제 실패 | {} ",  filePath);
+		        		   return false;
+		        	   }
+		        	     		   
+	                }else{
+	                   logger.info("파일 삭제 실패 | {} ",  filePath);
+	                   return false;
+	                }
+		             
+		        }else{
+		        	logger.info("파일이 존재하지 않습니다. | {} ", filePath);
+		        	return false;
+		        }
+		             
+			
+		}
+	    
 	    private String savePath(String contentTypeName) {
 	    	// uuid 생성(Universal Unique IDentifier, 범용 고유 식별자)
 	    	 UUID uuid = UUID.randomUUID();

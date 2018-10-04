@@ -92,12 +92,19 @@
                                 <span class="hide-menu">회원정보</span>
                             </a>
                         </li>
+                           <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/user/companyRegist" aria-expanded="false">
+                                <i class="mdi mdi-arrange-bring-forward"></i>
+                                <span class="hide-menu">개인사업장 관리</span>
+                            </a>
+                        </li>
                          <li class="sidebar-item">
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/form" aria-expanded="false">
                                 <i class="mdi mdi-arrange-bring-forward"></i>
                                 <span class="hide-menu">Form Basic</span>
                             </a>
                         </li>
+                      
                         <li class="sidebar-item">
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/table" aria-expanded="false">
                                 <i class="mdi mdi-border-none"></i>

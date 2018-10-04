@@ -70,7 +70,6 @@
 			<!-- Remind Passowrd -->
 			<div id="formFooter">
 				<a class="underlineHover" href="/user/regist">회원 가입</a>
-				<a class="underlineHover" href="/user/companyRegist">사업자 등록</a>
 			</div>
 
 		</div>

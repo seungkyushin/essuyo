@@ -32,10 +32,16 @@
 		
     </select>
     
-    <insert id="insert" parameterType="ImageInfoVO" useGeneratedKeys="true"  keyProperty="id">
+    <insert id="insert" parameterType="ImageInfoVO" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+
     	INSERT INTO image_info(save_path, type, name, cre_date, mod_date) 
     		VALUES(#{savePath}, #{type}, #{name}, NOW(), NOW() )
 		
     </insert>
+    
+     <delete id="delete" parameterType="Integer">
+		DELETE FROM image_info WHERE id = #{id}		
+    </delete>
+  
     
  </mapper>

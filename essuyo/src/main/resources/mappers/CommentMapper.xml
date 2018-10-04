@@ -8,7 +8,7 @@
     
 	<!-- 내림차순 정렬로 등록일 기준으로 최신순으로 받아온다. -->
     <select id="selectById" resultType="CommentVO">
-    	SELECT id, title, content, state, helpful, score, mod_date AS modDate, reg_date AS regDate, user_id AS userId, company_id AS companyId
+    	SELECT id, title, content, helpful, score, mod_date AS modDate, reg_date AS regDate, user_id AS userId, company_id AS companyId
     	FROM  comment 
     	<choose>
    			 <when test="type != null and type.equals('user')">

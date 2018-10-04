@@ -86,10 +86,24 @@ public class ImageAdminServieImpl implements ImageAdminService{
 			}
 	}
 	
+	@Override
 	public int addImageInfo(ImageInfoVO imageInfo) {
 		
 		try {
-			return imageAdminDao.insert(imageInfo);
+				imageAdminDao.insert(imageInfo);
+				return imageInfo.getId();
+		} catch (Exception e) {
+			logger.error("이미지 등록 실패.. | {} ", e.toString());
+			return 0;
+		}
+		
+	}
+	
+	@Override
+	public int deleteImageInfo(int id) {
+		
+		try {
+				return imageAdminDao.delete(id);
 		} catch (Exception e) {
 			logger.error("이미지 등록 실패.. | {} ", e.toString());
 			return 0;

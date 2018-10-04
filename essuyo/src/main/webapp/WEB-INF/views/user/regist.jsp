@@ -32,13 +32,61 @@
 <link rel="stylesheet" href="/resources/css/style.css">
 
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/css/login.css">
 
 
 
 <title>회원가입</title>
 </head>
 <body>
-	<%@ include file="//pageframe/header.jsp"%>
+
+<%@ include file="/pageframe/header.jsp"%>
+
+	<div class="wrapper fadeInDown">
+		<div id="formContent">
+			<!-- Tabs Titles -->
+
+			<!-- Icon -->
+			<div class="fadeIn first">
+				<img src="/resources/images/backpack.png" id="icon" alt="User Icon" />
+				<h1 style="color: #0d0d0d">회원 가입</h1>
+			</div>
+
+			<!-- Login Form -->
+			
+			<form  id="registForm" method="post" enctype="multipart/form-data">
+				<input type="hidden" name="isCheckedEmail" id="isCheckedEmail" value="N"/>
+			
+				<input type="email" id="email" name="email" class="fadeIn second" placeholder="이메일" required>
+				<input type="password" id="password" name="password" class="fadeIn second" minlength="4"
+						data-msg-minlength="최소 {0} 자리 이상 입력해야 합니다." maxlength="12" placeholder="비밀번호" required>
+								
+				<input type="password" id="passwordCheck" class="fadeIn second" placeholder="비밀번호를 다시 입력해 주세요" equalTo="#password">
+				<input type="text" id="name" name="name" class="fadeIn second" placeholder="이름" required="true">
+				<input type="text" id="age" name="age" class="fadeIn second" placeholder="나이" required>
+			
+				<select class="fadeIn second form-control" id="gender" name="gender" required>
+						<option selected="selected" value="">성별</option>
+						<option value="남자">남자</option>
+						<option value="여자">여자</option>
+				</select>
+				
+										
+				<input	type="submit" class="fadeIn fourth" onclick="doReg();" value="회원가입">
+			</form>
+
+			<!-- Remind Passowrd -->
+			<div id="formFooter">
+				<a class="underlineHover" href="/login">로그인</a>
+			</div>
+
+		</div>
+	</div>
+
+
+	<%@ include file="/pageframe/footer.jsp"%>
+	
+	<%-- <%@ include file="//pageframe/header.jsp"%>
 	<section class="light-bg booking-details_wrap">
 	<div class="container">
 	<div class="row">
@@ -85,7 +133,7 @@
 	</div>
 </div>
 </section>
-	<%@ include file="//pageframe/footer.jsp"%>
+	<%@ include file="//pageframe/footer.jsp"%> --%>
 	<!-- 제이쿼리로 유효성 검사 -->
 <script type="text/javascript" src="/resources/js/jquery/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="/resources/js/jquery/jquery.validate.js"></script>
@@ -100,26 +148,33 @@
 		$("#registForm").validate();
 		
 		// 버튼을 눌렀을 때 이메일의 유효성, 중복은 검사하는 기능. 지금은 
-		$("#btnCheckId").click(function() {
-			var email = $("#email").val();
+	/* 	$("#btnCheckId").click(function() {
 			
-			if(! email_check(email)){
-				myAlert("잘못된 이메일 형식", "형식에 맞는 이메일 주소를 입력해주세요.");
-			} else {
-				var url = "/api/checkId";
-				$.post(url, {email : email}, function(json) {
-					myAlert("이메일 중복체크", json.msg);
-					
-					//이메일을 사용할 수 있으면 isCheckedEmail의 값을 Y로 해준다
-					if(json.code == 99){
-						$("#isCheckedEmail").val("Y");
-					}
-				});
-			}
-			
-		});
+			checkEmail();
+		}); */
+		
+		$('#email').focusout(function() {
+			checkEmail();
+			});
 	});
 
+	function checkEmail(){
+		var email = $("#email").val();
+		
+		if(! email_check(email)){
+			myAlert("잘못된 이메일 형식", "형식에 맞는 이메일 주소를 입력해주세요.");
+		} else {
+			var url = "/api/checkId";
+			$.post(url, {email : email}, function(json) {
+				myAlert("이메일 중복체크", json.msg);
+				
+				//이메일을 사용할 수 있으면 isCheckedEmail의 값을 Y로 해준다
+				if(json.code == 99){
+					$("#isCheckedEmail").val("Y");
+				}
+			});
+		}
+	}
 	// 	회원가입에 성공하면, 일단 대쉬보드로 가게 설정해 놓음
 	//실패하면, 일단 다시 회원가입 페이지로 가게 함
 	function doReg() {

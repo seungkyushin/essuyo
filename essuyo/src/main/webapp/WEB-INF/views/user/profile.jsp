@@ -128,7 +128,7 @@
                     <c:if test="${!empty company}">
                     	     <div class="col-lg-4 col-xlg-3 col-md-5">
 								<div class="featured-place-wrap">
-									<a href="/detail"> <img	src="${company.image}" class="img-fluid" alt="#">
+									<a href="/detail?id=${company.id}"> <img	src="${company.image}" class="img-fluid" alt="#">
 										<c:choose>
 											<c:when test="${company.score <= 3}">
 												<span class="featured-rating">${company.score}</span>
@@ -301,8 +301,10 @@
 			var password = $("#password").val();
 			var checkPassword =  $("#checkPassword").val();
 			var gender = $("#gender").val();
+			var imageFile = $("#imageFile").val();
+		
 			
-			if( name == "" && age == "" && password == "" && checkPassword == "" &&  gender == "${user.gender}"){
+			if( name == "" && age == "" && password == "" && checkPassword == "" &&  gender == "${user.gender}" && imageFile == ""){
 				myAlert("WARNNING !","입력값없이 정보를 수정할 수 없습니다.");
 				return false;
 			}else if( password != "" && checkPassword == ""  ){

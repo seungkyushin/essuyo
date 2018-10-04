@@ -5,7 +5,6 @@ public class CommentVO {
 	private int id;
 	private String title;
 	private String content;
-//	private String state;
 	private int helpful;
 	private int score;
 	private String modDate;

@@ -14,6 +14,6 @@ public interface ImageAdminService {
 	
 	
 	public int addImageInfo(ImageInfoVO imageInfo);
-
+	public int deleteImageInfo(int id);
 
 }

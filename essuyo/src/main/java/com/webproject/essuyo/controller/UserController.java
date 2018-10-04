@@ -177,6 +177,7 @@ public class UserController {
 		UserVO user = service.getUserVO((String)httpSession.getAttribute("login"));
 
 		newUserInfo.setId(user.getId());
+		newUserInfo.setImageInfoId(user.getImageInfoId());
 
 		int update = service.setUserInfo(newUserInfo,file);
 		

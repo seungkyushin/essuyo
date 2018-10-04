@@ -216,7 +216,7 @@ INSERT INTO image_info ( save_path, type ,name, cre_date ) VALUES("/resources/im
 INSERT INTO image_info ( save_path, type ,name, cre_date ) VALUES("/resources/images/car.jpg","image/jpg","car", now());
 INSERT INTO image_info ( save_path, type ,name, cre_date ) VALUES("/resources/images/food.jpg","image/jpg","food", now());
 INSERT INTO image_info ( save_path, type ,name, cre_date ) VALUES("/resources/images/museum.jpg","image/jpg","museum", now());
-INSERT INTO image_info ( save_path, type ,name, cre_date ) VALUES("/resources/images/users/1.jpg","image/jpg","user1", now());
+INSERT INTO image_info ( save_path, type ,name, cre_date ) VALUES("/resources/images/users/1.jpg","image/jpg","1.jpg", now());
 INSERT INTO image_info ( save_path, type ,name, cre_date ) VALUES("/resources/images/users/2.jpg","image/jpg","user2", now());
 INSERT INTO image_info ( save_path, type ,name, cre_date ) VALUES("/resources/images/users/3.jpg","image/jpg","user3", now());
 INSERT INTO image_info ( save_path, type ,name, cre_date ) VALUES("/resources/images/menu-hotel.jpg","image/jpg","menu-hotel", now());
@@ -429,34 +429,34 @@ INSERT INTO product_image_admin(product_id,image_info_id) VALUES(4, 4);
 
 
 /*덧글*/
-INSERT INTO comment(title, content, state, helpful, score, reg_date, user_id, company_id) 
-VALUES("comment title 1", "이써요이써요이써요이써요", "상태", 0, 1.0,"2018-09-21",2,1);
+INSERT INTO comment(title, content,  helpful, score, reg_date, user_id, company_id) 
+VALUES("comment title 1", "이써요이써요이써요이써요", 0, 1.0,"2018-09-21",2,1);
 
-INSERT INTO comment(title, content, state, helpful, score, reg_date, user_id, company_id) 
-VALUES("comment title 2", "이써요이써요이써요이써요", "상태", 0, 2.0,"2018-09-21",3,1);
+INSERT INTO comment(title, content,  helpful, score, reg_date, user_id, company_id) 
+VALUES("comment title 2", "이써요이써요이써요이써요", 0, 2.0,"2018-09-21",3,1);
 
-INSERT INTO comment(title, content, state, helpful, score, reg_date, user_id, company_id) 
-VALUES("comment title 3", "이써요이써요이써요이써요", "상태", 0, 5.0,"2018-09-22",2,1);
+INSERT INTO comment(title, content,  helpful, score, reg_date, user_id, company_id) 
+VALUES("comment title 3", "이써요이써요이써요이써요", 0, 5.0,"2018-09-22",2,1);
 
-INSERT INTO comment(title, content, state, helpful, score, reg_date, user_id, company_id) 
-VALUES("comment title 4", "이써요이써요이써요이써요", "상태", 0, 4.0,"2018-09-22",3,2);
+INSERT INTO comment(title, content,  helpful, score, reg_date, user_id, company_id) 
+VALUES("comment title 4", "이써요이써요이써요이써요", 0, 4.0,"2018-09-22",3,2);
 
-INSERT INTO comment(title, content, state, helpful, score, reg_date, user_id, company_id) 
-VALUES("comment title 5", "이써요이써요이써요이써요", "상태", 0, 5.0,"2018-09-22",2,2);
+INSERT INTO comment(title, content,  helpful, score, reg_date, user_id, company_id) 
+VALUES("comment title 5", "이써요이써요이써요이써요", 0, 5.0,"2018-09-22",2,2);
 
-INSERT INTO comment(title, content, state, helpful, score, reg_date, user_id, company_id) 
-VALUES("comment title 6", "이써요이써요이써요이써요", "상태", 0, 6.0,"2018-09-23",3,2);
+INSERT INTO comment(title, content,  helpful, score, reg_date, user_id, company_id) 
+VALUES("comment title 6", "이써요이써요이써요이써요", 0, 6.0,"2018-09-23",3,2);
 
-INSERT INTO comment(title, content, state, helpful, score, reg_date, user_id, company_id) 
-VALUES("comment title 7", "이써요이써요이써요이써요", "상태", 0, 7.0,"2018-09-24",2,1);
+INSERT INTO comment(title, content,  helpful, score, reg_date, user_id, company_id) 
+VALUES("comment title 7", "이써요이써요이써요이써요", 0, 7.0,"2018-09-24",2,1);
 
-INSERT INTO comment(title, content, state, helpful, score, reg_date, user_id, company_id) 
-VALUES("comment title 8", "이써요이써요이써요이써요", "상태", 0, 8.0,"2018-09-25",3,1);
+INSERT INTO comment(title, content,  helpful, score, reg_date, user_id, company_id) 
+VALUES("comment title 8", "이써요이써요이써요이써요", 0, 8.0,"2018-09-25",3,1);
 
-INSERT INTO comment(title, content, state, helpful, score, reg_date, user_id, company_id) 
-VALUES("comment title 9", "이써요이써요이써요이써요", "상태", 0, 9.0,"2018-09-25",2,2);
+INSERT INTO comment(title, content,  helpful, score, reg_date, user_id, company_id) 
+VALUES("comment title 9", "이써요이써요이써요이써요", 0, 9.0,"2018-09-25",2,2);
 
-INSERT INTO comment(title, content, state, helpful, score, reg_date, user_id, company_id) 
+INSERT INTO comment(title, content,  helpful, score, reg_date, user_id, company_id) 
 VALUES("comment title 10", "이써요이써요이써요이써요", "상태", 0, 9.5,"2018-09-25",3,2);
 
 
