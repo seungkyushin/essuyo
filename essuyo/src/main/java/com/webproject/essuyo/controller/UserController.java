@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.webproject.essuyo.domain.BusinessVO;
@@ -26,6 +26,8 @@ import com.webproject.essuyo.domain.CompanyVO;
 import com.webproject.essuyo.domain.UserVO;
 import com.webproject.essuyo.service.BusinessService;
 import com.webproject.essuyo.service.CompanyService;
+import com.webproject.essuyo.service.FileService;
+import com.webproject.essuyo.service.ImageAdminService;
 import com.webproject.essuyo.service.ReservationService;
 import com.webproject.essuyo.service.impl.UserServiceImpl;
 
@@ -46,8 +48,16 @@ public class UserController {
 	@Autowired
 	private CompanyService companyService;
 
-	// GET 방식으로 회원가입 페이지에 접근. 그냥 회원가입 페이지로 보내준다
-	@RequestMapping(value = "/regist", method = RequestMethod.GET)
+
+	@Autowired
+	private ImageAdminService imageAdminService;
+	
+	@Autowired
+	private FileService fileService;
+	
+	
+	//GET 방식으로 회원가입 페이지에 접근. 그냥 회원가입 페이지로 보내준다
+	@RequestMapping(value="/regist", method=RequestMethod.GET)
 	public void registGet(UserVO vo, Model model) throws Exception {
 		logger.info("registGet.......");
 	}
@@ -158,15 +168,19 @@ public class UserController {
 	}
 
 	@PostMapping("/profileUpdate")
-	public String showProfilePage(UserVO newUserInfo, RedirectAttributes redirectAttr, HttpSession httpSession,
-			Model model) {
+	public String showProfilePage(UserVO newUserInfo, 
+			RedirectAttributes redirectAttr, 
+			HttpSession httpSession,
+			MultipartFile file, Model model) {
 
-		UserVO user = service.getUserVO((String) httpSession.getAttribute("login"));
+		
+		UserVO user = service.getUserVO((String)httpSession.getAttribute("login"));
+
 		newUserInfo.setId(user.getId());
 
-		int update = service.setUserInfo(newUserInfo);
-
-		if (update > 0) {
+		int update = service.setUserInfo(newUserInfo,file);
+		
+		if(update > 0) {
 			redirectAttr.addFlashAttribute("errorMessageTitle", "SUCCESS !");
 			redirectAttr.addFlashAttribute("errorMessage", "회원 정보가 성공적으로 수정되었습니다.");
 

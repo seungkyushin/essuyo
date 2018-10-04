@@ -3,6 +3,7 @@ package com.webproject.essuyo.service;
 import java.util.Date;
 import java.util.Map;
 
+import org.springframework.web.multipart.MultipartFile;
 
 import com.webproject.essuyo.domain.CompanyVO;
 import com.webproject.essuyo.domain.BusinessVO;
@@ -45,8 +46,9 @@ public interface UserService {
 	//< 판매자의 좋아요수를 올려준다.
 	public int setGoodCount(String email);
 	
-	public int setUserInfo(UserVO user);	
-
+	public int setUserInfo(UserVO user);
+	public int setUserInfo(UserVO user,MultipartFile file);
+	
 	// 메시지에서 받는 email 찾기 위한 service
 	public UserVO selectMessageEmail(String id) throws Exception;
 	

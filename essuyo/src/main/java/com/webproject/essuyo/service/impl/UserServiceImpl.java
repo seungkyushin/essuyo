@@ -12,13 +12,16 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.webproject.essuyo.dao.BusinessDao;
 import com.webproject.essuyo.dao.UserDAO;
 import com.webproject.essuyo.domain.BusinessVO;
 import com.webproject.essuyo.domain.CompanyVO;
+import com.webproject.essuyo.domain.ImageInfoVO;
 import com.webproject.essuyo.domain.SQLParamVO;
 import com.webproject.essuyo.domain.UserVO;
+import com.webproject.essuyo.service.FileService;
 import com.webproject.essuyo.service.ImageAdminService;
 import com.webproject.essuyo.service.UserService;
 
@@ -34,6 +37,9 @@ public class UserServiceImpl implements UserService{
 	@Autowired
 	private ImageAdminService imageAdminService;
 
+	
+	@Autowired
+	private FileService fileService;
 
 	private Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 	
@@ -160,6 +166,22 @@ public class UserServiceImpl implements UserService{
 			return 0;
 		}
 	}
+	
+	@Override
+	@Transactional
+	public int setUserInfo(UserVO user,MultipartFile file) {
+		try {
+				int imageInfoId = fileService.uplodaFile(file);
+				
+				user.setImageInfoId(imageInfoId);
+				
+			return dao.update(user);
+		} catch (Exception e) {
+			logger.error("유저 업데이트 오류.. {} ", e.toString());
+			return 0;
+		}
+	}
+
 
 	
 	@Override

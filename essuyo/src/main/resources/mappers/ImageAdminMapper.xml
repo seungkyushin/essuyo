@@ -32,4 +32,10 @@
 		
     </select>
     
+    <insert id="insert" parameterType="ImageInfoVO" useGeneratedKeys="true"  keyProperty="id">
+    	INSERT INTO image_info(save_path, type, name, cre_date, mod_date) 
+    		VALUES(#{savePath}, #{type}, #{name}, NOW(), NOW() )
+		
+    </insert>
+    
  </mapper>

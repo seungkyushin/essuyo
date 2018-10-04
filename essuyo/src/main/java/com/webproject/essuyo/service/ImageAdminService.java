@@ -12,4 +12,8 @@ public interface ImageAdminService {
 	public List<ImageInfoVO> getImageInfoList(String findType, int id);
 	public ImageInfoVO getImageInfo(int imageInfoid);
 	
+	
+	public int addImageInfo(ImageInfoVO imageInfo);
+
+
 }

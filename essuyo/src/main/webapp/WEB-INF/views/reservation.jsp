@@ -246,7 +246,7 @@
 var disabledDays = [];
 
 $(document).ready(function() {
-			
+		
 			Ajax("GET","api/disableDate/" + ${product.id},function(data){
 				disabledDays = data;
 			});
