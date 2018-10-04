@@ -31,6 +31,7 @@ public class CompanyDao {
 
 	public Map<String, Object> getDetailCompanyInfo(int companyId) throws Exception {
 		return session.selectOne(namespace + ".score", companyId);
+
 	}
 
 	public Integer cntReviews(int companyId) throws Exception {

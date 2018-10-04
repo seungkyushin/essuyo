@@ -9,7 +9,7 @@
 select *
 from company
 order by id
-limit 0,4;
+limit #{start},#{limit};
 ]]>
 	</select>
 
@@ -29,11 +29,6 @@ FROM company WHERE id = #{companyId};
 		</trim>
 	</select>
 
-	<select id="score" resultType="CompanyVO">
-		select score
-		from company;
-	</select>
-
 	<!-- 리뷰수 -->
 	<select id="reviews" resultType="Integer">
 		select count(*)
@@ -43,7 +38,21 @@ FROM company WHERE id = #{companyId};
 		company_id=#{companyId};
 	</select>
 
-
-
+<!-- 	가게평점구하기 -->
+<update id="score" parameterType="CommentVO">
+update company 
+set score = (select round(AVG(score),1) from comment where companyId=#{companyId}) 
+where id=#{Id};
+</update>
 
 </mapper>
+
+
+
+
+
+
+
+
+
+

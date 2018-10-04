@@ -57,7 +57,7 @@
 				<div class="col-md-6">
 					<div class="reserve-seat-block">
 						<div class="reserve-rating">
-							<span>${company.score}</span>
+							<span>${score}</span>
 						</div>
 						<div class="review-btn">
 							<a href="#" class="btn btn-outline-danger">댓글</a> <span>34
@@ -81,6 +81,7 @@
 							<p>${company.discription}</p>
 							<hr>
 						</div>
+
 						<div class="row">
 							<c:forEach var="item" items="${company.facility}">
 								<div class="col-md-4">
@@ -101,6 +102,7 @@
 
 
 					</div>
+
 
 				</div>
 				<div class="col-md-4 responsive-wrap">
