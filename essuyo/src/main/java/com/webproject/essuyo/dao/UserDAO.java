@@ -93,10 +93,9 @@ public class UserDAO {
 		map.put("url", cvo.getUrl());
 		map.put("state", cvo.getState());
 		map.put("time", cvo.getTime());
-		map.put("areaListId", cvo.getAreaListId());
-		map.put("id", cvo.getId());
+		map.put("areaListId", cvo.getAreaListId());		
 		
-		session.update(namespace+".companyUpdate", map);		
+		session.insert(namespace+".companyUpdate", map);		
 	}
 	
 	

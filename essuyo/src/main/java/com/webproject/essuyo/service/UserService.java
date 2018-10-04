@@ -41,10 +41,12 @@ public interface UserService {
 	//< 판매자의 좋아요수를 올려준다.
 	public int setGoodCount(String email);
 	
-	public int setUserInfo(UserVO user);
-	
+	public int setUserInfo(UserVO user);	
 
 	// 메시지에서 받는 email 찾기 위한 service
 	public UserVO selectMessageEmail(String id) throws Exception;
+	
+	//이메일로 유저를 찾기
+	public UserVO selectByEmail(String email);
 
 }

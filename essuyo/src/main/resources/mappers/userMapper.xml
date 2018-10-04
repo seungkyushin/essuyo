@@ -41,10 +41,11 @@
 	values(#{name},#{email},#{password}, 0, #{age},#{gender}, NOW(), LAST_INSERT_ID())
 	</insert>
 	
-<!-- 	컴퍼니 테이블 수정하는 sql(미정) -->
-	<update id="companyUpdate">
-	update company set name = #{name}, type = #{type} ,discription = #{discription}, address = #{address}, number = #{number}, url = #{url}, state = #{state}, time = #{time}, area_list_id = #{areaListId} where id = #{id}
-	</update>
+<!-- 	컴퍼니 테이블 수정하는 sql(미완) -->
+	<insert id="companyUpdate">
+	insert into company(name, type, discription, address, number, url, state, time, area_list_id)
+		values(#{name}, #{type}, #{discription}, #{address}, #{number}, #{url}, #{state}, #{time}, #{areaListId})
+	</insert>
 	
 
 	<select id="selectById" resultType="UserVO">

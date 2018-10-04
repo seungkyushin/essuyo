@@ -221,6 +221,13 @@ public class UserServiceImpl implements UserService{
 		
 	}
 
+	//이메일로 유저 찾기
+	@Override
+	public UserVO selectByEmail(String email) {
+		
+		return dao.selectByEmail(email);
+	}
+
 
 
 }
