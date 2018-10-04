@@ -222,6 +222,19 @@ public class UserServiceImpl implements UserService{
 		
 	}
 
+	//이메일로 유저 찾기
+	@Override
+	public UserVO selectByEmail(String email) {
+		
+		return dao.selectByEmail(email);
+	}
+
+	//컴퍼니 테이블에 정보를 입력한 직후에 실해시켜서 비즈니스 테이블에 컴퍼니 아이디를 넣어주는 서비스
+	@Override
+	public void cIdIntoBusiness(UserVO vo) throws Exception {
+		dao.cIdIntoBusiness(vo);		
+	}
+
 
 
 }

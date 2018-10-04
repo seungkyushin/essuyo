@@ -93,10 +93,16 @@ public class UserDAO {
 		map.put("url", cvo.getUrl());
 		map.put("state", cvo.getState());
 		map.put("time", cvo.getTime());
-		map.put("areaListId", cvo.getAreaListId());
-		map.put("id", cvo.getId());
+		map.put("areaListId", cvo.getAreaListId());		
 		
-		session.update(namespace+".companyUpdate", map);		
+		session.insert(namespace+".companyUpdate", map);		
+	}
+	
+	//companyUpdate (컴퍼니 insert) 다음에 바로 실행시켜서, 비즈니스 테이블에 컴퍼니 아이디를 넣어준다
+	public void cIdIntoBusiness(UserVO vo) throws Exception{
+		Integer bId = vo.getBusinessId();		
+		session.update(namespace+".cIdIntoBusiness", bId);
+		
 	}
 	
 	
