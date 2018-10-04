@@ -104,17 +104,17 @@ public class MessageController {
 		model.addAttribute("list", service.listAll());
 	}
 
-	@RequestMapping(value = "/removePage", method = RequestMethod.POST)
+	@RequestMapping(value = "/removePage", method = RequestMethod.GET)
 	public String remove(@RequestParam("megNum") int megNum, MessageCriteria cri, RedirectAttributes rttr)
 			throws Exception {
-
+		logger.info("----- 삭제 remove() -----");
 		service.remove(megNum);
 
-		rttr.addAttribute("page", cri.getPage());
+		logger.info("----- 삭제 완료 -----");
 		rttr.addAttribute("perPageNum", cri.getPerPageNum());
 
 		rttr.addFlashAttribute("msg", "SUCCESS");
-
+		
 		return "redirect:/message/listPage";
 	}
 
