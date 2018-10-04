@@ -73,6 +73,7 @@
 			<if test="password != null and password !=''">password = #{password} ,</if>
 			<if test="gender != null and gender !=''">gender = #{gender} ,</if>
 			<if test="age != null and age !=''"> age = #{age} ,</if>
+			<if test="ImageInfoId != null and ImageInfoId !=''"> image_info_id = #{ImageInfoId} ,</if>
 		</trim>
   		
   		WHERE id=#{id}

@@ -45,8 +45,8 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="slider-content_wrap">
-                                    <h1 style="color:#ff6347">ESSUYO??</h1>
-                                    <h5 style="color:yellowgreen">ESSUYO!</h5>
+                                    <h1>여행에 필요한 예약 있어요??</h1>
+                                    <h5>여행에 필요한 예약은 이써요 에서!!</h5>
                                 </div>
                             </div>
                         </div>
@@ -61,7 +61,7 @@
                                         		<option value="식사">
                                         		<option value="박물관">
 											</datalist>
-                                        <input type="text" placeholder="어느 지역을 찾으세요??" class="btn-group2"> 
+                                        <input type="text" placeholder="ex) 서울" class="btn-group2"> 
                                        <button type="submit" class="btn-form" ><span class="icon-magnifier search-icon"></span>검색<i class="pe-7s-angle-right"></i></button>
                                     </div>
                                 </form>
@@ -188,7 +188,7 @@
                         <h5 style="text-align:center" >Restaurants</h5>
                     </div>
                     <div class="col-md-3 featured-responsive">
-                        <h5 style="text-align:center">Hotels</h5>
+                        <h5 style="text-align:center">최고 점수</h5>
                     </div>
                     <div class="col-md-3 featured-responsive">
                         <h5 style="text-align:center">Car-Rental</h5>

@@ -3,6 +3,7 @@ package com.webproject.essuyo.service;
 import java.util.Date;
 import java.util.Map;
 
+import org.springframework.web.multipart.MultipartFile;
 
 import com.webproject.essuyo.domain.CompanyVO;
 import com.webproject.essuyo.domain.BusinessVO;
@@ -40,6 +41,7 @@ public interface UserService {
 	public int setGoodCount(String email);
 	
 	public int setUserInfo(UserVO user);
+	public int setUserInfo(UserVO user,MultipartFile file);
 	
 
 	// 메시지에서 받는 email 찾기 위한 service
