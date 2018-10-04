@@ -27,7 +27,7 @@
 	<!-- 사업체 회원가입용 sql, 컴퍼니 정보를 입력 -->
 	<insert id="companyRegist">
 		insert into company(name, type, discription, address, number, url, state, time)
-		values(#{companyName}, #{type}, #{discription}, #{address}, #{number}, #{url}, #{state}, #{time})
+		values(#{name}, #{type}, #{discription}, #{address}, #{number}, #{url}, #{state}, #{time})
 	</insert>	
 	<!-- 	비즈니스 테이블에 컴퍼니 아이디 입력 -->
 <!-- 	컴퍼니 레지스트가 실행된 다음에 LAST_INSERT_ID()가 실행되면, 컴퍼니 id가 -->
@@ -41,6 +41,10 @@
 	values(#{name},#{email},#{password}, 0, #{age},#{gender}, NOW(), LAST_INSERT_ID())
 	</insert>
 	
+<!-- 	컴퍼니 테이블 수정하는 sql(미정) -->
+	<update id="companyUpdate">
+	update company set name = #{name}, type = #{type} ,discription = #{discription}, address = #{address}, number = #{number}, url = #{url}, state = #{state}, time = #{time}, area_list_id = #{areaListId} where id = #{id}
+	</update>
 	
 
 	<select id="selectById" resultType="UserVO">
