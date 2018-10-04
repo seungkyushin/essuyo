@@ -24,7 +24,12 @@
     	<if test="start != null and limit != null and limit > 0">
     		limit #{start}, #{limit};
     	</if>
- </select>
+ 	</select>
+ 	
+ 	<insert id="create">
+ 		insert into comment (title, content, score, user_id, company_id)
+ 		values(#{title}, #{content}, #{score}, #{userId}, #{companyId})
+ 	</insert>
   
     
  </mapper>

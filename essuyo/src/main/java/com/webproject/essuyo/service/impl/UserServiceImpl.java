@@ -73,6 +73,7 @@ public class UserServiceImpl implements UserService{
 		
 		return dao.selectByEmail(email);
 	}
+	
 	@Override
 	public Map<String, Object> getUserInfo(String email) {
 		

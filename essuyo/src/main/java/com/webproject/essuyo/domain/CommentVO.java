@@ -5,9 +5,9 @@ public class CommentVO {
 	private int id;
 	private String title;
 	private String content;
-	private String state;
+//	private String state;
 	private int helpful;
-	private float score;
+	private int score;
 	private String modDate;
 	private String regDate;
 	private int userId;
@@ -32,22 +32,17 @@ public class CommentVO {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public String getState() {
-		return state;
-	}
-	public void setState(String state) {
-		this.state = state;
-	}
+	
 	public int getHelpful() {
 		return helpful;
 	}
 	public void setHelpful(int helpful) {
 		this.helpful = helpful;
 	}
-	public float getScore() {
+	public int getScore() {
 		return score;
 	}
-	public void setScore(float score) {
+	public void setScore(int score) {
 		this.score = score;
 	}
 	public String getModDate() {
@@ -76,7 +71,7 @@ public class CommentVO {
 	}
 	@Override
 	public String toString() {
-		return "CommentVO [id=" + id + ", title=" + title + ", content=" + content + ", state=" + state + ", helpful="
+		return "CommentVO [id=" + id + ", title=" + title + ", content=" + content + ", helpful="
 				+ helpful + ", score=" + score + ", modDate=" + modDate + ", regDate=" + regDate + ", userId=" + userId
 				+ ", companyId=" + companyId + "]";
 	}

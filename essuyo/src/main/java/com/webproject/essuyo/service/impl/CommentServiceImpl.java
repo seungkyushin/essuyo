@@ -51,7 +51,7 @@ public class CommentServiceImpl implements CommentService{
 						paramMap.put("title", data.getTitle());
 						paramMap.put("content", data.getContent());
 						paramMap.put("regDate", data.getRegDate());
-						paramMap.put("state", data.getState());
+						//paramMap.put("state", data.getState());
 						paramMap.put("score", data.getScore());
 						paramMap.put("helpful", data.getHelpful());
 						paramMap.put("userId", data.getUserId());
@@ -71,6 +71,13 @@ public class CommentServiceImpl implements CommentService{
 		}
 		
 		return resultList;
+	}
+
+	// 댓글 입력
+	@Override
+	public void writerComment(CommentVO comment) throws Exception {
+		commentDao.create(comment);
+		
 	}
 
 	/*@Override

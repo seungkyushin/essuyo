@@ -107,14 +107,15 @@ CREATE TABLE comment (
 	id INTEGER PRIMARY KEY auto_increment, /* 번호 */
 	title VARCHAR(255) NOT NULL, /* 제목 */
 	content  VARCHAR(255), /* 내용 */
-	state VARCHAR(255) NOT NULL, /* 상태 */
+	/*state VARCHAR(255) NOT NULL,  상태 */
 	helpful INTEGER, /* 도움점수 */
-	score DECIMAL(2,1) NOT NULL, /* 점수 */
+	score INTEGER NOT NULL, /* 점수 */
 	mod_date DATE, /* 수정날짜 */
-	reg_date DATE NOT NULL, /* 등록날짜 */
+	reg_date timestamp not null default now(), /* 등록날짜 */
 	user_id INTEGER NOT NULL,/* 사용자번호 */
 	company_id INTEGER NOT NULL,/* 회사번호 */
 	
+	CONSTRAINT chk_score CHECK (score > 0 AND score <=10),
 	FOREIGN KEY (user_id) REFERENCES user(id) ON DELETE CASCADE,
 	FOREIGN KEY (company_id) REFERENCES company(id) ON DELETE CASCADE
 )DEFAULT CHARSET=utf8; 
