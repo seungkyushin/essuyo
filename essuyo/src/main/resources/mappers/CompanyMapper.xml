@@ -9,7 +9,7 @@
 select *
 from company
 order by id
-limit 0,4;
+limit #{start},#{limit};
 ]]>
 </select>
 
@@ -29,12 +29,20 @@ from company where
 		</trim>
 </select>
 
-<select id="score" resultType="CompanyVO">
-select score
-from company;
-</select>
-
-
-
+<update id="score" parameterType="CommentVO">
+update company 
+set score = (select round(AVG(score),1) from comment where companyId=#{companyId}) 
+where id=#{Id};
+</update>
 
 </mapper>
+
+
+
+
+
+
+
+
+
+

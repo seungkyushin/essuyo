@@ -57,7 +57,7 @@
 				<div class="col-md-6">
 					<div class="reserve-seat-block">
 						<div class="reserve-rating">
-							<span>${company.score}</span>
+							<span>${score}</span>
 						</div>
 						<div class="review-btn">
 							<a href="#" class="btn btn-outline-danger">댓글</a> <span>34
@@ -100,7 +100,7 @@
                         <hr>
                   
                         
-                    </div>
+                   		</div>
 					
 				</div>
 				<div class="col-md-4 responsive-wrap">

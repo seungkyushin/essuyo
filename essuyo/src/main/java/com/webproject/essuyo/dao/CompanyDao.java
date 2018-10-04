@@ -29,7 +29,6 @@ public class CompanyDao {
 		return session.selectList(namespace+".listAll", param);
 		
 	}
-	
 	public Map<String,Object> getDetailCompanyInfo(int companyId) throws Exception{
 		return session.selectOne(namespace+".score", companyId);
 		
