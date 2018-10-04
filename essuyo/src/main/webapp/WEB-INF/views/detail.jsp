@@ -60,7 +60,7 @@
 							<span>${score}</span>
 						</div>
 						<div class="review-btn">
-							<a href="#" class="btn btn-outline-danger">댓글</a> <span>34
+							<a href="/comment/register?companyId=1" class="btn btn-outline-danger">댓글</a> <span>34
 								reviews</span>
 						</div>
 

@@ -20,5 +20,11 @@ public class CommentDao {
 	public List<CommentVO> selectById(SQLParamVO params) throws Exception{
 		
 		return sqlSession.selectList(NAME_SAPACE + ".selectById" , params);
-	};
+	}
+
+	// 댓글 입력
+	public void create(CommentVO comment) throws Exception{
+		
+		sqlSession.insert(NAME_SAPACE + ".create", comment);
+	}
 }
