@@ -66,16 +66,12 @@
 					</tr>
 				</c:forEach>
 			</table>
-			<div class="box-footer">
-				<button type="submit" class="btn registerBtn"
-					style="float: right; text-align: center; text-color: white; background-color: gray; border-radius: 5px;">
-					WRITER</button>
-			</div>
+		
 			<div class="pageNum"  align="center">
 				<ul class="pagination">
 					<c:if test="${pageMaker.prev }">
 						<li><a
-							href="recevieMeg${pageMaker.listMakeQuery(pageMaker.startPage - 1) }">&laquo;</a>
+							href="recevieMeg${pageMaker.listMakeQuery(pageMaker.startPage) }">&laquo;</a>
 						</li>
 					</c:if>
 
@@ -89,7 +85,7 @@
 
 					<c:if test="${pageMaker.next && pageMaker.endPage > 0} ">
 						<li><a
-							href="recevieMeg${pageMaker.listMakeQuery(pageMaker.endPage +1) }">&raquo;</a>
+							href="recevieMeg${pageMaker.listMakeQuery(pageMaker.endPage) }">&raquo;</a>
 						</li>
 					</c:if>
 				</ul>
@@ -113,11 +109,6 @@
 		$(document).ready(function() {
 			var formObj = $("form[role='form']");
 
-			console.log(formObj);
-			$(".registerBtn").on("click", function() {
-				formObj.attr("action", "/message/register");
-				formObj.submit();
-			});
 			console.log(formObj);
 			$(".allBtn").on("click", function() {
 				formObj.attr("action", "/message/listPage");

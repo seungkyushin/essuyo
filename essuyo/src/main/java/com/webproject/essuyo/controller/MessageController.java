@@ -58,9 +58,10 @@ public class MessageController {
 
 		logger.info(message.toString());
 		logger.info("register get...");
+		
 	}
 
-	@RequestMapping(value = "/register", method = RequestMethod.POST)
+	@RequestMapping(value = "/registerSend", method = RequestMethod.POST)
 	public String registerPOST(MessageVO message, RedirectAttributes rttr, Model model) throws Exception {
 
 		logger.info("register POST...");
@@ -70,15 +71,6 @@ public class MessageController {
 		String id = message.getReceiverID();
 		logger.info("receiver : " + id);
 
-		// UserVO 의 id 값으로 들어온 값을 email로 변환
-		UserVO user = userService.selectMessageEmail(id);
-		String receiverID = user.getEmail();
-		logger.info("user : " + receiverID);
-
-		// receiverID 초기화
-		message.setReceiverID(receiverID);
-		logger.info("receiver : " + receiverID);
-
 		model.addAttribute("messageVO", message);
 
 		service.regist(message);
@@ -88,28 +80,23 @@ public class MessageController {
 		return "redirect:/message/listPage";
 	}
 	
-	@RequestMapping(value = "/replyPage", method = RequestMethod.POST)
-	public String replyPage(MessageVO message, RedirectAttributes rttr, Model model,
+	@RequestMapping(value = "/replyPage", method = RequestMethod.GET)
+	public void replyPage(MessageVO message, RedirectAttributes rttr, Model model,
 			@RequestParam("userID") String userID, @RequestParam("receiverID") String receiverID)
 			throws Exception {
 		logger.info("----- 답장 replyPage() -----");
 		
 		// 답장하기 위해 전달 받은 ID값을 반대로 저장
-		message.setUserID(receiverID);
-		message.setReceiverID(userID);
+		message.setUserID(userID);
+		message.setReceiverID(receiverID);
 		
 		logger.info("message : " + message);
-		
+				
 		model.addAttribute("messageVO", message);
 
-		service.regist(message);
-
 		rttr.addFlashAttribute("msg", "success");
-		
-		return "redirect:/message/listPage";
 	}
 	
-
 	@RequestMapping(value = "/listAll", method = RequestMethod.GET)
 	public void listAll(Model model) throws Exception {
 
