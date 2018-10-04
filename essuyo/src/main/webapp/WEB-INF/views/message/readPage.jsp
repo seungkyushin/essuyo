@@ -22,18 +22,19 @@
 
 </head>
 <body>
-	<form role="form" method="post">
+	<form role="form" method="get">
 		<input type="hidden" name='megNum' value="${messageVO.megNum }">
 	</form>
 	 
 	<div class="box-body">
 		<div class="form-group">
 			<label for="exInputWriter"> WRITER </label> 
-			<input type="text"	id="writer" name="writer" class="form-control" 
+			<input type="text"	id="userID" name="writer" class="form-control" 
 				value="${messageVO.userID }" readonly="readonly">
 		</div>
 		<div class="form-group">
-			<label for="exInputWriter"> RECEIVER </label> <input type="text"
+			<label for="exInputWriter"> RECEIVER </label> 
+			<input type="text" id="receiverID"
 				name="receiver" class="form-control" value="${messageVO.receiverID }"
 				readonly="readonly">
 		</div>
@@ -54,9 +55,12 @@
 		<button type="submit" class="btn goListBtn"
 			style="float: left; text-align: center; text-color: white; background-color: gray; border-radius: 5px;">
 			LIST</button>
-		<button type="submit" class="btn replyBtn"
-			style="float: center; text-align: center; text-color: white; background-color: gray; border-radius: 5px;">
-			REPLY</button>
+		<a href="/message/replyPage?userID=${messageVO.receiverID }&receiverID=${messageVO.userID }">
+			<button type="submit" class="btn replyBtn"
+				style="float: center; text-align: center; text-color: white; background-color: gray; border-radius: 5px;">
+				REPLY</button>
+		</a>
+			
 		<button type="submit" class="btn removeBtn"
 			style="float: right; text-align: center; text-color: white; background-color: gray; border-radius: 5px;">
 			DELETE</button>
@@ -93,27 +97,16 @@
 					formObj.submit();
 				}); 
 			}
-				
 			$(".removeBtn").on("click", function() {
 				formObj.attr("action", "/message/removePage");
 				formObj.submit();
 			});
 			
 			$(".replyBtn").on("click", function() {
-				var userID = $("#writer").val();
-				var receiverID = $("#receiver").serialize();
-				
-				$.ajax({
-					type:"POST",
-					url : "/message/replyPage?userID=" userID + "&receiverID=" + receiverID,
-					cache : false,
-					data : "userID,receiverID",
-					success : onSuccess,
-					error : onError
-				});
-				
-				formObj.attr("action", "/message/replyPage");
-				
+				var userID = $("#userID").val();
+				var receiverID = $("#receiverID").val();
+			
+				formObj.attr("action", "/message/replyPage?userID=" + userID + "&receiverID=" + receiverID);
 			});
 		});
 		

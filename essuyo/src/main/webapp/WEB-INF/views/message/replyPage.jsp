@@ -20,7 +20,7 @@
 
 </head>
 <body>
-	<form role="form" method="post">
+	<form role="form" method="POST" action="/message/registerSend">
 		<div class="box-body">
 			<div class="form-group">
 				<label for="exInputWriter"> WRITER </label>
@@ -49,13 +49,26 @@
 		<div class="box-footer">
 			<button type="submit" class="btn btn-primary"
 				style="float: right; text-align: center; text-color: white; background-color: gray; border-radius: 5px gray;">
-				SNED</button>
+				SEND</button>
 			<button type="button" class="btn btn-cancel"
 				Onclick="javascript:history.back(-1)"
 				style="float: left; text-align: center; text-color: white; background-color: gray; border-radius: 5px gray;">
 				CANCEL</button>
 		</div>
 	</form>
+	
+	<script type="text/javascript">
+	
+		$(document).ready(function() {
+			var formObj = $("form[role='form']");
+
+			console.log(formObj);
+			$(".btn-primary").on("click", function() {
+				formObj.attr("action", "/message/registerSend");
+				formObj.submit();
+			});
+		});
+	</script>
 
 </body>
 </html>

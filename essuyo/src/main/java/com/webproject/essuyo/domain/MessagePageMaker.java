@@ -57,7 +57,8 @@ public class MessagePageMaker {
 	public void listCalcData() {
 		endPage = (int) (Math.ceil((listCri.getPage()+1) / (double) displayPageNum) * displayPageNum);
 		
-		startPage = (endPage - displayPageNum) + 1;
+		//startPage = (endPage - displayPageNum) + 1;
+		startPage = startPage +1;
 		int tempEndPage = (int) (Math.ceil(totalCount / (double) listCri.getPerPageNum()));
 		
 		if(endPage > tempEndPage) {
@@ -65,6 +66,7 @@ public class MessagePageMaker {
 		}
 				
 		prev = startPage == 10 ? false : true;
+//		prev = listCri.getPage() == 10 ? false : true;
 		next = endPage * listCri.getPerPageNum() >= totalCount ? false : true;
 	}
 	
@@ -142,7 +144,7 @@ public class MessagePageMaker {
 	
 	@Override
 	public String toString() {
-		String result = "[ totalCount : " + totalCount + ", startPage : " + startPage + ", endPage : " 
+		String result = "게시물 인덱스 번호" + listCri.getPage() + "[ totalCount : " + totalCount + ", startPage : " + startPage + ", endPage : " 
 					+ endPage + ", prev : " + prev + ", next : " + next + ", displayPageNum : " 
 					+ displayPageNum + "]";
 		return result;
