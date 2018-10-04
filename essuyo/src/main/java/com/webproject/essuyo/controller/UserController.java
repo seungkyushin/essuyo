@@ -116,11 +116,26 @@ public class UserController {
 		}
 	}
 	//테스트 중. form을 다 작성하고 보냈을 때.
+	@Transactional	
 	@RequestMapping(value = "/companyUpdate", method = RequestMethod.POST)
-	public void companyUpdatePOST(CompanyVO cvo) throws Exception{
+	public String companyUpdatePOST(CompanyVO cvo, HttpServletRequest request, RedirectAttributes rttr) throws Exception{
 		logger.info("companyUpdatePOST......");
+		String email = (String) request.getSession().getAttribute("login");
+		UserVO vo = service.selectByEmail(email);		
 		
-		service.companyUpdate(cvo);
+		try {
+			service.companyUpdate(cvo);
+			service.cIdIntoBusiness(vo);
+			
+			rttr.addFlashAttribute("errorMessageTitle", "정보 수정 성공");
+			rttr.addFlashAttribute("errorMessage", "성공적으로 정보가 수정됐습니다.");
+			return "redirect:/user/companyUpdate";
+		} catch (Exception e) {			
+			e.printStackTrace();
+			rttr.addFlashAttribute("errorMessageTitle", "정보 수정 실패");
+			rttr.addFlashAttribute("errorMessage", "정보 수정에 실패했습니다. 관리자에게 문의해 주세요.");			
+			return "redirect:/user/companyUpdate";
+		}
 		
 	}
 	

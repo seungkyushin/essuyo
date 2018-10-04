@@ -98,6 +98,13 @@ public class UserDAO {
 		session.insert(namespace+".companyUpdate", map);		
 	}
 	
+	//companyUpdate (컴퍼니 insert) 다음에 바로 실행시켜서, 비즈니스 테이블에 컴퍼니 아이디를 넣어준다
+	public void cIdIntoBusiness(UserVO vo) throws Exception{
+		Integer bId = vo.getBusinessId();		
+		session.update(namespace+".cIdIntoBusiness", bId);
+		
+	}
+	
 	
 	//로그인 유지 기능. 여유가 생기면 마저 손보고, 작동 안 하는데 시간이 없을 경우엔 삭제
 	public void keepLogin(String email, String seesionId, Date next) {

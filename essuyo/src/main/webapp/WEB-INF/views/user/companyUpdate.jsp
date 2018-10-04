@@ -65,7 +65,7 @@
 								<form class="form-horizontal m-t-30" id="registForm" name="registForm" method="post" enctype="multipart/form-data">
 
 									<div class="form-group">
-										<label>[회사명] </label> <input value="${cvo.name}" type="text" id="companyName" name="companyName" class="form-control" placeholder="회사명" required>
+										<label>[회사명] </label> <input value="${cvo.name}" type="text" id="name" name="name" class="form-control" placeholder="회사명" required>
 									</div>
 
 									<div class="form-group">
@@ -96,13 +96,11 @@
 									</div>
 
 									<div class="form-group">
-										<label>[회사 전화번호] <span class="help"> ※ 010-1234-5793 혹은, 02-123-4567</span></label>
-										<input value="${cvo.number }" type="text" id="number" name="number" class="form-control" placeholder="회사 전화번호" pattern="[0-9]{2,3}-[0-9]{3,4}-[0-9]{3,4}" maxlength="13" required>
+										<label>[회사 전화번호] <span class="help"> ※ 010-1234-5793 혹은, 02-123-4567</span></label> <input value="${cvo.number }" type="text" id="number" name="number" class="form-control" placeholder="회사 전화번호" pattern="[0-9]{2,3}-[0-9]{3,4}-[0-9]{3,4}" maxlength="13" required>
 									</div>
 
 									<div class="form-group">
-										<label>[회사 홈페이지] <span class="help"> ※ www.example.com 혹은, www.example.co.kr</span></label>
-										<input value="${cvo.url }" type="text" id="url" name="url" class="form-control" placeholder="회사 홈페이지" required>
+										<label>[회사 홈페이지] <span class="help"> ※ www.example.com 혹은, www.example.co.kr</span></label> <input value="${cvo.url }" type="text" id="url" name="url" class="form-control" placeholder="회사 홈페이지" required>
 									</div>
 									<div class="form-group">
 										<label>[영업 상태]</label> <select class="custom-select col-12" id="state" name="state" required>
@@ -113,11 +111,10 @@
 									</div>
 
 									<div class="form-group">
-										<label>[영업 시간] </label>
-										<input value="${cvo.time }" type="text" id="time" name="time" class="form-control" placeholder="영업시간" required>
+										<label>[영업 시간] </label> <input value="${cvo.time }" type="text" id="time" name="time" class="form-control" placeholder="영업시간" required>
 									</div>
 
-									<button type="button" onclick="doReg();">정보 수정</button>
+									<button type="submit">정보 수정</button>
 								</form>
 
 								<!-- Column -->
@@ -146,31 +143,35 @@
 				<script>
 					$(function() {
 						$("#registForm").validate();
-						
-// 						var discription = document.getElementById('discription');
-						
-// 						discription.value = ${cvo.discription};						
+
+						var discription = document
+								.getElementById('discription');
+
+						discription.value = '${cvo.discription}';
 					});
 
 					function doReg() {
 
 						if ($("#registForm").valid()) {
-							var url = "/user/companyRegist";
-							$.post(url, $("#registForm").serialize(),
+							var url = "/user/companyUpdate";
+							$
+									.post(
+											url,
+											$("#registForm").serialize(),
 											function(data) {
 												if (data == 1) {
-													myAlert("가입 성공",
-															"회원가입에 성공했습니다.");
-													document.location.href = "/login";
+													myAlert("정보 수정 성공",
+															"성공적으로 정보가 수정됐습니다.");
+													document.location.href = "/user/profile";
 												} else {
-													myAlert("가입 실패",
-															"회원가입에 실패했습니다. 관리자에게 문의해 주세요.");
-													document.location.href = "/user/companyRegist";
+													myAlert("정보 수정 실패",
+															"정보 수정에 실패했습니다. 관리자에게 문의해 주세요.");
+													document.location.href = "/user/companyUpdate";
 												}
 											});
 						}
 					}
-					
+
 					//글자수 제한 체크 
 					function len_chk() {
 						var frm = document.registForm.discription;

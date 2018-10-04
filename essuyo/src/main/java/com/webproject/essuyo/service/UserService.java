@@ -27,7 +27,11 @@ public interface UserService {
 	
 	public boolean checkId(String email);
 	
+	//컴퍼니 테이블에 정보 입력하는 서비스
 	public void companyUpdate(CompanyVO cvo) throws Exception;
+	
+	//컴퍼니 테이블에 정보를 입력한 직후에 실해시켜서 비즈니스 테이블에 컴퍼니 아이디를 넣어주는 서비스
+	public void cIdIntoBusiness(UserVO vo) throws Exception;
 
 	public Map<String,Object> getSaleUserInfo(int CompanyId);
 	
@@ -48,5 +52,8 @@ public interface UserService {
 	
 	//이메일로 유저를 찾기
 	public UserVO selectByEmail(String email);
+	
+	
+	
 
 }
