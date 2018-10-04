@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.aspectj.org.eclipse.jdt.core.dom.Comment;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,42 +13,38 @@ import org.springframework.stereotype.Service;
 
 import com.webproject.essuyo.dao.CompanyDao;
 import com.webproject.essuyo.dao.FacilityAdminDao;
-
-
-
+import com.webproject.essuyo.domain.CommentVO;
 import com.webproject.essuyo.domain.CompanyVO;
 import com.webproject.essuyo.domain.SQLParamVO;
 import com.webproject.essuyo.service.CompanyService;
 import com.webproject.essuyo.service.ImageAdminService;
 
-
 @Service
 public class CompanyServiceImpl implements CompanyService {
 
 	private Logger logger = LoggerFactory.getLogger(CompanyServiceImpl.class);
-	
+
 	@Autowired
 	private CompanyDao companyDao;
-	
+
 	@Autowired
 	private FacilityAdminDao facilityAdminDao;
-	
+
 	@Autowired
 	private ImageAdminService imageAdminService;
-	
-	
+
 	@Override
-	public CompanyVO getCompanyVO(int companyId)  {
+	public CompanyVO getCompanyVO(int companyId) {
 		try {
 			return companyDao.getCompany(companyId);
 		} catch (Exception e) {
-			logger.error("Company Table 조회 실패.. {}",e.toString());
+			logger.error("Company Table 조회 실패.. {}", e.toString());
 			return null;
 		}
 	}
-	
+
 	@Override
-	public Map<String,Object> getSimpleCompanyInfo(int companyId)  {
+	public Map<String, Object> getSimpleCompanyInfo(int companyId) {
 		try {
 			Map<String, Object> resultMap = new HashMap<>();
 			CompanyVO company = this.getCompanyVO(companyId);
@@ -62,41 +59,40 @@ public class CompanyServiceImpl implements CompanyService {
 				resultMap.put("state", company.getState());
 				resultMap.put("url", company.getUrl());
 				resultMap.put("image", this.getImagePath(companyId).get(0));
-				
+
 				return resultMap;
 			}
-			
+
 			return null;
 		} catch (Exception e) {
 			logger.error("Company 조회 실패.. {}", e.toString());
 			return null;
 		}
 	}
-	
-	public Map<String,Object> getDetailCompanyInfo(int companyId)  {
-		
-		 Map<String,Object> resultMap = new HashMap<>();
+
+	public Map<String, Object> getDetailCompanyInfo(int companyId) {
+
+		Map<String, Object> resultMap = new HashMap<>();
 		try {
-			
-				CompanyVO company = this.getCompanyVO(companyId);
-				
-				resultMap.put("id", company.getId());
-				resultMap.put("name", company.getName());
-				resultMap.put("discription", company.getDiscription());
-				resultMap.put("address", company.getAddress());
-				resultMap.put("number", company.getNumber());
-				resultMap.put("state", company.getState());
-				resultMap.put("time", company.getTime());
-				resultMap.put("score", company.getScore());
-				resultMap.put("url", company.getUrl());
-				resultMap.put("image", this.getImagePath(companyId));
-				resultMap.put("facility", this.getCompanyFacility(companyId));
-				
-				
-				return resultMap;
-				
+
+			CompanyVO company = this.getCompanyVO(companyId);
+
+			resultMap.put("id", company.getId());
+			resultMap.put("name", company.getName());
+			resultMap.put("discription", company.getDiscription());
+			resultMap.put("address", company.getAddress());
+			resultMap.put("number", company.getNumber());
+			resultMap.put("state", company.getState());
+			resultMap.put("time", company.getTime());
+			resultMap.put("score", company.getScore());
+			resultMap.put("url", company.getUrl());
+			resultMap.put("image", this.getImagePath(companyId));
+			resultMap.put("facility", this.getCompanyFacility(companyId));
+			resultMap.put("review", companyDao.cntReviews(companyId));
+			return resultMap;
+
 		} catch (Exception e) {
-			logger.error("Company Table 조회 실패.. {}",e.toString());
+			logger.error("Company Table 조회 실패.. {}", e.toString());
 			return null;
 		}
 	}
@@ -106,7 +102,6 @@ public class CompanyServiceImpl implements CompanyService {
 		return companyDao.listAll(param);
 	}
 
-	
 	@Override
 	public Map<String, Object> getList(int start) {
 		Map<String, Object> resultMap = new HashMap<>();
@@ -114,28 +109,25 @@ public class CompanyServiceImpl implements CompanyService {
 		List<CompanyVO> list = null;
 		List<String> imageInfoList = null;
 		List<Object> salesList = new ArrayList<>();
-		
-		
-		SQLParamVO param = new SQLParamVO();		
-		param.setStart(start*4);
+
+		SQLParamVO param = new SQLParamVO();
+		param.setStart(start * 4);
 		param.setLimit(4);
-		
-		try {			
+
+		try {
 			list = companyDao.listAll(param);
-			
 
 		} catch (Exception e) {
 			logger.error("리스트 조회 실패.. | {} ", e.toString());
 		}
-		
-		
-		for(CompanyVO data : list) {
+
+		for (CompanyVO data : list) {
 			Map<String, Object> salesMap = new HashMap<>();
-						
+
 			salesMap.put("id", data.getId());
-			salesMap.put("name",data.getName());
+			salesMap.put("name", data.getName());
 			salesMap.put("type", data.getType());
-			salesMap.put("discription",data.getDiscription() );
+			salesMap.put("discription", data.getDiscription());
 			salesMap.put("score", data.getScore());
 			salesMap.put("address", data.getAddress());
 			salesMap.put("number", data.getNumber());
@@ -145,26 +137,23 @@ public class CompanyServiceImpl implements CompanyService {
 			salesMap.put("totalVisit", data.getTotalVisit());
 			salesMap.put("todayVisit", data.getTodayVisit());
 			salesMap.put("areaListId", data.getAreaListId());
-	
-	
+
 			try {
 				imageInfoList = this.getImagePath(data.getId());
-			} catch (Exception e) {				
+			} catch (Exception e) {
 				logger.error("이미지 조회 실패");
-			}		
-			
-			salesMap.put("image",imageInfoList);	
+			}
+
+			salesMap.put("image", imageInfoList);
 			salesList.add(salesMap);
 		}
-		
-	
+
 		resultMap.put("sales", salesList);
-	
-		
+
 		return resultMap;
-		
+
 	}
-	
+
 	@Override
 	public List<String> getCompanyFacility(int companyId) throws Exception {
 		return facilityAdminDao.selectById(companyId);
@@ -174,9 +163,5 @@ public class CompanyServiceImpl implements CompanyService {
 	public List<String> getImagePath(int companyId) throws Exception {
 		return imageAdminService.getImagePathList("company", companyId);
 	}
-	
-	
 
-	
 }
-

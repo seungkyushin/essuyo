@@ -32,8 +32,8 @@
 			<div class="swiper-wrapper">
 				<c:forEach items="${company.image}" var="imageUrl">
 					<div class="swiper-slide">
-						<a href="${imageUrl}" class="grid image-link"> 
-						<img src="${imageUrl}" class="img-fluid" alt="#">
+						<a href="${imageUrl}" class="grid image-link"> <img
+							src="${imageUrl}" class="img-fluid" alt="#">
 						</a>
 					</div>
 				</c:forEach>
@@ -75,33 +75,33 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-8 responsive-wrap">
-					
-						<div class="booking-checkbox_wrap">
-							<div class="booking-checkbox">
-								<p>${company.discription}</p>
-								<hr>
-							</div>
-							<div class="row">
-								<c:forEach var="item" items="${company.facility}">
-									<div class="col-md-4">
-										<label class="custom-checkbox"> <span
-											class="ti-check-box"></span> <span
-											class="custom-control-description">${item}</span>
-										</label>
-									</div>
-								</c:forEach>
 
-							</div>
+					<div class="booking-checkbox_wrap">
+						<div class="booking-checkbox">
+							<p>${company.discription}</p>
+							<hr>
 						</div>
-				
-				
-						<div id="comment-list" class="booking-checkbox_wrap mt-4">
-                        <h5>34 Reviews</h5>
-                        <hr>
-                  
-                        
-                    </div>
-					
+						<div class="row">
+							<c:forEach var="item" items="${company.facility}">
+								<div class="col-md-4">
+									<label class="custom-checkbox"> <span
+										class="ti-check-box"></span> <span
+										class="custom-control-description">${item}</span>
+									</label>
+								</div>
+							</c:forEach>
+
+						</div>
+					</div>
+
+
+					<div id="comment-list" class="booking-checkbox_wrap mt-4">
+						<h5>${company.review}Reviews</h5>
+						<hr>
+
+
+					</div>
+
 				</div>
 				<div class="col-md-4 responsive-wrap">
 					<div class="contact-info">
@@ -121,19 +121,20 @@
 						<div class="address">
 							<span class="icon-clock"></span>
 							<p>${company.time}<br>
-							<c:choose>
-								<c:when test="${company.state == '영업중'}">
-									 <span class="open-now">${company.state}</span>
-								</c:when>
-								<c:when test="${company.state == '영업종료'}">
-									 <span class="closed-now">${company.state}</span>
-								</c:when>
-							</c:choose>
-							
-							
+								<c:choose>
+									<c:when test="${company.state == '영업중'}">
+										<span class="open-now">${company.state}</span>
+									</c:when>
+									<c:when test="${company.state == '영업종료'}">
+										<span class="closed-now">${company.state}</span>
+									</c:when>
+								</c:choose>
+
+
 							</p>
 						</div>
-						<a href="/message/register?receiverID=${user.id}" class="btn btn-outline-danger btn-contact">메시지 보내기</a>
+						<a href="/message/register?receiverID=${user.id}"
+							class="btn btn-outline-danger btn-contact">메시지 보내기</a>
 					</div>
 					<div class="follow">
 						<div class="follow-img">
@@ -230,26 +231,27 @@
 	<script>
 		$(document).ready(function() {
 
-			var requestURL = "/api/commentList/company/" + 1 +"/" + ${company.id};
-			Ajax("GET",requestURL,function(dataList){
-				
-				dataList.forEach(function(data){
-					
-	    				var tempData = {};
-	        			tempData['image'] = data.imageUrl;
-	        			tempData['name'] = data.name;
-	        			tempData['title'] = data.title;
-	        			tempData['regDate'] = data.regDate;
-	        			tempData['score'] = data.score;
-	        			tempData['content'] = data.content;
-	        			tempData['helpful'] = data.helpful;
-	        			tempData['state'] = data.state;
-	        			
-	           	    	makeHTML("#comment-template", "#comment-list", tempData);
-					});
-	    			
-				}); 
+			var requestURL = "/api/commentList/company/" + 1 + "/" + ${company.id};
 			
+			Ajax("GET", requestURL, function(dataList) {
+
+				dataList.forEach(function(data) {
+
+					var tempData = {};
+					tempData['image'] = data.imageUrl;
+					tempData['name'] = data.name;
+					tempData['title'] = data.title;
+					tempData['regDate'] = data.regDate;
+					tempData['score'] = data.score;
+					tempData['content'] = data.content;
+					tempData['helpful'] = data.helpful;
+					tempData['state'] = data.state;
+
+					makeHTML("#comment-template", "#comment-list", tempData);
+				});
+
+			});
+
 		});
 	</script>
 

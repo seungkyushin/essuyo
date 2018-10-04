@@ -2,37 +2,46 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  
+
 <mapper namespace="com.webproject.essuyo.dao.CompanyDao">
-<select id="listAll" resultType="CompanyVO">
+	<select id="listAll" resultType="CompanyVO">
 <![CDATA[
 select *
 from company
 order by id
 limit 0,4;
 ]]>
-</select>
+	</select>
 
-<select id="select" resultType="CompanyVO">
+	<select id="select" resultType="CompanyVO">
 <![CDATA[
 SELECT id, name, type, score, discription, address, number, url, state, time, 
 total_visit AS totalVisit, today_visit AS todayVisit, area_list_id AS areaListId 
 FROM company WHERE id = #{companyId};
 ]]>
-</select>
+	</select>
 
-<select id="11" resultType="CompanyVO">
-select * 
-from company where 
-<trim prefix="WHERE" suffixOverrides=",">	
-         <if test="test1 != null"> type = #{test1}</if>
+	<select id="11" resultType="CompanyVO">
+		select *
+		from company where
+		<trim prefix="WHERE" suffixOverrides=",">
+			<if test="test1 != null"> type = #{test1}</if>
 		</trim>
-</select>
+	</select>
 
-<select id="score" resultType="CompanyVO">
-select score
-from company;
-</select>
+	<select id="score" resultType="CompanyVO">
+		select score
+		from company;
+	</select>
+
+	<!-- 리뷰수 -->
+	<select id="reviews" resultType="Integer">
+		select count(*)
+		from
+		comment
+		where
+		company_id=#{companyId};
+	</select>
 
 
 
