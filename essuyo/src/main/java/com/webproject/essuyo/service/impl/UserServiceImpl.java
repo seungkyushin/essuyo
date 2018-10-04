@@ -214,6 +214,13 @@ public class UserServiceImpl implements UserService{
 		return resultMap;
 	}
 
+	//컴퍼니 테이블을 수정하는 서비스(미완성)
+	@Override
+	public void companyUpdate(CompanyVO cvo) throws Exception {
+		dao.companyUpdate(cvo);
+		
+	}
+
 
 
 }

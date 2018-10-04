@@ -26,6 +26,8 @@ public interface UserService {
 	public UserVO checkLoginBefore(String value);
 	
 	public boolean checkId(String email);
+	
+	public void companyUpdate(CompanyVO cvo) throws Exception;
 
 	public Map<String,Object> getSaleUserInfo(int CompanyId);
 	

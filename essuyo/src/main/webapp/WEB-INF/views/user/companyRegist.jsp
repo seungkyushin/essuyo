@@ -65,7 +65,8 @@
 							<label>[비밀번호 확인]</label> <input type="password" id="passwordCheck" class="form-control" placeholder="비밀번호를 다시 입력해 주세요" equalTo="#password">
 						</div>
 						<div class="form-group">
-							<label>[이 름] <span class="help"> 예) "홍길동"</span></label> <input type="text" id="userName" name="userName" class="form-control" placeholder="이름" required>
+							<label>[이 름] <span class="help"> 예) "홍길동"</span></label>
+							<input type="text" id="userName" name="userName" class="form-control" placeholder="이름" required>
 						</div>
 						<div class="form-group">
 							<label for="age">[나이] <span class="help"> ※ 숫자로만 입력해 주세요. 예) 28살 -> 28</span></label> <input type="text" id="age" name="age" class="form-control" placeholder="나이" required>

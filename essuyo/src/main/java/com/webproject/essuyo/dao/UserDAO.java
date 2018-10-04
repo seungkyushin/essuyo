@@ -49,7 +49,7 @@ public class UserDAO {
 	//사업체 회원가입 기능.
 	public void companyRegist(CompanyVO cvo) throws Exception{
 		Map<String, Object> map = new HashMap<>();
-		//map.put("companyName", cvo.getCompanyName());
+		map.put("name", cvo.getName());
 		map.put("type", cvo.getType());
 		map.put("discription", cvo.getName());
 		map.put("address", cvo.getAddress());
@@ -79,6 +79,24 @@ public class UserDAO {
 		
 		session.insert(namespace+".ownerRegist", dto);
 		
+	}
+	
+	//컴퍼니 테이블을 수정하는 기능. 일단 cvo를 받아서 HashMap으로 넣어준다.
+	public void companyUpdate(CompanyVO cvo) throws Exception{
+		Map<String, Object> map = new HashMap<>();
+		
+		map.put("name", cvo.getName());
+		map.put("type", cvo.getType());
+		map.put("discription", cvo.getDiscription());
+		map.put("address", cvo.getAddress());
+		map.put("number", cvo.getNumber());
+		map.put("url", cvo.getUrl());
+		map.put("state", cvo.getState());
+		map.put("time", cvo.getTime());
+		map.put("areaListId", cvo.getAreaListId());
+		map.put("id", cvo.getId());
+		
+		session.update(namespace+".companyUpdate", map);		
 	}
 	
 	

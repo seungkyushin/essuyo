@@ -78,12 +78,16 @@ public class UserController {
 	public Integer companyRegistPost(UserVO vo, CompanyVO cvo, HttpServletRequest request, HttpSession session, Model model) throws Exception {
 		logger.info("companyRegistPost.......");
 		
-		//리퀘스트로 유저이름과 회사이름을 구분해서 넣어준다.
-		String userName = (String) request.getAttribute("userName");
-		String companyName = (String) request.getAttribute("companyName");		
+		//리퀘스트로 유저이름과 회사이름을 구분해서 넣어준다.		
+		
+		
+		String userName = (String) request.getParameter("userName");
+		String companyName = (String) request.getParameter("companyName");
 		vo.setName(userName);
 		cvo.setName(companyName);
 		
+		System.out.println("userName: "+ vo.getName());
+		System.out.println("companyName: "+	 cvo.getName());
 		//LAST_INSERT_ID()를 사용하기 때문에 반드시 아래의 순서대로 실행하는 게 중요하다
 		try {
 			service.companyRegist(cvo);
@@ -95,6 +99,15 @@ public class UserController {
 		}
 		return 1;
 	}
+	
+	//컴퍼니 테이블을 수정하는 서비스의 컨트롤러(미완성)
+	public void companyUpdate(CompanyVO cvo) throws Exception{
+		logger.info("companyUpdate......");
+		
+		service.companyUpdate(cvo);
+		
+	}
+	
 
 	@GetMapping("/profile")
 	public String showProfilePage(HttpSession httpSession, Model model) {
