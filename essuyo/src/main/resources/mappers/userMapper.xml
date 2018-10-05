@@ -18,9 +18,11 @@
 	</select>
 	
 <!-- 일반유저 회원가입용 sql문. 프라이머리 키인 id는 자동 증가고, cre_date는 now()를 이용했다. -->
+<!-- 기본 프로필 이미지, image_info_id 지정하는 문장 추가.
+현재 기본 프로필 이미지를 임의로 1번에 추가해 놨기 때문에 1번을 사용(나중에 바뀔 수 있다) -->
 	<insert id="regist">
-		insert into user(name, email, password, fail_password, age, gender, cre_date)
-		values(#{name},#{email},#{password}, 0, #{age},#{gender}, NOW());
+		insert into user(name, email, password, fail_password, age, gender, cre_date, image_info_id)
+		values(#{name},#{email},#{password}, 0, #{age},#{gender}, NOW(), 1);
 	</insert>
 	
 <!-- 	사업체 회원가입은 LAST_INSERT_ID() 때문에 순서대로 서비스를 실행시키는 게 중요하다 -->
