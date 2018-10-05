@@ -55,7 +55,8 @@
 					<form class="form-horizontal m-t-30" id="registForm" name="registForm" method="post" enctype="multipart/form-data">
 						<input type="hidden" name="isCheckedEmail" id="isCheckedEmail" value="N" />
 						<div class="form-group">
-							<label for="email">[이메일] <span class="help"> 예) "example@gmail.com"</span></label> <input type="email" id="email" name="email" class="form-control" placeholder="이메일" required>
+							<label for="email">[이메일] <span class="help"> 예) "example@gmail.com"</span></label>
+							<input type="email" id="email" name="email" class="form-control" placeholder="이메일" onchange="checkToN()" required>
 							<button type="button" id="btnCheckId" style="height: 35px;">이메일 중복확인</button>
 						</div>
 						<div class="form-group">
@@ -120,7 +121,7 @@
 							<label>[영업 시간] </label> <input type="text" id="time" name="time" class="form-control" placeholder="영업시간" required>
 						</div>
 
-						<a href="#" class="btn-reg" onclick="doReg();">회원가입</a>
+						<button type="submit" class="btn-reg" onclick="doReg();">회원가입</button>
 					</form>
 				</div>
 			</div>
@@ -161,6 +162,12 @@
 			});
 		});
 
+		//이메일 칸을 변경했을 경우 다시 이메일 체크를 받게 만드는 기능
+		function checkToN() {
+			document.getElementById("isCheckedEmail").value = 'N';
+
+		}
+		
 		// 	회원가입에 성공하면, 일단 대쉬보드로 가게 설정해 놓음
 		//실패하면, 일단 다시 회원가입 페이지로 가게 함
 		function doReg() {
@@ -170,16 +177,7 @@
 			}
 
 			if ($("#registForm").valid()) {
-				var url = "/user/companyRegist";
-				$.post(url, $("#registForm").serialize(), function(data) {
-					if (data == 1) {
-						myAlert("가입 성공", "회원가입에 성공했습니다.");
-						document.location.href = "/login";
-					} else {
-						myAlert("가입 실패", "회원가입에 실패했습니다. 관리자에게 문의해 주세요.");
-						document.location.href = "/user/companyRegist";
-					}
-				});
+				document.getElementById('registForm').submit();
 			}
 		}
 		//정규식으로 이메일을 체크하는 펑션.

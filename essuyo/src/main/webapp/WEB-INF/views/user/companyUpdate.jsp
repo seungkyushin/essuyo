@@ -62,7 +62,7 @@
 							<div class="card-body">
 								<h4 class="card-title">사업자 정보 수정</h4>
 								<h5 class="card-subtitle">요구사항에 따라 빈 칸을 채워주세요</h5>
-								<form class="form-horizontal m-t-30" id="registForm" name="registForm" method="post" enctype="multipart/form-data">
+								<form class="form-horizontal m-t-30" id="registForm" name="registForm" method="post" enctype="multipart/form-data" action="/user/companyUpdate">
 
 									<div class="form-group">
 										<label>[회사명] </label> <input value="${cvo.name}" type="text" id="name" name="name" class="form-control" placeholder="회사명" required>

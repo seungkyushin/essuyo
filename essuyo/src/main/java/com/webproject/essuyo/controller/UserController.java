@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -69,26 +68,29 @@ public class UserController {
 	}
 
 	// POST 방식으로 회원가입 페이지 접근
-	@ResponseBody
+	
 	@RequestMapping(value = "/regist", method = RequestMethod.POST)
-	public Integer registPost(UserVO vo, HttpSession session, Model model) throws Exception {
+	public String registPost(UserVO vo, HttpSession session, Model model, RedirectAttributes rttr) throws Exception {
 		logger.info("registPost.......");
 		try {
 			service.regist(vo);
+			rttr.addFlashAttribute("errorMessageTitle", "가입 성공");
+			rttr.addFlashAttribute("errorMessage", "회원가입에 성공했습니다.");
 		} catch (Exception e) {
 			e.printStackTrace();
-			return 0;
+			rttr.addFlashAttribute("errorMessageTitle", "가입 실패");
+			rttr.addFlashAttribute("errorMessage", "회원가입에 실패했습니다. 관리자에게 문의해 주세요.");
+			return "redirect:/user/regist";
 		}
-		return 1;
+		return "redirect:/login";
 	}
 
 	// POST 방식으로 사업체 회원가입 접근.
 	// 일반 회원가입 서비스와, 사업체 회원가입 서비스를 트랜잭션으로 묶음
-	@Transactional
-	@ResponseBody
+	@Transactional	
 	@RequestMapping(value = "/companyRegist", method = RequestMethod.POST)
-	public Integer companyRegistPost(UserVO vo, CompanyVO cvo, HttpServletRequest request, HttpSession session,
-			Model model) throws Exception {
+	public String companyRegistPost(UserVO vo, CompanyVO cvo, HttpServletRequest request, HttpSession session,
+			Model model, RedirectAttributes rttr) throws Exception {
 		logger.info("companyRegistPost.......");
 
 		// 리퀘스트로 유저이름과 회사이름을 구분해서 넣어준다.
@@ -105,11 +107,17 @@ public class UserController {
 			service.companyRegist(cvo);
 			service.businessRegist();
 			service.ownerRegist(vo);
+			rttr.addFlashAttribute("errorMessageTitle", "가입 성공");
+			rttr.addFlashAttribute("errorMessage", "회원가입에 성공했습니다.");
+			return "redirect:/login";
 		} catch (Exception e) {
 			e.printStackTrace();
-			return 0;
+			rttr.addFlashAttribute("errorMessageTitle", "가입 실패");
+			rttr.addFlashAttribute("errorMessage", "회원가입에 실패했습니다. 관리자에게 문의해 주세요.");
+			return "redirect:/user/companyRegist";
+			
 		}
-		return 1;
+	
 	}
 
 	// 컴퍼니 테이블을 수정하는 서비스의 컨트롤러(미완성)
