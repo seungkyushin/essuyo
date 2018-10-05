@@ -12,29 +12,16 @@
 <meta name="keywords" content="이써요">
 <!-- Favicons -->
 <link rel="shortcut icon" href="#">
-<!-- Page Title -->
 <title>자리 있어요?</title>
-<!-- Bootstrap CSS -->
 <link rel="stylesheet" href="/resources/css/bootstrap/bootstrap.min.css">
-<!-- Google Fonts -->
-<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,500,700,900" rel="stylesheet">
-<!-- Simple line Icon -->
 <link rel="stylesheet" href="/resources/css/simple-line-icons.css">
-<!-- Themify Icon -->
 <link rel="stylesheet" href="/resources/css/themify-icons.css">
-<!-- Hover Effects -->
 <link rel="stylesheet" href="/resources/css/set1.css">
-<!-- Swipper Slider -->
 <link rel="stylesheet" href="/resources/css/swiper.min.css">
-<!-- Magnific Popup CSS -->
 <link rel="stylesheet" href="/resources/css/magnific-popup.css">
-<!-- Main CSS -->
 <link rel="stylesheet" href="/resources/css/style.css">
-
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="/resources/css/login.css">
-
-
 
 <title>회원가입</title>
 </head>
@@ -60,11 +47,14 @@
 				<input type="password" id="password" name="password" class="fadeIn second" minlength="4" data-msg-minlength="최소 {0} 자리 이상 입력해야 합니다." maxlength="12" placeholder="비밀번호" required>
 				<input type="password" id="passwordCheck" class="fadeIn second" placeholder="비밀번호를 다시 입력해 주세요" equalTo="#password" required>
 				<input type="text" id="name" name="name" class="fadeIn second" placeholder="이름" required="true">
-					<input type="text" id="age" name="age" class="fadeIn second" placeholder="나이" required> <select class="fadeIn second form-control" id="gender" name="gender" required>
-					<option selected="selected" value="">성별</option>
-					<option value="남자">남자</option>
-					<option value="여자">여자</option>
-				</select> <input type="button" class="fadeIn fourth" onclick="doReg();" value="회원가입">
+				<input type="text" id="age" name="age" class="fadeIn second" placeholder="나이" required>
+				<select class="fadeIn second form-control" id="gender" name="gender" required>
+						<option selected="selected" value="">성별</option>
+						<option value="남">남</option>
+						<option value="여">여</option>
+				</select>
+							
+				<input	type="submit" class="fadeIn fourth" onclick="doReg();" value="회원가입">
 			</form>
 
 			<!-- Remind Passowrd -->

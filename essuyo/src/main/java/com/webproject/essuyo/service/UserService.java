@@ -56,6 +56,8 @@ public interface UserService {
 	public UserVO selectByEmail(String email);
 	
 	
+	public boolean businessTest(String email);
+	
 	
 
 }

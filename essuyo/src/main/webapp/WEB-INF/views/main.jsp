@@ -32,49 +32,54 @@
 </head>
 
 <body>
-	
-	<%@ include file="/pageframe/header.jsp" %>
-	
+
+	<%@ include file="/pageframe/header.jsp"%>
+
 	<!-- SLIDER -->
 	<section class="slider d-flex align-items-center">
-<!--         <img src="images/slider.jpg" class="img-fluid" alt="#"> -->
-        <div class="container">
-            <div class="row d-flex justify-content-center">
-                <div class="col-md-12">
-                    <div class="slider-title_box">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="slider-content_wrap">
-                                    <h1>여행에 필요한 예약 있어요??</h1>
-                                    <h5>여행에 필요한 예약은 이써요 에서!!</h5>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row d-flex justify-content-center">
-                            <div class="col-md-10">
-                                <form class="form-wrap mt-4">
-                                    <div class="btn-group" role="group" aria-label="Basic example">
-                                        	<input list="list" placeholder="☆★☆★☆골라주세요★☆★☆★" name="list1" class="btn-group1">
-											<datalist id="list">
-												<option value="숙박">
-                                        		<option value="차량">
-                                        		<option value="식사">
-                                        		<option value="박물관">
-											</datalist>
-                                        <input type="text" placeholder="ex) 서울" class="btn-group2"> 
-                                       <button type="submit" class="btn-form" ><span class="icon-magnifier search-icon"></span>검색<i class="pe-7s-angle-right"></i></button>
-                                    </div>
-                                </form>
-                                <div class="slider-link">
-                                    <a href="#" style="color:aqua">별점순 검색</a><span> // </span> <a href="#" style="color:aqua">최근순 검색</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+		<!--         <img src="images/slider.jpg" class="img-fluid" alt="#"> -->
+		<div class="container">
+			<div class="row d-flex justify-content-center">
+				<div class="col-md-12">
+					<div class="slider-title_box">
+						<div class="row">
+							<div class="col-md-12">
+								<div class="slider-content_wrap">
+									<h1>여행에 필요한 예약 있어요??</h1>
+									<h5>여행에 필요한 예약은 이써요 에서!!</h5>
+								</div>
+							</div>
+						</div>
+						<div class="row d-flex justify-content-center">
+							<div class="col-md-10">
+								<form class="form-wrap mt-4">
+									<div class="btn-group" role="group" aria-label="Basic example">
+										<input list="list" placeholder="☆★☆★☆골라주세요★☆★☆★" name="list1"
+											class="btn-group1">
+										<datalist id="list">
+											<option value="숙박">
+											<option value="차량">
+											<option value="식사">
+											<option value="박물관">
+										</datalist>
+										<input type="text" placeholder="ex) 서울" class="btn-group2">
+										<button type="submit" class="btn-form">
+											<span class="icon-magnifier search-icon"></span>검색<i
+												class="pe-7s-angle-right"></i>
+										</button>
+									</div>
+								</form>
+								<div class="slider-link">
+									<a href="#" style="color: aqua">별점순 검색</a><span> // </span> <a
+										href="#" style="color: aqua">최근순 검색</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
 	<!--// SLIDER -->
 	<!--============================= FIND PLACES =============================-->
 	<section class="main-block">
@@ -90,13 +95,14 @@
 				<div class="col-md-4">
 					<div class="find-place-img_wrap">
 						<div class="grid">
-							<figure class="effect-ruby"><a href="/list">
-								<img src="resources/images/menu-rentcar.jpg" class="img-fluid"
+							<figure class="effect-ruby">
+								<a href="/list"> <img
+									src="resources/images/menu-rentcar.jpg" class="img-fluid"
 									alt="img13" />
-								<figcaption>
-									<h5>렌트</h5>
-                                    <p>${countList} 목록</p>
-								</figcaption></a>
+									<figcaption>
+										<h5>렌트</h5>
+										<p>${countList}목록</p>
+									</figcaption></a>
 							</figure>
 						</div>
 					</div>
@@ -106,14 +112,15 @@
 						<div class="col-md-12">
 							<div class="find-place-img_wrap">
 								<div class="grid">
-									<figure class="effect-ruby"><a href="/list">
-										<img src="resources/images/menu-restraunt.jpg" class="img-fluid"
-											alt="img13"/>
-										<figcaption>
-											<h5>식당</h5>
-											<p>${countList} 목록</p>
-										</figcaption></a>
-									</figure>	
+									<figure class="effect-ruby">
+										<a href="/list"> <img
+											src="resources/images/menu-restraunt.jpg" class="img-fluid"
+											alt="img13" />
+											<figcaption>
+												<h5>식당</h5>
+												<p>${countList}목록</p>
+											</figcaption></a>
+									</figure>
 								</div>
 							</div>
 						</div>
@@ -122,13 +129,14 @@
 						<div class="col-md-12">
 							<div class="find-place-img_wrap">
 								<div class="grid">
-									<figure class="effect-ruby"><a href="/list">
-										<img src="resources/images/menu-museum.jpg" class="img-fluid"
+									<figure class="effect-ruby">
+										<a href="/list"> <img
+											src="resources/images/menu-museum.jpg" class="img-fluid"
 											alt="img13" />
-										<figcaption>
-											<h5>문화시설</h5>
-                                            <p>${countList} 목록</p>
-										</figcaption></a>
+											<figcaption>
+												<h5>문화시설</h5>
+												<p>${countList}목록</p>
+											</figcaption></a>
 									</figure>
 								</div>
 							</div>
@@ -140,13 +148,14 @@
 						<div class="col-md-12">
 							<div class="find-place-img_wrap">
 								<div class="grid">
-									<figure class="effect-ruby"><a href="/list">
-										<img src="resources/images/menu-hotel.jpg" class="img-fluid"
+									<figure class="effect-ruby">
+										<a href="/list"> <img
+											src="resources/images/menu-hotel.jpg" class="img-fluid"
 											alt="img13" />
-										<figcaption>
-											<h5>숙박</h5> 
-                                            <p>${countList} 목록</p>
-										</figcaption></a>
+											<figcaption>
+												<h5>숙박</h5>
+												<p>${countList}목록</p>
+											</figcaption></a>
 									</figure>
 								</div>
 							</div>
@@ -156,13 +165,13 @@
 						<div class="col-md-12">
 							<div class="find-place-img_wrap">
 								<div class="grid">
-									<figure class="effect-ruby"><a href="/list">
-										<img src="resources/images/menu-QnA.jpg" class="img-fluid"
-											alt="img13" />
-										<figcaption>
-											<h5>질문 이써Yo?</h5>
-                                            <p>Do you have any Question?</p>
-										</figcaption></a>
+									<figure class="effect-ruby">
+										<a href="/list"> <img src="resources/images/menu-QnA.jpg"
+											class="img-fluid" alt="img13" />
+											<figcaption>
+												<h5>질문 이써Yo?</h5>
+												<p>Do you have any Question?</p>
+											</figcaption></a>
 									</figure>
 								</div>
 							</div>
@@ -183,26 +192,26 @@
 					</div>
 				</div>
 			</div>
-			<div class="row" style="color:olivedrab">
-                    <div class="col-md-3 featured-responsive">
-                        <h5 style="text-align:center" >Restaurants</h5>
-                    </div>
-                    <div class="col-md-3 featured-responsive">
-                        <h5 style="text-align:center">최고 점수</h5>
-                    </div>
-                    <div class="col-md-3 featured-responsive">
-                        <h5 style="text-align:center">Car-Rental</h5>
-                    </div>
-                    <div class="col-md-3 featured-responsive">
-                        <h5 style="text-align:center">MUSEUM</h5>
-                    </div>
-            </div>
+			<div class="row" style="color: olivedrab">
+				<div class="col-md-3 featured-responsive">
+					<h5 style="text-align: center">Restaurants</h5>
+				</div>
+				<div class="col-md-3 featured-responsive">
+					<h5 style="text-align: center">최고 점수</h5>
+				</div>
+				<div class="col-md-3 featured-responsive">
+					<h5 style="text-align: center">Car-Rental</h5>
+				</div>
+				<div class="col-md-3 featured-responsive">
+					<h5 style="text-align: center">MUSEUM</h5>
+				</div>
+			</div>
 			<div class="row">
 				<div class="col-md-3 featured-responsive">
 					<div class="featured-place-wrap">
-						<a href="/detail"> <img src="resources/images/menu-restraunt2.jpg"
-							class="img-fluid" alt="#"> <span
-							class="featured-rating-orange">6.5</span>
+						<a href="/detail"> <img
+							src="resources/images/menu-restraunt2.jpg" class="img-fluid"
+							alt="#"> <span class="featured-rating-orange">6.5</span>
 							<div class="featured-title-box">
 								<h6>아웃백-SteakHouse</h6>
 								<p>Restaurant</p>
@@ -262,8 +271,9 @@
 				</div>
 				<div class="col-md-3 featured-responsive">
 					<div class="featured-place-wrap">
-						<a href="/detail"> <img src="resources/images/menu-rentcar2.jpg"
-							class="img-fluid" alt="#"> <span class="featured-rating">3.2</span>
+						<a href="/detail"> <img
+							src="resources/images/menu-rentcar2.jpg" class="img-fluid"
+							alt="#"> <span class="featured-rating">3.2</span>
 							<div class="featured-title-box">
 								<h6>쏘쏘카</h6>
 								<p>Restaurant</p>
@@ -292,8 +302,9 @@
 				</div>
 				<div class="col-md-3 featured-responsive">
 					<div class="featured-place-wrap">
-						<a href="/detail"> <img src="resources/images/menu-museum2.jpg"
-							class="img-fluid" alt="#"> <span class="featured-rating">3.2</span>
+						<a href="/detail"> <img
+							src="resources/images/menu-museum2.jpg" class="img-fluid" alt="#">
+							<span class="featured-rating">3.2</span>
 							<div class="featured-title-box">
 								<h6>상어박물관?</h6>
 								<p>Restaurant</p>
@@ -691,7 +702,7 @@
 		</div>
 	</section>
 	<!--//END CATEGORIES -->
-	
+
 	<%@ include file="/pageframe/footer.jsp"%>
 
 	<!-- jQuery, Bootstrap JS. -->
@@ -703,15 +714,10 @@
 	<script>
 		$(window).scroll(function() {
 			// 100 = The point you would like to fade the nav in.
-
 			if ($(window).scrollTop() > 100) {
-
 				$('.fixed').addClass('is-sticky');
-
 			} else {
-
 				$('.fixed').removeClass('is-sticky');
-
 			}
 			;
 		});

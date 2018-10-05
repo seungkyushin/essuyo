@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -25,7 +26,6 @@ import com.webproject.essuyo.domain.CompanyVO;
 import com.webproject.essuyo.domain.UserVO;
 import com.webproject.essuyo.service.BusinessService;
 import com.webproject.essuyo.service.CompanyService;
-import com.webproject.essuyo.service.FileService;
 import com.webproject.essuyo.service.ImageAdminService;
 import com.webproject.essuyo.service.ReservationService;
 import com.webproject.essuyo.service.impl.UserServiceImpl;
@@ -47,25 +47,42 @@ public class UserController {
 	@Autowired
 	private CompanyService companyService;
 
-
 	@Autowired
 	private ImageAdminService imageAdminService;
-	
-	@Autowired
-	private FileService fileService;
-	
-	
-	//GET 방식으로 회원가입 페이지에 접근. 그냥 회원가입 페이지로 보내준다
-	@RequestMapping(value="/regist", method=RequestMethod.GET)
+
+	// GET 방식으로 회원가입 페이지에 접근. 그냥 회원가입 페이지로 보내준다
+	@RequestMapping(value = "/regist", method = RequestMethod.GET)
 	public void registGet(UserVO vo, Model model) throws Exception {
 		logger.info("registGet.......");
 	}
 
 	// GET 방식으로 사업체 회원가입 페이지에 접근.
 	@RequestMapping(value = "/companyRegist", method = RequestMethod.GET)
-	public void companyRegistGet(UserVO vo, CompanyVO cvo, Model model) throws Exception {
+	public void companyRegistGet(UserVO vo, CompanyVO cvo, HttpSession httpSession, Model model) throws Exception {
 		logger.info("companyRegistGet.......");
+
+		String email = (String) httpSession.getAttribute("login");
+		BusinessVO business = service.getBusinessInfo(email);
+		model.addAttribute("business", business);
+
 	}
+	
+	@GetMapping("/businessStart")
+	public String startBusiness(RedirectAttributes redirectAttr, HttpSession httpSession, Model model) throws Exception {
+
+		String email = (String) httpSession.getAttribute("login");
+		
+		if( service.businessTest(email) == true) {
+			return "redirect:/user/companyRegist";
+		}
+		
+		redirectAttr.addFlashAttribute("errorMessageTitle","ERROR !");
+		redirectAttr.addFlashAttribute("errorMessage","사업을 시작 할 수 없습니다.");
+		return "redirect:/user/companyRegist";
+
+
+	}
+	
 
 	// POST 방식으로 회원가입 페이지 접근
 	
@@ -97,10 +114,10 @@ public class UserController {
 
 		String userName = (String) request.getParameter("userName");
 		String companyName = (String) request.getParameter("companyName");
-		vo.setName(userName);
+		// vo.setName(userName);
 		cvo.setName(companyName);
 
-		System.out.println("userName: " + vo.getName());
+		// System.out.println("userName: " + vo.getName());
 		System.out.println("companyName: " + cvo.getName());
 		// LAST_INSERT_ID()를 사용하기 때문에 반드시 아래의 순서대로 실행하는 게 중요하다
 		try {
@@ -127,37 +144,37 @@ public class UserController {
 		logger.info("companyUpdateGET.....");
 		String email = (String) request.getSession().getAttribute("login");
 		UserVO vo = service.selectByEmail(email);
-		if(vo.getBusinessId() != 0) {		
-		BusinessVO bvo = businessService.selectById(vo.getBusinessId());
-		CompanyVO cvo = companyService.getCompanyVO(bvo.getCompanyId());
-		model.addAttribute("cvo", cvo);
+		if (vo.getBusinessId() != 0) {
+			BusinessVO bvo = businessService.selectById(vo.getBusinessId());
+			CompanyVO cvo = companyService.getCompanyVO(bvo.getCompanyId());
+			model.addAttribute("cvo", cvo);
 		}
 	}
-	//테스트 중. form을 다 작성하고 보냈을 때.
-	@Transactional	
+
+	// 테스트 중. form을 다 작성하고 보냈을 때.
+	@Transactional
 	@RequestMapping(value = "/companyUpdate", method = RequestMethod.POST)
-	public String companyUpdatePOST(CompanyVO cvo, HttpServletRequest request, RedirectAttributes rttr) throws Exception{
+	public String companyUpdatePOST(CompanyVO cvo, HttpServletRequest request, RedirectAttributes rttr)
+			throws Exception {
 		logger.info("companyUpdatePOST......");
 		String email = (String) request.getSession().getAttribute("login");
-		UserVO vo = service.selectByEmail(email);		
-		
+		UserVO vo = service.selectByEmail(email);
+
 		try {
 			service.companyUpdate(cvo);
 			service.cIdIntoBusiness(vo);
-			
+
 			rttr.addFlashAttribute("errorMessageTitle", "정보 수정 성공");
 			rttr.addFlashAttribute("errorMessage", "성공적으로 정보가 수정됐습니다.");
 			return "redirect:/user/companyUpdate";
-		} catch (Exception e) {			
+		} catch (Exception e) {
 			e.printStackTrace();
 			rttr.addFlashAttribute("errorMessageTitle", "정보 수정 실패");
-			rttr.addFlashAttribute("errorMessage", "정보 수정에 실패했습니다. 관리자에게 문의해 주세요.");			
+			rttr.addFlashAttribute("errorMessage", "정보 수정에 실패했습니다. 관리자에게 문의해 주세요.");
 			return "redirect:/user/companyUpdate";
 		}
-		
+
 	}
-	
-	
 
 	@GetMapping("/profile")
 	public String showProfilePage(HttpSession httpSession, Model model) {
@@ -176,20 +193,17 @@ public class UserController {
 	}
 
 	@PostMapping("/profileUpdate")
-	public String showProfilePage(UserVO newUserInfo, 
-			RedirectAttributes redirectAttr, 
-			HttpSession httpSession,
+	public String showProfilePage(UserVO newUserInfo, RedirectAttributes redirectAttr, HttpSession httpSession,
 			MultipartFile file, Model model) {
 
-		
-		UserVO user = service.getUserVO((String)httpSession.getAttribute("login"));
+		UserVO user = service.getUserVO((String) httpSession.getAttribute("login"));
 
 		newUserInfo.setId(user.getId());
 		newUserInfo.setImageInfoId(user.getImageInfoId());
 
-		int update = service.setUserInfo(newUserInfo,file);
-		
-		if(update > 0) {
+		int update = service.setUserInfo(newUserInfo, file);
+
+		if (update > 0) {
 			redirectAttr.addFlashAttribute("errorMessageTitle", "SUCCESS !");
 			redirectAttr.addFlashAttribute("errorMessage", "회원 정보가 성공적으로 수정되었습니다.");
 
@@ -308,4 +322,5 @@ public class UserController {
 		model.addAttribute("sparkLineName", "올해 지출");
 
 	}
+
 }

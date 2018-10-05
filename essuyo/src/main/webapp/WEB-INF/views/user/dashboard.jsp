@@ -89,7 +89,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title m-b-0">${dounutChartName}</h4>
-                                <h2 class="font-light">${totalReservtionCount} 회<span class="font-16 text-success font-medium">+23%</span></h2>
+                                <h2 class="font-light">${totalReservtionCount} 회<span class="font-16 text-success font-medium"></span></h2>
                             	
 								              <c:choose>
                                 	<c:when test="${userType == 'user'}">
@@ -186,10 +186,8 @@
 	<div class="d-flex flex-row comment-row">
 
         <div class="p-2">
-		<a href="#">  
-            <img src="{{imageUrl}}" alt="#" width="50" class="rounded-circle">
-		</a>
-        </div>
+	         <img src="{{imageUrl}}" alt="#" width="50" class="rounded-circle">
+	     </div>
         <div class="comment-text w-100">
             <h6 class="font-medium">{{title}}</h6>
             <span class="m-b-15 d-block">{{content}}</span>
@@ -208,8 +206,8 @@
     </script>
     <script type="template" id="reservation-template" >
 		<tr>
-  		    <td class="txt-oflo"><a href="#">{{typeName}}</a></td>
-		   <td class="txt-oflo"><a href="#">{{productName}}</a></td>
+  		    <td class="txt-oflo"><a href="/message/register?receiverID={{typeId}}">{{typeName}}</a></td>
+		   <td class="txt-oflo"><a href="/reservation?company={{companyId}}&product={{productId}}">{{productName}}</a></td>
            <td><span class="label label-{{stateClass}} label-rounded">{{state}}</span> </td>
            <td class="txt-oflo">{{resDate}}</td>
            <td><span class="font-medium">{{totalPrice}} 원</span></td>
@@ -251,9 +249,13 @@
 			
 			dataList.forEach(function(data){
 				var tempData = {};
+				tempData['typeId'] = data.typeId;
 				tempData['typeName'] = data.typeName;
+				tempData['companyId'] = data.companyId;
+				tempData['productId'] = data.productId;
 				tempData['productName'] = data.productName;
 				tempData['state'] = data.state;
+			
 				if(  data.state == "성공" ){
 					tempData['stateClass'] = "success";
 				}else if(  data.state == "취소" ){

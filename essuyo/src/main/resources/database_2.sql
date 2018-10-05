@@ -107,7 +107,6 @@ CREATE TABLE comment (
 	id INTEGER PRIMARY KEY auto_increment, /* 번호 */
 	title VARCHAR(255) NOT NULL, /* 제목 */
 	content  VARCHAR(255), /* 내용 */
-	/*state VARCHAR(255) NOT NULL,  상태 */
 	helpful INTEGER, /* 도움점수 */
 	score INTEGER NOT NULL, /* 점수 */
 	mod_date DATE, /* 수정날짜 */
@@ -212,16 +211,17 @@ CREATE TABLE reservation (
 
 
 /*이미지*/
-INSERT INTO image_info ( save_path, type ,name, cre_date ) VALUES("/resources/images/hotel.jpg","image/jpg","hotel", now());
-INSERT INTO image_info ( save_path, type ,name, cre_date ) VALUES("/resources/images/car.jpg","image/jpg","car", now());
-INSERT INTO image_info ( save_path, type ,name, cre_date ) VALUES("/resources/images/food.jpg","image/jpg","food", now());
-INSERT INTO image_info ( save_path, type ,name, cre_date ) VALUES("/resources/images/museum.jpg","image/jpg","museum", now());
+INSERT INTO image_info ( save_path, type ,name, cre_date ) VALUES("/resources/images/hotel.jpg","image/jpg","hotel.jpg", now());
+INSERT INTO image_info ( save_path, type ,name, cre_date ) VALUES("/resources/images/car.jpg","image/jpg","car.jpg", now());
+INSERT INTO image_info ( save_path, type ,name, cre_date ) VALUES("/resources/images/food.jpg","image/jpg","food.jpg", now());
+INSERT INTO image_info ( save_path, type ,name, cre_date ) VALUES("/resources/images/museum.jpg","image/jpg","museum.jpg", now());
 INSERT INTO image_info ( save_path, type ,name, cre_date ) VALUES("/resources/images/users/1.jpg","image/jpg","1.jpg", now());
-INSERT INTO image_info ( save_path, type ,name, cre_date ) VALUES("/resources/images/users/2.jpg","image/jpg","user2", now());
-INSERT INTO image_info ( save_path, type ,name, cre_date ) VALUES("/resources/images/users/3.jpg","image/jpg","user3", now());
-INSERT INTO image_info ( save_path, type ,name, cre_date ) VALUES("/resources/images/menu-hotel.jpg","image/jpg","menu-hotel", now());
-INSERT INTO image_info ( save_path, type ,name, cre_date ) VALUES("/resources/images/reserve-slide3.jpg","image/jpg","reserve-slide3", now());
-INSERT INTO image_info ( save_path, type ,name, cre_date ) VALUES("/resources/images/reserve-slide2.jpg","image/jpg","reserve-slide2", now());
+INSERT INTO image_info ( save_path, type ,name, cre_date ) VALUES("/resources/images/users/2.jpg","image/jpg","user2.jpg", now());
+INSERT INTO image_info ( save_path, type ,name, cre_date ) VALUES("/resources/images/users/3.jpg","image/jpg","user3.jpg", now());
+INSERT INTO image_info ( save_path, type ,name, cre_date ) VALUES("/resources/images/menu-hotel.jpg","image/jpg","menu-hotel.jpg", now());
+INSERT INTO image_info ( save_path, type ,name, cre_date ) VALUES("/resources/images/reserve-slide3.jpg","image/jpg","reserve-slide3.jpg", now());
+INSERT INTO image_info ( save_path, type ,name, cre_date ) VALUES("/resources/images/reserve-slide2.jpg","image/jpg","reserve-slide2.jpg", now());
+INSERT INTO image_info ( save_path, type ,name, cre_date ) VALUES("/resources/images/default-user.png","image/png","default-user.png", now());
 
 /*company list*/
 insert into image_info(save_path,type,name,cre_date) values("/resources/images/hotel1.png","image/png","hotel1",now());
@@ -457,7 +457,7 @@ INSERT INTO comment(title, content,  helpful, score, reg_date, user_id, company_
 VALUES("comment title 9", "이써요이써요이써요이써요", 0, 9.0,"2018-09-25",2,2);
 
 INSERT INTO comment(title, content,  helpful, score, reg_date, user_id, company_id) 
-VALUES("comment title 10", "이써요이써요이써요이써요", "상태", 0, 9.5,"2018-09-25",3,2);
+VALUES("comment title 10", "이써요이써요이써요이써요", 0, 9.5,"2018-09-25",3,2);
 
 
 /*예약*/

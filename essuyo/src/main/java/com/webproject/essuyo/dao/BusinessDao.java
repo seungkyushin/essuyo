@@ -26,6 +26,9 @@ public class BusinessDao {
 		return sqlSession.selectOne(NAME_SPACE + ".updateGoodCount" , id);
 	}
 
+	public int insert(BusinessVO param) throws Exception{
+		return sqlSession.insert(NAME_SPACE + ".insert" , param);
+	}
 
 	
 	
