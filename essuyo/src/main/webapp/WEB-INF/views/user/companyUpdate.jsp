@@ -88,19 +88,19 @@
 									<div class="form-group">
 										<label>[회사 소재 지역]</label> <select class="custom-select col-12" id="areaListId" name="areaListId" required>
 											<option selected="selected" value="">지역 선택</option>
-											<option value="02">서울</option>
-											<option value="032">인천</option>
-											<option value="031">경기</option>
-											<option value="051">부산</option>
+											<option value="1">서울</option>
+											<option value="2">부산</option>
+											<option value="3">광주</option>
+											<option value="4">강원도</option>
 										</select>
 									</div>
 
 									<div class="form-group">
-										<label>[회사 전화번호] <span class="help"> ※ 010-1234-5793 혹은, 02-123-4567</span></label> <input value="${cvo.number }" type="text" id="number" name="number" class="form-control" placeholder="회사 전화번호" pattern="[0-9]{2,3}-[0-9]{3,4}-[0-9]{3,4}" maxlength="13" required>
+										<label>[회사 전화번호] <span class="help"> 예) 010-1234-5793 혹은, 02-123-4567</span></label> <input value="${cvo.number }" type="text" id="number" name="number" class="form-control" placeholder="회사 전화번호" pattern="[0-9]{2,3}-[0-9]{3,4}-[0-9]{3,4}" maxlength="13" required>
 									</div>
 
 									<div class="form-group">
-										<label>[회사 홈페이지] <span class="help"> ※ www.example.com 혹은, www.example.co.kr</span></label> <input value="${cvo.url }" type="text" id="url" name="url" class="form-control" placeholder="회사 홈페이지" required>
+										<label>[회사 홈페이지] <span class="help"> 예) www.example.com 혹은, www.example.co.kr</span></label> <input value="${cvo.url }" type="text" id="url" name="url" class="form-control" placeholder="회사 홈페이지" required>
 									</div>
 									<div class="form-group">
 										<label>[영업 상태]</label> <select class="custom-select col-12" id="state" name="state" required>
@@ -111,7 +111,7 @@
 									</div>
 
 									<div class="form-group">
-										<label>[영업 시간] </label> <input value="${cvo.time }" type="text" id="time" name="time" class="form-control" placeholder="영업시간" required>
+										<label>[영업 시간] </label><span class="help"> 예) 09:00 ~ 18:00 혹은, All Time, 상시 영업</span><input value="${cvo.time }" type="text" id="time" name="time" class="form-control" placeholder="영업시간" required>
 									</div>
 
 									<button type="submit">정보 수정</button>
