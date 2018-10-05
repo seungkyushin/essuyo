@@ -250,7 +250,7 @@ public class UserController {
 		}else {
 			redirectAttr.addFlashAttribute("errorMessageTitle","IMFOMATION !");
 			redirectAttr.addFlashAttribute("errorMessage","회사를 등록 후 이용해주시길 바랍니다.");
-			return "redirect:/user/companyRegister";
+			return "redirect:/user/companyRegist";
 		}
 		
 
