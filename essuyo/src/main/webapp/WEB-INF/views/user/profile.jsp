@@ -145,7 +145,7 @@
 											<h6>${company.name}</h6>
 											<p>${company.type}</p>
 											<span>• </span>
-											<p>3 Reviews</p>
+											<p>${company.review}개의 댓글</p>
 																						
 											<ul>
 												<li><span class="icon-location-pin"></span>

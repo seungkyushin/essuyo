@@ -38,7 +38,6 @@ public class CompanyController {
 	public String showCompanyDetailPage(@RequestParam("id") int companyId, Model model) throws Exception {
 		
 		model.addAttribute("company", service.getDetailCompanyInfo(companyId));
-		model.addAttribute("score", service.getDetailCompanyInfo(companyId));
 		model.addAttribute("user", userService.getSaleUserInfo(companyId));
 
 		return "detail";

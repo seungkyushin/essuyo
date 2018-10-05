@@ -60,8 +60,7 @@
 							<span>${score}</span>
 						</div>
 						<div class="review-btn">
-							<a href="/comment/register?companyId=1" class="btn btn-outline-danger">댓글</a> <span>34
-								reviews</span>
+							<a href="/comment/register?companyId=1" class="btn btn-outline-danger">댓글 쓰기</a> 
 						</div>
 
 					</div>
@@ -97,7 +96,7 @@
 
 
 					<div id="comment-list" class="booking-checkbox_wrap mt-4">
-						<h5>${company.review}Reviews</h5>
+						<h5>총 댓글 ${company.review}개</h5>
 						<hr>
 
 

@@ -58,6 +58,7 @@ public class CompanyServiceImpl implements CompanyService {
 				resultMap.put("number", company.getNumber());
 				resultMap.put("state", company.getState());
 				resultMap.put("url", company.getUrl());
+				resultMap.put("review", companyDao.cntReviews(companyId));
 				resultMap.put("image", this.getImagePath(companyId).get(0));
 
 				return resultMap;
