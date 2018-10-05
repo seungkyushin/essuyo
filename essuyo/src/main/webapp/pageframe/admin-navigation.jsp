@@ -83,7 +83,7 @@
                                            <li class="sidebar-item">
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/user/dashboard" aria-expanded="false">
                                 <i class="mdi mdi-av-timer"></i>
-                                <span class="hide-menu">종합화면</span>
+                                <span class="hide-menu">예약 종합화면</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
@@ -98,6 +98,15 @@
                                 <span class="hide-menu">개인사업장 관리</span>
                             </a>
                         </li>
+                        <c:if test="${ !empty sessionScope.companyLogin}">
+                                       
+                          <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/user/dashboardCompany" aria-expanded="false">
+                                <i class="mdi mdi-arrange-bring-forward"></i>
+                                <span class="hide-menu">개인사업장 종합화면</span>
+                            </a>
+                        </li>
+                        </c:if>
                          <li class="sidebar-item">
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/form" aria-expanded="false">
                                 <i class="mdi mdi-arrange-bring-forward"></i>
