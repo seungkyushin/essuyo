@@ -220,19 +220,39 @@ public class UserController {
 
 		String email = (String) httpSession.getAttribute("login");
 		UserVO user = service.getUserVO(email);
-
-		if (user.getBusinessId() == 0) {
+		
 			model.addAttribute("userType", "user");
 			model.addAttribute("id", user.getId());
 			setUserDashboard(email, "user", user.getId(), model);
-		} else {
-			int id = service.getBusinessInfo(email).getCompanyId();
-			model.addAttribute("userType", "company");
-			model.addAttribute("id", id);
-			setCompanyDashboard(email, "company", id, model);
-		}
-
+	
 		return "/user/dashboard";
+
+	}
+	
+	@GetMapping("/dashboardCompany")
+	public String showCompanyDashboardPage(HttpSession httpSession,
+			RedirectAttributes redirectAttr ,Model model) {
+
+		String email = (String) httpSession.getAttribute("login");
+	
+		int businessId = service.getBusinessInfo(email).getId();
+		int companyId = service.getBusinessInfo(email).getCompanyId();
+		
+		if( companyId != 0 && businessId != 0) {
+			model.addAttribute("userType", "company");
+			model.addAttribute("id", companyId);
+			setCompanyDashboard(email, "company", companyId, model);
+			return "/user/dashboard";
+		}else if( companyId == 0 && businessId == 0 ){
+			redirectAttr.addFlashAttribute("errorMessageTitle","ERROR !");
+			redirectAttr.addFlashAttribute("errorMessage","정상적인 방법으로 시도해 주세요.");
+			return "redirect:/";
+		}else {
+			redirectAttr.addFlashAttribute("errorMessageTitle","IMFOMATION !");
+			redirectAttr.addFlashAttribute("errorMessage","회사를 등록 후 이용해주시길 바랍니다.");
+			return "redirect:/user/companyRegister";
+		}
+		
 
 	}
 
