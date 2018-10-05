@@ -95,7 +95,7 @@
 									alt="img13" />
 								<figcaption>
 									<h5>렌트</h5>
-                                    <p>4 Listings</p>
+                                    <p>${countList} 목록</p>
 								</figcaption></a>
 							</figure>
 						</div>
@@ -111,7 +111,7 @@
 											alt="img13"/>
 										<figcaption>
 											<h5>식당</h5>
-											<p>8 Listings</p>
+											<p>${countList} 목록</p>
 										</figcaption></a>
 									</figure>	
 								</div>
@@ -127,7 +127,7 @@
 											alt="img13" />
 										<figcaption>
 											<h5>문화시설</h5>
-                                            <p>4 Listings</p>
+                                            <p>${countList} 목록</p>
 										</figcaption></a>
 									</figure>
 								</div>
@@ -145,7 +145,7 @@
 											alt="img13" />
 										<figcaption>
 											<h5>숙박</h5> 
-                                            <p>3	 Listings</p>
+                                            <p>${countList} 목록</p>
 										</figcaption></a>
 									</figure>
 								</div>

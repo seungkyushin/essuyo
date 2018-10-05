@@ -36,8 +36,9 @@ public class CompanyController {
 //	상세정보 
 	@GetMapping("/detail")
 	public String showCompanyDetailPage(@RequestParam("id") int companyId, Model model) throws Exception {
-
+		
 		model.addAttribute("company", service.getDetailCompanyInfo(companyId));
+		model.addAttribute("score", service.getDetailCompanyInfo(companyId));
 		model.addAttribute("user", userService.getSaleUserInfo(companyId));
 
 		return "detail";

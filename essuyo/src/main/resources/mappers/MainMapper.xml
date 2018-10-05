@@ -9,10 +9,10 @@ select *
 from company;
 </select>
 
-<select id="count" resultType="Integer">
-select count(*)
-from company
-where type=#{type};
+<select id="count" resultType="hashMap">
+SELECT type, count(*) AS count 
+FROM company 
+GROUP BY type=#{type};
 </select>
 
 </mapper>
