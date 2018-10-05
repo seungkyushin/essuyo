@@ -84,9 +84,18 @@
 			<if test="gender != null and gender !=''">gender = #{gender} ,</if>
 			<if test="age != null and age !=''"> age = #{age} ,</if>
 			<if test="imageInfoId != null and imageInfoId !=''"> image_info_id = #{imageInfoId} ,</if>
+			<if test="businessId != null and businessId !=''"> business_id = #{businessId} ,</if>
 		</trim>
   		
-  		WHERE id=#{id}
+  		<choose>
+  			<when test="id != null and id != 0">
+  				WHERE id=#{id}
+  			</when>
+  			<when test="email != null and email != ''">
+  				WHERE email=#{email}
+  			</when>
+  		</choose>
+  		
 			
 			
 	</update>

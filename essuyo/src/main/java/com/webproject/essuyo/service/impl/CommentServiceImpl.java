@@ -5,16 +5,18 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.joda.time.LocalDate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.webproject.essuyo.dao.CommentDao;
-import com.webproject.essuyo.dao.ImageAdminDao;
+import com.webproject.essuyo.dao.CompanyDao;
+import com.webproject.essuyo.dao.UserDAO;
 import com.webproject.essuyo.domain.CommentVO;
-import com.webproject.essuyo.domain.ImageInfoVO;
 import com.webproject.essuyo.domain.SQLParamVO;
+import com.webproject.essuyo.domain.UserVO;
 import com.webproject.essuyo.service.CommentService;
 import com.webproject.essuyo.service.ImageAdminService;
 
@@ -23,6 +25,10 @@ public class CommentServiceImpl implements CommentService{
 
 	@Autowired
 	private CommentDao commentDao;
+	
+	@Autowired
+	private UserDAO userDao;
+	
 	
 	@Autowired
 	private ImageAdminService imageAdminService;
@@ -46,20 +52,20 @@ public class CommentServiceImpl implements CommentService{
 					//if (userInfo != null) {
 					for (CommentVO data : commentList) {
 						Map<String, Object> paramMap = new HashMap<>();
-
 						
 						paramMap.put("title", data.getTitle());
 						paramMap.put("content", data.getContent());
 						paramMap.put("regDate", data.getRegDate());
-						//paramMap.put("state", data.getState());
 						paramMap.put("score", data.getScore());
 						paramMap.put("helpful", data.getHelpful());
 						paramMap.put("userId", data.getUserId());
 
 						if (type.equals("user") == true) {
-							paramMap.put("imageUrl", "/resources/images/users/5.jpg");
+							List<String> companyImageList = imageAdminService.getImagePathList("company", data.getCompanyId());
+							paramMap.put("imageUrl", companyImageList.get(0) );
 						}else if (type.equals("company") == true) {
-							paramMap.put("imageUrl", "/resources/images/users/6.jpg" );
+							UserVO user = userDao.selectById(new SQLParamVO("user",data.getUserId()));
+							paramMap.put("imageUrl", imageAdminService.getImagePath(user.getImageInfoId()));
 						}
 						
 						resultList.add(paramMap);
@@ -79,10 +85,5 @@ public class CommentServiceImpl implements CommentService{
 		commentDao.create(comment);
 		
 	}
-
-	/*@Override
-	public String getImagePath(int id) {
-		return imageAdminService.getImagePath(id);
-	}*/
 
 }

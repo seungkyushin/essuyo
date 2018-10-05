@@ -12,29 +12,16 @@
 <meta name="keywords" content="이써요">
 <!-- Favicons -->
 <link rel="shortcut icon" href="#">
-<!-- Page Title -->
 <title>자리 있어요?</title>
-<!-- Bootstrap CSS -->
 <link rel="stylesheet" href="/resources/css/bootstrap/bootstrap.min.css">
-<!-- Google Fonts -->
-<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,500,700,900" rel="stylesheet">
-<!-- Simple line Icon -->
 <link rel="stylesheet" href="/resources/css/simple-line-icons.css">
-<!-- Themify Icon -->
 <link rel="stylesheet" href="/resources/css/themify-icons.css">
-<!-- Hover Effects -->
 <link rel="stylesheet" href="/resources/css/set1.css">
-<!-- Swipper Slider -->
 <link rel="stylesheet" href="/resources/css/swiper.min.css">
-<!-- Magnific Popup CSS -->
 <link rel="stylesheet" href="/resources/css/magnific-popup.css">
-<!-- Main CSS -->
 <link rel="stylesheet" href="/resources/css/style.css">
-
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="/resources/css/login.css">
-
-
 
 <title>회원가입</title>
 </head>
@@ -67,8 +54,8 @@
 			
 				<select class="fadeIn second form-control" id="gender" name="gender" required>
 						<option selected="selected" value="">성별</option>
-						<option value="남자">남자</option>
-						<option value="여자">여자</option>
+						<option value="남">남</option>
+						<option value="여">여</option>
 				</select>
 				
 										

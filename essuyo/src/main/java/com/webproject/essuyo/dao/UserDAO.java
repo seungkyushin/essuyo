@@ -146,6 +146,8 @@ public class UserDAO {
 		return session.update(namespace + ".update", user);
 	}
 	
+
+	
 	
 	
 

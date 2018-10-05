@@ -45,59 +45,32 @@
             </button>
                         <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
                             <ul class="navbar-nav">
-                              <!--   <li class="nav-item dropdown">
-=======
-	<div class="dark-bg sticky-top">
-		<div class="container-fluid">
-			<div class="row">
-				<div class="col-md-12">
-					<nav class="navbar navbar-expand-lg navbar-light">
-						<a class="navbar-brand" href="/"><img src="" /></a>
-						<button class="navbar-toggler" type="button"
-							data-toggle="collapse" data-target="#navbarNavDropdown"
-							aria-controls="navbarNavDropdown" aria-expanded="false"
-							aria-label="Toggle navigation">
-							<span class="icon-menu"></span>
-						</button>
-						<div class="collapse navbar-collapse justify-content-end"
-							id="navbarNavDropdown">
-							<ul class="navbar-nav">
-								<!--   <li class="nav-item dropdown">
->>>>>>> branch 'master' of https://github.com/seungkyushin/essuyo.git
-                                    <a class="nav-link" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                   						카테고리
-                   						<span class="icon-arrow-down"></span>
-                 					</a>
-                                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                        <a class="dropdown-item" href="#">호텔</a>
-                                        <a class="dropdown-item" href="#">렌트카</a>
-                                        <a class="dropdown-item" href="#">박물관</a>
-                                        <a class="dropdown-item" href="#">음식점</a>                                    </div>
-                                </li> -->
-
-								<li class="nav-item"><a class="nav-link"
-									href="/user/regist">호텔</a></li>
-								<li class="nav-item"><a class="nav-link"
-									href="/user/regist">렌트카</a></li>
-								<li class="nav-item"><a class="nav-link"
-									href="/user/regist">박물관</a></li>
-								<li class="nav-item"><a class="nav-link"
-									href="/user/regist">식당</a></li>
+								<li class="nav-item">
+									<a class="nav-link"	href="/list">호텔</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link"	href="/list">렌트카</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" href="/list">박물관</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link"	href="/list">식당</a>
+								</li>
 
 								<c:choose>
 									<c:when test="${ empty sessionScope.login }">
-										<li class="nav-item"><a class="nav-link"
-											href="/user/regist">회원가입</a></li>
-										<li><a href="/login" class="btn btn-outline-light top-btn">로그인 <i class="icon-login"></i></a></li>
+										<li class="nav-item">
+											<a class="nav-link" href="/user/regist">회원가입</a>
+										</li>
+										<li class="nav-item">
+											<a class="nav-link"	href="/login">로그인 <i class="icon-login"></i></a>
+										</li>
+								
 									</c:when>
 
 									<c:when test="${ !empty sessionScope.login }">
 										<div class="navbar-collapse collapse" id="navbarSupportedContent" data-navbarbg="skin6">
-
-											<ul class="navbar-nav float-left mr-auto">
-												<li class="nav-item search-box">
-												</li>
-											</ul>
 
 											<ul class="navbar-nav float-right">
 
@@ -107,10 +80,14 @@
 													<img id="userImage" src="" alt="user" class="rounded-circle" width="31">
 												</a>
 													<div class="dropdown-menu dropdown-menu-right user-dd animated">
-														<a class="dropdown-item" href="/user/profile"><i
-															class="ti-user m-r-5 m-l-5"></i> 프로필</a> <a
-															class="dropdown-item" href="/logout"><i
-															class="ti-wallet m-r-5 m-l-5"></i> 로그아웃</a> 
+													<a class="dropdown-item" href="/user/profile">
+														<i class="icon-user m-r-5 m-l-5"></i> 프로필</a>
+														
+													<a class="dropdown-item" href="/user/dashboard">
+														<i class="icon-pie-chart m-r-5 m-l-5"></i> 종합화면</a> 
+														
+													<a class="dropdown-item" href="/logout">
+														<i class="icon-logout m-r-5 m-l-5"></i> 로그아웃</a> 
 													</div></li>
 											
 											</ul>

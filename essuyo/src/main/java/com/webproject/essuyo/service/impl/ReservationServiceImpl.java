@@ -11,12 +11,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.webproject.essuyo.dao.CompanyDao;
 import com.webproject.essuyo.dao.ProductDao;
 import com.webproject.essuyo.dao.ReservationDao;
 import com.webproject.essuyo.dao.UserDAO;
+import com.webproject.essuyo.domain.CompanyVO;
 import com.webproject.essuyo.domain.ProductVO;
 import com.webproject.essuyo.domain.ReservationVO;
 import com.webproject.essuyo.domain.SQLParamVO;
+import com.webproject.essuyo.domain.UserVO;
 import com.webproject.essuyo.service.ReservationService;
 
 @Service
@@ -30,6 +33,9 @@ public class ReservationServiceImpl implements ReservationService {
 
 	@Autowired
 	private UserDAO userDao;
+	
+	@Autowired
+	private CompanyDao companyDao;
 
 	private final int SEARCH_LIMIT = 5;
 	private final int MAX_GENDER_COUNT = 2;
@@ -84,12 +90,18 @@ public class ReservationServiceImpl implements ReservationService {
 				for (ReservationVO data : reservationList) {
 					Map<String, Object> resultMap = new HashMap<>();
 
-					if (findType.equals("user") == true)
-						resultMap.put("typeName", "회사:" + data.getCompanyId());
-					else if (findType.equals("company") == true) {
-						resultMap.put("typeName", "유저:" + data.getUserId());
+					if (findType.equals("user") == true) {
+						CompanyVO company = companyDao.getCompany(data.getCompanyId());
+						resultMap.put("typeId", company.getId() );
+						resultMap.put("typeName", company.getName() );
 					}
-
+					else if (findType.equals("company") == true) {
+						UserVO user = userDao.selectById(new SQLParamVO("user",data.getUserId()));
+						resultMap.put("typeId", user.getId() );
+						resultMap.put("typeName", user.getName());
+					}
+					resultMap.put("companyId", data.getCompanyId() );
+					resultMap.put("productId", data.getProductId() );
 					resultMap.put("productName", productDao.selectByProductId(data.getProductId()).getName());
 					resultMap.put("resDate", data.getRegDate());
 					resultMap.put("state", data.getState());
