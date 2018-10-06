@@ -138,10 +138,10 @@ CREATE TABLE message (
 /* 상품관리 */
 CREATE TABLE product_admin (
 	id INTEGER PRIMARY KEY auto_increment, /*상품 관리 번호*/
-	business_id INTEGER, /* 사업종류번호 */
+	company_id INTEGER, /* 사업종류번호 */
 	product_id INTEGER,
 	
-	FOREIGN KEY (business_id) REFERENCES business(id) ON DELETE CASCADE,
+	FOREIGN KEY (company_id) REFERENCES company(id) ON DELETE CASCADE,
 	FOREIGN KEY (product_id) REFERENCES product(id) ON DELETE CASCADE
 );
 
@@ -389,10 +389,10 @@ VALUES("박물관이 살아있다.", "2018-10-01","2018-10-15",  "영화 아님"
 
 
 /*상품 관리*/
-INSERT INTO product_admin(business_id,product_id) VALUES(1,1);
-INSERT INTO product_admin(business_id,product_id) VALUES(1,2);
-INSERT INTO product_admin(business_id,product_id) VALUES(1,3);
-INSERT INTO product_admin(business_id,product_id) VALUES(1,4);
+INSERT INTO product_admin(company_id,product_id) VALUES(1,1);
+INSERT INTO product_admin(company_id,product_id) VALUES(1,2);
+INSERT INTO product_admin(company_id,product_id) VALUES(2,3);
+INSERT INTO product_admin(company_id,product_id) VALUES(2,4);
 
 /*상품 제고*/
 INSERT INTO product_manager(sale_date,count,product_id) VALUES

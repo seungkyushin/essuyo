@@ -20,6 +20,7 @@
 <link rel="stylesheet" href="resources/css/swiper.min.css">
 <link rel="stylesheet" href="resources/css/magnific-popup.css">
 <link rel="stylesheet" href="resources/css/style.css">
+<link rel="stylesheet" href="resources/css/tab.css">
 </head>
 <body>
 
@@ -70,39 +71,53 @@
 	</section>
 
 	<!--============================= BOOKING DETAILS =============================-->
+	
+<div class="container">
+         <ul class="tabs" >
+             <li class="tab-link current" data-tab="tab-1">정보</li>
+             <li class="tab-link" data-tab="tab-2">댓글</li>
+         </ul>
+     </div>
+     
+     
 	<section class="light-bg booking-details_wrap">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-8 responsive-wrap">
+					<div id="tab-1" class="tab-content current">
+						<div class="booking-checkbox_wrap">
+							<div class="booking-checkbox">
+								<p>${company.discription}</p>
+								<hr>
+							</div>
 
-					<div class="booking-checkbox_wrap">
-						<div class="booking-checkbox">
-							<p>${company.discription}</p>
-							<hr>
+							<div class="row">
+								<c:forEach var="item" items="${company.facility}">
+									<div class="col-md-4">
+										<label class="custom-checkbox"> <span
+											class="ti-check-box"></span> <span
+											class="custom-control-description">${item}</span>
+										</label>
+									</div>
+								</c:forEach>
+								<hr>
+								
+							</div>
+					
+						<div id="productList">
+						</div>
+							
 						</div>
 
-						<div class="row">
-							<c:forEach var="item" items="${company.facility}">
-								<div class="col-md-4">
-									<label class="custom-checkbox"> <span
-										class="ti-check-box"></span> <span
-										class="custom-control-description">${item}</span>
-									</label>
-								</div>
-							</c:forEach>
-
+					</div>
+					<div id="tab-2" class="tab-content">
+						<div class="booking-checkbox_wrap">
+							<div id="comment-list" class="booking-checkbox_wrap mt-4">
+								<h5>총 댓글 ${company.review}개</h5>
+								<hr>
+							</div>
 						</div>
 					</div>
-
-
-					<div id="comment-list" class="booking-checkbox_wrap mt-4">
-						<h5>총 댓글 ${company.review}개</h5>
-						<hr>
-
-
-					</div>
-
-
 				</div>
 				<div class="col-md-4 responsive-wrap">
 					<div class="contact-info">
@@ -195,6 +210,31 @@
    </div>
    <hr>
 	</script>
+	<script  type="template" id="product-template">
+	<div class="booking-checkbox_wrap">
+	<div class="featured-place-wrap">
+		<a href="/detail"> <img src="/resources/images/car2.png" class="img-fluid"
+			alt="#"> <span class="featured-rating">{{totalCount}}</span>
+			<div class="featured-title-box">
+				<h6>{{name}}</h6>
+				<i class="icon-direction"></i><p> {{discription}}</p>
+		
+
+				<ul>
+					<li><span class="icon-calendar"></span>
+						<p>{{salesDate}}</p></li>
+					<li><span class="icon-wallet"></span>
+						<p>{{price}} 원</p></li>
+
+				</ul>
+				<div class="bottom-icons">
+					<div class="open-now">{{state}}</div>
+				</div>
+			</div>
+		</a>
+	</div>
+</div>
+	</script>
 	<script>
 		var swiper = new Swiper('.swiper-container', {
 			slidesPerView : 3,
@@ -231,6 +271,18 @@
 	</script>
 	<script>
 		$(document).ready(function() {
+			  
+            $('ul.tabs li').click(function(){
+                var tab_id = $(this).attr('data-tab');
+        
+                $('ul.tabs li').removeClass('current');
+                $('.tab-content').removeClass('current');
+        
+                $(this).addClass('current');
+                $("#"+tab_id).addClass('current');
+           
+       	 });
+        
 
 			var requestURL = "/api/commentList/company/" + 1 + "/" + ${company.id};
 			

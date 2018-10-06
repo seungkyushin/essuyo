@@ -289,11 +289,9 @@
 	   		
 	   		//< 유저 썸네일
 	   		ImageThumbnail("#userImage");
-
     	
     });
    
-
 		function checkInfo(){
 			
 			var name = $("#name").val();

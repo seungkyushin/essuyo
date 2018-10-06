@@ -118,7 +118,7 @@
 											alt="img13" />
 											<figcaption>
 												<h5>식당</h5>
-												<p>${countList}목록</p>
+												<p>${countList['렌트카']}목록</p>
 											</figcaption></a>
 									</figure>
 								</div>
@@ -135,7 +135,7 @@
 											alt="img13" />
 											<figcaption>
 												<h5>문화시설</h5>
-												<p>${countList}목록</p>
+												<p>${countList['박물관']}목록</p>
 											</figcaption></a>
 									</figure>
 								</div>
@@ -154,7 +154,11 @@
 											alt="img13" />
 											<figcaption>
 												<h5>숙박</h5>
-												<p>${countList}목록</p>
+												<p>${countList['hotel']}목록</p>
+												<p>${countList.hotel}목록</p>
+												<p>${countList['펜션']}목록</p>
+												<p>${countList['호텔']}목록</p>
+												
 											</figcaption></a>
 									</figure>
 								</div>

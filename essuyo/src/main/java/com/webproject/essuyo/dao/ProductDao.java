@@ -24,11 +24,14 @@ public class ProductDao {
 		return sqlSession.selectOne(NAME_SPACE + ".selectById" , id);
 	}
 	
+	public List<ProductVO> selectByCompanyId(int id) throws Exception{
+		return sqlSession.selectList(NAME_SPACE + ".selectByCompanyId" , id);
+	}
+	
 	public ProductVO update(ProductVO product) throws Exception{
 		return sqlSession.selectOne(NAME_SPACE + ".updateById" , product);
 	}
-	
-	
+		
 	public List<ProductManagerVO> selectManagerByProductId(int id) throws Exception{
 		return sqlSession.selectList(NAME_SPACE + ".selectManagerByProductId" , id);
 	}

@@ -1,6 +1,5 @@
 package com.webproject.essuyo.service.impl;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,11 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.webproject.essuyo.dao.ProductDao;
-
-import com.webproject.essuyo.domain.ProductManagerVO;
 import com.webproject.essuyo.domain.ProductVO;
-import com.webproject.essuyo.domain.ReservationVO;
-import com.webproject.essuyo.domain.SQLParamVO;
 import com.webproject.essuyo.service.ImageAdminService;
 import com.webproject.essuyo.service.ProductService;
 
@@ -33,9 +28,8 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public Map<String, Object> getProduct(int productId) {
-		Map<String, Object> resultMap = new HashMap<>();
-
 		try {
+			Map<String, Object> resultMap = new HashMap<>();
 			ProductVO product = null;
 			// < 상품 정보
 			product = productDao.selectByProductId(productId);
@@ -63,6 +57,23 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
+	public List<ProductVO> getProductList(int companyId) {
+		
+		// < 상품 정보
+		try {
+			List<ProductVO> productList = productDao.selectByCompanyId(companyId);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		
+		return null;
+	}
+
+	
+	
+	@Override
 	public List<String> getImagePath(int productId) {
 		return imageAdminService.getImagePathList("product", productId);
 	}
@@ -77,6 +88,6 @@ public class ProductServiceImpl implements ProductService {
 		}
 	}
 
-	
+
 
 }

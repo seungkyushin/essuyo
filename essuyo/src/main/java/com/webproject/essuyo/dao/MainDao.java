@@ -3,6 +3,7 @@ package com.webproject.essuyo.dao;
 
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -22,8 +23,8 @@ public class MainDao {
 		return session.selectList(namespace + ".selectOne");
 	}
 	
-	public CompanyVO getMainCount() throws Exception{
-		return session.selectOne(namespace + ".count");
+	public List<Map<String,Object>> getMainCount() throws Exception{
+		return session.selectList(namespace + ".count");
 		
 	}
 	
