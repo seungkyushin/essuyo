@@ -1,5 +1,6 @@
 package com.webproject.essuyo.service.impl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,27 +27,35 @@ public class ProductServiceImpl implements ProductService {
 
 	private Logger logger = LoggerFactory.getLogger(ProductServiceImpl.class);
 
+	private Map<String, Object> makeProductViewData(ProductVO product) {
+		
+		if( product != null ) {
+			Map<String, Object> resultMap = new HashMap<>();
+			
+			resultMap.put("name", product.getName());
+			resultMap.put("id", product.getId());
+			resultMap.put("saleStartDate", product.getSaleStartDate());
+			resultMap.put("saleEndDate", product.getSaleEndDate());
+			LocalDate endDate = new LocalDate(product.getSaleEndDate());
+			resultMap.put("state", LocalDate.now().isAfter(endDate) == false ? "예약가능" : "판매종료");
+			resultMap.put("discription", product.getDiscription());
+			resultMap.put("price", product.getPrice());
+			resultMap.put("url", this.getImagePath(product.getId()));
+			
+			return resultMap;
+		}
+		
+		return null;
+	}
+	
 	@Override
 	public Map<String, Object> getProduct(int productId) {
 		try {
-			Map<String, Object> resultMap = new HashMap<>();
-			ProductVO product = null;
 			// < 상품 정보
-			product = productDao.selectByProductId(productId);
+			 ProductVO product = productDao.selectByProductId(productId);
 
 			if (product != null) {
-
-				resultMap.put("name", product.getName());
-				resultMap.put("id", product.getId());
-				resultMap.put("saleStartDate", product.getSaleStartDate());
-				resultMap.put("saleEndDate", product.getSaleEndDate());
-				LocalDate endDate = new LocalDate(product.getSaleEndDate());
-				resultMap.put("state", LocalDate.now().isAfter(endDate) == false ? "예약가능" : "판매종료");
-				resultMap.put("discription", product.getDiscription());
-				resultMap.put("price", product.getPrice());
-				resultMap.put("url", this.getImagePath(productId));
-
-				return resultMap;
+				return makeProductViewData(product);
 			}
 
 		} catch (Exception e) {
@@ -57,18 +66,24 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public List<ProductVO> getProductList(int companyId) {
+	public List<Map<String,Object>> getProductList(int companyId) {
 		
 		// < 상품 정보
 		try {
-			List<ProductVO> productList = productDao.selectByCompanyId(companyId);
+				List<Map<String,Object>> resultList = new ArrayList<>();
+				List<ProductVO> productList = productDao.selectByCompanyId(companyId);
+				
+				for(ProductVO product : productList) {
+					resultList.add(makeProductViewData(product));
+				}
+				
+				return resultList;
+				
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error("상품 조회 실패.. | {} ", e.toString());
+			return null;
 		}
-
 		
-		return null;
 	}
 
 	

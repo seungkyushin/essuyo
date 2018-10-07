@@ -60,10 +60,6 @@
 						<div class="reserve-rating">
 							<span>${score}</span>
 						</div>
-						<div class="review-btn">
-							<a href="/comment/register?companyId=1" class="btn btn-outline-danger">댓글 쓰기</a> 
-						</div>
-
 					</div>
 				</div>
 			</div>
@@ -71,19 +67,20 @@
 	</section>
 
 	<!--============================= BOOKING DETAILS =============================-->
-	
-<div class="container">
-         <ul class="tabs" >
-             <li class="tab-link current" data-tab="tab-1">정보</li>
-             <li class="tab-link" data-tab="tab-2">댓글</li>
-         </ul>
-     </div>
-     
-     
+
+	<div class="container">
+		<ul class="tabs">
+			<li class="tab-link current" data-tab="tab-1">정보</li>
+			<li class="tab-link" data-tab="tab-2">댓글</li>
+		</ul>
+	</div>
+
+
 	<section class="light-bg booking-details_wrap">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-8 responsive-wrap">
+				
 					<div id="tab-1" class="tab-content current">
 						<div class="booking-checkbox_wrap">
 							<div class="booking-checkbox">
@@ -100,13 +97,14 @@
 										</label>
 									</div>
 								</c:forEach>
-								<hr>
-								
 							</div>
-					
-						<div id="productList">
-						</div>
 							
+							
+							<hr>
+
+							<div id="product-list">
+							</div>
+
 						</div>
 
 					</div>
@@ -115,6 +113,48 @@
 							<div id="comment-list" class="booking-checkbox_wrap mt-4">
 								<h5>총 댓글 ${company.review}개</h5>
 								<hr>
+								
+								 <c:if test="${ !empty sessionScope.login}">
+								<form role="form" method="POST"	action="/comment/writerComment">
+								<div class="customer-review_wrap">
+									<div class="customer-img">
+										<img id="writeUserImage" src="" class="img-fluid comment-image-size" alt="">
+										<p id="writeUserName">이름</p>
+										
+									</div>
+									<div class="customer-content-wrap">
+										<div class="customer-content">
+											<div class="customer-review">
+												<input type="text" name='title' class="form-control" placeholder="제목">
+											</div>
+											
+											<div class="customer-rating">8.0</div>
+										</div>
+										
+										<textarea class="form-control" name="content" rows="3"placeholder="내용"></textarea>
+			
+									</div>
+								</div>
+								<button type="submit" class="btn btn-info"	style="float: right;">댓글달기</button>
+													
+									<label for="exInputWriter"> SCORE </label> <select
+														name="score" id="score">
+														<option value="0">☆☆☆☆☆</option>
+														<option value="1">★☆☆☆☆</option>
+														<option value="2">★★☆☆☆</option>
+														<option value="3">★★★☆☆</option>
+														<option value="4">★★★★☆</option>
+														<option value="5">★★★★★</option>
+
+													</select>
+													
+								<input type="hidden" name='companyId' value="${company.id}">
+								</form>
+									
+								<hr>
+								</c:if>
+									
+								
 							</div>
 						</div>
 					</div>
@@ -132,7 +172,7 @@
 						</div>
 						<div class="address">
 							<span class="icon-link"></span>
-							<p>${company.url}</p>
+							<p>${company.homepage}</p>
 						</div>
 						<div class="address">
 							<span class="icon-clock"></span>
@@ -183,7 +223,7 @@
 	<script type="template" id="comment-template">
 	   <div class="customer-review_wrap">
        <div class="customer-img">
-           <img src="{{image}}" class="img-fluid" alt="{{name}}">
+           <img src="{{image}}" class="img-fluid comment-image-size" alt="{{name}}">
            <p>{{name}}</p>
            <span>35 Reviews</span>
        </div>
@@ -210,11 +250,12 @@
    </div>
    <hr>
 	</script>
-	<script  type="template" id="product-template">
+
+	<script type="template" id="product-template">
 	<div class="booking-checkbox_wrap">
 	<div class="featured-place-wrap">
-		<a href="/detail"> <img src="/resources/images/car2.png" class="img-fluid"
-			alt="#"> <span class="featured-rating">{{totalCount}}</span>
+		<a href="/reservation?company={{companyId}}&product={{productId}}"> 
+			<img src="{{url}}" class="img-fluid" alt="#"> <span class="featured-rating">{{totalCount}}</span>
 			<div class="featured-title-box">
 				<h6>{{name}}</h6>
 				<i class="icon-direction"></i><p> {{discription}}</p>
@@ -222,7 +263,7 @@
 
 				<ul>
 					<li><span class="icon-calendar"></span>
-						<p>{{salesDate}}</p></li>
+						<p>{{saleDate}}</p></li>
 					<li><span class="icon-wallet"></span>
 						<p>{{price}} 원</p></li>
 
@@ -270,42 +311,82 @@
 		}
 	</script>
 	<script>
-		$(document).ready(function() {
-			  
-            $('ul.tabs li').click(function(){
-                var tab_id = $(this).attr('data-tab');
-        
-                $('ul.tabs li').removeClass('current');
-                $('.tab-content').removeClass('current');
-        
-                $(this).addClass('current');
-                $("#"+tab_id).addClass('current');
-           
-       	 });
-        
+		$(document).ready(
+				function() {
 
-			var requestURL = "/api/commentList/company/" + 1 + "/" + ${company.id};
-			
-			Ajax("GET", requestURL, function(dataList) {
+					$('ul.tabs li').click(function() {
+						var tab_id = $(this).attr('data-tab');
 
-				dataList.forEach(function(data) {
+						$('ul.tabs li').removeClass('current');
+						$('.tab-content').removeClass('current');
 
-					var tempData = {};
-					tempData['image'] = data.imageUrl;
-					tempData['name'] = data.name;
-					tempData['title'] = data.title;
-					tempData['regDate'] = data.regDate;
-					tempData['score'] = data.score;
-					tempData['content'] = data.content;
-					tempData['helpful'] = data.helpful;
-					tempData['state'] = data.state;
+						$(this).addClass('current');
+						$("#" + tab_id).addClass('current');
 
-					makeHTML("#comment-template", "#comment-list", tempData);
+					});
+
+					var requestURL = "/api/productList/" + ${company.id};
+
+					Ajax("GET", requestURL, function(dataList) {
+
+						dataList.forEach(function(data) {
+
+							var tempData = {};
+
+							tempData['companyId'] = ${company.id};
+							tempData['productId'] = data.id;
+							tempData['url'] = data.url[0];
+							tempData['name'] = data.name;
+							tempData['discription'] = data.discription;
+							tempData['saleDate'] = data.saleStartDate + "-"	+ data.saleEndDate;
+							tempData['state'] = data.state;
+							tempData['price'] = dotSplit(data.price);
+
+							makeHTML("#product-template", "#product-list",
+									tempData);
+						});
+
+					});
+
+					
+					
+				      if( "" != "${sessionScope.login}" ){
+				    		requestURL = "/api/loginImage";
+							Ajax("GET", requestURL, function(data) {
+								
+								$("#writeUserImage").attr("src",data);
+								
+								$("#writeUserImage").attr("alt","잉");
+								$("#writeUserName").text("홍길동");
+							
+							});
+				      }
+				      
+				
+
+					
+					requestURL = "/api/commentList/company/" + 1 + "/" + ${company.id};
+					Ajax("GET", requestURL, function(dataList) {
+
+						dataList.forEach(function(data) {
+
+							var tempData = {};
+							tempData['image'] = data.imageUrl;
+							tempData['name'] = data.name;
+							tempData['title'] = data.title;
+							tempData['regDate'] = data.regDate;
+							tempData['score'] = data.score;
+							tempData['content'] = data.content;
+							tempData['helpful'] = data.helpful;
+							tempData['state'] = data.state;
+
+							makeHTML("#comment-template", "#comment-list",
+									tempData);
+						});
+
+					});
+
 				});
-
-			});
-
-		});
 	</script>
 
 	<%@ include file="/pageframe/footer.jsp"%>

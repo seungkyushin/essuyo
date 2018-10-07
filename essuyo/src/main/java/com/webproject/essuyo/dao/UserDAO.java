@@ -54,7 +54,7 @@ public class UserDAO {
 		map.put("discription", cvo.getName());
 		map.put("address", cvo.getAddress());
 		map.put("number", cvo.getNumber());
-		map.put("url", cvo.getUrl());
+		map.put("url", cvo.getHomepage());
 		map.put("state", cvo.getState());
 		map.put("time", cvo.getTime());
 		
@@ -90,7 +90,7 @@ public class UserDAO {
 		map.put("discription", cvo.getDiscription());
 		map.put("address", cvo.getAddress());
 		map.put("number", cvo.getNumber());
-		map.put("url", cvo.getUrl());
+		map.put("url", cvo.getHomepage());
 		map.put("state", cvo.getState());
 		map.put("time", cvo.getTime());
 		map.put("areaListId", cvo.getAreaListId());		

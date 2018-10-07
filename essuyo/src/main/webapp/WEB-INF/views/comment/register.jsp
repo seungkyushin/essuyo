@@ -20,6 +20,8 @@
 <title>댓글 관리</title>
 </head>
 <body>
+<%@ include file="/pageframe/header.jsp"%>
+         
 	<form role="form" method="POST" action="/comment/writerComment">
 		<div class="box-body">
 			<div class="form-group">
@@ -68,8 +70,10 @@
 				CANCEL</button>
 		</div>
 	</form>
-	
-	<script type="text/javascript">
+
+<%@ include file="/pageframe/footer.jsp"%>
+
+<script type="text/javascript">
 	
 		$(document).ready(function() {
 			var formObj = $("form[role='form']");
@@ -81,6 +85,6 @@
 			});
 		});
 	</script>
-
+	
 </body>
 </html>

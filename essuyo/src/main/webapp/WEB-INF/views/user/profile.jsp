@@ -81,9 +81,6 @@
                                      			</div>
                                     		</div>
                                     	</c:if>
-                                    	
-                                   
-                                    
                                 </center>
                             </div>
                             

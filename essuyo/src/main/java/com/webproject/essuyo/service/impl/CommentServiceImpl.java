@@ -65,6 +65,7 @@ public class CommentServiceImpl implements CommentService{
 							paramMap.put("imageUrl", companyImageList.get(0) );
 						}else if (type.equals("company") == true) {
 							UserVO user = userDao.selectById(new SQLParamVO("user",data.getUserId()));
+							paramMap.put("name",  user.getName());
 							paramMap.put("imageUrl", imageAdminService.getImagePath(user.getImageInfoId()));
 						}
 						

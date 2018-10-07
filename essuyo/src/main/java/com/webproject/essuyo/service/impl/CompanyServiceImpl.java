@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
-import org.aspectj.org.eclipse.jdt.core.dom.Comment;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 
 import com.webproject.essuyo.dao.CompanyDao;
 import com.webproject.essuyo.dao.FacilityAdminDao;
-import com.webproject.essuyo.domain.CommentVO;
 import com.webproject.essuyo.domain.CompanyVO;
 import com.webproject.essuyo.domain.SQLParamVO;
 import com.webproject.essuyo.service.CompanyService;
@@ -33,6 +32,8 @@ public class CompanyServiceImpl implements CompanyService {
 	@Autowired
 	private ImageAdminService imageAdminService;
 
+	private final int MAX_RAKING_COUNT = 4;
+
 	@Override
 	public CompanyVO getCompanyVO(int companyId) {
 		try {
@@ -43,23 +44,77 @@ public class CompanyServiceImpl implements CompanyService {
 		}
 	}
 
+	private Map<String, Object> makeCompanyViewData(CompanyVO company) {
+
+		if (company != null) {
+			Map<String, Object> resultMap = new HashMap<>();
+
+			resultMap.put("id", company.getId());
+			resultMap.put("score", company.getScore());
+			resultMap.put("name", company.getName());
+			resultMap.put("type", company.getType());
+			resultMap.put("address", company.getAddress());
+			resultMap.put("number", company.getNumber());
+			resultMap.put("state", company.getState());
+			resultMap.put("homepage", company.getHomepage());
+
+			return resultMap;
+		}
+
+		return null;
+	}
+	
+	private String makeRankTitle(String type, String subType) {
+
+		String result = "";
+		
+		switch(type) {
+		case "reservation" : 
+				if( subType.equals("max")) {
+					result = "가장 많은 예약";
+				}else if( subType.equals("min")) {
+					result = "가장 적은 예약";
+				}
+			break;
+		case "comment" : 
+			if( subType.equals("max")) {
+				result = "가장 많은 댓글";
+			}else if( subType.equals("min")) {
+				result = "가장 적은 댓글";
+			}
+			break;
+		case "score" : 
+			if( subType.equals("max")) {
+				result = "가장 높은 점수";
+			}else if( subType.equals("min")) {
+				result = "가장 낮은 점수";
+			}
+			break;
+		case "price" : 
+			if( subType.equals("max")) {
+				result = "가장 높은 매출";
+			}else if( subType.equals("min")) {
+				result = "가장 낮은 매출";
+			}
+			break;
+		
+		}
+		
+		return result;
+		
+	}
+	
+
 	@Override
 	public Map<String, Object> getSimpleCompanyInfo(int companyId) {
 		try {
-			Map<String, Object> resultMap = new HashMap<>();
 			CompanyVO company = this.getCompanyVO(companyId);
 
 			if (company != null) {
-				resultMap.put("id", company.getId());
-				resultMap.put("score", company.getScore());
-				resultMap.put("name", company.getName());
-				resultMap.put("type", company.getType());
-				resultMap.put("address", company.getAddress());
-				resultMap.put("number", company.getNumber());
-				resultMap.put("state", company.getState());
-				resultMap.put("url", company.getUrl());
+				Map<String, Object> resultMap = this.makeCompanyViewData(company);
+
 				resultMap.put("review", companyDao.cntReviews(companyId));
-				resultMap.put("image", this.getImagePath(companyId).get(0));
+				resultMap.put("image", this.getImagePath(company.getId()));
 
 				return resultMap;
 			}
@@ -72,28 +127,72 @@ public class CompanyServiceImpl implements CompanyService {
 	}
 
 	public Map<String, Object> getDetailCompanyInfo(int companyId) {
-
-		Map<String, Object> resultMap = new HashMap<>();
 		try {
 
 			CompanyVO company = this.getCompanyVO(companyId);
 
-			resultMap.put("id", company.getId());
-			resultMap.put("name", company.getName());
-			resultMap.put("discription", company.getDiscription());
-			resultMap.put("address", company.getAddress());
-			resultMap.put("number", company.getNumber());
-			resultMap.put("state", company.getState());
-			resultMap.put("time", company.getTime());
-			resultMap.put("score", company.getScore());
-			resultMap.put("url", company.getUrl());
-			resultMap.put("image", this.getImagePath(companyId));
-			resultMap.put("facility", this.getCompanyFacility(companyId));
-			resultMap.put("review", companyDao.cntReviews(companyId));
-			return resultMap;
+			if (company != null) {
+				Map<String, Object> resultMap = this.makeCompanyViewData(company);
 
+				resultMap.put("image", this.getImagePath(companyId));
+				resultMap.put("facility", this.getCompanyFacility(companyId));
+				resultMap.put("review", companyDao.cntReviews(companyId));
+
+				return resultMap;
+			}
+
+			return null;
 		} catch (Exception e) {
 			logger.error("Company Table 조회 실패.. {}", e.toString());
+			return null;
+		}
+	}
+
+	@Override
+	public List<Map<String, Object>> getRankCompanyInfoList() {
+
+		List<String> type = new ArrayList<>();
+		type.add("reservation");
+		type.add("comment");
+		type.add("score");
+		type.add("price");
+		String[] subType = { "max", "min" };
+
+		Random random = new Random();
+
+		try {
+			List<Map<String, Object>> resultList = new ArrayList<>();
+
+			for (int i = 0; i < MAX_RAKING_COUNT; i++) {
+				int typeIndex = random.nextInt(type.size());
+				int subTypeIndex = random.nextInt(2);
+
+				Map<String, Object> param = new HashMap<>();
+				param.put("type", type.get(typeIndex));
+				param.put("subType", subType[subTypeIndex]);
+
+				List<CompanyVO> companyList = companyDao.getRankCompanyList(param);
+				
+				if (companyList != null) {
+					
+					//< 동점일 경우 첫번째 Index를 선택한다.
+					CompanyVO company = companyList.get(0);
+					Map<String, Object> resultMap = this.makeCompanyViewData(company);
+						
+					
+					resultMap.put("rankTitle", this.makeRankTitle(type.get(typeIndex), subType[subTypeIndex]));
+					resultMap.put("review", companyDao.cntReviews(company.getId()));
+					resultMap.put("image", this.getImagePath(company.getId()).get(0));
+
+					resultList.add(resultMap);
+				}
+
+				type.remove(typeIndex);
+			}
+			
+			return resultList;
+		} catch (Exception e) {
+			logger.error("comapny rank 실패.. {}", e.toString());
 			return null;
 		}
 	}
@@ -132,11 +231,9 @@ public class CompanyServiceImpl implements CompanyService {
 			salesMap.put("score", data.getScore());
 			salesMap.put("address", data.getAddress());
 			salesMap.put("number", data.getNumber());
-			salesMap.put("url", data.getUrl());
+			salesMap.put("homepage", data.getHomepage());
 			salesMap.put("state", data.getState());
 			salesMap.put("time", data.getTime());
-			salesMap.put("totalVisit", data.getTotalVisit());
-			salesMap.put("todayVisit", data.getTodayVisit());
 			salesMap.put("areaListId", data.getAreaListId());
 
 			try {

@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.webproject.essuyo.domain.CompanyVO;
 import com.webproject.essuyo.domain.ReservationVO;
 import com.webproject.essuyo.service.CompanyService;
 import com.webproject.essuyo.service.ProductService;
