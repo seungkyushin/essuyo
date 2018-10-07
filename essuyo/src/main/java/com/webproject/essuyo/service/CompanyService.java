@@ -16,6 +16,8 @@ public interface CompanyService {
 	public Map<String, Object> getSimpleCompanyInfo(int companyId);
 
 	public Map<String, Object> getDetailCompanyInfo(int companyId);
+	
+	public List<Map<String, Object>> getRankCompanyInfoList();
 
 	public List<CompanyVO> listAll(SQLParamVO param) throws Exception;
 

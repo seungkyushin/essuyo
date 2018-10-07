@@ -37,5 +37,13 @@ public class CompanyDao {
 	public Integer cntReviews(int companyId) throws Exception {
 		return session.selectOne(namespace + ".reviews", companyId);
 	}
+	
+	public List<CompanyVO> getRankCompanyList(Map<String, Object> param) throws Exception {
+		return session.selectList(namespace + ".selectRankCompany", param);
+	}
+	
+	
+	
+	
 
 }

@@ -26,7 +26,6 @@ import com.webproject.essuyo.domain.CompanyVO;
 import com.webproject.essuyo.domain.UserVO;
 import com.webproject.essuyo.service.BusinessService;
 import com.webproject.essuyo.service.CompanyService;
-import com.webproject.essuyo.service.ImageAdminService;
 import com.webproject.essuyo.service.ReservationService;
 import com.webproject.essuyo.service.impl.UserServiceImpl;
 
@@ -47,8 +46,6 @@ public class UserController {
 	@Autowired
 	private CompanyService companyService;
 
-	@Autowired
-	private ImageAdminService imageAdminService;
 
 	// GET 방식으로 회원가입 페이지에 접근. 그냥 회원가입 페이지로 보내준다
 	@RequestMapping(value = "/regist", method = RequestMethod.GET)

@@ -22,44 +22,83 @@
 
 </head>
 <body>
-	<form role="form" method="get">
-		<table class="table table-bordered">
-			<tr>
-				<th style="width: 10px">N</th>
-				<th>TITLE</th>
-				<th>RECEIVER</th>
-				<th>SENDER</th>
-				<th>DATE</th>
-				<th>READ</th>
-			</tr>
 
-			<c:forEach items="${list }" var="MessageVO">
-				<tr>
-					<td>${MessageVO.megNum }</td>
-					<td><a href="/message/readPage?megNum=${MessageVO.megNum }">
-							${MessageVO.title } </a></td>
-					<td>${MessageVO.receiverID}</td>
-					<td>${MessageVO.receiverID }</td>
-					<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"
-							value="${MessageVO.sendDate }" /></td>
-							
-					<c:if test="${MessageVO.readCheck == 1 }">
-						<td><strong><span class="badge bg-red">읽음</span></strong></td>
-					</c:if>
-					<c:if test="${MessageVO.readCheck == 0 }">
-						<td><span class="badge bg-red">읽지 않음</span></td>
-					</c:if>
-
-				</tr>
-
-			</c:forEach>
-		</table>
-		<div class="box-footer">
-			<button type="submit" class="btn registerBtn"
-				style="float: right; text-align: center; text-color: white; background-color: gray; border-radius: 5px;">
-				WRITER</button>
+	<div class="preloader">
+		<div class="lds-ripple">
+			<div class="lds-pos"></div>
+			<div class="lds-pos"></div>
 		</div>
-	</form>
+	</div>
+
+
+	<div id="main-wrapper" data-navbarbg="skin6" data-theme="light"
+		data-layout="vertical" data-sidebartype="full"
+		data-boxed-layout="full">
+
+		<%@ include file="/pageframe/admin-navigation.jsp"%>
+
+		<div class="page-wrapper">
+
+			<div class="page-breadcrumb">
+				<div class="row">
+					<div class="col-5 align-self-center">
+						<h4 class="page-title">메시지 보내기</h4>
+					</div>
+				</div>
+
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-lg-4 col-xlg-3 col-md-5">
+							<div class="card">
+								<div class="card-body">
+									<form role="form" method="get">
+										<table class="table table-bordered">
+											<tr>
+												<th style="width: 10px">N</th>
+												<th>TITLE</th>
+												<th>RECEIVER</th>
+												<th>SENDER</th>
+												<th>DATE</th>
+												<th>READ</th>
+											</tr>
+
+											<c:forEach items="${list }" var="MessageVO">
+												<tr>
+													<td>${MessageVO.megNum }</td>
+													<td><a
+														href="/message/readPage?megNum=${MessageVO.megNum }">
+															${MessageVO.title } </a></td>
+													<td>${MessageVO.receiverID}</td>
+													<td>${MessageVO.receiverID }</td>
+													<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"
+															value="${MessageVO.sendDate }" /></td>
+
+													<c:if test="${MessageVO.readCheck == 1 }">
+														<td><strong><span class="badge bg-red">읽음</span></strong></td>
+													</c:if>
+													<c:if test="${MessageVO.readCheck == 0 }">
+														<td><span class="badge bg-red">읽지 않음</span></td>
+													</c:if>
+
+												</tr>
+
+											</c:forEach>
+										</table>
+										<div class="box-footer">
+											<button type="submit" class="btn registerBtn"
+												style="float: right; text-align: center; text-color: white; background-color: gray; border-radius: 5px;">
+												WRITER</button>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
 
 	<script type="text/javascript">
 		var result = '${msg}';

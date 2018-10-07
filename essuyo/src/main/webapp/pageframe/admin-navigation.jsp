@@ -12,6 +12,7 @@
     <title>프로필</title>
     <link href="../resources/css/style.min.css" rel="stylesheet">
     <link href="../resources/css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="../resources/css/simple-line-icons.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+KR">
 </head>
 <body>
@@ -107,6 +108,14 @@
                             </a>
                         </li>
                         </c:if>
+                        
+                         <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/message/listPage" aria-expanded="false">
+                                <i class="icon-envelope-open"></i>
+                                <span class="hide-menu">메시지</span>
+                            </a>
+                        </li>
+                        
                          <li class="sidebar-item">
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/form" aria-expanded="false">
                                 <i class="mdi mdi-arrange-bring-forward"></i>

@@ -15,8 +15,7 @@ limit #{start},#{limit};
 
 	<select id="select" resultType="CompanyVO">
 <![CDATA[
-SELECT id, name, type, score, discription, address, number, url, state, time, 
-total_visit AS totalVisit, today_visit AS todayVisit, area_list_id AS areaListId 
+SELECT id, name, type, score, discription, address, number, homepage, state, time, area_list_id AS areaListId 
 FROM company WHERE id = #{companyId};
 ]]>
 	</select>
@@ -38,12 +37,86 @@ FROM company WHERE id = #{companyId};
 		company_id=#{companyId};
 	</select>
 
-<!-- 	가게평점구하기 -->
-<update id="score" parameterType="CompanyVO">
-update company 
-set score = (select round(AVG(score),1) from comment where company_id=#{companyId}) 
-where id=#{id};
-</update>
+	<!-- 가게평점구하기 -->
+	<update id="score" parameterType="CompanyVO">
+		update company
+		set score =
+		(select round(AVG(score),1) from comment where
+		company_id=#{companyId})
+		where id=#{id};
+	</update>
+
+
+
+	<select id="selectRankCompany" resultType="CompanyVO">
+
+		SELECT id, name, type, discription, score, address, number, homepage, state, time, area_list_id AS areaListId
+		FROM company
+
+
+		<choose>
+
+			<when test="type != null and type.equals('score')">
+				<if test="subType != null and subType.equals('max')">
+					WHERE score = (SELECT MAX(score) FROM company)
+				</if>
+				<if test="subType != null and subType.equals('min')">
+					WHERE score = (SELECT MIN(score) FROM company)
+				</if>
+			</when>
+
+			<when test="type != null and type.equals('comment')">
+
+				<if test="subType != null and subType.equals('max')">
+					WHERE id = ANY (SELECT company_id FROM comment GROUP BY company_id
+					HAVING COUNT(*) = (SELECT MAX(counted) FROM (SELECT count(*) as counted
+					FROM comment
+					GROUP BY company_id) AS counts))
+
+				</if>
+				<if test="subType != null and subType.equals('min')">
+					WHERE id = ANY (SELECT company_id FROM comment GROUP BY company_id
+					HAVING COUNT(*) =  (SELECT MIN(counted) FROM (SELECT count(*) as counted
+					FROM comment
+					GROUP BY company_id) AS counts))
+				</if>
+			</when>
+			<when test="type != null and type.equals('reservation')">
+
+				<if test="subType != null and subType.equals('max')">
+					WHERE id = ANY (SELECT company_id FROM reservation WHERE NOT state="취소" 
+					GROUP BY company_id 
+					HAVING COUNT(*) = (SELECT MAX(counted) FROM (SELECT count(*) as counted
+					FROM reservation
+					WHERE NOT state="취소" GROUP BY company_id) AS counts))
+				</if>
+				<if test="subType != null and subType.equals('min')">
+					WHERE id = ANY (SELECT company_id FROM reservation  WHERE NOT state="취소" 
+					GROUP BY company_id
+					HAVING COUNT(*) = (SELECT MIN(counted) FROM (SELECT count(*) as counted
+					FROM reservation
+					WHERE NOT state="취소" GROUP BY company_id) AS counts))
+				</if>
+
+			</when>
+
+			<when test="type != null and type.equals('price')">
+
+				<if test="subType != null and subType.equals('max')">
+					WHERE id = ANY (SELECT company_id FROM reservation GROUP BY company_id
+					HAVING sum(total_price) = (SELECT MAX(counted) 
+					FROM (SELECT sum(total_price) as counted FROM reservation WHERE NOT state="취소" GROUP BY company_id) AS counts))
+				</if>
+				<if test="subType != null and subType.equals('min')">
+					WHERE id = ANY (SELECT company_id FROM reservation GROUP BY company_id
+					HAVING sum(total_price) = (SELECT MIN(counted) 
+					FROM (SELECT sum(total_price) as counted FROM reservation WHERE NOT state="취소" GROUP BY company_id) AS counts))
+				</if>
+
+			</when>
+		</choose>
+	</select>
+
 
 </mapper>
 

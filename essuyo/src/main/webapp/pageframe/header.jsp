@@ -81,14 +81,22 @@
 												</a>
 													<div class="dropdown-menu dropdown-menu-right user-dd animated">
 													<a class="dropdown-item" href="/user/profile">
-														<i class="icon-user m-r-5 m-l-5"></i> 프로필</a>
+														<i class="icon-user m-r-5 m-l-5"></i> 프로필</a> 
 														
-													<a class="dropdown-item" href="/user/dashboard">
-														<i class="icon-pie-chart m-r-5 m-l-5"></i> 종합화면</a> 
-														
+														<a class="dropdown-item" href="/user/dashboard"> 
+															<i class="icon-chart m-r-5 m-l-5"></i> 종합화면 </a>
+
+														<c:if test="${ !empty sessionScope.companyLogin}">
+															<a class="dropdown-item" href="/user/dashboardCompany">
+																<i class="icon-chart m-r-5 m-l-5"></i> 개인사업장 종합화면</a> 
+														</c:if>
+
+
 													<a class="dropdown-item" href="/logout">
 														<i class="icon-logout m-r-5 m-l-5"></i> 로그아웃</a> 
-													</div></li>
+														
+													</div>
+												</li>
 											
 											</ul>
 										</div>

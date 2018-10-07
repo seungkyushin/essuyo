@@ -12,7 +12,6 @@ public class BusinessDao {
 	@Autowired
 	private SqlSession sqlSession;
 	private String NAME_SPACE = "mappers.Business";
-
 	
 	public BusinessVO selectByCompanyId(int companyId) throws Exception{
 		return sqlSession.selectOne(NAME_SPACE + ".selectByCompanyId" , companyId);
