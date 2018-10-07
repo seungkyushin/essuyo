@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -154,7 +154,7 @@ public class UserController {
 	// 테스트 중. form을 다 작성하고 보냈을 때.
 	@Transactional
 	@RequestMapping(value = "/companyUpdate", method = RequestMethod.POST)
-	public String companyUpdatePOST(CompanyVO cvo, HttpServletRequest request, RedirectAttributes rttr)
+	public String companyUpdatePOST(@RequestParam("imgs") List<MultipartFile> file, CompanyVO cvo, HttpServletRequest request, RedirectAttributes rttr)
 			throws Exception {
 		logger.info("companyUpdatePOST......");
 		String email = (String) request.getSession().getAttribute("login");

@@ -111,8 +111,26 @@
 									</div>
 
 									<div class="form-group">
+										<label>[회사 이미지 업로드] </label><span class="help"> ※ 이미지는 최소 3장, 최대 12장까지 업로드할 수 있습니다.</span><br>
+										<input type="file" multiple="multiple" class="imgsShow" name="imgs" required accept="image/png, image/jpeg"><br>
+										<input type="file" multiple="multiple" class="imgsShow" name="imgs" required accept="image/png, image/jpeg"><br>
+										<input type="file" multiple="multiple" class="imgsShow" name="imgs" required accept="image/png, image/jpeg"><br>
+										<button type="button" name="show" id="show" onclick="showMore();">More</button><br>
+										<input type="file" multiple="multiple" class="imgsHide" name="imgs" accept="image/png, image/jpeg"><br>
+										<input type="file" multiple="multiple" class="imgsHide" name="imgs" accept="image/png, image/jpeg"><br>
+										<input type="file" multiple="multiple" class="imgsHide" name="imgs" accept="image/png, image/jpeg"><br>
+										<input type="file" multiple="multiple" class="imgsHide" name="imgs" accept="image/png, image/jpeg"><br>
+										<input type="file" multiple="multiple" class="imgsHide" name="imgs" accept="image/png, image/jpeg"><br>
+										<input type="file" multiple="multiple" class="imgsHide" name="imgs" accept="image/png, image/jpeg"><br>
+										<input type="file" multiple="multiple" class="imgsHide" name="imgs" accept="image/png, image/jpeg"><br>
+										<input type="file" multiple="multiple" class="imgsHide" name="imgs" accept="image/png, image/jpeg"><br>
+										<input type="file" multiple="multiple" class="imgsHide" name="imgs" accept="image/png, image/jpeg">
+									</div>
+
+									<div class="form-group">
 										<label>[영업 시간] </label><span class="help"> 예) 09:00 ~ 18:00 혹은, All Time, 상시 영업</span><input value="${cvo.time }" type="text" id="time" name="time" class="form-control" placeholder="영업시간" required>
 									</div>
+
 
 									<button type="submit">정보 수정</button>
 								</form>
@@ -148,6 +166,18 @@
 								.getElementById('discription');
 
 						discription.value = '${cvo.discription}';
+
+						//이미지 업로드 인풋 숨기기
+						$(".imgsHide").hide();
+						//이미지 추가하기
+						$("#show").click(function() {
+
+							$(".imgsHide").show('1500'); //천천히 보이기
+
+							$(this).hide('fast');//more버튼 숨기기
+
+						});
+
 					});
 
 					function doReg() {
