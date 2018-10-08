@@ -219,7 +219,6 @@ INSERT INTO image_info ( save_path, type ,name, cre_date ) VALUES("/resources/im
 INSERT INTO image_info ( save_path, type ,name, cre_date ) VALUES("/resources/images/menu-hotel.jpg","image/jpg","menu-hotel.jpg", now());
 INSERT INTO image_info ( save_path, type ,name, cre_date ) VALUES("/resources/images/reserve-slide3.jpg","image/jpg","reserve-slide3.jpg", now());
 INSERT INTO image_info ( save_path, type ,name, cre_date ) VALUES("/resources/images/reserve-slide2.jpg","image/jpg","reserve-slide2.jpg", now());
-INSERT INTO image_info ( save_path, type ,name, cre_date ) VALUES("/resources/images/default-user.png","image/png","default-user.png", now());
 
 /*company list*/
 insert into image_info(save_path,type,name,cre_date) values("/resources/images/hotel1.png","image/png","hotel1",now());
@@ -274,35 +273,35 @@ VALUES("힐튼호텔4", "호텔", 2.0 , "돈만 있으면 쾌적한 곳4", "강�
 "http://hiltonbusan.co.kr/","영업종료","ALL TIME",4);
 
 INSERT INTO company(name, type, score, discription, address,number, homepage, state, time, area_list_id)
-VALUES("아웃백1", "식당", 9.0 , "빵 맛있는 식당", "서울 서대문구 연세로12길 33","02-1111-1111",
+VALUES("식당1", "식당", 9.0 , "빵 맛있는 식당", "서울 서대문구 연세로12길 33","02-1111-1111",
 "http://outback1.co.kr/shinchon/","영업중","am 10:00 ~ pm 10:00",1);
 
 INSERT INTO company(name, type, score, discription, address,number, homepage, state, time, area_list_id)
-VALUES("아웃백2", "식당", 7.0 , "빵 맛있는 식당", "부산 서대문구 연세로12길 33","02-2222-2222",
+VALUES("식당2", "식당", 7.0 , "빵 맛있는 식당", "부산 서대문구 연세로12길 33","02-2222-2222",
 "http://outback2.co.kr/shinchon/","영업중","am 10:00 ~ pm 10:00",2);
 
 INSERT INTO company(name, type, score, discription, address,number, homepage, state, time, area_list_id)
-VALUES("아웃백3", "식당", 6.0 , "빵 맛있는 식당", "광주 서대문구 연세로12길 33","02-3333-3333",
+VALUES("식당3", "식당", 6.0 , "빵 맛있는 식당", "광주 서대문구 연세로12길 33","02-3333-3333",
 "http://outback3.co.kr/shinchon/","영업종료","am 10:00 ~ pm 10:00",3);
 
 INSERT INTO company(name, type, score, discription, address,number, homepage, state, time, area_list_id)
-VALUES("아웃백4", "식당", 2.0 , "빵 맛있는 식당", "강원도 서대문구 연세로12길 33","02-4444-4444",
+VALUES("식당4", "식당", 2.0 , "빵 맛있는 식당", "강원도 서대문구 연세로12길 33","02-4444-4444",
 "http://outback4.co.kr/shinchon/","영업종료","am 10:00 ~ pm 10:00",4);
 
 INSERT INTO company(name, type, score, discription, address,number, homepage, state, time, area_list_id)
-VALUES("알촌1", "음식점", 9.0 , "알밥파는 집11", "서울 서대문구 이화여대7길 14","02-111-111",
+VALUES("박물관1", "박물관", 9.0 , "알밥파는 집11", "서울 서대문구 이화여대7길 14","02-111-111",
 "http://alchon1.com/","영업중","am 10:00 ~ pm 10:00",1);
 
 INSERT INTO company(name, type, score, discription, address,number, homepage, state, time, area_list_id)
-VALUES("알촌2", "음식점", 7.0 , "알밥파는 집2", "부산 서대문구 이화여대7길 14","02-222-222",
+VALUES("박물관2", "박물관", 7.0 , "알밥파는 집2", "부산 서대문구 이화여대7길 14","02-222-222",
 "http://alchon2.com/","영업중","am 10:00 ~ pm 10:00",2);
 
 INSERT INTO company(name, type, score, discription, address,number, homepage, state, time, area_list_id)
-VALUES("알촌3", "음식점", 6.0 , "알밥파는 집3", "광주 서대문구 이화여대7길 14","02-333-333",
+VALUES("박물관3", "박물관", 6.0 , "알밥파는 집3", "광주 서대문구 이화여대7길 14","02-333-333",
 "http://alchon3.com/","영업종료","am 10:00 ~ pm 10:00",3);
 
 INSERT INTO company(name, type, score, discription, address,number, homepage, state, time, area_list_id)
-VALUES("알촌4", "음식점", 2.0 , "알밥파는 집4", "강원도 서대문구 이화여대7길 14","02-444-444",
+VALUES("박물관4", "박물관", 2.0 , "알밥파는 집4", "강원도 서대문구 이화여대7길 14","02-444-444",
 "http://alchon4.com/","영업종료","am 10:00 ~ pm 10:00",4);
 
 
@@ -336,7 +335,7 @@ INSERT INTO facility_admin(company_id, facility_id) VALUES(2,4);
 
 INSERT INTO facility_admin(company_id, facility_id) VALUES(3,1);
 INSERT INTO facility_admin(company_id, facility_id) VALUES(3,3);
-INSERT INTO facility_admin(company_id, facility_id) VALUES(2,4);
+INSERT INTO facility_admin(company_id, facility_id) VALUES(3,4);
 
 INSERT INTO facility_admin(company_id, facility_id) VALUES(4,1);
 INSERT INTO facility_admin(company_id, facility_id) VALUES(4,2);

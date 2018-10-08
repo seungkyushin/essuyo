@@ -8,15 +8,9 @@
 <![CDATA[
 select *
 from company
+where type=#{type}
 order by id
 limit #{start},#{limit};
-]]>
-	</select>
-
-	<select id="select" resultType="CompanyVO">
-<![CDATA[
-SELECT id, name, type, score, discription, address, number, homepage, state, time, area_list_id AS areaListId 
-FROM company WHERE id = #{companyId};
 ]]>
 	</select>
 
@@ -24,17 +18,44 @@ FROM company WHERE id = #{companyId};
 	<select id="filter" resultType="CompanyVO">
 		select *
 		from company
-		where id = (select company_id
-		            from facility_admin
+		where type=#{type} and 
+		      id = ANY (select company_id from facility_admin
 		          <trim prefix="WHERE" suffixOverrides="or">
-			       <if test="value1 = 1"> facility_id = 1 or</if>
-			       <if test="value2 = 2"> facility_id = 2 or</if>
-			       <if test="value3 = 3"> facility_id = 3 or</if>
-			       <if test="value4 = 4"> facility_id = 4 or</if>
+			       <if test="value1 == 1"> facility_id = 1 or</if>
+			       <if test="value2 == 2"> facility_id = 2 or</if>
+			       <if test="value3 == 3"> facility_id = 3 or</if>
+			       <if test="value4 == 4"> facility_id = 4 or</if>
 		          </trim>
-		group by id
-		having count(id)>=#{count})
+		group by company_id
+		having count(*)>=#{count})
 		limit #{start}, #{limit};
+	</select>
+	
+	
+	<select id="mainSearch" resultType="CompanyVO">
+		select *
+		from company
+		where  type=#{type} and 
+		       area_list_id =#{area_list_id}  and  
+		       id = ANY (select company_id from facility_admin
+		          <trim prefix="WHERE" suffixOverrides="or">
+			       <if test="value1 == 1"> facility_id = 1 or</if>
+			       <if test="value2 == 2"> facility_id = 2 or</if>
+			       <if test="value3 == 3"> facility_id = 3 or</if>
+			       <if test="value4 == 4"> facility_id = 4 or</if>
+		          </trim>
+		group by company_id
+		having count(*)>=#{count})
+		limit #{start}, #{limit};
+	</select>
+
+
+
+	<select id="select" resultType="CompanyVO">
+<![CDATA[
+SELECT id, name, type, score, discription, address, number, homepage, state, time, area_list_id AS areaListId 
+FROM company WHERE id = #{companyId};
+]]>
 	</select>
 	
 	

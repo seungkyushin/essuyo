@@ -22,7 +22,7 @@ public interface CompanyService {
 	//판매리스트
 	public List<CompanyVO> listAll(SQLParamVO param) throws Exception;
 
-	public Map<String, Object> getList(int start, String value) throws Exception;
+	public Map<String, Object> getList(int start, String value, String type,int area_list_id) throws Exception;
 	
 	
 

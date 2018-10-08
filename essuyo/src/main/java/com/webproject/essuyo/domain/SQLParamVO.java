@@ -7,9 +7,7 @@ public class SQLParamVO {
 	private int start;
 	private int limit;
 
-
-				
-				
+	
 	
 	public SQLParamVO() {
 

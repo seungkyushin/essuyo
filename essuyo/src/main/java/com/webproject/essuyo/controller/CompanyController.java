@@ -1,6 +1,5 @@
 package com.webproject.essuyo.controller;
 
-import java.awt.datatransfer.SystemFlavorMap;
 
 import javax.inject.Inject;
 
@@ -23,22 +22,27 @@ public class CompanyController {
 	private static final Logger logger = LoggerFactory.getLogger(CompanyController.class);
 
 	@Inject
-	private CompanyService service;
+	private CompanyService CompanyService;
 
 	@Autowired
 	private UserService userService;
 
 //	판매리스트
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public void salesList(Model model) throws Exception {
+	public String salesList(@RequestParam("type") String type, @RequestParam(value="area_list_id", defaultValue="0")int area_list_id, Model model) throws Exception {
 		logger.info("ListGET()....");
+		model.addAttribute("type",type);
+		model.addAttribute("area_list_id",area_list_id);
+		
+		
+		return "list";
 	}
 
 //	상세정보 
 	@GetMapping("/detail")
 	public String showCompanyDetailPage(@RequestParam("id") int companyId, Model model) throws Exception {
 		
-		model.addAttribute("company", service.getDetailCompanyInfo(companyId));
+		model.addAttribute("company", CompanyService.getDetailCompanyInfo(companyId));
 		model.addAttribute("user", userService.getSaleUserInfo(companyId));
 
 		return "detail";

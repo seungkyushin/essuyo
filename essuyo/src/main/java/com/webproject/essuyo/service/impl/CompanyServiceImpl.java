@@ -203,42 +203,43 @@ public class CompanyServiceImpl implements CompanyService {
 	}
 
 	@Override
-	public Map<String, Object> getList(int start, String value) {
+	public Map<String, Object> getList(int start, String value, String type,int area_list_id) {
 		Map<String, Object> resultMap = new HashMap<>();
 
 		List<CompanyVO> list = null;
 		List<String> imageInfoList = null;
 		List<Object> salesList = new ArrayList<>();
 		
-				
 	
-		
 		try {			
-				if( value != null && value.equals("") == true) {
+				if( value != null && value.equals("") == true && area_list_id == 0) {
 					SQLParamVO param = new SQLParamVO();		
 					param.setStart(start*4);
 					param.setLimit(4);
+					param.setType(type);
 					
 					list = companyDao.listAll(param);
 					
 				}else {
+					Map<String, Object> filterParam = new HashMap<>();	
 					
-					Map<String, Object> filterParam = new HashMap<>();
-					
-					String[] values = value.split(","); 
-				
-					
-					for(int i=0; i<values.length;i++) {
-						filterParam.put("value" + (i+1), values[i]);
+					String[] values = value.split(","); 					
+					for(int i= 0; i<values.length;i++) {
+							filterParam.put("value" + values[i], values[i]);			
 					}
+					
 					filterParam.put("count", values.length);
 					
 					filterParam.put("start",start*4 );
 					filterParam.put("limit",4 );
-					
+					filterParam.put("type", type);
+//					filterParam.put("area_list_id",area_list_id);
+						
 					list = companyDao.filter(filterParam);
 					
 				}
+				
+				
 		} catch (Exception e) {
 			logger.error("리스트 조회 실패.. | {} ", e.toString());
 		}
@@ -257,6 +258,8 @@ public class CompanyServiceImpl implements CompanyService {
 			salesMap.put("homepage", data.getHomepage());
 			salesMap.put("state", data.getState());
 			salesMap.put("time", data.getTime());
+			salesMap.put("lat", data.getLat());
+			salesMap.put("lon", data.getLon());
 			salesMap.put("areaListId", data.getAreaListId());
 	
 	
