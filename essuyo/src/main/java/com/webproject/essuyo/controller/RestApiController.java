@@ -29,7 +29,7 @@ import com.webproject.essuyo.service.UserService;
 public class RestApiController {
 
 	@Inject
-	private CompanyService service;	
+	private CompanyService companyService;	
 
 	@Autowired
 	private CommentService commentService;
@@ -49,10 +49,13 @@ public class RestApiController {
 	
 	
 	@RequestMapping(value="/list",method=RequestMethod.GET)
-	public ResponseEntity<Map<String, Object>> list(@RequestParam int start){
+	public ResponseEntity<Map<String, Object>> list(@RequestParam int start, @RequestParam String value){
 		ResponseEntity<Map<String, Object>> entity = null;	
+		
 		try {
-			entity= new ResponseEntity<>(service.getList(start),HttpStatus.OK);
+			entity= new ResponseEntity<>(companyService.getList(start,value),HttpStatus.OK);
+			
+		
 		} catch (Exception e) {
      		e.printStackTrace();
      		entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -60,6 +63,7 @@ public class RestApiController {
 		
 		return entity;
 	}
+	
 	/* Comment List를 반환한다.
 	 * type : user, company 
 	 * start : 페이지 단위(1페이지당  SEARCH_LIMIT)*/

@@ -18,11 +18,16 @@ public interface CompanyService {
 	public Map<String, Object> getDetailCompanyInfo(int companyId);
 	
 	public List<Map<String, Object>> getRankCompanyInfoList();
-
+	
+	//판매리스트
 	public List<CompanyVO> listAll(SQLParamVO param) throws Exception;
 
-	public Map<String, Object> getList(int start) throws Exception;
+	public Map<String, Object> getList(int start, String value) throws Exception;
+	
+	
 
+	
+	
 	public List<String> getCompanyFacility(int companyId) throws Exception;
 
 //	이미지 

@@ -69,32 +69,31 @@
 					<div class="row detail-checkbox-wrap">
 						<div class="col-sm-12 col-md-6 col-lg-4 col-xl-3">
 							<label class="custom-control custom-checkbox">
-							 <input	type="checkbox"> <span class="custom-control-indicator"></span>
-								<span class="custom-control-description">주차공간 여부</span>
+							 <input	type="checkbox" value="1" name =fil> <span class="custom-control-indicator"></span>
+								<span class="custom-control-description"> 주차공간 여부</span>
 							</label>
 						</div>
 						<div class="col-sm-12 col-md-6 col-lg-4 col-xl-3">
 							<label class="custom-control custom-checkbox"> 
-							<input	type="checkbox"> <span class="custom-control-indicator"></span>
-								<span class="custom-control-description">와이파이 / 인터넷 </span>
+							<input type="checkbox" value="2" name=fil> <span class="custom-control-indicator"></span>
+								<span class="custom-control-description"> 인터넷 가능 여부 </span>
 							</label>
 						</div>
 						<div class="col-sm-12 col-md-6 col-lg-4 col-xl-3">
 							<label class="custom-control custom-checkbox"> 
-							<input type="checkbox"> <span class="custom-control-indicator"></span>
-								<span class="custom-control-description">흡연 / 금연 </span>
+							<input type="checkbox" value="3" name=fil> <span class="custom-control-indicator"></span>
+								<span class="custom-control-description"> 흡연 가능 여부 </span>
 							</label>
 						</div>
 						<div class="col-sm-12 col-md-6 col-lg-4 col-xl-3">
 							<label class="custom-control custom-checkbox">
-							 <input
-								type="checkbox"> <span class="custom-control-indicator"></span>
-								<span class="custom-control-description">신용카드 가능 여부</span>
+							 <input	type="checkbox" value="4" name=fil> <span class="custom-control-indicator"></span>
+								<span class="custom-control-description"> 신용카드 가능 여부</span>
 							</label>
 						</div>
 						<input id="search" type="button" value="검색">
 					</div>
-
+					
 
 					<!-- 판매리스트 div -->
 					<div id="salesList" class="row light-bg detail-options-wrap">
@@ -130,13 +129,12 @@
  			$(".map-fix").toggle();
  		});
 	</script>
-	<script>
-		// Want to customize colors? go to snazzymaps.com
+	<script>	
 		function myMap() {
 			var maplat = $('#map').data('lat');
 			var maplon = $('#map').data('lon');
 			var mapzoom = $('#map').data('zoom');
-			// Styles a map in night mode.
+			
 			var map = new google.maps.Map(document.getElementById('map'), {
 				center : {
 					lat : maplat,
@@ -158,11 +156,23 @@
 
 
 	<!-- ajaxJQuery -->
-	<script>
+	<script>	
 		function test() {
+			
+			var values = document.getElementsByName("fil");
+			var value = "";
+			for(var i=0; i<values.length;i++){
+				if(values[i].checked){
+					value = value + values[i].value+",";
+				}
+			}
+			
+			value = value.slice(0, value.length -1);	
+		
+			
 			$.ajax({
 				type : 'GET',
-				url : '/api/list?start=' + start,
+				url : encodeURI('/api/list?start=' + start + "&value=" + value),
 				headers : {
 					"Content-Type" : "application/json",
 					"X-HTTP-Method-Override" : "GET"
@@ -170,7 +180,8 @@
 
 				success : function(data) {
 					$("#type1").text(data.sales[0].type);
-
+							
+					
 					var source = $("#template").html();
 					var template = Handlebars.compile(source);
 					var resultHTML = "";
@@ -179,22 +190,22 @@
 
 						
 						if (data2.score >= 8) {
-							$(".a").attr('class', 'featured-rating-green');
+							$(".score_info").attr('class', 'featured-rating-green');
 						} else if (data2.score >= 4) {
-							$(".a").attr('class', 'featured-rating-orange');
+							$(".score_info").attr('class', 'featured-rating-orange');
 						} else {
-							$(".a").attr('class', 'featured-rating');
+							$(".score_info").attr('class', 'featured-rating');
 						}
 
 						if (data2.state == 'OPEN') {
-							$(".b").attr('class', 'open-now');
+							$(".state-info").attr('class', 'open-now');
 						} else {
-							$(".b").attr('class','closed-now');
+							$(".state-info").attr('class','closed-now');
 						}
 
 					})
 				}
-			//$("#salesList").html(resultHTML);
+	
 			});
 		}
 	</script>
@@ -203,8 +214,10 @@
 
 	<script>
 		var start = 0;
+		var value="";
 		$(document).ready(function() {
-		test();
+					
+			test();
 	    $(window).scroll(function() {
 		if ($(window).scrollTop() == $(document).height()- $(window).height()) {
 		start++;
@@ -212,6 +225,13 @@
 	    }
 
 	    });
+	    
+	    
+		$("#search").click(function() {
+			$("#salesList").html(""); 
+
+ 			test();
+ 		});
 					
 		});
 	</script>
@@ -220,7 +240,7 @@
 	 <div class="col-sm-6 col-lg-12 col-xl-6 featured-responsive">
 								<div class="featured-place-wrap">
 									<a href="/detail"> <img	src="{{image}}" class="img-fluid" alt="#">
-										<span class="a">{{score}}</span>
+										<span class="score_info">{{score}}</span>
 										<div class="featured-title-box">
 											<h6>{{name}}</h6>
 											<p>{{type}}</p>
@@ -236,7 +256,7 @@
 													<p>{{url}}</p></li>
  											</ul>
 											<div class="bottom-icons">
-												<div class="b">{{state}}</div>
+												<div class="state-info">{{state}}</div>
 											</div>
 										</div>
 									</a>
