@@ -36,8 +36,6 @@
 			<div class="row">
 				<div class="col-md-6">
 					<h5>${product.name}</h5>
-		
-					</p>
 					<br>
 					<span class="icon-direction"></span><p class="reserve-description">${product.discription}</p>
 				</div>

@@ -7,8 +7,6 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
     <link rel="icon" type="image/png" sizes="16x16" href="../resources/images/favicon.png">
     <title>프로필</title>
     <link href="../resources/css/style.min.css" rel="stylesheet">
@@ -262,13 +260,8 @@
     
     <script>
     $(document).ready(function(){
-    	
-    	/* 
-		$( document ).click(function() {
-	    	  $( "#toggle" ).toggle( "slide" );
-	    	});
-	   		 */
-	
+   
+   	
 	   		$("#modify").on("click",function(){
 	   		  $( "#toggle" ).toggle( "slide" );
 	   		});
@@ -285,7 +278,7 @@
 	   		});
 	   		
 	   		//< 유저 썸네일
-	   		ImageThumbnail("#userImage");
+	   		ImageThumbnail("#userImage","#imageFile");
     	
     });
    

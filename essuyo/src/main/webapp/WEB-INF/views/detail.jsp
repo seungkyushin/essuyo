@@ -112,36 +112,31 @@
 							<div id="comment-list" class="booking-checkbox_wrap mt-4">
 								<h5>총 댓글 ${company.review}개</h5>
 								<hr>
-
-								<c:if test="${ !empty sessionScope.login}">
-									<form role="form" method="POST" action="/comment/writerComment">
-										<div class="customer-review_wrap">
-											<div class="customer-img">
-												<img id="writeUserImage" src=""
-													class="img-fluid comment-image-size" alt="">
-												<p id="writeUserName">이름</p>
-
+								
+								 <c:if test="${ !empty sessionScope.login}">
+								<form role="form" method="POST"	action="/comment/writerComment">
+								
+								<div class="customer-review_wrap">
+									<div class="customer-img">
+										<img id="writeUserImage" src="" class="img-fluid comment-image-size" alt="">
+									</div>
+									<div class="customer-content-wrap">
+										<div class="customer-content">
+											<div class="customer-review">
+												<input type="text" name='title' class="form-control" placeholder="제목">
 											</div>
-											<div class="customer-content-wrap">
-												<div class="customer-content">
-													<div class="customer-review">
-														<input type="text" name='title' class="form-control"
-															placeholder="제목">
-													</div>
-
-													<div class="customer-rating">8.0</div>
-												</div>
-
-												<textarea class="form-control" name="content" rows="3"
-													placeholder="내용"></textarea>
-
-											</div>
+											
+											<div class="customer-rating">8.0</div>
 										</div>
-										<button type="submit" class="btn btn-info"
-											style="float: right;">댓글달기</button>
-
-										<label for="exInputWriter"> SCORE </label> <select
-											name="score" id="score">
+										
+										<textarea class="form-control" name="content" rows="3"placeholder="내용"></textarea>
+			
+									</div>
+								</div>
+								<button type="submit" class="btn btn-info"	style="float: right;">댓글달기</button>
+													
+									<label for="exInputWriter"> SCORE </label> 
+									<select	name="score" id="score">
 											<option value="0">☆☆☆☆☆</option>
 											<option value="1">★☆☆☆☆</option>
 											<option value="2">★★☆☆☆</option>
@@ -149,7 +144,8 @@
 											<option value="4">★★★★☆</option>
 											<option value="5">★★★★★</option>
 
-										</select> <input type="hidden" name='companyId' value="${company.id}">
+										</select> 
+										<input type="hidden" name='companyId' value="${company.id}">
 									</form>
 
 									<hr>
@@ -212,6 +208,8 @@
 				</div>
 			</div>
 		</div>
+
+	
 	</section>
 
 	<script src="resources/js/jquery/jquery-3.2.1.min.js"></script>
@@ -238,16 +236,17 @@
            </div>
            <p class="customer-text">{{content}}</p>
           
-           <ul>
-				{{images}}
-               <li><img src="images/review-img1.jpg" class="img-fluid" alt="#"></li>
-               <li><img src="images/review-img2.jpg" class="img-fluid" alt="#"></li>
-               <li><img src="images/review-img3.jpg" class="img-fluid" alt="#"></li>
-           </ul>
-
            <span>{{helpful}}명이 이 댓글에 도움을 받았습니다.</span>
            <a href="#"><span class="icon-like"></span>Helpful</a>
        </div>
+
+
+		<a href=""> 
+			<i class="ti-pencil-alt"></i>
+		</a>
+		<a href=""> 
+			<i class="icon-trash"></i>
+		</a> 
    </div>
    <hr>
 	</script>
@@ -350,12 +349,27 @@
 
 					});
 
+<<<<<<< HEAD
 					if ("" != "${sessionScope.login}") {
 						requestURL = "/api/loginImage";
 						Ajax("GET", requestURL, function(data) {
 							$("#writeUserImage").attr("src", data);
 							$("#writeUserImage").attr("alt", "잉");
 							$("#writeUserName").text("홍길동");
+=======
+					
+					
+				      if( "" != "${sessionScope.login}" ){
+				    		requestURL = "/api/loginImage";
+							Ajax("GET", requestURL, function(data) {
+								
+								$("#writeUserImage").attr("src",data);
+								$("#writeUserImage").attr("alt","사진");
+							});
+				      }
+				      
+				
+>>>>>>> refs/heads/kyu
 
 						});
 					}

@@ -19,29 +19,20 @@
   <header class="topbar" data-navbarbg="skin6">
             <nav class="navbar top-navbar navbar-expand-md navbar-light">
                 <div class="navbar-header" data-logobg="skin5">
-                    <!-- This is for the sidebar toggle which is visible on mobile only -->
+                
                     <a class="nav-toggler waves-effect waves-light d-block d-md-none" href="javascript:void(0)">
                         <i class="ti-menu ti-close"></i>
                     </a>
-                    <!-- ============================================================== -->
-                    <!-- Logo -->
-                    <!-- ============================================================== -->
+
                     <div class="navbar-brand">
                         <a href="/" class="logo">
-                            <!-- Logo icon -->
-                            <b class="logo-icon">
-                                <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
-                                <!-- Dark Logo icon -->
-                                <img src="/resources/images/logo-icon.png" alt="homepage" class="dark-logo" />
-                                <!-- Light Logo icon -->
-                                <img src="/resources/images/logo-light-icon.png" alt="homepage" class="light-logo" />
+                              <b class="logo-icon">
+                                 <img src="/resources/images/logo-icon.png" alt="homepage" class="dark-logo" />
+                                 <img src="/resources/images/logo-light-icon.png" alt="homepage" class="light-logo" />
                             </b>
-                            <!--End Logo icon -->
-                            <!-- Logo text -->
+
                             <span class="logo-text">
-                                <!-- dark Logo text -->
                                 <img src="/resources/images/logo-text.png" alt="homepage" class="dark-logo" />
-                                <!-- Light Logo text -->
                                 <img src="/resources/images/logo-light-text.png" class="light-logo" alt="homepage" />
                             </span>
                         </a>
@@ -83,19 +74,19 @@
                     <ul id="sidebarnav">
                                            <li class="sidebar-item">
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/user/dashboard" aria-expanded="false">
-                                <i class="mdi mdi-av-timer"></i>
+                                <i class="icon-chart"></i>
                                 <span class="hide-menu">예약 종합화면</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/user/profile" aria-expanded="false">
-                                <i class="mdi mdi-account-network"></i>
+                                <i class="icon-user"></i>
                                 <span class="hide-menu">회원정보</span>
                             </a>
                         </li>
                            <li class="sidebar-item">
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/user/companyRegist" aria-expanded="false">
-                                <i class="mdi mdi-arrange-bring-forward"></i>
+                                <i class="icon-briefcase"></i>
                                 <span class="hide-menu">개인사업장 관리</span>
                             </a>
                         </li>
@@ -103,10 +94,17 @@
                                        
                           <li class="sidebar-item">
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/user/dashboardCompany" aria-expanded="false">
-                                <i class="mdi mdi-arrange-bring-forward"></i>
+                                <i class="icon-chart"></i>
                                 <span class="hide-menu">개인사업장 종합화면</span>
                             </a>
-                        </li>
+                          </li>
+                          
+                           <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/productList" aria-expanded="false">
+                                <i class="icon-social-dropbox"></i>
+                                <span class="hide-menu">상품관리</span>
+                            </a>
+                          </li>
                         </c:if>
                         
                          <li class="sidebar-item">
@@ -129,29 +127,9 @@
                                 <span class="hide-menu">Table</span>
                             </a>
                         </li>
-                        <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/icon" aria-expanded="false">
-                                <i class="mdi mdi-face"></i>
-                                <span class="hide-menu">Icon</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/starter" aria-expanded="false">
-                                <i class="mdi mdi-file"></i>
-                                <span class="hide-menu">Blank</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/error" aria-expanded="false">
-                                <i class="mdi mdi-alert-outline"></i>
-                                <span class="hide-menu">404</span>
-                            </a>
-                        </li>
-                    </ul>
+                     </ul>
                 </nav>
-                <!-- End Sidebar navigation -->
             </div>
-            <!-- End Sidebar scroll-->
         </aside>
         
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>

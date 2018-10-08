@@ -1,0 +1,251 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>자리 있어요?</title>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+	crossorigin="anonymous">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+KR">
+<link rel="stylesheet" href="/resources/css/simple-line-icons.css">
+<link rel="stylesheet" href="/resources/css/themify-icons.css">
+<link rel="stylesheet" href="/resources/css/set1.css">
+<link rel="stylesheet" href="/resources/css/swiper.min.css">
+<link rel="stylesheet" href="/resources/css/magnific-popup.css">
+<link rel="stylesheet" href="/resources/css/style.css">
+<link rel="stylesheet" href="/resources/css/style.min.css" >
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	
+
+</head>
+
+<body>
+	<%@ include file="/pageframe/header.jsp"%>
+
+	<!--============================= RESERVE A SEAT =============================-->
+	<section class="reserve-block">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6">
+					<h5>
+						<input class="form-control" type="text" name="name" id="name" placeholder="상품명">
+					</h5>
+					<br> <input class="form-control" type="text" name="name" id="name"
+						placeholder="상품 설명">
+				</div>
+
+			</div>
+		</div>
+	</section>
+
+	<section class="light-bg booking-details_wrap">
+		<div class="container">
+
+
+                    
+			<hr>
+
+			<form id="reservation-info" action="./reserve" method="POST" method="post" enctype="multipart/form-data">
+						
+			
+		 	<div class="row">
+				<div class="col-md-4">
+					<img id="productImage1" src="" class="img-fluid" alt="#">				
+				</div>
+				<div class="col-md-4">
+					<img id="productImage2" src="" class="img-fluid" alt="#">				
+				</div>
+				<div class="col-md-4">
+					<img id="productImage3" src="" class="img-fluid" alt="#">				
+				</div>
+			</div> 
+			
+			
+			
+				
+				<input type="file"name="file" id="multipleFile" multiple/>
+
+
+					
+					
+				<div class="row">
+					<div class="col-md-8 responsive-wrap">
+
+						<div id="item" class="booking-checkbox_wrap">
+							<div class="row">
+
+								<div class="col-md-12">
+
+									<p style="font-size: 20px">
+										<span class="icon-calendar"></span>&nbsp;&nbsp;판매 날짜
+									</p>
+
+									<input style="border-right: none; width: 48%;" type="text"
+										name="resDate" id="startDate" class="input-border" readOnly>
+									<input style="border-left: none; width: 48%;" type="text"
+										id="endDate" class="input-border" readOnly>
+
+								</div>
+								<hr>
+								<div class="col-md-12">
+
+									<p style="font-size: 20px">
+										<span class="icon-list"></span>&nbsp;&nbsp;수량
+									</p>
+									<ul>
+										<li style="display: inline-block"><a id="minus"
+											class="nav-link" href="javascript:void(0)"><span
+												class="icon-minus"></span></a></li>
+										<li style="display: inline-block"><input id="count"
+											name="productCount" style="text-align: center; border: none;"
+											size="2" type="text" value="0" readOnly></li>
+										<li style="display: inline-block"><a id="plus"
+											class="nav-link" href="javascript:void(0)"><span
+												class="icon-plus"></span></a></li>
+									</ul>
+								</div>
+								<hr>
+								<div class="col-md-12">
+									<p style="font-size: 20px">
+										<span class="icon-wallet"></span>&nbsp;&nbsp;가격
+									</p>
+									<input type="text" name="price" id="price" class="form-control">
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+				
+			</form>
+			<hr>
+		</div>
+	</section>
+
+
+	<!--//END BOOKING DETAILS -->
+
+	<script src="/resources/js/jquery/jquery.js"></script>
+	<script src="/resources/js/jquery/jquery.min.js"></script>
+    <script src="/resources/js/popper/umd/popper.min.js"></script>
+    <script src="/resources/js/bootstrap/bootstrap.min.js"></script>
+	<script src="/resources/js/jquery/jquery.magnific-popup.js"></script>
+	<script src="/resources/js/swiper.min.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"
+		integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30="
+		crossorigin="anonymous"></script>
+	<script src="/resources/js/datepicker-ko.js"></script>
+	<script src="/resources/js/utility.js"></script>
+	
+
+    
+    
+	<script>
+	
+
+$(document).ready(function() {
+		
+	
+			
+			$("#startDate").datepicker({
+					showAnim : "slideDown",
+					minDate : 0,
+					maxDate : new Date("${product.saleEndDate}"),
+					onSelect : function(dateText, inst) {
+						 calReserveReuslt();
+					}
+			});
+
+			$("#endDate").datepicker({
+					showAnim : "slideDown",
+					minDate : 0,
+					maxDate : new Date("${product.saleEndDate}"),
+					onSelect : function(dateText, inst) {
+						calReserveReuslt();
+					}
+			});
+
+	
+			$("#plus").on("click", function() {
+				$("#userImage").attr("src","/resources/images/detail_image3_6.jpg");
+			
+				
+			
+				
+				var count = parseInt($("#count").val());
+				if( count <= 9){
+					count += 1;
+					$("#count").val(count);
+								
+					$(".toggle-string").show();
+					$("#productCount").val(count);
+	
+					
+				}
+			});
+			$("#minus").on("click", function() {
+				var count = parseInt($("#count").val());
+				if( count != 0){
+					count -= 1;
+					$("#count").val(count);
+					
+					$(".toggle-string").show();
+					$("#productCount").val(count);
+				}			
+			});
+			
+			
+			//< 유저 썸네일
+	   		ImageThumbnail("#productImage","#multipleFile");
+			
+});
+</script>
+
+	<script>
+	var swiper = new Swiper('.swiper-container', {
+			slidesPerView : 3,
+			slidesPerGroup : 3,
+			loop : true,
+			loopFillGroupWithBlank : true,
+			pagination : {
+				el : '.swiper-pagination',
+				clickable : true,
+			},
+			navigation : {
+				nextEl : '.swiper-button-next',
+				prevEl : '.swiper-button-prev',
+			}
+		});
+	
+	</script>
+	
+	<script>
+	 if ($('.image-link').length) {
+			$('.image-link').magnificPopup({
+				type : 'image',
+				gallery : {
+					enabled : true
+				}
+			});
+		}
+		if ($('.image-link2').length) {
+			$('.image-link2').magnificPopup({
+				type : 'image',
+				gallery : {
+					enabled : true
+				}
+			});
+		} 
+	</script>
+	<%@ include file="/pageframe/footer.jsp"%>
+</body>
+
+</html>
+

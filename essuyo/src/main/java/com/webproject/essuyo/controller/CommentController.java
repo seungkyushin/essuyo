@@ -52,6 +52,12 @@ public class CommentController {
 	public String  writerComment(CommentVO comment, RedirectAttributes rttr, Model model) throws Exception{
 		logger.info("------- Comment 입력 writerComment() -------");
 		
+		// user ID 받아오기
+		String userEmail = (String) session.getAttribute("login");
+		UserVO user = userService.getUserVO(userEmail);
+		int userId = user.getId();
+		comment.setUserId(userId);
+		
 		model.addAttribute("commentVO", comment);
 		logger.info(comment.toString());
 		

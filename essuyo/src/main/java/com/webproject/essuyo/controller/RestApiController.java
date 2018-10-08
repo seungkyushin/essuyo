@@ -145,6 +145,11 @@ public class RestApiController {
 	
 		}
 		
+		@GetMapping("/product/{productId}")
+		public Map<String,Object> getProduct(@PathVariable("productId") int productId){
+			return productService.getProduct(productId);
+		}
+		
 	
 
 }

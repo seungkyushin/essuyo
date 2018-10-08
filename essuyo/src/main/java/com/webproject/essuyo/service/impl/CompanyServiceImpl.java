@@ -114,7 +114,7 @@ public class CompanyServiceImpl implements CompanyService {
 				Map<String, Object> resultMap = this.makeCompanyViewData(company);
 
 				resultMap.put("review", companyDao.cntReviews(companyId));
-				resultMap.put("image", this.getImagePath(company.getId()));
+				resultMap.put("image", this.getImagePath(company.getId()).get(0));
 
 				return resultMap;
 			}

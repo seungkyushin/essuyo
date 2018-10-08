@@ -12,10 +12,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.webproject.essuyo.domain.BusinessVO;
 import com.webproject.essuyo.domain.ReservationVO;
+import com.webproject.essuyo.domain.UserVO;
 import com.webproject.essuyo.service.CompanyService;
 import com.webproject.essuyo.service.ProductService;
 import com.webproject.essuyo.service.ReservationService;
+import com.webproject.essuyo.service.UserService;
 
 @Controller
 public class ProductController {
@@ -28,6 +31,9 @@ public class ProductController {
 
 	@Autowired
 	private CompanyService companyService;
+	
+	@Autowired
+	private UserService userService;
 
 	@GetMapping("/reservation")
 	public String showReservationPage(@RequestParam("company") int companyId, @RequestParam("product") int productId,
@@ -67,4 +73,31 @@ public class ProductController {
 
 		return viewName;
 	}
+	
+	@GetMapping("/productList")
+	public String showProductMangerPage(HttpSession httpSession, Model model) {
+
+		String viewName = "/user/productManager";
+		int BusinessId = (Integer) httpSession.getAttribute("companyLogin");
+		BusinessVO business = userService.getBusinessInfo(BusinessId);
+		
+		model.addAttribute("companyId" ,business.getCompanyId());
+	
+		return viewName;
+	}
+	
+	@GetMapping("/user/productRegist")
+	public String showProductRegistPage(HttpSession httpSession, Model model) {
+
+		String viewName = "/user/productRegist";
+		int BusinessId = (Integer) httpSession.getAttribute("companyLogin");
+		BusinessVO business = userService.getBusinessInfo(BusinessId);
+		
+		model.addAttribute("companyId" ,business.getCompanyId());
+	
+		return viewName;
+	}
+	
+	
+	
 }
