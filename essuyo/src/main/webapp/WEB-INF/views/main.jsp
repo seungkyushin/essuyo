@@ -94,7 +94,7 @@
 					<div class="find-place-img_wrap">
 						<div class="grid">
 							<figure class="effect-ruby">
-								<a href="/list"> <img
+								<a href="/list?type='렌트카'"> <img
 									src="resources/images/menu-rentcar.jpg" class="img-fluid"
 									alt="img13" />
 									<figcaption>
@@ -111,7 +111,7 @@
 							<div class="find-place-img_wrap">
 								<div class="grid">
 									<figure class="effect-ruby">
-										<a href="/list"> <img
+										<a href="/list?type='식당'"> <img
 											src="resources/images/menu-restraunt.jpg" class="img-fluid"
 											alt="img13" />
 											<figcaption>
@@ -128,7 +128,7 @@
 							<div class="find-place-img_wrap">
 								<div class="grid">
 									<figure class="effect-ruby">
-										<a href="/list"> <img
+										<a href="/list?type='박물관'"> <img
 											src="resources/images/menu-museum.jpg" class="img-fluid"
 											alt="img13" />
 											<figcaption>
@@ -147,7 +147,7 @@
 							<div class="find-place-img_wrap">
 								<div class="grid">
 									<figure class="effect-ruby">
-										<a href="/list"> <img
+										<a href="/list?type='호텔'"> <img
 											src="resources/images/menu-hotel.jpg" class="img-fluid"
 											alt="img13" />
 											<figcaption>

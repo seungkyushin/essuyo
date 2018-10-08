@@ -69,25 +69,25 @@
 					<div class="row detail-checkbox-wrap">
 						<div class="col-sm-12 col-md-6 col-lg-4 col-xl-3">
 							<label class="custom-control custom-checkbox">
-							 <input	type="checkbox" value="1" name =fil> <span class="custom-control-indicator"></span>
+							 <input	type="checkbox" value="1" name =filter> <span class="custom-control-indicator"></span>
 								<span class="custom-control-description"> 주차공간 여부</span>
 							</label>
 						</div>
 						<div class="col-sm-12 col-md-6 col-lg-4 col-xl-3">
 							<label class="custom-control custom-checkbox"> 
-							<input type="checkbox" value="2" name=fil> <span class="custom-control-indicator"></span>
+							<input type="checkbox" value="2" name=filter> <span class="custom-control-indicator"></span>
 								<span class="custom-control-description"> 인터넷 가능 여부 </span>
 							</label>
 						</div>
 						<div class="col-sm-12 col-md-6 col-lg-4 col-xl-3">
 							<label class="custom-control custom-checkbox"> 
-							<input type="checkbox" value="3" name=fil> <span class="custom-control-indicator"></span>
+							<input type="checkbox" value="3" name=filter> <span class="custom-control-indicator"></span>
 								<span class="custom-control-description"> 흡연 가능 여부 </span>
 							</label>
 						</div>
 						<div class="col-sm-12 col-md-6 col-lg-4 col-xl-3">
 							<label class="custom-control custom-checkbox">
-							 <input	type="checkbox" value="4" name=fil> <span class="custom-control-indicator"></span>
+							 <input	type="checkbox" value="4" name=filter> <span class="custom-control-indicator"></span>
 								<span class="custom-control-description"> 신용카드 가능 여부</span>
 							</label>
 						</div>
@@ -159,7 +159,7 @@
 	<script>	
 		function test() {
 			
-			var values = document.getElementsByName("fil");
+			var values = document.getElementsByName("filter");
 			var value = "";
 			for(var i=0; i<values.length;i++){
 				if(values[i].checked){
@@ -172,16 +172,15 @@
 			
 			$.ajax({
 				type : 'GET',
-				url : encodeURI('/api/list?start=' + start + "&value=" + value),
+				url : encodeURI('/api/list?start=' + start + "&value=" + value + "&type="+type + "&area_list_id="+area_list_id),
 				headers : {
 					"Content-Type" : "application/json",
 					"X-HTTP-Method-Override" : "GET"
 				},
 
 				success : function(data) {
-					$("#type1").text(data.sales[0].type);
-							
-					
+					$("#type1").text(type);
+				
 					var source = $("#template").html();
 					var template = Handlebars.compile(source);
 					var resultHTML = "";
@@ -197,7 +196,7 @@
 							$(".score_info").attr('class', 'featured-rating');
 						}
 
-						if (data2.state == 'OPEN') {
+						if (data2.state == "영업중") {
 							$(".state-info").attr('class', 'open-now');
 						} else {
 							$(".state-info").attr('class','closed-now');
@@ -215,31 +214,33 @@
 	<script>
 		var start = 0;
 		var value="";
+		var type=${type};
+		var area_list_id=${area_list_id};
 		$(document).ready(function() {
 					
 			test();
 	    $(window).scroll(function() {
 		if ($(window).scrollTop() == $(document).height()- $(window).height()) {
-		start++;
-	    test();
+		start++;	
+	    test();			
 	    }
 
 	    });
 	    
 	    
 		$("#search").click(function() {
-			$("#salesList").html(""); 
-
- 			test();
+			$("#salesList").html("");      
+ 		test();
  		});
 					
 		});
 	</script>
+	
 	<!-- 판매리스트 소스 -->
 	<script id=template type="text/x-handlerbars-template">
 	 <div class="col-sm-6 col-lg-12 col-xl-6 featured-responsive">
 								<div class="featured-place-wrap">
-									<a href="/detail"> <img	src="{{image}}" class="img-fluid" alt="#">
+									<a href="/detail?id={{id}}"> <img	src="{{image}}" class="img-fluid" alt="#">
 										<span class="score_info">{{score}}</span>
 										<div class="featured-title-box">
 											<h6>{{name}}</h6>
@@ -253,7 +254,7 @@
 												<li><span class="icon-screen-smartphone"></span>
 													<p>{{number}}</p></li>
 												<li><span class="icon-link"></span>
-													<p>{{url}}</p></li>
+													<p>{{hompage}}</p></li>
  											</ul>
 											<div class="bottom-icons">
 												<div class="state-info">{{state}}</div>
@@ -263,6 +264,12 @@
 								</div>		
 </div>			
 </script>
+
+<script>
+<!-- 	<script id=template2 type="text/x-handlerbars-template"> -->
+<!-- 					<div id="map" data-lat={{lat}} data-lon={{lon}} data-zoom="14"></div> -->
+</script>
+
 	<!-- Map JS (Please change the API key below. Read documentation for more info) -->
 	 <script src="https://maps.googleapis.com/maps/api/js?callback=myMap&key=AIzaSyB_SsV7PnpCZxu2cphySVYNkiKehtF_ogY"></script>
 </body>
