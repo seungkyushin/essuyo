@@ -21,62 +21,60 @@ import com.webproject.essuyo.service.CommentService;
 import com.webproject.essuyo.service.ImageAdminService;
 
 @Service
-public class CommentServiceImpl implements CommentService{
+public class CommentServiceImpl implements CommentService {
 
 	@Autowired
 	private CommentDao commentDao;
-	
+
 	@Autowired
 	private UserDAO userDao;
-	
-	
+
 	@Autowired
 	private ImageAdminService imageAdminService;
-	
+
 	private final int SEARCH_LIMIT = 5;
-		
+
 	private Logger logger = LoggerFactory.getLogger(CommentServiceImpl.class);
-	
+
 	@Override
-	public List<Map<String,Object>> getCommentList(String type, int id, int start) {
-		
-		List<Map<String,Object>> resultList = new ArrayList<Map<String,Object>>();
-			
+	public List<Map<String, Object>> getCommentList(String type, int id, int start) {
+
+		List<Map<String, Object>> resultList = new ArrayList<Map<String, Object>>();
+
 		try {
-				SQLParamVO params = new  SQLParamVO(type,id,(start-1),SEARCH_LIMIT);
-				List<CommentVO> commentList = commentDao.selectById(params);
-			
-						
-					//UserVO userInfo = userService.getUserInfo(id);
+			SQLParamVO params = new SQLParamVO(type, id, (start - 1), SEARCH_LIMIT);
+			List<CommentVO> commentList = commentDao.selectById(params);
 
-					//if (userInfo != null) {
-					for (CommentVO data : commentList) {
-						Map<String, Object> paramMap = new HashMap<>();
-						
-						paramMap.put("title", data.getTitle());
-						paramMap.put("content", data.getContent());
-						paramMap.put("regDate", data.getRegDate());
-						paramMap.put("score", data.getScore());
-						paramMap.put("helpful", data.getHelpful());
-						paramMap.put("userId", data.getUserId());
+			// UserVO userInfo = userService.getUserInfo(id);
 
-						if (type.equals("user") == true) {
-							List<String> companyImageList = imageAdminService.getImagePathList("company", data.getCompanyId());
-							paramMap.put("imageUrl", companyImageList.get(0) );
-						}else if (type.equals("company") == true) {
-							UserVO user = userDao.selectById(new SQLParamVO("user",data.getUserId()));
-							paramMap.put("name",  user.getName());
-							paramMap.put("imageUrl", imageAdminService.getImagePath(user.getImageInfoId()));
-						}
-						
-						resultList.add(paramMap);
-					}
-				//}
-				
+			// if (userInfo != null) {
+			for (CommentVO data : commentList) {
+				Map<String, Object> paramMap = new HashMap<>();
+
+				paramMap.put("title", data.getTitle());
+				paramMap.put("content", data.getContent());
+				paramMap.put("regDate", data.getRegDate());
+				paramMap.put("score", data.getScore());
+				paramMap.put("helpful", data.getHelpful());
+				paramMap.put("userId", data.getUserId());
+
+				if (type.equals("user") == true) {
+					List<String> companyImageList = imageAdminService.getImagePathList("company", data.getCompanyId());
+					paramMap.put("imageUrl", companyImageList.get(0));
+				} else if (type.equals("company") == true) {
+					UserVO user = userDao.selectById(new SQLParamVO("user", data.getUserId()));
+					paramMap.put("name", user.getName());
+					paramMap.put("totalReply", userDao.reviewCnt(user.getId()));
+					paramMap.put("imageUrl", imageAdminService.getImagePath(user.getImageInfoId()));
+				}
+				resultList.add(paramMap);
+			}
+			// }
+
 		} catch (Exception e) {
 			logger.error("댓글 조회 실패.. | {} ", e.toString());
 		}
-		
+
 		return resultList;
 	}
 
@@ -84,7 +82,7 @@ public class CommentServiceImpl implements CommentService{
 	@Override
 	public void writerComment(CommentVO comment) throws Exception {
 		commentDao.create(comment);
-		
+
 	}
 
 }

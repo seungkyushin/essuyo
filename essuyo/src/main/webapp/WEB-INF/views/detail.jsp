@@ -80,7 +80,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-8 responsive-wrap">
-				
+
 					<div id="tab-1" class="tab-content current">
 						<div class="booking-checkbox_wrap">
 							<div class="booking-checkbox">
@@ -98,12 +98,11 @@
 									</div>
 								</c:forEach>
 							</div>
-							
-							
+
+
 							<hr>
 
-							<div id="product-list">
-							</div>
+							<div id="product-list"></div>
 
 						</div>
 
@@ -113,48 +112,50 @@
 							<div id="comment-list" class="booking-checkbox_wrap mt-4">
 								<h5>총 댓글 ${company.review}개</h5>
 								<hr>
-								
-								 <c:if test="${ !empty sessionScope.login}">
-								<form role="form" method="POST"	action="/comment/writerComment">
-								<div class="customer-review_wrap">
-									<div class="customer-img">
-										<img id="writeUserImage" src="" class="img-fluid comment-image-size" alt="">
-										<p id="writeUserName">이름</p>
-										
-									</div>
-									<div class="customer-content-wrap">
-										<div class="customer-content">
-											<div class="customer-review">
-												<input type="text" name='title' class="form-control" placeholder="제목">
-											</div>
-											
-											<div class="customer-rating">8.0</div>
-										</div>
-										
-										<textarea class="form-control" name="content" rows="3"placeholder="내용"></textarea>
-			
-									</div>
-								</div>
-								<button type="submit" class="btn btn-info"	style="float: right;">댓글달기</button>
-													
-									<label for="exInputWriter"> SCORE </label> <select
-														name="score" id="score">
-														<option value="0">☆☆☆☆☆</option>
-														<option value="1">★☆☆☆☆</option>
-														<option value="2">★★☆☆☆</option>
-														<option value="3">★★★☆☆</option>
-														<option value="4">★★★★☆</option>
-														<option value="5">★★★★★</option>
 
-													</select>
-													
-								<input type="hidden" name='companyId' value="${company.id}">
-								</form>
-									
-								<hr>
+								<c:if test="${ !empty sessionScope.login}">
+									<form role="form" method="POST" action="/comment/writerComment">
+										<div class="customer-review_wrap">
+											<div class="customer-img">
+												<img id="writeUserImage" src=""
+													class="img-fluid comment-image-size" alt="">
+												<p id="writeUserName">이름</p>
+
+											</div>
+											<div class="customer-content-wrap">
+												<div class="customer-content">
+													<div class="customer-review">
+														<input type="text" name='title' class="form-control"
+															placeholder="제목">
+													</div>
+
+													<div class="customer-rating">8.0</div>
+												</div>
+
+												<textarea class="form-control" name="content" rows="3"
+													placeholder="내용"></textarea>
+
+											</div>
+										</div>
+										<button type="submit" class="btn btn-info"
+											style="float: right;">댓글달기</button>
+
+										<label for="exInputWriter"> SCORE </label> <select
+											name="score" id="score">
+											<option value="0">☆☆☆☆☆</option>
+											<option value="1">★☆☆☆☆</option>
+											<option value="2">★★☆☆☆</option>
+											<option value="3">★★★☆☆</option>
+											<option value="4">★★★★☆</option>
+											<option value="5">★★★★★</option>
+
+										</select> <input type="hidden" name='companyId' value="${company.id}">
+									</form>
+
+									<hr>
 								</c:if>
-									
-								
+
+
 							</div>
 						</div>
 					</div>
@@ -225,7 +226,7 @@
        <div class="customer-img">
            <img src="{{image}}" class="img-fluid comment-image-size" alt="{{name}}">
            <p>{{name}}</p>
-           <span>35 Reviews</span>
+           <span>{{totalReply}} Reviews</span>
        </div>
        <div class="customer-content-wrap">
            <div class="customer-content">
@@ -338,7 +339,8 @@
 							tempData['url'] = data.url[0];
 							tempData['name'] = data.name;
 							tempData['discription'] = data.discription;
-							tempData['saleDate'] = data.saleStartDate + "-"	+ data.saleEndDate;
+							tempData['saleDate'] = data.saleStartDate + "-"
+									+ data.saleEndDate;
 							tempData['state'] = data.state;
 							tempData['price'] = dotSplit(data.price);
 
@@ -348,23 +350,16 @@
 
 					});
 
-					
-					
-				      if( "" != "${sessionScope.login}" ){
-				    		requestURL = "/api/loginImage";
-							Ajax("GET", requestURL, function(data) {
-								
-								$("#writeUserImage").attr("src",data);
-								
-								$("#writeUserImage").attr("alt","잉");
-								$("#writeUserName").text("홍길동");
-							
-							});
-				      }
-				      
-				
+					if ("" != "${sessionScope.login}") {
+						requestURL = "/api/loginImage";
+						Ajax("GET", requestURL, function(data) {
+							$("#writeUserImage").attr("src", data);
+							$("#writeUserImage").attr("alt", "잉");
+							$("#writeUserName").text("홍길동");
 
-					
+						});
+					}
+
 					requestURL = "/api/commentList/company/" + 1 + "/" + ${company.id};
 					Ajax("GET", requestURL, function(dataList) {
 
@@ -379,15 +374,16 @@
 							tempData['content'] = data.content;
 							tempData['helpful'] = data.helpful;
 							tempData['state'] = data.state;
+							tempData['totalReply'] = data.totalReply;
 
-							makeHTML("#comment-template", "#comment-list",
-									tempData);
-						});
-
+							makeHTML("#comment-template", "#comment-list", tempData);
+							});
 					});
 
 				});
 	</script>
+
+
 
 	<%@ include file="/pageframe/footer.jsp"%>
 
