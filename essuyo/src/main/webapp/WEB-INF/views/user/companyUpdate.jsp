@@ -100,7 +100,8 @@
 									</div>
 
 									<div class="form-group">
-										<label>[회사 홈페이지] <span class="help"> 예) www.example.com 혹은, www.example.co.kr</span></label> <input value="${cvo.url }" type="text" id="url" name="url" class="form-control" placeholder="회사 홈페이지" required>
+										<label>[회사 홈페이지] <span class="help"> 예) www.example.com 혹은, www.example.co.kr</span></label>
+										<input value="${cvo.homepage }" type="text" id="homepage" name="homepage" class="form-control" placeholder="회사 홈페이지" required>
 									</div>
 									<div class="form-group">
 										<label>[영업 상태]</label> <select class="custom-select col-12" id="state" name="state" required>

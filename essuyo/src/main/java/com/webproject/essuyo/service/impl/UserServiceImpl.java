@@ -273,5 +273,20 @@ public class UserServiceImpl implements UserService {
 	public void cIdIntoBusiness(UserVO vo) throws Exception {
 		dao.cIdIntoBusiness(vo);
 	}
+	
+	
+	//유저 테이블이 비지니스 아이디를 업데이트 해주는 서비스
+	@Override
+	public void bIdtoUser(UserVO vo) throws Exception {
+		dao.bIdtoUser(vo);
+		
+	}
+	
+	
+
+	
+
+	
+
 
 }

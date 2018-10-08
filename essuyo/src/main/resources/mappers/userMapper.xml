@@ -25,11 +25,17 @@
 		values(#{name},#{email},#{password}, 0, #{age},#{gender}, NOW(), 1);
 	</insert>
 	
+<!-- 	유저 테이블에 비지니스 아이디를 업데이트 해주는 sql문 -->
+	<update id="bIdtoUser">
+	update user set business_id = LAST_INSERT_ID() where email = #{email}
+	</update>
+	
+	
 <!-- 	사업체 회원가입은 LAST_INSERT_ID() 때문에 순서대로 서비스를 실행시키는 게 중요하다 -->
 	<!-- 사업체 회원가입용 sql, 컴퍼니 정보를 입력 -->
 	<insert id="companyRegist">
-		insert into company(name, type, discription, address, number, url, state, time)
-		values(#{name}, #{type}, #{discription}, #{address}, #{number}, #{url}, #{state}, #{time})
+		insert into company(name, type, discription, address, number, homepage, state, time)
+		values(#{name}, #{type}, #{discription}, #{address}, #{number}, #{homepage}, #{state}, #{time})
 	</insert>	
 	<!-- 	비즈니스 테이블에 컴퍼니 아이디 입력 -->
 <!-- 	컴퍼니 레지스트가 실행된 다음에 LAST_INSERT_ID()가 실행되면, 컴퍼니 id가 -->
@@ -45,8 +51,8 @@
 	
 <!-- 	컴퍼니 테이블 수정하는 sql(미완) -->
 	<insert id="companyUpdate">
-	insert into company(name, type, discription, address, number, url, state, time, area_list_id)
-		values(#{name}, #{type}, #{discription}, #{address}, #{number}, #{url}, #{state}, #{time}, #{areaListId})
+	insert into company(name, type, discription, address, number, homepage, state, time, area_list_id)
+		values(#{name}, #{type}, #{discription}, #{address}, #{number}, #{homepage}, #{state}, #{time}, #{areaListId})
 	</insert>
 	
 <!-- 	companyUpdate 컴퍼니 insert 다음에 바로 실행시켜서, 비즈니스 테이블에 컴퍼니 아이디를 넣어준다 -->

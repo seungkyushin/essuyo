@@ -262,4 +262,18 @@ public class CompanyServiceImpl implements CompanyService {
 		return imageAdminService.getImagePathList("company", companyId);
 	}
 
+	
+
+	@Override
+	public void companyImgInsert(int cId) throws Exception {
+		companyDao.companyImgInsert(cId);
+		
+	}
+
+	@Override
+	public int selectId() throws Exception {
+		
+		return companyDao.selectId();
+	}
+
 }

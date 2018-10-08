@@ -9,6 +9,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.webproject.essuyo.domain.BusinessVO;
 import com.webproject.essuyo.domain.CompanyVO;
 import com.webproject.essuyo.domain.SQLParamVO;
 import com.webproject.essuyo.domain.UserVO;
@@ -90,7 +91,7 @@ public class UserDAO {
 		map.put("discription", cvo.getDiscription());
 		map.put("address", cvo.getAddress());
 		map.put("number", cvo.getNumber());
-		map.put("url", cvo.getHomepage());
+		map.put("homepage", cvo.getHomepage());
 		map.put("state", cvo.getState());
 		map.put("time", cvo.getTime());
 		map.put("areaListId", cvo.getAreaListId());		
@@ -147,7 +148,12 @@ public class UserDAO {
 	}
 	
 
-	
+	//유저 테이블에 비지니스 아이디를 업데이트 해준다
+	public void bIdtoUser(UserVO vo) throws Exception{
+		
+		session.update(namespace+".bIdtoUser", vo.getEmail());
+		
+	}
 	
 	
 

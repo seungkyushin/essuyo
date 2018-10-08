@@ -26,6 +26,7 @@ import com.webproject.essuyo.domain.CompanyVO;
 import com.webproject.essuyo.domain.UserVO;
 import com.webproject.essuyo.service.BusinessService;
 import com.webproject.essuyo.service.CompanyService;
+import com.webproject.essuyo.service.ImageAdminService;
 import com.webproject.essuyo.service.ReservationService;
 import com.webproject.essuyo.service.impl.UserServiceImpl;
 
@@ -45,6 +46,9 @@ public class UserController {
 
 	@Autowired
 	private CompanyService companyService;
+	
+	@Autowired
+	private ImageAdminService imageAdminService;
 
 
 	// GET 방식으로 회원가입 페이지에 접근. 그냥 회원가입 페이지로 보내준다
@@ -86,7 +90,7 @@ public class UserController {
 	@RequestMapping(value = "/regist", method = RequestMethod.POST)
 	public String registPost(UserVO vo, HttpSession session, Model model, RedirectAttributes rttr) throws Exception {
 		logger.info("registPost.......");
-		try {
+		try {			
 			service.regist(vo);
 			rttr.addFlashAttribute("errorMessageTitle", "가입 성공");
 			rttr.addFlashAttribute("errorMessage", "회원가입에 성공했습니다.");
@@ -149,17 +153,26 @@ public class UserController {
 	}
 
 	// 테스트 중. form을 다 작성하고 보냈을 때.
+	//이미지 업로드 진행중
 	@Transactional
 	@RequestMapping(value = "/companyUpdate", method = RequestMethod.POST)
-	public String companyUpdatePOST(@RequestParam("imgs") List<MultipartFile> file, CompanyVO cvo, HttpServletRequest request, RedirectAttributes rttr)
+	public String companyUpdatePOST(@RequestParam("imgs") List<MultipartFile> files, CompanyVO cvo, HttpServletRequest request, RedirectAttributes rttr)
 			throws Exception {
 		logger.info("companyUpdatePOST......");
 		String email = (String) request.getSession().getAttribute("login");
 		UserVO vo = service.selectByEmail(email);
-
+		//반드시 아래 순서로 실행되어야 값이 제대로 들어간다
 		try {
 			service.companyUpdate(cvo);
-			service.cIdIntoBusiness(vo);
+			int cId = companyService.selectId();
+			businessService.insertWithCId();			
+			service.bIdtoUser(vo);			
+		
+			
+			for(MultipartFile file : files) {
+				imageAdminService.uploadFile(file);
+				companyService.companyImgInsert(cId);
+			}
 
 			rttr.addFlashAttribute("errorMessageTitle", "정보 수정 성공");
 			rttr.addFlashAttribute("errorMessage", "성공적으로 정보가 수정됐습니다.");

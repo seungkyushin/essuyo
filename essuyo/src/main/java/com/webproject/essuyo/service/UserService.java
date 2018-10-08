@@ -59,5 +59,8 @@ public interface UserService {
 	public boolean businessTest(String email);
 	
 	
+	public void bIdtoUser(UserVO vo) throws Exception;
+
+	
 
 }

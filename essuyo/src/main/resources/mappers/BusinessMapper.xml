@@ -22,5 +22,9 @@
     <insert id="insert" parameterType="BusinessVO" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
     	INSERT INTO business(good, comment)	VALUES(0, "사장님의 한마디!");
     </insert>
+    
+    <insert id="insertWithCId">
+    INSERT INTO business(good, comment, company_id)	VALUES(0, "사장님의 한마디!", LAST_INSERT_ID());
+    </insert>
 
  </mapper>

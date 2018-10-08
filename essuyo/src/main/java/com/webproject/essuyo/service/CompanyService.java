@@ -27,5 +27,9 @@ public interface CompanyService {
 
 //	이미지 
 	public List<String> getImagePath(int companyId) throws Exception;
+	
+	public int selectId() throws Exception;
+	
+	public void companyImgInsert(int cId) throws Exception;
 
 }
