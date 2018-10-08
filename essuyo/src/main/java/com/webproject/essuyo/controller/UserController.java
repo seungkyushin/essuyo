@@ -170,8 +170,15 @@ public class UserController {
 		
 			
 			for(MultipartFile file : files) {
-				imageAdminService.uploadFile(file);
-				companyService.companyImgInsert(cId);
+				String fileType = file.getContentType().toString();
+				//이미지 파일만 받도록 ,if문을 걸었음
+				if(!fileType.equals("application/octet-stream")) {
+					System.out.println(fileType);
+					imageAdminService.uploadFile(file);
+					companyService.companyImgInsert(cId);
+				}				
+				
+				
 			}
 
 			rttr.addFlashAttribute("errorMessageTitle", "정보 수정 성공");
