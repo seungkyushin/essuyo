@@ -28,7 +28,11 @@ public class CompanyDao {
 		return session.selectList(namespace + ".listAll", param);
 
 	}
-
+	
+	public List<CompanyVO> filter(Map<String,Object> param) throws Exception{
+		return session.selectList(namespace+".filter", param);
+	}
+	
 	public Map<String, Object> getDetailCompanyInfo(int companyId) throws Exception {
 		return session.selectOne(namespace + ".score", companyId);
 

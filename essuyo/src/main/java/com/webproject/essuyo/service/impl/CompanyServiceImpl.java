@@ -203,31 +203,54 @@ public class CompanyServiceImpl implements CompanyService {
 	}
 
 	@Override
-	public Map<String, Object> getList(int start) {
+	public Map<String, Object> getList(int start, String value) {
 		Map<String, Object> resultMap = new HashMap<>();
 
 		List<CompanyVO> list = null;
 		List<String> imageInfoList = null;
 		List<Object> salesList = new ArrayList<>();
-
-		SQLParamVO param = new SQLParamVO();
-		param.setStart(start * 4);
-		param.setLimit(4);
-
-		try {
-			list = companyDao.listAll(param);
-
+		
+				
+	
+		
+		try {			
+				if( value != null && value.equals("") == true) {
+					SQLParamVO param = new SQLParamVO();		
+					param.setStart(start*4);
+					param.setLimit(4);
+					
+					list = companyDao.listAll(param);
+					
+				}else {
+					
+					Map<String, Object> filterParam = new HashMap<>();
+					
+					String[] values = value.split(","); 
+				
+					
+					for(int i=0; i<values.length;i++) {
+						filterParam.put("value" + (i+1), values[i]);
+					}
+					filterParam.put("count", values.length);
+					
+					filterParam.put("start",start*4 );
+					filterParam.put("limit",4 );
+					
+					list = companyDao.filter(filterParam);
+					
+				}
 		} catch (Exception e) {
 			logger.error("리스트 조회 실패.. | {} ", e.toString());
 		}
-
-		for (CompanyVO data : list) {
+		
+		
+		for(CompanyVO data : list) {
 			Map<String, Object> salesMap = new HashMap<>();
-
+						
 			salesMap.put("id", data.getId());
-			salesMap.put("name", data.getName());
+			salesMap.put("name",data.getName());
 			salesMap.put("type", data.getType());
-			salesMap.put("discription", data.getDiscription());
+			salesMap.put("discription",data.getDiscription() );
 			salesMap.put("score", data.getScore());
 			salesMap.put("address", data.getAddress());
 			salesMap.put("number", data.getNumber());
@@ -235,22 +258,26 @@ public class CompanyServiceImpl implements CompanyService {
 			salesMap.put("state", data.getState());
 			salesMap.put("time", data.getTime());
 			salesMap.put("areaListId", data.getAreaListId());
-
+	
+	
 			try {
 				imageInfoList = this.getImagePath(data.getId());
-			} catch (Exception e) {
+			} catch (Exception e) {				
 				logger.error("이미지 조회 실패");
-			}
-
-			salesMap.put("image", imageInfoList);
+			}		
+			
+			salesMap.put("image",imageInfoList);	
 			salesList.add(salesMap);
 		}
-
+		
+	
 		resultMap.put("sales", salesList);
-
+	
+		
 		return resultMap;
-
+		
 	}
+	
 
 	@Override
 	public List<String> getCompanyFacility(int companyId) throws Exception {

@@ -1,5 +1,7 @@
 package com.webproject.essuyo.controller;
 
+import java.awt.datatransfer.SystemFlavorMap;
+
 import javax.inject.Inject;
 
 import org.slf4j.Logger;
@@ -40,6 +42,8 @@ public class CompanyController {
 		model.addAttribute("user", userService.getSaleUserInfo(companyId));
 
 		return "detail";
+		
 	}
 
+	
 }

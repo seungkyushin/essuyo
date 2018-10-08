@@ -20,14 +20,24 @@ FROM company WHERE id = #{companyId};
 ]]>
 	</select>
 
-	<select id="11" resultType="CompanyVO">
-		select *
-		from company where
-		<trim prefix="WHERE" suffixOverrides=",">
-			<if test="test1 != null"> type = #{test1}</if>
-		</trim>
-	</select>
 
+	<select id="filter" resultType="CompanyVO">
+		select *
+		from company
+		where id = (select company_id
+		            from facility_admin
+		          <trim prefix="WHERE" suffixOverrides="or">
+			       <if test="value1 = 1"> facility_id = 1 or</if>
+			       <if test="value2 = 2"> facility_id = 2 or</if>
+			       <if test="value3 = 3"> facility_id = 3 or</if>
+			       <if test="value4 = 4"> facility_id = 4 or</if>
+		          </trim>
+		group by id
+		having count(id)>=#{count})
+		limit #{start}, #{limit};
+	</select>
+	
+	
 	<!-- 리뷰수 -->
 	<select id="reviews" resultType="Integer">
 		select count(*)
@@ -119,13 +129,4 @@ FROM company WHERE id = #{companyId};
 
 
 </mapper>
-
-
-
-
-
-
-
-
-
 
