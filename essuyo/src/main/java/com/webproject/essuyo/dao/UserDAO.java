@@ -2,6 +2,7 @@ package com.webproject.essuyo.dao;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -155,6 +156,17 @@ public class UserDAO {
 		
 	}
 	
+	//컴퍼니 테이블을 업데이트하는 기능
+	public void companyModify(CompanyVO cvo) throws Exception{		
+		
+		session.update(namespace+".companyModify", cvo);
+	}
 	
+	//컴퍼니 이미지 테이블의 이미지 아이디들을 얻는 DAO
+	public List<Integer> getImgIds(CompanyVO cvo)throws Exception{
+		int id = cvo.getId();
+		
+		return session.selectList(namespace+".getImgIds", id);
+	}
 
 }

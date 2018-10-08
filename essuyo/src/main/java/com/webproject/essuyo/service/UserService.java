@@ -1,6 +1,7 @@
 package com.webproject.essuyo.service;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.web.multipart.MultipartFile;
@@ -60,6 +61,10 @@ public interface UserService {
 	
 	
 	public void bIdtoUser(UserVO vo) throws Exception;
+	
+	public void companyModify(CompanyVO cvo) throws Exception;
+	
+	public List<Integer> getImgIds(CompanyVO cvo)throws Exception;
 
 	
 

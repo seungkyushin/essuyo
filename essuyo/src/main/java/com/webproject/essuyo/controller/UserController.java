@@ -46,10 +46,9 @@ public class UserController {
 
 	@Autowired
 	private CompanyService companyService;
-	
+
 	@Autowired
 	private ImageAdminService imageAdminService;
-
 
 	// GET 방식으로 회원가입 페이지에 접근. 그냥 회원가입 페이지로 보내준다
 	@RequestMapping(value = "/regist", method = RequestMethod.GET)
@@ -67,30 +66,29 @@ public class UserController {
 		model.addAttribute("business", business);
 
 	}
-	
+
 	@GetMapping("/businessStart")
-	public String startBusiness(RedirectAttributes redirectAttr, HttpSession httpSession, Model model) throws Exception {
+	public String startBusiness(RedirectAttributes redirectAttr, HttpSession httpSession, Model model)
+			throws Exception {
 
 		String email = (String) httpSession.getAttribute("login");
-		
-		if( service.businessTest(email) == true) {
+
+		if (service.businessTest(email) == true) {
 			return "redirect:/user/companyRegist";
 		}
-		
-		redirectAttr.addFlashAttribute("errorMessageTitle","ERROR !");
-		redirectAttr.addFlashAttribute("errorMessage","사업을 시작 할 수 없습니다.");
+
+		redirectAttr.addFlashAttribute("errorMessageTitle", "ERROR !");
+		redirectAttr.addFlashAttribute("errorMessage", "사업을 시작 할 수 없습니다.");
 		return "redirect:/user/companyRegist";
 
-
 	}
-	
 
 	// POST 방식으로 회원가입 페이지 접근
-	
+
 	@RequestMapping(value = "/regist", method = RequestMethod.POST)
 	public String registPost(UserVO vo, HttpSession session, Model model, RedirectAttributes rttr) throws Exception {
 		logger.info("registPost.......");
-		try {			
+		try {
 			service.regist(vo);
 			rttr.addFlashAttribute("errorMessageTitle", "가입 성공");
 			rttr.addFlashAttribute("errorMessage", "회원가입에 성공했습니다.");
@@ -105,7 +103,7 @@ public class UserController {
 
 	// POST 방식으로 사업체 회원가입 접근.
 	// 일반 회원가입 서비스와, 사업체 회원가입 서비스를 트랜잭션으로 묶음
-	@Transactional	
+	@Transactional
 	@RequestMapping(value = "/companyRegist", method = RequestMethod.POST)
 	public String companyRegistPost(UserVO vo, CompanyVO cvo, HttpServletRequest request, HttpSession session,
 			Model model, RedirectAttributes rttr) throws Exception {
@@ -133,54 +131,102 @@ public class UserController {
 			rttr.addFlashAttribute("errorMessageTitle", "가입 실패");
 			rttr.addFlashAttribute("errorMessage", "회원가입에 실패했습니다. 관리자에게 문의해 주세요.");
 			return "redirect:/user/companyRegist";
-			
+
 		}
-	
+
 	}
 
 	// 컴퍼니 테이블을 수정하는 서비스의 컨트롤러(미완성)
 	// 테스트 중. 컴퍼니 테이블 작성 페이지로 가는 컨트롤러
 	@RequestMapping(value = "/companyUpdate", method = RequestMethod.GET)
-	public void companyUpdateGET(HttpServletRequest request, Model model) throws Exception {
+	public void companyUpdateGET(HttpServletRequest request, Model model, HttpSession session) throws Exception {
 		logger.info("companyUpdateGET.....");
 		String email = (String) request.getSession().getAttribute("login");
 		UserVO vo = service.selectByEmail(email);
 		if (vo.getBusinessId() != 0) {
 			BusinessVO bvo = businessService.selectById(vo.getBusinessId());
 			CompanyVO cvo = companyService.getCompanyVO(bvo.getCompanyId());
-			model.addAttribute("cvo", cvo);
+			// 모델 대신 세션에 세트
+			// model.addAttribute("cvo", cvo);
+			session.setAttribute("cvo", cvo);
+
 		}
 	}
 
-	// 테스트 중. form을 다 작성하고 보냈을 때.
-	//이미지 업로드 진행중
+	// form을 다 작성하고 보냈을 때.
+	// 이미지 업로드
 	@Transactional
 	@RequestMapping(value = "/companyUpdate", method = RequestMethod.POST)
-	public String companyUpdatePOST(@RequestParam("imgs") List<MultipartFile> files, CompanyVO cvo, HttpServletRequest request, RedirectAttributes rttr)
-			throws Exception {
+	public String companyUpdatePOST(@RequestParam("imgs") List<MultipartFile> files, CompanyVO cvo,
+			HttpServletRequest request, RedirectAttributes rttr, HttpSession session) throws Exception {
 		logger.info("companyUpdatePOST......");
 		String email = (String) request.getSession().getAttribute("login");
 		UserVO vo = service.selectByEmail(email);
-		//반드시 아래 순서로 실행되어야 값이 제대로 들어간다
+		// 반드시 아래 순서로 실행되어야 값이 제대로 들어간다
 		try {
 			service.companyUpdate(cvo);
 			int cId = companyService.selectId();
-			businessService.insertWithCId();			
-			service.bIdtoUser(vo);			
-		
-			
-			for(MultipartFile file : files) {
+			businessService.insertWithCId();
+			service.bIdtoUser(vo);
+
+			for (MultipartFile file : files) {
 				String fileType = file.getContentType().toString();
-				//이미지 파일만 받도록 ,if문을 걸었음
-				if(!fileType.equals("application/octet-stream")) {
+				// 이미지 파일만 받도록 ,if문을 걸었음
+				if (!fileType.equals("application/octet-stream")) {
 					System.out.println(fileType);
 					imageAdminService.uploadFile(file);
 					companyService.companyImgInsert(cId);
-				}				
-				
-				
+				}
+
+			}
+			
+			session.removeAttribute("cvo");
+			rttr.addFlashAttribute("errorMessageTitle", "정보 입력 성공");
+			rttr.addFlashAttribute("errorMessage", "성공적으로 정보가 입력됐습니다.");
+			session.setAttribute("companyLogin", vo.getBusinessId());
+			return "redirect:/user/companyUpdate";
+		} catch (Exception e) {
+			e.printStackTrace();
+			rttr.addFlashAttribute("errorMessageTitle", "정보 입력 실패");
+			rttr.addFlashAttribute("errorMessage", "정보 입력에 실패했습니다. 관리자에게 문의해 주세요.");
+			return "redirect:/user/companyUpdate";
+		}
+
+	}
+
+	// 컴퍼니 테이블을 수정(update)하는 컨트롤러
+	@Transactional
+	@RequestMapping(value = "/companyModify", method = RequestMethod.POST)
+	public String companyModify(@RequestParam("imgs") List<MultipartFile> files, CompanyVO cvo,
+			HttpServletRequest request, RedirectAttributes rttr, HttpSession session) throws Exception {
+		logger.info("companyModify......");
+		// 처음 companyUpdate에 GET으로 접근할 때 세션으로 세팅한 cvo 객체
+		CompanyVO cvo2 = (CompanyVO) request.getSession().getAttribute("cvo");
+		cvo.setId(cvo2.getId());
+
+		// 반드시 아래 순서로 실행되어야 값이 제대로 들어간다
+		try {
+			service.companyModify(cvo);
+			int cId = cvo.getId();
+			List<Integer> imgIds = service.getImgIds(cvo);
+			if (!files.get(1).getContentType().toString().equals("application/octet-stream")) {
+				for (Integer imgId : imgIds) {
+					String SavePath = imageAdminService.getImagePath(imgId);
+					imageAdminService.deleteFile(SavePath, imgId);
+				}
+			}
+			for (MultipartFile file : files) {
+				String fileType = file.getContentType().toString();
+				// 이미지 파일만 받도록 ,if문을 걸었음
+				if (!fileType.equals("application/octet-stream")) {
+					System.out.println("파일 타입 : " + fileType);
+					imageAdminService.uploadFile(file);
+					companyService.companyImgInsert(cId);
+				}
+
 			}
 
+			session.removeAttribute("cvo");
 			rttr.addFlashAttribute("errorMessageTitle", "정보 수정 성공");
 			rttr.addFlashAttribute("errorMessage", "성공적으로 정보가 수정됐습니다.");
 			return "redirect:/user/companyUpdate";
@@ -237,39 +283,37 @@ public class UserController {
 
 		String email = (String) httpSession.getAttribute("login");
 		UserVO user = service.getUserVO(email);
-		
-			model.addAttribute("userType", "user");
-			model.addAttribute("id", user.getId());
-			setUserDashboard(email, "user", user.getId(), model);
-	
+
+		model.addAttribute("userType", "user");
+		model.addAttribute("id", user.getId());
+		setUserDashboard(email, "user", user.getId(), model);
+
 		return "/user/dashboard";
 
 	}
-	
+
 	@GetMapping("/dashboardCompany")
-	public String showCompanyDashboardPage(HttpSession httpSession,
-			RedirectAttributes redirectAttr ,Model model) {
+	public String showCompanyDashboardPage(HttpSession httpSession, RedirectAttributes redirectAttr, Model model) {
 
 		String email = (String) httpSession.getAttribute("login");
-	
+
 		int businessId = service.getBusinessInfo(email).getId();
 		int companyId = service.getBusinessInfo(email).getCompanyId();
-		
-		if( companyId != 0 && businessId != 0) {
+
+		if (companyId != 0 && businessId != 0) {
 			model.addAttribute("userType", "company");
 			model.addAttribute("id", companyId);
 			setCompanyDashboard(email, "company", companyId, model);
 			return "/user/dashboard";
-		}else if( companyId == 0 && businessId == 0 ){
-			redirectAttr.addFlashAttribute("errorMessageTitle","ERROR !");
-			redirectAttr.addFlashAttribute("errorMessage","정상적인 방법으로 시도해 주세요.");
+		} else if (companyId == 0 && businessId == 0) {
+			redirectAttr.addFlashAttribute("errorMessageTitle", "ERROR !");
+			redirectAttr.addFlashAttribute("errorMessage", "정상적인 방법으로 시도해 주세요.");
 			return "redirect:/";
-		}else {
-			redirectAttr.addFlashAttribute("errorMessageTitle","IMFOMATION !");
-			redirectAttr.addFlashAttribute("errorMessage","회사를 등록 후 이용해주시길 바랍니다.");
+		} else {
+			redirectAttr.addFlashAttribute("errorMessageTitle", "IMFOMATION !");
+			redirectAttr.addFlashAttribute("errorMessage", "회사를 등록 후 이용해주시길 바랍니다.");
 			return "redirect:/user/companyRegist";
 		}
-		
 
 	}
 
