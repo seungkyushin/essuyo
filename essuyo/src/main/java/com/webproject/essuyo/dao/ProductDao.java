@@ -40,9 +40,13 @@ public class ProductDao {
 		return sqlSession.selectList(NAME_SPACE + ".selectManagerDisableDate" , id);
 	}
 	
-
-
-
+	public int insertManager(ProductManagerVO param) throws Exception{
+		return sqlSession.insert(NAME_SPACE + ".insertManager" , param);
+	}
 	
+	public int updateManager(ProductManagerVO param) throws Exception{
+		return sqlSession.update(NAME_SPACE + ".updateManager" , param);
+	}
+
 
 }

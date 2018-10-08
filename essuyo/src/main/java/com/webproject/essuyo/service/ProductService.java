@@ -4,6 +4,8 @@ package com.webproject.essuyo.service;
 import java.util.List;
 import java.util.Map;
 
+import com.webproject.essuyo.domain.ProductManagerVO;
+
 
 public interface ProductService {
 	
@@ -12,6 +14,11 @@ public interface ProductService {
 	
 	public List<Map<String,Object>> getProductList(int companyId);
 	
+	public int addProduct(ProductManagerVO productManager);
+	
+	public int updateProduct(ProductManagerVO productManager);
+	
+
 	public List<String> getImagePath(int productId);
 	
 	public List<String> getDisableDate(int productId);

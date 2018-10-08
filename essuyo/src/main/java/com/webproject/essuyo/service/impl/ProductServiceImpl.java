@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.webproject.essuyo.dao.ProductDao;
+import com.webproject.essuyo.domain.ProductManagerVO;
 import com.webproject.essuyo.domain.ProductVO;
 import com.webproject.essuyo.service.ImageAdminService;
 import com.webproject.essuyo.service.ProductService;
@@ -101,6 +102,18 @@ public class ProductServiceImpl implements ProductService {
 			logger.error("상품 조회 실패.. | {} ", e.toString());
 			return null;
 		}
+	}
+
+	@Override
+	public int addProduct(ProductManagerVO productManager) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int updateProduct(ProductManagerVO productManager) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 

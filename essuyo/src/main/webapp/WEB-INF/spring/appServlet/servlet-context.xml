@@ -35,7 +35,10 @@
 	<!-- <beans:bean id="loginInterceptor" class="com.webproject.essuyo.interceptor.LoginInterceptor"></beans:bean> -->
 	<beans:bean id="authInterceptor" class="com.webproject.essuyo.interceptor.AuthInterceptor"></beans:bean>
 	<mvc:interceptors>
-		<mvc:interceptor>			
+		<mvc:interceptor>
+			<mvc:mapping path="/message/*" />
+			<mvc:mapping path="/productList" />
+			
 			<mvc:mapping path="/user/*" />
 			<mvc:exclude-mapping path="/user/regist" />
 			<mvc:exclude-mapping path="/user/companyRegist" />

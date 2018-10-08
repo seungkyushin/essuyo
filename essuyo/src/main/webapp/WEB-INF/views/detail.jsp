@@ -116,11 +116,10 @@
 								
 								 <c:if test="${ !empty sessionScope.login}">
 								<form role="form" method="POST"	action="/comment/writerComment">
+								
 								<div class="customer-review_wrap">
 									<div class="customer-img">
 										<img id="writeUserImage" src="" class="img-fluid comment-image-size" alt="">
-										<p id="writeUserName">이름</p>
-										
 									</div>
 									<div class="customer-content-wrap">
 										<div class="customer-content">
@@ -211,6 +210,8 @@
 				</div>
 			</div>
 		</div>
+
+	
 	</section>
 
 	<script src="resources/js/jquery/jquery-3.2.1.min.js"></script>
@@ -237,16 +238,17 @@
            </div>
            <p class="customer-text">{{content}}</p>
           
-           <ul>
-				{{images}}
-               <li><img src="images/review-img1.jpg" class="img-fluid" alt="#"></li>
-               <li><img src="images/review-img2.jpg" class="img-fluid" alt="#"></li>
-               <li><img src="images/review-img3.jpg" class="img-fluid" alt="#"></li>
-           </ul>
-
            <span>{{helpful}}명이 이 댓글에 도움을 받았습니다.</span>
            <a href="#"><span class="icon-like"></span>Helpful</a>
        </div>
+
+
+		<a href=""> 
+			<i class="ti-pencil-alt"></i>
+		</a>
+		<a href=""> 
+			<i class="icon-trash"></i>
+		</a> 
    </div>
    <hr>
 	</script>
@@ -355,10 +357,7 @@
 							Ajax("GET", requestURL, function(data) {
 								
 								$("#writeUserImage").attr("src",data);
-								
-								$("#writeUserImage").attr("alt","잉");
-								$("#writeUserName").text("홍길동");
-							
+								$("#writeUserImage").attr("alt","사진");
 							});
 				      }
 				      

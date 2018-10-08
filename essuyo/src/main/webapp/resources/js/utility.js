@@ -88,18 +88,25 @@ function ColseMyAlert(){
 	$("#myModal").css("display", "none");
 }
 
-function ImageThumbnail(imageElementId){
+function ImageThumbnail(imageElementId,inputFileId){
 	
-	const elImage = document.querySelector("#imageFile");
+	var elImage = document.querySelector(inputFileId);
 	elImage.addEventListener("change", function(evt){
-	    const image = evt.target.files[0];
-	    if(!valideImageType(image)) { 
-	    	myAlert("ERROR !", "파일이 이미지 타입이 아닙니다.");
-	        return;
-	    }
-	    //이렇게 넣으면 이미지 정보가 화면에 노출됩니다.
-	    const elImage = document.querySelector(imageElementId);
-	    elImage.src = window.URL.createObjectURL(image);
+		var imageCount = evt.target.files.length;
+		
+		for(var i=0; i < imageCount; i++){
+			 var image = evt.target.files[i];
+			 
+			    if(!valideImageType(image)) { 
+			    	myAlert("ERROR !", "파일이 이미지 타입이 아닙니다.");
+			        return;
+			    }
+			    //이렇게 넣으면 이미지 정보가 화면에 노출됩니다.
+			    var test = imageElementId+(i+1);
+			    var elImage = document.querySelector(test);
+			    elImage.src = window.URL.createObjectURL(image);
+		}
+	   
 	});
 	
 }
