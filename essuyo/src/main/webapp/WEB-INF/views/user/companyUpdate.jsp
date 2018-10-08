@@ -60,9 +60,17 @@
 					<div class="col-lg-10 col-xlg-10 col-md-10">
 						<div class="card">
 							<div class="card-body">
-								<h4 class="card-title">사업자 정보 수정</h4>
+								<h4 class="card-title">사업자 정보 입력 및 수정</h4>
 								<h5 class="card-subtitle">요구사항에 따라 빈 칸을 채워주세요</h5>
+								
+								<c:if test="${cvo.id ne 0 || cvo.id ne ''}">
+								<form class="form-horizontal m-t-30" id="registForm" name="registForm" method="post" enctype="multipart/form-data" action="/user/companyModify">
+								</c:if>								
+								<c:if test="${cvo.id eq 0 || cvo.id eq ''}">
 								<form class="form-horizontal m-t-30" id="registForm" name="registForm" method="post" enctype="multipart/form-data" action="/user/companyUpdate">
+								</c:if>
+								
+								
 
 									<div class="form-group">
 										<label>[회사명] </label> <input value="${cvo.name}" type="text" id="name" name="name" class="form-control" placeholder="회사명" required>
@@ -100,7 +108,7 @@
 									</div>
 
 									<div class="form-group">
-										<label>[회사 홈페이지] <span class="help"> 예) www.example.com 혹은, www.example.co.kr</span></label> <input value="${cvo.url }" type="text" id="url" name="url" class="form-control" placeholder="회사 홈페이지" required>
+										<label>[회사 홈페이지] <span class="help"> 예) www.example.com 혹은, www.example.co.kr</span></label> <input value="${cvo.homepage }" type="text" id="homepage" name="homepage" class="form-control" placeholder="회사 홈페이지" required>
 									</div>
 									<div class="form-group">
 										<label>[영업 상태]</label> <select class="custom-select col-12" id="state" name="state" required>
@@ -111,11 +119,20 @@
 									</div>
 
 									<div class="form-group">
-										<label>[회사 이미지 업로드] </label><span class="help"> ※ 이미지는 최소 3장, 최대 12장까지 업로드할 수 있습니다.</span><br>
+										<label>[회사 이미지 업로드] </label><span class="help"> ※1. 이미지는 최소 3장, 최대 12장까지 업로드할 수 있습니다. <c:if test="${cvo.id ne 0 || cvo.id ne ''}"> ※2. 새 이미지를 업로드 하시면 기존 이미지들은 삭제됩니다.</c:if></span><br>
+<!-- 정보를 새로 입력할 때는 required가 달린 input을 보여준다 -->
+										<c:if test="${cvo.id eq 0 || cvo.id eq ''}">
+										<input type="file" multiple="multiple" class="imgsShow" name="imgs"  required accept="image/png, image/jpeg"><br>
 										<input type="file" multiple="multiple" class="imgsShow" name="imgs" required accept="image/png, image/jpeg"><br>
 										<input type="file" multiple="multiple" class="imgsShow" name="imgs" required accept="image/png, image/jpeg"><br>
-										<input type="file" multiple="multiple" class="imgsShow" name="imgs" required accept="image/png, image/jpeg"><br>
-										<button type="button" name="show" id="show" onclick="showMore();">More</button><br>
+										</c:if>
+<!-- 기존 정보를 수정할 때는 required가 없는 input을 보여줘서, 굳이 이미지를 업로드 하지 않아도 되게 한다 -->
+										<c:if test="${cvo.id ne 0 || cvo.id ne ''}">
+										<input type="file" multiple="multiple" class="imgsShow" name="imgs"  accept="image/png, image/jpeg"><br>
+										<input type="file" multiple="multiple" class="imgsShow" name="imgs" accept="image/png, image/jpeg"><br>
+										<input type="file" multiple="multiple" class="imgsShow" name="imgs" accept="image/png, image/jpeg"><br>										
+										</c:if>
+										
 										<input type="file" multiple="multiple" class="imgsHide" name="imgs" accept="image/png, image/jpeg"><br>
 										<input type="file" multiple="multiple" class="imgsHide" name="imgs" accept="image/png, image/jpeg"><br>
 										<input type="file" multiple="multiple" class="imgsHide" name="imgs" accept="image/png, image/jpeg"><br>
@@ -124,15 +141,20 @@
 										<input type="file" multiple="multiple" class="imgsHide" name="imgs" accept="image/png, image/jpeg"><br>
 										<input type="file" multiple="multiple" class="imgsHide" name="imgs" accept="image/png, image/jpeg"><br>
 										<input type="file" multiple="multiple" class="imgsHide" name="imgs" accept="image/png, image/jpeg"><br>
-										<input type="file" multiple="multiple" class="imgsHide" name="imgs" accept="image/png, image/jpeg">
+										<input type="file" multiple="multiple" class="imgsHide" name="imgs" accept="image/png, image/jpeg"><br>
+										<button type="button" name="show" id="show" onclick="showMore();">More</button>
 									</div>
 
 									<div class="form-group">
 										<label>[영업 시간] </label><span class="help"> 예) 09:00 ~ 18:00 혹은, All Time, 상시 영업</span><input value="${cvo.time }" type="text" id="time" name="time" class="form-control" placeholder="영업시간" required>
 									</div>
-
-
-									<button type="submit">정보 수정</button>
+<!-- 컴퍼니 아이디의 존재 여부에 따라 정보 입력과 정보 수정을 나눠서 표시한다 -->
+									<c:if test="${cvo.id eq 0 || cvo.id eq ''}">
+										<button type="submit">정보 입력</button>
+									</c:if>
+									<c:if test="${cvo.id ne 0 || cvo.id ne ''}">
+										<button type="submit" >정보 수정</button>
+									</c:if>
 								</form>
 
 								<!-- Column -->
@@ -177,28 +199,16 @@
 							$(this).hide('fast');//more버튼 숨기기
 
 						});
+						
+						var cvoId = "${cvo.id}";
 
 					});
 
-					function doReg() {
+					function companyModify() {
 
 						if ($("#registForm").valid()) {
-							var url = "/user/companyUpdate";
-							$
-									.post(
-											url,
-											$("#registForm").serialize(),
-											function(data) {
-												if (data == 1) {
-													myAlert("정보 수정 성공",
-															"성공적으로 정보가 수정됐습니다.");
-													document.location.href = "/user/profile";
-												} else {
-													myAlert("정보 수정 실패",
-															"정보 수정에 실패했습니다. 관리자에게 문의해 주세요.");
-													document.location.href = "/user/companyUpdate";
-												}
-											});
+							var url = "/user/companyModify";
+							$.post(url, $("#registForm").serialize());
 						}
 					}
 

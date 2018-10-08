@@ -30,6 +30,14 @@ public class BusinessDao {
 	}
 
 	
+	public void insertEmpty() throws Exception{
+		sqlSession.insert(NAME_SPACE + ".insert");		 
+	}
 	
+	public void insertWithCId() throws Exception{
+		sqlSession.insert(NAME_SPACE+".insertWithCId");
+		
+	}
+
 	
 }

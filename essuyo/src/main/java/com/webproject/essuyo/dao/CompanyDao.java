@@ -46,8 +46,16 @@ public class CompanyDao {
 		return session.selectList(namespace + ".selectRankCompany", param);
 	}
 	
+	//이메일로 컴퍼니 아이디를 얻는 DAO
+	public int selectId() throws Exception{
+		return session.selectOne(namespace+".selectId");
+	}
 	
-	
+	//컴퍼니 이미지 관리 테이블에 입력하는 DAO
+	public void companyImgInsert(int cId) throws Exception{
+		
+		session.insert(namespace+".companyImgInsert", cId);
+	}
 	
 
 }

@@ -2,6 +2,7 @@ package com.webproject.essuyo.service.impl;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -273,5 +274,33 @@ public class UserServiceImpl implements UserService {
 	public void cIdIntoBusiness(UserVO vo) throws Exception {
 		dao.cIdIntoBusiness(vo);
 	}
+	
+	
+	//유저 테이블이 비지니스 아이디를 업데이트 해주는 서비스
+	@Override
+	public void bIdtoUser(UserVO vo) throws Exception {
+		dao.bIdtoUser(vo);
+		
+	}
+
+	//컴퍼니 테이블을 update하는 기능
+	@Override
+	public void companyModify(CompanyVO cvo) throws Exception {
+		dao.companyModify(cvo);
+		
+	}
+
+	@Override
+	public List<Integer> getImgIds(CompanyVO cvo) throws Exception {
+		
+		return dao.getImgIds(cvo);
+	}
+	
+	
+
+	
+
+	
+
 
 }

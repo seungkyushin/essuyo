@@ -2,6 +2,7 @@ package com.webproject.essuyo.dao;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -9,6 +10,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.webproject.essuyo.domain.BusinessVO;
 import com.webproject.essuyo.domain.CompanyVO;
 import com.webproject.essuyo.domain.SQLParamVO;
 import com.webproject.essuyo.domain.UserVO;
@@ -88,7 +90,7 @@ public class UserDAO {
 		map.put("discription", cvo.getDiscription());
 		map.put("address", cvo.getAddress());
 		map.put("number", cvo.getNumber());
-		map.put("url", cvo.getHomepage());
+		map.put("homepage", cvo.getHomepage());
 		map.put("state", cvo.getState());
 		map.put("time", cvo.getTime());
 		map.put("areaListId", cvo.getAreaListId());
@@ -143,9 +145,30 @@ public class UserDAO {
 		return session.update(namespace + ".update", user);
 	}
 
+
 	// 개인별 총 리뷰수
 	public Integer reviewCnt(int userId) throws Exception {
 		return session.selectOne(namespace + ".reviewCnt", userId);
 	}
 
+	//유저 테이블에 비지니스 아이디를 업데이트 해준다
+	public void bIdtoUser(UserVO vo) throws Exception{
+		
+		session.update(namespace+".bIdtoUser", vo.getEmail());
+		
+	}
+	
+	//컴퍼니 테이블을 업데이트하는 기능
+	public void companyModify(CompanyVO cvo) throws Exception{		
+		
+		session.update(namespace+".companyModify", cvo);
+	}
+	
+	//컴퍼니 이미지 테이블의 이미지 아이디들을 얻는 DAO
+	public List<Integer> getImgIds(CompanyVO cvo)throws Exception{
+		int id = cvo.getId();
+		
+		return session.selectList(namespace+".getImgIds", id);
+
+	}
 }

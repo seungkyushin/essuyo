@@ -30,16 +30,29 @@
 		values(#{name},#{email},#{password}, 0, #{age},#{gender}, NOW(), 1);
 	</insert>
 
+
 	<!-- 사업체 회원가입은 LAST_INSERT_ID() 때문에 순서대로 서비스를 실행시키는 게 중요하다 -->
+
+	
+<!-- 	유저 테이블에 비지니스 아이디를 업데이트 해주는 sql문 -->
+	<update id="bIdtoUser">
+	update user set business_id = LAST_INSERT_ID() where email = #{email}
+	</update>
+	
+	
+<!-- 	사업체 회원가입은 LAST_INSERT_ID() 때문에 순서대로 서비스를 실행시키는 게 중요하다 -->
+
 	<!-- 사업체 회원가입용 sql, 컴퍼니 정보를 입력 -->
-	<insert id="companyRegist">
-		insert into company(name, type, discription, address,
-		number, url, state, time)
-		values(#{name}, #{type}, #{discription},
-		#{address}, #{number}, #{url}, #{state}, #{time})
-	</insert>
+	<insert id="companyRegist">	
 	<!-- 비즈니스 테이블에 컴퍼니 아이디 입력 -->
 	<!-- 컴퍼니 레지스트가 실행된 다음에 LAST_INSERT_ID()가 실행되면, 컴퍼니 id가 -->
+
+		insert into company(name, type, discription, address, number, homepage, state, time)
+		values(#{name}, #{type}, #{discription}, #{address}, #{number}, #{homepage}, #{state}, #{time})
+	</insert>	
+	<!-- 	비즈니스 테이블에 컴퍼니 아이디 입력 -->
+<!-- 	컴퍼니 레지스트가 실행된 다음에 LAST_INSERT_ID()가 실행되면, 컴퍼니 id가 -->
+
 	<insert id="businessRegist">
 		insert into business (company_id)
 		values(LAST_INSERT_ID())
@@ -54,18 +67,45 @@
 		LAST_INSERT_ID())
 	</insert>
 
+
 	<!-- 컴퍼니 테이블 수정하는 sql(미완) -->
+
+	
+<!-- 	컴퍼니 테이블 insert하는 기능 -->
+
 	<insert id="companyUpdate">
-		insert into company(name, type, discription, address,
-		number, url, state,
-		time, area_list_id)
-		values(#{name}, #{type},
-		#{discription},
-		#{address}, #{number}, #{url}, #{state}, #{time},
-		#{areaListId})
+	
+	insert into company(name, type, discription, address, number, homepage, state, time, area_list_id)
+		values(#{name}, #{type}, #{discription}, #{address}, #{number}, #{homepage}, #{state}, time, #{areaListId})
+
 	</insert>
 
+
 	<!-- companyUpdate 컴퍼니 insert 다음에 바로 실행시켜서, 비즈니스 테이블에 컴퍼니 아이디를 넣어준다 -->
+
+	
+<!-- 	컴퍼니 테이블 update 하는 기능 -->
+	<update id="companyModify">
+	update company set
+	name = #{name},
+	type = #{type},
+	discription = #{discription},
+	address = #{address},
+	number = #{number},
+	homepage = #{homepage},
+	state = #{state},
+	time = #{time},
+	area_list_id = #{areaListId}
+	where id = #{id}
+	</update>
+	
+<!-- 	컴퍼니 이미지 테이블에서 이미지 아이디들을 얻는 sql -->
+	<select id="getImgIds" resultType="Integer">
+	select image_info_id from company_image_admin where company_id = #{id}
+	</select>
+	
+<!-- 	companyUpdate 컴퍼니 insert 다음에 바로 실행시켜서, 비즈니스 테이블에 컴퍼니 아이디를 넣어준다 -->
+
 	<update id="cIdIntoBusiness">
 		update business set company_id = LAST_INSERT_ID()
 		where id = #{businessId}

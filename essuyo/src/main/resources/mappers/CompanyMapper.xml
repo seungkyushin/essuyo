@@ -147,6 +147,16 @@ FROM company WHERE id = #{companyId};
 			</when>
 		</choose>
 	</select>
+	
+<!-- 	LAST_INSERT_ID로 비즈니스 테이블에서 컴퍼니 아이디를 선택하는 sql문 -->
+	<select id="selectId" resultType="java.lang.Integer">
+	select LAST_INSERT_ID()
+	</select>
+	
+<!-- 	컴퍼니 이미지 관리 테이블에 입력하는 sql문 -->
+	<insert id="companyImgInsert">
+	insert into company_image_admin(company_id, image_info_id) values(#{companyId}, LAST_INSERT_ID())
+	</insert>
 
 
 </mapper>

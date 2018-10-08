@@ -19,5 +19,23 @@ public class BusinessServiceImpl implements BusinessService {
 		
 		return bdao.selectById(id);
 	}
+	
+	
+	//비어있는 비지니스 테이블을 생성
+	
+	@Override
+	public void insertEmpty() throws Exception {
+		
+		bdao.insertEmpty();
+	}
+
+
+	@Override
+	public void insertWithCId() throws Exception {
+		bdao.insertWithCId();
+		
+	}
+
+	
 
 }
