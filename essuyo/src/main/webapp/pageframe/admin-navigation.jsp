@@ -8,8 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" type="image/png" sizes="16x16" href="../resources/images/favicon.png">
-    <title>프로필</title>
+       <title>프로필</title>
     <link href="../resources/css/style.min.css" rel="stylesheet">
     <link href="../resources/css/style.css" rel="stylesheet">
     <link rel="stylesheet" href="../resources/css/simple-line-icons.css">
@@ -30,39 +29,16 @@
                                  <img src="/resources/images/logo-icon.png" alt="homepage" class="dark-logo" />
                                  <img src="/resources/images/logo-light-icon.png" alt="homepage" class="light-logo" />
                             </b>
-
                             <span class="logo-text">
-                                <img src="/resources/images/logo-text.png" alt="homepage" class="dark-logo" />
-                                <img src="/resources/images/logo-light-text.png" class="light-logo" alt="homepage" />
+                                		메인으로
                             </span>
                         </a>
-                    </div>
+                    </div> 
                     <a class="topbartoggler d-block d-md-none waves-effect waves-light" href="javascript:void(0)" data-toggle="collapse" data-target="#navbarSupportedContent"
                         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <i class="ti-more"></i>
                     </a>
                 </div>
-<!-- 
-                <div class="navbar-collapse collapse" id="navbarSupportedContent" data-navbarbg="skin6">
-    
-                    <ul class="navbar-nav float-left mr-auto">
-                       	<li class="nav-item search-box">
-                        </li>
-                    </ul>
-          
-                    <ul class="navbar-nav float-right">
- 
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="/resources/images/users/1.jpg" alt="user" class="rounded-circle" width="31"></a>
-                            <div class="dropdown-menu dropdown-menu-right user-dd animated">
-                                <a class="dropdown-item" href="javascript:void(0)"><i class="ti-user m-r-5 m-l-5"></i> My Profile</a>
-                                <a class="dropdown-item" href="javascript:void(0)"><i class="ti-wallet m-r-5 m-l-5"></i> My Balance</a>
-                                <a class="dropdown-item" href="javascript:void(0)"><i class="ti-email m-r-5 m-l-5"></i> Inbox</a>
-                            </div>
-                        </li>
-       
-                    </ul>
-                </div> -->
             </nav>
         </header>
         
@@ -100,7 +76,7 @@
                           </li>
                           
                            <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/productList" aria-expanded="false">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/product/admin" aria-expanded="false">
                                 <i class="icon-social-dropbox"></i>
                                 <span class="hide-menu">상품관리</span>
                             </a>
@@ -114,20 +90,13 @@
                             </a>
                         </li>
                         
-                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/form" aria-expanded="false">
-                                <i class="mdi mdi-arrange-bring-forward"></i>
-                                <span class="hide-menu">Form Basic</span>
+                          <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/logout" aria-expanded="false">
+                                <i class="icon-logout"></i>
+                                <span class="hide-menu">로그 아웃</span>
                             </a>
                         </li>
-                      
-                        <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/table" aria-expanded="false">
-                                <i class="mdi mdi-border-none"></i>
-                                <span class="hide-menu">Table</span>
-                            </a>
-                        </li>
-                     </ul>
+                      </ul>
                 </nav>
             </div>
         </aside>

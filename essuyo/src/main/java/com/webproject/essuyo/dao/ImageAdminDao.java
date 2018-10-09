@@ -2,6 +2,7 @@ package com.webproject.essuyo.dao;
 
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +39,14 @@ public class ImageAdminDao {
 	
 	public int delete(int id) throws Exception{
 		return sqlSession.delete(NAME_SPACE + ".delete" , id);
+	}
+	
+	public int insertAdminProduct(Map<String,Object> param) throws Exception{
+		return sqlSession.insert(NAME_SPACE + ".insertAdminProduct" , param);
+	}
+	
+	public int insertAdminCompany(Map<String,Object> param) throws Exception{
+		return sqlSession.insert(NAME_SPACE + ".insertAdminCompany" , param);
 	}
 	
 	

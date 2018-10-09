@@ -71,7 +71,11 @@ public class UserServiceImpl implements UserService {
 
 		return dao.selectByEmail(email);
 	}
-
+	@Override
+	public UserVO getUserVO(int id) {
+		return dao.selectById(new SQLParamVO("user",id));
+	}
+	
 	@Override
 	public Map<String, Object> getUserInfo(String email) {
 
@@ -137,10 +141,12 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	@Transactional
-	public int setGoodCount(String email) {
-		UserVO user = dao.selectByEmail(email);
+	public int setGoodCount(int businessId) {
 		try {
-			return businessDao.updateGoodCountByBusinessId(user.getBusinessId());
+				if( businessDao.updateGoodCountByBusinessId(businessId) != 0) {
+					return businessDao.selectById(businessId).getGood();
+				}
+			return 0;
 		} catch (Exception e) {
 			logger.error("비지니스 조회 오류.. {} ", e.toString());
 			return 0;
@@ -184,7 +190,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	@Transactional
-	public boolean businessTest(String email) {
+	public boolean addBusiness(String email) {
 
 		try {
 			//< 비지니스 생성

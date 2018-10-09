@@ -281,9 +281,6 @@
 								</div>		
 </div>			
 </script>
-
-
-	<!-- Map JS (Please change the API key below. Read documentation for more info) -->
 	 <script src="https://maps.googleapis.com/maps/api/js?callback=myMap&key=AIzaSyB_SsV7PnpCZxu2cphySVYNkiKehtF_ogY"></script>
 </body>
 

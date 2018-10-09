@@ -63,6 +63,6 @@ public class CommentController {
 		
 		service.writerComment(comment);
 		
-		return "redirect:/detail?id=" + comment.getCompanyId();
+		return "redirect:/company/detail?id=" + comment.getCompanyId();
 	}
 }

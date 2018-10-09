@@ -10,7 +10,6 @@ import org.springframework.stereotype.Repository;
 
 import com.webproject.essuyo.domain.ProductManagerVO;
 import com.webproject.essuyo.domain.ProductVO;
-import com.webproject.essuyo.domain.SQLParamVO;
 
 @Repository
 public class ProductDao { 
@@ -26,6 +25,10 @@ public class ProductDao {
 	
 	public List<ProductVO> selectByCompanyId(int id) throws Exception{
 		return sqlSession.selectList(NAME_SPACE + ".selectByCompanyId" , id);
+	}
+	
+	public int insert(ProductVO param) throws Exception{
+		return sqlSession.insert(NAME_SPACE + ".insert" , param);
 	}
 	
 	public ProductVO update(ProductVO product) throws Exception{
@@ -44,9 +47,16 @@ public class ProductDao {
 		return sqlSession.insert(NAME_SPACE + ".insertManager" , param);
 	}
 	
+	public int insertManager(List<ProductManagerVO> param) throws Exception{
+		return sqlSession.insert(NAME_SPACE + ".insertManager" , param);
+	}
+	
 	public int updateManager(ProductManagerVO param) throws Exception{
 		return sqlSession.update(NAME_SPACE + ".updateManager" , param);
 	}
 
+	public int insertAdmin(Map<String,Integer> param) throws Exception{
+		return sqlSession.insert(NAME_SPACE + ".insertAdmin" , param);
+	}
 
 }

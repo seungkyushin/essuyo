@@ -106,15 +106,13 @@ public class RestApiController {
 
 	}
 	
-	@GetMapping("/good")
-	public Integer setGoodCount(HttpSession httpSeesion){
+	@GetMapping("/good/{userId}")
+	public Integer setGoodCount(@PathVariable int userId, HttpSession httpSeesion){
 
 		String email = (String)httpSeesion.getAttribute("login");
 		
-		int result = userService.setGoodCount(email);
-		
-		if( result != 0) {
-			return result;
+		if( email != null ) {
+			return userService.setGoodCount(userService.getUserVO(userId).getBusinessId());
 		}
 		return 0;
 	}

@@ -73,7 +73,8 @@
 							
 							<c:forEach items="${product.url}" var="item">
 							 	<div class="swiper-slide">
-								<a href="${item}" class="grid image-link"> 
+							 	
+								<a href="${item}" class="grid image-link">  
 									<img src="${item}" class="img-fluid" alt="#">
 								</a>
 							</div>
@@ -91,39 +92,27 @@
 			</div>
 			
 			<hr>
-			<form id="reservation-info" action="./reserve" method="POST">
+			<form id="reservation-info" action="/product/reserve" method="POST">
 			
 			<div class="row">
-				
-				<%-- <div class="col-md-6 responsive-wrap">
-						<img src="${product.image.url}" class="img-fluid"	alt="${product.image.name}">
-				</div> --%>
 			 
 			 	<div class="col-md-8 responsive-wrap">
 					
-							<input type="hidden" id="companyId" name="CompanyId" value="1">
+							<input type="hidden" id="companyId" name="companyId" value="${company.id}">
 							<input type="hidden" id="productId" name="productId" value="${product.id}" >
-							
+						
 							
 							<div id="item" class="booking-checkbox_wrap">	
 								<div class="row">
 									<div class="col-md-12">
-										<label class="custom-checkbox"> <span
-												class="ti-check-box"></span> <span
-												class="custom-control-description">NONE</span>
-										</label>
-									</div>
-	
-							
-									<div class="col-md-12">
 										<p style="font-size:20px"><span class="icon-bulb"></span>&nbsp;&nbsp;예약 날짜</p>
 											<c:choose>
-												<c:when test="${companyType == '호텔' or companyType == '렌트카'}">
+												<c:when test="${company.type == '호텔' or company.type == '렌트카'}">
 													<input style="border-right:none; width: 48%;" type="text" name="resDate" id="startDate" class="input-border" readOnly>
                                     			    <input style="border-left:none; width: 48%;" type="text" id="endDate"  class="input-border" readOnly>
  
 												</c:when>
-												<c:when test="${companyType == '식당' or companyType == '박물관'}">
+												<c:when test="${company.type == '식당' or compan.type == '박물관'}">
 														<input type="text"  name="resDate" id="startDate" placeholder="날짜선택" class="input-border" readOnly>
 														<br><br>
 														<p style="font-size:20px"><span class="icon-bulb"></span>&nbsp;&nbsp;수량</p>
@@ -146,14 +135,14 @@
 								<p>예약 날짜</p>
 						
 								<c:choose>
-									<c:when test="${companyType == '호텔' or companyType == '렌트카'}">
+									<c:when test="${company.type == '호텔' or company.type == '렌트카'}">
 										<p><div class= "toggle-string" style="display:none">
 											<span id="reservation-date"></span><br>
 											<input type="text" size="1" style=" text-align:center; border:none" id="productCount" name="productCount"  readOnly>
 											<span>박</span>
 										</div></p>
 									</c:when>
-									<c:when test="${companyType == '식당' or companyType == '박물관'}">
+									<c:when test="${company.type == '식당' or company.type == '박물관'}">
 										<p><div class= "toggle-string" style="display:none">
 											<span id="reservation-date"></span><br>
 											<input type="text" size="2" style=" text-align:center; border:none" id="productCount" name="productCount"  readOnly>
@@ -173,7 +162,7 @@
 								</div>
 							</div>
 					
-							<a id="res-submit" href="javascript:void(0)" class="btn btn-outline-danger btn-contact">결제하기</a>
+							<a id="res-submit" href="javascript:void(0)" class="btn btn-outline-danger btn-contact">예약하기</a>
 						</div>
 				</div>
 			
@@ -245,7 +234,7 @@ var disabledDays = [];
 
 $(document).ready(function() {
 		
-			Ajax("GET","api/disableDate/" + ${product.id},function(data){
+			Ajax("GET","/api/disableDate/${product.id}", function(data){
 				disabledDays = data;
 			});
 			
@@ -255,7 +244,7 @@ $(document).ready(function() {
 					maxDate : new Date("${product.saleEndDate}"),
 					beforeShowDay: disableAllTheseDays,
 					onSelect : function(dateText, inst) {
-						 calReserveReuslt();
+						 calReserveResult();
 					}
 			});
 
@@ -265,7 +254,7 @@ $(document).ready(function() {
 					maxDate : new Date("${product.saleEndDate}"),
 					beforeShowDay: disableAllTheseDays,
 					onSelect : function(dateText, inst) {
-						calReserveReuslt();
+						calReserveResult();
 					}
 			});
 
@@ -296,23 +285,18 @@ $(document).ready(function() {
 			
 			$("#res-submit").on("click", function() {
 				
-				if("${sessionScope.login}" == ""){
-					alert("로그인 후 이용가능한 서비스입니다.\n로그인 페이지로 이동합니다.");
-					location.href = "/user/login";
-				}
-				
 				var productCount = $("#productCount").val();
 				var agree = $('input:checkbox[id="customCheck1"]').is(":checked");
 
 				if(productCount != "" && agree == true){
 					  $("#reservation-info").submit();
 				}else{
-					if( productCount == "" && agree == false)
-						alert("날짜,수량 선택 및 취소규정에 동의해 주세요");
+					if( productCount == "" && agree == false )
+						myAlert("INFOMATION !","날짜,수량 선택 및 취소규정에 동의해 주세요");
 					else if( agree == false )
-						alert("취소규정에 동의해 주세요");
+						myAlert("INFOMATION !","취소규정에 동의해 주세요");
 					else if( productCount == "" )
-						alert("하루이상 날짜 혹은 수량을 선택해 주세요");
+						myAlert("INFOMATION !","하루이상 날짜 혹은 수량을 선택해 주세요");
 				}
 			});
 			
@@ -346,28 +330,61 @@ $(document).ready(function() {
 				
 			$('#cancel').slideToggle();
 		}
-		function calReserveReuslt(){
+		function checkDate(startDate, endDate){
+			
+			var listDate = [];
+			var returnType = true;
+			getDateRange(startDate, endDate, listDate);
+		
+			listDate.forEach(function(data){
+				
+				
+				for (i = 0; i < disabledDays.length; i++) {
+				      if(data == disabledDays[i]) {
+				    	  	returnType = false;
+			           	 	break;
+		   		  		}
+				}
+			});
+			return returnType;
+			
+		}
+		function calReserveResult(){
 			
 			var startDate = $("#startDate").val();
 			var endDate = $("#endDate").val();
 			
+			
+			
+			
+								
 			if( startDate != "" && endDate != undefined && endDate != ""){
+				
+				if( checkDate(startDate,endDate) == false){
+					$("#startDate").val("");
+					$("#endDate").val("");
+					myAlert("IMFOMATION !","연속된 날짜여야만 예약이 가능합니다.\n예약날짜 중간에 예약불가 날짜가 있습니다.");
+					return;
+				}
+				
 				var count = calDayCount(startDate,endDate);
 				if( count > 0){
 					$(".toggle-string").show();
 					$(".toggle-string2").show();
 					
-					$("#reservation-date").text(startDate + " - " + endDate);
+					$("#reservation-date").text(startDate + " ~ " + endDate);
 					$("#productCount").val(count);
 			
 					calTotalPrice(count);
 				}else if( count < 0 ){
-					alert("종료 날짜보다 시작날짜가 클수 없습니다.");
+					myAlert("WARRNING !","종료 날짜보다 시작날짜가 클수 없습니다.");
+					$("#startDate").val("");
+					$("#endDate").val("");
 					$("#productCount").val("");
 					$(".toggle-string").hide();
 				}
 				else{
-					alert("1박이상 선택해주세요");
+					myAlert("WARRNING !","1박이상 선택해주세요");
 					$("#productCount").val("");
 					$(".toggle-string").hide();
 				}

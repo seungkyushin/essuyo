@@ -19,4 +19,8 @@ public interface ImageAdminService {
 	
 	public int uploadFile(MultipartFile file);
 	public boolean deleteFile(String filePath, int imageInfoId) throws Exception;
+	
+	
+	public void addImageAdminProduct(int productId, int imageInfoId) throws Exception;
+	
 }

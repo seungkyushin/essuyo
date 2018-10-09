@@ -4,7 +4,9 @@ package com.webproject.essuyo.service;
 import java.util.List;
 import java.util.Map;
 
-import com.webproject.essuyo.domain.ProductManagerVO;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.webproject.essuyo.domain.ProductVO;
 
 
 public interface ProductService {
@@ -14,9 +16,9 @@ public interface ProductService {
 	
 	public List<Map<String,Object>> getProductList(int companyId);
 	
-	public int addProduct(ProductManagerVO productManager);
+	public int addProduct(ProductVO product, int productCount, int companyId, List<MultipartFile> imageList);
 	
-	public int updateProduct(ProductManagerVO productManager);
+	public int updateProduct(ProductVO product, List<MultipartFile> imageList);
 	
 
 	public List<String> getImagePath(int productId);

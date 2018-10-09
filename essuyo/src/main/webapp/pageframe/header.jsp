@@ -1,48 +1,34 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
-
 <html>
-
 <head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="author" content="Colorlib">
-<meta name="description" content="자리있어요?">
-<meta name="keywords" content="이써요">
-
-<link rel="shortcut icon" href="#">
-<title>자리 있어요?</title>
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
-	crossorigin="anonymous">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+KR">
-<link rel="stylesheet" href="/resources/css/simple-line-icons.css">
-<link rel="stylesheet" href="/resources/css/themify-icons.css">
-<link rel="stylesheet" href="/resources/css/set1.css">
-<link rel="stylesheet" href="/resources/css/swiper.min.css">
-<link rel="stylesheet" href="/resources/css/magnific-popup.css">
-<link rel="stylesheet" href="/resources/css/style.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.34.7/css/bootstrap-dialog.min.css">
-
+	<title>자리 있어요?</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport"	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+KR">
+	<link rel="stylesheet"
+		href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+		integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+		crossorigin="anonymous">
+	<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/resources/css/simple-line-icons.css">
+	<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/resources/css/themify-icons.css">
+	<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/resources/css/style.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.34.7/css/bootstrap-dialog.min.css">
+	<link rel="icon" type="image/png" sizes="16x16" href="../resources/images/favicon.png">
 </head>
 <body>
-
-
-
     <div class="dark-bg sticky-top">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
+                
                     <nav class="navbar navbar-expand-lg navbar-light">
-                        <a class="navbar-brand" href="/"><img src=""/></a>
+                        <a class="navbar-brand" href="/"><img style="width:50px;height:50px"src="${pageContext.servletContext.contextPath}/resources/images/backpack.png"/></a>
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="icon-menu"></span>
-            </button>
+            				  <span class="icon-menu"></span>
+           				 </button>
                         <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
                             <ul class="navbar-nav">
 								<li class="nav-item">
@@ -70,10 +56,9 @@
 									</c:when>
 
 									<c:when test="${ !empty sessionScope.login }">
-										<div class="navbar-collapse collapse" id="navbarSupportedContent" data-navbarbg="skin6">
-
-											<ul class="navbar-nav float-right">
-
+									<li class="nav-item">
+										<ul class="navbar-nav">
+											
 												<li class="nav-item dropdown">
 												<a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic"
 													href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -90,18 +75,20 @@
 															<a class="dropdown-item" href="/user/dashboardCompany">
 																<i class="icon-chart m-r-5 m-l-5"></i> 개인사업장 종합화면</a> 
 														</c:if>
-
+														
+															<a class="dropdown-item" href="/message/listPage"> 
+															<i class="icon-envelope-open"></i> 메시지 </a>
 
 													<a class="dropdown-item" href="/logout">
 														<i class="icon-logout m-r-5 m-l-5"></i> 로그아웃</a> 
-														
 													</div>
 												</li>
-											
+									
 											</ul>
-										</div>
-
+										
+										</li>
 									</c:when>
+								
 								</c:choose>
 							</ul>
 						</div>
@@ -115,7 +102,7 @@
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <script src="../resources/js/utility.js"></script>
+  <script src="${pageContext.servletContext.contextPath}/resources/js/utility.js"></script>
   	
 
 <div class="overlay"></div>

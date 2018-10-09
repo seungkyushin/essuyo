@@ -22,7 +22,7 @@ public class BusinessDao {
 	}
 	
 	public int updateGoodCountByBusinessId(int id) throws Exception{
-		return sqlSession.selectOne(NAME_SPACE + ".updateGoodCount" , id);
+		return sqlSession.update(NAME_SPACE + ".updateGoodCount" , id);
 	}
 
 	public int insert(BusinessVO param) throws Exception{

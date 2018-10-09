@@ -6,7 +6,7 @@
 <mapper namespace="mappers.Reservation">
 
 
-<insert id="insert" parameterType="ReservationVO">
+<insert id="insert" parameterType="ReservationVO" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
 INSERT INTO reservation
 (state, product_type, total_price, res_date, product_count, reg_date, company_id, product_id, user_id) 
 VALUES(#{state}, #{productType}, #{totalPrice}, #{resDate}, #{productCount}, NOW(),#{companyId},#{productId},#{userId});

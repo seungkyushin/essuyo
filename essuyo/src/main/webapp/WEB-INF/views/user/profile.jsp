@@ -148,7 +148,7 @@
 												<li><span class="icon-screen-smartphone"></span>
 													<p>${company.number}</p></li>
 												<li><span class="icon-link"></span>
-													<p>${company.url}</p></li>
+													<p>${company.homepage}</p></li>
  											</ul>
 											<div class="bottom-icons">
 										<c:choose>

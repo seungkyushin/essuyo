@@ -39,6 +39,20 @@
 		
     </insert>
     
+    <insert id="insertAdminProduct" parameterType="HashMap">
+			INSERT INTO product_image_admin(product_id,image_info_id) VALUES ( #{productId}, #{imageInfoId} )
+    </insert> 
+    
+      <insert id="insertAdminCompany" parameterType="HashMap">
+   	
+			  	INSERT INTO company_iamge_Admin(company_id,image_info_id)
+    			VLAUES
+    			<foreach collection="param" item="item" separator=",">
+      	  			( #{company_id}, #{param.id} )
+        		</foreach>
+	</insert>
+  
+    
      <delete id="delete" parameterType="Integer">
 		DELETE FROM image_info WHERE id = #{id}		
     </delete>

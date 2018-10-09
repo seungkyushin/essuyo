@@ -3,7 +3,9 @@ package com.webproject.essuyo.service.impl;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import org.slf4j.Logger;
@@ -24,9 +26,10 @@ public class ImageAdminServieImpl implements ImageAdminService {
 
 	@Autowired
 	private ImageAdminDao imageAdminDao;
+	
 
 	private Logger logger = LoggerFactory.getLogger(ImageAdminServieImpl.class);
-	private String UPLOAD_PATH = "C:\\Users\\Administrator\\git\\essuyo\\essuyo\\src\\main\\webapp\\resources\\images\\upload";
+	private String UPLOAD_PATH = "C:\\Users\\kyu\\git\\essuyo\\essuyo\\src\\main\\webapp\\resources\\images\\upload";
 
 	@Override
 	public ImageInfoVO getImageInfo(int imageInfoid) {
@@ -93,6 +96,18 @@ public class ImageAdminServieImpl implements ImageAdminService {
 		imageAdminDao.insert(imageInfo);
 		return imageInfo.getId();
 	}
+	
+	@Override
+	public void addImageAdminProduct(int productId, int imageInfoId) throws Exception {
+		
+		Map<String,Object> param = new HashMap<>();
+		param.put("productId", productId);
+		param.put("imageInfoId", imageInfoId);
+		
+		imageAdminDao.insertAdminProduct(param);
+
+	}
+
 
 	@Override
 	public int deleteImageInfo(int id) {
