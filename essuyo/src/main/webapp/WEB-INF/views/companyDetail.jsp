@@ -1,26 +1,19 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-
 <head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="author" content="Colorlib">
-<meta name="description" content="자리있어요?">
-<meta name="keywords" content="이써요">
-<link rel="shortcut icon" href="#">
-<title>자리 있어요?</title>
-<link rel="stylesheet" href="resources/css/bootstrap/bootstrap.min.css">
-<link rel="stylesheet" href="resources/css/simple-line-icons.css">
-<link rel="stylesheet" href="resources/css/themify-icons.css">
-<link rel="stylesheet" href="resources/css/set1.css">
-<link rel="stylesheet" href="resources/css/swiper.min.css">
-<link rel="stylesheet" href="resources/css/magnific-popup.css">
-<link rel="stylesheet" href="resources/css/style.css">
-<link rel="stylesheet" href="resources/css/tab.css">
+	<title>자리 있어요?</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="stylesheet" href="/resources/css/bootstrap/bootstrap.min.css">
+	<link rel="stylesheet" href="/resources/css/simple-line-icons.css">
+	<link rel="stylesheet" href="/resources/css/themify-icons.css">
+	<link rel="stylesheet" href="/resources/css/set1.css">
+	<link rel="stylesheet" href="/resources/css/swiper.min.css">
+	<link rel="stylesheet" href="/resources/css/magnific-popup.css">
+	<link rel="stylesheet" href="/resources/css/style.css">
+	<link rel="stylesheet" href="/resources/css/tab.css">
 </head>
 <body>
 
@@ -33,8 +26,8 @@
 			<div class="swiper-wrapper">
 				<c:forEach items="${company.image}" var="imageUrl">
 					<div class="swiper-slide">
-						<a href="${imageUrl}" class="grid image-link"> <img
-							src="${imageUrl}" class="img-fluid" alt="#">
+						<a href="${imageUrl}" class="grid image-link"> 
+							<img src="${imageUrl}" class="img-fluid" alt="#">
 						</a>
 					</div>
 				</c:forEach>
@@ -58,7 +51,7 @@
 				<div class="col-md-6">
 					<div class="reserve-seat-block">
 						<div class="reserve-rating">
-							<span>${score}</span>
+							<span>${company.score}</span>
 						</div>
 					</div>
 				</div>
@@ -70,7 +63,7 @@
 
 	<div class="container">
 		<ul class="tabs">
-			<li class="tab-link current" data-tab="tab-1">정보</li>
+			<li class="tab-link current" data-tab="tab-1">판매 상품</li>
 			<li class="tab-link" data-tab="tab-2">댓글</li>
 		</ul>
 	</div>
@@ -83,11 +76,6 @@
 
 					<div id="tab-1" class="tab-content current">
 						<div class="booking-checkbox_wrap">
-							<div class="booking-checkbox">
-								<p>${company.discription}</p>
-								<hr>
-							</div>
-
 							<div class="row">
 								<c:forEach var="item" items="${company.facility}">
 									<div class="col-md-4">
@@ -158,7 +146,8 @@
 				</div>
 				<div class="col-md-4 responsive-wrap">
 					<div class="contact-info">
-						<img src="resources/images/map.jpg" class="img-fluid" alt="#">
+						<div id="map" style="width:100%;height:400px;"></div>
+
 						<div class="address">
 							<span class="icon-location-pin"></span>
 							<p>${company.address}</p>
@@ -199,11 +188,11 @@
 						<ul class="social-counts">
 							<li></li>
 							<li>
-								<h6>${user.good}</h6> <span>좋아요</span>
+								<h6 id="good-count">${user.good}</h6> <span>좋아요</span>
 							</li>
 							<li></li>
 						</ul>
-						<a href="api/good">좋아요!</a>
+						<a href="javascript:gootCount()">좋아요!</a>
 					</div>
 				</div>
 			</div>
@@ -211,14 +200,15 @@
 
 	
 	</section>
-
-	<script src="resources/js/jquery/jquery-3.2.1.min.js"></script>
-	<script src="resources/js/popper/popper.min.js"></script>
-	<script src="resources/js/bootstrap/bootstrap.min.js"></script>
-	<script src="resources/js/jquery/jquery.magnific-popup.js"></script>
-	<script src="resources/js/swiper.min.js"></script>
-	<script src="resources/js/utility.js"></script>
-	<script src="resources/js/handlebars.min.js"></script>
+	<script src="/resources/js/jquery/jquery-3.2.1.min.js"></script>
+	<script src="/resources/js/popper/popper.min.js"></script>
+	<script src="/resources/js/bootstrap/bootstrap.min.js"></script>
+	<script src="/resources/js/jquery/jquery.magnific-popup.js"></script>
+	<script src="/resources/js/swiper.min.js"></script>
+	<script src="/resources/js/utility.js"></script>
+	<script src="/resources/js/handlebars.min.js"></script>
+	
+	
 	<script type="template" id="comment-template">
 	   <div class="customer-review_wrap">
        <div class="customer-img">
@@ -254,8 +244,9 @@
 	<script type="template" id="product-template">
 	<div class="booking-checkbox_wrap">
 	<div class="featured-place-wrap">
-		<a href="/reservation?company={{companyId}}&product={{productId}}"> 
-			<img src="{{url}}" class="img-fluid" alt="#"> <span class="featured-rating">{{totalCount}}</span>
+		<a href="/product/reservation?company={{companyId}}&product={{productId}}"> 
+			<img src="{{url}}" class="img-fluid company-image-size" alt="#">
+				 <span class="featured-rating-green"><i class="icon-check"></i></span>
 			<div class="featured-title-box">
 				<h6>{{name}}</h6>
 				<i class="icon-direction"></i><p> {{discription}}</p>
@@ -338,7 +329,7 @@
 							tempData['url'] = data.url[0];
 							tempData['name'] = data.name;
 							tempData['discription'] = data.discription;
-							tempData['saleDate'] = data.saleStartDate + "-"
+							tempData['saleDate'] = data.saleStartDate + " ~ "
 									+ data.saleEndDate;
 							tempData['state'] = data.state;
 							tempData['price'] = dotSplit(data.price);
@@ -349,17 +340,7 @@
 
 					});
 
-<<<<<<< HEAD
-					if ("" != "${sessionScope.login}") {
-						requestURL = "/api/loginImage";
-						Ajax("GET", requestURL, function(data) {
-							$("#writeUserImage").attr("src", data);
-							$("#writeUserImage").attr("alt", "잉");
-							$("#writeUserName").text("홍길동");
-=======
-					
-					
-				      if( "" != "${sessionScope.login}" ){
+					if( "" != "${sessionScope.login}" ){
 				    		requestURL = "/api/loginImage";
 							Ajax("GET", requestURL, function(data) {
 								
@@ -367,12 +348,7 @@
 								$("#writeUserImage").attr("alt","사진");
 							});
 				      }
-				      
 				
->>>>>>> refs/heads/kyu
-
-						});
-					}
 
 					requestURL = "/api/commentList/company/" + 1 + "/" + ${company.id};
 					Ajax("GET", requestURL, function(dataList) {
@@ -395,8 +371,64 @@
 					});
 
 				});
+		
+		
+		function gootCount(){
+			Ajax("GET", "/api/good/${user.id}", function(data) {
+				$("#good-count").text(data);
+			});
+
+			
+		}
 	</script>
 
+	
+<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=YkyfY8yLi0st2FbjVXIG&callback=initMap&submodules=geocoder"></script>
+
+<script>
+var map = new naver.maps.Map("map", {
+    center: new naver.maps.LatLng(37.3595316, 127.1052133),
+    zoom: 10,
+    mapTypeControl: true
+});
+
+var infoWindow = new naver.maps.InfoWindow({
+    anchorSkew: true
+});
+
+map.setCursor('pointer');
+
+// result by latlng coordinate
+function searchAddressToCoordinate(address) {
+    naver.maps.Service.geocode({
+        address: address
+    }, function(status, response) {
+        if (status === naver.maps.Service.Status.ERROR) {
+            return myAlert('ERROR !' ,"찾을 수 없는 주소 입니다!");
+        }
+
+        
+        var item = response.result.items[0],
+            addrType = item.isRoadAddress ? '[도로명 주소]' : '[지번 주소]',
+            point = new naver.maps.Point(item.point.x, item.point.y);
+             infoWindow.setContent([
+            	  '<div class="iw_inner">',
+                  '<h3>${company.name}</h3>',
+                  '<p>' + item.addrdetail.sido + '</p>',
+                  '<p>${company.homepage}</p>',
+                  '</div>'
+            ].join(''));
+
+        map.setCenter(point);
+        infoWindow.open(map, point);
+    });
+}
+function initGeocoder() {
+    searchAddressToCoordinate('${company.address}');
+}
+
+naver.maps.onJSContentLoaded = initGeocoder;
+ </script>
 
 
 	<%@ include file="/pageframe/footer.jsp"%>

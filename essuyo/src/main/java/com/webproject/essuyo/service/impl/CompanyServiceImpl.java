@@ -56,6 +56,7 @@ public class CompanyServiceImpl implements CompanyService {
 			resultMap.put("address", company.getAddress());
 			resultMap.put("number", company.getNumber());
 			resultMap.put("state", company.getState());
+			resultMap.put("time", company.getTime());
 			resultMap.put("homepage", company.getHomepage());
 
 			return resultMap;

@@ -999,6 +999,11 @@ input.error {
 }
 
 .comment-image-size{
-	 width: 78px; 
-	 height: 78px;
+	 max-width: 78px; 
+	 max-height: 78px;
+}
+
+.company-image-size{
+	 max-width: 519px; 
+	 max-height: 366px;
 }

@@ -68,8 +68,8 @@ function Ajax(method,requestUrl,success){
 		type : method,
 		url : requestUrl,
 		success : success,
-		error : function(error){
-			alert("Ajax error : " + error);
+		error : function(request,error){
+			alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 		}
 	});
 }
@@ -91,8 +91,35 @@ function ColseMyAlert(){
 function ImageThumbnail(imageElementId,inputFileId){
 	
 	var elImage = document.querySelector(inputFileId);
+		elImage.addEventListener("change", function(evt){
+		 var image = evt.target.files[0];
+		    if(!valideImageType(image)) { 
+		    	myAlert("ERROR !", "파일이 이미지 타입이 아닙니다.");
+		        return;
+		    }
+		    
+	    //이렇게 넣으면 이미지 정보가 화면에 노출됩니다.
+	    var elImage = document.querySelector(imageElementId);
+	    elImage.src = window.URL.createObjectURL(image);
+
+	});
+}
+
+function ImageThumbnailCount(imageElementId,inputFileId,minCount,maxCount){
+	
+	var elImage = document.querySelector(inputFileId);
 	elImage.addEventListener("change", function(evt){
 		var imageCount = evt.target.files.length;
+		
+		if( minCount > imageCount ){
+			myAlert("WARRING !","최소 3개이상 선택해주세요");
+			elImage.value="";
+			return;
+		}else if( maxCount < imageCount){
+			myAlert("WARRING !","최대 "+ maxCount +"개이상 선택 할 수 없습니다.");
+			elImage.value="";
+			return;
+		}
 		
 		for(var i=0; i < imageCount; i++){
 			 var image = evt.target.files[i];
@@ -102,8 +129,7 @@ function ImageThumbnail(imageElementId,inputFileId){
 			        return;
 			    }
 			    //이렇게 넣으면 이미지 정보가 화면에 노출됩니다.
-			    var test = imageElementId+(i+1);
-			    var elImage = document.querySelector(test);
+			    var elImage = document.querySelector(imageElementId+i);
 			    elImage.src = window.URL.createObjectURL(image);
 		}
 	   
@@ -111,12 +137,55 @@ function ImageThumbnail(imageElementId,inputFileId){
 	
 }
 
+
 function valideImageType(image) {
 	const result = ([ 'image/jpeg',
 					  'image/png',
 					  'image/jpg' ].indexOf(image.type) > -1);
 	return result;
 }
+
+function getDateRange(startDate, endDate, listDate)
+
+{
+
+    var dateMove = new Date(startDate);
+
+    var strDate = startDate;
+
+    
+
+    if (startDate == endDate)
+
+    {
+
+        var strDate = dateMove.toISOString().slice(0,10);
+
+        listDate.push(strDate);
+
+    }
+
+    else
+
+    {
+
+        while (strDate < endDate)
+
+        {
+
+            var strDate = dateMove.toISOString().slice(0, 10);
+
+            listDate.push(strDate);
+
+            dateMove.setDate(dateMove.getDate() + 1);
+
+        }
+
+    }
+
+    return listDate;
+
+};
 
 
 

@@ -10,7 +10,7 @@
 	<select id="login"
 		resultType="com.webproject.essuyo.domain.UserVO">
 		select name, email, password, fail_password, age, gender,
-		cre_date AS creDate, last_date AS lastDate, total_reply AS todayReply,
+		cre_date AS creDate, last_date AS lastDate,
 		business_id AS businessId, image_info_id AS imageInfoId from user
 		where email = #{email} and password = #{password}
 	</select>
@@ -115,7 +115,6 @@
 	<select id="selectById" resultType="UserVO">
 		SELECT id, name, age, gender, email, password, fail_password, cre_date
 		AS creDate, last_date AS lastDate,
-		total_reply AS totalReply,
 		business_id AS businessId, image_info_id AS imageInfoId FROM user
 
 		<choose>
@@ -132,9 +131,8 @@
 
 	<select id="selectByEmail" resultType="UserVO">
 		SELECT id, name, age,
-		gender, email, password, fail_password, cre_date AS creDate, last_date
-		AS lastDate,
-		total_reply AS totalReply, business_id AS businessId,
+		gender, email, password, fail_password, cre_date AS creDate, 
+		last_date AS lastDate, business_id AS businessId,	
 		image_info_id AS imageInfoId FROM user
 		WHERE email = #{email}
 	</select>

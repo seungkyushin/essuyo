@@ -57,7 +57,7 @@
 					<div class="col-lg-4 col-xlg-3 col-md-5">
 						<div class="card card-body">
 							<h4 class="card-title">판매 상품 리스트
-							<a style= "float: right" href="/user/productRegist"><i class="icon-plus"></i></a>
+							<a style= "float: right" href="/product/register"><i class="icon-plus"></i></a>
 							</h4>
 							
 							<div class="table-responsive">

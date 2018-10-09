@@ -17,6 +17,7 @@ import com.webproject.essuyo.service.CompanyService;
 import com.webproject.essuyo.service.UserService;
 
 @Controller
+@RequestMapping("/company")
 public class CompanyController {
 
 	private static final Logger logger = LoggerFactory.getLogger(CompanyController.class);
@@ -45,7 +46,7 @@ public class CompanyController {
 		model.addAttribute("company", CompanyService.getDetailCompanyInfo(companyId));
 		model.addAttribute("user", userService.getSaleUserInfo(companyId));
 
-		return "detail";
+		return "companyDetail";
 		
 	}
 

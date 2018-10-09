@@ -1,43 +1,25 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<!-- Required meta tags -->
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="author" content="Colorlib">
-<meta name="description" content="자리있어요?">
-<meta name="keywords" content="이써요">
-<!-- Page Title -->
-<title>자리 있어요??</title>
-<!-- Bootstrap CSS -->
-<link rel="stylesheet" href="resources/css/bootstrap/bootstrap.min.css">
-<!-- Google Fonts -->
-<link
-	href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,500,700,900"
-	rel="stylesheet">
-<!-- Simple line Icon -->
-<link rel="stylesheet" href="resources/css/simple-line-icons.css">
-<!-- Themify Icon -->
-<link rel="stylesheet" href="resources/css/themify-icons.css">
-<!-- Hover Effects -->
-<link rel="stylesheet" href="resources/css/set1.css">
-<!-- Main CSS -->
-<link rel="stylesheet" href="resources/css/style.css">
-<!-- Tab Function -->
-<link rel="stylesheet" href="resources/css/tab.css">
+	<title>자리 있어요??</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="icon" type="image/png" sizes="16x16" href="/resources/images/backpack.png">
+	<link rel="stylesheet" href="resources/css/bootstrap/bootstrap.min.css">
+	<link rel="stylesheet" href="resources/css/simple-line-icons.css">
+	<link rel="stylesheet" href="resources/css/themify-icons.css">
+	<link rel="stylesheet" href="resources/css/set1.css">
+	<link rel="stylesheet" href="resources/css/style.css">
+	<link rel="stylesheet" href="resources/css/tab.css">
 </head>
 
 <body>
 
 	<%@ include file="/pageframe/header.jsp"%>
 
-	<!-- SLIDER -->
 	<section class="slider d-flex align-items-center">
-		<!--         <img src="images/slider.jpg" class="img-fluid" alt="#"> -->
 		<div class="container">
 			<div class="row d-flex justify-content-center">
 				<div class="col-md-12">
@@ -78,8 +60,7 @@
 			</div>
 		</div>
 	</section>
-	<!--// SLIDER -->
-	<!--============================= FIND PLACES =============================-->
+
 	<section class="main-block">
 		<div class="container">
 			<div class="row justify-content-center">
@@ -183,8 +164,7 @@
 			</div>
 		</div>
 	</section>
-	<!--//END FIND PLACES -->
-	<!--============================= FEATURED PLACES =============================-->
+
 	<section class="main-block light-bg">
 		<div class="container">
 			<div class="row justify-content-center">
@@ -195,16 +175,27 @@
 				</div>
 			</div>
 			<div class="row" style="color: olivedrab">
-			
+						
 			<c:if test="${ !empty rankCompanyList}" >
 			<c:forEach items="${rankCompanyList}" var="company">
 				<div class="col-md-3 featured-responsive">
 					<h5 style="text-align: center">${company.rankTitle}</h5>
 					
 							<div class="featured-place-wrap">
-								<a href="/detail"> 
+								<a href="/company/detail?id=${company.id}"> 
 									<img src="${company.image}" class="img-fluid" alt="#">
-										 <span class="featured-rating-orange">${company.score}</span>
+										<c:choose>
+											<c:when test="${company.score < 3}">
+												 <span class="featured-rating">${company.score}</span>
+											</c:when>
+											<c:when test="${company.score < 7}">
+												 <span class="featured-rating-orange">${company.score}</span>
+											</c:when>
+											<c:otherwise>
+												 <span class="featured-rating-green">${company.score}</span>
+											</c:otherwise>
+										</c:choose>
+										
 							<div class="featured-title-box">
 								<h6>${company.name}</h6>
 								<p>${company.type}</p>
@@ -225,17 +216,13 @@
 											<div class="open-now">${company.state}</div>
 										</c:when>
 										<c:when test="${company.state == '영업종료'}">
-											<div class="closed-now">${companystate}</div>
+											<div class="closed-now">${company.state}</div>
 										</c:when>
 									</c:choose>
-									
-								
 								</div>
 							</div>
 						</a>
 					</div>
-					
-					
 				</div>
 				</c:forEach>
 			</c:if>

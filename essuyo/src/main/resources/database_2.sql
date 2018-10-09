@@ -90,7 +90,6 @@ CREATE TABLE user (
 	fail_password INTEGER NOT NULL, /* 비밀번호실패 */
 	cre_date DATE NOT NULL, /* 생성날짜 */
 	last_date DATE, /* 마지막로그인날짜 */
-	total_reply INTEGER, /* 총덧글수 */
 	business_id INTEGER, /* 사업번호 */
 	image_info_id INTEGER,
 	sessionkey varchar(50) not null default 'none', /*세션키*/
@@ -347,16 +346,16 @@ INSERT INTO business(good,comment,company_id) VALUES(10, "알촌", 3);
 
 /*유저*/
 INSERT INTO user(name, age, gender, email, password,fail_password,
-cre_date,last_date,total_reply,business_id,image_info_id) VALUES("이써요", 10,"남","test@essuyo.com",
-"1234",3,now(),now(),10,1,5);
+cre_date,business_id,image_info_id) VALUES("이써요", 10,"남","test@essuyo.com",
+"1234",3,now(),1,5);
 
 INSERT INTO user(name, age, gender, email, password,fail_password,
-cre_date,last_date,total_reply,image_info_id) VALUES("이써요2", 20,"남","test@esy.com",
-"1234",3,now(),now(),0,6);
+cre_date,image_info_id) VALUES("이써요2", 20,"남","test@esy.com",
+"1234",3,now(),6);
 
 INSERT INTO user(name, age, gender, email, password,fail_password,
-cre_date,last_date,total_reply,image_info_id) VALUES("이써요3", 30,"남","test3@essuyo.com",
-"1234",3,now(),now(),0,7);
+cre_date,image_info_id) VALUES("이써요3", 30,"남","test3@essuyo.com",
+"1234",3,now(),7);
 
 
 

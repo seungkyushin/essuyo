@@ -42,10 +42,11 @@ public interface UserService {
 
 	
 	public UserVO getUserVO(String email);
+	public UserVO getUserVO(int id);
 	public Map<String,Object> getUserInfo(String email);
 	
 	//< 판매자의 좋아요수를 올려준다.
-	public int setGoodCount(String email);
+	public int setGoodCount(int businessId);
 	
 	public int setUserInfo(UserVO user);
 	public int setUserInfo(UserVO user,MultipartFile file);
@@ -57,7 +58,7 @@ public interface UserService {
 	public UserVO selectByEmail(String email);
 	
 	
-	public boolean businessTest(String email);
+	public boolean addBusiness(String email);
 	
 	
 	public void bIdtoUser(UserVO vo) throws Exception;

@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.joda.time.LocalDate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import com.webproject.essuyo.dao.ProductDao;
 import com.webproject.essuyo.dao.ReservationDao;
 import com.webproject.essuyo.dao.UserDAO;
 import com.webproject.essuyo.domain.CompanyVO;
+import com.webproject.essuyo.domain.ProductManagerVO;
 import com.webproject.essuyo.domain.ProductVO;
 import com.webproject.essuyo.domain.ReservationVO;
 import com.webproject.essuyo.domain.SQLParamVO;
@@ -47,23 +49,32 @@ public class ReservationServiceImpl implements ReservationService {
 	@Transactional
 	public int regReservationInfo(String email, ReservationVO reservationInfo) {
 		try {
-			// < 상품의 개수를 계산
+			
+			// < 상품의 개수를 차감
 			ProductVO product = productDao.selectByProductId(reservationInfo.getProductId());
-			// int resultCount = product.getCount() - reservationInfo.getProductCount();
-			// if (resultCount >= 0) {
-
-			// .setCount(resultCount);
-			productDao.update(product);
-
+			
+			int maxCount = reservationInfo.getProductCount();
+		
+					
+			for(int i=0; i < maxCount; i++) {
+		
+				ProductManagerVO productManager = new ProductManagerVO();
+				
+				productManager.setCount(1);
+				productManager.setProductId(reservationInfo.getProductId());
+				LocalDate saleDate = new LocalDate(reservationInfo.getResDate());
+				productManager.setSaleDate(saleDate.plusDays(i).toString());
+				productDao.updateManager(productManager);
+				
+			}
+		
 			int userId = userDao.selectByEmail(email).getId();
 			reservationInfo.setState("성공");
+			reservationInfo.setProductType(companyDao.getCompany(reservationInfo.getCompanyId()).getType());
 			reservationInfo.setUserId(userId);
-			System.out.println(reservationInfo);
-
-			return reservationDao.insert(reservationInfo);
-			// } else {
-			// return 0;
-			// }
+					
+			reservationDao.insert(reservationInfo);
+			return reservationInfo.getId();
 
 		} catch (Exception e) {
 			logger.error("예약 등록 실패.. | {} ", e.toString());

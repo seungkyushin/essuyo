@@ -30,6 +30,7 @@
 	<%@ include file="/pageframe/header.jsp"%>
 
 	<!--============================= RESERVE A SEAT =============================-->
+	<form id="product-form" action="/product/register" method="POST" enctype="multipart/form-data">
 	<section class="reserve-block">
 		<div class="container">
 			<div class="row">
@@ -37,7 +38,7 @@
 					<h5>
 						<input class="form-control" type="text" name="name" id="name" placeholder="상품명">
 					</h5>
-					<br> <input class="form-control" type="text" name="name" id="name"
+					<br> <input class="form-control" type="text" name="discription" id="name"
 						placeholder="상품 설명">
 				</div>
 
@@ -48,32 +49,26 @@
 	<section class="light-bg booking-details_wrap">
 		<div class="container">
 
-
-                    
-			<hr>
-
-			<form id="reservation-info" action="./reserve" method="POST" method="post" enctype="multipart/form-data">
-						
-			
-		 	<div class="row">
-				<div class="col-md-4">
-					<img id="productImage1" src="" class="img-fluid" alt="#">				
-				</div>
-				<div class="col-md-4">
-					<img id="productImage2" src="" class="img-fluid" alt="#">				
-				</div>
-				<div class="col-md-4">
-					<img id="productImage3" src="" class="img-fluid" alt="#">				
-				</div>
-			</div> 
-			
-			
-			
-				
-				<input type="file"name="file" id="multipleFile" multiple/>
+				<ul>
+					<li style="display: inline-block">
+						<a id="image-minus" class="nav-link" href="javascript:void(0)">
+							<span class="icon-minus"></span>
+						</a>
+					</li>
+					<li style="display: inline-block">
+						<div id="imageList" class="row"></div>
+					</li>
+					<li style="display: inline-block">
+						<a id="image-plus" class="nav-link" href="javascript:void(0)">
+							<span class="icon-plus"></span>
+						</a>
+					</li>
+				</ul>
 
 
-					
+				<input type="file" name="fileList" id="multipleFile" multiple/>
+
+			
 					
 				<div class="row">
 					<div class="col-md-8 responsive-wrap">
@@ -88,9 +83,9 @@
 									</p>
 
 									<input style="border-right: none; width: 48%;" type="text"
-										name="resDate" id="startDate" class="input-border" readOnly>
+										name="saleStartDate" id="startDate" class="input-border" readOnly>
 									<input style="border-left: none; width: 48%;" type="text"
-										id="endDate" class="input-border" readOnly>
+										name="saleEndDate" id="endDate" class="input-border" readOnly>
 
 								</div>
 								<hr>
@@ -118,17 +113,21 @@
 									</p>
 									<input type="text" name="price" id="price" class="form-control">
 								</div>
+								
+								<div class="col-md-10">
+									
+								</div>
+								<div class="col-md-2">
+									<input type="submit" class="form-control" value="등록">
+								</div>
 							</div>
 						</div>
 					</div>
 
 				</div>
-				
-			</form>
-			<hr>
 		</div>
 	</section>
-
+</form>
 
 	<!--//END BOOKING DETAILS -->
 
@@ -149,9 +148,29 @@
     
 	<script>
 	
-
+var maxImageCount = 3;
 $(document).ready(function() {
 		
+	initImageFrame();
+	
+	$("#image-plus").on("click", function() {
+		if( maxImageCount < 12 ){
+			maxImageCount += 1;
+			initImageFrame();	
+		}else{
+			myAlert("INFOMATION !" ,"최대 12개 입니다.");
+		}
+	});
+	
+	$("#image-minus").on("click", function() {
+		if( maxImageCount > 3 ){
+			maxImageCount -= 1;
+			initImageFrame();	
+		}else{
+			myAlert("INFOMATION !" ,"최소 3개 입니다.");
+		}
+	});
+	
 	
 			
 			$("#startDate").datepicker({
@@ -174,11 +193,7 @@ $(document).ready(function() {
 
 	
 			$("#plus").on("click", function() {
-				$("#userImage").attr("src","/resources/images/detail_image3_6.jpg");
-			
-				
-			
-				
+										
 				var count = parseInt($("#count").val());
 				if( count <= 9){
 					count += 1;
@@ -201,11 +216,21 @@ $(document).ready(function() {
 				}			
 			});
 			
-			
 			//< 유저 썸네일
-	   		ImageThumbnail("#productImage","#multipleFile");
+	   		ImageThumbnailCount("#productImage-","#multipleFile",3,maxImageCount);
 			
 });
+
+function initImageFrame(){
+	$("#imageList").empty();
+	for(var i=0; i<maxImageCount; i++){
+		var html = '<div class="col-md-1">'
+		+ '<img style="border-style:dashed"'
+		+ 'id="productImage-' + i + '" src="/resources/images/placeholder-image.png" class="img-fluid" alt="#"></div>'
+		
+		$("#imageList").append(html);
+	}
+}
 </script>
 
 	<script>
@@ -226,24 +251,6 @@ $(document).ready(function() {
 	
 	</script>
 	
-	<script>
-	 if ($('.image-link').length) {
-			$('.image-link').magnificPopup({
-				type : 'image',
-				gallery : {
-					enabled : true
-				}
-			});
-		}
-		if ($('.image-link2').length) {
-			$('.image-link2').magnificPopup({
-				type : 'image',
-				gallery : {
-					enabled : true
-				}
-			});
-		} 
-	</script>
 	<%@ include file="/pageframe/footer.jsp"%>
 </body>
 

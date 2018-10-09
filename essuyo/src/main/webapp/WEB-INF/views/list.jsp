@@ -267,7 +267,7 @@
 
 <script>
 <!-- 	<script id=template2 type="text/x-handlerbars-template"> -->
-<!-- 					<div id="map" data-lat={{lat}} data-lon={{lon}} data-zoom="14"></div> -->
+<!-- 				<div id="map" data-lat={{lat}} data-lon={{lon}} data-zoom="14"></div> -->
 </script>
 
 	<!-- Map JS (Please change the API key below. Read documentation for more info) -->

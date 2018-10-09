@@ -73,7 +73,7 @@ public class UserController {
 
 		String email = (String) httpSession.getAttribute("login");
 
-		if (service.businessTest(email) == true) {
+		if (service.addBusiness(email) == true) {
 			return "redirect:/user/companyRegist";
 		}
 

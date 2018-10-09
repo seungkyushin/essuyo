@@ -5,11 +5,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.joda.time.Days;
 import org.joda.time.LocalDate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.webproject.essuyo.dao.ProductDao;
 import com.webproject.essuyo.domain.ProductManagerVO;
@@ -105,13 +108,52 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public int addProduct(ProductManagerVO productManager) {
-		// TODO Auto-generated method stub
-		return 0;
+	@Transactional
+	public int addProduct(ProductVO product, int productCount, int companyId ,List<MultipartFile> imageList) {
+	
+		try {
+				//< 1. 상품 디비 생성
+				productDao.insert(product);
+				
+				//< 2. 상품 제고 디비 생성
+				LocalDate startDate = new LocalDate(product.getSaleStartDate());
+				LocalDate endDate = new LocalDate(product.getSaleEndDate());
+				
+				int productManagerCount = Days.daysBetween(startDate, endDate).getDays() + 1;
+				
+				for(int i=0; i<productManagerCount; i ++) {
+					ProductManagerVO productManager = new ProductManagerVO();
+					productManager.setCount(productCount);
+					productManager.setProductId(product.getId());
+					LocalDate saleDate = startDate.plusDays(i);
+					productManager.setSaleDate(saleDate.toString());
+					
+					productDao.insertManager(productManager);
+				}
+				
+				//< 3. 상품 관리 디비 추가
+				Map<String,Integer> params = new HashMap<>();
+				params.put("productId", product.getId());
+				params.put("companyId", companyId);
+				productDao.insertAdmin(params);
+			
+				//< 4. 파일 업로드
+			for( MultipartFile file : imageList ) {
+				imageAdminService.addImageAdminProduct(product.getId(), imageAdminService.uploadFile(file));
+			}
+			
+			
+			return 1;
+				
+		} catch (Exception e) {
+			logger.error("상품 조회 실패.. | {} ", e.toString());
+			return 0;
+		}
+
 	}
 
 	@Override
-	public int updateProduct(ProductManagerVO productManager) {
+	public int updateProduct(ProductVO product, List<MultipartFile> imageList) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
