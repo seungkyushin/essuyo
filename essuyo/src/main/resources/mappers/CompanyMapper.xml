@@ -18,7 +18,22 @@ limit #{start},#{limit};
 	<select id="filter" resultType="CompanyVO">
 		select *
 		from company
-		where type=#{type} and 
+		where type=#{type}
+		      <if test="name.equals('null')">
+		      and
+		      </if>
+		      <if test="name.equals('서울')">
+		      and area_list_id = (select id from area_list where name=#{name}) and  
+		      </if>
+		       <if test="name.equals('부산')">
+		      and area_list_id = (select id from area_list where name=#{name}) and  
+		      </if>
+		        <if test="name.equals('광주')">
+		      and area_list_id = (select id from area_list where name=#{name}) and  
+		      </if>
+		          <if test="name.equals('강원도')">
+		      and area_list_id = (select id from area_list where name=#{name}) and  
+		      </if> 
 		      id = ANY (select company_id from facility_admin
 		          <trim prefix="WHERE" suffixOverrides="or">
 			       <if test="value1 == 1"> facility_id = 1 or</if>
@@ -36,7 +51,7 @@ limit #{start},#{limit};
 		select *
 		from company
 		where  type=#{type} and 
-		       area_list_id =#{area_list_id}  and  
+		       area_list_id = (select id from area_list where name=#{name}) and  
 		       id = ANY (select company_id from facility_admin
 		          <trim prefix="WHERE" suffixOverrides="or">
 			       <if test="value1 == 1"> facility_id = 1 or</if>

@@ -103,8 +103,7 @@
 
 <!-- 맵 div -->
 				<div class="col-md-5 responsive-wrap map-wrap">
-					<div class="map-fix">
-						
+					<div class="map-fix">				
 							<div id="map" data-lat="37.556537" data-lon="126.945" data-zoom="14"></div>
 					</div>
 				</div>
@@ -129,6 +128,8 @@
  			$(".map-fix").toggle();
  		});
 	</script>
+	
+	
 	<script>	
 		function myMap() {
 			var maplat = $('#map').data('lat');
@@ -143,17 +144,34 @@
 				zoom : mapzoom,
 				scrollwheel : false
 			});
-			var marker = new google.maps.Marker({
-				position : {
-					lat : maplat,
-					lng : maplon
-				},
-				map : map,
-				title : '현재 위치!'
-			});
+			
+// 			$.ajax({
+// 				type : 'GET',
+// 				url : encodeURI('/api/list?start=' + start + "&value=" + value + "&type="+type + "&name="+ name),
+// 				headers : {
+// 					"Content-Type" : "application/json",
+// 					"X-HTTP-Method-Override" : "GET"
+// 				},
+
+// 				success : function(data) {
+// 					for(var i=0; i<data.sales.length;i++){
+// 						var lat1 = data.sales[i].lat
+// 						var lon1 = data.sales[i].lon
+					
+					var marker = new google.maps.Marker({
+						position : {
+							lat : maplat,//lat1,
+							lng : maplon//lon1
+						},
+						map : map			
+					});
+// 					}
+
+// 					}
+// 			});						
 		}
 	</script>
-
+			
 
 	<!-- ajaxJQuery -->
 	<script>	
@@ -172,7 +190,7 @@
 			
 			$.ajax({
 				type : 'GET',
-				url : encodeURI('/api/list?start=' + start + "&value=" + value + "&type="+type + "&area_list_id="+area_list_id),
+				url : encodeURI('/api/list?start=' + start + "&value=" + value + "&type="+type + "&name="+ name),
 				headers : {
 					"Content-Type" : "application/json",
 					"X-HTTP-Method-Override" : "GET"
@@ -210,12 +228,11 @@
 	</script>
 
 
-
 	<script>
 		var start = 0;
 		var value="";
 		var type=${type};
-		var area_list_id=${area_list_id};
+		var name=${name};
 		$(document).ready(function() {
 					
 			test();
@@ -246,7 +263,7 @@
 											<h6>{{name}}</h6>
 											<p>{{type}}</p>
 											<span>• </span>
-											<p>3 Reviews</p>
+											<p>{{commentCount}}개의 댓글 수</p>
 																						
 											<ul>
 												<li><span class="icon-location-pin"></span>
@@ -254,7 +271,7 @@
 												<li><span class="icon-screen-smartphone"></span>
 													<p>{{number}}</p></li>
 												<li><span class="icon-link"></span>
-													<p>{{hompage}}</p></li>
+													<p>{{homepage}}</p></li>
  											</ul>
 											<div class="bottom-icons">
 												<div class="state-info">{{state}}</div>
@@ -265,10 +282,6 @@
 </div>			
 </script>
 
-<script>
-<!-- 	<script id=template2 type="text/x-handlerbars-template"> -->
-<!-- 					<div id="map" data-lat={{lat}} data-lon={{lon}} data-zoom="14"></div> -->
-</script>
 
 	<!-- Map JS (Please change the API key below. Read documentation for more info) -->
 	 <script src="https://maps.googleapis.com/maps/api/js?callback=myMap&key=AIzaSyB_SsV7PnpCZxu2cphySVYNkiKehtF_ogY"></script>

@@ -29,10 +29,10 @@ public class CompanyController {
 
 //	판매리스트
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public String salesList(@RequestParam("type") String type, @RequestParam(value="area_list_id", defaultValue="0")int area_list_id, Model model) throws Exception {
+	public String salesList(@RequestParam("type") String type, @RequestParam(value="name", defaultValue="null")String name, Model model) throws Exception {
 		logger.info("ListGET()....");
 		model.addAttribute("type",type);
-		model.addAttribute("area_list_id",area_list_id);
+		model.addAttribute("name",name);
 		
 		
 		return "list";

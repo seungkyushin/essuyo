@@ -52,19 +52,22 @@
 						</div>
 						<div class="row d-flex justify-content-center">
 							<div class="col-md-10">
-								<form class="form-wrap mt-4">
-									<div class="btn-group" role="group" aria-label="Basic example">
-										<input list="list" placeholder="선택" name="list1"
-											class="btn-group1" >
+								<form class="form-wrap mt-4"">
+									<div class="btn-group" role="group" aria-label="Basic example"">
+										<input list="list" placeholder="선택" name="type"
+											class="btn-group1" id="listValue">
 										<datalist id="list">
-											<option value="숙박">
-											<option value="차량">
-											<option value="식사">
+											<option value="호텔">
+											<option value="식당">
 											<option value="박물관">
+											<option value="렌트카">
 										</datalist>
 													
-										<input type="text" placeholder="ex) 서울" class="btn-group2">
-										<button type="submit" class="btn-form">
+										<input type="text" placeholder="ex) 지역" class="btn-group2" id="inputValue">
+									
+										
+										
+										<button type="button" class="btn-form" onclick="button_click()">
 											<span class="icon-magnifier search-icon"></span>검색<i
 												class="pe-7s-angle-right"></i>
 										</button>
@@ -269,6 +272,17 @@
 			}
 			;
 		});
+	</script>
+	
+<!-- 	검색창 JQuery -->
+	<script>
+	function button_click() {
+		var type = document.getElementById("listValue").value;
+		var name =document.getElementById("inputValue").value;
+		if(type != "" && name != ""){
+		document.location.href = "list?type=" +'"'+ type+'"' +"&name="+'"'+ name+'"';
+		}
+	};
 	</script>
 </body>
 

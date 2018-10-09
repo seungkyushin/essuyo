@@ -62,6 +62,8 @@ CREATE TABLE company (
 	homepage VARCHAR(255), /* 홈페이지 */
 	state VARCHAR(255) NOT NULL, /* 영업상태 */
 	time VARCHAR(255) NOT NULL, /* 영업시간 */
+    lat double NOT NULL,  /* 맵좌표(x) */
+    lon double NOT NULL,  /* 맵좌표(y) */
 	area_list_id INTEGER , /* 지역명목록번호 */
 	
 	FOREIGN KEY (area_list_id) REFERENCES area_list(id)
@@ -256,70 +258,70 @@ INSERT INTO facility(name)  VALUES("신용카드");
 
 
 /* 업체 */
-INSERT INTO company(name, type, score, discription, address,number, homepage, state, time, area_list_id)
+INSERT INTO company(name, type, score, discription, address,number, homepage, state, time,lat,lon, area_list_id)
 VALUES("힐튼호텔1", "호텔", 9.0 , "돈만 있으면 쾌적한 곳1", "서울특별시 기장군 기장읍 기장해안로 268-32 힐튼서울","010-1111-1111",
-"http://hiltonbusan1.co.kr/","영업중","ALL TIME",1);
+"http://hiltonbusan1.co.kr/","영업중","ALL TIME",37.556388,126.945200,1);
 
-INSERT INTO company(name, type, score, discription, address,number, homepage, state, time, area_list_id)
+INSERT INTO company(name, type, score, discription, address,number, homepage, state, time,lat,lon, area_list_id)
 VALUES("힐튼호텔2", "호텔", 7.0 , "돈만 있으면 쾌적한 곳2", "부산광역시 기장군 기장읍 기장해안로 268-32 힐튼부산","010-2222-2222",
-"http://hiltonbusan2.co.kr/","영업중","ALL TIME",2);
+"http://hiltonbusan2.co.kr/","영업중","ALL TIME",37.556455,126.944741,2);
 
-INSERT INTO company(name, type, score, discription, address,number, homepage, state, time, area_list_id)
+INSERT INTO company(name, type, score, discription, address,number, homepage, state, time,lat,lon, area_list_id)
 VALUES("힐튼호텔3", "호텔", 6.0 , "돈만 있으면 쾌적한 곳3", "광주광역시 기장군 기장읍 기장해안로 268-32 힐튼광주","010-3333-3333",
-"http://hiltonbusan.co.kr/","영업종료","ALL TIME",3);
+"http://hiltonbusan.co.kr/","영업종료","ALL TIME",37.556855,126.944585,3);
 
-INSERT INTO company(name, type, score, discription, address,number, homepage, state, time, area_list_id)
+INSERT INTO company(name, type, score, discription, address,number, homepage, state, time,lat,lon, area_list_id)
 VALUES("힐튼호텔4", "호텔", 2.0 , "돈만 있으면 쾌적한 곳4", "강원도 기장군 기장읍 기장해안로 268-32 힐튼강원도","010-4444-4444",
-"http://hiltonbusan.co.kr/","영업종료","ALL TIME",4);
+"http://hiltonbusan.co.kr/","영업종료","ALL TIME",37.556929,126.945242,4);
 
-INSERT INTO company(name, type, score, discription, address,number, homepage, state, time, area_list_id)
+INSERT INTO company(name, type, score, discription, address,number, homepage, state, time,lat,lon, area_list_id)
 VALUES("식당1", "식당", 9.0 , "빵 맛있는 식당", "서울 서대문구 연세로12길 33","02-1111-1111",
-"http://outback1.co.kr/shinchon/","영업중","am 10:00 ~ pm 10:00",1);
+"http://outback1.co.kr/shinchon/","영업중","am 10:00 ~ pm 10:00",37.556388,126.945200,1);
 
-INSERT INTO company(name, type, score, discription, address,number, homepage, state, time, area_list_id)
+INSERT INTO company(name, type, score, discription, address,number, homepage, state, time,lat,lon, area_list_id)
 VALUES("식당2", "식당", 7.0 , "빵 맛있는 식당", "부산 서대문구 연세로12길 33","02-2222-2222",
-"http://outback2.co.kr/shinchon/","영업중","am 10:00 ~ pm 10:00",2);
+"http://outback2.co.kr/shinchon/","영업중","am 10:00 ~ pm 10:00",37.556455,126.944741,2);
 
-INSERT INTO company(name, type, score, discription, address,number, homepage, state, time, area_list_id)
+INSERT INTO company(name, type, score, discription, address,number, homepage, state, time,lat,lon, area_list_id)
 VALUES("식당3", "식당", 6.0 , "빵 맛있는 식당", "광주 서대문구 연세로12길 33","02-3333-3333",
-"http://outback3.co.kr/shinchon/","영업종료","am 10:00 ~ pm 10:00",3);
+"http://outback3.co.kr/shinchon/","영업종료","am 10:00 ~ pm 10:00",37.556855,126.944585,3);
 
-INSERT INTO company(name, type, score, discription, address,number, homepage, state, time, area_list_id)
+INSERT INTO company(name, type, score, discription, address,number, homepage, state, time,lat,lon, area_list_id)
 VALUES("식당4", "식당", 2.0 , "빵 맛있는 식당", "강원도 서대문구 연세로12길 33","02-4444-4444",
-"http://outback4.co.kr/shinchon/","영업종료","am 10:00 ~ pm 10:00",4);
+"http://outback4.co.kr/shinchon/","영업종료","am 10:00 ~ pm 10:00",37.556929,126.945242,4);
 
-INSERT INTO company(name, type, score, discription, address,number, homepage, state, time, area_list_id)
+INSERT INTO company(name, type, score, discription, address,number, homepage, state, time,lat,lon, area_list_id)
 VALUES("박물관1", "박물관", 9.0 , "알밥파는 집11", "서울 서대문구 이화여대7길 14","02-111-111",
-"http://alchon1.com/","영업중","am 10:00 ~ pm 10:00",1);
+"http://alchon1.com/","영업중","am 10:00 ~ pm 10:00",37.556388,126.945200,1);
 
-INSERT INTO company(name, type, score, discription, address,number, homepage, state, time, area_list_id)
+INSERT INTO company(name, type, score, discription, address,number, homepage, state, time,lat,lon, area_list_id)
 VALUES("박물관2", "박물관", 7.0 , "알밥파는 집2", "부산 서대문구 이화여대7길 14","02-222-222",
-"http://alchon2.com/","영업중","am 10:00 ~ pm 10:00",2);
+"http://alchon2.com/","영업중","am 10:00 ~ pm 10:00",37.556455,126.944741,2);
 
-INSERT INTO company(name, type, score, discription, address,number, homepage, state, time, area_list_id)
+INSERT INTO company(name, type, score, discription, address,number, homepage, state, time,lat,lon, area_list_id)
 VALUES("박물관3", "박물관", 6.0 , "알밥파는 집3", "광주 서대문구 이화여대7길 14","02-333-333",
-"http://alchon3.com/","영업종료","am 10:00 ~ pm 10:00",3);
+"http://alchon3.com/","영업종료","am 10:00 ~ pm 10:00",37.556855,126.944585,3);
 
-INSERT INTO company(name, type, score, discription, address,number, homepage, state, time, area_list_id)
+INSERT INTO company(name, type, score, discription, address,number, homepage, state, time,lat,lon, area_list_id)
 VALUES("박물관4", "박물관", 2.0 , "알밥파는 집4", "강원도 서대문구 이화여대7길 14","02-444-444",
-"http://alchon4.com/","영업종료","am 10:00 ~ pm 10:00",4);
+"http://alchon4.com/","영업종료","am 10:00 ~ pm 10:00",37.556929,126.945242,4);
 
 
-INSERT INTO company(name, type, score, discription, address,number, homepage, state, time, area_list_id)
+INSERT INTO company(name, type, score, discription, address,number, homepage, state, time,lat,lon, area_list_id)
 VALUES("쏘카1", "렌트카", 9.0 , "카 쉐어1", "서울 서대문구 남가좌동 7길 14","02-11-11",
-"http://socar1.com/","영업중","am 10:00 ~ pm 10:00",1);
+"http://socar1.com/","영업중","am 10:00 ~ pm 10:00",37.556388,126.945200,1);
 
-INSERT INTO company(name, type, score, discription, address,number, homepage, state, time, area_list_id)
+INSERT INTO company(name, type, score, discription, address,number, homepage, state, time,lat,lon, area_list_id)
 VALUES("쏘카2", "렌트카", 7.0 , "카 쉐어2", "부산 서대문구 남가좌동 7길 14","02-22-22",
-"http://socar2.com/","영업중","am 10:00 ~ pm 10:00",2);
+"http://socar2.com/","영업중","am 10:00 ~ pm 10:00",37.556455,126.944741,2);
 
-INSERT INTO company(name, type, score, discription, address,number, homepage, state, time, area_list_id)
+INSERT INTO company(name, type, score, discription, address,number, homepage, state, time,lat,lon, area_list_id)
 VALUES("쏘카3", "렌트카", 6.0 , "카 쉐어3", "광주 서대문구 남가좌동 7길 14","02-33-33",
-"http://socar3.com/","영업종료","am 10:00 ~ pm 10:00",3);
+"http://socar3.com/","영업종료","am 10:00 ~ pm 10:00",37.556855,126.944585,3);
 
-INSERT INTO company(name, type, score, discription, address,number, homepage, state, time, area_list_id)
+INSERT INTO company(name, type, score, discription, address,number, homepage, state, time,lat,lon, area_list_id)
 VALUES("쏘카4", "렌트카", 2.0 , "카 쉐어4", "강원도 서대문구 남가좌동 7길 14","02-44-44",
-"http://socar4.com/","영업종료","am 10:00 ~ pm 10:00",4);
+"http://socar4.com/","영업종료","am 10:00 ~ pm 10:00",37.556929,126.945242,4);
 
 
 

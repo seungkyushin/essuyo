@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.webproject.essuyo.dao.CommentDao;
 import com.webproject.essuyo.dao.CompanyDao;
 import com.webproject.essuyo.dao.FacilityAdminDao;
 import com.webproject.essuyo.domain.CompanyVO;
@@ -31,6 +32,9 @@ public class CompanyServiceImpl implements CompanyService {
 
 	@Autowired
 	private ImageAdminService imageAdminService;
+	
+	@Autowired
+	private CommentDao commentDao;
 
 	private final int MAX_RAKING_COUNT = 4;
 
@@ -203,7 +207,7 @@ public class CompanyServiceImpl implements CompanyService {
 	}
 
 	@Override
-	public Map<String, Object> getList(int start, String value, String type,int area_list_id) {
+	public Map<String, Object> getList(int start, String value, String type, String name) throws Exception {
 		Map<String, Object> resultMap = new HashMap<>();
 
 		List<CompanyVO> list = null;
@@ -212,7 +216,7 @@ public class CompanyServiceImpl implements CompanyService {
 		
 	
 		try {			
-				if( value != null && value.equals("") == true && area_list_id == 0) {
+				if( value != null && value.equals("") == true && name.equals("null")) {
 					SQLParamVO param = new SQLParamVO();		
 					param.setStart(start*4);
 					param.setLimit(4);
@@ -233,7 +237,7 @@ public class CompanyServiceImpl implements CompanyService {
 					filterParam.put("start",start*4 );
 					filterParam.put("limit",4 );
 					filterParam.put("type", type);
-//					filterParam.put("area_list_id",area_list_id);
+					filterParam.put("name",name);
 						
 					list = companyDao.filter(filterParam);
 					
@@ -261,6 +265,9 @@ public class CompanyServiceImpl implements CompanyService {
 			salesMap.put("lat", data.getLat());
 			salesMap.put("lon", data.getLon());
 			salesMap.put("areaListId", data.getAreaListId());
+			
+			salesMap.put("commentCount", commentDao.count(data.getId()));
+			
 	
 	
 			try {

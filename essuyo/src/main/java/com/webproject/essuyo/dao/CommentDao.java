@@ -27,4 +27,10 @@ public class CommentDao {
 		
 		sqlSession.insert(NAME_SAPACE + ".create", comment);
 	}
+	
+	// 댓글  갯수
+	public int count(int company_id) throws Exception{
+		return sqlSession.selectOne(NAME_SAPACE+".commentCount",company_id);
+	}
+	
 }

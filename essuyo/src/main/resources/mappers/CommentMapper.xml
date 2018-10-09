@@ -31,5 +31,12 @@
  		values(#{title}, #{content}, #{score}, #{userId}, #{companyId})
  	</insert>
   
+  
+    <select id="commentCount" resultType="java.lang.Integer">
+    select count(*)
+    from comment
+    where company_id = #{company_id};
+    </select>
+    
     
  </mapper>

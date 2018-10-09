@@ -7,6 +7,7 @@ public class SQLParamVO {
 	private int start;
 	private int limit;
 
+
 	
 	
 	public SQLParamVO() {
@@ -54,6 +55,8 @@ public class SQLParamVO {
 	public void setLimit(int limit) {
 		this.limit = limit;
 	}
+	
+	
 	@Override
 	public String toString() {
 		return "SQLParamVO [type=" + type + ", id=" + id + ", start=" + start + ", limit=" + limit + "]";

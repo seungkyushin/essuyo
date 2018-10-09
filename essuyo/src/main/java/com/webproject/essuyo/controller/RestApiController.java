@@ -49,11 +49,11 @@ public class RestApiController {
 	
 	
 	@RequestMapping(value="/list",method=RequestMethod.GET)
-	public ResponseEntity<Map<String, Object>> list(@RequestParam int start, @RequestParam String value, @RequestParam String type,@RequestParam int area_list_id){
+	public ResponseEntity<Map<String, Object>> list(@RequestParam int start, @RequestParam String value, @RequestParam String type,@RequestParam String name){
 		ResponseEntity<Map<String, Object>> entity = null;	
 		
 		try {
-			entity= new ResponseEntity<>(companyService.getList(start,value,type,area_list_id),HttpStatus.OK);
+			entity= new ResponseEntity<>(companyService.getList(start,value,type,name),HttpStatus.OK);
 			
 		
 		} catch (Exception e) {
