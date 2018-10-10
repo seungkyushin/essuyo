@@ -23,15 +23,23 @@ public class CompanyDao {
 		return session.selectOne(namespace + ".select", companyId);
 
 	}
-
+	
+	//판매리스트 전체	
 	public List<CompanyVO> listAll(SQLParamVO param) throws Exception {
 		return session.selectList(namespace + ".listAll", param);
 
 	}
 	
+	//필터 기능
 	public List<CompanyVO> filter(Map<String,Object> param) throws Exception{
 		return session.selectList(namespace+".filter", param);
 	}
+	
+	// 판매리스트  갯수
+	public int SalesListCount(Map<String,Object> param) throws Exception{
+		return session.selectOne(namespace+".listCount", param);
+	}
+	
 	
 	public Map<String, Object> getDetailCompanyInfo(int companyId) throws Exception {
 		return session.selectOne(namespace + ".score", companyId);

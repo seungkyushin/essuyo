@@ -14,19 +14,19 @@
 <!-- Page Title -->
 <title>판매 리스트</title>
 <!-- Bootstrap CSS -->
-<link rel="stylesheet" href="resources/css/bootstrap/bootstrap.min.css">
+<link rel="stylesheet" href="/resources/css/bootstrap/bootstrap.min.css">
 <!-- Google Fonts -->
 <link
 	href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,500,700,900"
 	rel="stylesheet">
 <!-- Simple line Icon -->
-<link rel="stylesheet" href="resources/css/simple-line-icons.css">
+<link rel="stylesheet" href="/resources/css/simple-line-icons.css">
 <!-- Themify Icon -->
-<link rel="stylesheet" href="resources/css/themify-icons.css">
+<link rel="stylesheet" href="/resources/css/themify-icons.css">
 <!-- Hover Effects -->
-<link rel="stylesheet" href="resources/css/set1.css">
+<link rel="stylesheet" href="/resources/css/set1.css">
 <!-- Main CSS -->
-<link rel="stylesheet" href="resources/css/style.css">
+<link rel="stylesheet" href="/resources/css/style.css">
 </head>
 <body>
 	<!--============================= HEADER =============================-->
@@ -41,8 +41,8 @@
 						<div class="col-md-4 featured-responsive">
 							<div class="detail-filter-text">
 								<p>
-									34 개의 검색된 <span id="type1"></span>
-								</p>
+									<span id="count1">0</span>  개의 검색된 <span id="type1"></span>
+								</p>			
 							</div>
 						</div>
 						<!-- 필터 나눔 기준 -->
@@ -104,7 +104,8 @@
 <!-- 맵 div -->
 				<div class="col-md-5 responsive-wrap map-wrap">
 					<div class="map-fix">				
-							<div id="map" data-lat="37.556537" data-lon="126.945" data-zoom="14"></div>
+							<div id="map" data-lat="37.556537" data-lon="126.945" data-zoom="17"></div>
+							
 					</div>
 				</div>
 			</div>
@@ -118,9 +119,9 @@
 
 	<!-- jQuery, Bootstrap JS. -->
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-		<script src="resources/js/jquery/jquery-3.2.1.min.js"></script>
-	<script src="resources/js/popper/popper.min.js"></script>
-	<script src="resources/js/bootstrap/bootstrap.min.js"></script>
+	<script src="/resources/js/jquery/jquery-3.2.1.min.js"></script>
+	<script src="/resources/js/popper/popper.min.js"></script>
+	<script src="/resources/js/bootstrap/bootstrap.min.js"></script>
 	<script	src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 
 	<script>
@@ -145,30 +146,30 @@
 				scrollwheel : false
 			});
 			
-// 			$.ajax({
-// 				type : 'GET',
-// 				url : encodeURI('/api/list?start=' + start + "&value=" + value + "&type="+type + "&name="+ name),
-// 				headers : {
-// 					"Content-Type" : "application/json",
-// 					"X-HTTP-Method-Override" : "GET"
-// 				},
+			$.ajax({
+				type : 'GET',
+				url : encodeURI('/api/list?start=' + start + "&value=" + value + "&type="+type + "&name="+ name),
+				headers : {
+					"Content-Type" : "application/json",
+					"X-HTTP-Method-Override" : "GET"
+				},
 
-// 				success : function(data) {
-// 					for(var i=0; i<data.sales.length;i++){
-// 						var lat1 = data.sales[i].lat
-// 						var lon1 = data.sales[i].lon
+				success : function(data) {
+					for(var i=0; i<data.sales.length;i++){
+						var lat1 = data.sales[i].lat;
+						var lon1 = data.sales[i].lon;
 					
 					var marker = new google.maps.Marker({
 						position : {
-							lat : maplat,//lat1,
-							lng : maplon//lon1
+							lat : lat1,
+							lng : lon1
 						},
 						map : map			
 					});
-// 					}
+					}
 
-// 					}
-// 			});						
+					}
+			});						
 		}
 	</script>
 			
@@ -197,8 +198,11 @@
 				},
 
 				success : function(data) {
+					var salesCount = data.salesCount;
 					$("#type1").text(type);
-				
+					$("#count1").text(salesCount);
+					
+					
 					var source = $("#template").html();
 					var template = Handlebars.compile(source);
 					var resultHTML = "";
@@ -233,9 +237,10 @@
 		var value="";
 		var type=${type};
 		var name=${name};
+		
+		
 		$(document).ready(function() {
-					
-			test();
+			test();		
 	    $(window).scroll(function() {
 		if ($(window).scrollTop() == $(document).height()- $(window).height()) {
 		start++;	
@@ -257,7 +262,7 @@
 	<script id=template type="text/x-handlerbars-template">
 	 <div class="col-sm-6 col-lg-12 col-xl-6 featured-responsive">
 								<div class="featured-place-wrap">
-									<a href="/detail?id={{id}}"> <img	src="{{image}}" class="img-fluid" alt="#">
+									<a href="/company/detail?id={{id}}"> <img	src="{{image}}" class="img-fluid" alt="#">
 										<span class="score_info">{{score}}</span>
 										<div class="featured-title-box">
 											<h6>{{name}}</h6>
