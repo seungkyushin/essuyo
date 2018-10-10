@@ -159,25 +159,23 @@
 					for(var i=0; i<data.sales.length;i++){
 						var lat1 = data.sales[i].lat;
 						var lon1 = data.sales[i].lon;
-								
-										 
 					
 				         
-					var marker1 = new google.maps.Marker({
+					var marker[i] = new google.maps.Marker({
 						position : {
-							lat : data.sales[0].lat,
-							lng : data.sales[0].lon
+							lat : lat1,
+							lng : lon1
 						},
 						map : map			
 					});
 				
 					
 
-			      var content1 = data.sales[i].name;
+			      var content[i] = data.sales[i].name;
 		 
-			        google.maps.event.addListener(marker1, "click", function(event) {
-			        	  var infowindow = new google.maps.InfoWindow({ content: content1});
-			        	infowindow.open(map,marker1);
+			        google.maps.event.addListener(marker[i], "click", function(event) {
+			        	  var infowindow = new google.maps.InfoWindow({ content: content[i]});
+			        	infowindow.open(map,marker[i]);
 
 			        });
 			        
@@ -226,9 +224,9 @@
 						$("#salesList").append(template(data2));
 
 						
-						if (data2.score >= 8) {
+						if (data2.score >= 4) {
 							$(".score_info").attr('class', 'featured-rating-green');
-						} else if (data2.score >= 4) {
+						} else if (data2.score >= 2) {
 							$(".score_info").attr('class', 'featured-rating-orange');
 						} else {
 							$(".score_info").attr('class', 'featured-rating');
