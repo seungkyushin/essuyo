@@ -134,6 +134,24 @@ public class ProductController {
 	}
 	
 	
+
+	@GetMapping("/delete")
+	public String deleteProduct(@RequestParam int  productId, RedirectAttributes redirectAttr,
+			HttpSession httpSession, Model model) {
+
+		productService.deleteProduct(productId);
+		return "redirect:/product/admin";
+	}
+	
+	@GetMapping("/update")
+	public String updateProduct(@RequestParam int  productId, RedirectAttributes redirectAttr,
+			HttpSession httpSession, Model model) {
+
+		productService.deleteProduct(productId);
+		return "redirect:/product/admin";
+	}
+	
+	
 	
 	
 	

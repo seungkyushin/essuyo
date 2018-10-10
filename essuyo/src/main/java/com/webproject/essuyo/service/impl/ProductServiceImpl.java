@@ -158,6 +158,15 @@ public class ProductServiceImpl implements ProductService {
 		return 0;
 	}
 
+	@Override
+	public void deleteProduct(int productId) {
+		try {
+				productDao.delete(productId);
+		} catch (Exception e) {
+			logger.error("상품  삭제 실패.. | {} ", e.toString());
+		}	
+	}
+
 
 
 }

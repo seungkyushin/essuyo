@@ -63,6 +63,9 @@
 		VALUES( #{companyId}, #{productId})
 	</insert>
 	
+	<delete id="delete" parameterType="Integer">
+		DELETE FROM product WHERE id=#{id}
+	</delete>	
 	
 	
 	
