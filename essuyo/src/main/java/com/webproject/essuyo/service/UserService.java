@@ -67,6 +67,6 @@ public interface UserService {
 	
 	public List<Integer> getImgIds(CompanyVO cvo)throws Exception;
 
-	
+	public void updateLastDate(UserVO vo) throws Exception;
 
 }

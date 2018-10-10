@@ -301,6 +301,12 @@ public class UserServiceImpl implements UserService {
 		
 		return dao.getImgIds(cvo);
 	}
+
+	@Override
+	public void updateLastDate(UserVO vo) throws Exception {
+		dao.updateLastDate(vo);
+		
+	}
 	
 	
 

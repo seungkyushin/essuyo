@@ -172,4 +172,13 @@ public class UserDAO {
 		return session.selectList(namespace+".getImgIds", id);
 
 	}
+	
+	//로그인시 최종 접속일 항목을 갱신해 주는 DAO
+	public void updateLastDate(UserVO vo) throws Exception{
+		int id = vo.getId();
+		
+		session.update(namespace+".updateLastDate", id);
+		
+	}
+	
 }

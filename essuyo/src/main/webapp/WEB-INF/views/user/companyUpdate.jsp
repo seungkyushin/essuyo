@@ -104,7 +104,13 @@
 										<option value="4">강원도</option>
 									</select>
 								</div>
-
+								<div class="form-group">
+								<label>[사업장 시설 구비 여부]  <span class="help"> ※ 해당 사항이 없으실 경우 체크하지 않으시면 됩니다.</span></label><br>
+									<input type='checkbox' name='facIds' value='1' />주차공간<br>
+									<input type='checkbox' name='facIds' value='2' />와이파이/인터넷<br>
+									<input type='checkbox' name='facIds' value='3' />흡연구역<br>
+									<input type='checkbox' name='facIds' value='4' />신용카드<br>
+								</div>
 								<div class="form-group">
 									<label>[회사 전화번호] <span class="help"> 예) 010-1234-5793 혹은, 02-123-4567</span></label> <input value="${cvo.number }" type="text" id="number" name="number" class="form-control" placeholder="회사 전화번호" pattern="[0-9]{2,3}-[0-9]{3,4}-[0-9]{3,4}" maxlength="13" required>
 								</div>
@@ -121,9 +127,7 @@
 								</div>
 
 								<div class="form-group">
-									<label>[회사 이미지 업로드] </label><br>
-									<span class="help"> ※1. 이미지는 최소 3장, 최대 12장까지 업로드할 수 있습니다. <br>
-									<c:if test="${cvo.id ne 0 || cvo.id ne ''}"> ※2. 새 이미지를 업로드 하시면 기존 이미지들은 삭제됩니다.</c:if></span><br>
+									<label>[회사 이미지 업로드] </label><br> <span class="help"> ※1. 이미지는 최소 3장, 최대 12장까지 업로드할 수 있습니다. <br> <c:if test="${cvo.id ne 0 || cvo.id ne ''}"> ※2. 새 이미지를 업로드 하시면 기존 이미지들은 삭제됩니다.</c:if></span><br>
 									<!-- 정보를 새로 입력할 때는 required가 달린 input을 보여준다 -->
 									<!-- 기존 정보를 수정할 때는 required가 없는 input을 보여줘서, 굳이 이미지를 업로드 하지 않아도 되게 한다 -->
 									<c:choose>
