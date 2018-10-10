@@ -104,7 +104,7 @@
 <!-- 맵 div -->
 				<div class="col-md-5 responsive-wrap map-wrap">
 					<div class="map-fix">				
-							<div id="map" data-lat="37.556537" data-lon="126.945" data-zoom="17"></div>
+							<div id="map" data-zoom="17"></div>
 							
 					</div>
 				</div>
@@ -132,20 +132,7 @@
 	
 	
 	<script>	
-		function myMap() {
-			var maplat = $('#map').data('lat');
-			var maplon = $('#map').data('lon');
-			var mapzoom = $('#map').data('zoom');
-			
-			var map = new google.maps.Map(document.getElementById('map'), {
-				center : {
-					lat : maplat,
-					lng : maplon
-				},
-				zoom : mapzoom,
-				scrollwheel : false
-			});
-			
+		function myMap() {		
 			$.ajax({
 				type : 'GET',
 				url : encodeURI('/api/list?start=' + start + "&value=" + value + "&type="+type + "&name="+ name),
@@ -155,18 +142,47 @@
 				},
 
 				success : function(data) {
+					var maplat = data.sales[0].lat;
+					var maplon = data.sales[0].lon;
+					var mapzoom = $('#map').data('zoom');
+					
+					var map = new google.maps.Map(document.getElementById('map'), {
+						center : {
+							lat : maplat,
+							lng : maplon
+						},
+						zoom : mapzoom,
+						scrollwheel : false
+					});
+					
+			
 					for(var i=0; i<data.sales.length;i++){
 						var lat1 = data.sales[i].lat;
 						var lon1 = data.sales[i].lon;
+								
+										 
 					
-					var marker = new google.maps.Marker({
+				         
+					var marker1 = new google.maps.Marker({
 						position : {
-							lat : lat1,
-							lng : lon1
+							lat : data.sales[0].lat,
+							lng : data.sales[0].lon
 						},
 						map : map			
 					});
+				
+					
+
+			      var content1 = data.sales[i].name;
+		 
+			        google.maps.event.addListener(marker1, "click", function(event) {
+			        	  var infowindow = new google.maps.InfoWindow({ content: content1});
+			        	infowindow.open(map,marker1);
+
+			        });
+			        
 					}
+		
 
 					}
 			});						
