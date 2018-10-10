@@ -27,6 +27,7 @@
 <link rel="stylesheet" href="/resources/css/set1.css">
 <!-- Main CSS -->
 <link rel="stylesheet" href="/resources/css/style.css">
+<link rel="stylesheet" href="/resources/css/check-box.css">
 </head>
 <body>
 	<!--============================= HEADER =============================-->
@@ -48,15 +49,7 @@
 						<!-- 필터 나눔 기준 -->
 						<div class="col-md-8 featured-responsive">
 							<div class="detail-filter">
-								<p>필터</p>
-								<form class="filter-dropdown">
-									<select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="inlineFormCustomSelect">
-										<option selected>기본순</option>
-										<option value="1">인기순</option>
-										<option value="2">댓글 많은순</option>
-										<option value="3">평점 높은순</option>
-									</select>
-								</form>
+								<button class="btn btn-success" id="search">검색</button>
 								<div class="map-responsive-wrap">
 									<a class="map-icon" href="#"><span
 										class="icon-location-pin"></span></a>
@@ -65,39 +58,48 @@
 						</div>
 					</div>
 
+      
+                   
+                  
 					<!-- 필터 세부사항 div -->
 					<div class="row detail-checkbox-wrap">
+						
 						<div class="col-sm-12 col-md-6 col-lg-4 col-xl-3">
-							<label class="custom-control custom-checkbox">
-							 <input	type="checkbox" value="1" name =filter> <span class="custom-control-indicator"></span>
-								<span class="custom-control-description"> 주차공간 여부</span>
+							<label class="custom-control availability-checkbox checkbox-day">
+							<input type="checkbox" value="1" name="filter" class="custom-control-input">
+								<span class="custom-control-indicator"></span>
+								<span> 주차공간 여부 </span>
 							</label>
 						</div>
+								
 						<div class="col-sm-12 col-md-6 col-lg-4 col-xl-3">
-							<label class="custom-control custom-checkbox"> 
-							<input type="checkbox" value="2" name=filter> <span class="custom-control-indicator"></span>
-								<span class="custom-control-description"> 인터넷 가능 여부 </span>
+							<label class="custom-control availability-checkbox checkbox-day">
+							<input type="checkbox" value="1" name="filter" class="custom-control-input">
+								<span class="custom-control-indicator"></span>
+								<span> 인터넷 가능 여부 </span>
 							</label>
 						</div>
+						
 						<div class="col-sm-12 col-md-6 col-lg-4 col-xl-3">
-							<label class="custom-control custom-checkbox"> 
-							<input type="checkbox" value="3" name=filter> <span class="custom-control-indicator"></span>
-								<span class="custom-control-description"> 흡연 가능 여부 </span>
+							<label class="custom-control availability-checkbox checkbox-day">
+							<input type="checkbox" value="1" name="filter" class="custom-control-input">
+								<span class="custom-control-indicator"></span>
+								<span> 흡연 가능 여부 </span>
 							</label>
 						</div>
+						
 						<div class="col-sm-12 col-md-6 col-lg-4 col-xl-3">
-							<label class="custom-control custom-checkbox">
-							 <input	type="checkbox" value="4" name=filter> <span class="custom-control-indicator"></span>
-								<span class="custom-control-description"> 신용카드 가능 여부</span>
+							<label class="custom-control availability-checkbox checkbox-day">
+							<input type="checkbox" value="1" name="filter" class="custom-control-input">
+								<span class="custom-control-indicator"></span>
+								<span> 신용카드 가능 여부 </span>
 							</label>
 						</div>
-						<input id="search" type="button" value="검색">
-					</div>
-					
 
-					<!-- 판매리스트 div -->
+								
+						
+							<!-- 판매리스트 div -->
 					<div id="salesList" class="row light-bg detail-options-wrap">
-
 					</div>
 				</div>
 

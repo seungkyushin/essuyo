@@ -74,7 +74,8 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-md-4">
+			
+			<div class="col-md-4">
 					<div class="find-place-img_wrap">
 						<div class="grid">
 							<figure class="effect-ruby">
@@ -84,7 +85,7 @@
 									alt="img13" />
 									<figcaption>
 										<h5>렌트</h5>
-										<p>${countList}목록</p>
+										<p>${companyCount.car}목록</p>
 									</figcaption></a>
 							</figure>
 						</div>
@@ -101,7 +102,7 @@
 											alt="img13" />
 											<figcaption>
 												<h5>식당</h5>
-												<p>${countList['렌트카']}목록</p>
+												<p>${companyCount.food}목록</p>
 											</figcaption></a>
 									</figure>
 								</div>
@@ -118,7 +119,7 @@
 											alt="img13" />
 											<figcaption>
 												<h5>문화시설</h5>
-												<p>${countList['박물관']}목록</p>
+												<p>${companyCount.museum}목록</p>
 											</figcaption></a>
 									</figure>
 								</div>
@@ -137,12 +138,8 @@
 											alt="img13" />
 											<figcaption>
 												<h5>숙박</h5>
-												<p>${countList['hotel']}목록</p>
-												<p>${countList.hotel}목록</p>
-												<p>${countList['펜션']}목록</p>
-												<p>${countList['호텔']}목록</p>
-												
-											</figcaption></a>
+												<p>${companyCount.hotel}목록</p>
+																					</figcaption></a>
 									</figure>
 								</div>
 							</div>

@@ -264,6 +264,11 @@ public class UserController {
 		UserVO user = service.getUserVO((String) httpSession.getAttribute("login"));
 
 		newUserInfo.setId(user.getId());
+		
+		if( newUserInfo.getPassword().equals("") == false) {
+			newUserInfo.setPassword(Encryption.SHA512(newUserInfo.getPassword()));
+		}
+		
 		newUserInfo.setImageInfoId(user.getImageInfoId());
 
 		int update = service.setUserInfo(newUserInfo, file);
