@@ -12,7 +12,7 @@ from company;
 <select id="count" resultType="hashMap">
 SELECT type, count(*) AS count 
 FROM company 
-GROUP BY type=#{type};
+GROUP BY type;
 </select>
 
 </mapper>

@@ -83,8 +83,8 @@
 									src="resources/images/menu-rentcar.jpg" class="img-fluid"
 									alt="img13" />
 									<figcaption>
-										<h5>렌트</h5>
-										<p>${countList}목록</p>
+										<h5>렌트카</h5>
+										<p>${countList['렌트카']}목록</p>
 									</figcaption></a>
 							</figure>
 						</div>
@@ -101,7 +101,7 @@
 											alt="img13" />
 											<figcaption>
 												<h5>식당</h5>
-												<p>${countList['렌트카']}목록</p>
+												<p>${countList['식당']}목록</p>
 											</figcaption></a>
 									</figure>
 								</div>
@@ -117,7 +117,7 @@
 											src="resources/images/menu-museum.jpg" class="img-fluid"
 											alt="img13" />
 											<figcaption>
-												<h5>문화시설</h5>
+												<h5>박물관</h5>
 												<p>${countList['박물관']}목록</p>
 											</figcaption></a>
 									</figure>
@@ -136,9 +136,8 @@
 											src="resources/images/menu-hotel.jpg" class="img-fluid"
 											alt="img13" />
 											<figcaption>
-												<h5>숙박</h5>
-												<p>${countList['hotel']}목록</p>
-												<p>${countList.hotel}목록</p>
+												<h5>호텔</h5>
+												<p>${countList}목록</p>
 												<p>${countList['펜션']}목록</p>
 												<p>${countList['호텔']}목록</p>
 												
