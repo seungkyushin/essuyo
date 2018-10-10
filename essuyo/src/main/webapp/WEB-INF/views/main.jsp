@@ -78,7 +78,7 @@
 					<div class="find-place-img_wrap">
 						<div class="grid">
 							<figure class="effect-ruby">
-								<a href="/list?type='렌트카'"> <img
+								<a href="/company/list?type='렌트카'"> <img
 									src="resources/images/menu-rentcar.jpg" class="img-fluid"
 									alt="img13" />
 									<figcaption>
@@ -95,7 +95,7 @@
 							<div class="find-place-img_wrap">
 								<div class="grid">
 									<figure class="effect-ruby">
-										<a href="/list?type='식당'"> <img
+										<a href="/company/list?type='식당'"> <img
 											src="resources/images/menu-restraunt.jpg" class="img-fluid"
 											alt="img13" />
 											<figcaption>
@@ -112,7 +112,7 @@
 							<div class="find-place-img_wrap">
 								<div class="grid">
 									<figure class="effect-ruby">
-										<a href="/list?type='박물관'"> <img
+										<a href="/company/list?type='박물관'"> <img
 											src="resources/images/menu-museum.jpg" class="img-fluid"
 											alt="img13" />
 											<figcaption>
@@ -131,7 +131,7 @@
 							<div class="find-place-img_wrap">
 								<div class="grid">
 									<figure class="effect-ruby">
-										<a href="/list?type='호텔'"> <img
+										<a href="/company/list?type='호텔'"> <img
 											src="resources/images/menu-hotel.jpg" class="img-fluid"
 											alt="img13" />
 											<figcaption>
@@ -152,7 +152,7 @@
 							<div class="find-place-img_wrap">
 								<div class="grid">
 									<figure class="effect-ruby">
-										<a href="/list"> <img src="resources/images/menu-QnA.jpg"
+										<a href="/company/list"> <img src="resources/images/menu-QnA.jpg"
 											class="img-fluid" alt="img13" />
 											<figcaption>
 												<h5>질문 이써Yo?</h5>
@@ -266,8 +266,8 @@
 	function button_click() {
 		var type = document.getElementById("listValue").value;
 		var name =document.getElementById("inputValue").value;
-		if(type != "" && name != ""){
-		document.location.href = "list?type=" +'"'+ type+'"' +"&name="+'"'+ name+'"';
+		if(type != "" &&( name != "" &&(name =="서울"|| name=="부산"||name=="광주"||name=="강원도"))){
+		document.location.href = "company/list?type=" +'"'+ type+'"' +"&name="+'"'+ name+'"';
 		}
 	};
 	</script>

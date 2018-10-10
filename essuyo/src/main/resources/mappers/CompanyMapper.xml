@@ -14,27 +14,26 @@ limit #{start},#{limit};
 ]]>
 	</select>
 
-
+<!--  판매리스트 페이지 필터링 -->
 	<select id="filter" resultType="CompanyVO">
-		select *
+		select * 
 		from company
 		where type=#{type}
-		      <if test="name.equals('null')">
-		      and
-		      </if>
 		      <if test="name.equals('서울')">
-		      and area_list_id = (select id from area_list where name=#{name}) and  
+		      and area_list_id = (select id from area_list where name=#{name})
 		      </if>
 		       <if test="name.equals('부산')">
-		      and area_list_id = (select id from area_list where name=#{name}) and  
+		      and area_list_id = (select id from area_list where name=#{name})
 		      </if>
 		        <if test="name.equals('광주')">
-		      and area_list_id = (select id from area_list where name=#{name}) and  
+		      and area_list_id = (select id from area_list where name=#{name})
 		      </if>
 		          <if test="name.equals('강원도')">
-		      and area_list_id = (select id from area_list where name=#{name}) and  
+		      and area_list_id = (select id from area_list where name=#{name})  
 		      </if> 
-		      id = ANY (select company_id from facility_admin
+		      
+		     <if test="value != ''">
+		      and id = ANY (select company_id from facility_admin
 		          <trim prefix="WHERE" suffixOverrides="or">
 			       <if test="value1 == 1"> facility_id = 1 or</if>
 			       <if test="value2 == 2"> facility_id = 2 or</if>
@@ -43,27 +42,9 @@ limit #{start},#{limit};
 		          </trim>
 		group by company_id
 		having count(*)>=#{count})
+		     </if>
 		limit #{start}, #{limit};
 	</select>
-	
-	
-	<select id="mainSearch" resultType="CompanyVO">
-		select *
-		from company
-		where  type=#{type} and 
-		       area_list_id = (select id from area_list where name=#{name}) and  
-		       id = ANY (select company_id from facility_admin
-		          <trim prefix="WHERE" suffixOverrides="or">
-			       <if test="value1 == 1"> facility_id = 1 or</if>
-			       <if test="value2 == 2"> facility_id = 2 or</if>
-			       <if test="value3 == 3"> facility_id = 3 or</if>
-			       <if test="value4 == 4"> facility_id = 4 or</if>
-		          </trim>
-		group by company_id
-		having count(*)>=#{count})
-		limit #{start}, #{limit};
-	</select>
-
 
 
 	<select id="select" resultType="CompanyVO">
@@ -92,6 +73,37 @@ FROM company WHERE id = #{companyId};
 		where id=#{id};
 	</update>
 
+<!--  판매리스트 갯수 구하기 -->
+<select id="listCount" resultType="java.lang.Integer">
+        select count(*) as count
+		from company
+		where type=#{type}
+		      <if test="name.equals('서울')">
+		      and area_list_id = (select id from area_list where name=#{name})
+		      </if>
+		       <if test="name.equals('부산')">
+		      and area_list_id = (select id from area_list where name=#{name})
+		      </if>
+		        <if test="name.equals('광주')">
+		      and area_list_id = (select id from area_list where name=#{name})
+		      </if>
+		          <if test="name.equals('강원도')">
+		      and area_list_id = (select id from area_list where name=#{name})  
+		      </if> 
+		      
+		     <if test="value != ''">
+		      and id = ANY (select company_id from facility_admin
+		          <trim prefix="WHERE" suffixOverrides="or">
+			       <if test="value1 == 1"> facility_id = 1 or</if>
+			       <if test="value2 == 2"> facility_id = 2 or</if>
+			       <if test="value3 == 3"> facility_id = 3 or</if>
+			       <if test="value4 == 4"> facility_id = 4 or</if>
+		          </trim>
+		group by company_id
+		having count(*)>=#{count})
+		     </if>
+		     ;
+</select>
 
 
 	<select id="selectRankCompany" resultType="CompanyVO">

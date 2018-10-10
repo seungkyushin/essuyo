@@ -32,6 +32,7 @@
  	</insert>
   
   
+ <!--   댓글 갯수 구하기 -->
     <select id="commentCount" resultType="java.lang.Integer">
     select count(*)
     from comment

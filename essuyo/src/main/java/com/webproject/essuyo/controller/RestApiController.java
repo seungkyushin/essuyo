@@ -58,6 +58,7 @@ public class RestApiController {
 		
 		} catch (Exception e) {
      		e.printStackTrace();
+     		
      		entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 		

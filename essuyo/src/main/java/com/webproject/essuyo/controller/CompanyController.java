@@ -1,6 +1,9 @@
 package com.webproject.essuyo.controller;
 
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.inject.Inject;
 
 import org.slf4j.Logger;
@@ -12,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+
 
 import com.webproject.essuyo.service.CompanyService;
 import com.webproject.essuyo.service.UserService;
@@ -27,13 +31,16 @@ public class CompanyController {
 
 	@Autowired
 	private UserService userService;
+	
 
 //	판매리스트
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String salesList(@RequestParam("type") String type, @RequestParam(value="name", defaultValue="null")String name, Model model) throws Exception {
 		logger.info("ListGET()....");
+
 		model.addAttribute("type",type);
 		model.addAttribute("name",name);
+		
 		
 		
 		return "list";
