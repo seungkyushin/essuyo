@@ -1,6 +1,7 @@
 package com.webproject.essuyo.service.impl;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -31,18 +32,21 @@ public class MainServiceImpl implements MainService {
 		Map<String,Object> tempMap = new HashMap<>();
 		
 		for(Map<String,Object> data : resultMap) {
+			
 			for(String key : data.keySet()) {
 				if(key.equals("type") == true ) {
+					data.get(key);
 					
-				}else if(key.equals("count") == true ) {
-					
-				}
-				
-				tempMap.put(key, data.get(key));
+				} 
+				else if(key.equals("count") == true ) {
+					data.get(key);
+				} 
+				tempMap.put(key, data.values());
 			}
 			
-			tempMap.put("hotel", 23123123);
 			tempMap.put("펜션", 53453);
+			resultMap.add(tempMap);
+			System.out.println(tempMap);
 		}
 		
 		return tempMap;
