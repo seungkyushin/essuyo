@@ -29,6 +29,7 @@ import com.webproject.essuyo.service.CompanyService;
 import com.webproject.essuyo.service.ImageAdminService;
 import com.webproject.essuyo.service.ReservationService;
 import com.webproject.essuyo.service.impl.UserServiceImpl;
+import com.webproject.essuyo.utility.Encryption;
 
 @Controller
 @RequestMapping("/user/*")
@@ -87,7 +88,8 @@ public class UserController {
 
 	@RequestMapping(value = "/regist", method = RequestMethod.POST)
 	public String registPost(UserVO vo, HttpSession session, Model model, RedirectAttributes rttr) throws Exception {
-		logger.info("registPost.......");
+		logger.info("registPost.......");		
+		
 		try {
 			service.regist(vo);
 			rttr.addFlashAttribute("errorMessageTitle", "가입 성공");
