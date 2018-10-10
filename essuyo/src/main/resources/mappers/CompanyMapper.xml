@@ -149,12 +149,14 @@ FROM company WHERE id = #{companyId};
 			<when test="type != null and type.equals('price')">
 
 				<if test="subType != null and subType.equals('max')">
-					WHERE id = ANY (SELECT company_id FROM reservation GROUP BY company_id
+					WHERE id = ANY (SELECT company_id FROM reservation WHERE NOT state="취소"  
+					GROUP BY company_id
 					HAVING sum(total_price) = (SELECT MAX(counted) 
 					FROM (SELECT sum(total_price) as counted FROM reservation WHERE NOT state="취소" GROUP BY company_id) AS counts))
 				</if>
 				<if test="subType != null and subType.equals('min')">
-					WHERE id = ANY (SELECT company_id FROM reservation GROUP BY company_id
+					WHERE id = ANY (SELECT company_id FROM reservation WHERE NOT state="취소"  
+					GROUP BY company_id
 					HAVING sum(total_price) = (SELECT MIN(counted) 
 					FROM (SELECT sum(total_price) as counted FROM reservation WHERE NOT state="취소" GROUP BY company_id) AS counts))
 				</if>

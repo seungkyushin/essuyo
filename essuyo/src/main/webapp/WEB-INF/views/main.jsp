@@ -34,7 +34,7 @@
 						</div>
 						<div class="row d-flex justify-content-center">
 							<div class="col-md-10">
-								<form class="form-wrap mt-4"">
+								<form class="form-wrap mt-4">
 									<div class="btn-group" role="group" aria-label="Basic example"">
 										<input list="list" placeholder="선택" name="type"
 											class="btn-group1" id="listValue">
@@ -78,7 +78,7 @@
 					<div class="find-place-img_wrap">
 						<div class="grid">
 							<figure class="effect-ruby">
-								<a href="/list?type='렌트카'"> <img
+								<a href="company/list?type='렌트카'"> <img
 									src="resources/images/menu-rentcar.jpg" class="img-fluid"
 									alt="img13" />
 									<figcaption>
@@ -267,7 +267,7 @@
 		var type = document.getElementById("listValue").value;
 		var name =document.getElementById("inputValue").value;
 		if(type != "" && name != ""){
-		document.location.href = "list?type=" +'"'+ type+'"' +"&name="+'"'+ name+'"';
+		document.location.href = "company/list?type=" +'"'+ type+'"' +"&name="+'"'+ name+'"';
 		}
 	};
 	</script>

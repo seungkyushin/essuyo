@@ -54,7 +54,7 @@
 
 				<div class="row">
 
-					<div class="col-lg-4 col-xlg-3 col-md-5">
+					<div class="col-lg-6 col-xlg-6 col-md-6">
 						<div class="card card-body">
 							<h4 class="card-title">판매 상품 리스트
 							<a style= "float: right" href="/product/register"><i class="icon-plus"></i></a>
@@ -62,7 +62,7 @@
 							
 							<div class="table-responsive">
 
-								<table id="product-list-table" class="table table-hover">
+								<table style="overflow-y:auto;overflow-x:hidden;" id="product-list-table" class="table table-hover">
 									<thead>
 										<tr>
 											<th scope="col">상품번호</th>
@@ -79,9 +79,11 @@
 							</div>
 						</div>
 					</div>
+				<div class="col-lg-4">
 					<div id="product-info" style="display:none">
 					
 					</div>
+				</div>
 				</div>
 
 			</div>
@@ -120,7 +122,9 @@
 		</ul>
 		<div class="bottom-icons">
 			<div class="open-now">{{state}}</div>
+			<a style="float:right" href=""> <i style="width:30px;height:auto;" class="icon-note"></i> </a>
 		</div>
+				
 	</div>
 </a>
 </div>
