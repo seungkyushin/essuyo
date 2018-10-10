@@ -38,5 +38,15 @@
     where company_id = #{company_id};
     </select>
     
+    <update id="update">
+    	update comment set title = #{title}, content = #{content}, score = #{score}, mod_date = now()
+    	where id = #{id}
+    </update>
+    
+    <delete id="delete">
+    	delete comment
+    	where id = #{id}
+    </delete>
+    
     
  </mapper>

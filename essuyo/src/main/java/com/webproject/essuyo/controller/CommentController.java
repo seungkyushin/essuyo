@@ -5,8 +5,12 @@ import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -64,5 +68,36 @@ public class CommentController {
 		service.writerComment(comment);
 		
 		return "redirect:/company/detail?id=" + comment.getCompanyId();
+	}
+	
+	@RequestMapping(value ="/{id}", method= {RequestMethod.PUT, RequestMethod.PATCH})
+	public ResponseEntity<String> update(@PathVariable("id") Integer id, @RequestBody CommentVO vo){
+		
+		ResponseEntity<String> entity = null;
+		try {
+			vo.setId(id);
+			service.modifyComment(vo);
+			
+			entity = new ResponseEntity<>("SUCCESS", HttpStatus.OK);
+		}catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+		
+	}
+	
+	@RequestMapping(value ="/{id}", method= RequestMethod.DELETE)
+	public ResponseEntity<String> remove(@PathVariable("id") Integer id){
+		
+		ResponseEntity<String> entity = null;
+		try {
+			service.removeComment(id);
+			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
+		}catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+		return entity;
 	}
 }

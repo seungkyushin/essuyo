@@ -85,4 +85,16 @@ public class CommentServiceImpl implements CommentService {
 
 	}
 
+	@Override
+	public void modifyComment(CommentVO comment) throws Exception {
+		
+		commentDao.update(comment);
+	}
+
+	@Override
+	public void removeComment(Integer id) throws Exception {
+		
+		commentDao.delete(id);
+	}
+
 }

@@ -14,4 +14,8 @@ public interface CommentService {
 	
 	// 댓글 입력
 	public void writerComment(CommentVO comment) throws Exception;
+	// 댓글 수정
+	public void modifyComment(CommentVO comment) throws Exception;
+	// 댓글 삭제
+	public void removeComment(Integer id) throws Exception;
 }

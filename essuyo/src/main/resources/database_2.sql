@@ -113,7 +113,7 @@ CREATE TABLE comment (
 	user_id INTEGER NOT NULL,/* 사용자번호 */
 	company_id INTEGER NOT NULL,/* 회사번호 */
 	
-	CONSTRAINT chk_score CHECK (score > 0 AND score <=10),
+	CONSTRAINT chk_score CHECK (score > 0 AND score <=5),
 	FOREIGN KEY (user_id) REFERENCES user(id) ON DELETE CASCADE,
 	FOREIGN KEY (company_id) REFERENCES company(id) ON DELETE CASCADE
 )DEFAULT CHARSET=utf8; 

@@ -102,7 +102,7 @@
 								<hr>
 								
 								 <c:if test="${ !empty sessionScope.login}">
-								<form role="form" method="POST"	action="/comment/writerComment">
+								<form role="form" method="POST"	action="/comment/writerComment" onsubmit="return checkValue();">
 								
 								<div class="customer-review_wrap">
 									<div class="customer-img">
@@ -111,13 +111,13 @@
 									<div class="customer-content-wrap">
 										<div class="customer-content">
 											<div class="customer-review">
-												<input type="text" name='title' class="form-control" placeholder="제목">
+												<input type="text" name='title' id='title' class="form-control" placeholder="제목">
 											</div>
 											
 											<div class="customer-rating">8.0</div>
 										</div>
 										
-										<textarea class="form-control" name="content" rows="3"placeholder="내용"></textarea>
+										<textarea class="form-control" name="content" id='content' rows="3"placeholder="내용"></textarea>
 			
 									</div>
 								</div>
@@ -231,10 +231,10 @@
        </div>
 
 
-		<a href=""> 
+		<a href="/comment/update?id={{id}}"> 
 			<i class="ti-pencil-alt"></i>
 		</a>
-		<a href=""> 
+		<a href="/comment/remove?id={{id}}"> 
 			<i class="icon-trash"></i>
 		</a> 
    </div>
@@ -377,8 +377,22 @@
 			Ajax("GET", "/api/good/${user.id}", function(data) {
 				$("#good-count").text(data);
 			});
+		}
+		
+		function checkValue() {
+			var title = document.getElementById("title").value;
+			var content = document.getElementById("content").value;
 
-			
+			if (title == "" || title == null) {
+				myAlert("ERROR", "제목을 입력해주세요!");
+
+				return false;
+			}
+			if (content == "" || content == null) {
+				myAlert("ERROR", "댓글 내용을 입력해주세요!");
+
+				return false;
+			}
 		}
 	</script>
 

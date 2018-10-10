@@ -20,41 +20,39 @@
 <title>댓글 관리</title>
 </head>
 <body>
-<%@ include file="/pageframe/header.jsp"%>
-         
-	<form role="form" method="POST" action="/comment/writerComment">
+	<%@ include file="/pageframe/header.jsp"%>
+
+	<form role="form" method="POST" action="/comment/writerComment"
+		onsubmit="return checkValue();">
 		<div class="box-body">
 			<div class="form-group">
 				<label for="exInputWriter"> WRITER </label>
 				<!-- 발송자 아이디 받아오기 -->
 				<input type="text" name='userId' class="form-control"
-				 	 value="${commentVO.userId }" readonly="readonly">  
+					value="${commentVO.userId }" readonly="readonly">
 			</div>
 			<div class="form-group">
-				<input type="hidden" name='companyId' value="${commentVO.companyId }">
+				<input type="hidden" name='companyId'
+					value="${commentVO.companyId }">
 			</div>
 			<div class="form-group">
-				<label for="exInputTitle"> TITLE </label> <input type="text"
+				<label for="exInputTitle"> TITLE </label> <input type="text" id="title"
 					name='title' class="form-control" placeholder="Enter Title">
 			</div>
 			<div class="form-group">
 				<label for="exInputContent"> CONTENT </label>
-				<textarea class="form-control" name="content" rows="3"
+				<textarea class="form-control" name="content" rows="3" id="content"
 					placeholder="Enter Content"></textarea>
 			</div>
 			<div class="form-group">
-				<label for="exInputWriter"> SCORE </label>
-				<select name="score" id="score">
-					<option value="0"> ☆☆☆☆☆ </option>
-					<option value="1"> ★☆☆☆☆ </option>
-					<option value="2"> ★★☆☆☆ </option>
-					<option value="3"> ★★★☆☆ </option>
-					<option value="4"> ★★★★☆ </option>
-					<option value="5"> ★★★★★ </option>
-					<!-- <option value="7"> 7 </option>
-					<option value="8"> 8 </option>
-					<option value="9"> 9 </option>
-					<option value="10"> 10 </option> -->
+				<label for="exInputWriter"> SCORE </label> <select name="score" 
+					id="score">
+					<option value="0">☆☆☆☆☆</option>
+					<option value="1">★☆☆☆☆</option>
+					<option value="2">★★☆☆☆</option>
+					<option value="3">★★★☆☆</option>
+					<option value="4">★★★★☆</option>
+					<option value="5">★★★★★</option>
 				</select>
 			</div>
 
@@ -71,10 +69,9 @@
 		</div>
 	</form>
 
-<%@ include file="/pageframe/footer.jsp"%>
+	<%@ include file="/pageframe/footer.jsp"%>
 
-<script type="text/javascript">
-	
+	<script type="text/javascript">
 		$(document).ready(function() {
 			var formObj = $("form[role='form']");
 
@@ -84,7 +81,22 @@
 				formObj.submit();
 			});
 		});
+		function checkValue() {
+			var title = document.getElementById("title").value;
+			var content = document.getElementById("content").value;
+
+			if (title == "" || title == null) {
+				myAlert("ERROR", "제목을 입력해주세요!");
+				title.focus();
+				return false;
+			}
+			if (content == "" || content == null) {
+				myAlert("ERROR", "댓글 내용을 입력해주세요!");
+				content.focus();
+				return false;
+			}
+		}
 	</script>
-	
+
 </body>
 </html>

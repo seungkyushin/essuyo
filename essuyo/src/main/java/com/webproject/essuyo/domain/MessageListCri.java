@@ -12,6 +12,8 @@ public class MessageListCri implements Serializable{
 	private int perPageNum;
 	private String userID;
 	
+	
+	
 	public MessageListCri() {
 		this.page = 1;
 		this.perPageNum = 10;

@@ -52,7 +52,7 @@
 						<div class="col-lg-4 col-xlg-3 col-md-5">
 							<div class="card">
 								<div class="card-body">
-									<form role="form" method="POST" action="/message/registerSend">
+									<form role="form" method="POST" action="/message/registerSend"  onsubmit="return checkValue();">
 										<div class="box-body">
 											<div class="form-group">
 												<label for="exInputWriter"> 보낸 사람 </label>
@@ -114,6 +114,20 @@
 					formObj.submit();
 				});
 			});
+			
+			
+			function checkValue() {
+				var title = document.getElementById("title").value;
+
+				if (title == "" || title == null) {
+					myAlert("ERROR","제목을 입력해주세요!");
+					title.focus();
+					return false;
+				}
+			}
+			
+			//onclick="javascript:checkValue()"
+			//onsubmit="return checkValue();"
 		</script>
 </body>
 </html>

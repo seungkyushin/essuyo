@@ -1,6 +1,7 @@
 package com.webproject.essuyo.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.webproject.essuyo.domain.MessageListCri;
 import com.webproject.essuyo.domain.MessageVO;
@@ -22,5 +23,6 @@ public interface MessageService {
 	public List<MessageVO> recevieCri(MessageListCri listCri)throws Exception;
 	public int sendCountPaging(String userID) throws Exception;
 	public int recevieCountPaging(String userID) throws Exception;
+	public Map<String, Object> getMegList(MessageListCri listCri) throws Exception;
 	
 }

@@ -33,4 +33,13 @@ public class CommentDao {
 		return sqlSession.selectOne(NAME_SAPACE+".commentCount",company_id);
 	}
 	
+	// 댓글 수정
+	public void update(CommentVO comment) throws Exception{
+		sqlSession.update(NAME_SAPACE + ".update", comment);
+	}
+	
+	// 댓글 삭제
+	public void delete(Integer id) throws Exception{
+		sqlSession.update(NAME_SAPACE + ".delete", id);
+	}
 }

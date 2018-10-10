@@ -1,13 +1,18 @@
 package com.webproject.essuyo.service.impl;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.webproject.essuyo.dao.MessageDao;
 import com.webproject.essuyo.domain.MessageListCri;
+import com.webproject.essuyo.domain.MessagePageMaker;
 import com.webproject.essuyo.domain.MessageVO;
 import com.webproject.essuyo.service.MessageService;
 
@@ -16,6 +21,9 @@ public class MessageServiceImpl implements MessageService {
 
 	@Inject
 	private MessageDao dao;
+	
+	@Autowired
+	private MessageService messageService;
 	
 	@Override
 	public void regist(MessageVO message) throws Exception {
@@ -82,6 +90,38 @@ public class MessageServiceImpl implements MessageService {
 		
 		return dao.recevieCountPaging(userID);
 	}
+
+	@Override
+	public Map<String, Object> getMegList(MessageListCri listCri) throws Exception {
+
+		MessagePageMaker pageMaker = new MessagePageMaker();
+		int sPage = (listCri.getPage()-1)*10;
+		listCri.setPage(sPage);
+		pageMaker.setListCri(listCri);
+		pageMaker.setListTotalCount(messageService.recevieCountPaging(listCri.getUserID()));
+
+		Map<String, Object> resultMap = new HashMap<>();
+		List<MessageVO> list = dao.recevieCri(listCri);	
+		List<Object> salesList = new ArrayList<>();
+		
 	
+			for(MessageVO vo : list) {
+				Map<String, Object> salesMap = new HashMap<>();
+				salesMap.put("megNum", vo.getMegNum());
+				salesMap.put("title", vo.getTitle());
+				salesMap.put("sendDate", vo.getSendDate());
+				salesMap.put("readCheck", vo.getReadCheck());
+				salesMap.put("content", vo.getContent());
+				salesMap.put("userID", vo.getUserID());
+				salesMap.put("receiverID", vo.getReceiverID());
+				
+				
+				salesList.add(salesMap);
+				}
+			
+		resultMap.put("sales", salesList);
+		
+		return resultMap;
+	}
 
 }
