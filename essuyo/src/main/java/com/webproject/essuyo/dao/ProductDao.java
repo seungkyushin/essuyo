@@ -58,5 +58,9 @@ public class ProductDao {
 	public int insertAdmin(Map<String,Integer> param) throws Exception{
 		return sqlSession.insert(NAME_SPACE + ".insertAdmin" , param);
 	}
+	
+	public int delete(int id) throws Exception{
+		return sqlSession.insert(NAME_SPACE + ".delete" , id);
+	}
 
 }

@@ -19,8 +19,9 @@ public interface ProductService {
 	public int addProduct(ProductVO product, int productCount, int companyId, List<MultipartFile> imageList);
 	
 	public int updateProduct(ProductVO product, List<MultipartFile> imageList);
-	
 
+	public void deleteProduct(int productId);
+	
 	public List<String> getImagePath(int productId);
 	
 	public List<String> getDisableDate(int productId);
