@@ -45,8 +45,7 @@ public class MainServiceImpl implements MainService {
 			}
 			
 			tempMap.put("펜션", 53453);
-			resultMap.add(tempMap);
-			System.out.println(tempMap);
+
 		}
 		
 		return tempMap;
