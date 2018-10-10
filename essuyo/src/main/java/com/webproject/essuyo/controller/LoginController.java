@@ -63,11 +63,13 @@ public class LoginController {
 			logger.info("new company login success");
 			session.setAttribute("companyLogin", vo.getBusinessId());
 			session.setAttribute("login", vo.getEmail());
+			service.updateLastDate(vo);
 			return "redirect:/";
 		} else {
 			// 비즈니스 아이디가 0일 경우 그냥 login 어트리뷰트만 세트해 준다.
 			logger.info("new login success");
 			session.setAttribute("login", vo.getEmail());
+			service.updateLastDate(vo);
 			return "redirect:/";
 		}
 	}
