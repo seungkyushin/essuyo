@@ -193,7 +193,6 @@
             <span class="m-b-15 d-block">{{content}}</span>
             <div class="comment-footer">
                 <span class="text-muted float-right">{{regDate}}</span>
-                <span class="label label-rounded label-primary">{{state}}</span>
                 <span class="action-icons">
                     <a href="javascript:void(0)">
                         <i class="ti-pencil-alt"></i>
@@ -281,7 +280,6 @@
         			tempData['title'] = data.title;
         			tempData['content'] = data.content;
         			tempData['regDate'] = data.regDate;
-        			tempData['state'] = data.state;
         			
            	    	makeHTML("#comment-template", "#comment-list", tempData);
 				});

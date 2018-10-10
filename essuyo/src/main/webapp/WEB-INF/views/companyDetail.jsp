@@ -97,7 +97,9 @@
 					</div>
 					<div id="tab-2" class="tab-content">
 						<div class="booking-checkbox_wrap">
-							<div id="comment-list" class="booking-checkbox_wrap mt-4">
+				
+				<div class="booking-checkbox_wrap mt-4">
+							
 								<h5>총 댓글 ${company.review}개</h5>
 								<hr>
 								
@@ -138,10 +140,12 @@
 
 									<hr>
 								</c:if>
-
-
+						</div>
+							<div id="comment-list" style="overflow-y:auto;overflow-x:hidden;height:600px;" class="booking-checkbox_wrap mt-4">
 							</div>
 						</div>
+						
+						
 					</div>
 				</div>
 				<div class="col-md-4 responsive-wrap">
@@ -329,8 +333,7 @@
 							tempData['url'] = data.url[0];
 							tempData['name'] = data.name;
 							tempData['discription'] = data.discription;
-							tempData['saleDate'] = data.saleStartDate + " ~ "
-									+ data.saleEndDate;
+							tempData['saleDate'] = data.saleStartDate + " ~ " + data.saleEndDate;
 							tempData['state'] = data.state;
 							tempData['price'] = dotSplit(data.price);
 

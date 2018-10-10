@@ -29,7 +29,6 @@
 <body>
 	<%@ include file="/pageframe/header.jsp"%>
 
-	<!--============================= RESERVE A SEAT =============================-->
 	<form id="product-form" action="/product/register" method="POST" enctype="multipart/form-data">
 	<section class="reserve-block">
 		<div class="container">
@@ -66,7 +65,7 @@
 				</ul>
 
 
-				<input type="file" name="fileList" id="multipleFile" multiple/>
+				<input type="file" name="fileList" id="multipleFile" data-max="3" data-min="3" multiple/>
 
 			
 					
@@ -148,14 +147,15 @@
     
 	<script>
 	
-var maxImageCount = 3;
 $(document).ready(function() {
 		
 	initImageFrame();
 	
 	$("#image-plus").on("click", function() {
-		if( maxImageCount < 12 ){
-			maxImageCount += 1;
+		var max = $("#multipleFile").data("max");
+		
+		if( max < 12 ){
+			$("#multipleFile").data("max",max+1);
 			initImageFrame();	
 		}else{
 			myAlert("INFOMATION !" ,"최대 12개 입니다.");
@@ -163,8 +163,10 @@ $(document).ready(function() {
 	});
 	
 	$("#image-minus").on("click", function() {
-		if( maxImageCount > 3 ){
-			maxImageCount -= 1;
+		var max = $("#multipleFile").data("max");
+		var min = $("#multipleFile").data("min");
+		if( max > min ){
+			$("#multipleFile").data("max",max-1);
 			initImageFrame();	
 		}else{
 			myAlert("INFOMATION !" ,"최소 3개 입니다.");
@@ -217,13 +219,15 @@ $(document).ready(function() {
 			});
 			
 			//< 유저 썸네일
-	   		ImageThumbnailCount("#productImage-","#multipleFile",3,maxImageCount);
+	   		ImageThumbnail("#productImage-","#multipleFile");
 			
 });
 
 function initImageFrame(){
 	$("#imageList").empty();
-	for(var i=0; i<maxImageCount; i++){
+	var max = $("#multipleFile").data("max");
+	
+	for(var i=0; i<max; i++){
 		var html = '<div class="col-md-1">'
 		+ '<img style="border-style:dashed"'
 		+ 'id="productImage-' + i + '" src="/resources/images/placeholder-image.png" class="img-fluid" alt="#"></div>'
