@@ -62,99 +62,107 @@
 							<div class="card-body">
 								<h4 class="card-title">사업자 정보 입력 및 수정</h4>
 								<h5 class="card-subtitle">요구사항에 따라 빈 칸을 채워주세요</h5>
-								
-								<c:if test="${cvo.id ne 0 || cvo.id ne ''}">
-								<form class="form-horizontal m-t-30" id="registForm" name="registForm" method="post" enctype="multipart/form-data" action="/user/companyModify">
-								</c:if>								
-								<c:if test="${cvo.id eq 0 || cvo.id eq ''}">
-								<form class="form-horizontal m-t-30" id="registForm" name="registForm" method="post" enctype="multipart/form-data" action="/user/companyUpdate">
-								</c:if>
-								
-								
 
-									<div class="form-group">
-										<label>[회사명] </label> <input value="${cvo.name}" type="text" id="name" name="name" class="form-control" placeholder="회사명" required>
-									</div>
+								<c:choose>				
+								<c:when test="${cvo == null || cvo == ''}">
+										<form class="form-horizontal m-t-30" id="registForm" name="registForm" method="post" enctype="multipart/form-data" action="/user/companyUpdate">
+									</c:when>					
+									<c:when test="${cvo != null || cvo != ''}">
+										<form class="form-horizontal m-t-30" id="registForm" name="registForm" method="post" enctype="multipart/form-data" action="/user/companyModify">
+									</c:when>
+									
+								</c:choose>
 
-									<div class="form-group">
-										<label>[회사 업종]</label> <select class="custom-select col-12" id="type" name="type" required>
-											<option selected="selected" value="">업종 선택</option>
-											<option value="숙박">숙박</option>
-											<option value="렌트카">렌트카</option>
-											<option value="음식점">음식점</option>
-											<option value="박물관">박물관</option>
-										</select>
-									</div>
-									<div class="form-group">
-										<label>[회사 소개문]<span class="help"> ※ 250자 이내로 입력해 주세요</span></label>
-										<textarea name="discription" id="discription" class="form-control" rows="5" onkeyup="len_chk()"></textarea>
-									</div>
 
-									<div class="form-group">
-										<label>[회사 주소] </label> <input value="${cvo.address }" type="text" id="address" name="address" class="form-control" placeholder="회사주소" required>
-									</div>
-									<div class="form-group">
-										<label>[회사 소재 지역]</label> <select class="custom-select col-12" id="areaListId" name="areaListId" required>
-											<option selected="selected" value="">지역 선택</option>
-											<option value="1">서울</option>
-											<option value="2">부산</option>
-											<option value="3">광주</option>
-											<option value="4">강원도</option>
-										</select>
-									</div>
+								<div class="form-group">
+									<label>[회사명] </label> <input value="${cvo.name}" type="text" id="name" name="name" class="form-control" placeholder="회사명" required>
+								</div>
 
-									<div class="form-group">
-										<label>[회사 전화번호] <span class="help"> 예) 010-1234-5793 혹은, 02-123-4567</span></label> <input value="${cvo.number }" type="text" id="number" name="number" class="form-control" placeholder="회사 전화번호" pattern="[0-9]{2,3}-[0-9]{3,4}-[0-9]{3,4}" maxlength="13" required>
-									</div>
+								<div class="form-group">
+									<label>[회사 업종]</label> <select class="custom-select col-12" id="type" name="type" required>
+										<option selected="selected" value="">업종 선택</option>
+										<option value="숙박">숙박</option>
+										<option value="렌트카">렌트카</option>
+										<option value="음식점">음식점</option>
+										<option value="박물관">박물관</option>
+									</select>
+								</div>
+								<div class="form-group">
+									<label>[회사 소개문]<span class="help"> ※ 250자 이내로 입력해 주세요</span></label>
+									<textarea name="discription" id="discription" class="form-control" rows="5" onkeyup="len_chk()"></textarea>
+								</div>
 
-									<div class="form-group">
-										<label>[회사 홈페이지] <span class="help"> 예) www.example.com 혹은, www.example.co.kr</span></label> <input value="${cvo.homepage }" type="text" id="homepage" name="homepage" class="form-control" placeholder="회사 홈페이지" required>
-									</div>
-									<div class="form-group">
-										<label>[영업 상태]</label> <select class="custom-select col-12" id="state" name="state" required>
-											<option selected="selected" value="">영업상태</option>
-											<option value="OPEN">영업중</option>
-											<option value="CLOSED">휴업중</option>
-										</select>
-									</div>
+								<div class="form-group">
+									<label>[회사 주소] </label> <input value="${cvo.address }" type="text" id="address" name="address" class="form-control" placeholder="회사주소" required>
+								</div>
+								<div class="form-group">
+									<label>[회사 소재 지역]</label> <select class="custom-select col-12" id="areaListId" name="areaListId" required>
+										<option selected="selected" value="">지역 선택</option>
+										<option value="1">서울</option>
+										<option value="2">부산</option>
+										<option value="3">광주</option>
+										<option value="4">강원도</option>
+									</select>
+								</div>
 
-									<div class="form-group">
-										<label>[회사 이미지 업로드] </label><span class="help"> ※1. 이미지는 최소 3장, 최대 12장까지 업로드할 수 있습니다. <c:if test="${cvo.id ne 0 || cvo.id ne ''}"> ※2. 새 이미지를 업로드 하시면 기존 이미지들은 삭제됩니다.</c:if></span><br>
-<!-- 정보를 새로 입력할 때는 required가 달린 input을 보여준다 -->
-										<c:if test="${cvo.id eq 0 || cvo.id eq ''}">
-										<input type="file" multiple="multiple" class="imgsShow" name="imgs"  required accept="image/png, image/jpeg"><br>
-										<input type="file" multiple="multiple" class="imgsShow" name="imgs" required accept="image/png, image/jpeg"><br>
-										<input type="file" multiple="multiple" class="imgsShow" name="imgs" required accept="image/png, image/jpeg"><br>
-										</c:if>
-<!-- 기존 정보를 수정할 때는 required가 없는 input을 보여줘서, 굳이 이미지를 업로드 하지 않아도 되게 한다 -->
-										<c:if test="${cvo.id ne 0 || cvo.id ne ''}">
-										<input type="file" multiple="multiple" class="imgsShow" name="imgs"  accept="image/png, image/jpeg"><br>
-										<input type="file" multiple="multiple" class="imgsShow" name="imgs" accept="image/png, image/jpeg"><br>
-										<input type="file" multiple="multiple" class="imgsShow" name="imgs" accept="image/png, image/jpeg"><br>										
-										</c:if>
-										
-										<input type="file" multiple="multiple" class="imgsHide" name="imgs" accept="image/png, image/jpeg"><br>
-										<input type="file" multiple="multiple" class="imgsHide" name="imgs" accept="image/png, image/jpeg"><br>
-										<input type="file" multiple="multiple" class="imgsHide" name="imgs" accept="image/png, image/jpeg"><br>
-										<input type="file" multiple="multiple" class="imgsHide" name="imgs" accept="image/png, image/jpeg"><br>
-										<input type="file" multiple="multiple" class="imgsHide" name="imgs" accept="image/png, image/jpeg"><br>
-										<input type="file" multiple="multiple" class="imgsHide" name="imgs" accept="image/png, image/jpeg"><br>
-										<input type="file" multiple="multiple" class="imgsHide" name="imgs" accept="image/png, image/jpeg"><br>
-										<input type="file" multiple="multiple" class="imgsHide" name="imgs" accept="image/png, image/jpeg"><br>
-										<input type="file" multiple="multiple" class="imgsHide" name="imgs" accept="image/png, image/jpeg"><br>
-										<button type="button" name="show" id="show" onclick="showMore();">More</button>
-									</div>
+								<div class="form-group">
+									<label>[회사 전화번호] <span class="help"> 예) 010-1234-5793 혹은, 02-123-4567</span></label> <input value="${cvo.number }" type="text" id="number" name="number" class="form-control" placeholder="회사 전화번호" pattern="[0-9]{2,3}-[0-9]{3,4}-[0-9]{3,4}" maxlength="13" required>
+								</div>
 
-									<div class="form-group">
-										<label>[영업 시간] </label><span class="help"> 예) 09:00 ~ 18:00 혹은, All Time, 상시 영업</span><input value="${cvo.time }" type="text" id="time" name="time" class="form-control" placeholder="영업시간" required>
-									</div>
-<!-- 컴퍼니 아이디의 존재 여부에 따라 정보 입력과 정보 수정을 나눠서 표시한다 -->
-									<c:if test="${cvo.id eq 0 || cvo.id eq ''}">
+								<div class="form-group">
+									<label>[회사 홈페이지] <span class="help"> 예) www.example.com 혹은, www.example.co.kr</span></label> <input value="${cvo.homepage }" type="text" id="homepage" name="homepage" class="form-control" placeholder="회사 홈페이지" required>
+								</div>
+								<div class="form-group">
+									<label>[영업 상태]</label> <select class="custom-select col-12" id="state" name="state" required>
+										<option selected="selected" value="">영업상태</option>
+										<option value="OPEN">영업중</option>
+										<option value="CLOSED">휴업중</option>
+									</select>
+								</div>
+
+								<div class="form-group">
+									<label>[회사 이미지 업로드] </label><span class="help"> ※1. 이미지는 최소 3장, 최대 12장까지 업로드할 수 있습니다. <c:if test="${cvo.id ne 0 || cvo.id ne ''}"> ※2. 새 이미지를 업로드 하시면 기존 이미지들은 삭제됩니다.</c:if></span><br>
+									<!-- 정보를 새로 입력할 때는 required가 달린 input을 보여준다 -->
+									<!-- 기존 정보를 수정할 때는 required가 없는 input을 보여줘서, 굳이 이미지를 업로드 하지 않아도 되게 한다 -->
+									<c:choose>
+										<c:when test="${cvo == null || cvo == ''}">
+											<input type="file" multiple="multiple" class="imgsShow" name="imgs" required accept="image/png, image/jpeg">
+											<br>
+											<input type="file" multiple="multiple" class="imgsShow" name="imgs" required accept="image/png, image/jpeg">
+											<br>
+											<input type="file" multiple="multiple" class="imgsShow" name="imgs" required accept="image/png, image/jpeg">
+											<br>
+										</c:when>
+										<c:when test="${cvo != null || cvo != ''}">
+											<input type="file" multiple="multiple" class="imgsShow" name="imgs" accept="image/png, image/jpeg">
+											<br>
+											<input type="file" multiple="multiple" class="imgsShow" name="imgs" accept="image/png, image/jpeg">
+											<br>
+											<input type="file" multiple="multiple" class="imgsShow" name="imgs" accept="image/png, image/jpeg">
+											<br>
+										</c:when>
+									</c:choose>
+
+									<input type="file" multiple="multiple" class="imgsHide" name="imgs" accept="image/png, image/jpeg"><br> <input type="file" multiple="multiple" class="imgsHide" name="imgs" accept="image/png, image/jpeg"><br> <input type="file" multiple="multiple" class="imgsHide" name="imgs" accept="image/png, image/jpeg"><br> <input type="file" multiple="multiple" class="imgsHide" name="imgs" accept="image/png, image/jpeg"><br> <input type="file"
+										multiple="multiple" class="imgsHide" name="imgs" accept="image/png, image/jpeg"><br> <input type="file" multiple="multiple" class="imgsHide" name="imgs" accept="image/png, image/jpeg"><br> <input type="file" multiple="multiple" class="imgsHide" name="imgs" accept="image/png, image/jpeg"><br> <input type="file" multiple="multiple" class="imgsHide" name="imgs" accept="image/png, image/jpeg"><br> <input type="file" multiple="multiple"
+										class="imgsHide" name="imgs" accept="image/png, image/jpeg"><br>
+									<button type="button" name="show" id="show" onclick="showMore();">More</button>
+								</div>
+
+								<div class="form-group">
+									<label>[영업 시간] </label><span class="help"> 예) 09:00 ~ 18:00 혹은, All Time, 상시 영업</span><input value="${cvo.time }" type="text" id="time" name="time" class="form-control" placeholder="영업시간" required>
+								</div>
+								<!-- 컴퍼니 아이디의 존재 여부에 따라 정보 입력과 정보 수정을 나눠서 표시한다 -->
+
+								<c:choose>
+									<c:when test="${cvo == null || cvo == ''}">
 										<button type="submit">정보 입력</button>
-									</c:if>
-									<c:if test="${cvo.id ne 0 || cvo.id ne ''}">
-										<button type="submit" >정보 수정</button>
-									</c:if>
+									</c:when>
+									<c:when test="${cvo != null || cvo != ''}">
+										<button type="submit">정보 수정</button>
+									</c:when>
+								</c:choose>
+
 								</form>
 
 								<!-- Column -->
@@ -199,7 +207,7 @@
 							$(this).hide('fast');//more버튼 숨기기
 
 						});
-						
+
 						var cvoId = "${cvo.id}";
 
 					});

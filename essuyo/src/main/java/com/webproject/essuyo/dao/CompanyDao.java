@@ -54,7 +54,9 @@ public class CompanyDao {
 	//컴퍼니 이미지 관리 테이블에 입력하는 DAO
 	public void companyImgInsert(int cId) throws Exception{
 		
-		session.insert(namespace+".companyImgInsert", cId);
+		int companyId = cId;
+		
+		session.insert(namespace+".companyImgInsert", companyId);
 	}
 	
 

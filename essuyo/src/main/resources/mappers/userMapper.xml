@@ -76,7 +76,7 @@
 	<insert id="companyUpdate">
 	
 	insert into company(name, type, discription, address, number, homepage, state, time, area_list_id)
-		values(#{name}, #{type}, #{discription}, #{address}, #{number}, #{homepage}, #{state}, time, #{areaListId})
+		values(#{name}, #{type}, #{discription}, #{address}, #{number}, #{homepage}, #{state}, #{time}, #{areaListId})
 
 	</insert>
 
