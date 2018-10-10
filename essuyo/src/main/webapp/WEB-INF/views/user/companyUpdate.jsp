@@ -63,14 +63,14 @@
 								<h4 class="card-title">사업자 정보 입력 및 수정</h4>
 								<h5 class="card-subtitle">요구사항에 따라 빈 칸을 채워주세요</h5>
 
-								<c:choose>				
-								<c:when test="${cvo == null || cvo == ''}">
+								<c:choose>
+									<c:when test="${cvo == null || cvo == ''}">
 										<form class="form-horizontal m-t-30" id="registForm" name="registForm" method="post" enctype="multipart/form-data" action="/user/companyUpdate">
-									</c:when>					
+									</c:when>
 									<c:when test="${cvo != null || cvo != ''}">
 										<form class="form-horizontal m-t-30" id="registForm" name="registForm" method="post" enctype="multipart/form-data" action="/user/companyModify">
 									</c:when>
-									
+
 								</c:choose>
 
 
@@ -121,7 +121,9 @@
 								</div>
 
 								<div class="form-group">
-									<label>[회사 이미지 업로드] </label><span class="help"> ※1. 이미지는 최소 3장, 최대 12장까지 업로드할 수 있습니다. <c:if test="${cvo.id ne 0 || cvo.id ne ''}"> ※2. 새 이미지를 업로드 하시면 기존 이미지들은 삭제됩니다.</c:if></span><br>
+									<label>[회사 이미지 업로드] </label><br>
+									<span class="help"> ※1. 이미지는 최소 3장, 최대 12장까지 업로드할 수 있습니다. <br>
+									<c:if test="${cvo.id ne 0 || cvo.id ne ''}"> ※2. 새 이미지를 업로드 하시면 기존 이미지들은 삭제됩니다.</c:if></span><br>
 									<!-- 정보를 새로 입력할 때는 required가 달린 input을 보여준다 -->
 									<!-- 기존 정보를 수정할 때는 required가 없는 input을 보여줘서, 굳이 이미지를 업로드 하지 않아도 되게 한다 -->
 									<c:choose>
@@ -142,11 +144,11 @@
 											<br>
 										</c:when>
 									</c:choose>
-
+									<button type="button" name="show" id="show" onclick="showMore();">More</button>
 									<input type="file" multiple="multiple" class="imgsHide" name="imgs" accept="image/png, image/jpeg"><br> <input type="file" multiple="multiple" class="imgsHide" name="imgs" accept="image/png, image/jpeg"><br> <input type="file" multiple="multiple" class="imgsHide" name="imgs" accept="image/png, image/jpeg"><br> <input type="file" multiple="multiple" class="imgsHide" name="imgs" accept="image/png, image/jpeg"><br> <input type="file"
 										multiple="multiple" class="imgsHide" name="imgs" accept="image/png, image/jpeg"><br> <input type="file" multiple="multiple" class="imgsHide" name="imgs" accept="image/png, image/jpeg"><br> <input type="file" multiple="multiple" class="imgsHide" name="imgs" accept="image/png, image/jpeg"><br> <input type="file" multiple="multiple" class="imgsHide" name="imgs" accept="image/png, image/jpeg"><br> <input type="file" multiple="multiple"
 										class="imgsHide" name="imgs" accept="image/png, image/jpeg"><br>
-									<button type="button" name="show" id="show" onclick="showMore();">More</button>
+
 								</div>
 
 								<div class="form-group">
