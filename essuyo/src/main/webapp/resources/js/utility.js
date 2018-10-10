@@ -92,50 +92,56 @@ function ImageThumbnail(imageElementId,inputFileId){
 	
 	var elImage = document.querySelector(inputFileId);
 		elImage.addEventListener("change", function(evt){
+		
+		var imageCount = evt.target.files.length;
+		
+		if( imageCount == 1){
 		 var image = evt.target.files[0];
+		 
 		    if(!valideImageType(image)) { 
+		    	evt.target.value="";
 		    	myAlert("ERROR !", "파일이 이미지 타입이 아닙니다.");
 		        return;
 		    }
 		    
-	    //이렇게 넣으면 이미지 정보가 화면에 노출됩니다.
-	    var elImage = document.querySelector(imageElementId);
-	    elImage.src = window.URL.createObjectURL(image);
+		    //이렇게 넣으면 이미지 정보가 화면에 노출됩니다.
+		    var elImage = document.querySelector(imageElementId);
+		    elImage.src = window.URL.createObjectURL(image);
+		    
+		}else{
+			var min = $(inputFileId).data("min");
+			var max = $(inputFileId).data("max");
+			
+			if( min > imageCount ){
+				myAlert("WARRING !","최소 3개이상 선택해주세요");
+				evt.target.value="";
+				return;
+			}else if( max < imageCount){
+				myAlert("WARRING !","최대 "+ evt.target.dataset.max +"개 이상 선택 할 수 없습니다.");
+				evt.target.value="";
+				return;
+			}
+			
+			for(var i=0; i < imageCount; i++){
+				 var image = evt.target.files[i];
+				 
+				    if(!valideImageType(image)) { 
+				    	myAlert("ERROR !", "파일이 이미지 타입이 아닙니다.");
+				    	evt.target.value="";
+				        return;
+				    }
+				    //이렇게 넣으면 이미지 정보가 화면에 노출됩니다.
+				    var elImage = document.querySelector(imageElementId+i);
+				    elImage.src = window.URL.createObjectURL(image);
+			}
+			
+		}
+		    
+
 
 	});
 }
 
-function ImageThumbnailCount(imageElementId,inputFileId,minCount,maxCount){
-	
-	var elImage = document.querySelector(inputFileId);
-	elImage.addEventListener("change", function(evt){
-		var imageCount = evt.target.files.length;
-		
-		if( minCount > imageCount ){
-			myAlert("WARRING !","최소 3개이상 선택해주세요");
-			elImage.value="";
-			return;
-		}else if( maxCount < imageCount){
-			myAlert("WARRING !","최대 "+ maxCount +"개이상 선택 할 수 없습니다.");
-			elImage.value="";
-			return;
-		}
-		
-		for(var i=0; i < imageCount; i++){
-			 var image = evt.target.files[i];
-			 
-			    if(!valideImageType(image)) { 
-			    	myAlert("ERROR !", "파일이 이미지 타입이 아닙니다.");
-			        return;
-			    }
-			    //이렇게 넣으면 이미지 정보가 화면에 노출됩니다.
-			    var elImage = document.querySelector(imageElementId+i);
-			    elImage.src = window.URL.createObjectURL(image);
-		}
-	   
-	});
-	
-}
 
 
 function valideImageType(image) {

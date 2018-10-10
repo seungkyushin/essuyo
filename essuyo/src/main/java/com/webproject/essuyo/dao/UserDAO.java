@@ -14,6 +14,7 @@ import com.webproject.essuyo.domain.BusinessVO;
 import com.webproject.essuyo.domain.CompanyVO;
 import com.webproject.essuyo.domain.SQLParamVO;
 import com.webproject.essuyo.domain.UserVO;
+import com.webproject.essuyo.utility.Encryption;
 
 @Repository
 public class UserDAO {
@@ -26,8 +27,8 @@ public class UserDAO {
 	// 로그인 기능을 해 준다. vo 객체에서 이메일과 비번을 받아서 dto 맵에 넣어줌.
 	public UserVO login(UserVO vo) throws Exception {
 		Map<String, Object> dto = new HashMap<>();
-		dto.put("email", vo.getEmail());
-		dto.put("password", vo.getPassword());
+		dto.put("email", vo.getEmail());		
+		dto.put("password", Encryption.SHA512(vo.getPassword()));
 
 		return session.selectOne(namespace + ".login", dto);
 	}
@@ -38,7 +39,7 @@ public class UserDAO {
 		Map<String, Object> dto = new HashMap<>();
 		dto.put("name", vo.getName());
 		dto.put("email", vo.getEmail());
-		dto.put("password", vo.getPassword());
+		dto.put("password", Encryption.SHA512(vo.getPassword()));
 		dto.put("age", vo.getAge());
 		dto.put("gender", vo.getGender());
 
@@ -171,4 +172,13 @@ public class UserDAO {
 		return session.selectList(namespace+".getImgIds", id);
 
 	}
+	
+	//로그인시 최종 접속일 항목을 갱신해 주는 DAO
+	public void updateLastDate(UserVO vo) throws Exception{
+		int id = vo.getId();
+		
+		session.update(namespace+".updateLastDate", id);
+		
+	}
+	
 }

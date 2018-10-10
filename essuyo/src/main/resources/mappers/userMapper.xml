@@ -9,11 +9,16 @@
 	<!-- 로그인용 sql문. email과 password를 user 테이블에서 찾는다 -->
 	<select id="login"
 		resultType="com.webproject.essuyo.domain.UserVO">
-		select name, email, password, fail_password, age, gender,
+		select id, name, email, password, fail_password, age, gender,
 		cre_date AS creDate, last_date AS lastDate,
 		business_id AS businessId, image_info_id AS imageInfoId from user
 		where email = #{email} and password = #{password}
 	</select>
+	
+<!-- 	최종 로그인 날짜를 갱신하는 sql -->
+	<update id="updateLastDate">
+	update user set last_date = NOW() where id = #{id}
+	</update>
 
 	<!-- 이메일 중복체크용 sql 입력된 이메일을 카운트한다 -->
 	<select id="checkId" resultType="int">

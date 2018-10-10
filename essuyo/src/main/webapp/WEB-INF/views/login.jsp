@@ -58,7 +58,8 @@
 			<form id="loginForm" method="post" action="/login">
 			
 			
-				<input type="email" id="email" name="email" class="fadeIn second" placeholder="이메일" required>
+				<input type="email" title="올바르지 않은 이메일 형식입니다." pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" id="email" name="email" class="fadeIn second" placeholder="이메일" required >
+				
 
 					
 				<input type="password" id="password" name="password" class="fadeIn second" minlength="4"
