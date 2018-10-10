@@ -17,9 +17,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.webproject.essuyo.domain.MessageListCri;
 import com.webproject.essuyo.service.CommentService;
 import com.webproject.essuyo.service.CompanyService;
 import com.webproject.essuyo.service.ImageAdminService;
+import com.webproject.essuyo.service.MessageService;
 import com.webproject.essuyo.service.ProductService;
 import com.webproject.essuyo.service.ReservationService;
 import com.webproject.essuyo.service.UserService;
@@ -42,12 +44,15 @@ public class RestApiController {
 	
 	@Autowired
 	private UserService userService;
-	
-	
+		
 	@Autowired
 	private ImageAdminService imageAdminService;
 	
+	@Autowired
+	private MessageService messageService;
 	
+	@Inject
+	private HttpSession session;
 	@RequestMapping(value="/list",method=RequestMethod.GET)
 	public ResponseEntity<Map<String, Object>> list(@RequestParam int start, @RequestParam String value, @RequestParam String type,@RequestParam String name){
 		ResponseEntity<Map<String, Object>> entity = null;	
@@ -149,6 +154,15 @@ public class RestApiController {
 			return productService.getProduct(productId);
 		}
 		
-	
+		@GetMapping("/getMessageList")
+		public Map<String,Object> getSendMegList() throws Exception{
+			
+			String userID = (String) session.getAttribute("login");
+			MessageListCri listCri = new MessageListCri();
+			listCri.setUserID(userID);
+			
+			return messageService.getMegList(listCri);
+			 
+		}
 
 }

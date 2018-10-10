@@ -37,39 +37,30 @@ public class MessageController {
 
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public void registerGET(MessageVO message, RedirectAttributes rttr, Model model) throws Exception {
-
+		logger.info("register get...");
+		
 		// 현재 로그인 된 ID 가져오기
 		String userID = (String) session.getAttribute("login");
-		logger.info("user : " + userID);
 		message.setUserID(userID);
 
 		// receiverID 받아오기
 		String id = message.getReceiverID();
-		logger.info("receiver : " + id);
 
 		// UserVO 의 id 값으로 들어온 값을 email로 변환
 		UserVO user = userService.selectMessageEmail(id);
 		String receiverID = user.getEmail();
-		logger.info("receiver : " + receiverID);
+		
 		// receiverID 초기화
 		message.setReceiverID(receiverID);
 
 		model.addAttribute("messageVO", message);
 
-		logger.info(message.toString());
-		logger.info("register get...");
-		
 	}
 
 	@RequestMapping(value = "/registerSend", method = RequestMethod.POST)
 	public String registerPOST(MessageVO message, RedirectAttributes rttr, Model model) throws Exception {
 
 		logger.info("register POST...");
-		logger.info(message.toString());
-
-		// receiverID 받아오기
-		String id = message.getReceiverID();
-		logger.info("receiver : " + id);
 
 		model.addAttribute("messageVO", message);
 
@@ -89,9 +80,7 @@ public class MessageController {
 		// 답장하기 위해 전달 받은 ID값을 반대로 저장
 		message.setUserID(userID);
 		message.setReceiverID(receiverID);
-		
-		logger.info("message : " + message);
-				
+			
 		model.addAttribute("messageVO", message);
 
 		rttr.addFlashAttribute("msg", "success");
@@ -121,11 +110,10 @@ public class MessageController {
 	@RequestMapping(value = "/listPage", method = RequestMethod.GET)
 	public void listPage(@ModelAttribute("cri") MessageListCri cri, Model model) throws Exception {
 		logger.info("----- 전체 쪽지함 listPage() -----");
-		logger.info(cri.toString());
+	
 
 		// 현재 로그인 된 ID 가져오기
 		String userID = (String) session.getAttribute("login");
-		logger.info("user : " + userID);
 				
 		MessagePageMaker pageMaker = new MessagePageMaker();
 		cri.setUserID(userID);
@@ -133,11 +121,8 @@ public class MessageController {
 		cri.setPage(sPage);
 		
 		pageMaker.setListCri(cri);
-		logger.info(pageMaker.toString());
-		logger.info(cri.toString());
 		
 		pageMaker.setListTotalCount(service.listCountCriteria(cri));
-		logger.info(pageMaker.toString());
 		model.addAttribute("pageMaker", pageMaker);
 		
 		model.addAttribute("list", service.listCriteria(cri));
@@ -149,8 +134,6 @@ public class MessageController {
 		
 		// 현재 로그인 된 ID 가져오기
 		String userID = (String) session.getAttribute("login");
-		logger.info("user : " + userID);
-		
 		
 		model.addAttribute(service.read(megNum, userID));
 
@@ -163,16 +146,13 @@ public class MessageController {
 
 		// 현재 로그인 된 ID 가져오기
 		String userID = (String) session.getAttribute("login");
-		logger.info("user : " + userID);
-
+	
 		// 페이징 처리를 위한 설정
 		MessagePageMaker pageMaker = new MessagePageMaker();
 		listCri.setUserID(userID);
 		int sPage = (listCri.getPage()-1)*10;
 		listCri.setPage(sPage);
 		pageMaker.setListCri(listCri);
-
-		logger.info(listCri.toString());
 
 		pageMaker.setListTotalCount(service.sendCountPaging(userID));
 
@@ -189,16 +169,13 @@ public class MessageController {
 
 		// 현재 로그인 된 ID 가져오기
 		String userID = (String) session.getAttribute("login");
-		logger.info("user : " + userID);
-
+	
 		// 페이징 처리를 위한 설정
 		MessagePageMaker pageMaker = new MessagePageMaker();
 		listCri.setUserID(userID);
 		int sPage = (listCri.getPage()-1)*10;
 		listCri.setPage(sPage);
 		pageMaker.setListCri(listCri);
-
-		logger.info(listCri.toString());
 
 		pageMaker.setListTotalCount(service.recevieCountPaging(userID));
 
