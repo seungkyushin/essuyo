@@ -4,11 +4,14 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.springframework.stereotype.Service;
+
 import com.webproject.essuyo.dao.NoticeDao;
 import com.webproject.essuyo.domain.NoticeVO;
 import com.webproject.essuyo.service.NoticeService;
 
-public class NoticeServiceImpl implements NoticeService{
+@Service
+public class NoticeServiceImpl implements NoticeService {
 	
 	@Inject
 	private NoticeDao dao;
@@ -27,7 +30,7 @@ public class NoticeServiceImpl implements NoticeService{
 	public void modify(NoticeVO notice) throws Exception {
 		dao.update(notice);
 	}
-
+		
 	@Override
 	public void remove(Integer noticeNum) throws Exception {
 		dao.delete(noticeNum);
@@ -37,5 +40,5 @@ public class NoticeServiceImpl implements NoticeService{
 	public List<NoticeVO> listAll() throws Exception {
 		return dao.listAll();
 	}
-	
+
 }

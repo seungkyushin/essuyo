@@ -5,9 +5,9 @@ import java.util.Date;
 public class NoticeVO {
 	private Integer noticeNum;
 	private String title;
-	private Date regDate;
 	private String content;
 	private String userID;
+	private Date regDate;
 	
 	public Integer getNoticeNum() {
 		return noticeNum;
@@ -21,12 +21,6 @@ public class NoticeVO {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public Date getRegDate() {
-		return regDate;
-	}
-	public void setRegDate(Date registerDate) {
-		this.regDate = registerDate;
-	}
 	public String getContent() {
 		return content;
 	}
@@ -39,10 +33,16 @@ public class NoticeVO {
 	public void setUserID(String userID) {
 		this.userID = userID;
 	}
-	
+	public Date getRegDate() {
+		return regDate;
+	}
+	public void setRegDate(Date regDate) {
+		this.regDate = regDate;
+	}
+
 	@Override
 	public String toString() {
-		String result = "[noticeNum = " + noticeNum + ", title = " + title + ", regDate = " + regDate + ", content ="  + content + ", userID = " + userID +  "]";
+		String result = "[noticeNum = " + noticeNum + ", title = " + title + ", content = " + content + ", userID = " + userID + ", regDate = " + regDate + "]";
 		return result;
 	}
 }
