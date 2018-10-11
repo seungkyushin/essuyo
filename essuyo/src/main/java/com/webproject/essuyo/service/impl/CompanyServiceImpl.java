@@ -274,8 +274,6 @@ public class CompanyServiceImpl implements CompanyService {
 			salesMap.put("homepage", data.getHomepage());
 			salesMap.put("state", data.getState());
 			salesMap.put("time", data.getTime());
-			salesMap.put("lat", data.getLat());
-			salesMap.put("lon", data.getLon());
 			salesMap.put("areaListId", data.getAreaListId());
 			
 			salesMap.put("commentCount", commentDao.count(data.getId()));

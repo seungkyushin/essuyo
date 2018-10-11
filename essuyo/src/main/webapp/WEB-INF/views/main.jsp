@@ -27,8 +27,8 @@
 						<div class="row">
 							<div class="col-md-12">
 								<div class="slider-content_wrap">
-									<h1>여행에 필요한 예약 있어요??</h1>
-									<h5>여행에 필요한 예약은 이써요 에서!!</h5>
+									<h1>여행에 필요한 모든 예약 시스템 </h1>
+									<h5>여행에 필요한 통합 예약 시스템</h5>
 								</div>
 							</div>
 						</div>
@@ -39,10 +39,10 @@
 										<input list="list" placeholder="선택" name="type"
 											class="btn-group1" id="listValue">
 										<datalist id="list">
-											<option value="호텔">
+											<option value="숙박">
 											<option value="식당">
-											<option value="박물관">
-											<option value="렌트카">
+											<option value="문화">
+											<option value="차량대여">
 										</datalist>
 													
 										<input type="text" placeholder="ex) 지역" class="btn-group2" id="inputValue">
@@ -80,12 +80,12 @@
 						<div class="grid">
 							<figure class="effect-ruby">
 
-								<a href="/company/list?type='렌트카'"> <img
+								<a href="/company/list?type='숙박'"> <img
 									src="resources/images/menu-rentcar.jpg" class="img-fluid"
 									alt="img13" />
 									<figcaption>
-										<h5>렌트카</h5>
-										<p>${companyCount.car}목록</p>
+										<h5>숙박</h5>
+										<p>${companyCount.hotel}목록</p>
 									</figcaption></a>
 							</figure>
 						</div>
@@ -114,11 +114,11 @@
 							<div class="find-place-img_wrap">
 								<div class="grid">
 									<figure class="effect-ruby">
-										<a href="/company/list?type='박물관'"> <img
+										<a href="/company/list?type='문화'"> <img
 											src="resources/images/menu-museum.jpg" class="img-fluid"
 											alt="img13" />
 											<figcaption>
-												<h5>박물관</h5>
+												<h5>문화</h5>
 												<p>${companyCount.museum}목록</p>
 										</figcaption></a>
 									</figure>
@@ -133,14 +133,15 @@
 							<div class="find-place-img_wrap">
 								<div class="grid">
 									<figure class="effect-ruby">
-										<a href="/company/list?type='호텔'"> <img
+										<a href="/company/list?type='차량대여'"> <img
 											src="resources/images/menu-hotel.jpg" class="img-fluid"
 											alt="img13" />
-											<figcaption>
-												<h5>호텔</h5>
-												<p>${companyCount.hotel}목록</p>
-											</figcaption></a>
 
+											<figcaption>
+												<h5>차량대여</h5>
+												<p>${companyCount.car}목록</p>
+
+											</figcaption></a>
 									</figure>
 								</div>
 							</div>

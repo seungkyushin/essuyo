@@ -132,63 +132,70 @@
  		});
 	</script>
 	
-	
-	<script>	
-		function myMap() {		
-			$.ajax({
-				type : 'GET',
-				url : encodeURI('/api/list?start=' + start + "&value=" + value + "&type="+type + "&name="+ name),
-				headers : {
-					"Content-Type" : "application/json",
-					"X-HTTP-Method-Override" : "GET"
-				},
-
-				success : function(data) {
-					var maplat = data.sales[0].lat;
-					var maplon = data.sales[0].lon;
-					var mapzoom = $('#map').data('zoom');
-					
-					var map = new google.maps.Map(document.getElementById('map'), {
-						center : {
-							lat : maplat,
-							lng : maplon
-						},
-						zoom : mapzoom,
-						scrollwheel : false
-					});
-					
-			
-					for(var i=0; i<data.sales.length;i++){
-						var lat1 = data.sales[i].lat;
-						var lon1 = data.sales[i].lon;
-					
-				         
-					var marker[i] = new google.maps.Marker({
-						position : {
-							lat : lat1,
-							lng : lon1
-						},
-						map : map			
-					});
-				
-					
-
-			      var content[i] = data.sales[i].name;
-		 
-			        google.maps.event.addListener(marker[i], "click", function(event) {
-			        	  var infowindow = new google.maps.InfoWindow({ content: content[i]});
-			        	infowindow.open(map,marker[i]);
-
-			        });
-			        
-					}
 		
+		
+<!-- 맵 JQuery -->
+<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=YkyfY8yLi0st2FbjVXIG&callback=initMap&submodules=geocoder"></script>
 
-					}
-			});						
-		}
-	</script>
+<script>
+var map = new naver.maps.Map("map", {
+    center: new naver.maps.LatLng(37.556378, 126.945176),
+    zoom: 13,
+    mapTypeControl: true
+});
+
+var infoWindow = new naver.maps.InfoWindow({
+    anchorSkew: true
+});
+
+map.setCursor('pointer');
+
+
+function searchAddressToCoordinate(address) {
+    naver.maps.Service.geocode({
+        address: address
+    }, function(status, response) {
+        if (status === naver.maps.Service.Status.ERROR) {
+            return myAlert('ERROR !' ,"찾을 수 없는 주소 입니다!");
+        }
+
+        
+        var item = response.result.items[0],
+            addrType = item.isRoadAddress ? '[도로명 주소]' : '[지번 주소]',
+            point = new naver.maps.Point(item.point.x, item.point.y);
+             infoWindow.setContent([
+            	  '<div>',
+                  '<h3>${data.sales[i].name}</h3>',            
+                  '</div>'
+            ].join(''));
+
+        map.setCenter(point);
+        infoWindow.open(map, point);
+    });
+}
+
+function initGeocoder() {
+
+	$.ajax({
+		type : 'GET',
+		url : encodeURI('/api/list?start=' + start + "&value=" + value + "&type="+type + "&name="+ name),
+		headers : {
+			"Content-Type" : "application/json",
+			"X-HTTP-Method-Override" : "GET"
+		},
+		success : function(data) {
 			
+	for(var i =0;i<data.length;i++){
+    searchAddressToCoordinate('${data.sales[i].address}');	
+	}	
+}
+});
+}	
+
+
+naver.maps.onJSContentLoaded = initGeocoder;
+ </script>
+
 
 	<!-- ajaxJQuery -->
 	<script>	
@@ -257,6 +264,7 @@
 		
 		$(document).ready(function() {
 			test();		
+
 	    $(window).scroll(function() {
 		if ($(window).scrollTop() == $(document).height()- $(window).height()) {
 		start++;	
@@ -273,7 +281,7 @@
 					
 		});
 	</script>
-	
+
 	<!-- 판매리스트 소스 -->
 	<script id=template type="text/x-handlerbars-template">
 	 <div class="col-sm-6 col-lg-12 col-xl-6 featured-responsive">
@@ -302,7 +310,7 @@
 								</div>		
 </div>			
 </script>
-	 <script src="https://maps.googleapis.com/maps/api/js?callback=myMap&key=AIzaSyB_SsV7PnpCZxu2cphySVYNkiKehtF_ogY"></script>
+
 </body>
 
 </html>
