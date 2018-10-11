@@ -62,8 +62,6 @@ CREATE TABLE company (
 	homepage VARCHAR(255), /* 홈페이지 */
 	state VARCHAR(255) NOT NULL, /* 영업상태 */
 	time VARCHAR(255) NOT NULL, /* 영업시간 */
-    lat double NOT NULL,  /* 맵좌표(x) */
-    lon double NOT NULL,  /* 맵좌표(y) */
 	area_list_id INTEGER , /* 지역명목록번호 */
 	
 	FOREIGN KEY (area_list_id) REFERENCES area_list(id)

@@ -334,24 +334,24 @@ public class CompanyServiceImpl implements CompanyService {
 				int count = 0;
 				for(String key : data.keySet()) {
 					if(key.equals("type") == true ) {
-						
-						switch((String)data.get(key)) {
-							case "호텔":
+						switch(String.valueOf(data.get(key))) {
+							case "숙박":
 								type = "hotel";
 								break;
-							case "렌트카":
+							case "차량대여":
 								type = "car";
 								break;
 							case "식당":
 								type = "food";
 								break;
-							case "박물관":
+							case "문화":
 								type = "mesuum";
 								break;
 						}
 						
 					}else if(key.equals("count") == true ) {
-						count = (int)data.get(key);
+						String strCount = String.valueOf(data.get(key));
+						count = Integer.parseInt(strCount);
 					}
 
 				}

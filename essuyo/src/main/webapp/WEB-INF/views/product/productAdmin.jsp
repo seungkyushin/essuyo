@@ -142,6 +142,7 @@
 <script>
 $(document).ready(function(){
 
+	if("${companyId}" != ""){
 	var requestURL = "/api/productList/" + ${companyId};
 	Ajax("GET",requestURL,function(dataList){
 		
@@ -156,7 +157,7 @@ $(document).ready(function(){
 			makeHTML("#product-table-template", "#product-list", tempData);
 		});
 	});
-	
+	}
 	
 	
 	

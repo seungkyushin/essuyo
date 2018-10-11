@@ -79,13 +79,17 @@ public class UserController {
 
 		String email = (String) httpSession.getAttribute("login");
 
-		if (service.addBusiness(email) == true) {
-			return "redirect:/user/companyRegist";
+		int businessId =  service.addBusiness(email);
+		if ( businessId != 0) {
+			httpSession.setAttribute("companyLogin", businessId);
+			redirectAttr.addFlashAttribute("errorMessageTitle", "SUCCESS !");
+			redirectAttr.addFlashAttribute("errorMessage", "회사를 등록해 사업을 시작하세요!");
+			return "redirect:/user/companyUpdate";
 		}
 
 		redirectAttr.addFlashAttribute("errorMessageTitle", "ERROR !");
 		redirectAttr.addFlashAttribute("errorMessage", "사업을 시작 할 수 없습니다.");
-		return "redirect:/user/companyRegist";
+		return "redirect:/user/companyUpdate";
 
 	}
 
