@@ -193,24 +193,28 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	@Transactional
-	public boolean addBusiness(String email) {
+	public int addBusiness(String email) {
 
 		try {
-			//< 비지니스 생성
-			BusinessVO business = new BusinessVO();
-			businessDao.insert(business);
+				UserVO user = dao.selectByEmail(email);
+				if( user.getBusinessId() == 0 ) {
+					//< 비지니스 생성
+					BusinessVO business = new BusinessVO();
+					businessDao.insert(business);
 
-			//< 유저 업데이트
-			UserVO user = new UserVO();
-			user.setBusinessId(business.getId());
-			user.setEmail(email);
-			dao.update(user);
-			
-			return true;
+					//< 유저 업데이트
+					UserVO updateUser = new UserVO();
+					updateUser.setBusinessId(business.getId());
+					updateUser.setEmail(email);
+					dao.update(user);
+					
+					return business.getId();
+				}else
+					return 0;
 			
 		} catch (Exception e) {
 			logger.error("비지니스 & 유저 업데이트 오류.. {} ", e.toString());
-			return false;
+			return 0;
 		}
 	}
 	

@@ -94,7 +94,10 @@ public class ProductController {
 		int BusinessId = (Integer) httpSession.getAttribute("companyLogin");
 		BusinessVO business = userService.getBusinessInfo(BusinessId);
 		
-		model.addAttribute("companyId" ,business.getCompanyId());
+		if(business != null && business.getCompanyId() != 0) {
+			model.addAttribute("companyId" ,business.getCompanyId());
+		}
+			
 	
 		return viewName;
 	}

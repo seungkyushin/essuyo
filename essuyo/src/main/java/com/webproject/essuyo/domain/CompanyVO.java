@@ -13,7 +13,6 @@ public class CompanyVO {
 	private String state; /* 영업상태 */
 	private String time; /* 영업시간 */
 	private int areaListId; /* 지역명목록번호 */
-	
 	public int getId() {
 		return id;
 	}
@@ -74,7 +73,7 @@ public class CompanyVO {
 	public void setTime(String time) {
 		this.time = time;
 	}
-	
+
 	public int getAreaListId() {
 		return areaListId;
 	}
