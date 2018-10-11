@@ -12,7 +12,7 @@
 <meta name="author" content="">
 <link rel="icon" type="image/png" sizes="16x16"
 	href="../resources/images/favicon.png">
-<title>쪽지 관리</title>
+<title>메시지 보내기</title>
 <link href="../resources/css/style.min.css" rel="stylesheet">
 <link href="../resources/css/style.css" rel="stylesheet">
 <link rel="stylesheet"
@@ -20,11 +20,9 @@
 <link rel="stylesheet" href="../resources/css/simple-line-icons.css">
 <link rel="stylesheet" href="../resources/css/themify-icons.css">
 <link rel="stylesheet" href="../resources/css/set1.css">
-
-
 </head>
-<body>
 
+<body>
 	<div class="preloader">
 		<div class="lds-ripple">
 			<div class="lds-pos"></div>
@@ -56,16 +54,13 @@
 										<div class="box-body">
 											<div class="form-group">
 												<label for="exInputWriter"> 보낸 사람 </label>
-												<!-- 발송자 아이디 받아오기 -->
 												<input type="text" name='userID' class="form-control"
 													value="${messageVO.userID }" readonly="readonly">
 											</div>
 											<div class="form-group">
 												<label for="exInputWriter"> 받는 사람 </label>
-												<!-- 수신자 아이디 받아오기 -->
 												<input type="text" name='receiverID' class="form-control"
-													value="${messageVO.receiverID }">
-
+													value="${messageVO.receiverID }" readonly="readonly">
 											</div>
 											<div class="form-group">
 												<label for="exInputTitle"> 제목 </label> <input type="text"
@@ -80,7 +75,6 @@
 										</div>
 
 										<div class="box-footer">
-
 											<button type="submit" class="btn btn-info"
 												style="float: right;">보내기</button>
 											<button type="button" class="btn btn-danger"
@@ -125,9 +119,6 @@
 					return false;
 				}
 			}
-			
-			//onclick="javascript:checkValue()"
-			//onsubmit="return checkValue();"
 		</script>
 </body>
 </html>

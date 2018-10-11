@@ -131,7 +131,7 @@ public class MessageController {
 	@RequestMapping(value = "/readPage", method = RequestMethod.GET)
 	public void read(@RequestParam("megNum") int megNum, @ModelAttribute("cri") MessageCriteria cri,
 			Model model) throws Exception {
-		
+		logger.info("----- 읽기 readPage() -----");
 		// 현재 로그인 된 ID 가져오기
 		String userID = (String) session.getAttribute("login");
 		
