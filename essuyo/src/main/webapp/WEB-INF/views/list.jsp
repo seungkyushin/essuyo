@@ -95,22 +95,21 @@
 								<span> 신용카드 가능 여부 </span>
 							</label>
 						</div>
-
-								
-						
+					</div>	
+					
 							<!-- 판매리스트 div -->
 					<div id="salesList" class="row light-bg detail-options-wrap">
+						</div>
 					</div>
-				</div>
 
-<!-- 맵 div -->
-				<div class="col-md-5 responsive-wrap map-wrap">
-					<div class="map-fix">				
+					<!-- 맵 div -->
+					<div class="col-md-5 responsive-wrap map-wrap">
+						<div class="map-fix">				
 							<div id="map" data-zoom="17"></div>
-							
+						</div>
 					</div>
-				</div>
-			</div>
+			
+		</div>
 		</div>
 	</section>
 	

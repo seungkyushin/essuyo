@@ -286,7 +286,7 @@ public class CompanyServiceImpl implements CompanyService {
 				logger.error("이미지 조회 실패");
 			}		
 			
-			salesMap.put("image",imageInfoList);	
+			salesMap.put("image",imageInfoList.get(0));	
 			salesList.add(salesMap);
 		}
 		
