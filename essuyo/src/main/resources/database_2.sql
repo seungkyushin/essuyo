@@ -92,8 +92,6 @@ CREATE TABLE user (
 	last_date DATE, /* 마지막로그인날짜 */
 	business_id INTEGER, /* 사업번호 */
 	image_info_id INTEGER,
-	sessionkey varchar(50) not null default 'none', /*세션키*/
-	sessionlimit timestamp, /*세션유효기간*/
 	
 	FOREIGN KEY (business_id) REFERENCES business(id) ON DELETE CASCADE,
 	FOREIGN KEY (image_info_id) REFERENCES image_info(id) ON DELETE CASCADE
