@@ -12,8 +12,6 @@ public class CompanyVO {
 	private String homepage; /* 홈페이지 */
 	private String state; /* 영업상태 */
 	private String time; /* 영업시간 */
-	private double lat;  /* 맵 좌표(x) */ 
-	private double lon;  /* 맵 좌표(y) */
 	private int areaListId; /* 지역명목록번호 */
 	
 	public int getId() {
@@ -77,18 +75,6 @@ public class CompanyVO {
 		this.time = time;
 	}
 	
-	public double getLat() {
-		return lat;
-	}
-	public void setLat(double lat) {
-		this.lat = lat;
-	}
-	public double getLon() {
-		return lon;
-	}
-	public void setLon(double lon) {
-		this.lon = lon;
-	}
 	public int getAreaListId() {
 		return areaListId;
 	}

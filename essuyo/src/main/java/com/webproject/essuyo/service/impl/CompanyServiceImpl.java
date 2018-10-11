@@ -336,16 +336,16 @@ public class CompanyServiceImpl implements CompanyService {
 					if(key.equals("type") == true ) {
 						
 						switch((String)data.get(key)) {
-							case "호텔":
+							case "숙박":
 								type = "hotel";
 								break;
-							case "렌트카":
+							case "차량대여":
 								type = "car";
 								break;
 							case "식당":
 								type = "food";
 								break;
-							case "박물관":
+							case "문화":
 								type = "mesuum";
 								break;
 						}
