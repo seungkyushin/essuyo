@@ -168,18 +168,23 @@ public class UserServiceImpl implements UserService {
 	@Transactional
 	public int setUserInfo(UserVO user, MultipartFile file) {
 		try {
-			int deleteImageInfoId = user.getImageInfoId();
-			
-			//< 1. 이미지 서버에 저장
-			int imageInfoId = imageAdminService.uploadFile(file);
-			user.setImageInfoId(imageInfoId);
-			
-			//< 2. 저장 성공하면 DB 갱신
+			// < 파일이 있는 경우만
+			if (file.getSize() > 0) {
+				int deleteImageInfoId = user.getImageInfoId();
+
+				// < 1. 이미지 서버에 저장
+				int imageInfoId = imageAdminService.uploadFile(file);
+				user.setImageInfoId(imageInfoId);
+
+				// < 2. User 테이블에 이미지 갱신되면 파일 삭제 및 DB 삭제
+				if (deleteImageInfoId != 1) {
+					ImageInfoVO image = imageAdminService.getImageInfo(deleteImageInfoId);
+					imageAdminService.deleteFile(image.getName(), image.getId());
+				}
+			}
+
+			// < 1. 저장 성공하면 DB 갱신
 			dao.update(user);
-			
-			//< 3. User 테이블에 이미지 갱신되면 파일 삭제 및 DB 삭제
-			ImageInfoVO image = imageAdminService.getImageInfo(deleteImageInfoId);
-			imageAdminService.deleteFile(image.getName(),image.getId());
 
 			return 1;
 		} catch (Exception e) {
@@ -190,24 +195,28 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	@Transactional
-	public boolean addBusiness(String email) {
+	public int addBusiness(String email) {
 
 		try {
-			//< 비지니스 생성
-			BusinessVO business = new BusinessVO();
-			businessDao.insert(business);
+				UserVO user = dao.selectByEmail(email);
+				if( user.getBusinessId() == 0 ) {
+					//< 비지니스 생성
+					BusinessVO business = new BusinessVO();
+					businessDao.insert(business);
 
-			//< 유저 업데이트
-			UserVO user = new UserVO();
-			user.setBusinessId(business.getId());
-			user.setEmail(email);
-			dao.update(user);
-			
-			return true;
+					//< 유저 업데이트
+					UserVO updateUser = new UserVO();
+					updateUser.setBusinessId(business.getId());
+					updateUser.setEmail(email);
+					dao.update(user);
+					
+					return business.getId();
+				}else
+					return 0;
 			
 		} catch (Exception e) {
 			logger.error("비지니스 & 유저 업데이트 오류.. {} ", e.toString());
-			return false;
+			return 0;
 		}
 	}
 	

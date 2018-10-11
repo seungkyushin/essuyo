@@ -2,6 +2,7 @@ package com.webproject.essuyo.service.impl;
 
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.webproject.essuyo.dao.FacilityAdminDao;
@@ -10,6 +11,7 @@ import com.webproject.essuyo.service.FacilityAdminService;
 @Service
 public class FacilityAdminServiceImpl implements FacilityAdminService {
 	
+	@Autowired
 	private FacilityAdminDao fadao;
 
 	@Override

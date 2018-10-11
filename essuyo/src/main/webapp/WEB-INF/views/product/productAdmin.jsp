@@ -17,7 +17,7 @@
 <link href="../resources/css/chartist/chartist.min.css" rel="stylesheet">
 <link href="../resources/css/style.min.css" rel="stylesheet">
 <link href="../resources/css/simple-line-icons.css" rel="stylesheet">
-<link rel="stylesheet" href="resources/css/style.css">
+<link href="../resources/css/style.css" rel="stylesheet" >
 
 </head>
 
@@ -69,6 +69,7 @@
 											<th scope="col">상품명</th>
 											<th scope="col">판매 날짜</th>
 											<th scope="col">가격</th>
+											<th scope="col"></th>
 										</tr>
 									</thead>
 									<tbody id="product-list">
@@ -106,9 +107,8 @@
 
 <script type="template" id="product-template">
 <div class="featured-place-wrap">
-<a href="/reservation?company={{companyId}}&product={{productId}}">
+<a href="/product/reservation?company={{companyId}}&product={{productId}}">
 	<img src="{{url}}" class="img-fluid" alt="#"> 
-	<span class="featured-rating">8.0</span>
 	<div class="featured-title-box">
 		<h6>{{name}}</h6>
 		<i class="icon-direction"></i>
@@ -122,8 +122,8 @@
 		</ul>
 		<div class="bottom-icons">
 			<div class="open-now">{{state}}</div>
-			<a style="float:right" href=""> <i style="width:30px;height:auto;" class="icon-note"></i> </a>
 		</div>
+			
 				
 	</div>
 </a>
@@ -136,29 +136,48 @@
 	<td>{{name}}</td>
 	<td>{{saleDate}}</td>
 	<td>{{price}} 원</td>
+	<td><a href="">수정</a> / <a href="javascript:deleteProduct({{number}})">삭제</a></td>
 </tr>
 </script>
 
 <script>
+function deleteProduct(id){
+	
+	Ajax("GET", "/api/delete?id=" + id,function(data){
+		
+		if( data == true ){
+			myAlert("SUCCESS !" ,"삭제에 성공 하셨습니다.");
+		}else{
+			myAlert("ERROR !" ,"삭제에 실패 하였습니다.");
+		}
+		 getProductList();
+		
+	});
+}
+function getProductList(){
+	if("${companyId}" != ""){
+		
+		var requestURL = "/api/productList/" + ${companyId};
+		Ajax("GET",requestURL,function(dataList){
+			
+			dataList.forEach(function(data){
+				var tempData = {};
+				
+				tempData['number'] = data.id;
+				tempData['score'] = data.score;
+				tempData['name'] = data.name;
+				tempData['saleDate'] = data.saleStartDate + " - " + data.saleEndDate;
+				tempData['price'] = data.price;
+											
+				makeHTML("#product-table-template", "#product-list", tempData);
+			});
+		});
+	}
+}
 $(document).ready(function(){
 
-	var requestURL = "/api/productList/" + ${companyId};
-	Ajax("GET",requestURL,function(dataList){
+	getProductList();
 		
-		dataList.forEach(function(data){
-			var tempData = {};
-			tempData['number'] = data.id;
-			tempData['score'] = data.score;
-			tempData['name'] = data.name;
-			tempData['saleDate'] = data.saleStartDate + " - " + data.saleEndDate;
-			tempData['price'] = data.price;
-										
-			makeHTML("#product-table-template", "#product-list", tempData);
-		});
-	});
-	
-	
-	
 	
 	$("#product-list-table").on("click",function(event){
 			
@@ -170,9 +189,12 @@ $(document).ready(function(){
 			
 
 				var tempData = {};
+				tempData['companyId'] = ${companyId};
+				tempData['productId'] = data.id;
 				tempData['url'] = data.url[0];
 				tempData['number'] = data.id;
 				tempData['name'] = data.name;
+				tempData['score'] = data.score;
 				tempData['discription'] = data.discription;
 				tempData['saleDate'] = data.saleStartDate + " - " + data.saleEndDate;
 				tempData['price'] = data.price;

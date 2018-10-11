@@ -13,7 +13,7 @@
     <meta name="author" content="">
     <link rel="icon" type="image/png" sizes="16x16" href="http://localhost:8080/resources/images/favicon.png">
     <title>오류 페이지</title>
-    <link href="http://localhost:8080/resources/css/style.min.css" rel="stylesheet">
+    <link href="${pageContext.servletContext.contextPath}/resources/css/style.min.css" rel="stylesheet">
 </head>
 
 <body>
@@ -36,9 +36,9 @@
     	</div>
     </div>
     
-    <script src="http://localhost:8080/resources/js/jquery/jquery.min.js"></script>
-    <script src="http://localhost:8080/resources/js/popper/umd/popper.min.js"></script>
-    <script src="http://localhost:8080/resources/js/bootstrap/bootstrap.min.js"></script>
+    <script src="${pageContext.servletContext.contextPath}/resources/js/jquery/jquery.min.js"></script>
+    <script src="${pageContext.servletContext.contextPath}/resources/js/popper/umd/popper.min.js"></script>
+    <script src="${pageContext.servletContext.contextPath}/js/bootstrap/bootstrap.min.js"></script>
   
   <script>
     $('[data-toggle="tooltip"]').tooltip();

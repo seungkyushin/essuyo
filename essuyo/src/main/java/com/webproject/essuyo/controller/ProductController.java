@@ -94,7 +94,10 @@ public class ProductController {
 		int BusinessId = (Integer) httpSession.getAttribute("companyLogin");
 		BusinessVO business = userService.getBusinessInfo(BusinessId);
 		
-		model.addAttribute("companyId" ,business.getCompanyId());
+		if(business != null && business.getCompanyId() != 0) {
+			model.addAttribute("companyId" ,business.getCompanyId());
+		}
+			
 	
 		return viewName;
 	}
@@ -106,7 +109,8 @@ public class ProductController {
 		int BusinessId = (Integer) httpSession.getAttribute("companyLogin");
 		BusinessVO business = userService.getBusinessInfo(BusinessId);
 		
-		model.addAttribute("companyId" ,business.getCompanyId());
+		if( business != null && business.getCompanyId() != 0)
+			model.addAttribute("companyId" ,business.getCompanyId());
 	
 		return viewName;
 	}
@@ -133,15 +137,8 @@ public class ProductController {
 
 	}
 	
+
 	
-
-	@GetMapping("/delete")
-	public String deleteProduct(@RequestParam int  productId, RedirectAttributes redirectAttr,
-			HttpSession httpSession, Model model) {
-
-		productService.deleteProduct(productId);
-		return "redirect:/product/admin";
-	}
 	
 	@GetMapping("/update")
 	public String updateProduct(@RequestParam int  productId, RedirectAttributes redirectAttr,

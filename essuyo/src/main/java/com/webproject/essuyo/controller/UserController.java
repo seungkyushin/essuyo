@@ -1,5 +1,6 @@
 package com.webproject.essuyo.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -61,17 +62,7 @@ public class UserController {
 	public void registGet(UserVO vo, Model model) throws Exception {
 		logger.info("registGet.......");
 	}
-
-	// GET 방식으로 사업체 회원가입 페이지에 접근.
-	@RequestMapping(value = "/companyRegist", method = RequestMethod.GET)
-	public void companyRegistGet(UserVO vo, CompanyVO cvo, HttpSession httpSession, Model model) throws Exception {
-		logger.info("companyRegistGet.......");
-
-		String email = (String) httpSession.getAttribute("login");
-		BusinessVO business = service.getBusinessInfo(email);
-		model.addAttribute("business", business);
-
-	}
+	
 
 	@GetMapping("/businessStart")
 	public String startBusiness(RedirectAttributes redirectAttr, HttpSession httpSession, Model model)
@@ -79,13 +70,17 @@ public class UserController {
 
 		String email = (String) httpSession.getAttribute("login");
 
-		if (service.addBusiness(email) == true) {
-			return "redirect:/user/companyRegist";
+		int businessId =  service.addBusiness(email);
+		if ( businessId != 0) {
+			httpSession.setAttribute("companyLogin", businessId);
+			redirectAttr.addFlashAttribute("errorMessageTitle", "SUCCESS !");
+			redirectAttr.addFlashAttribute("errorMessage", "회사를 등록해 사업을 시작하세요!");
+			return "redirect:/user/companyUpdate";
 		}
 
 		redirectAttr.addFlashAttribute("errorMessageTitle", "ERROR !");
 		redirectAttr.addFlashAttribute("errorMessage", "사업을 시작 할 수 없습니다.");
-		return "redirect:/user/companyRegist";
+		return "redirect:/user/companyUpdate";
 
 	}
 
@@ -108,40 +103,7 @@ public class UserController {
 		return "redirect:/login";
 	}
 
-	// POST 방식으로 사업체 회원가입 접근.
-	// 일반 회원가입 서비스와, 사업체 회원가입 서비스를 트랜잭션으로 묶음
-	@Transactional
-	@RequestMapping(value = "/companyRegist", method = RequestMethod.POST)
-	public String companyRegistPost(UserVO vo, CompanyVO cvo, HttpServletRequest request, HttpSession session,
-			Model model, RedirectAttributes rttr) throws Exception {
-		logger.info("companyRegistPost.......");
-
-		// 리퀘스트로 유저이름과 회사이름을 구분해서 넣어준다.
-
-		String userName = (String) request.getParameter("userName");
-		String companyName = (String) request.getParameter("companyName");
-		// vo.setName(userName);
-		cvo.setName(companyName);
-
-		// System.out.println("userName: " + vo.getName());
-		System.out.println("companyName: " + cvo.getName());
-		// LAST_INSERT_ID()를 사용하기 때문에 반드시 아래의 순서대로 실행하는 게 중요하다
-		try {
-			service.companyRegist(cvo);
-			service.businessRegist();
-			service.ownerRegist(vo);
-			rttr.addFlashAttribute("errorMessageTitle", "가입 성공");
-			rttr.addFlashAttribute("errorMessage", "회원가입에 성공했습니다.");
-			return "redirect:/login";
-		} catch (Exception e) {
-			e.printStackTrace();
-			rttr.addFlashAttribute("errorMessageTitle", "가입 실패");
-			rttr.addFlashAttribute("errorMessage", "회원가입에 실패했습니다. 관리자에게 문의해 주세요.");
-			return "redirect:/user/companyRegist";
-
-		}
-
-	}
+	
 
 	// 컴퍼니 테이블을 수정하는 서비스의 컨트롤러(미완성)
 	// 테스트 중. 컴퍼니 테이블 작성 페이지로 가는 컨트롤러
@@ -166,7 +128,7 @@ public class UserController {
 	@RequestMapping(value = "/companyUpdate", method = RequestMethod.POST)
 	public String companyUpdatePOST(@RequestParam("imgs") List<MultipartFile> files, CompanyVO cvo,
 			HttpServletRequest request, RedirectAttributes rttr, HttpSession session,
-			@RequestParam("facIds") List<String> facIds) throws Exception {
+			@RequestParam("facIds") ArrayList<String> facIds) throws Exception {
 		logger.info("companyUpdatePOST......");
 		String email = (String) request.getSession().getAttribute("login");
 		UserVO vo = service.selectByEmail(email);
@@ -188,14 +150,14 @@ public class UserController {
 
 			}
 
-			if (!facIds.isEmpty()) {
+			if (facIds.size() >= 2) {
 				for (String facId : facIds) {
-
+					if(!facId.equals("no")) {
 					Map<String, Object> map = new HashMap<>();
-					map.put("companyId", cId);
-					map.put("facilityId", facId);
+					map.put("company_id", cId);
+					map.put("facility_id", facId);
 					FAService.insertToAdmin(map);
-
+					}
 				}
 			}
 			session.removeAttribute("cvo");
@@ -217,7 +179,7 @@ public class UserController {
 	@RequestMapping(value = "/companyModify", method = RequestMethod.POST)
 	public String companyModify(@RequestParam("imgs") List<MultipartFile> files, CompanyVO cvo,
 			HttpServletRequest request, RedirectAttributes rttr, HttpSession session,
-			@RequestParam("facIds") List<String> facIds) throws Exception {
+			@RequestParam("facIds") ArrayList<String> facIds) throws Exception {
 		logger.info("companyModify......");
 		// 처음 companyUpdate에 GET으로 접근할 때 세션으로 세팅한 cvo 객체
 		CompanyVO cvo2 = (CompanyVO) request.getSession().getAttribute("cvo");
@@ -245,13 +207,18 @@ public class UserController {
 
 			}
 
-			if (!facIds.isEmpty()) {
+			if (facIds.size() == 1) {
 				FAService.deleteFacAdmin(cId);
+			} else {
+				FAService.deleteFacAdmin(cId);
+				
 				for (String facId : facIds) {
+					if(!facId.equals("no")) {
 					Map<String, Object> map = new HashMap<>();
-					map.put("companyId", cId);
-					map.put("facilityId", facId);
+					map.put("company_id", cId);
+					map.put("facility_id", facId);
 					FAService.insertToAdmin(map);
+				}
 				}
 			}
 
@@ -291,6 +258,11 @@ public class UserController {
 		UserVO user = service.getUserVO((String) httpSession.getAttribute("login"));
 
 		newUserInfo.setId(user.getId());
+		
+		if( newUserInfo.getPassword().equals("") == false) {
+			newUserInfo.setPassword(Encryption.SHA512(newUserInfo.getPassword()));
+		}
+		
 		newUserInfo.setImageInfoId(user.getImageInfoId());
 
 		int update = service.setUserInfo(newUserInfo, file);

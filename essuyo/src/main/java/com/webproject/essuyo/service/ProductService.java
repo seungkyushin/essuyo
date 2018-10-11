@@ -20,7 +20,7 @@ public interface ProductService {
 	
 	public int updateProduct(ProductVO product, List<MultipartFile> imageList);
 
-	public void deleteProduct(int productId);
+	public boolean deleteProduct(int productId);
 	
 	public List<String> getImagePath(int productId);
 	

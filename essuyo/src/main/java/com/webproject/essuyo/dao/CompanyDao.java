@@ -67,5 +67,11 @@ public class CompanyDao {
 		session.insert(namespace+".companyImgInsert", companyId);
 	}
 	
+	
+	public List<Map<String,Object>> selectAllCompanyCount() throws Exception{
+		return session.selectList(namespace + ".allCompanyCount");
+		
+	}
+	
 
 }

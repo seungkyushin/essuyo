@@ -166,19 +166,21 @@ public class CompanyServiceImpl implements CompanyService {
 		Random random = new Random();
 
 		try {
+			
 			List<Map<String, Object>> resultList = new ArrayList<>();
 
 			for (int i = 0; i < MAX_RAKING_COUNT; i++) {
+				
 				int typeIndex = random.nextInt(type.size());
 				int subTypeIndex = random.nextInt(2);
 
 				Map<String, Object> param = new HashMap<>();
 				param.put("type", type.get(typeIndex));
 				param.put("subType", subType[subTypeIndex]);
-
+				
 				List<CompanyVO> companyList = companyDao.getRankCompanyList(param);
 				
-				if (companyList != null) {
+				if (companyList != null && companyList.size() != 0 ) {
 					
 					//< 동점일 경우 첫번째 Index를 선택한다.
 					CompanyVO company = companyList.get(0);
@@ -215,8 +217,13 @@ public class CompanyServiceImpl implements CompanyService {
 		List<String> imageInfoList = null;
 		List<Object> salesList = new ArrayList<>();
 		
+		String[] values = value.split(","); 					
+		
 		Map<String, Object> sales = new HashMap<>();
-		sales.put("value", value);
+		for(int i= 0; i<values.length;i++) {
+			sales.put("value" + values[i], values[i]);			
+		}
+		sales.put("count", values.length);
 		sales.put("type", type);
 		sales.put("name", name);
 		int salesCount = companyDao.SalesListCount(sales);
@@ -237,7 +244,7 @@ public class CompanyServiceImpl implements CompanyService {
 				}else {
 					Map<String, Object> filterParam = new HashMap<>();	
 					
-					String[] values = value.split(","); 					
+									
 					for(int i= 0; i<values.length;i++) {
 							filterParam.put("value" + values[i], values[i]);			
 					}
@@ -272,8 +279,6 @@ public class CompanyServiceImpl implements CompanyService {
 			salesMap.put("homepage", data.getHomepage());
 			salesMap.put("state", data.getState());
 			salesMap.put("time", data.getTime());
-			salesMap.put("lat", data.getLat());
-			salesMap.put("lon", data.getLon());
 			salesMap.put("areaListId", data.getAreaListId());
 			
 			salesMap.put("commentCount", commentDao.count(data.getId()));
@@ -286,7 +291,7 @@ public class CompanyServiceImpl implements CompanyService {
 				logger.error("이미지 조회 실패");
 			}		
 			
-			salesMap.put("image",imageInfoList);	
+			salesMap.put("image",imageInfoList.get(0));	
 			salesList.add(salesMap);
 		}
 		
@@ -319,6 +324,54 @@ public class CompanyServiceImpl implements CompanyService {
 	public int selectId() throws Exception {
 		
 		return companyDao.selectId();
+	}
+
+	
+	@Override
+	public Map<String, Object> getAllCompanyCount() {
+		
+		try {
+				List<Map<String, Object>> allCompanyCountList = companyDao.selectAllCompanyCount();
+				Map<String,Object> resultMap = new HashMap<>();
+			
+			for(Map<String,Object> data : allCompanyCountList) {
+				String type = "";
+				int count = 0;
+				for(String key : data.keySet()) {
+					if(key.equals("type") == true ) {
+
+					switch(String.valueOf(data.get(key))) {
+							case "숙박":
+								type = "hotel";
+								break;
+							case "차량대여":
+								type = "car";
+								break;
+							case "식당":
+								type = "food";
+								break;
+							case "문화":
+								type = "mesuum";
+								break;
+						}
+						
+					}else if(key.equals("count") == true ) {
+						String strCount = String.valueOf(data.get(key));
+						count = Integer.parseInt(strCount);
+					}
+
+				}
+				 resultMap.put(type, count);
+			}
+			
+			return resultMap;
+			
+		} catch (Exception e) {
+			logger.error("회사 카테고리별 카운트 조회 실패.. | {} ", e.toString());
+			return null;
+		}
+	
+
 	}
 
 }

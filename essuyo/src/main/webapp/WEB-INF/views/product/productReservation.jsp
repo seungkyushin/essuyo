@@ -107,12 +107,12 @@
 									<div class="col-md-12">
 										<p style="font-size:20px"><span class="icon-bulb"></span>&nbsp;&nbsp;예약 날짜</p>
 											<c:choose>
-												<c:when test="${company.type == '호텔' or company.type == '렌트카'}">
+												<c:when test="${company.type == '숙박' or company.type == '차량대여'}">
 													<input style="border-right:none; width: 48%;" type="text" name="resDate" id="startDate" class="input-border" readOnly>
                                     			    <input style="border-left:none; width: 48%;" type="text" id="endDate"  class="input-border" readOnly>
  
 												</c:when>
-												<c:when test="${company.type == '식당' or compan.type == '박물관'}">
+												<c:when test="${company.type == '식당' or compan.type == '문화'}">
 														<input type="text"  name="resDate" id="startDate" placeholder="날짜선택" class="input-border" readOnly>
 														<br><br>
 														<p style="font-size:20px"><span class="icon-bulb"></span>&nbsp;&nbsp;수량</p>
@@ -135,14 +135,14 @@
 								<p>예약 날짜</p>
 						
 								<c:choose>
-									<c:when test="${company.type == '호텔' or company.type == '렌트카'}">
+									<c:when test="${company.type == '숙박' or company.type == '차량대여'}">
 										<p><div class= "toggle-string" style="display:none">
 											<span id="reservation-date"></span><br>
 											<input type="text" size="1" style=" text-align:center; border:none" id="productCount" name="productCount"  readOnly>
 											<span>박</span>
 										</div></p>
 									</c:when>
-									<c:when test="${company.type == '식당' or company.type == '박물관'}">
+									<c:when test="${company.type == '식당' or company.type == '문화'}">
 										<p><div class= "toggle-string" style="display:none">
 											<span id="reservation-date"></span><br>
 											<input type="text" size="2" style=" text-align:center; border:none" id="productCount" name="productCount"  readOnly>

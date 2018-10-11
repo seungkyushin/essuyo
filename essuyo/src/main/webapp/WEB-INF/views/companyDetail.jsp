@@ -6,7 +6,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<link rel="stylesheet" href="/resources/css/bootstrap/bootstrap.min.css">
+	<link rel="stylesheet" href="/resources/css/bootstrap/bootstrap.css"> 
 	<link rel="stylesheet" href="/resources/css/simple-line-icons.css">
 	<link rel="stylesheet" href="/resources/css/themify-icons.css">
 	<link rel="stylesheet" href="/resources/css/set1.css">
@@ -118,25 +118,22 @@
 											
 											<div class="customer-rating">8.0</div>
 										</div>
-										
 										<textarea class="form-control" name="content" id='content' rows="3"placeholder="내용"></textarea>
-			
 									</div>
 								</div>
-								<button type="submit" class="btn btn-info"	style="float: right;">댓글달기</button>
+									<button type="submit" class="btn btn-info"	style="float: right;">댓글달기</button>
 													
-									<label for="exInputWriter"> SCORE </label> 
-									<select	name="score" id="score">
-											<option value="0">☆☆☆☆☆</option>
-											<option value="1">★☆☆☆☆</option>
-											<option value="2">★★☆☆☆</option>
-											<option value="3">★★★☆☆</option>
-											<option value="4">★★★★☆</option>
-											<option value="5">★★★★★</option>
-
-										</select> 
-										<input type="hidden" name='companyId' value="${company.id}">
-									</form>
+								<label for="exInputWriter"> SCORE </label> 
+								<select	name="score" id="score">
+									<option value="0">☆☆☆☆☆</option>
+									<option value="1">★☆☆☆☆</option>
+									<option value="2">★★☆☆☆</option>
+									<option value="3">★★★☆☆</option>
+									<option value="4">★★★★☆</option>
+									<option value="5">★★★★★</option>
+								</select> 
+								<input type="hidden" name='companyId' value="${company.id}">
+								</form>
 
 									<hr>
 								</c:if>
@@ -201,12 +198,57 @@
 				</div>
 			</div>
 		</div>
-
-	
 	</section>
+	<!-- Modal -->
+	<div id="modifyModal" class="modal modal-primary fade" role="dialog"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+		<div class = "modal-dialog" style="background-color:white">
+			<div calss="modal-content">
+				<div class="modal-header">
+					<h6 align="center">댓글 수정</h6>
+					<button type="button" class="close" data-dismiss="modal">
+						<span aria-hidden="true">×</span>
+						<span class="sr-only">Close</span>
+					</button>
+				</div>
+				<div class="modal-body" data-rno>
+					<form role="ModifyForm" method="POST"	action="/comment/modifyComment" onsubmit="return checkValue();">
+						<div class="customer-review_wrap">
+							<div class="customer-img">
+								<img id="writeUserImage" src="" class="img-fluid comment-image-size" alt="">
+							</div>
+							<div class="customer-content-wrap">
+								<div class="customer-content">
+									<div class="customer-review">
+										<input type="text" name='Modifytitle' id='Modifytitle' class="form-control" 
+											placeholder="제목" value="${commentVO.title }">
+									</div>
+									<div class="customer-rating">8.0</div>
+								</div>
+								<textarea class="form-control" name="Modifycontent" id='Modifycontent' rows="3" 
+									placeholder="내용" value="${commentVO.content }"></textarea>
+							</div>
+						</div>
+						<button type="submit" class="btn modifyBtn"	style="float: right;" data-dismiss="modal">수정하기</button>
+													
+						<label for="exInputWriter"> SCORE </label> 
+						<select	name="score" id="score">
+							<option value="0">☆☆☆☆☆</option>
+							<option value="1">★☆☆☆☆</option>
+							<option value="2">★★☆☆☆</option>
+							<option value="3">★★★☆☆</option>
+							<option value="4">★★★★☆</option>
+							<option value="5">★★★★★</option>
+						</select> 
+						<input type="hidden" name='ModifycompanyId' id="ModifyId" value="${company.id}">
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	
 	<script src="/resources/js/jquery/jquery-3.2.1.min.js"></script>
 	<script src="/resources/js/popper/popper.min.js"></script>
-	<script src="/resources/js/bootstrap/bootstrap.min.js"></script>
+	<script src="/resources/js/bootstrap/bootstrap.js"></script> 
 	<script src="/resources/js/jquery/jquery.magnific-popup.js"></script>
 	<script src="/resources/js/swiper.min.js"></script>
 	<script src="/resources/js/utility.js"></script>
@@ -235,10 +277,10 @@
        </div>
 
 
-		<a href="/comment/update?id={{id}}"> 
+		<a data-toggle="modal" data-target="#modifyModal"> 
 			<i class="ti-pencil-alt"></i>
 		</a>
-		<a href="/comment/remove?id={{id}}"> 
+		<a href="/comment/removeComment?id={{id}}&commentId={{commentId}}"> 
 			<i class="icon-trash"></i>
 		</a> 
    </div>
@@ -250,7 +292,7 @@
 	<div class="featured-place-wrap">
 		<a href="/product/reservation?company={{companyId}}&product={{productId}}"> 
 			<img src="{{url}}" class="img-fluid company-image-size" alt="#">
-				 <span class="featured-rating-green"><i class="icon-check"></i></span>
+			
 			<div class="featured-title-box">
 				<h6>{{name}}</h6>
 				<i class="icon-direction"></i><p> {{discription}}</p>
@@ -359,6 +401,9 @@
 						dataList.forEach(function(data) {
 
 							var tempData = {};
+							
+							tempData['id'] = ${company.id};
+							tempData['commentId'] = data.id;
 							tempData['image'] = data.imageUrl;
 							tempData['name'] = data.name;
 							tempData['title'] = data.title;
@@ -372,7 +417,16 @@
 							makeHTML("#comment-template", "#comment-list", tempData);
 							});
 					});
-
+					
+					// 수정 버튼
+					var modiForm = $("form[role='ModifyForm']");
+					console.log(modiForm);
+					$("#modifyBtn").on("click",function(){
+						var id = document.getElementById("ModifyId").value;
+						modiForm.attr("action","/message/modifyComment?" + id);
+						modiForm.submit();
+					});
+					
 				});
 		
 		
@@ -397,6 +451,19 @@
 				return false;
 			}
 		}
+		
+		// 수정이 완료되면
+		var updateMsg = '${updateMsg}';
+		if (updateMsg == 'SUCCESS') {
+			myAlert("UPDATE","수정이 완료되었습니다.");
+		}
+		
+		// 삭제가 완료되면
+		var deleteMsg = '${deleteMsg}';
+		if (deleteMsg == 'SUCCESS') {
+			myAlert("DELETE","삭제가 완료되었습니다.");
+		}
+		
 	</script>
 
 	

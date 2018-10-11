@@ -27,22 +27,22 @@
 						<div class="row">
 							<div class="col-md-12">
 								<div class="slider-content_wrap">
-									<h1>여행에 필요한 예약 있어요??</h1>
-									<h5>여행에 필요한 예약은 이써요 에서!!</h5>
+									<h1>여행에 필요한 예약 Essuyo! </h1>
+									<h5>여행에 필요한 통합 예약 시스템</h5>
 								</div>
 							</div>
 						</div>
 						<div class="row d-flex justify-content-center">
 							<div class="col-md-10">
 								<form class="form-wrap mt-4">
-									<div class="btn-group" role="group" aria-label="Basic example"">
+									<div class="btn-group" role="group" aria-label="Basic example">
 										<input list="list" placeholder="선택" name="type"
 											class="btn-group1" id="listValue">
 										<datalist id="list">
-											<option value="호텔">
+											<option value="숙박">
 											<option value="식당">
-											<option value="박물관">
-											<option value="렌트카">
+											<option value="문화">
+											<option value="차량대여">
 										</datalist>
 													
 										<input type="text" placeholder="ex) 지역" class="btn-group2" id="inputValue">
@@ -69,22 +69,23 @@
 			<div class="row justify-content-center">
 				<div class="col-md-5">
 					<div class="styled-heading">
-						<h3>분야별로 필요한것은 무엇?</h3>
+						<h3>분야별 카테고리</h3>
 					</div>
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-md-4">
+			
+			<div class="col-md-4">
 					<div class="find-place-img_wrap">
 						<div class="grid">
 							<figure class="effect-ruby">
 
-								<a href="/company/list?type='렌트카'"> <img
+								<a href="/company/list?type='숙박'"> <img
 									src="resources/images/menu-rentcar.jpg" class="img-fluid"
 									alt="img13" />
 									<figcaption>
-										<h5>렌트카</h5>
-										<p>${countList['렌트카']}목록</p>
+										<h5>숙박</h5>
+										<p>${companyCount.hotel}목록</p>
 									</figcaption></a>
 							</figure>
 						</div>
@@ -101,7 +102,7 @@
 											alt="img13" />
 											<figcaption>
 												<h5>식당</h5>
-												<p>${countList['식당']}목록</p>
+												<p>${companyCount.food}목록</p>
 											</figcaption></a>
 									</figure>
 								</div>
@@ -113,13 +114,13 @@
 							<div class="find-place-img_wrap">
 								<div class="grid">
 									<figure class="effect-ruby">
-										<a href="/company/list?type='박물관'"> <img
+										<a href="/company/list?type='문화'"> <img
 											src="resources/images/menu-museum.jpg" class="img-fluid"
 											alt="img13" />
 											<figcaption>
-												<h5>박물관</h5>
-												<p>${countList['박물관']}목록</p>
-											</figcaption></a>
+												<h5>문화</h5>
+												<p>${companyCount.museum}목록</p>
+										</figcaption></a>
 									</figure>
 								</div>
 							</div>
@@ -132,15 +133,14 @@
 							<div class="find-place-img_wrap">
 								<div class="grid">
 									<figure class="effect-ruby">
-										<a href="/company/list?type='호텔'"> <img
+										<a href="/company/list?type='차량대여'"> <img
 											src="resources/images/menu-hotel.jpg" class="img-fluid"
 											alt="img13" />
+
 											<figcaption>
-												<h5>호텔</h5>
-												<p>${countList}목록</p>
-												<p>${countList['펜션']}목록</p>
-												<p>${countList['호텔']}목록</p>
-												
+												<h5>차량대여</h5>
+												<p>${companyCount.car}목록</p>
+
 											</figcaption></a>
 									</figure>
 								</div>
@@ -213,7 +213,7 @@
 										<p>${company.homepage}</p></li>
 
 								</ul>
-								<div class="bottom-icons">
+							<div class="bottom-icons">
 									<c:choose>
 										<c:when test="${company.state == '영업중'}">
 											<div class="open-now">${company.state}</div>

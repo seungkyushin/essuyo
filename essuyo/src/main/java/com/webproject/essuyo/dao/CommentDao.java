@@ -39,7 +39,7 @@ public class CommentDao {
 	}
 	
 	// 댓글 삭제
-	public void delete(Integer id) throws Exception{
-		sqlSession.update(NAME_SAPACE + ".delete", id);
+	public void delete(CommentVO comment) throws Exception{
+		sqlSession.update(NAME_SAPACE + ".delete", comment);
 	}
 }

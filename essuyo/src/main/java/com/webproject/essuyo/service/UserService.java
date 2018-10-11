@@ -58,7 +58,7 @@ public interface UserService {
 	public UserVO selectByEmail(String email);
 	
 	
-	public boolean addBusiness(String email);
+	public int addBusiness(String email);
 	
 	
 	public void bIdtoUser(UserVO vo) throws Exception;
