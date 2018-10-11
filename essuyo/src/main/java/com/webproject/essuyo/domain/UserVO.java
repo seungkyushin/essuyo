@@ -17,8 +17,7 @@ public class UserVO {
 	private int todayReply; /* 생성날짜 */
 	private int businessId;
 	private int imageInfoId;
-	private String sessionKey;
-	private Timestamp sessionlimit;
+	
 	public int getId() {
 		return id;
 	}
@@ -91,25 +90,13 @@ public class UserVO {
 	public void setImageInfoId(int imageInfoId) {
 		this.imageInfoId = imageInfoId;
 	}
-	public String getSessionKey() {
-		return sessionKey;
-	}
-	public void setSessionKey(String sessionKey) {
-		this.sessionKey = sessionKey;
-	}
-	public Timestamp getSessionlimit() {
-		return sessionlimit;
-	}
-	public void setSessionlimit(Timestamp sessionlimit) {
-		this.sessionlimit = sessionlimit;
-	}
+	
 	@Override
 	public String toString() {
 		return "UserVO [id=" + id + ", name=" + name + ", email=" + email + ", password=" + password
 				+ ", fail_password=" + fail_password + ", age=" + age + ", gender=" + gender + ", creDate=" + creDate
 				+ ", lastDate=" + lastDate + ", todayReply=" + todayReply + ", businessId=" + businessId
-				+ ", imageInfoId=" + imageInfoId + ", sessionKey=" + sessionKey + ", sessionlimit=" + sessionlimit
-				+ "]";
+				+ ", imageInfoId=" + imageInfoId +  "]";
 	}
 	
 	
