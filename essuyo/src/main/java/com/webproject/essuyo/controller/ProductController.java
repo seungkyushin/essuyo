@@ -137,24 +137,8 @@ public class ProductController {
 
 	}
 	
+
 	
-
-	@GetMapping("/delete")
-	public String deleteProduct(@RequestParam int  id, RedirectAttributes redirectAttr,
-			HttpSession httpSession, Model model) {
-
-		;
-		
-		if( productService.deleteProduct(id) == true) {
-			redirectAttr.addFlashAttribute("errorMessageTitle", "SUCCESS !");
-			redirectAttr.addFlashAttribute("errorMessage", "해당 상품이 삭제 되었습니다.");
-		}else{
-			redirectAttr.addFlashAttribute("errorMessageTitle", "ERROR !");
-			redirectAttr.addFlashAttribute("errorMessage", "해당 상품이 삭제에 실패하였습니다.");
-		}
-			
-		return "redirect:/product/admin";
-	}
 	
 	@GetMapping("/update")
 	public String updateProduct(@RequestParam int  productId, RedirectAttributes redirectAttr,
