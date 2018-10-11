@@ -28,6 +28,27 @@
 <!-- Main CSS -->
 <link rel="stylesheet" href="/resources/css/style.css">
 <link rel="stylesheet" href="/resources/css/check-box.css">
+
+ <style type="text/css">
+@import url(http://fonts.googleapis.com/css?family=Reenie+Beanie);
+#stickynote {
+	width:100px;
+	padding:5px;
+	margin:auto;
+	position:relative;
+	background-color:#fe6;
+	background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#fe6), to(#f6ef97), color-stop(.6,#f5da41));
+	background:-moz-linear-gradient(top, #fe6, #f5da41, #f6ef97);
+	text-shadow:0 1px 0 #F6EF97;
+	box-shadow:0 0 5px rgba(0,0,0,.2);
+	-webkit-box-shadow:0 0 5px rgba(0,0,0,.2);
+	-moz-box-shadow:0 0 5px rgba(0,0,0,.2);
+}
+</style>
+
+
+
+
 </head>
 <body>
 	<!--============================= HEADER =============================-->
@@ -125,32 +146,21 @@
 	<script src="/resources/js/bootstrap/bootstrap.min.js"></script>
 	<script	src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 
-	<script>
- 		$(".map-icon").click(function() {
- 			$(".map-fix").toggle();
- 		});
-	</script>
-	
-		
 		
 <!-- 맵 JQuery -->
 <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=YkyfY8yLi0st2FbjVXIG&callback=initMap&submodules=geocoder"></script>
 
 <script>
 var map = new naver.maps.Map("map", {
-    center: new naver.maps.LatLng(37.556777, 126.942118),
-    zoom: 13,
+    center: new naver.maps.LatLng(37.556777 , 126.942118),
+    zoom: 12,
     mapTypeControl: true
-});
-
-var infoWindow = new naver.maps.InfoWindow({
-    anchorSkew: true
 });
 
 map.setCursor('pointer');
 
+function searchAddressToCoordinate(address, name, id) {
 
-function searchAddressToCoordinate(address) {
     naver.maps.Service.geocode({
         address: address
     }, function(status, response) {
@@ -159,17 +169,32 @@ function searchAddressToCoordinate(address) {
         }
 
         
+        var infoWindow = new naver.maps.InfoWindow({
+            anchorSkew: true
+        });
+        
+        
         var item = response.result.items[0],
             addrType = item.isRoadAddress ? '[도로명 주소]' : '[지번 주소]',
             point = new naver.maps.Point(item.point.x, item.point.y);
              infoWindow.setContent([
-            	  '<div>',
-                  '<h3>${data.sales[i].name}</h3>',            
+            	  '<div id="stickynote">',
+                  '<a href="/company/detail?id='+id+'"><h6>' + name +'</h6></a>',            
                   '</div>'
+                  
             ].join(''));
 
-        map.setCenter(point);
-        infoWindow.open(map, point);
+             var marker = new naver.maps.Marker({
+                 map: map,
+                 position: item.point
+             });
+     		
+        map.setCenter(point);  
+       
+        naver.maps.Event.addListener(marker, "click", function(e) {
+        	infoWindow.open(map, point);        	
+        });
+        
     });
 }
 
@@ -184,15 +209,18 @@ function initGeocoder() {
 		},
 		success : function(data) {
 			
-	for(var i =0;i<data.length;i++){
-    searchAddressToCoordinate('${data.sales[i].address}');	
+	for(var i =0; i<data.sales.length; i++){
+		var address1 = data.sales[i].address;
+		var name1 = data.sales[i].name;
+		var id1 = data.sales[i].id;
+    searchAddressToCoordinate(address1, name1, id1);	
 	}	
 }
+
 });
 }	
 
-
-naver.maps.onJSContentLoaded = initGeocoder;
+	naver.maps.onJSContentLoaded = initGeocoder;
  </script>
 
 
@@ -227,7 +255,6 @@ naver.maps.onJSContentLoaded = initGeocoder;
 					
 					var source = $("#template").html();
 					var template = Handlebars.compile(source);
-					var resultHTML = "";
 					data.sales.forEach(function(data2) {
 						$("#salesList").append(template(data2));
 
@@ -247,10 +274,21 @@ naver.maps.onJSContentLoaded = initGeocoder;
 						}
 
 					})
+// 					function initGeocoder() {
+						
+// 					for(var i =0; i<data.sales.length; i++){
+// 						var address1 = data.sales[i].address;
+// 						var name1 = data.sales[i].name;
+// 						var id1 = data.sales[i].id;
+// 				    searchAddressToCoordinate(address1, name1, id1);	
+// 					}	
+// 					}
 				}
-	
+			
 			});
+// 			.fail(function(){"<div class="col-sm-6 col-lg-12 col-xl-6 featured-responsive"></div>"})
 		}
+	
 	</script>
 
 
@@ -271,16 +309,15 @@ naver.maps.onJSContentLoaded = initGeocoder;
 	    }
 
 	    });
-	    
-	    
+	    	
 		$("#search").click(function() {
-			$("#salesList").html("");      
+		$("#salesList").html("");      
  		test();
  		});
 					
 		});
 	</script>
-
+ 
 	<!-- 판매리스트 소스 -->
 	<script id=template type="text/x-handlerbars-template">
 	 <div class="col-sm-6 col-lg-12 col-xl-6 featured-responsive">
@@ -309,6 +346,7 @@ naver.maps.onJSContentLoaded = initGeocoder;
 								</div>		
 </div>			
 </script>
+
 
 </body>
 
