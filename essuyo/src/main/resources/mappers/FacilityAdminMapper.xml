@@ -10,7 +10,7 @@
  	</select>
 
      <insert id="insertToAdmin">
-     insert into facility_admin(company_id, facility_id) values(#{companyId}, #{facilityId}) 
+     insert into facility_admin(company_id, facility_id) values(#{company_id}, #{facility_id}) 
      </insert>
      
      <delete id="deleteFacAdmin">

@@ -1,5 +1,6 @@
 package com.webproject.essuyo.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -166,7 +167,7 @@ public class UserController {
 	@RequestMapping(value = "/companyUpdate", method = RequestMethod.POST)
 	public String companyUpdatePOST(@RequestParam("imgs") List<MultipartFile> files, CompanyVO cvo,
 			HttpServletRequest request, RedirectAttributes rttr, HttpSession session,
-			@RequestParam("facIds") List<String> facIds) throws Exception {
+			@RequestParam("facIds") ArrayList<String> facIds) throws Exception {
 		logger.info("companyUpdatePOST......");
 		String email = (String) request.getSession().getAttribute("login");
 		UserVO vo = service.selectByEmail(email);
@@ -188,14 +189,14 @@ public class UserController {
 
 			}
 
-			if (!facIds.isEmpty()) {
+			if (facIds.size() >= 2) {
 				for (String facId : facIds) {
-
+					if(!facId.equals("no")) {
 					Map<String, Object> map = new HashMap<>();
-					map.put("companyId", cId);
-					map.put("facilityId", facId);
+					map.put("company_id", cId);
+					map.put("facility_id", facId);
 					FAService.insertToAdmin(map);
-
+					}
 				}
 			}
 			session.removeAttribute("cvo");
@@ -217,7 +218,7 @@ public class UserController {
 	@RequestMapping(value = "/companyModify", method = RequestMethod.POST)
 	public String companyModify(@RequestParam("imgs") List<MultipartFile> files, CompanyVO cvo,
 			HttpServletRequest request, RedirectAttributes rttr, HttpSession session,
-			@RequestParam("facIds") List<String> facIds) throws Exception {
+			@RequestParam("facIds") ArrayList<String> facIds) throws Exception {
 		logger.info("companyModify......");
 		// 처음 companyUpdate에 GET으로 접근할 때 세션으로 세팅한 cvo 객체
 		CompanyVO cvo2 = (CompanyVO) request.getSession().getAttribute("cvo");
@@ -245,13 +246,18 @@ public class UserController {
 
 			}
 
-			if (!facIds.isEmpty()) {
+			if (facIds.size() == 1) {
 				FAService.deleteFacAdmin(cId);
+			} else {
+				FAService.deleteFacAdmin(cId);
+				
 				for (String facId : facIds) {
+					if(!facId.equals("no")) {
 					Map<String, Object> map = new HashMap<>();
-					map.put("companyId", cId);
-					map.put("facilityId", facId);
+					map.put("company_id", cId);
+					map.put("facility_id", facId);
 					FAService.insertToAdmin(map);
+				}
 				}
 			}
 
