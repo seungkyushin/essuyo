@@ -29,7 +29,8 @@ public class ImageAdminServieImpl implements ImageAdminService {
 	
 
 	private Logger logger = LoggerFactory.getLogger(ImageAdminServieImpl.class);
-	private String UPLOAD_PATH = "C:\\Users\\Administrator\\git\\essuyo\\essuyo\\src\\main\\webapp\\resources\\images\\upload";
+	// = "C:\\Users\\kyu\\git\\essuyo\\essuyo\\src\\main\\webapp\\resources\\images\\upload";
+	private String UPLOAD_PATH = "/usr/local/apache-tomcat-8.0.52/webapps/essuyo/resources/images/upload";
 
 	@Override
 	public ImageInfoVO getImageInfo(int imageInfoid) {
@@ -180,13 +181,6 @@ public class ImageAdminServieImpl implements ImageAdminService {
 			return false;
 		}
 
-	}
-
-	private String savePath(String contentTypeName) {
-		// uuid 생성(Universal Unique IDentifier, 범용 고유 식별자)
-		UUID uuid = UUID.randomUUID();
-		// 랜덤생성+파일이름 저장
-		return uuid.toString() + "." + contentTypeName;
 	}
 
 }

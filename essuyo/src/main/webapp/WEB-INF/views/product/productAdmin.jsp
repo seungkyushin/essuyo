@@ -136,7 +136,7 @@
 	<td>{{name}}</td>
 	<td>{{saleDate}}</td>
 	<td>{{price}} 원</td>
-	<td><a href="">수정</a> / <a href="javascript:deleteProduct({{number}})">삭제</a></td>
+	<td><a href="/product/update?id={{number}}">수정</a> / <a href="javascript:deleteProduct({{number}})">삭제</a></td>
 </tr>
 </script>
 
@@ -154,11 +154,14 @@ function deleteProduct(id){
 		
 	});
 }
+
 function getProductList(){
 	if("${companyId}" != ""){
 		
 		var requestURL = "/api/productList/" + ${companyId};
 		Ajax("GET",requestURL,function(dataList){
+			
+			$("#product-list").empty();
 			
 			dataList.forEach(function(data){
 				var tempData = {};
@@ -180,44 +183,27 @@ $(document).ready(function(){
 		
 	
 	$("#product-list-table").on("click",function(event){
-			
-		$("#product-info").empty();
-		$("#product-info").hide();
-		
-		var requestURL = "/api/product/" + event.target.parentElement.dataset.index;
-		Ajax("GET",requestURL,function(data){
-			
-
-				var tempData = {};
-				tempData['companyId'] = ${companyId};
-				tempData['productId'] = data.id;
-				tempData['url'] = data.url[0];
-				tempData['number'] = data.id;
-				tempData['name'] = data.name;
-				tempData['score'] = data.score;
-				tempData['discription'] = data.discription;
-				tempData['saleDate'] = data.saleStartDate + " - " + data.saleEndDate;
-				tempData['price'] = data.price;
-											
-				makeHTML("#product-template", "#product-info", tempData);
-				
-				$("#product-info").show();
-			
-		});
+		if( event.target.parentElement.dataset.index )
+			getDetailProductInfo(event.target.parentElement.dataset.index)
+		else{
+			$("#product-info").empty();
+			$("#product-info").hide();
+		}
 	});
-	
-
 });
 
-function getProduct(productId){
+function getDetailProductInfo(productId){
+	
+	$("#product-info").empty();
 	
 	var requestURL = "/api/product/" + productId;
-	Ajax("GET",requestURL,function(dataList){
+	Ajax("GET",requestURL,function(data){
 		
-		dataList.forEach(function(data){
-			var tempData = {};
-			tempData['url'] = data.url;
-			tempData['score'] = data.score;
+			var tempData = {};	
+			
+			tempData['companyId'] = ${companyId};
+			tempData['productId'] = data.id;
+			tempData['url'] = data.url[0];
 			tempData['name'] = data.name;
 			tempData['discription'] = data.discription;
 			tempData['saleDate'] = data.saleStartDate + " - " + data.saleEndDate;
@@ -225,7 +211,9 @@ function getProduct(productId){
 			tempData['state'] = data.state;
 										
 			makeHTML("#product-template", "#product-info", tempData);
-		});
+			
+			$("#product-info").show();
+	
 	});
 	
 	

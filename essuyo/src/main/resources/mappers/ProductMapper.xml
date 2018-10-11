@@ -64,7 +64,7 @@
 	</insert>
 	
 	<delete id="delete" parameterType="Integer">
-		DELETE FROM product WHERE id=#{id}
+		DELETE FROM product_admin WHERE product_id=#{id}
 	</delete>	
 	
 	

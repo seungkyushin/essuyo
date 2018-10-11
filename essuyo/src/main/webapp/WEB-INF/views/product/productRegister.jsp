@@ -35,10 +35,9 @@
 			<div class="row">
 				<div class="col-md-6">
 					<h5>
-						<input class="form-control" type="text" name="name" id="name" placeholder="상품명">
+						<input class="form-control" type="text" name="name" id="name" placeholder="상품명" >
 					</h5>
-					<br> <input class="form-control" type="text" name="discription" id="name"
-						placeholder="상품 설명">
+					<br> <input class="form-control" type="text" name="discription" id="name" placeholder="상품 설명">
 				</div>
 
 			</div>
