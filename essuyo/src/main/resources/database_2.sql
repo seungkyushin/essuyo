@@ -104,7 +104,7 @@ CREATE TABLE comment (
 	id INTEGER PRIMARY KEY auto_increment, /* 번호 */
 	title VARCHAR(255) NOT NULL, /* 제목 */
 	content  VARCHAR(255), /* 내용 */
-	helpful INTEGER, /* 도움점수 */
+	helpful INTEGER default 0, /* 도움점수 */
 	score INTEGER NOT NULL, /* 점수 */
 	mod_date DATE, /* 수정날짜 */
 	reg_date timestamp not null default now(), /* 등록날짜 */

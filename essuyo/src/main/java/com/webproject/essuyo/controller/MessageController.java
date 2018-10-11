@@ -29,7 +29,6 @@ public class MessageController {
 	@Inject
 	private MessageService service;
 
-	@Inject
 	private UserService userService;
 
 	@Inject
@@ -86,13 +85,6 @@ public class MessageController {
 		rttr.addFlashAttribute("msg", "success");
 	}
 	
-	@RequestMapping(value = "/listAll", method = RequestMethod.GET)
-	public void listAll(Model model) throws Exception {
-
-		logger.info("show all message list");
-		model.addAttribute("list", service.listAll());
-	}
-
 	@RequestMapping(value = "/removePage", method = RequestMethod.GET)
 	public String remove(@RequestParam("megNum") int megNum, MessageCriteria cri, RedirectAttributes rttr)
 			throws Exception {

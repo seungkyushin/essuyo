@@ -42,4 +42,10 @@ public class CommentDao {
 	public void delete(CommentVO comment) throws Exception{
 		sqlSession.update(NAME_SAPACE + ".delete", comment);
 	}
+	
+	// helpful
+	public Integer helpful(Integer commentId) throws Exception{
+		
+		return sqlSession.update(NAME_SAPACE + ".helpful", commentId);
+	}
 }

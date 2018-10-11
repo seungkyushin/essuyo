@@ -18,4 +18,6 @@ public interface CommentService {
 	public void modifyComment(CommentVO comment) throws Exception;
 	// 댓글 삭제
 	public void removeComment(CommentVO comment) throws Exception;
+	// helpful 버튼 
+	public Integer helpful(Integer commentId) throws Exception;
 }

@@ -53,6 +53,7 @@ public class RestApiController {
 	
 	@Inject
 	private HttpSession session;
+	
 	@RequestMapping(value="/list",method=RequestMethod.GET)
 	public ResponseEntity<Map<String, Object>> list(@RequestParam int start, @RequestParam String value, @RequestParam String type,@RequestParam String name){
 		ResponseEntity<Map<String, Object>> entity = null;	
@@ -125,44 +126,48 @@ public class RestApiController {
 	
 	// 회원가입 시 이메일 중복 체크
 		
-		@RequestMapping(value = "/checkId", method = RequestMethod.POST)
-		public Map<String, Object> checkId(String email) {
-			Map<String, Object> map = new HashMap<>();
-
-			if (userService.checkId(email)) {
-				map.put("code", 99);
-				map.put("msg", "사용가능한 이메일 입니다.");
-				
-			} else {
-				map.put("code", -1);
-				map.put("msg", "이미 등록된 이메일입니다.");
-				
-			}
-			return map;
+	@RequestMapping(value = "/checkId", method = RequestMethod.POST)
+	public Map<String, Object> checkId(String email) {
+		Map<String, Object> map = new HashMap<>();
+		if (userService.checkId(email)) {
+			map.put("code", 99);
+			map.put("msg", "사용가능한 이메일 입니다.");
+			
+		} else {
+			map.put("code", -1);
+			map.put("msg", "이미 등록된 이메일입니다.");
+			
 		}
-		
-		
-		@GetMapping("/productList/{companyId}")
-		public List<Map<String,Object>> getProductList(@PathVariable("companyId") int companyId){
-		 
-			return productService.getProductList(companyId);
+		return map;
+	}
 	
-		}
-		
-		@GetMapping("/product/{productId}")
-		public Map<String,Object> getProduct(@PathVariable("productId") int productId){
-			return productService.getProduct(productId);
-		}
-		
-		@GetMapping("/getMessageList")
-		public Map<String,Object> getSendMegList() throws Exception{
-			
-			String userID = (String) session.getAttribute("login");
-			MessageListCri listCri = new MessageListCri();
-			listCri.setUserID(userID);
-			
-			return messageService.getMegList(listCri);
-			 
-		}
+	
+	@GetMapping("/productList/{companyId}")
+	public List<Map<String,Object>> getProductList(@PathVariable("companyId") int companyId){
+	 
+		return productService.getProductList(companyId);
 
+	}
+	
+	@GetMapping("/product/{productId}")
+	public Map<String,Object> getProduct(@PathVariable("productId") int productId){
+		return productService.getProduct(productId);
+	}
+	
+	@GetMapping("/getMessageList")
+	public Map<String,Object> getSendMegList() throws Exception{
+		
+		String userID = (String) session.getAttribute("login");
+		MessageListCri listCri = new MessageListCri();
+		listCri.setUserID(userID);
+		
+		return messageService.getMegList(listCri);
+		 
+	}
+	
+	@GetMapping("/helpful/{commentId}")
+	public Integer setGoodCount(@PathVariable("commentId") int commentId) throws Exception{
+		
+		return commentService.helpful(commentId);
+	}
 }

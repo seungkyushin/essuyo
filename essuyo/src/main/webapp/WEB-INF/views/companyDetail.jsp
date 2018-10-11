@@ -273,7 +273,7 @@
            <p class="customer-text">{{content}}</p>
           
            <span>{{helpful}}명이 이 댓글에 도움을 받았습니다.</span>
-           <a href="#"><span class="icon-like"></span>Helpful</a>
+           <a href="javascript:helpCount()"><span class="icon-like"></span>Helpful</a>
        </div>
 
 
@@ -450,6 +450,11 @@
 
 				return false;
 			}
+		}
+		function helpCount(){
+			Ajax("GET", "/api/helpful/11", function(data) {
+				
+			});
 		}
 		
 		// 수정이 완료되면
