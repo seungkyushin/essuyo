@@ -222,11 +222,7 @@ INSERT INTO facility(name)  VALUES("와이파이/인터넷");
 INSERT INTO facility(name)  VALUES("금연구역");
 INSERT INTO facility(name)  VALUES("신용카드");
 
-/* 업체 */
-INSERT INTO company(name,type,discription,score,address,number,homepage,state,time,area_list_id) values("굿타임 호텔","숙박","설명1",1.0,"서울특별시 서대문구 대현동","02-364-0535","www.goodtimehotel.com","영업중","ALL TIME",1);
-INSERT INTO company(name,type,discription,score,address,number,homepage,state,time,area_list_id) values("이자엘라 호텔","숙박","설명2",2.0,"서울특별시 서대문구 신촌로 149 신촌자이엘라","02-364-0535","www.goodtimehotel.com","영업중","ALL TIME",1);
-INSERT INTO company(name,type,discription,score,address,number,homepage,state,time,area_list_id) values("호텔타임","숙박","설명3",3.0,"서울특별시 서대문구 연세로2길 98","02-364-0535","www.hoteltime.com","영업종료","ALL TIME",1);
-INSERT INTO company(name,type,discription,score,address,number,homepage,state,time,area_list_id) values("에이치에비뉴 숙박","호텔","설명4",4.0,"서울특별시 마포구 신촌로 152","0503-5051-5640","www.HABnew.com","영업중","ALL TIME",1);
+
 
 
 
