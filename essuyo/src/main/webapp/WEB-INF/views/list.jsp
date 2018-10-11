@@ -74,7 +74,7 @@
 								
 						<div class="col-sm-12 col-md-6 col-lg-4 col-xl-3">
 							<label class="custom-control availability-checkbox checkbox-day">
-							<input type="checkbox" value="1" name="filter" class="custom-control-input">
+							<input type="checkbox" value="2" name="filter" class="custom-control-input">
 								<span class="custom-control-indicator"></span>
 								<span> 인터넷 가능 여부 </span>
 							</label>
@@ -82,7 +82,7 @@
 						
 						<div class="col-sm-12 col-md-6 col-lg-4 col-xl-3">
 							<label class="custom-control availability-checkbox checkbox-day">
-							<input type="checkbox" value="1" name="filter" class="custom-control-input">
+							<input type="checkbox" value="3" name="filter" class="custom-control-input">
 								<span class="custom-control-indicator"></span>
 								<span> 흡연 가능 여부 </span>
 							</label>
@@ -90,7 +90,7 @@
 						
 						<div class="col-sm-12 col-md-6 col-lg-4 col-xl-3">
 							<label class="custom-control availability-checkbox checkbox-day">
-							<input type="checkbox" value="1" name="filter" class="custom-control-input">
+							<input type="checkbox" value="4" name="filter" class="custom-control-input">
 								<span class="custom-control-indicator"></span>
 								<span> 신용카드 가능 여부 </span>
 							</label>

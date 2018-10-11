@@ -217,8 +217,13 @@ public class CompanyServiceImpl implements CompanyService {
 		List<String> imageInfoList = null;
 		List<Object> salesList = new ArrayList<>();
 		
+		String[] values = value.split(","); 					
+		
 		Map<String, Object> sales = new HashMap<>();
-		sales.put("value", value);
+		for(int i= 0; i<values.length;i++) {
+			sales.put("value" + values[i], values[i]);			
+		}
+		sales.put("count", values.length);
 		sales.put("type", type);
 		sales.put("name", name);
 		int salesCount = companyDao.SalesListCount(sales);
@@ -239,7 +244,7 @@ public class CompanyServiceImpl implements CompanyService {
 				}else {
 					Map<String, Object> filterParam = new HashMap<>();	
 					
-					String[] values = value.split(","); 					
+									
 					for(int i= 0; i<values.length;i++) {
 							filterParam.put("value" + values[i], values[i]);			
 					}

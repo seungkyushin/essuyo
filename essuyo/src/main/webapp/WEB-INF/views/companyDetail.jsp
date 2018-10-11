@@ -292,7 +292,7 @@
 	<div class="featured-place-wrap">
 		<a href="/product/reservation?company={{companyId}}&product={{productId}}"> 
 			<img src="{{url}}" class="img-fluid company-image-size" alt="#">
-				 <span class="featured-rating-green"><i class="icon-check"></i></span>
+			
 			<div class="featured-title-box">
 				<h6>{{name}}</h6>
 				<i class="icon-direction"></i><p> {{discription}}</p>

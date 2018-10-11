@@ -32,16 +32,16 @@
                         <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
                             <ul class="navbar-nav">
 								<li class="nav-item">
-									<a class="nav-link"	href="/list">호텔</a>
+									<a class="nav-link"	href="/company/list?type='숙박'">숙박</a>
 								</li>
 								<li class="nav-item">
-									<a class="nav-link"	href="/list">렌트카</a>
+									<a class="nav-link"	href="/company/list?type='식당'">식당</a>
 								</li>
 								<li class="nav-item">
-									<a class="nav-link" href="/list">박물관</a>
+									<a class="nav-link" href="/company/list?type='문화'">문화</a>
 								</li>
 								<li class="nav-item">
-									<a class="nav-link"	href="/list">식당</a>
+									<a class="nav-link"	href="/company/list?type='차량대여'">차량대여</a>
 								</li>
 
 								<c:choose>
@@ -141,7 +141,7 @@
 	}
 	 	 
 	if( "${sessionScope.login}" != "" ){
-		Ajax("GET","http://localhost:8080/api/loginImage",function(data){
+		Ajax("GET","/api/loginImage",function(data){
 		
 			$("#userImage").attr("src",data);
 		})
