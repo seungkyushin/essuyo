@@ -41,12 +41,12 @@
     
     <update id="update">
     	update comment set title = #{title}, content = #{content}, score = #{score}, mod_date = now()
-    	where id = #{id}
+    	where id = #{id} , user_id = #{userId}
     </update>
     
     <delete id="delete">
-    	delete comment
-    	where id = #{id}
+    	delete from comment
+    	where id = #{id} AND user_id = #{userId}
     </delete>
     
     

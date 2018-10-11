@@ -5,14 +5,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.joda.time.LocalDate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.webproject.essuyo.dao.CommentDao;
-import com.webproject.essuyo.dao.CompanyDao;
 import com.webproject.essuyo.dao.UserDAO;
 import com.webproject.essuyo.domain.CommentVO;
 import com.webproject.essuyo.domain.SQLParamVO;
@@ -92,9 +90,9 @@ public class CommentServiceImpl implements CommentService {
 	}
 
 	@Override
-	public void removeComment(Integer id) throws Exception {
+	public void removeComment(CommentVO comment) throws Exception {
 		
-		commentDao.delete(id);
+		commentDao.delete(comment);
 	}
 
 }

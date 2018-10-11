@@ -13,7 +13,7 @@
 <meta name="author" content="">
 <link rel="icon" type="image/png" sizes="16x16"
 	href="../resources/images/favicon.png">
-<title>쪽지 관리</title>
+<title>메시지 관리</title>
 <link href="../resources/css/style.min.css" rel="stylesheet">
 <link href="../resources/css/style.css" rel="stylesheet">
 <link rel="stylesheet"
@@ -70,7 +70,7 @@
 			<div class="page-breadcrumb">
 				<div class="row">
 					<div class="col-5 align-self-center">
-						<h4 class="page-title">전체 쪽지함</h4>
+						<h4 class="page-title">전체 메시지함</h4>
 					</div>
 				</div>
 
@@ -80,18 +80,16 @@
 							<div class="card">
 								<div class="card-body">
 									<form role="form" method="get">
-
-
 										<div>
 											<button type="submit" class="btn allBtn"
 												style="float: left; text-align: center; text-color: white; background-color: #D8D8D8; border-radius: 1px;">
-												All LIST BOX</button>
+												전체 메시지함</button>
 											<button type="submit" class="btn sentBtn"
 												style="float: left; text-align: center; text-color: white; background-color: #D8D8D8; border-radius: 1px;">
-												RECEIVED BOX</button>
+												받은 메시지함</button>
 											<button type="submit" class="btn receivedBtn"
 												style="float: left; text-align: center; text-color: white; background-color: #D8D8D8; border-radius: 1px;">
-												SENT BOX</button>
+												보낸 메시지함</button>
 										</div>
 
 
@@ -165,7 +163,6 @@
 				</div>
 			</div>
 		</div>
-
 	</div>
 
 	<!-- jquery 추가 -->
@@ -183,7 +180,7 @@
 		var result = '${msg}';
 
 		if (result == 'SUCCESS') {
-			alert("삭제가 완료되었습니다.");
+			myAlert("DELETE","삭제가 완료되었습니다.");
 		}
 	</script>
 

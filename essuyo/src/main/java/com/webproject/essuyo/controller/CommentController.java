@@ -5,7 +5,7 @@ import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpStatus;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,8 +17,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.webproject.essuyo.domain.CommentVO;
+import com.webproject.essuyo.domain.CompanyVO;
 import com.webproject.essuyo.domain.UserVO;
 import com.webproject.essuyo.service.CommentService;
+import com.webproject.essuyo.service.CompanyService;
 import com.webproject.essuyo.service.UserService;
 
 @Controller
@@ -30,9 +32,11 @@ public class CommentController {
 	@Inject
 	private CommentService service;
 	@Inject
-	private UserService userService;
-	@Inject
 	private HttpSession session;
+	@Autowired
+	private UserService userService;
+	@Autowired
+	private CompanyService companyService;
 	
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public void register(CommentVO comment, RedirectAttributes rttr, Model model,
@@ -67,37 +71,45 @@ public class CommentController {
 		
 		service.writerComment(comment);
 		
+		int companyId = comment.getCompanyId();
+		companyService.getDetailCompanyInfo(companyId);
+		
+		return "redirect:/company/detail?id=" + companyId;
+	}
+	
+	@RequestMapping(value ="/modifyComment", method= {RequestMethod.PUT, RequestMethod.PATCH})
+	public String modifyComment(@RequestParam("id") Integer id,CommentVO comment, RedirectAttributes rttr) throws Exception{
+		
+		String userEmail = (String) session.getAttribute("login");
+		UserVO user = userService.getUserVO(userEmail);
+		int userId = user.getId();
+		comment.setUserId(userId);
+		comment.setId(id);
+		
+		service.modifyComment(comment);
+		
+		rttr.addFlashAttribute("updateMsg", "SUCCESS");
+		
 		return "redirect:/company/detail?id=" + comment.getCompanyId();
 	}
 	
-	@RequestMapping(value ="/{id}", method= {RequestMethod.PUT, RequestMethod.PATCH})
-	public ResponseEntity<String> update(@PathVariable("id") Integer id, @RequestBody CommentVO vo){
+	@RequestMapping(value ="/removeComment", method = RequestMethod.GET)
+	public String removeComment(@RequestParam("id") Integer id, @RequestParam("commentId") Integer commentId, CompanyVO company, RedirectAttributes rttr) throws Exception{
+				
+		String userEmail = (String) session.getAttribute("login");
+		UserVO user = userService.getUserVO(userEmail);
+		int userId =user.getId();
 		
-		ResponseEntity<String> entity = null;
-		try {
-			vo.setId(id);
-			service.modifyComment(vo);
-			
-			entity = new ResponseEntity<>("SUCCESS", HttpStatus.OK);
-		}catch (Exception e) {
-			e.printStackTrace();
-			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
-		}
-		return entity;
+		CommentVO comment = new CommentVO();
+		comment.setUserId(userId);
+		comment.setId(commentId);
 		
-	}
-	
-	@RequestMapping(value ="/{id}", method= RequestMethod.DELETE)
-	public ResponseEntity<String> remove(@PathVariable("id") Integer id){
+		service.removeComment(comment);
 		
-		ResponseEntity<String> entity = null;
-		try {
-			service.removeComment(id);
-			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
-		}catch (Exception e) {
-			e.printStackTrace();
-			entity = new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
-		}
-		return entity;
+		rttr.addFlashAttribute("deleteMsg", "SUCCESS");
+		
+		
+		return "redirect:/company/detail?id=" + id;
+		
 	}
 }
