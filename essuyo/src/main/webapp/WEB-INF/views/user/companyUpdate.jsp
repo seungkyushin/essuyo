@@ -96,9 +96,9 @@
 										id="type" name="type" required>
 										<option selected="selected" value="">업종 선택</option>
 										<option value="숙박">숙박</option>
-										<option value="렌트카">렌트카</option>
-										<option value="음식점">음식점</option>
-										<option value="박물관">박물관</option>
+										<option value="식당">식당</option>
+										<option value="문화">문화</option>
+										<option value="차량대여">차량대여</option>
 									</select>
 								</div>
 								<div class="form-group">
@@ -124,12 +124,13 @@
 									</select>
 								</div>
 								<div class="form-group">
-									<label>[사업장 시설 구비 여부] <span class="help"> ※ 해당
-											사항이 없으실 경우 체크하지 않으시면 됩니다.</span></label><br> <input type='checkbox'
-										name='facIds' value='1' />주차공간<br> <input
-										type='checkbox' name='facIds' value='2' />와이파이/인터넷<br> <input
-										type='checkbox' name='facIds' value='3' />흡연구역<br> <input
-										type='checkbox' name='facIds' value='4' />신용카드<br>
+
+								<label>[사업장 시설 구비 여부]  <br><span class="help"> ※ 해당 사항이 없으실 경우 체크하지 않으시면 됩니다.</span></label><br>
+									<input type="hidden" name="facIds" value="no">
+									<input type='checkbox' name='facIds' value='1' />주차공간<br>
+									<input type='checkbox' name='facIds' value='2' />와이파이/인터넷<br>
+									<input type='checkbox' name='facIds' value='3' />흡연구역<br>
+									<input type='checkbox' name='facIds' value='4' />신용카드<br>
 								</div>
 								<div class="form-group">
 									<label>[회사 전화번호] <span class="help"> 예)
@@ -157,10 +158,14 @@
 								</div>
 
 								<div class="form-group">
+
 									<label>[회사 이미지 업로드] </label><br> <span class="help">
-										※1. 이미지는 최소 3장, 최대 12장까지 업로드할 수 있습니다. <br> <c:if
-											test="${cvo.id ne 0 || cvo.id ne ''}"> ※2. 새 이미지를 업로드 하시면 기존 이미지들은 삭제됩니다.</c:if>
-									</span><br>
+									※1. 이미지는 최소 3장, 최대 12장까지 업로드할 수 있습니다. <br>
+									
+									<c:if test="${cvo != null || cvo != ''}"> ※2. 새 이미지를 업로드 하시면 기존 이미지들은 삭제됩니다.<br>
+									※3. 선택한 이미지 파일을 취소하시고 싶으실 경우, 다시 파일 선택 버튼을 눌러, 취소 버튼을 누르시면, 이미지 선택을 취소할 수 있습니다.</c:if></span>
+									<br>
+
 									<!-- 정보를 새로 입력할 때는 required가 달린 input을 보여준다 -->
 									<!-- 기존 정보를 수정할 때는 required가 없는 input을 보여줘서, 굳이 이미지를 업로드 하지 않아도 되게 한다 -->
 									<c:choose>
