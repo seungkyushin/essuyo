@@ -179,18 +179,12 @@ $(document).ready(function() {
 					showAnim : "slideDown",
 					minDate : 0,
 					maxDate : new Date("${product.saleEndDate}"),
-					onSelect : function(dateText, inst) {
-						 calReserveReuslt();
-					}
 			});
 
 			$("#endDate").datepicker({
 					showAnim : "slideDown",
 					minDate : 0,
 					maxDate : new Date("${product.saleEndDate}"),
-					onSelect : function(dateText, inst) {
-						calReserveReuslt();
-					}
 			});
 
 	

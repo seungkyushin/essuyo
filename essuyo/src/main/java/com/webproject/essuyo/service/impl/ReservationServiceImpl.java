@@ -262,11 +262,11 @@ public class ReservationServiceImpl implements ReservationService {
 
 	public int getCategoryIndex(String category) {
 		switch (category) {
-		case "호텔":
+		case "숙박":
 			return 0;
-		case "렌트카":
+		case "차량대여":
 			return 1;
-		case "박물관":
+		case "문화":
 			return 2;
 		case "식당":
 			return 3;

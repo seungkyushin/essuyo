@@ -159,11 +159,13 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public void deleteProduct(int productId) {
+	public boolean deleteProduct(int productId) {
 		try {
 				productDao.delete(productId);
+				return true;
 		} catch (Exception e) {
 			logger.error("상품  삭제 실패.. | {} ", e.toString());
+			return false;
 		}	
 	}
 

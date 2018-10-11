@@ -123,7 +123,7 @@
                     <c:if test="${!empty company}">
                     	     <div class="col-lg-4 col-xlg-3 col-md-5">
 								<div class="featured-place-wrap">
-									<a href="/detail?id=${company.id}"> <img	src="${company.image}" class="img-fluid" alt="#">
+									<a href="/company/detail?id=${company.id}"> <img	src="${company.image}" class="img-fluid" alt="#">
 										<c:choose>
 											<c:when test="${company.score <= 3}">
 												<span class="featured-rating">${company.score}</span>

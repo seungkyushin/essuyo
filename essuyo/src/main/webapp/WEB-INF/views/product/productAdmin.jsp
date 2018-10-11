@@ -17,7 +17,7 @@
 <link href="../resources/css/chartist/chartist.min.css" rel="stylesheet">
 <link href="../resources/css/style.min.css" rel="stylesheet">
 <link href="../resources/css/simple-line-icons.css" rel="stylesheet">
-<link rel="stylesheet" href="resources/css/style.css">
+<link href="../resources/css/style.css" rel="stylesheet" >
 
 </head>
 
@@ -106,9 +106,8 @@
 
 <script type="template" id="product-template">
 <div class="featured-place-wrap">
-<a href="/reservation?company={{companyId}}&product={{productId}}">
+<a href="/product/reservation?company={{companyId}}&product={{productId}}">
 	<img src="{{url}}" class="img-fluid" alt="#"> 
-	<span class="featured-rating">8.0</span>
 	<div class="featured-title-box">
 		<h6>{{name}}</h6>
 		<i class="icon-direction"></i>
@@ -122,7 +121,8 @@
 		</ul>
 		<div class="bottom-icons">
 			<div class="open-now">{{state}}</div>
-			<a style="float:right" href=""> <i style="width:30px;height:auto;" class="icon-note"></i> </a>
+			<button style="float:left" class="btn btn-danger">삭제</button>
+			<button style="float:right" class="btn btn-info">수정</button>
 		</div>
 				
 	</div>
@@ -148,6 +148,7 @@ $(document).ready(function(){
 		
 		dataList.forEach(function(data){
 			var tempData = {};
+			
 			tempData['number'] = data.id;
 			tempData['score'] = data.score;
 			tempData['name'] = data.name;
@@ -171,9 +172,12 @@ $(document).ready(function(){
 			
 
 				var tempData = {};
+				tempData['companyId'] = ${companyId};
+				tempData['productId'] = data.id;
 				tempData['url'] = data.url[0];
 				tempData['number'] = data.id;
 				tempData['name'] = data.name;
+				tempData['score'] = data.score;
 				tempData['discription'] = data.discription;
 				tempData['saleDate'] = data.saleStartDate + " - " + data.saleEndDate;
 				tempData['price'] = data.price;

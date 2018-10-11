@@ -109,7 +109,8 @@ public class ProductController {
 		int BusinessId = (Integer) httpSession.getAttribute("companyLogin");
 		BusinessVO business = userService.getBusinessInfo(BusinessId);
 		
-		model.addAttribute("companyId" ,business.getCompanyId());
+		if( business != null && business.getCompanyId() != 0)
+			model.addAttribute("companyId" ,business.getCompanyId());
 	
 		return viewName;
 	}
@@ -139,10 +140,19 @@ public class ProductController {
 	
 
 	@GetMapping("/delete")
-	public String deleteProduct(@RequestParam int  productId, RedirectAttributes redirectAttr,
+	public String deleteProduct(@RequestParam int  id, RedirectAttributes redirectAttr,
 			HttpSession httpSession, Model model) {
 
-		productService.deleteProduct(productId);
+		;
+		
+		if( productService.deleteProduct(id) == true) {
+			redirectAttr.addFlashAttribute("errorMessageTitle", "SUCCESS !");
+			redirectAttr.addFlashAttribute("errorMessage", "해당 상품이 삭제 되었습니다.");
+		}else{
+			redirectAttr.addFlashAttribute("errorMessageTitle", "ERROR !");
+			redirectAttr.addFlashAttribute("errorMessage", "해당 상품이 삭제에 실패하였습니다.");
+		}
+			
 		return "redirect:/product/admin";
 	}
 	
