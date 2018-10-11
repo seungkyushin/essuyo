@@ -25,12 +25,11 @@
 
                     <div class="navbar-brand">
                         <a href="/" class="logo">
-                              <b class="logo-icon">
-                                 <img src="/resources/images/logo-icon.png" alt="homepage" class="dark-logo" />
-                                 <img src="/resources/images/logo-light-icon.png" alt="homepage" class="light-logo" />
+                            <b class="logo-icon">
+                                <img  style="width:50px;height:50px" src="/resources/images/backpack.png" alt="homepage" class="light-logo" /> 
                             </b>
                             <span class="logo-text">
-                                		메인으로
+                                		<i class="icon-home"></i>
                             </span>
                         </a>
                     </div> 

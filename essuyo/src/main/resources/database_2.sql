@@ -97,8 +97,8 @@ CREATE TABLE user (
 	sessionkey varchar(50) not null default 'none', /*세션키*/
 	sessionlimit timestamp, /*세션유효기간*/
 	
-	FOREIGN KEY (business_id) REFERENCES business(id),
-	FOREIGN KEY (image_info_id) REFERENCES image_info(id)
+	FOREIGN KEY (business_id) REFERENCES business(id) ON DELETE CASCADE,
+	FOREIGN KEY (image_info_id) REFERENCES image_info(id) ON DELETE CASCADE
 )DEFAULT CHARSET=utf8; 
 
 /* 덧글 */
@@ -210,37 +210,8 @@ CREATE TABLE reservation (
 
 
 /*이미지*/
-INSERT INTO image_info ( save_path, type ,name, cre_date ) VALUES("/resources/images/hotel.jpg","image/jpg","hotel.jpg", now());
-INSERT INTO image_info ( save_path, type ,name, cre_date ) VALUES("/resources/images/car.jpg","image/jpg","car.jpg", now());
-INSERT INTO image_info ( save_path, type ,name, cre_date ) VALUES("/resources/images/food.jpg","image/jpg","food.jpg", now());
-INSERT INTO image_info ( save_path, type ,name, cre_date ) VALUES("/resources/images/museum.jpg","image/jpg","museum.jpg", now());
-INSERT INTO image_info ( save_path, type ,name, cre_date ) VALUES("/resources/images/users/1.jpg","image/jpg","1.jpg", now());
-INSERT INTO image_info ( save_path, type ,name, cre_date ) VALUES("/resources/images/users/2.jpg","image/jpg","user2.jpg", now());
-INSERT INTO image_info ( save_path, type ,name, cre_date ) VALUES("/resources/images/users/3.jpg","image/jpg","user3.jpg", now());
-INSERT INTO image_info ( save_path, type ,name, cre_date ) VALUES("/resources/images/menu-hotel.jpg","image/jpg","menu-hotel.jpg", now());
-INSERT INTO image_info ( save_path, type ,name, cre_date ) VALUES("/resources/images/reserve-slide3.jpg","image/jpg","reserve-slide3.jpg", now());
-INSERT INTO image_info ( save_path, type ,name, cre_date ) VALUES("/resources/images/reserve-slide2.jpg","image/jpg","reserve-slide2.jpg", now());
+INSERT INTO image_info ( save_path, type ,name, cre_date ) VALUES("/resources/images/default-user.png","image/png","default-user.png", now());
 
-/*company list*/
-insert into image_info(save_path,type,name,cre_date) values("/resources/images/hotel1.png","image/png","hotel1",now());
-insert into image_info(save_path,type,name,cre_date) values("/resources/images/hotel2.png","image/png","hotel2",now());
-insert into image_info(save_path,type,name,cre_date) values("/resources/images/hotel3.png","image/png","hotel3",now());
-insert into image_info(save_path,type,name,cre_date) values("/resources/images/hotel4.png","image/png","hotel4",now());
-
-insert into image_info(save_path,type,name,cre_date) values("/resources/images/food1.png","image/png","food1",now());
-insert into image_info(save_path,type,name,cre_date) values("/resources/images/food2.png","image/png","food2",now());
-insert into image_info(save_path,type,name,cre_date) values("/resources/images/food3.png","image/png","food3",now());
-insert into image_info(save_path,type,name,cre_date) values("/resources/images/food4.png","image/png","food4",now());
-
-insert into image_info(save_path,type,name,cre_date) values("/resources/images/pa1.png","image/png","pa1",now());
-insert into image_info(save_path,type,name,cre_date) values("/resources/images/pa2.png","image/png","pa2",now());
-insert into image_info(save_path,type,name,cre_date) values("/resources/images/pa3.png","image/png","pa3",now());
-insert into image_info(save_path,type,name,cre_date) values("/resources/images/pa4.png","image/png","pa4",now());
-
-insert into image_info(save_path,type,name,cre_date) values("/resources/images/car1.png","image/png","car1",now());
-insert into image_info(save_path,type,name,cre_date) values("/resources/images/car2.png","image/png","car2",now());
-insert into image_info(save_path,type,name,cre_date) values("/resources/images/car3.png","image/png","car3",now());
-insert into image_info(save_path,type,name,cre_date) values("/resources/images/car4.png","image/png","car4",now());
 
 /* 지역명목록 */
 INSERT INTO area_list (name)  VALUES("서울");
@@ -248,244 +219,11 @@ INSERT INTO area_list (name)  VALUES("부산");
 INSERT INTO area_list (name)  VALUES("광주");
 INSERT INTO area_list (name)  VALUES("강원도");
 
-
-
 INSERT INTO facility(name)  VALUES("주차공간");
 INSERT INTO facility(name)  VALUES("와이파이/인터넷");
 INSERT INTO facility(name)  VALUES("금연구역");
 INSERT INTO facility(name)  VALUES("신용카드");
 
 
-/* 업체 */
-INSERT INTO company(name, type, score, discription, address,number, homepage, state, time,lat,lon, area_list_id)
-VALUES("힐튼호텔1", "호텔", 9.0 , "돈만 있으면 쾌적한 곳1", "서울특별시 기장군 기장읍 기장해안로 268-32 힐튼서울","010-1111-1111",
-"http://hiltonbusan1.co.kr/","영업중","ALL TIME",37.556388,126.945200,1);
 
-INSERT INTO company(name, type, score, discription, address,number, homepage, state, time,lat,lon, area_list_id)
-VALUES("힐튼호텔2", "호텔", 7.0 , "돈만 있으면 쾌적한 곳2", "부산광역시 기장군 기장읍 기장해안로 268-32 힐튼부산","010-2222-2222",
-"http://hiltonbusan2.co.kr/","영업중","ALL TIME",37.556455,126.944741,2);
-
-INSERT INTO company(name, type, score, discription, address,number, homepage, state, time,lat,lon, area_list_id)
-VALUES("힐튼호텔3", "호텔", 6.0 , "돈만 있으면 쾌적한 곳3", "광주광역시 기장군 기장읍 기장해안로 268-32 힐튼광주","010-3333-3333",
-"http://hiltonbusan.co.kr/","영업종료","ALL TIME",37.556855,126.944585,3);
-
-INSERT INTO company(name, type, score, discription, address,number, homepage, state, time,lat,lon, area_list_id)
-VALUES("힐튼호텔4", "호텔", 2.0 , "돈만 있으면 쾌적한 곳4", "강원도 기장군 기장읍 기장해안로 268-32 힐튼강원도","010-4444-4444",
-"http://hiltonbusan.co.kr/","영업종료","ALL TIME",37.556929,126.945242,4);
-
-INSERT INTO company(name, type, score, discription, address,number, homepage, state, time,lat,lon, area_list_id)
-VALUES("식당1", "식당", 9.0 , "빵 맛있는 식당", "서울 서대문구 연세로12길 33","02-1111-1111",
-"http://outback1.co.kr/shinchon/","영업중","am 10:00 ~ pm 10:00",37.556388,126.945200,1);
-
-INSERT INTO company(name, type, score, discription, address,number, homepage, state, time,lat,lon, area_list_id)
-VALUES("식당2", "식당", 7.0 , "빵 맛있는 식당", "부산 서대문구 연세로12길 33","02-2222-2222",
-"http://outback2.co.kr/shinchon/","영업중","am 10:00 ~ pm 10:00",37.556455,126.944741,2);
-
-INSERT INTO company(name, type, score, discription, address,number, homepage, state, time,lat,lon, area_list_id)
-VALUES("식당3", "식당", 6.0 , "빵 맛있는 식당", "광주 서대문구 연세로12길 33","02-3333-3333",
-"http://outback3.co.kr/shinchon/","영업종료","am 10:00 ~ pm 10:00",37.556855,126.944585,3);
-
-INSERT INTO company(name, type, score, discription, address,number, homepage, state, time,lat,lon, area_list_id)
-VALUES("식당4", "식당", 2.0 , "빵 맛있는 식당", "강원도 서대문구 연세로12길 33","02-4444-4444",
-"http://outback4.co.kr/shinchon/","영업종료","am 10:00 ~ pm 10:00",37.556929,126.945242,4);
-
-INSERT INTO company(name, type, score, discription, address,number, homepage, state, time,lat,lon, area_list_id)
-VALUES("박물관1", "박물관", 9.0 , "알밥파는 집11", "서울 서대문구 이화여대7길 14","02-111-111",
-"http://alchon1.com/","영업중","am 10:00 ~ pm 10:00",37.556388,126.945200,1);
-
-INSERT INTO company(name, type, score, discription, address,number, homepage, state, time,lat,lon, area_list_id)
-VALUES("박물관2", "박물관", 7.0 , "알밥파는 집2", "부산 서대문구 이화여대7길 14","02-222-222",
-"http://alchon2.com/","영업중","am 10:00 ~ pm 10:00",37.556455,126.944741,2);
-
-INSERT INTO company(name, type, score, discription, address,number, homepage, state, time,lat,lon, area_list_id)
-VALUES("박물관3", "박물관", 6.0 , "알밥파는 집3", "광주 서대문구 이화여대7길 14","02-333-333",
-"http://alchon3.com/","영업종료","am 10:00 ~ pm 10:00",37.556855,126.944585,3);
-
-INSERT INTO company(name, type, score, discription, address,number, homepage, state, time,lat,lon, area_list_id)
-VALUES("박물관4", "박물관", 2.0 , "알밥파는 집4", "강원도 서대문구 이화여대7길 14","02-444-444",
-"http://alchon4.com/","영업종료","am 10:00 ~ pm 10:00",37.556929,126.945242,4);
-
-
-INSERT INTO company(name, type, score, discription, address,number, homepage, state, time,lat,lon, area_list_id)
-VALUES("쏘카1", "렌트카", 9.0 , "카 쉐어1", "서울 서대문구 남가좌동 7길 14","02-11-11",
-"http://socar1.com/","영업중","am 10:00 ~ pm 10:00",37.556388,126.945200,1);
-
-INSERT INTO company(name, type, score, discription, address,number, homepage, state, time,lat,lon, area_list_id)
-VALUES("쏘카2", "렌트카", 7.0 , "카 쉐어2", "부산 서대문구 남가좌동 7길 14","02-22-22",
-"http://socar2.com/","영업중","am 10:00 ~ pm 10:00",37.556455,126.944741,2);
-
-INSERT INTO company(name, type, score, discription, address,number, homepage, state, time,lat,lon, area_list_id)
-VALUES("쏘카3", "렌트카", 6.0 , "카 쉐어3", "광주 서대문구 남가좌동 7길 14","02-33-33",
-"http://socar3.com/","영업종료","am 10:00 ~ pm 10:00",37.556855,126.944585,3);
-
-INSERT INTO company(name, type, score, discription, address,number, homepage, state, time,lat,lon, area_list_id)
-VALUES("쏘카4", "렌트카", 2.0 , "카 쉐어4", "강원도 서대문구 남가좌동 7길 14","02-44-44",
-"http://socar4.com/","영업종료","am 10:00 ~ pm 10:00",37.556929,126.945242,4);
-
-
-
-
-INSERT INTO facility_admin(company_id, facility_id) VALUES(1,1);
-INSERT INTO facility_admin(company_id, facility_id) VALUES(1,3);
-INSERT INTO facility_admin(company_id, facility_id) VALUES(1,4);
-
-
-INSERT INTO facility_admin(company_id, facility_id) VALUES(2,1);
-INSERT INTO facility_admin(company_id, facility_id) VALUES(2,2);
-INSERT INTO facility_admin(company_id, facility_id) VALUES(2,4);
-
-INSERT INTO facility_admin(company_id, facility_id) VALUES(3,1);
-INSERT INTO facility_admin(company_id, facility_id) VALUES(3,3);
-INSERT INTO facility_admin(company_id, facility_id) VALUES(3,4);
-
-INSERT INTO facility_admin(company_id, facility_id) VALUES(4,1);
-INSERT INTO facility_admin(company_id, facility_id) VALUES(4,2);
-
-/* 사업 */
-INSERT INTO business(good,comment,company_id) VALUES(10, "힐튼호텔", 1);
-INSERT INTO business(good,comment,company_id) VALUES(10, "아웃백-신촌점", 2);
-INSERT INTO business(good,comment,company_id) VALUES(10, "알촌", 3);
-
-/*유저*/
-INSERT INTO user(name, age, gender, email, password,fail_password,
-cre_date,business_id,image_info_id) VALUES("이써요", 10,"남","test@essuyo.com",
-"1234",3,now(),1,5);
-
-INSERT INTO user(name, age, gender, email, password,fail_password,
-cre_date,image_info_id) VALUES("이써요2", 20,"남","test@esy.com",
-"1234",3,now(),6);
-
-INSERT INTO user(name, age, gender, email, password,fail_password,
-cre_date,image_info_id) VALUES("이써요3", 30,"남","test3@essuyo.com",
-"1234",3,now(),7);
-
-
-
-/*상품*/
-INSERT INTO product(name, sale_start_date, sale_end_date, discription, price)
-VALUES("비싼 호텔", "2018-10-01","2018-10-15", "한국에서 가장 비싼 호텔입니다.",1000000);
-INSERT INTO product(name, sale_start_date, sale_end_date, discription, price) 
-VALUES("람보르기니 SUV", "2018-10-01","2018-10-30", "람보르기니기니",300000);
-INSERT INTO product(name, sale_start_date, sale_end_date, discription, price) 
-VALUES("돈까스 맛집", "2018-10-01","2018-11-01", "돈까스 장인이 매일 직접 만들어 판매합니다.",7000);
-INSERT INTO product(name, sale_start_date, sale_end_date, discription, price)
-VALUES("박물관이 살아있다.", "2018-10-01","2018-10-15",  "영화 아님",4000);
-
-
-/*상품 관리*/
-INSERT INTO product_admin(company_id,product_id) VALUES(1,1);
-INSERT INTO product_admin(company_id,product_id) VALUES(1,2);
-INSERT INTO product_admin(company_id,product_id) VALUES(2,3);
-INSERT INTO product_admin(company_id,product_id) VALUES(2,4);
-
-/*상품 제고*/
-INSERT INTO product_manager(sale_date,count,product_id) VALUES
-("2018-10-01",1,1),("2018-10-02",1,1),("2018-10-03",0,1),("2018-10-04",1,1),("2018-10-05",1,1),
-("2018-10-06",1,1),("2018-10-07",1,1),("2018-10-08",1,1),("2018-10-09",1,1),("2018-10-10",0,1),
-("2018-10-11",1,1),("2018-10-12",1,1),("2018-10-13",1,1),("2018-10-14",1,1),("2018-10-15",1,1);
-
-
-/*회사 이미지*/
-INSERT INTO company_image_admin(company_id,image_info_id) VALUES(1, 11);
-INSERT INTO company_image_admin(company_id,image_info_id) VALUES(2, 12);
-INSERT INTO company_image_admin(company_id,image_info_id) VALUES(3, 13);
-INSERT INTO company_image_admin(company_id,image_info_id) VALUES(4, 14);
-INSERT INTO company_image_admin(company_id,image_info_id) VALUES(5, 15);
-INSERT INTO company_image_admin(company_id,image_info_id) VALUES(6, 16);
-INSERT INTO company_image_admin(company_id,image_info_id) VALUES(7, 17);
-INSERT INTO company_image_admin(company_id,image_info_id) VALUES(8, 18);
-INSERT INTO company_image_admin(company_id,image_info_id) VALUES(9, 19);
-INSERT INTO company_image_admin(company_id,image_info_id) VALUES(10, 20);
-INSERT INTO company_image_admin(company_id,image_info_id) VALUES(11, 21);
-INSERT INTO company_image_admin(company_id,image_info_id) VALUES(12, 22);
-INSERT INTO company_image_admin(company_id,image_info_id) VALUES(13, 23);
-INSERT INTO company_image_admin(company_id,image_info_id) VALUES(14, 24);
-INSERT INTO company_image_admin(company_id,image_info_id) VALUES(15, 25);
-INSERT INTO company_image_admin(company_id,image_info_id) VALUES(16, 26);
-
-/*상품 이미지 관리*/
-INSERT INTO product_image_admin(product_id,image_info_id) VALUES(1, 1);
-INSERT INTO product_image_admin(product_id,image_info_id) VALUES(1, 8);
-INSERT INTO product_image_admin(product_id,image_info_id) VALUES(1, 9);
-INSERT INTO product_image_admin(product_id,image_info_id) VALUES(2, 2);
-INSERT INTO product_image_admin(product_id,image_info_id) VALUES(3, 3);
-INSERT INTO product_image_admin(product_id,image_info_id) VALUES(4, 4);
-
-
-/*덧글*/
-INSERT INTO comment(title, content,  helpful, score, reg_date, user_id, company_id) 
-VALUES("comment title 1", "이써요이써요이써요이써요", 0, 1.0,"2018-09-21",2,1);
-
-INSERT INTO comment(title, content,  helpful, score, reg_date, user_id, company_id) 
-VALUES("comment title 2", "이써요이써요이써요이써요", 0, 2.0,"2018-09-21",3,1);
-
-INSERT INTO comment(title, content,  helpful, score, reg_date, user_id, company_id) 
-VALUES("comment title 3", "이써요이써요이써요이써요", 0, 5.0,"2018-09-22",2,1);
-
-INSERT INTO comment(title, content,  helpful, score, reg_date, user_id, company_id) 
-VALUES("comment title 4", "이써요이써요이써요이써요", 0, 4.0,"2018-09-22",3,2);
-
-INSERT INTO comment(title, content,  helpful, score, reg_date, user_id, company_id) 
-VALUES("comment title 5", "이써요이써요이써요이써요", 0, 5.0,"2018-09-22",2,2);
-
-INSERT INTO comment(title, content,  helpful, score, reg_date, user_id, company_id) 
-VALUES("comment title 6", "이써요이써요이써요이써요", 0, 6.0,"2018-09-23",3,2);
-
-INSERT INTO comment(title, content,  helpful, score, reg_date, user_id, company_id) 
-VALUES("comment title 7", "이써요이써요이써요이써요", 0, 7.0,"2018-09-24",2,1);
-
-INSERT INTO comment(title, content,  helpful, score, reg_date, user_id, company_id) 
-VALUES("comment title 8", "이써요이써요이써요이써요", 0, 8.0,"2018-09-25",3,1);
-
-INSERT INTO comment(title, content,  helpful, score, reg_date, user_id, company_id) 
-VALUES("comment title 9", "이써요이써요이써요이써요", 0, 9.0,"2018-09-25",2,2);
-
-INSERT INTO comment(title, content,  helpful, score, reg_date, user_id, company_id) 
-VALUES("comment title 10", "이써요이써요이써요이써요", 0, 9.5,"2018-09-25",3,2);
-
-
-/*예약*/
-
-INSERT INTO reservation(state, product_type, total_price, res_date, product_count, reg_date, company_id, product_id, user_id) 
-VALUES("완료", "호텔", 300000, "2018-03-01", 2, "2018-03-03", 1, 1, 2);
-
-INSERT INTO reservation(state, product_type, total_price, res_date, product_count, reg_date, company_id, product_id, user_id) 
-VALUES("완료", "호텔", 300000, "2018-03-01", 2, "2018-03-03", 1, 1, 2);
-
-INSERT INTO reservation(state, product_type, total_price, res_date, product_count, reg_date, company_id, product_id, user_id) 
-VALUES("완료", "식당", 300000, "2018-03-01", 2, "2018-03-03", 4, 2, 2);
-
-INSERT INTO reservation(state, product_type, total_price, res_date, product_count, reg_date, company_id, product_id, user_id) 
-VALUES("완료", "식당", 300000, "2018-03-01", 2, "2018-03-03", 3, 3, 2);
-
-INSERT INTO reservation(state, product_type, total_price, res_date, product_count, reg_date, company_id, product_id, user_id) 
-VALUES("완료", "렌트카", 300000, "2018-03-01", 2, "2018-03-03", 3, 3, 2);
-
-INSERT INTO reservation(state, product_type,  total_price, res_date, product_count, reg_date, company_id, product_id, user_id) 
-VALUES("완료", "호텔", 200000, "2018-09-21", 2, "2018-09-19", 1, 1, 2);
-
-INSERT INTO reservation(state, product_type, total_price, res_date, product_count, reg_date, company_id, product_id, user_id) 
-VALUES("완료", "호텔", 300000, "2018-09-22", 3, "2018-09-19", 4, 2, 2);
-
-INSERT INTO reservation(state, product_type,  total_price, res_date, product_count, reg_date, company_id, product_id, user_id) 
-VALUES("취소", "호텔", 500000, "2018-09-24", 5, "2018-09-19", 4, 2, 2);
-
-INSERT INTO reservation(state, product_type,  total_price, res_date, product_count, reg_date, company_id, product_id, user_id) 
-VALUES("완료", "호텔", 600000, "2018-09-25", 6, "2018-09-19", 4, 2, 2);
-
-INSERT INTO reservation(state, product_type,  total_price, res_date, product_count, reg_date, company_id, product_id, user_id) 
-VALUES("성공", "식당", 700000, "2018-09-26", 7, "2018-09-19", 4, 2, 2);
-
-INSERT INTO reservation(state, product_type,  total_price, res_date, product_count, reg_date, company_id, product_id, user_id) 
-VALUES("완료", "박물관", 800000, "2018-09-27", 8, "2018-09-19", 3, 3, 2);
-
-
-INSERT INTO reservation(state, product_type,  total_price, res_date, product_count, reg_date, company_id, product_id, user_id) 
-VALUES("완료", "식당", 1000000, "2018-09-28", 9, "2018-09-19", 3, 3, 3);
-
-INSERT INTO reservation(state, product_type,  total_price, res_date, product_count, reg_date, company_id, product_id, user_id) 
-VALUES("성공", "식당", 100000, "2018-09-20", 1, "2018-09-19", 1, 1, 3);
-
-INSERT INTO reservation(state, product_type,  total_price, res_date, product_count, reg_date, company_id, product_id, user_id) 
-VALUES("성공", "식당", 400000, "2018-09-23", 4, "2018-09-19", 4, 2, 3);
 

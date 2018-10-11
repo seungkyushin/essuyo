@@ -168,18 +168,21 @@ public class UserServiceImpl implements UserService {
 	@Transactional
 	public int setUserInfo(UserVO user, MultipartFile file) {
 		try {
-			int deleteImageInfoId = user.getImageInfoId();
-			
-			//< 1. 이미지 서버에 저장
-			int imageInfoId = imageAdminService.uploadFile(file);
-			user.setImageInfoId(imageInfoId);
-			
-			//< 2. 저장 성공하면 DB 갱신
-			dao.update(user);
-			
-			//< 3. User 테이블에 이미지 갱신되면 파일 삭제 및 DB 삭제
-			ImageInfoVO image = imageAdminService.getImageInfo(deleteImageInfoId);
-			imageAdminService.deleteFile(image.getName(),image.getId());
+				//< 파일이 있는 경우만
+				if(file.getSize() > 0) {
+					int deleteImageInfoId = user.getImageInfoId();
+					
+					//< 1. 이미지 서버에 저장
+					int imageInfoId = imageAdminService.uploadFile(file);
+					user.setImageInfoId(imageInfoId);
+					
+					//< 2. User 테이블에 이미지 갱신되면 파일 삭제 및 DB 삭제
+					ImageInfoVO image = imageAdminService.getImageInfo(deleteImageInfoId);
+					imageAdminService.deleteFile(image.getName(),image.getId());
+					}
+		
+				//< 1. 저장 성공하면 DB 갱신
+				dao.update(user);
 
 			return 1;
 		} catch (Exception e) {

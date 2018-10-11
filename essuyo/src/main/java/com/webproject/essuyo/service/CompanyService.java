@@ -24,13 +24,11 @@ public interface CompanyService {
 
 	public Map<String, Object> getList(int start, String value, String type, String name) throws Exception;
 	
-	
-
-	
+	public Map<String,Object> getAllCompanyCount();
 	
 	public List<String> getCompanyFacility(int companyId) throws Exception;
 
-//	이미지 
+	//	이미지 
 	public List<String> getImagePath(int companyId) throws Exception;
 	
 	public int selectId() throws Exception;

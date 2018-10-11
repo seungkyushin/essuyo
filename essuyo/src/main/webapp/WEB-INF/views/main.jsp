@@ -35,7 +35,7 @@
 						<div class="row d-flex justify-content-center">
 							<div class="col-md-10">
 								<form class="form-wrap mt-4">
-									<div class="btn-group" role="group" aria-label="Basic example"">
+									<div class="btn-group" role="group" aria-label="Basic example">
 										<input list="list" placeholder="선택" name="type"
 											class="btn-group1" id="listValue">
 										<datalist id="list">
@@ -74,7 +74,8 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-md-4">
+			
+			<div class="col-md-4">
 					<div class="find-place-img_wrap">
 						<div class="grid">
 							<figure class="effect-ruby">
@@ -84,7 +85,7 @@
 									alt="img13" />
 									<figcaption>
 										<h5>렌트카</h5>
-										<p>${countList['렌트카']}목록</p>
+										<p>${companyCount.car}목록</p>
 									</figcaption></a>
 							</figure>
 						</div>
@@ -101,7 +102,7 @@
 											alt="img13" />
 											<figcaption>
 												<h5>식당</h5>
-												<p>${countList['식당']}목록</p>
+												<p>${companyCount.food}목록</p>
 											</figcaption></a>
 									</figure>
 								</div>
@@ -118,8 +119,8 @@
 											alt="img13" />
 											<figcaption>
 												<h5>박물관</h5>
-												<p>${countList['박물관']}목록</p>
-											</figcaption></a>
+												<p>${companyCount.museum}목록</p>
+										</figcaption></a>
 									</figure>
 								</div>
 							</div>
@@ -137,11 +138,9 @@
 											alt="img13" />
 											<figcaption>
 												<h5>호텔</h5>
-												<p>${countList}목록</p>
-												<p>${countList['펜션']}목록</p>
-												<p>${countList['호텔']}목록</p>
-												
+												<p>${companyCount.hotel}목록</p>
 											</figcaption></a>
+
 									</figure>
 								</div>
 							</div>
@@ -213,7 +212,7 @@
 										<p>${company.homepage}</p></li>
 
 								</ul>
-								<div class="bottom-icons">
+							<div class="bottom-icons">
 									<c:choose>
 										<c:when test="${company.state == '영업중'}">
 											<div class="open-now">${company.state}</div>

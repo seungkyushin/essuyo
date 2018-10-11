@@ -188,5 +188,10 @@ FROM company WHERE id = #{companyId};
 	</insert>
 
 
+<select id="allCompanyCount" resultType="hashMap">
+SELECT type, count(*) AS count FROM company GROUP BY type;
+</select>
+
+
 </mapper>
 
