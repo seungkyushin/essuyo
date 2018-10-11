@@ -132,7 +132,7 @@ CREATE TABLE message (
 	FOREIGN KEY (receiver_id) REFERENCES user(email) ON DELETE CASCADE
 )DEFAULT CHARSET=utf8; 
 
-/*공지사항*/
+/* 공지사항 */
 CREATE TABLE notice (
 	noticeNum INTEGER PRIMARY KEY auto_increment, /* 번호 */
 	title VARCHAR(255) NOT  NULL, /* 제목 */	
@@ -140,7 +140,7 @@ CREATE TABLE notice (
 	reg_date timestamp not null default now(), /* 등록날짜 */	
 	user_id VARCHAR(255) NOT NULL, /* 작성자 사용자번호 */	
 	
-    FOREIGN KEY (user_id) REFERENCES user(email) ON DELETE CASCADE,
+   FOREIGN KEY (user_id) REFERENCES user(email) ON DELETE CASCADE
 )DEFAULT CHARSET=utf8; 
 
 /* 상품관리 */
