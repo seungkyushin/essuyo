@@ -59,8 +59,9 @@
                                 <span class="hide-menu">회원정보</span>
                             </a>
                         </li>
+                        
                            <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/user/companyRegist" aria-expanded="false">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/user/companyUpdate" aria-expanded="false">
                                 <i class="icon-briefcase"></i>
                                 <span class="hide-menu">개인사업장 관리</span>
                             </a>
