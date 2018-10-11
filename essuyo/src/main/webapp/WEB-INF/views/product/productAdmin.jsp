@@ -69,6 +69,7 @@
 											<th scope="col">상품명</th>
 											<th scope="col">판매 날짜</th>
 											<th scope="col">가격</th>
+											<th scope="col"></th>
 										</tr>
 									</thead>
 									<tbody id="product-list">
@@ -121,9 +122,8 @@
 		</ul>
 		<div class="bottom-icons">
 			<div class="open-now">{{state}}</div>
-			<button style="float:left" class="btn btn-danger">삭제</button>
-			<button style="float:right" class="btn btn-info">수정</button>
 		</div>
+			
 				
 	</div>
 </a>
@@ -136,31 +136,48 @@
 	<td>{{name}}</td>
 	<td>{{saleDate}}</td>
 	<td>{{price}} 원</td>
+	<td><a href="">수정</a> / <a href="javascript:deleteProduct({{number}})">삭제</a></td>
 </tr>
 </script>
 
 <script>
+function deleteProduct(id){
+	
+	Ajax("GET", "/api/delete?id=" + id,function(data){
+		
+		if( data == true ){
+			myAlert("SUCCESS !" ,"삭제에 성공 하셨습니다.");
+		}else{
+			myAlert("ERROR !" ,"삭제에 실패 하였습니다.");
+		}
+		 getProductList();
+		
+	});
+}
+function getProductList(){
+	if("${companyId}" != ""){
+		
+		var requestURL = "/api/productList/" + ${companyId};
+		Ajax("GET",requestURL,function(dataList){
+			
+			dataList.forEach(function(data){
+				var tempData = {};
+				
+				tempData['number'] = data.id;
+				tempData['score'] = data.score;
+				tempData['name'] = data.name;
+				tempData['saleDate'] = data.saleStartDate + " - " + data.saleEndDate;
+				tempData['price'] = data.price;
+											
+				makeHTML("#product-table-template", "#product-list", tempData);
+			});
+		});
+	}
+}
 $(document).ready(function(){
 
-	if("${companyId}" != ""){
-	var requestURL = "/api/productList/" + ${companyId};
-	Ajax("GET",requestURL,function(dataList){
+	getProductList();
 		
-		dataList.forEach(function(data){
-			var tempData = {};
-			
-			tempData['number'] = data.id;
-			tempData['score'] = data.score;
-			tempData['name'] = data.name;
-			tempData['saleDate'] = data.saleStartDate + " - " + data.saleEndDate;
-			tempData['price'] = data.price;
-										
-			makeHTML("#product-table-template", "#product-list", tempData);
-		});
-	});
-	}
-	
-	
 	
 	$("#product-list-table").on("click",function(event){
 			

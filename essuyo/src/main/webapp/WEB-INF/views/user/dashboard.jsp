@@ -193,12 +193,7 @@
             <span class="m-b-15 d-block">{{content}}</span>
             <div class="comment-footer">
                 <span class="text-muted float-right">{{regDate}}</span>
-                <span class="action-icons">
-                    <a href="javascript:void(0)">
-                        <i class="ti-pencil-alt"></i>
-                    </a>
-                  </span>
-            </div>
+             </div>
         </div>
 	  </div>
 
