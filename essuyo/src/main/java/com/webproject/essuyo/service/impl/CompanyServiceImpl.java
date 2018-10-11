@@ -334,7 +334,8 @@ public class CompanyServiceImpl implements CompanyService {
 				int count = 0;
 				for(String key : data.keySet()) {
 					if(key.equals("type") == true ) {
-						switch(String.valueOf(data.get(key))) {
+
+					switch(String.valueOf(data.get(key))) {
 							case "숙박":
 								type = "hotel";
 								break;

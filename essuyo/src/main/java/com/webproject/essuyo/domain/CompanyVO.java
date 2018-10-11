@@ -73,6 +73,7 @@ public class CompanyVO {
 	public void setTime(String time) {
 		this.time = time;
 	}
+
 	public int getAreaListId() {
 		return areaListId;
 	}
