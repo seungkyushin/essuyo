@@ -27,7 +27,7 @@
 						<div class="row">
 							<div class="col-md-12">
 								<div class="slider-content_wrap">
-									<h1>여행에 필요한 모든 예약 시스템 </h1>
+									<h1>여행에 필요한 예약 Essuyo! </h1>
 									<h5>여행에 필요한 통합 예약 시스템</h5>
 								</div>
 							</div>
@@ -69,7 +69,7 @@
 			<div class="row justify-content-center">
 				<div class="col-md-5">
 					<div class="styled-heading">
-						<h3>분야별로 필요한것은 무엇?</h3>
+						<h3>분야별 카테고리</h3>
 					</div>
 				</div>
 			</div>
