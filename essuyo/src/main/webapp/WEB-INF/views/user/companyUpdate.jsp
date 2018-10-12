@@ -125,11 +125,12 @@
 								</div>
 								<div class="form-group">
 
-								<label>[사업장 시설 구비 여부]  <br><span class="help"> ※ 해당 사항이 없으실 경우 체크하지 않으시면 됩니다.</span></label><br>
+								<label>[사업장 시설 구비 여부]  <br><span class="help"> ※ 해당 사항이 없으실 경우 체크하지 않으시면 됩니다.</span><br><span class="help">※ ${facStr }</span></label><br>
+								
 									<input type="hidden" name="facIds" value="no">
 									<input type='checkbox' name='facIds' value='1' />주차공간<br>
 									<input type='checkbox' name='facIds' value='2' />와이파이/인터넷<br>
-									<input type='checkbox' name='facIds' value='3' />흡연구역<br>
+									<input type='checkbox' name='facIds' value='3' />금연구역<br>
 									<input type='checkbox' name='facIds' value='4' />신용카드<br>
 								</div>
 								<div class="form-group">
@@ -161,9 +162,9 @@
 
 									<label>[회사 이미지 업로드] </label><br> <span class="help">
 									※1. 이미지는 최소 3장, 최대 12장까지 업로드할 수 있습니다. <br>
-									
-									<c:if test="${cvo != null || cvo != ''}"> ※2. 새 이미지를 업로드 하시면 기존 이미지들은 삭제됩니다.<br>
-									※3. 선택한 이미지 파일을 취소하시고 싶으실 경우, 다시 파일 선택 버튼을 눌러, 취소 버튼을 누르시면, 이미지 선택을 취소할 수 있습니다.</c:if></span>
+									※2. 선택한 이미지 파일을 취소하시고 싶으실 경우, 다시 파일 선택 버튼을 눌러, 취소 버튼을 누르시면, 이미지 선택을 취소할 수 있습니다.<br>
+									<c:if test="${cvo != null || cvo != ''}"> ※3. 새 이미지를 업로드 하시면 기존 이미지들은 삭제됩니다.<br>
+									</c:if></span>
 									<br>
 
 									<!-- 정보를 새로 입력할 때는 required가 달린 input을 보여준다 -->
