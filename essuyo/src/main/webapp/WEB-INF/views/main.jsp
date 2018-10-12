@@ -152,7 +152,7 @@
 							<div class="find-place-img_wrap">
 								<div class="grid">
 									<figure class="effect-ruby">
-										<a href="/company/list"> <img src="resources/images/menu-QnA.jpg"
+										<a href="/qna/listPage"> <img src="resources/images/menu-QnA.jpg"
 											class="img-fluid" alt="img13" />
 											<figcaption>
 												<h5>질문 이써Yo?</h5>
