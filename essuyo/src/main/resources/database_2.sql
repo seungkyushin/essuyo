@@ -203,6 +203,19 @@ CREATE TABLE reservation (
 	FOREIGN KEY (user_id) REFERENCES user(id) ON DELETE CASCADE
 )DEFAULT CHARSET=utf8; 
 
+/* QnA */
+CREATE TABLE qna (
+	id INTEGER PRIMARY KEY auto_increment, /* 번호 */
+    title VARCHAR(255) NOT NULL, /* 제목 */
+    content text, /* 내용 */
+    reg_date timestamp not null default now(), /* 등록날짜 */	
+    user_id VARCHAR(255) NOT NULL, /* 사용자_번호*/    
+    view_count INTEGER, /* 조회수 */
+    
+    FOREIGN KEY (user_id) REFERENCES user(email)
+)DEFAULT CHARSET=utf8;
+
+
 
 /*********************************************************************************/
 /************************************ 데이터 입력 ************************************/

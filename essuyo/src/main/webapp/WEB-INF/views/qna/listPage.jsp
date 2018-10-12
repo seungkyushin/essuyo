@@ -47,7 +47,6 @@
 }
 </style>
 
-
 </head>
 <body>
 
@@ -83,7 +82,7 @@
 										<div>
 											<button type="submit" class="btn allBtn"
 												style="float: left; text-align: center; text-color: white; background-color: #D8D8D8; border-radius: 1px;">
-												작성 </button>											
+												작성</button>
 										</div>
 
 										<div class="table-responsive">
@@ -92,20 +91,24 @@
 												<thead>
 													<tr>
 														<th scope="col">번호</th>
-														<th scope="col">제목</th>														
+														<th scope="col">제목</th>
 														<th scope="col">작성자</th>
 														<th scope="col">작성날짜</th>
-														
+												
+
 													</tr>
 												</thead>
 												<tbody>
-													<c:forEach items="${list }" var="QnAVO">
+													<c:forEach items="${criList }" var="QnAVO">
 														<tr>
 															<td>${QnAVO.id }</td>
-															<td><a href='/qna/readPage${pageMaker.listMakeQuery(pageMaker.cri.page)}?id=${QnAVO.id }'>
-																	${QnAVO.title } </a></td>															
+															<td><a
+																href='/qna/readPage${pageMaker.makeQuery(pageMaker.cri.page)}&id=${QnAVO.id }'>
+																	${QnAVO.title } </a></td>
 															<td>${QnAVO.userId }</td>
-															<td><fmt:formatDate pattern="yyyy-MM-dd hh:mm"	value="${QnAVO.regDate }" /></td>															
+															<td><fmt:formatDate pattern="yyyy-MM-dd hh:mm"
+																	value="${QnAVO.regDate }" /></td>
+																
 														</tr>
 													</c:forEach>
 
@@ -116,9 +119,8 @@
 
 										<div class="pageNum" align="center">
 											<ul class="pagination">
-												<c:if test="${pageMaker.prev }">
-													<li><a
-														href="listPage${pageMaker.listMakeQuery(pageMaker.startPage) }">&laquo;</a>
+												<c:if test="${pageMaker.prev}">
+													<li><a href="listPage?page=${pageMaker.startPage -1}">&laquo;</a>													
 													</li>
 												</c:if>
 
@@ -126,19 +128,16 @@
 													end="${pageMaker.endPage }" var="idx">
 													<li
 														<c:out value="${pageMaker.cri.page == idx?'class =active':'' }"/>>
-														<a href="listPage${pageMaker.listMakeQuery(idx)}">${idx }</a>
+														<a href="listPage${pageMaker.makeQuery(idx)}">${idx }</a>
 													</li>
 												</c:forEach>
 
-												<c:if test="${pageMaker.next && pageMaker.endPage > 0} ">
-													<li><a
-														href="listPage${pageMaker.listMakeQuery(pageMaker.endPage) }">&raquo;</a>
+												<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+													<li><a href="listPage?page=${pageMaker.endPage +1 }">&raquo;</a>
 													</li>
 												</c:if>
 											</ul>
 										</div>
-
-
 									</form>
 								</div>
 							</div>
@@ -169,6 +168,14 @@
 		}
 	</script>
 
+	<script>
+		var result = '${msg}';
+
+		if (result == 'success') {
+			alert("작성이 완료되었습니다.");
+		}
+	</script>
+
 
 	<script>
 		$(document).ready(function() {
@@ -180,7 +187,6 @@
 				formObj.submit();
 			});
 		});
-	
 	</script>
 
 </body>
