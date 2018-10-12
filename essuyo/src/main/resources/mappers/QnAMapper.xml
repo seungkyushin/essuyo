@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace = "mappers.QnAMapper">
+	
+	<insert id="create">
+		insert into qna (title, content, reg_date, user_id)
+		values(#{title}, #{content}, NOW(), #{userId})
+	</insert>
+
+
+	<select id="read" resultType="com.webproject.essuyo.domain.QnAVO">
+		select id, title, content, reg_date, user_id AS userId
+		from qna
+		where id = #{id}
+	</select>
+	
+	<select id="listAll" resultType="com.webproject.essuyo.domain.QnAVO">
+    <![CDATA[
+    	select id, title, content, reg_date AS regDate, user_id AS userId
+    	from qna
+    	where id > 0
+    	order by id desc
+    ]]>
+    </select>
+    
+    <delete id="delete">
+    	delete from qna
+    	where id = #{megNum}
+    </delete>
+    
+    <update id="updateViewCnt" parameterType="Integer">
+    UPDATE qna
+    SET viewCount = viewCount +1
+    WHERE id = #{id}
+    </update>
+    
+      
+    
+</mapper>

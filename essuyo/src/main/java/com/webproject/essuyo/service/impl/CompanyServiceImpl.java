@@ -332,18 +332,20 @@ public class CompanyServiceImpl implements CompanyService {
 	
 	@Override
 	public Map<String, Object> getAllCompanyCount() {
-		
-		try {
-				List<Map<String, Object>> allCompanyCountList = companyDao.selectAllCompanyCount();
-				Map<String,Object> resultMap = new HashMap<>();
-			
-			for(Map<String,Object> data : allCompanyCountList) {
-				String type = "";
-				int count = 0;
-				for(String key : data.keySet()) {
-					if(key.equals("type") == true ) {
 
-					switch(String.valueOf(data.get(key))) {
+		try {
+			List<Map<String, Object>> allCompanyCountList = companyDao.selectAllCompanyCount();
+			Map<String, Object> resultMap = new HashMap<>();
+
+			if (allCompanyCountList != null && allCompanyCountList.size() != 0) {
+
+				for (Map<String, Object> data : allCompanyCountList) {
+					String type = "";
+					int count = 0;
+					for (String key : data.keySet()) {
+						if (key.equals("type") == true) {
+
+							switch (String.valueOf(data.get(key))) {
 							case "숙박":
 								type = "hotel";
 								break;
@@ -356,19 +358,20 @@ public class CompanyServiceImpl implements CompanyService {
 							case "문화":
 								type = "mesuum";
 								break;
-						}
-						
-					}else if(key.equals("count") == true ) {
-						String strCount = String.valueOf(data.get(key));
-						count = Integer.parseInt(strCount);
-					}
+							}
 
+						} else if (key.equals("count") == true) {
+							String strCount = String.valueOf(data.get(key));
+							count = Integer.parseInt(strCount);
+						}
+
+					}
+					resultMap.put(type, count);
 				}
-				 resultMap.put(type, count);
+				return resultMap;
 			}
-			
-			return resultMap;
-			
+			return null;
+
 		} catch (Exception e) {
 			logger.error("회사 카테고리별 카운트 조회 실패.. | {} ", e.toString());
 			return null;

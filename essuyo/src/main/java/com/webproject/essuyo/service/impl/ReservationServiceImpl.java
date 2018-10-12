@@ -18,7 +18,6 @@ import com.webproject.essuyo.dao.ReservationDao;
 import com.webproject.essuyo.dao.UserDAO;
 import com.webproject.essuyo.domain.CompanyVO;
 import com.webproject.essuyo.domain.ProductManagerVO;
-import com.webproject.essuyo.domain.ProductVO;
 import com.webproject.essuyo.domain.ReservationVO;
 import com.webproject.essuyo.domain.SQLParamVO;
 import com.webproject.essuyo.domain.UserVO;
@@ -49,12 +48,7 @@ public class ReservationServiceImpl implements ReservationService {
 	@Transactional
 	public int regReservationInfo(String email, ReservationVO reservationInfo) {
 		try {
-			
-			// < 상품의 개수를 차감
-			ProductVO product = productDao.selectByProductId(reservationInfo.getProductId());
-			
 			int maxCount = reservationInfo.getProductCount();
-		
 					
 			for(int i=0; i < maxCount; i++) {
 		
