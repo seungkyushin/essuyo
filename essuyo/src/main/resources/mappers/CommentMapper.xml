@@ -17,6 +17,9 @@
     		 <when test="type != null and type.equals('company')">
 					WHERE company_id=#{id} 
     		</when>
+    		<!-- <when test="type != null and type.equals('comment')">
+					WHERE id=#{id} 
+    		</when> -->
   		</choose>
     	
     	ORDER BY id DESC 
@@ -32,7 +35,7 @@
  	</insert>
   
   
- <!--   댓글 갯수 구하기 -->
+ 	<!--   댓글 갯수 구하기 -->
     <select id="commentCount" resultType="java.lang.Integer">
     select count(*)
     from comment
@@ -49,5 +52,9 @@
     	where id = #{id} AND user_id = #{userId}
     </delete>
     
+    <update id="helpful">
+    	update comment set helpful = helpful + 1
+    	where id = #{id}
+    </update>
     
  </mapper>

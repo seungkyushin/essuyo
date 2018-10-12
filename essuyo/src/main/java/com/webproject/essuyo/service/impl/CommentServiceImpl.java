@@ -95,4 +95,10 @@ public class CommentServiceImpl implements CommentService {
 		commentDao.delete(comment);
 	}
 
+	@Override
+	public Integer helpful(Integer commentId) throws Exception {
+		
+		return commentDao.helpful(commentId);
+	}
+
 }
