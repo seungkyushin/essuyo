@@ -67,7 +67,7 @@ public class MessagePageMaker {
 				
 		prev = startPage == 10 ? false : true;
 //		prev = listCri.getPage() == 10 ? false : true;
-		next = endPage * listCri.getPerPageNum() >= totalCount ? false : true;
+		next = endPage * listCri.getPerPageNum() >= totalCount ? true : false;
 	}
 	
 	public String listMakeQuery(int page) {
