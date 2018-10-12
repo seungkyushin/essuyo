@@ -10,7 +10,6 @@
 		values(#{title}, #{content}, NOW(), #{userId})
 	</insert>
 
-
 	<select id="read" resultType="com.webproject.essuyo.domain.QnAVO">
 		select id, title, content, reg_date, user_id AS userId
 		from qna
@@ -19,24 +18,52 @@
 	
 	<select id="listAll" resultType="com.webproject.essuyo.domain.QnAVO">
     <![CDATA[
-    	select id, title, content, reg_date AS regDate, user_id AS userId
+    	select id, title, content, reg_date AS regDate, user_id AS userId, view_count AS viewCount
     	from qna
     	where id > 0
-    	order by id desc
+    	order by id desc limit 0, 10
     ]]>
     </select>
     
     <delete id="delete">
     	delete from qna
-    	where id = #{megNum}
+    	where id = #{id}
     </delete>
     
     <update id="updateViewCnt" parameterType="Integer">
     UPDATE qna
-    SET viewCount = viewCount +1
+    SET view_count = view_count + 1
     WHERE id = #{id}
     </update>
     
-      
+   <select id="listPageCri" resultType="com.webproject.essuyo.domain.QnAVO">
+    <![CDATA[
+    	select id, title, content, reg_date AS regDate, user_id AS userId
+    	from qna
+    	where id > 0 
+    	order by id desc, regDate desc
+    	limit #{page}, 10
+    ]]>
+    </select>
     
+    <select id="listCriteria" resultType="com.webproject.essuyo.domain.QnAVO">
+    <![CDATA[
+    select
+    id, title, content, reg_date AS regDate, user_id AS userId
+    from
+    qna
+    where id>0
+    order by id desc, reg_date desc
+    limit #{pageStart}, #{perPageNum}
+    ]]>   
+    </select>
+    
+    <select id="countPaging" resultType="java.lang.Integer">
+    <![CDATA[
+   	select count(id)
+   	from qna
+   	where id>0
+    ]]>    
+    </select>
+        
 </mapper>

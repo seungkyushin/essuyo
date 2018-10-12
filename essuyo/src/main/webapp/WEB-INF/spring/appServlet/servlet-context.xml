@@ -42,6 +42,8 @@
 			<mvc:mapping path="/user/*" />
 			<mvc:mapping path="/product/*" />
 			<mvc:mapping path="/qna/*"/>
+			<mvc:mapping path="/notice/*" />
+
 			
 			<mvc:exclude-mapping path="/user/regist" />
 			

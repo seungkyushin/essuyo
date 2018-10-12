@@ -2,6 +2,7 @@ package com.webproject.essuyo.service;
 
 import java.util.List;
 
+import com.webproject.essuyo.domain.QnACriteriaVO;
 import com.webproject.essuyo.domain.QnAVO;
 
 public interface QnAService {
@@ -14,6 +15,7 @@ public interface QnAService {
 
 	public void remove(Integer id) throws Exception;
 	
-	public void updateViewCount(Integer id) throws Exception; 
+	public List<QnAVO> listCriteria(QnACriteriaVO cri) throws Exception;
 	
+	public int listCountCriteria(QnACriteriaVO cri) throws Exception;
 }

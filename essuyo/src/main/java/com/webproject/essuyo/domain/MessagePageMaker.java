@@ -34,7 +34,7 @@ public class MessagePageMaker {
 			endPage = tempEndPage;
 		}
 		
-		prev = startPage == 1 ? false : true;
+		prev = startPage == 0 ? false : true;
 		next = endPage * cri.getPerPageNum() >= totalCount ? false : true;
 	}
 	

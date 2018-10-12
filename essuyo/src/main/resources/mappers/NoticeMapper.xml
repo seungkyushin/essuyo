@@ -33,4 +33,23 @@ values (#{title}, #{content}, #{userID})
 ]]>
 </select>
 
+<select id="listPage" resultType="NoticeVO">
+	<![CDATA[
+		select noticeNum, title, content, user_id AS userID, reg_date As regDate
+		form notice where noticeNum > 0
+		oreder by noticeNum desc, regDate desc
+		limit #{page}, 10
+	]]>
+</select>
+
+<select id="listCriteria" resultType="NoticeVO">
+	<![CDATA[
+		select noticeNum, title, content, user_id AS userID, reg_date As regDate
+		form notice where noticeNum > 0
+		oreder by noticeNum desc, regDate desc
+		limit #{pageStart}, #{perPageNum}
+	]]>
+	
+</select>
+
 </mapper>
