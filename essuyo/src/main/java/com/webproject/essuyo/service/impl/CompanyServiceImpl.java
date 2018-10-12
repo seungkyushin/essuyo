@@ -356,7 +356,7 @@ public class CompanyServiceImpl implements CompanyService {
 								type = "food";
 								break;
 							case "문화":
-								type = "mesuum";
+								type = "museum";
 								break;
 							}
 
