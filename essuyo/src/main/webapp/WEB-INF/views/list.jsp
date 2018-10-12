@@ -29,6 +29,7 @@
 <link rel="stylesheet" href="/resources/css/style.css">
 <link rel="stylesheet" href="/resources/css/check-box.css">
 
+<!-- 맵 정보창 css -->
  <style type="text/css">
 @import url(http://fonts.googleapis.com/css?family=Reenie+Beanie);
 #stickynote {
@@ -78,10 +79,7 @@
 							</div>
 						</div>
 					</div>
-
-      
-                   
-                  
+          
 					<!-- 필터 세부사항 div -->
 					<div class="row detail-checkbox-wrap">
 						
@@ -126,10 +124,9 @@
 					<!-- 맵 div -->
 					<div class="col-md-5 responsive-wrap map-wrap">
 						<div class="map-fix">				
-							<div id="map" data-zoom="17"></div>
+							<div id="map"></div>
 						</div>
-					</div>
-			
+					</div>			
 		</div>
 		</div>
 	</section>
@@ -146,82 +143,8 @@
 	<script src="/resources/js/bootstrap/bootstrap.min.js"></script>
 	<script	src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 
-		
-<!-- 맵 JQuery -->
 <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=YkyfY8yLi0st2FbjVXIG&callback=initMap&submodules=geocoder"></script>
 
-<script>
-var map = new naver.maps.Map("map", {
-    center: new naver.maps.LatLng(37.556777 , 126.942118),
-    zoom: 12,
-    mapTypeControl: true
-});
-
-map.setCursor('pointer');
-
-function searchAddressToCoordinate(address, name, id) {
-
-    naver.maps.Service.geocode({
-        address: address
-    }, function(status, response) {
-        if (status === naver.maps.Service.Status.ERROR) {
-            return myAlert('ERROR !' ,"찾을 수 없는 주소 입니다!");
-        }
-
-        
-        var infoWindow = new naver.maps.InfoWindow({
-            anchorSkew: true
-        });
-        
-        
-        var item = response.result.items[0],
-            addrType = item.isRoadAddress ? '[도로명 주소]' : '[지번 주소]',
-            point = new naver.maps.Point(item.point.x, item.point.y);
-             infoWindow.setContent([
-            	  '<div id="stickynote">',
-                  '<a href="/company/detail?id='+id+'"><h6>' + name +'</h6></a>',            
-                  '</div>'
-                  
-            ].join(''));
-
-             var marker = new naver.maps.Marker({
-                 map: map,
-                 position: item.point
-             });
-     		
-        map.setCenter(point);  
-       
-        naver.maps.Event.addListener(marker, "click", function(e) {
-        	infoWindow.open(map, point);        	
-        });
-        
-    });
-}
-
-function initGeocoder() {
-
-	$.ajax({
-		type : 'GET',
-		url : encodeURI('/api/list?start=' + start + "&value=" + value + "&type="+type + "&name="+ name),
-		headers : {
-			"Content-Type" : "application/json",
-			"X-HTTP-Method-Override" : "GET"
-		},
-		success : function(data) {
-			
-	for(var i =0; i<data.sales.length; i++){
-		var address1 = data.sales[i].address;
-		var name1 = data.sales[i].name;
-		var id1 = data.sales[i].id;
-    searchAddressToCoordinate(address1, name1, id1);	
-	}	
-}
-
-});
-}	
-
-	naver.maps.onJSContentLoaded = initGeocoder;
- </script>
 
 
 	<!-- ajaxJQuery -->
@@ -245,14 +168,21 @@ function initGeocoder() {
 				headers : {
 					"Content-Type" : "application/json",
 					"X-HTTP-Method-Override" : "GET"
-				},
-
-				success : function(data) {
+				},		 
+	            
+				success : function(data) {					
 					var salesCount = data.salesCount;
 					$("#type1").text(type);
 					$("#count1").text(salesCount);
 					
-					
+					if(salesCount == 0){
+			         	var source1 = $("#templateNone").html();
+						var template = Handlebars.compile(source1);						
+						$("#salesList").append(template());
+						$("#salesList").append(template());
+						
+					} else {
+		
 					var source = $("#template").html();
 					var template = Handlebars.compile(source);
 					data.sales.forEach(function(data2) {
@@ -274,21 +204,72 @@ function initGeocoder() {
 						}
 
 					})
-// 					function initGeocoder() {
+					function initGeocoder() {
 						
-// 					for(var i =0; i<data.sales.length; i++){
-// 						var address1 = data.sales[i].address;
-// 						var name1 = data.sales[i].name;
-// 						var id1 = data.sales[i].id;
-// 				    searchAddressToCoordinate(address1, name1, id1);	
-// 					}	
-// 					}
+					for(var i =0; i<data.sales.length; i++){
+						var address1 = data.sales[i].address;
+						var name1 = data.sales[i].name;
+						var id1 = data.sales[i].id;
+				    searchAddressToCoordinate(address1, name1, id1);	
+					}	
+					}
+					naver.maps.onJSContentLoaded = initGeocoder;
+					
+				} //여기
 				}
-			
+				
 			});
-// 			.fail(function(){"<div class="col-sm-6 col-lg-12 col-xl-6 featured-responsive"></div>"})
+			
+			var map = new naver.maps.Map("map", {
+			    center: new naver.maps.LatLng(37.556777 , 126.942118),
+			    zoom: 12,
+			    mapTypeControl: true
+			});
+
+			map.setCursor('pointer');
+
+			function searchAddressToCoordinate(address, name, id) {
+
+			    naver.maps.Service.geocode({
+			        address: address
+			    }, function(status, response) {
+			        if (status === naver.maps.Service.Status.ERROR) {
+			            return myAlert('ERROR !' ,"찾을 수 없는 주소 입니다!");
+			        }
+
+			        
+			        var infoWindow = new naver.maps.InfoWindow({
+			            anchorSkew: true
+			        });
+			        
+			        
+			        var item = response.result.items[0],
+			            addrType = item.isRoadAddress ? '[도로명 주소]' : '[지번 주소]',
+			            point = new naver.maps.Point(item.point.x, item.point.y);
+			             infoWindow.setContent([
+			            	  '<div id="stickynote">',
+			                  '<a href="/company/detail?id='+id+'"><h6>' + name +'</h6></a>',            
+			                  '</div>'
+			                  
+			            ].join(''));
+
+			             var marker = new naver.maps.Marker({
+			                 map: map,
+			                 position: point
+			             });
+			     		
+			        map.setCenter(point);  
+			       
+			        naver.maps.Event.addListener(marker, "click", function(e) {
+			        	infoWindow.open(map, point);        	
+			        });
+			        
+			    });
+			}
+
 		}
 	
+
 	</script>
 
 
@@ -347,7 +328,25 @@ function initGeocoder() {
 </div>			
 </script>
 
-
+<script id=templateNone type="text/x-handlerbars-template">
+ <div class="col-sm-12 col-lg-12 col-xl-12 featured-responsive">
+								<div class="featured-place-wrap">
+									<div>
+	<div class="featured-title-box">
+	<div class="bottom-icons">
+	<div class="featured-title-box">
+	<div class="bottom-icons">
+	<div class="featured-title-box">
+	<div class="bottom-icons">
+    <div class="featured-title-box">
+	<div class="bottom-icons">
+								<div class="state-info"></div>
+											</div>
+										</div>
+						           </div>
+					         	</div>		
+</div>			 
+</script>
 </body>
 
 </html>

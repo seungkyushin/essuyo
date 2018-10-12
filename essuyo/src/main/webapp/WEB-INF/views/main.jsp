@@ -75,51 +75,39 @@
 			</div>
 			<div class="row">
 			
-			<div class="col-md-4">
-					<div class="find-place-img_wrap">
-						<div class="grid">
-							<figure class="effect-ruby">
+			<div class="col-md-1">
+			</div>
 
-								<a href="/company/list?type='숙박'"> <img
-									src="resources/images/menu-rentcar.jpg" class="img-fluid"
-									alt="img13" />
-									<figcaption>
-										<h5>숙박</h5>
-										<p>${companyCount.hotel}목록</p>
-									</figcaption></a>
-							</figure>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
+				<div class="col-md-5">
 					<div class="row find-img-align">
 						<div class="col-md-12">
 							<div class="find-place-img_wrap">
 								<div class="grid">
 									<figure class="effect-ruby">
-										<a href="/company/list?type='식당'"> <img
-											src="resources/images/menu-restraunt.jpg" class="img-fluid"
+										<a href="/company/list?type='숙박'"> <img
+											src="resources/images/menu-hotel.png" class="img-fluid"
 											alt="img13" />
 											<figcaption>
-												<h5>식당</h5>
-												<p>${companyCount.food}목록</p>
+												<h5>숙박</h5>
+												<p>${companyCount.hotel}개의 목록</p>
 											</figcaption></a>
 									</figure>
 								</div>
 							</div>
 						</div>
 					</div>
+					
 					<div class="row">
 						<div class="col-md-12">
 							<div class="find-place-img_wrap">
 								<div class="grid">
 									<figure class="effect-ruby">
 										<a href="/company/list?type='문화'"> <img
-											src="resources/images/menu-museum.jpg" class="img-fluid"
+											src="resources/images/menu-museum.png" class="img-fluid"
 											alt="img13" />
 											<figcaption>
 												<h5>문화</h5>
-												<p>${companyCount.museum}목록</p>
+												<p>${companyCount.museum}개의 목록</p>
 										</figcaption></a>
 									</figure>
 								</div>
@@ -127,20 +115,19 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-md-4">
+				
+				<div class="col-md-5">
 					<div class="row find-img-align">
 						<div class="col-md-12">
 							<div class="find-place-img_wrap">
 								<div class="grid">
 									<figure class="effect-ruby">
-										<a href="/company/list?type='차량대여'"> <img
-											src="resources/images/menu-hotel.jpg" class="img-fluid"
+										<a href="/company/list?type='식당'"> <img
+											src="resources/images/menu-restraunt.png" class="img-fluid"
 											alt="img13" />
-
 											<figcaption>
-												<h5>차량대여</h5>
-												<p>${companyCount.car}목록</p>
-
+												<h5>식당</h5>
+												<p>${companyCount.food}개의 목록</p>
 											</figcaption></a>
 									</figure>
 								</div>
@@ -152,21 +139,27 @@
 							<div class="find-place-img_wrap">
 								<div class="grid">
 									<figure class="effect-ruby">
-										<a href="/company/list"> <img src="resources/images/menu-QnA.jpg"
-											class="img-fluid" alt="img13" />
+										<a href="/company/list?type='차량대여'"> <img
+											src="resources/images/menu-rentcar.png" class="img-fluid"
+											alt="img13" />
 											<figcaption>
-												<h5>질문 이써Yo?</h5>
-												<p>Do you have any Question?</p>
-											</figcaption></a>
+												<h5>차량대여</h5>
+												<p>${companyCount.car}개의 목록</p>
+										</figcaption></a>
 									</figure>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-		</div>
+				
+	<div class="col-md-1">
+	</div>
+				</div>
+				</div>
 	</section>
+
+
 
 	<section class="main-block light-bg">
 		<div class="container">
@@ -188,10 +181,10 @@
 								<a href="/company/detail?id=${company.id}"> 
 									<img src="${company.image}" class="img-fluid" alt="#">
 										<c:choose>
-											<c:when test="${company.score < 3}">
+											<c:when test="${company.score <= 2}">
 												 <span class="featured-rating">${company.score}</span>
 											</c:when>
-											<c:when test="${company.score < 7}">
+											<c:when test="${company.score <= 4}">
 												 <span class="featured-rating-orange">${company.score}</span>
 											</c:when>
 											<c:otherwise>
