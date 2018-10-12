@@ -17,6 +17,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.webproject.essuyo.domain.MessageCriteria;
 import com.webproject.essuyo.domain.MessageListCri;
 import com.webproject.essuyo.domain.MessagePageMaker;
+import com.webproject.essuyo.domain.QnACriteriaVO;
+import com.webproject.essuyo.domain.QnAPageMakerVO;
 import com.webproject.essuyo.domain.QnAVO;
 import com.webproject.essuyo.service.MessageService;
 import com.webproject.essuyo.service.QnAService;
@@ -31,9 +33,6 @@ public class QnAController {
 
 	@Inject
 	private HttpSession session;
-
-	@Inject
-	private MessageService messageService;
 
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public void registerGET(QnAVO vo, RedirectAttributes rttr, Model model) throws Exception {
@@ -59,17 +58,12 @@ public class QnAController {
 		return "redirect:/qna/listPage";
 	}
 
-	@RequestMapping(value = "/listPage", method = RequestMethod.GET)
-	public void listAll(Model model) throws Exception {
-
-		logger.info("show all message list");
-		model.addAttribute("list", service.listAll());
-	}
-
 	@RequestMapping(value = "/readPage", method = RequestMethod.GET)
-	public void read(@RequestParam("id") int id, @ModelAttribute("cri") MessageCriteria cri, Model model) throws Exception {
+	public void read(@RequestParam("id") int id, @ModelAttribute("cri") MessageCriteria cri, Model model)
+			throws Exception {
 
 		String userId = (String) session.getAttribute("login");
+
 		model.addAttribute("qna", service.read(id, userId));
 
 //		service.updateViewCount(id);
@@ -83,8 +77,23 @@ public class QnAController {
 		logger.info("----- 삭제 완료 -----");
 		rttr.addAttribute("perPageNum", cri.getPerPageNum());
 
-		rttr.addFlashAttribute("msg", "success");
+		rttr.addFlashAttribute("msg", "SUCCESS");
 
 		return "redirect:/qna/listPage";
+	}
+
+	@RequestMapping(value = "/listPage", method = RequestMethod.GET)
+	public void listPage(@ModelAttribute("cri") QnACriteriaVO cri, Model model) throws Exception {
+
+		logger.info(cri.toString());
+
+		model.addAttribute("list", service.listAll());
+		model.addAttribute("criList", service.listCriteria(cri));
+		QnAPageMakerVO pageMaker = new QnAPageMakerVO();
+		pageMaker.setCri(cri);
+
+		pageMaker.setTotalCount(service.listCountCriteria(cri));
+
+		model.addAttribute("pageMaker", pageMaker);
 	}
 }
