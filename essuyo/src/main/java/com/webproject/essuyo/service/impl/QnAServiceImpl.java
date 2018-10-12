@@ -5,8 +5,11 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.webproject.essuyo.dao.QnADao;
+import com.webproject.essuyo.domain.QnACriteriaVO;
 import com.webproject.essuyo.domain.QnAVO;
 import com.webproject.essuyo.service.QnAService;
 
@@ -21,8 +24,10 @@ public class QnAServiceImpl implements QnAService {
 		dao.create(vo);
 	}
 
+	@Transactional(isolation=Isolation.READ_COMMITTED)
 	@Override
 	public QnAVO read(Integer id, String userId) throws Exception {
+		dao.updateViewCount(id);		
 		return dao.read(id);
 	}
 
@@ -38,11 +43,15 @@ public class QnAServiceImpl implements QnAService {
 	}
 
 	@Override
-	public void updateViewCount(Integer id) throws Exception {
-		dao.updateViewCount(id);
-		
+	public List<QnAVO> listCriteria(QnACriteriaVO cri) throws Exception {
+		return dao.listCriteria(cri);
 	}
 
+	@Override
+	public int listCountCriteria(QnACriteriaVO cri) throws Exception {
+		return dao.countPaging(cri);
+	}	
+	
 	
 	
 }

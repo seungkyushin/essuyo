@@ -74,7 +74,7 @@
 										<div class="box-footer">
 
 											<button type="submit" class="btn btn-info"
-												style="float: right;">보내기</button>
+												style="float: right;">작성</button>
 											<button type="button" class="btn btn-danger"
 												Onclick="javascript:history.back(-1)" style="float: left;">취소</button>
 										</div>
