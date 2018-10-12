@@ -89,6 +89,12 @@
                                 <span class="hide-menu">메시지</span>
                             </a>
                         </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/notice/listAll" aria-expanded="false">
+                                <i class="icon-briefcase"></i>
+                                <span class="hide-menu">공지사항</span>
+                            </a>
+                        </li>
                         
                           <li class="sidebar-item">
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/logout" aria-expanded="false">

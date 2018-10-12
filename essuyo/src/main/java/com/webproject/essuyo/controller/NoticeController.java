@@ -56,7 +56,7 @@ public class NoticeController {
 	
 	
 	@RequestMapping(value="/listAll", method=RequestMethod.GET)
-	public void listAll(Model model) throws Exception{
+	public void listAll(Model model, HttpSession session) throws Exception{
 		
 		logger.info("show all list..............");
 		model.addAttribute("list", service.listAll());
