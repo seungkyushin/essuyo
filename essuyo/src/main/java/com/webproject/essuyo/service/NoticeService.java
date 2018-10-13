@@ -2,7 +2,7 @@ package com.webproject.essuyo.service;
 
 import java.util.List;
 
-import com.webproject.essuyo.domain.Criteria;
+import com.webproject.essuyo.domain.NoticeCriteria;
 import com.webproject.essuyo.domain.NoticeVO;
 
 public interface NoticeService {
@@ -17,5 +17,7 @@ public interface NoticeService {
 	
 	public List<NoticeVO> listAll() throws Exception;
 	
-	public List<NoticeVO> listCriteria(Criteria cri) throws Exception;
+	public List<NoticeVO> listCriteria(NoticeCriteria cri) throws Exception;
+	
+	public int listCountCriteria(NoticeCriteria cri) throws Exception;
 }

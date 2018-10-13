@@ -7,7 +7,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
-import com.webproject.essuyo.domain.Criteria;
+import com.webproject.essuyo.domain.NoticeCriteria;
 import com.webproject.essuyo.domain.NoticeVO;
 
 @Repository
@@ -46,9 +46,13 @@ public class NoticeDao {
 		return session.selectList(namespace + ".listPage", page);
 	}
 	
-	public List<NoticeVO> listCriteria(Criteria cri) throws Exception{
+	public List<NoticeVO> listCriteria(NoticeCriteria cri) throws Exception{
 		return session.selectList(namespace + ".listCriteria", cri);
 	}
+	
+	public int countPaging(NoticeCriteria cri) throws Exception{
+		return session.selectOne(namespace + ".countPaging", cri);
+	};
 }
 
 

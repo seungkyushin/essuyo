@@ -90,7 +90,7 @@
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/notice/listAll" aria-expanded="false">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/notice/listPage" aria-expanded="false">
                                 <i class="icon-briefcase"></i>
                                 <span class="hide-menu">공지사항</span>
                             </a>

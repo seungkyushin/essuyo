@@ -7,7 +7,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.webproject.essuyo.dao.NoticeDao;
-import com.webproject.essuyo.domain.Criteria;
+import com.webproject.essuyo.domain.NoticeCriteria;
 import com.webproject.essuyo.domain.NoticeVO;
 import com.webproject.essuyo.service.NoticeService;
 
@@ -43,8 +43,13 @@ public class NoticeServiceImpl implements NoticeService {
 	}
 
 	@Override
-	public List<NoticeVO> listCriteria(Criteria cri) throws Exception {
+	public List<NoticeVO> listCriteria(NoticeCriteria cri) throws Exception {
 		return dao.listCriteria(cri);
+	}
+	
+	@Override
+	public int listCountCriteria(NoticeCriteria cri) throws Exception {
+		return dao.countPaging(cri);
 	}
 
 }
