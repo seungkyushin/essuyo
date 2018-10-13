@@ -29,9 +29,14 @@ public class CommentDao {
 	}
 	
 	// 댓글  갯수
-	public int count(int company_id) throws Exception{
-		return sqlSession.selectOne(NAME_SAPACE+".commentCount",company_id);
+	public int selectAllCompanyCommentCount(int company_id) throws Exception{
+		return sqlSession.selectOne(NAME_SAPACE+".selectCompanyCommentCount",company_id);
 	}
+	public int selectAllUserCommentCount(int userId) throws Exception{
+		return sqlSession.selectOne(NAME_SAPACE+".selectUserCommentCount",userId);
+	}
+	
+	
 	
 	// 댓글 수정
 	public void update(CommentVO comment) throws Exception{

@@ -6,7 +6,6 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<link rel="stylesheet" href="/resources/css/bootstrap/bootstrap.css"> 
 	<link rel="stylesheet" href="/resources/css/simple-line-icons.css">
 	<link rel="stylesheet" href="/resources/css/themify-icons.css">
 	<link rel="stylesheet" href="/resources/css/set1.css">
@@ -116,22 +115,24 @@
 												<input type="text" name='title' id='title' class="form-control" placeholder="제목">
 											</div>
 											
-											<div class="customer-rating">8.0</div>
+											<div class="customer-rating">
+												<select	name="score" id="score">
+													<option value="0">☆☆☆☆☆</option>
+													<option value="1">★☆☆☆☆</option>
+													<option value="2">★★☆☆☆</option>
+													<option value="3">★★★☆☆</option>
+													<option value="4">★★★★☆</option>
+													<option value="5">★★★★★</option>
+												</select> 
+											</div>
 										</div>
 										<textarea class="form-control" name="content" id='content' rows="3"placeholder="내용"></textarea>
 									</div>
 								</div>
 									<button type="submit" class="btn btn-info"	style="float: right;">댓글달기</button>
 													
-								<label for="exInputWriter"> SCORE </label> 
-								<select	name="score" id="score">
-									<option value="0">☆☆☆☆☆</option>
-									<option value="1">★☆☆☆☆</option>
-									<option value="2">★★☆☆☆</option>
-									<option value="3">★★★☆☆</option>
-									<option value="4">★★★★☆</option>
-									<option value="5">★★★★★</option>
-								</select> 
+							
+								
 								<input type="hidden" name='companyId' value="${company.id}">
 								</form>
 
@@ -222,23 +223,25 @@
 										<input type="text" name='Modifytitle' id='Modifytitle' class="form-control" 
 											placeholder="제목" value="${commentVO.title }">
 									</div>
-									<div class="customer-rating">8.0</div>
+									
+									<div class="customer-rating">
+										<select	name="score" id="score">
+											<option value="0">☆☆☆☆☆</option>
+											<option value="1">★☆☆☆☆</option>
+											<option value="2">★★☆☆☆</option>
+											<option value="3">★★★☆☆</option>
+											<option value="4">★★★★☆</option>
+											<option value="5">★★★★★</option>
+										</select> 
+									</div>
 								</div>
 								<textarea class="form-control" name="Modifycontent" id='Modifycontent' rows="3" 
-									placeholder="내용" value="${commentVO.content }"></textarea>
+									placeholder="내용" value="${commentVO.content}"></textarea>
 							</div>
 						</div>
 						<button type="submit" class="btn modifyBtn"	style="float: right;" data-dismiss="modal">수정하기</button>
-													
-						<label for="exInputWriter"> SCORE </label> 
-						<select	name="score" id="score">
-							<option value="0">☆☆☆☆☆</option>
-							<option value="1">★☆☆☆☆</option>
-							<option value="2">★★☆☆☆</option>
-							<option value="3">★★★☆☆</option>
-							<option value="4">★★★★☆</option>
-							<option value="5">★★★★★</option>
-						</select> 
+		
+						
 						<input type="hidden" name='ModifycompanyId' id="ModifyId" value="${company.id}">
 					</form>
 				</div>
@@ -248,14 +251,40 @@
 	
 	<script src="/resources/js/jquery/jquery-3.2.1.min.js"></script>
 	<script src="/resources/js/popper/popper.min.js"></script>
-	<script src="/resources/js/bootstrap/bootstrap.js"></script> 
 	<script src="/resources/js/jquery/jquery.magnific-popup.js"></script>
 	<script src="/resources/js/swiper.min.js"></script>
 	<script src="/resources/js/utility.js"></script>
 	<script src="/resources/js/handlebars.min.js"></script>
+		
+	<script type="template" id="comment-modify-template">
+	   <div class="customer-review_wrap">
+       <div class="customer-img">
+           <img src="{{image}}" class="img-fluid comment-image-size" alt="{{name}}">
+           <p>{{name}}</p>
+           <span>{{totalReply}} Reviews</span>
+       </div>
+       <div class="customer-content-wrap">
+           <div class="customer-content">
+               <div class="customer-review">
+                   <h6>{{title}}</h6>
+                   <p>등록 날짜 : {{regDate}}</p>
+               </div>
+               <div class="customer-rating">{{score}}</div>
+           </div>
+           <p class="customer-text">{{content}}</p>
+       </div>
+
+		<a data-toggle="modal" data-target="#modifyModal"> 
+			<i class="ti-pencil-alt"></i>
+		</a>
+		<a href="/comment/removeComment?id={{id}}&commentId={{commentId}}"> 
+			<i class="icon-trash"></i>
+		</a> 
+   </div>
+   <hr>
+	</script>
 	
-	
-	<script type="template" id="comment-template">
+		<script type="template" id="comment-template">
 	   <div class="customer-review_wrap">
        <div class="customer-img">
            <img src="{{image}}" class="img-fluid comment-image-size" alt="{{name}}">
@@ -275,17 +304,10 @@
            <span>{{helpful}}명이 이 댓글에 도움을 받았습니다.</span>
            <a href="javascript:helpCount()"><span class="icon-like"></span>Helpful</a>
        </div>
-
-
-		<a data-toggle="modal" data-target="#modifyModal"> 
-			<i class="ti-pencil-alt"></i>
-		</a>
-		<a href="/comment/removeComment?id={{id}}&commentId={{commentId}}"> 
-			<i class="icon-trash"></i>
-		</a> 
    </div>
    <hr>
 	</script>
+	
 
 	<script type="template" id="product-template">
 	<div class="booking-checkbox_wrap">
@@ -413,14 +435,16 @@
 							tempData['helpful'] = data.helpful;
 							tempData['state'] = data.state;
 							tempData['totalReply'] = data.totalReply;
-
-							makeHTML("#comment-template", "#comment-list", tempData);
+							
+								if( "${sessionScope.login}" == data.commentUserEmail )
+									makeHTML("#comment-modify-template", "#comment-list", tempData);
+								else
+									makeHTML("#comment-template", "#comment-list", tempData);
 							});
 					});
 					
 					// 수정 버튼
 					var modiForm = $("form[role='ModifyForm']");
-					console.log(modiForm);
 					$("#modifyBtn").on("click",function(){
 						var id = document.getElementById("ModifyId").value;
 						modiForm.attr("action","/message/modifyComment?" + id);

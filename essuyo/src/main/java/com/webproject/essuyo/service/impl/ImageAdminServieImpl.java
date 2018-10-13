@@ -29,8 +29,8 @@ public class ImageAdminServieImpl implements ImageAdminService {
 	
 
 	private Logger logger = LoggerFactory.getLogger(ImageAdminServieImpl.class);
-	// = "C:\\Users\\kyu\\git\\essuyo\\essuyo\\src\\main\\webapp\\resources\\images\\upload";
-	private String UPLOAD_PATH = "/usr/local/apache-tomcat-8.0.52/webapps/essuyo/resources/images/upload";
+	private String UPLOAD_PATH  = "C:\\Users\\kyu\\git\\essuyo\\essuyo\\src\\main\\webapp\\resources\\images\\upload";
+	//private String UPLOAD_PATH = "/usr/local/apache-tomcat-8.0.52/webapps/essuyo/resources/images/upload";
 
 	@Override
 	public ImageInfoVO getImageInfo(int imageInfoid) {

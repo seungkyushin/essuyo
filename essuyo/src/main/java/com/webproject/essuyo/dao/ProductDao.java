@@ -31,7 +31,7 @@ public class ProductDao {
 		return sqlSession.insert(NAME_SPACE + ".insert" , param);
 	}
 	
-	public ProductVO update(ProductVO product) throws Exception{
+	public int update(ProductVO product) throws Exception{
 		return sqlSession.selectOne(NAME_SPACE + ".updateById" , product);
 	}
 		

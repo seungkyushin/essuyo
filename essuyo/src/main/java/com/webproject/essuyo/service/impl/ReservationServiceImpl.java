@@ -84,14 +84,14 @@ public class ReservationServiceImpl implements ReservationService {
 			return null;
 		}
 
-		SQLParamVO params = new SQLParamVO(findType, id, (start - 1), SEARCH_LIMIT);
+		SQLParamVO params = new SQLParamVO(findType, id, (start - 1) * SEARCH_LIMIT, SEARCH_LIMIT);
 
 		try {
 
 			List<Map<String, Object>> resultList = new ArrayList<Map<String, Object>>();
 			List<ReservationVO> reservationList = reservationDao.select(params);
 
-			if (reservationList != null) {
+			if (reservationList != null && reservationList.size() != 0) {
 				for (ReservationVO data : reservationList) {
 					Map<String, Object> resultMap = new HashMap<>();
 
@@ -105,6 +105,8 @@ public class ReservationServiceImpl implements ReservationService {
 						resultMap.put("typeId", user.getId() );
 						resultMap.put("typeName", user.getName());
 					}
+					
+					resultMap.put("id", data.getId() );
 					resultMap.put("companyId", data.getCompanyId() );
 					resultMap.put("productId", data.getProductId() );
 					resultMap.put("productName", productDao.selectByProductId(data.getProductId()).getName());
@@ -113,6 +115,7 @@ public class ReservationServiceImpl implements ReservationService {
 					resultMap.put("totalPrice", data.getTotalPrice());
 
 					resultList.add(resultMap);
+					
 				}
 
 				return resultList;
@@ -345,11 +348,8 @@ public class ReservationServiceImpl implements ReservationService {
 						String categroyMonth = String.valueOf(data.get(key));
 						month = Integer.parseInt(categroyMonth) - 1;
 					}
-
-					comprehensive.get(categoryIndex).set(month, count);
-
 				}
-
+				comprehensive.get(categoryIndex).set(month, count);
 			}
 
 			return comprehensive;
@@ -402,6 +402,36 @@ public class ReservationServiceImpl implements ReservationService {
 		} catch (Exception e) {
 			logger.error("상품 월별 합계 조회 실패.. | {} ", e.toString());
 			return null;
+		}
+	}
+
+	@Override
+	public int setCancelReservation(int reservationId) {
+		try {
+			ReservationVO rv = new ReservationVO();
+			rv.setId(reservationId);
+			rv.setState("취소");
+			return reservationDao.update(rv);
+		} catch (Exception e) {
+			logger.error("상품 월별 합계 조회 실패.. | {} ", e.toString());
+			return 0;
+		}
+	}
+
+	@Override
+	public int getAllReservationCount(String type, int id) {
+		
+		try {
+				int max = reservationDao.selectCount(new SQLParamVO(type,id));
+				int resultCount = max/SEARCH_LIMIT;
+				
+				if( max%SEARCH_LIMIT > 0)
+					resultCount += 1;
+					
+				return resultCount;
+		} catch (Exception e) {
+			logger.error("예약 총 개수 조회 실패.. | {} ", e.toString());
+			return 0;
 		}
 	}
 

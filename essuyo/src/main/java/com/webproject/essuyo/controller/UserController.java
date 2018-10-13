@@ -286,7 +286,7 @@ public class UserController {
 		UserVO user = service.getUserVO(email);
 
 		model.addAttribute("userType", "user");
-		model.addAttribute("id", user.getId());
+		model.addAttribute("userId", user.getId());
 		setUserDashboard(email, "user", user.getId(), model);
 
 		return "/user/dashboard";

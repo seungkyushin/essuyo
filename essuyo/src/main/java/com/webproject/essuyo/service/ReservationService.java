@@ -31,8 +31,12 @@ public interface ReservationService {
 	//< 사용자 종합  예약 횟수
 	public List<List<Integer>> getComprehensiveReservation(String type, int id);
 	
+	//< 성별 예약 횟수
 	public List<Integer> getGenderReservationCount(int id);
 	
+	//< 예약 취소
+	public int setCancelReservation(int reservationId);
 	
-
+	//< 예약 개수
+	public int getAllReservationCount(String type,int id);
 }

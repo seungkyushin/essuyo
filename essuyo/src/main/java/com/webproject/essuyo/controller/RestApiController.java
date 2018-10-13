@@ -77,11 +77,19 @@ public class RestApiController {
 	 * type : user, company 
 	 * start : 페이지 단위(1페이지당  SEARCH_LIMIT)*/
 	@GetMapping("/commentList/{type}/{start}/{id}")
-	public List<Map<String, Object>> getCommentList(@PathVariable String type, @PathVariable int start,
+	public Map<String, Object> getCommentList(@PathVariable String type, @PathVariable int start,
 			@PathVariable int id) {
 
-		//< 요청자 화인
-		return commentService.getCommentList(type, id,  start);
+		Map<String, Object> resultMap = new HashMap<>();
+		List<Map<String, Object>> commentList = commentService.getCommentList(type, id,  start);
+				
+		if( commentList != null && commentList.size() != 0 ) {
+			resultMap.put("commentList", commentList);
+			resultMap.put("maxCount", reservationService.getAllReservationCount(type, id));
+			
+		}
+	
+		return resultMap;
 	}
 
 
@@ -89,12 +97,18 @@ public class RestApiController {
 	 * start : 페이지 단위(1페이지당  SEARCH_LIMIT)
 	 * */
 	@GetMapping("/reservationList/{type}/{start}/{id}")
-	public List<Map<String, Object>> getUserReservationList(@PathVariable String type, @PathVariable int start,
+	public Map<String, Object> getUserReservationList(@PathVariable String type, @PathVariable int start,
 			@PathVariable int id){
 
+		Map<String, Object> resultMap = new HashMap<>();
+		List<Map<String, Object>> resultList = reservationService.getReservationList(type, id, start);
+	
+		if( resultList != null && resultList.size() != 0 ) {
+			resultMap.put("reservationList", resultList);
+			resultMap.put("maxCount", reservationService.getAllReservationCount(type, id));
 		
-		//< 요청자 화인
-		return reservationService.getReservationList(type, id, start);
+		}
+		return resultMap;
 	}
 	
 	@GetMapping("/disableDate/{productId}")
@@ -167,18 +181,33 @@ public class RestApiController {
 		 
 	}
 	
-	@GetMapping("/delete")
-	public boolean deleteProduct(@RequestParam int  id, RedirectAttributes redirectAttr,
-			HttpSession httpSession, Model model) {
-		
-		return productService.deleteProduct(id);
-		
-	}
-	
+
 	@GetMapping("/helpful/{commentId}")
 	public Integer setGoodCount(@PathVariable("commentId") int commentId) throws Exception{
 		
 		return commentService.helpful(commentId);
 	}
+
+		@GetMapping("/delete/product/{id}")
+		public boolean deleteProduct(@PathVariable int  id, HttpSession httpSession) {
+			String email = (String)httpSession.getAttribute("login");
+			if( email != null && email.equals("") == false && id != 0) {
+				return productService.deleteProduct(id);
+			}
+			return false;
+		}
+		
+		@GetMapping("/cancel/reservation/{id}")
+		public boolean deleteReservation(@PathVariable int  id,	HttpSession httpSession) {
+			String email = (String)httpSession.getAttribute("login");
+			if( email != null && email.equals("") == false && id != 0) {
+				if( reservationService.setCancelReservation(id) != 0)
+					return true;
+				else
+					return false;
+							
+			}
+			return false;
+		}
 
 }
