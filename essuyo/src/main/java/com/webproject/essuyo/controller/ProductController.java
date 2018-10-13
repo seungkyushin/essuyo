@@ -40,6 +40,17 @@ public class ProductController {
 	@Autowired
 	private UserService userService;
 
+	
+	private BusinessVO getCheckBusinessVO(HttpSession httpSession) {
+		int BusinessId = (Integer) httpSession.getAttribute("companyLogin");
+		if( BusinessId != 0 ) {
+			return userService.getBusinessInfo(BusinessId);
+			
+		}else {
+			String email = (String) httpSession.getAttribute("login");
+			return userService.getBusinessInfo(email);
+		}
+	}
 	@GetMapping("/reservation")
 	public String showReservationPage(@RequestParam("company") int companyId, @RequestParam("product") int productId,
 			Model model) {
@@ -91,8 +102,7 @@ public class ProductController {
 	public String showProductMangerPage(HttpSession httpSession, Model model) {
 
 		String viewName = "/product/productAdmin";
-		int BusinessId = (Integer) httpSession.getAttribute("companyLogin");
-		BusinessVO business = userService.getBusinessInfo(BusinessId);
+		BusinessVO business = getCheckBusinessVO(httpSession);
 		
 		if(business != null && business.getCompanyId() != 0) {
 			model.addAttribute("companyId" ,business.getCompanyId());
@@ -106,8 +116,7 @@ public class ProductController {
 	public String showProductRegisterPage(HttpSession httpSession, Model model) {
 
 		String viewName = "/product/productRegister";
-		int BusinessId = (Integer) httpSession.getAttribute("companyLogin");
-		BusinessVO business = userService.getBusinessInfo(BusinessId);
+		BusinessVO business = getCheckBusinessVO(httpSession);
 		
 		if( business != null && business.getCompanyId() != 0)
 			model.addAttribute("companyId" ,business.getCompanyId());
@@ -122,11 +131,9 @@ public class ProductController {
 			RedirectAttributes redirectAttr,
 			HttpSession httpSession, Model model) {
 
-		
-		int BusinessId = (Integer) httpSession.getAttribute("companyLogin");
-		BusinessVO business = userService.getBusinessInfo(BusinessId);
-				
-		if( business != null && BusinessId != 0 ) {
+		BusinessVO business = getCheckBusinessVO(httpSession);
+	
+		if( business != null ) {
 			if( productService.addProduct(product, productCount, business.getCompanyId(), fileList) == 1) {
 				redirectAttr.addFlashAttribute("errorMessageTitle", "SUCCESS !");
 				redirectAttr.addFlashAttribute("errorMessage", "상품이 등록되었습니다.");
@@ -134,17 +141,13 @@ public class ProductController {
 				redirectAttr.addFlashAttribute("errorMessageTitle", "ERROR !");
 				redirectAttr.addFlashAttribute("errorMessage", "상품 등록에 실패하였습니다.");
 			}
-			
 		}else {
 			redirectAttr.addFlashAttribute("errorMessageTitle", "ERROR !");
-			redirectAttr.addFlashAttribute("errorMessage", "상품 등록에 실패하였습니다.");
+			redirectAttr.addFlashAttribute("errorMessage", "다시 로그인하여 시도해 주시길 바랍니다.");
 		}
-	
 		return "redirect:/product/admin";
 
 	}
-	
-
 	
 	
 	@GetMapping("/update")

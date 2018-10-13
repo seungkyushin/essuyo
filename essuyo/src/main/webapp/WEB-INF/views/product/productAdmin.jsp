@@ -143,7 +143,7 @@
 <script>
 function deleteProduct(id){
 	
-	Ajax("GET", "/api/delete?id=" + id,function(data){
+	Ajax("GET", "/api/delete/product/"+ id,function(data){
 		
 		if( data == true ){
 			myAlert("SUCCESS !" ,"삭제에 성공 하셨습니다.");

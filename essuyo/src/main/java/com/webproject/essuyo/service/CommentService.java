@@ -18,4 +18,8 @@ public interface CommentService {
 	public void modifyComment(CommentVO comment) throws Exception;
 	// 댓글 삭제
 	public void removeComment(CommentVO comment) throws Exception;
+	
+	//< 댓글 개수 구하기
+	public int getAllCompanyCommentCount(int id) throws Exception;
+	public int getAllUserCommentCount(int id) throws Exception;
 }

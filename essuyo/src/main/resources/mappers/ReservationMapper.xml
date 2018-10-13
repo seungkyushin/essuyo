@@ -32,6 +32,18 @@ FROM reservation WHERE
   		</if>
  </select>
  
+ <select id="selectReservationCount" resultType="Integer">
+	SELECT COUNT(*) FROM reservation WHERE 
+		<choose>
+   			 <when test="type != null and type.equals('user')">
+					user_id = #{id}
+   			 </when>
+    		 <when test="type != null and type.equals('company')">
+					company_id = #{id}
+    		</when>
+ 		</choose>
+ </select>
+ 
  <select id="selectNotStateById" resultType="ReservationVO">
 SELECT id, product_type AS productType, state, total_price AS totalPrice , res_date AS resDate, product_count AS productCount,
 reg_date AS regDate, company_id AS companyId, product_id AS productId, user_id AS userId
@@ -136,6 +148,13 @@ SELECT SUM(total_price) FROM reservation WHERE
 		id = ANY (SELECT user_id FROM reservation WHERE company_id=#{id}) GROUP BY gender;
  	</select>
 	
+	<update id="update" parameterType="ReservationVO">
+		UPDATE reservation 
+		<trim prefix="SET" suffixOverrides=",">
+			<if test="state != null">state = #{state} ,</if>
+		</trim>
+		WHERE id = #{id}
+ 	</update>
 	
 
 

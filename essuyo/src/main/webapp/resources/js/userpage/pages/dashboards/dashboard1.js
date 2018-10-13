@@ -211,7 +211,7 @@ function setLineGraph(ArrayData){
 	        	offset : 20,
 	            onlyInteger: true,
 	            labelInterpolationFnc: function(value) {
-	                return value + "c";
+	                return value ;
 	            }
 	        },
 	     
@@ -375,7 +375,7 @@ function setHTMLReservationColumns(type){
 	var nameList = [];
 	
 	if( type == "user" ){
-		nameList = ['회사명','상품명','상태','예약날짜','총결제 가격'];
+		nameList = ['회사명','상품명','상태','예약날짜','총결제 가격',' '];
 	}else if  ( type == "company"){
 		nameList = ['예약자명','상품명','상태','예약날짜','총결제 가격'];
 	}

@@ -40,7 +40,7 @@ public class CommentServiceImpl implements CommentService {
 		List<Map<String, Object>> resultList = new ArrayList<Map<String, Object>>();
 
 		try {
-			SQLParamVO params = new SQLParamVO(type, id, (start - 1), SEARCH_LIMIT);
+			SQLParamVO params = new SQLParamVO(type, id, (start - 1) * SEARCH_LIMIT, SEARCH_LIMIT);
 			List<CommentVO> commentList = commentDao.selectById(params);
 
 			// UserVO userInfo = userService.getUserInfo(id);
@@ -49,6 +49,7 @@ public class CommentServiceImpl implements CommentService {
 			for (CommentVO data : commentList) {
 				Map<String, Object> paramMap = new HashMap<>();
 
+				paramMap.put("id", data.getId());
 				paramMap.put("title", data.getTitle());
 				paramMap.put("content", data.getContent());
 				paramMap.put("regDate", data.getRegDate());
@@ -59,8 +60,10 @@ public class CommentServiceImpl implements CommentService {
 				if (type.equals("user") == true) {
 					List<String> companyImageList = imageAdminService.getImagePathList("company", data.getCompanyId());
 					paramMap.put("imageUrl", companyImageList.get(0));
+					paramMap.put("companyId", data.getCompanyId());
 				} else if (type.equals("company") == true) {
 					UserVO user = userDao.selectById(new SQLParamVO("user", data.getUserId()));
+					paramMap.put("commentUserEmail", user.getEmail());
 					paramMap.put("name", user.getName());
 					paramMap.put("totalReply", userDao.reviewCnt(user.getId()));
 					paramMap.put("imageUrl", imageAdminService.getImagePath(user.getImageInfoId()));
@@ -94,5 +97,14 @@ public class CommentServiceImpl implements CommentService {
 		
 		commentDao.delete(comment);
 	}
+	
+	@Override
+	public int getAllCompanyCommentCount(int id) throws Exception {
+		return commentDao.selectAllCompanyCommentCount(id);
+	}
+	public int getAllUserCommentCount(int id) throws Exception {
+		return commentDao.selectAllUserCommentCount(id);
+	}
 
+	
 }

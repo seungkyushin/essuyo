@@ -60,10 +60,10 @@
                                 
                                 <c:choose>
                                 	<c:when test="${userType == 'user'}">
-                                	    <span style="background-color:#137eff" class="font-16 font-medium label label-rounded">호텔</span>
-                                 		<span style="background-color:#ced4da" class="font-16 font-medium label label-rounded">렌트카</span>
-                               	 		<span style="background-color:#f4c63d" class="font-16 font-medium label label-rounded">박물관</span>
-                               	 		<span style="background-color:#d17905" class="font-16 font-medium label label-rounded">음식점</span> 
+                                	    <span style="background-color:#137eff" class="font-16 font-medium label label-rounded">숙박</span>
+                                 		<span style="background-color:#ced4da" class="font-16 font-medium label label-rounded">차량</span>
+                               	 		<span style="background-color:#f4c63d" class="font-16 font-medium label label-rounded">문화</span>
+                               	 		<span style="background-color:#d17905" class="font-16 font-medium label label-rounded">식당</span> 
                                     </c:when>
                                 	
                                 	<c:when test="${userType == 'company'}">
@@ -93,10 +93,10 @@
                             	
 								              <c:choose>
                                 	<c:when test="${userType == 'user'}">
-                                	    <span style="background-color:#d70206" class="font-16 font-medium label label-rounded">호텔</span>
-                                 		<span style="background-color:#f05b4f" class="font-16 font-medium label label-rounded">렌트카</span>
-                               	 		<span style="background-color:#f4c63d" class="font-16 font-medium label label-rounded">박물관</span>
-                               	 		<span style="background-color:#d17905" class="font-16 font-medium label label-rounded">음식점</span> 
+                                	    <span style="background-color:#d70206" class="font-16 font-medium label label-rounded">숙박</span>
+                                 		<span style="background-color:#f05b4f" class="font-16 font-medium label label-rounded">차량</span>
+                               	 		<span style="background-color:#f4c63d" class="font-16 font-medium label label-rounded">문화</span>
+                               	 		<span style="background-color:#d17905" class="font-16 font-medium label label-rounded">식당</span> 
 								     </c:when>
                                 	
                                 	<c:when test="${userType == 'company'}">
@@ -120,7 +120,7 @@
                             <div class="card-body">
                                 <h4 class="card-title">예약 리스트  <a href="javascript:refreshList('reservation')"><span class="icon-refresh"></span></a></h4>
                             </div>
-                            <div class="table-responsive">
+                            <div id="scroll-reservation"class="table-responsive" style="overflow:auto; height:210px;">
                                 <table class="table table-hover">
                                     <thead>
                                         <tr id="reservation-columns">
@@ -146,6 +146,7 @@
                                 
                                 </h4>
                             </div>
+                            
                             <div id="comment-list" class="comment-widgets" style="height:430px;">
                        
                      
@@ -181,12 +182,12 @@
     <script src="../resources/js/handlebars.min.js"></script>
 
   
-    <script type="template" id="comment-template">
+    <script type="template" id="comment-user-template">
 	  
 	<div class="d-flex flex-row comment-row">
 
         <div class="p-2">
-	         <img src="{{imageUrl}}" alt="#" width="50" class="rounded-circle">
+	         <a href="/company/detail?id={{companyId}}"> <img src="{{imageUrl}}" alt="#" width="50" class="rounded-circle"></a>
 	     </div>
         <div class="comment-text w-100">
             <h6 class="font-medium">{{title}}</h6>
@@ -198,18 +199,54 @@
 	  </div>
 
     </script>
-    <script type="template" id="reservation-template" >
+     <script type="template" id="comment-company-template">
+	  
+	<div class="d-flex flex-row comment-row">
+
+        <div class="p-2">
+	         <a href="/message/register?receiverID={{typeId}}"> <img src="{{imageUrl}}" alt="#" width="50" class="rounded-circle"> </a>
+	     </div>
+        <div class="comment-text w-100">
+            <h6 class="font-medium">{{title}}</h6>
+            <span class="m-b-15 d-block">{{content}}</span>
+            <div class="comment-footer">
+                <span class="text-muted float-right">{{regDate}}</span>
+             </div>
+        </div>
+	  </div>
+
+    </script>
+    
+    <script type="template" id="reservation-company-template" >
 		<tr>
-  		    <td class="txt-oflo"><a href="/message/register?receiverID={{typeId}}">{{typeName}}</a></td>
-		   <td class="txt-oflo"><a href="/reservation?company={{companyId}}&product={{productId}}">{{productName}}</a></td>
+  		   <td class="txt-oflo"><a href="/product/detail?id={{companyId}}">{{typeName}}</a></td>
+		   <td class="txt-oflo">{{productName}}</td>
            <td><span class="label label-{{stateClass}} label-rounded">{{state}}</span> </td>
            <td class="txt-oflo">{{resDate}}</td>
            <td><span class="font-medium">{{totalPrice}} 원</span></td>
+		   <td><span class="font-medium"><a href="javascript:calcelReservation({{id}});">예약 취소</a></span></td>
+        </tr>
+	</script>
+	
+	 <script type="template" id="reservation-user-template" >
+		<tr>
+  		    <td class="txt-oflo"><a href="/message/register?receiverID={{typeId}}">{{typeName}}</a></td>
+		   <td class="txt-oflo">{{productName}}</td>
+           <td><span class="label label-{{stateClass}} label-rounded">{{state}}</span> </td>
+           <td class="txt-oflo">{{resDate}}</td>
+           <td><span class="font-medium">{{totalPrice}} 원</span></td>
+ 		
         </tr>
 	</script>
 	
 	
+	
     <script>
+    var reservationStartNum = 1;
+    var commentStartNum = 1;
+    var reservationMaxNum = 0;
+    var commentMaxNum = 0;
+    
     $(document).ready(function(){
    	
     	var total = "${totalPayment}";
@@ -217,6 +254,9 @@
     	
     	var type = "${userType}";
     
+    	
+    	
+    	
     	//< 차트를 설정한다.
     	var lineGraph = ${lineGraph};
     	setLineGraph(lineGraph);
@@ -232,17 +272,47 @@
     	setHTMLReservationColumns(type);
         
     	//< Ajax
-    	requestReservationList(type,1)
-    	requestCommentList(type,1);
+    	requestReservationList(type,reservationStartNum);
+    	requestCommentList(type,commentStartNum);
+    	
+    	//< 스크롤 
+      	$("#scroll-reservation").scroll( function() { 
+      		var elem = $(this);
+      		if ( Math.floor(elem[0].scrollHeight - elem.scrollTop()) == elem.outerHeight()){
+      			
+      			if( reservationMaxNum != reservationStartNum){
+      				reservationStartNum += 1;      			
+    				requestReservationList(type,reservationStartNum);
+      			}
+      		}
+      	});
+    	
+     	$("#comment-list").scroll( function() { 
+      		var elem = $(this);
+      		if ( Math.floor(elem[0].scrollHeight - elem.scrollTop()) == elem.outerHeight()){
+      			
+      			if( commentMaxNum !=commentStartNum){
+      				commentStartNum += 1;      			
+					requestCommentList(type,commentStartNum);
+      			}
+      		}
+      	});
+     	
+      	
+
     	
   });
     
     function requestReservationList(type,startPageNum){
-    	var requestURL = "/api/reservationList/" + type + "/" + startPageNum +"/" + ${id};
-    	Ajax("GET",requestURL,function(dataList){
-			
-			dataList.forEach(function(data){
+    	var requestURL = "/api/reservationList/" + type + "/" + startPageNum +"/" + ${userId};
+    	Ajax("GET",requestURL,function(responseData){
+    		
+    		reservationMaxNum = responseData.maxCount;
+    		
+    		 responseData.reservationList.forEach(function(data){
 				var tempData = {};
+				
+				tempData['id'] = data.id;
 				tempData['typeId'] = data.typeId;
 				tempData['typeName'] = data.typeName;
 				tempData['companyId'] = data.companyId;
@@ -260,24 +330,45 @@
 				tempData['resDate'] = data.resDate;
 				tempData['totalPrice'] = dotSplit(data.totalPrice);
 						
-				makeHTML("#reservation-template", "#reservation-list", tempData);
+				if( type == "user")
+					makeHTML("#reservation-company-template", "#reservation-list", tempData);
+				else
+					makeHTML("#reservation-user-template", "#reservation-list", tempData);
+				
+			
 			});
+    			if( reservationStartNum == 1)
+    			 	$("#scroll-reservation").scrollTop(0);
 		});
     }
 	function requestCommentList(type,startPageNum){
-		var requestURL = "/api/commentList/" + type + "/" + startPageNum +"/" + ${id};
-		Ajax("GET",requestURL,function(dataList){
+		var requestURL = "/api/commentList/" + type + "/" + startPageNum +"/" + ${userId};
+		Ajax("GET",requestURL,function(responseData){
 			
-			dataList.forEach(function(data){
+			commentMaxNum = responseData.maxCount;
+		
+			responseData.commentList.forEach(function(data){
 				
     				var tempData = {};
         			tempData['imageUrl'] = data.imageUrl;
         			tempData['title'] = data.title;
         			tempData['content'] = data.content;
         			tempData['regDate'] = data.regDate;
+
+        			if( type == "user"){
+        				tempData['companyId'] = data.companyId;
+        				makeHTML("#comment-user-template", "#comment-list", tempData);
+        			}else{
+        				makeHTML("#comment-company-template", "#comment-list", tempData);
+        			}
+       
         			
-           	    	makeHTML("#comment-template", "#comment-list", tempData);
+        				
 				});
+			
+			if( commentStartNum == 1)
+			 	$("#scroll-reservation").scrollTop(0);
+			
     			
 			}); 
     }
@@ -285,12 +376,30 @@
     function refreshList(type){
     	if("reservation" == type){
     		$("#reservation-list").empty();
-    		requestReservationList("${userType}",1);
-    	}else if( "comment" == type){
+    	    reservationStartNum = 1;
+    	    requestReservationList("${userType}",reservationStartNum);
+     	}else if( "comment" == type){
     		$("#comment-list").empty();
-    		requestCommentList("${userType}",1);
+    		commentStartNum = 1;
+    		requestCommentList("${userType}",commentStartNum);
     	}
     	
+    }
+    
+    function calcelReservation(id){
+    	var requestURL = "/api/cancel/reservation/"+ id;
+		Ajax("GET",requestURL,function(result){
+			
+			var type = "${userType}";
+			
+			if( result == true ){
+				myAlert("SUCCESS !" ,"예약이 취소되었습니다.");
+				$("#reservation-list").empty();
+				requestReservationList(type,1);
+			}else{
+				myAlert("ERROR !" ,"예약 취소가 실패하였습니다.");
+			}
+		});			
     }
     </script>
 

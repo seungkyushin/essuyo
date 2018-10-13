@@ -284,7 +284,7 @@ public class CompanyServiceImpl implements CompanyService {
 			salesMap.put("time", data.getTime());
 			salesMap.put("areaListId", data.getAreaListId());
 			
-			salesMap.put("commentCount", commentDao.count(data.getId()));
+			salesMap.put("commentCount", commentDao.selectAllCompanyCommentCount(data.getId()) );
 			
 	
 	
@@ -356,7 +356,7 @@ public class CompanyServiceImpl implements CompanyService {
 								type = "food";
 								break;
 							case "문화":
-								type = "mesuum";
+								type = "museum";
 								break;
 							}
 

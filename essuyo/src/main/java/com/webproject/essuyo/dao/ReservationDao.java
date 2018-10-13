@@ -55,10 +55,15 @@ public class ReservationDao {
 		return sqlSession.selectList(NAME_SPACE + ".selectGenderReservationCount" , id);
 	}
 	
+	public int update(ReservationVO param) throws Exception{
+		return sqlSession.update(NAME_SPACE + ".update", param);
+	}
 	
-	
-	
-	
+	public int selectCount(SQLParamVO param) throws Exception{
+		return sqlSession.selectOne(NAME_SPACE + ".selectReservationCount", param);
+	}
+		
+		
 	
 	
 
