@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ page session="false"%>
+<%@ page session="true"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -75,14 +75,18 @@
 										<input type='hidden' name='noticeNum' value="${noticeVO.noticeNum }">
 										<input type='hidden' name='page' value="${cri.page }">
 										<input type='hidden' name='perPageNum' value="${cri.perPageNum }">
-									</form>
-									
+									</form>		
+								
 									<div class="box-footer">
+									<c:choose>
+										<c:when test="${!empty sessionScope.companyLogin}">
 											<button type="submit" class="btn btn-warning modifyBtn">수정</button>
 											<button type="submit" class="btn btn-danger removeBtn">삭제</button>
 											<button type="submit" class="btn btn-primary goListBtn">목록</button>
+										</c:when>
+									</c:choose>
 									</div>
-									
+								
 									
 								</div>
 							</div>
