@@ -64,11 +64,11 @@
 						<div class="col-md-4 featured-responsive">
 							<div class="detail-filter-text">
 								<p>
-									<span id="count1">0</span>  개의 검색된 <span id="type1"></span>
+									<span id="count1">0</span> <span id="type1"></span>
 								</p>			
 							</div>
 						</div>
-						<!-- 필터 나눔 기준 -->
+						<!-- 필터 -->
 						<div class="col-md-8 featured-responsive">
 							<div class="detail-filter">
 								<button class="btn btn-success" id="search">검색</button>
@@ -173,7 +173,11 @@
 				success : function(data) {					
 					var salesCount = data.salesCount;
 					$("#type1").text(type);
-					$("#count1").text(salesCount);
+					if(salesCount === undefined){
+					$("#count1").text("");	
+					}else{
+					$("#count1").text(salesCount+"개의 검색된");				
+					}
 					
 					if(salesCount == 0){
 			         	var source1 = $("#templateNone").html();
@@ -281,21 +285,24 @@
 		
 		
 		$(document).ready(function() {
-			test();		
-
+			test();				
+		
+// 		$(document).height()  -> 현재 내가 보고 있는 문서의 높이
+// 		$(window).height() -> 현재 내가 키고 있는 브라우저의 높이
+// 		$(window).scrollTop() -> 현재 브라우저 스크롤이 있는 위치
 	    $(window).scroll(function() {
 		if ($(window).scrollTop() == $(document).height()- $(window).height()) {
 		start++;	
 	    test();			
 	    }
 
-	    });
-	    	
+	    });	    
+	    if(type != "전체"){	    	
 		$("#search").click(function() {
 		$("#salesList").html("");      
  		test();
  		});
-					
+	    }					
 		});
 	</script>
  

@@ -3,8 +3,6 @@ package com.webproject.essuyo.controller;
 
 import javax.inject.Inject;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,8 +19,6 @@ import com.webproject.essuyo.service.UserService;
 @RequestMapping("/company")
 public class CompanyController {
 
-	private static final Logger logger = LoggerFactory.getLogger(CompanyController.class);
-
 	@Inject
 	private CompanyService CompanyService;
 
@@ -30,16 +26,19 @@ public class CompanyController {
 	private UserService userService;
 	
 
-//	판매리스트
+//	판매리스트 전체
+	@RequestMapping(value = "/listAll", method = RequestMethod.GET)
+	public String listAll(@RequestParam(value="type", defaultValue="'전체'") String type, @RequestParam(value="name", defaultValue="null")String name, Model model) throws Exception {
+		model.addAttribute("type",type);
+		model.addAttribute("name",name);	
+		return "list";
+	}
+
+//	판매리스트 타입별
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String salesList(@RequestParam("type") String type, @RequestParam(value="name", defaultValue="null")String name, Model model) throws Exception {
-		logger.info("ListGET()....");
-
 		model.addAttribute("type",type);
-		model.addAttribute("name",name);
-		
-		
-		
+		model.addAttribute("name",name);			
 		return "list";
 	}
 
@@ -52,7 +51,5 @@ public class CompanyController {
 
 		return "companyDetail";
 		
-	}
-
-	
+	}	
 }

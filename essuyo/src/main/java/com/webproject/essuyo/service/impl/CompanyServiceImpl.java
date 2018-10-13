@@ -203,12 +203,7 @@ public class CompanyServiceImpl implements CompanyService {
 			return null;
 		}
 	}
-
-	@Override
-	public List<CompanyVO> listAll(SQLParamVO param) throws Exception {
-		return companyDao.listAll(param);
-	}
-
+	
 	@Override
 	public Map<String, Object> getList(int start, String value, String type, String name) throws Exception {
 		Map<String, Object> resultMap = new HashMap<>();
@@ -228,25 +223,40 @@ public class CompanyServiceImpl implements CompanyService {
 			sales.put("value" + values[i], values[i]);			
 		}
 
-		sales.put("type", type);
-		sales.put("name", name);
-		sales.put("count", values.length);
-		int salesCount = companyDao.SalesListCount(sales);
-		resultMap.put("salesCount", salesCount);
-		
-	
 		try {			
-				if( value != null && value.equals("") == true && name.equals("null")) {
+				if(value.equals("") == true && name.equals("null") && !type.equals("전체")) {
+					sales.put("type", type);
+					sales.put("name", name);
+					sales.put("count", values.length);
+					int salesCount = companyDao.SalesListCount(sales);
+					resultMap.put("salesCount", salesCount);
+					
 					SQLParamVO param = new SQLParamVO();		
 					param.setStart(start*4);
 					param.setLimit(4);
 					param.setType(type);
 					
+					list = companyDao.listType(param);				
+					
+				} else if(type.equals("전체")) {
+					sales.put("type", type);
+					sales.put("name", name);
+					sales.put("count", values.length);
+					SQLParamVO param = new SQLParamVO();
+					param.setStart(start*4);
+					param.setLimit(4);
+					
 					list = companyDao.listAll(param);
 					
+				}
+				
+				else {
+					sales.put("type", type);
+					sales.put("name", name);
+					sales.put("count", values.length);
+					int salesCount = companyDao.SalesListCount(sales);
+					resultMap.put("salesCount", salesCount);
 					
-					
-				}else {
 					Map<String, Object> filterParam = new HashMap<>();	
 
 					for(int i= 0; i<values.length;i++) {
@@ -314,8 +324,6 @@ public class CompanyServiceImpl implements CompanyService {
 	public List<String> getImagePath(int companyId) throws Exception {
 		return imageAdminService.getImagePathList("company", companyId);
 	}
-
-	
 
 	@Override
 	public void companyImgInsert(int cId) throws Exception {

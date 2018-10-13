@@ -59,11 +59,8 @@ public class RestApiController {
 	@RequestMapping(value="/list",method=RequestMethod.GET)
 	public ResponseEntity<Map<String, Object>> list(@RequestParam int start, @RequestParam String value, @RequestParam String type,@RequestParam String name){
 		ResponseEntity<Map<String, Object>> entity = null;	
-		
 		try {
 			entity= new ResponseEntity<>(companyService.getList(start,value,type,name),HttpStatus.OK);
-			
-		
 		} catch (Exception e) {
      		e.printStackTrace();
      		

@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>자리 있어요??</title>
+	<title>Essuyo</title>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -27,11 +27,12 @@
 						<div class="row">
 							<div class="col-md-12">
 								<div class="slider-content_wrap">
-									<h1>여행에 필요한 예약 Essuyo! </h1>
-									<h5>여행에 필요한 통합 예약 시스템</h5>
+									<h1>여행에 모든것 Essuyo!</h1>
+									<h5>여행 통합 예약 시스템</h5>
 								</div>
 							</div>
 						</div>
+						
 						<div class="row d-flex justify-content-center">
 							<div class="col-md-10">
 								<form class="form-wrap mt-4">
@@ -69,8 +70,15 @@
 			<div class="row justify-content-center">
 				<div class="col-md-5">
 					<div class="styled-heading">
-						<h3>분야별 카테고리</h3>
+						<h3>카테고리 종류</h3>
 					</div>
+					<div class="row justify-content-center">
+				<div class="col-md-6">
+					<div class="featured-btn-wrap">
+						<a href='/company/list?type="전체"' class="btn btn-danger">전체 카테고리 검색</a>
+					</div>
+				</div>
+			</div>
 				</div>
 			</div>
 			<div class="row">
@@ -166,7 +174,7 @@
 			<div class="row justify-content-center">
 				<div class="col-md-5">
 					<div class="styled-heading">
-						<h3>랭킹</h3>
+						<h3>랭킹 & 순위</h3>
 					</div>
 				</div>
 			</div>
@@ -225,13 +233,6 @@
 		
 			</div>
 	
-			<div class="row justify-content-center">
-				<div class="col-md-4">
-					<div class="featured-btn-wrap">
-						<a href="/list" class="btn btn-danger">VIEW ALL</a>
-					</div>
-				</div>
-			</div>
 		</div>
 	</section>
 

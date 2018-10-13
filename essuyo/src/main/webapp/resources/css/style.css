@@ -157,7 +157,7 @@ p {
   padding: 0 8px 0 0; }
 
 .slider {
-  background: url(../images/sky.jpg) no-repeat;
+  background: url(../images/main.png) no-repeat;
   background-size: cover;
   min-height: 800px; }
   @media (max-width: 992px) {
