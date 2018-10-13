@@ -6,7 +6,6 @@ import java.util.Map;
 import org.springframework.stereotype.Service;
 
 import com.webproject.essuyo.domain.CompanyVO;
-import com.webproject.essuyo.domain.SQLParamVO;
 
 @Service
 public interface CompanyService {
@@ -20,8 +19,6 @@ public interface CompanyService {
 	public List<Map<String, Object>> getRankCompanyInfoList();
 	
 	//판매리스트
-	public List<CompanyVO> listAll(SQLParamVO param) throws Exception;
-
 	public Map<String, Object> getList(int start, String value, String type, String name) throws Exception;
 	
 	public Map<String,Object> getAllCompanyCount();

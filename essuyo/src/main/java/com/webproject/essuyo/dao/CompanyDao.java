@@ -24,10 +24,15 @@ public class CompanyDao {
 
 	}
 	
-	//판매리스트 전체	
+	//판매리스트 전체
 	public List<CompanyVO> listAll(SQLParamVO param) throws Exception {
 		return session.selectList(namespace + ".listAll", param);
 
+	}
+	//판매리스트 타입별
+	public List<CompanyVO> listType(SQLParamVO param) throws Exception {
+		return session.selectList(namespace + ".listType", param);
+		
 	}
 	
 	//필터 기능
