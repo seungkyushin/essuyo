@@ -1,11 +1,11 @@
 package com.webproject.essuyo.domain;
 
-public class Criteria {
+public class NoticeCriteria {
 	
 	private int page;
 	private int perPageNum;
 	
-	public Criteria() {
+	public NoticeCriteria() {
 		this.page=1;
 		this.perPageNum=10;
 	}
@@ -36,7 +36,7 @@ public class Criteria {
 	}
 	
 	// method for MyBatis SQL Mapper
-	public int getPagePageNum() {
+	public int getPerPageNum() {
 		return this.perPageNum;
 	}
 	

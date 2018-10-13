@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ page session="false"%>
+<%@ page session="true"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -71,13 +71,23 @@
 
 										</div>
 										
-										
-									
+									<form role="form" action="modifyPage" method="post">
+										<input type='hidden' name='noticeNum' value="${noticeVO.noticeNum }">
+										<input type='hidden' name='page' value="${cri.page }">
+										<input type='hidden' name='perPageNum' value="${cri.perPageNum }">
+									</form>		
+								
 									<div class="box-footer">
-											<button type="submit" class="btn btn-warning">수정</button>
-											<button type="submit" class="btn btn-danger">삭제</button>
-											<button type="submit" class="btn btn-primary">목록</button>
+									<c:choose>
+										<c:when test="${!empty sessionScope.companyLogin}">
+											<button type="submit" class="btn btn-warning modifyBtn">수정</button>
+											<button type="submit" class="btn btn-danger removeBtn">삭제</button>
+											<button type="submit" class="btn btn-primary goListBtn">목록</button>
+										</c:when>
+									</c:choose>
 									</div>
+								
+									
 								</div>
 							</div>
 						</div>
@@ -102,24 +112,27 @@
 			var formObj = $("form[role='form']");
 			console.log(formObj);
 			
-			$(".btn-warning").on("click", function(){
-				formObj.attr("action","/notice/modify");
+			$(".modifyBtn").on("click", function(){
+				formObj.attr("action","/notice/modifyPage");
 				formObj.attr("method","get");
 				formObj.submit();
 			});
 			
-			$(".btn-danger").on("click", function(){
-				formObj.attr("action", "/notice/remove");
+			$(".removeBtn").on("click", function(){
+				formObj.attr("action", "/notice/removePage");
 				formObj.submit();
 			});
-			$(".btn-primary").on("click", function(){
-				self.location ="/notice/listAll";
 
-			});
+			$(".goListBtn").on("click", function(){
+				formObj.attr("method", "get");
+				formObj.attr("action", "/notice/listPage");
+				formObj.submit();
+			})
 		});
-		
-	
 	</script>
+	
+	
+		
 	
 </body>
 </html>

@@ -45,11 +45,16 @@ values (#{title}, #{content}, #{userID})
 <select id="listCriteria" resultType="NoticeVO">
 	<![CDATA[
 		select noticeNum, title, content, user_id AS userID, reg_date As regDate
-		form notice where noticeNum > 0
-		oreder by noticeNum desc, regDate desc
+		from notice where noticeNum > 0
+		order by noticeNum desc, regDate desc
 		limit #{pageStart}, #{perPageNum}
 	]]>
-	
 </select>
+
+<select id="countPaging" resultType="int">
+<![CDATA[
+		select count(noticeNum)
+		from notice where noticeNum > 0
+	]]></select>
 
 </mapper>

@@ -99,7 +99,7 @@
 													<c:forEach items="${list}" var="noticeVO">
 														<tr>
 															<td>${noticeVO.noticeNum}</td>
-															<td><a href='/notice/read?noticeNum=${noticeVO.noticeNum}'>${noticeVO.title}</a></td>
+															<td><a href='/notice/readPage${pageMaker.makeQuery(pageMaker.cri.page)}&noticeNum=${noticeVO.noticeNum}'>${noticeVO.title}</a></td>
 															<td>${noticeVO.userID}</td>
 															<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${noticeVO.regDate}"></fmt:formatDate></td>
 														</tr>
@@ -107,15 +107,25 @@
 												</tbody>
 											</table>
 										</div>
+										
+										<div class="text-center">
+											<ul class="pagination">
+											
+											<c:if test="${pageMaker.prev}">
+												<li><a href="listPage${pageMaker.makeQuery(pageMaker.startPage -1)}">&laquo;</a></li>
+											</c:if>
+											
+											<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
+												<li><a href="listPage${pageMaker.makeQuery(idx)}">${idx}</a></li>
+											</c:forEach>
+											
+											<c:if test="${pageMaker.next && pageMaker.endPage > 0 }">
+												<li><a href="listPage${pageMaker.makeQuery(pageMaker.endPage+1)}">&raquo;</a></li>
+											</c:if>
+											</ul>
+										</div>
+										
 									</form>
-									<c:choose>
-                            	    	<c:when test="${userType == 'user'}">
-                          	     	 		<p>유저</p> 
-      	                                </c:when>
-            	                    	<c:when test="${userType == 'company'}">
-                	                		<p>사장</p>
-                    	            	</c:when>
-                                	</c:choose>
 								</div>
 							</div>
 						</div>
@@ -139,7 +149,6 @@
 	<script>
 	
 		var result = '${msg}';
-		
 		if (result == 'success'){
 			alert("처리가 완료되었습니다.");
 		}
