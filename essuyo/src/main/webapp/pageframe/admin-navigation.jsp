@@ -96,6 +96,13 @@
                             </a>
                         </li>
                         
+                         <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/qna/listPage" aria-expanded="false">
+                                <i class="icon-briefcase"></i>
+                                <span class="hide-menu">Q&A</span>
+                            </a>
+                        </li>
+                        
                           <li class="sidebar-item">
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/logout" aria-expanded="false">
                                 <i class="icon-logout"></i>
