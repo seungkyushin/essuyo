@@ -21,24 +21,25 @@ public class QnAServiceImpl implements QnAService {
 
 	@Override
 	public void regist(QnAVO vo) throws Exception {
+
 		dao.create(vo);
 	}
 
-	@Transactional(isolation=Isolation.READ_COMMITTED)
+	@Transactional(isolation = Isolation.READ_COMMITTED)
 	@Override
 	public QnAVO read(Integer id, String userId) throws Exception {
-		dao.updateViewCount(id);		
+		dao.updateViewCount(id);
 		return dao.read(id);
 	}
 
 	@Override
-	public List<QnAVO> listAll() throws Exception {
+	public List<QnAVO> listAll() throws Exception {	
 
 		return dao.listAll();
 	}
-	
+
 	@Override
-	public void remove(Integer id) throws Exception{
+	public void remove(Integer id) throws Exception {
 		dao.delete(id);
 	}
 
@@ -50,8 +51,6 @@ public class QnAServiceImpl implements QnAService {
 	@Override
 	public int listCountCriteria(QnACriteriaVO cri) throws Exception {
 		return dao.countPaging(cri);
-	}	
-	
-	
-	
+	}
+
 }

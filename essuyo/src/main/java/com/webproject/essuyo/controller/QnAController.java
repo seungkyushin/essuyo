@@ -66,7 +66,7 @@ public class QnAController {
 
 		model.addAttribute("qna", service.read(id, userId));
 
-//		service.updateViewCount(id);
+		// service.updateViewCount(id);
 	}
 
 	@RequestMapping(value = "/remove", method = RequestMethod.GET)
@@ -85,7 +85,7 @@ public class QnAController {
 	@RequestMapping(value = "/listPage", method = RequestMethod.GET)
 	public void listPage(@ModelAttribute("cri") QnACriteriaVO cri, Model model) throws Exception {
 
-		logger.info(cri.toString());
+		logger.info(cri.toString());		
 
 		model.addAttribute("list", service.listAll());
 		model.addAttribute("criList", service.listCriteria(cri));

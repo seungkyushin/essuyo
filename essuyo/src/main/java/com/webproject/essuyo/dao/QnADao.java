@@ -32,30 +32,29 @@ public class QnADao {
 
 	public void delete(Integer id) throws Exception {
 		session.delete(namespace + ".delete", id);
-	}	
-	
-	public void updateViewCount(Integer id) throws Exception{
+	}
+
+	public void updateViewCount(int id) throws Exception {
 		session.update(namespace + ".updateViewCnt", id);
 	}
-	
-	public List<QnAVO> listPageCri(int page) throws Exception{
-		
-		if(page <= 0) {
+
+	public List<QnAVO> listPageCri(int page) throws Exception {
+
+		if (page <= 0) {
 			page = 1;
 		}
-		
-		page = (page -1) *10;
-		
+
+		page = (page - 1) * 10;
+
 		return session.selectList(namespace + ".listPageCri", page);
 	}
-	
-	public List<QnAVO> listCriteria(QnACriteriaVO cri) throws Exception{
-		return session.selectList(namespace +".listCriteria", cri);
+
+	public List<QnAVO> listCriteria(QnACriteriaVO cri) throws Exception {
+		return session.selectList(namespace + ".listCriteria", cri);
 	}
-	
-	public int countPaging(QnACriteriaVO cri) throws Exception{
+
+	public int countPaging(QnACriteriaVO cri) throws Exception {
 		return session.selectOne(namespace + ".countPaging", cri);
 	};
-	
-	
+
 }

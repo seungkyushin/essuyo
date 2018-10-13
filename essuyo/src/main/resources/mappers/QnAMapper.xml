@@ -18,7 +18,7 @@
 	
 	<select id="listAll" resultType="com.webproject.essuyo.domain.QnAVO">
     <![CDATA[
-    	select id, title, content, reg_date AS regDate, user_id AS userId, view_count AS viewCount
+    	select *
     	from qna
     	where id > 0
     	order by id desc limit 0, 10
@@ -30,7 +30,7 @@
     	where id = #{id}
     </delete>
     
-    <update id="updateViewCnt" parameterType="Integer">
+    <update id="updateViewCnt">
     UPDATE qna
     SET view_count = view_count + 1
     WHERE id = #{id}
@@ -49,7 +49,7 @@
     <select id="listCriteria" resultType="com.webproject.essuyo.domain.QnAVO">
     <![CDATA[
     select
-    id, title, content, reg_date AS regDate, user_id AS userId
+    id, title, content, reg_date AS regDate, user_id AS userId, view_count AS viewCount
     from
     qna
     where id>0
