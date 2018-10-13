@@ -101,7 +101,7 @@
 				var formObj = $("form[role='form']");
 
 				console.log(formObj);
-				$(".btn-primary").on("click", function() {
+				$(".btn-info").on("click", function() {
 					formObj.attr("action", "/qna/registerSend");
 					formObj.submit();
 				});
@@ -118,8 +118,7 @@
 				}
 			}
 			
-			//onclick="javascript:checkValue()"
-			//onsubmit="return checkValue();"
+			
 		</script>
 </body>
 </html>

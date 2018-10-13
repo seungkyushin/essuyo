@@ -42,6 +42,11 @@ public class QnAServiceImpl implements QnAService {
 	public void remove(Integer id) throws Exception {
 		dao.delete(id);
 	}
+	
+	@Override
+	public void update(QnAVO vo) throws Exception{
+		dao.update(vo);
+	}
 
 	@Override
 	public List<QnAVO> listCriteria(QnACriteriaVO cri) throws Exception {

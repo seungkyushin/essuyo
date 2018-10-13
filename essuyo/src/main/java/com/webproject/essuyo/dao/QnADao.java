@@ -33,6 +33,10 @@ public class QnADao {
 	public void delete(Integer id) throws Exception {
 		session.delete(namespace + ".delete", id);
 	}
+	
+	public void update(QnAVO vo) throws Exception{
+		session.update(namespace + ".update", vo); 
+	}
 
 	public void updateViewCount(int id) throws Exception {
 		session.update(namespace + ".updateViewCnt", id);

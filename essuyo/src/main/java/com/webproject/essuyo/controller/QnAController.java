@@ -17,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.webproject.essuyo.domain.MessageCriteria;
 import com.webproject.essuyo.domain.MessageListCri;
 import com.webproject.essuyo.domain.MessagePageMaker;
+import com.webproject.essuyo.domain.NoticeVO;
 import com.webproject.essuyo.domain.QnACriteriaVO;
 import com.webproject.essuyo.domain.QnAPageMakerVO;
 import com.webproject.essuyo.domain.QnAVO;
@@ -53,7 +54,7 @@ public class QnAController {
 
 		service.regist(vo);
 
-		rttr.addFlashAttribute("msg", "success");
+		rttr.addFlashAttribute("msg", "REGISTERSUCCESS");
 
 		return "redirect:/qna/listPage";
 	}
@@ -65,8 +66,6 @@ public class QnAController {
 		String userId = (String) session.getAttribute("login");
 
 		model.addAttribute("qna", service.read(id, userId));
-
-		// service.updateViewCount(id);
 	}
 
 	@RequestMapping(value = "/remove", method = RequestMethod.GET)
@@ -77,8 +76,26 @@ public class QnAController {
 		logger.info("----- 삭제 완료 -----");
 		rttr.addAttribute("perPageNum", cri.getPerPageNum());
 
-		rttr.addFlashAttribute("msg", "SUCCESS");
+		rttr.addFlashAttribute("msg", "REMOVESUCCESS");
 
+		return "redirect:/qna/listPage";
+	}
+	
+	@RequestMapping(value = "/update", method = RequestMethod.GET)
+	public void updateGET(QnAVO vo, RedirectAttributes rttr, Model model) throws Exception {
+		
+		String userId = (String) session.getAttribute("login");
+		vo.setUserId(userId);
+
+		model.addAttribute("qnaVO", vo);
+	}
+	
+	@RequestMapping(value="/updateQ", method=RequestMethod.POST)
+	public String updatePOST(QnAVO vo, RedirectAttributes rttr, Model model) throws Exception{
+				
+		service.update(vo);
+		
+		rttr.addFlashAttribute("msg", "UPDATESUCCESS");
 		return "redirect:/qna/listPage";
 	}
 

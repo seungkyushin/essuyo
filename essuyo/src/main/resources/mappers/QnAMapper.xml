@@ -30,6 +30,12 @@
     	where id = #{id}
     </delete>
     
+    <update id="update">
+    update qna
+    set title=#{title}, content=#{content}
+    where id=#{id}
+    </update>
+    
     <update id="updateViewCnt">
     UPDATE qna
     SET view_count = view_count + 1

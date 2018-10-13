@@ -15,6 +15,8 @@ public interface QnAService {
 
 	public void remove(Integer id) throws Exception;
 	
+	public void update(QnAVO vo) throws Exception;
+	
 	public List<QnAVO> listCriteria(QnACriteriaVO cri) throws Exception;
 	
 	public int listCountCriteria(QnACriteriaVO cri) throws Exception;

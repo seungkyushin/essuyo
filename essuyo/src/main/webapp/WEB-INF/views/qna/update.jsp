@@ -22,7 +22,6 @@
 <link rel="stylesheet" href="../resources/css/themify-icons.css">
 <link rel="stylesheet" href="../resources/css/set1.css">
 
-
 </head>
 <body>
 	<div class="preloader">
@@ -31,6 +30,7 @@
 			<div class="lds-pos"></div>
 		</div>
 	</div>
+	
 	<div id="main-wrapper" data-navbarbg="skin6" data-theme="light"
 		data-layout="vertical" data-sidebartype="full"
 		data-boxed-layout="full">
@@ -42,7 +42,7 @@
 			<div class="page-breadcrumb">
 				<div class="row">
 					<div class="col-5 align-self-center">
-						<h4 class="page-title">Q&A</h4>
+						<h4 class="page-title">Q&A 수정 </h4>
 					</div>
 				</div>
 
@@ -52,29 +52,29 @@
 							<div class="card">
 								<div class="card-body">
 									<form role="form" method="get">
-										<input type="hidden" name='id' value="${qna.id }">
+										<input type="hidden" name='id' value="${qnaVO.id }">
 									
 										<div class="box-body">
 											<div class="form-group">
 												<label for="exInputWriter"> 작성자 </label> 
 												<input type="text" id="userId" name="writer" class="form-control"
-													value="${qna.userId }" readonly="readonly">
+													value="${qnaVO.userId }" readonly="readonly">
 											</div>											
 											<div class="form-group">
 												<label for="exInputTitle"> 제목 </label> 
-												<input type="text" name='title' class="form-control" value="${qna.title }" readonly="readonly">
+												<input type="text" name='title' class="form-control" value="${qnaVO.title }">
 											</div>
 											<div class="form-group">
 												<label for="exInputContent"> 내용 </label>
-												<textarea class="form-control" name="content" rows="10"	readonly="readonly">${qna.content }</textarea>
+												<textarea class="form-control" name="content" rows="10">${qnaVO.content }</textarea>
 											</div>
 										</div>
 
 										<div class="box-footer">
-											<button type="submit" class="btn btn-info" name="btn-info" Onclick="javascript:history.listCheck()">목록</button>		
-											
-											<button type="submit" class="btn btn-danger" name="btn-danger" style="float: right;">삭제</button>
-											<button type="submit" class="btn btn-warning" style="float: right;"> 수정 </button>
+											<button type="submit" class="btn btn-info" name="btn-info">
+												목록</button>
+											<button type="submit" class="btn btn-warning" name="btn-warning" style="float: right;">
+												수정</button>
 										</div>
 									</form>
 								</div>
@@ -87,6 +87,7 @@
 	</div>
 
 	<!-- jquery 추가 -->
+	<script src="/resources/js/jquery/jquery-3.2.1.min.js"></script>
 	<script src="../resources/js/jquery/jquery.min.js"></script>
 	<script src="../resources/js/popper/umd/popper.min.js"></script>
 	<script src="../resources/js/bootstrap/bootstrap.min.js"></script>
@@ -96,40 +97,23 @@
 	<script src="../resources/js/userpage/custom.min.js"></script>
 	<script src="../resources/js/utility.js"></script>
 
-	<script type="text/javascript">
-	$(document).ready(function() {
-		var formObj = $("form[role='form']");
-		console.log(formObj);
-		
-		var referrer = document.referrer;
-		
+ 	<script type="text/javascript"> 
+	$(document).ready(function() { 
+		var formObj = $("form[role='form']"); 
+		console.log(formObj);		
+			
+ 		$(".btn-info").on("click", function() { 
+ 				formObj.attr("method", "get"); 
+			formObj.attr("action", "/qna/listPage");
+				formObj.submit(); 
+		});			 
 	
-		$(".btn-info").on("click", function() {
-				formObj.attr("method", "get");
-				formObj.attr("action", "/qna/listPage");
-				formObj.submit();
-		});				
-		$(".btn-danger").on("click", function() {
-			formObj.attr("action", "/qna/remove");
-			formObj.submit();
-		});
-		$(".btn-warning").on("click", function(){
-			formObj.attr("action","/qna/update");
-			formObj.attr("method","get");
-			formObj.submit();
-		});	
-	});
-	
-	function listCheck(){
-		var referrer = document.referrer;	
-		
-			$(".btn-info").on("click", function() {
-				formObj.attr("method", "get");
-				formObj.attr("action", "/qna/listPage");
-				formObj.submit();
-			});
-		
-	}
-	</script>
+		$(".btn-warning").on("click", function() {	 
+			formObj.attr("method", "post"); 
+			formObj.attr("action", "/qna/updateQ"); 
+ 			formObj.submit();
+ 		});
+	});	 
+	</script>	
 </body>
 </html>
