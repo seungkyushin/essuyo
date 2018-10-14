@@ -1,442 +1,248 @@
-/* eXERD 툴로 생성한 질의문 입니다.
- * 테이블을 생성한후 테이블에 있는 제약을 추가하는 방식입니다. */
+/* 테이블 생성할 때 제약조건을 기입하는 방식입니다.
+ * 생성할 때 값들이 적용되므로 테이블 생성에 있어 순서가 존재합니다. */
 
 DROP DATABASE essuyo;
 CREATE DATABASE essuyo;
 USE essuyo;
 
 /* 사용가능시설목록 */
-CREATE TABLE facility_list (
-	id INTEGER NOT NULL, /* 번호 */
-	name VARCHAR(255) /* 이름 */
+CREATE TABLE facility (
+	id INTEGER PRIMARY KEY auto_increment,	/* 번호 */
+	name VARCHAR(255) NOT NULL				/* 이름 */
 )DEFAULT CHARSET=utf8; 
-
-ALTER TABLE facility_list
-	ADD
-		CONSTRAINT PK_facility_list
-		PRIMARY KEY (
-			id
-		);
-
-/* 사업종류 */
-CREATE TABLE business_type (
-	id INTEGER NOT NULL, /* 번호 */
-	name VARCHAR(255) NOT NULL /* 이름 */
-)DEFAULT CHARSET=utf8; 
-
-ALTER TABLE business_type
-	ADD
-		CONSTRAINT PK_business_type
-		PRIMARY KEY (
-			id
-		);
-
-/* 상품관리 */
-CREATE TABLE product_admin (
-	business_id INTEGER, /* 사업종류번호 */
-	product_id INTEGER /* 상품번호 */
-)DEFAULT CHARSET=utf8; 
-
-
-/* 회사 */
-CREATE TABLE company (
-	id INTEGER NOT NULL, /* 번호 */
-	name VARCHAR(255) NOT NULL, /* 이름 */
-	discription VARCHAR(255), /* 설명 */
-	address VARCHAR(255) NOT NULL, /* 주소 */
-	number VARCHAR(255) NOT NULL, /* 전화번호 */
-	url VARCHAR(255), /* 홈페이지 */
-	state VARCHAR(255) NOT NULL, /* 영업상태 */
-	time VARCHAR(255) NOT NULL, /* 영업시간 */
-	total_visit INTEGER, /* 총방문자수 */
-	today_visit INTEGER, /* 금일방문자수 */
-	grade  INTEGER, /* 등급 */
-	area_list_id INTEGER, /* 지역명목록번호 */
-	business_type_id INTEGER /* 사업종류번호 */
-)DEFAULT CHARSET=utf8; 
-
-ALTER TABLE company
-	ADD
-		CONSTRAINT PK_company
-		PRIMARY KEY (
-			id
-		);
 
 /* 지역명목록 */
 CREATE TABLE area_list (
-	id INTEGER NOT NULL, /* 번호 */
-	name VARCHAR(255) NOT NULL /* 이름 */
+	id INTEGER PRIMARY KEY auto_increment,	/* 번호 */
+	name VARCHAR(255) NOT NULL				/* 이름 */
 )DEFAULT CHARSET=utf8; 
-
-ALTER TABLE area_list
-	ADD
-		CONSTRAINT PK_area_list
-		PRIMARY KEY (
-			id
-		);
-
-/* 사용가능시설 */
-CREATE TABLE facility (
-	company_id INTEGER, /* 회사번호 */
-	facility_list_id INTEGER /* 사용가능시설목록번호 */
-)DEFAULT CHARSET=utf8; 
-
-/* 사용자 */
-CREATE TABLE user (
-	id INTEGER NOT NULL, /* 번호 */
-	name VARCHAR(255) NOT NULL, /* 이름 */
-	email VARCHAR(255) NOT NULL, /* 이메일 */
-	password VARCHAR(255) NOT NULL, /* 비밀번호 */
-	fail_password INTEGER NOT NULL, /* 비밀번호실패 */
-	first_date DATE NOT NULL, /* 생성날짜 */
-	last_date DATE, /* 마지막로그인날짜 */
-	total_reply INTEGER, /* 총덧글수 */
-	business_id INTEGER, /* 사업번호 */
-	image_info_id INTEGER /* 이미지정보번호 */
-)DEFAULT CHARSET=utf8; 
-
-ALTER TABLE user
-	ADD
-		CONSTRAINT PK_user
-		PRIMARY KEY (
-			id
-		);
-
-ALTER TABLE user
-	ADD
-		CONSTRAINT UK_user
-		UNIQUE (
-			email
-		);
-
-/* 덧글 */
-CREATE TABLE comment (
-	id INTEGER NOT NULL, /* 번호 */
-	title VARCHAR(255) NOT NULL, /* 제목 */
-	content  VARCHAR(255), /* 내용 */
-	state VARCHAR(255) NOT NULL, /* 상태 */
-	helpful INTEGER, /* 도움점수 */
-	scroe DECIMAL(2,1) NOT NULL, /* 점수 */
-	mod_date DATE, /* 수정날짜 */
-	reg_date DATE NOT NULL, /* 등록날짜 */
-	user_id INTEGER NOT NULL /* 사용자번호 */
-);
-
-ALTER TABLE comment
-	ADD
-		CONSTRAINT PK_comment
-		PRIMARY KEY (
-			id
-		);
-
-/* 예약 */
-CREATE TABLE reservation (
-	id INTEGER NOT NULL, /* 번호 */
-	state VARCHAR(255) NOT NULL, /* 상태 */
-	total_price INTEGER NOT NULL, /* 총가격 */
-	res_date DATE NOT NULL, /* 예약한날짜 */
-	/* 추가 : 완료날짜 or 일수?! */
-	reg_date DATE NOT NULL, /* 등록날짜 */
-	compay_id INTEGER, /* 회사_번호 */
-	product_id INTEGER, /* 상품_번호 */
-	user_id INTEGER /* 사용자_번호 */
-)DEFAULT CHARSET=utf8; 
-
-ALTER TABLE reservation
-	ADD
-		CONSTRAINT PK_reservation
-		PRIMARY KEY (
-			id
-		);
-
-/* 메시지 */
-CREATE TABLE message (
-	id INTEGER NOT NULL, /* 번호 */
-	content VARCHAR(255), /* 내용 */
-	send_date DATE NOT NULL, /* 보낸날짜 */
-	read_check INTEGER NOT NULL, /* 읽음확인 */
-	user_id INTEGER NOT NULL /* 사용자번호 */
-)DEFAULT CHARSET=utf8; 
-
-ALTER TABLE message
-	ADD
-		CONSTRAINT PK_message
-		PRIMARY KEY (
-			id
-		);
 
 /* 상품 */
 CREATE TABLE product (
-	id INTEGER NOT NULL, /* 번호 */
-	name VARCHAR(255) NOT NULL, /* 이름 */
-	discription VARCHAR(255) NOT NULL, /* 설명 */
-	price INTEGER NOT NULL /* 가격 */
+	id INTEGER PRIMARY KEY auto_increment,		/* 번호 */
+	name VARCHAR(255) NOT NULL,					/* 이름 */
+	sale_start_date DATE NOT NULL,				/* 판매시작일 */
+	sale_end_date DATE NOT NULL,				/* 판매종료일 */
+	discription VARCHAR(255) NOT NULL,			/* 설명 */
+	price INTEGER NOT NULL						/* 가격 */
 )DEFAULT CHARSET=utf8; 
 
-ALTER TABLE product
-	ADD
-		CONSTRAINT PK_product
-		PRIMARY KEY (
-			id
-		);
+/* 상품 재고 */
+CREATE TABLE product_manager (
+	id INTEGER PRIMARY KEY auto_increment,	/* 번호 */
+	sale_date DATE NOT NULL,				/* 판매일 */
+	count INTEGER NOT NULL,					/* 개수 */
+	product_id INTEGER NOT NULL,			/* 상품번호 */
+	
+	FOREIGN KEY (product_id) REFERENCES product(id) ON DELETE CASCADE 
+)DEFAULT CHARSET=utf8; 
+
+
 
 /* 이미지파일정보 */
 CREATE TABLE image_info (
-	id INTEGER NOT NULL, /* 번호 */
-	save_path VARCHAR(255) NOT NULL, /* 저장위치 */
-	type VARCHAR(255) NOT NULL, /* 종류 */
-	name VARCHAR(255) NOT NULL, /* 이름 */
-	cre_date DATE NOT NULL, /* 생성날짜 */
-	mod_date DATE /* 수정_날짜 */
+	id INTEGER PRIMARY KEY auto_increment,	/* 번호 */
+	save_path VARCHAR(255) NOT NULL, 		/* 저장위치 */
+	type VARCHAR(255) NOT NULL,				/* 종류 */
+	name VARCHAR(255) NOT NULL,				/* 이름 */
+	cre_date DATE NOT NULL,					/* 생성날짜 */
+	mod_date DATE							/* 수정_날짜 */
 )DEFAULT CHARSET=utf8; 
 
-ALTER TABLE image_info
-	ADD
-		CONSTRAINT PK_image_info
-		PRIMARY KEY (
-			id
-		);
+
+/* 업체 목록 */
+CREATE TABLE company (
+	id INTEGER PRIMARY KEY auto_increment, /* 번호 */
+	name VARCHAR(255) NOT NULL, /* 이름 */
+	type VARCHAR(255) NOT NULL, /* 회사 종류*/
+	discription VARCHAR(255), /* 설명 */
+	score  DECIMAL(2,1), /* 점수 */
+	address VARCHAR(255) NOT NULL, /* 주소 */
+	number VARCHAR(255) NOT NULL, /* 전화번호 */
+	homepage VARCHAR(255), /* 홈페이지 */
+	state VARCHAR(255) NOT NULL, /* 영업상태 */
+	time VARCHAR(255) NOT NULL, /* 영업시간 */
+	area_list_id INTEGER , /* 지역명목록번호 */
+	
+	FOREIGN KEY (area_list_id) REFERENCES area_list(id)
+)DEFAULT CHARSET=utf8; 
+
 
 /* 사업 */
 CREATE TABLE business (
-	id INTEGER NOT NULL, /* 번호 */
+	id INTEGER PRIMARY KEY auto_increment, /* 번호 */
 	good INTEGER, /* 좋아요 */
 	comment VARCHAR(255), /* 한마디 */
 	company_id INTEGER, /* 상점번호 */
-	business_type_id INTEGER /* 사업종류번호 */
+	
+	FOREIGN KEY (company_id) REFERENCES company(id)
 )DEFAULT CHARSET=utf8; 
 
-ALTER TABLE business
-	ADD
-		CONSTRAINT PK_business
-		PRIMARY KEY (
-			id
-		);
+
+/* 사용자 */
+CREATE TABLE user (
+	id INTEGER PRIMARY KEY auto_increment, /* 번호 */
+	name VARCHAR(255) NOT NULL, /* 이름 */
+	age INTEGER NOT NULL, /*나이*/
+	gender VARCHAR(255) NOT NULL, /*성별*/
+	email VARCHAR(255) UNIQUE NOT NULL, /* 이메일 */
+	password VARCHAR(255) NOT NULL, /* 비밀번호 */
+	fail_password INTEGER NOT NULL, /* 비밀번호실패 */
+	cre_date DATE NOT NULL, /* 생성날짜 */
+	last_date DATE, /* 마지막로그인날짜 */
+	business_id INTEGER, /* 사업번호 */
+	image_info_id INTEGER,
+	
+	FOREIGN KEY (business_id) REFERENCES business(id) ON DELETE CASCADE,
+	FOREIGN KEY (image_info_id) REFERENCES image_info(id) ON DELETE CASCADE
+)DEFAULT CHARSET=utf8; 
+
+/* 덧글 */
+CREATE TABLE comment (
+	id INTEGER PRIMARY KEY auto_increment, /* 번호 */
+	title VARCHAR(255) NOT NULL, /* 제목 */
+	content  VARCHAR(255), /* 내용 */
+	helpful INTEGER default 0, /* 도움점수 */
+	score INTEGER NOT NULL, /* 점수 */
+	mod_date DATE, /* 수정날짜 */
+	reg_date timestamp not null default now(), /* 등록날짜 */
+	user_id INTEGER NOT NULL,/* 사용자번호 */
+	company_id INTEGER NOT NULL,/* 회사번호 */
+	
+	CONSTRAINT chk_score CHECK (score > 0 AND score <=5),
+	FOREIGN KEY (user_id) REFERENCES user(id) ON DELETE CASCADE,
+	FOREIGN KEY (company_id) REFERENCES company(id) ON DELETE CASCADE
+)DEFAULT CHARSET=utf8; 
+
+/* 메시지 */
+CREATE TABLE message (
+	megNum INTEGER PRIMARY KEY auto_increment, /* 번호 */
+	title VARCHAR(255) NOT  NULL, /* 제목 */	
+	content TEXT, /* 내용 */
+	send_date timestamp not null default now(), /* 보낸날짜 */	
+	read_check INTEGER , /* 읽음확인 */
+	user_id VARCHAR(255) NOT NULL, /* 발송자 사용자번호 */
+    receiver_id VARCHAR(255) NOT NULL, /* 수신자 사용자번호 */	
+	
+    FOREIGN KEY (user_id) REFERENCES user(email) ON DELETE CASCADE,
+	FOREIGN KEY (receiver_id) REFERENCES user(email) ON DELETE CASCADE
+)DEFAULT CHARSET=utf8; 
+
+/* 공지사항 */
+CREATE TABLE notice (
+	noticeNum INTEGER PRIMARY KEY auto_increment, /* 번호 */
+	title VARCHAR(255) NOT  NULL, /* 제목 */	
+	content TEXT, /* 내용 */
+	reg_date timestamp not null default now(), /* 등록날짜 */	
+	user_id VARCHAR(255) NOT NULL, /* 작성자 사용자번호 */	
+	
+   FOREIGN KEY (user_id) REFERENCES user(email) ON DELETE CASCADE
+)DEFAULT CHARSET=utf8; 
+
+/* 상품관리 */
+CREATE TABLE product_admin (
+	id INTEGER PRIMARY KEY auto_increment, /*상품 관리 번호*/
+	company_id INTEGER, /* 사업종류번호 */
+	product_id INTEGER,
+	
+	FOREIGN KEY (company_id) REFERENCES company(id) ON DELETE CASCADE,
+	FOREIGN KEY (product_id) REFERENCES product(id) ON DELETE CASCADE
+);
+
+/* 사용가능시설 */
+CREATE TABLE facility_admin (
+	company_id INTEGER , /* 회사번호 */
+	facility_id INTEGER,  /* 사용가능시설목록번호 */
+	
+	FOREIGN KEY (company_id) REFERENCES company(id) ON DELETE CASCADE,
+	FOREIGN KEY (facility_id) REFERENCES facility(id) ON DELETE CASCADE
+);
+
 
 /* 회사이미지관리 */
 CREATE TABLE company_image_admin (
+	id INTEGER PRIMARY KEY auto_increment, /*회사이미지관리 번호*/
 	company_id INTEGER, /* 회사번호 */
-	image_info_id INTEGER /* 이미지정보번호 */
+	image_info_id INTEGER, /* 이미지정보번호 */
+	
+	FOREIGN KEY (company_id) REFERENCES company(id) ON DELETE CASCADE,
+	FOREIGN KEY (image_info_id) REFERENCES image_info(id) ON DELETE CASCADE
+)DEFAULT CHARSET=utf8;
+
+/* 상품이미지관리 */
+CREATE TABLE product_image_admin (
+	id INTEGER PRIMARY KEY auto_increment, /*상품 관리 번호*/
+	product_id INTEGER, /* 상품 번호 */
+	image_info_id INTEGER, /* 이미지 관리 번호 */
+	
+	FOREIGN KEY (product_id) REFERENCES product(id) ON DELETE CASCADE,
+	FOREIGN KEY (image_info_id) REFERENCES image_info(id) ON DELETE CASCADE
 )DEFAULT CHARSET=utf8; 
 
 /* 덧글이미지관리 */
 CREATE TABLE comment_image_admin (
+	id INTEGER PRIMARY KEY auto_increment, /*덧글이미지관리 번호*/
 	image_info_id INTEGER, /* 이미지정보번호 */
-	comment_id INTEGER /* 회사번호 */
+	comment_id INTEGER, /* 덧글번호 */
+	
+	FOREIGN KEY (comment_id) REFERENCES comment(id) ON DELETE CASCADE,
+	FOREIGN KEY (image_info_id) REFERENCES image_info(id) ON DELETE CASCADE
 )DEFAULT CHARSET=utf8; 
 
-/* 상품이미지관리 */
-CREATE TABLE proudct_image_admin (
-	product_id INTEGER, /* 번호 */
-	image_info_id INTEGER /* 번호2 */
+
+/* 예약 */
+CREATE TABLE reservation (
+	id INTEGER PRIMARY KEY  auto_increment, /* 번호 */
+	state VARCHAR(255) NOT NULL, /* 상태 */
+	product_type VARCHAR(255) NOT NULL,
+	total_price INTEGER NOT NULL, /* 총가격 */
+	res_date DATE NOT NULL, /* 예약한날짜 */
+	product_count INTEGER NOT NULL, /* 상품 개수 */
+	reg_date DATE NOT NULL, /* 등록날짜 */
+	company_id INTEGER , /* 회사_번호 */
+	product_id INTEGER , /* 상품_번호 */
+	user_id INTEGER ,  /* 사용자_번호 */
+	
+	FOREIGN KEY (company_id) REFERENCES company(id),
+	FOREIGN KEY (product_id) REFERENCES product(id),
+	FOREIGN KEY (user_id) REFERENCES user(id) ON DELETE CASCADE
 )DEFAULT CHARSET=utf8; 
 
-ALTER TABLE product_admin
-	ADD
-		CONSTRAINT FK_business_type_TO_product_admin
-		FOREIGN KEY (
-			business_id
-		)
-		REFERENCES business_type (
-			id
-		) ON DELETE CASCADE;
+/* QnA */
+CREATE TABLE qna (
+	id INTEGER PRIMARY KEY auto_increment, /* 번호 */
+    title VARCHAR(255) NOT NULL, /* 제목 */
+    content text, /* 내용 */
+    reg_date timestamp not null default now(), /* 등록날짜 */	
+    user_id VARCHAR(255) NOT NULL, /* 사용자_번호*/    
+    view_count INTEGER, /* 조회수 */
+    
+    FOREIGN KEY (user_id) REFERENCES user(email)
+)DEFAULT CHARSET=utf8;
 
-ALTER TABLE product_admin
-	ADD
-		CONSTRAINT FK_product_TO_product_admin
-		FOREIGN KEY (
-			product_id
-		)
-		REFERENCES product (
-			id
-		) ON DELETE CASCADE;
 
-ALTER TABLE company
-	ADD
-		CONSTRAINT FK_area_list_TO_company
-		FOREIGN KEY (
-			area_list_id
-		)
-		REFERENCES area_list (
-			id
-		);
 
-ALTER TABLE company
-	ADD
-		CONSTRAINT FK_business_type_TO_company
-		FOREIGN KEY (
-			business_type_id
-		)
-		REFERENCES business_type (
-			id
-		);
+/*********************************************************************************/
+/************************************ 데이터 입력 ************************************/
+/*********************************************************************************/
 
-ALTER TABLE facility
-	ADD
-		CONSTRAINT FK_company_TO_facility
-		FOREIGN KEY (
-			company_id
-		)
-		REFERENCES company (
-			id
-		) ON DELETE CASCADE;
 
-ALTER TABLE facility
-	ADD
-		CONSTRAINT FK_facility_list_TO_facility
-		FOREIGN KEY (
-			facility_list_id
-		)
-		REFERENCES facility_list (
-			id
-		) ON DELETE CASCADE;
+/*이미지*/
+INSERT INTO image_info ( save_path, type ,name, cre_date ) VALUES("/resources/images/default-user.png","image/png","default-user.png", now());
 
-ALTER TABLE user
-	ADD
-		CONSTRAINT FK_business_TO_user
-		FOREIGN KEY (
-			business_id
-		)
-		REFERENCES business (
-			id
-		);
 
-ALTER TABLE user
-	ADD
-		CONSTRAINT FK_image_info_TO_user
-		FOREIGN KEY (
-			image_info_id
-		)
-		REFERENCES image_info (
-			id
-		);
+/* 지역명목록 */
+INSERT INTO area_list (name)  VALUES("서울");
+INSERT INTO area_list (name)  VALUES("부산");
+INSERT INTO area_list (name)  VALUES("광주");
+INSERT INTO area_list (name)  VALUES("강원도");
 
-ALTER TABLE comment
-	ADD
-		CONSTRAINT FK_user_TO_comment
-		FOREIGN KEY (
-			user_id
-		)
-		REFERENCES user (
-			id
-		) ON DELETE CASCADE;
+INSERT INTO facility(name)  VALUES("주차공간");
+INSERT INTO facility(name)  VALUES("와이파이/인터넷");
+INSERT INTO facility(name)  VALUES("금연구역");
+INSERT INTO facility(name)  VALUES("신용카드");
 
-ALTER TABLE reservation
-	ADD
-		CONSTRAINT FK_company_TO_reservation
-		FOREIGN KEY (
-			compay_id
-		)
-		REFERENCES company (
-			id
-		);
 
-ALTER TABLE reservation
-	ADD
-		CONSTRAINT FK_product_TO_reservation
-		FOREIGN KEY (
-			product_id
-		)
-		REFERENCES product (
-			id
-		);
 
-ALTER TABLE reservation
-	ADD
-		CONSTRAINT FK_user_TO_reservation
-		FOREIGN KEY (
-			user_id
-		)
-		REFERENCES user (
-			id
-		) ON DELETE CASCADE;
 
-ALTER TABLE message
-	ADD
-		CONSTRAINT FK_user_TO_message
-		FOREIGN KEY (
-			user_id
-		)
-		REFERENCES user (
-			id
-		) ON DELETE CASCADE;
 
-ALTER TABLE business
-	ADD
-		CONSTRAINT FK_company_TO_business
-		FOREIGN KEY (
-			company_id
-		)
-		REFERENCES company (
-			id
-		);
-
-ALTER TABLE business
-	ADD
-		CONSTRAINT FK_business_type_TO_business
-		FOREIGN KEY (
-			business_type_id
-		)
-		REFERENCES business_type (
-			id
-		);
-
-ALTER TABLE company_image_admin
-	ADD
-		CONSTRAINT FK_company_TO_company_image_admin
-		FOREIGN KEY (
-			company_id
-		)
-		REFERENCES company (
-			id
-		) ON DELETE CASCADE;
-
-ALTER TABLE company_image_admin
-	ADD
-		CONSTRAINT FK_image_info_TO_company_image_admin
-		FOREIGN KEY (
-			image_info_id
-		)
-		REFERENCES image_info (
-			id
-		) ON DELETE CASCADE;
-
-ALTER TABLE comment_image_admin
-	ADD
-		CONSTRAINT FK_image_info_TO_comment_image_admin
-		FOREIGN KEY (
-			image_info_id
-		)
-		REFERENCES image_info (
-			id
-		) ON DELETE CASCADE;
-
-ALTER TABLE comment_image_admin
-	ADD
-		CONSTRAINT FK_comment_TO_comment_image_admin
-		FOREIGN KEY (
-			comment_id
-		)
-		REFERENCES comment (
-			id
-		) ON DELETE CASCADE;
-
-ALTER TABLE proudct_image_admin
-	ADD
-		CONSTRAINT FK_product_TO_proudct_image_admin
-		FOREIGN KEY (
-			product_id
-		)
-		REFERENCES product (
-			id
-		) ON DELETE CASCADE;
-
-ALTER TABLE proudct_image_admin
-	ADD
-		CONSTRAINT FK_image_info_TO_proudct_image_admin
-		FOREIGN KEY (
-			image_info_id
-		)
-		REFERENCES image_info (
-			id
-		) ON DELETE CASCADE;

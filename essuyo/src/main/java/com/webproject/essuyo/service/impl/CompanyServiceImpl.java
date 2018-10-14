@@ -388,4 +388,14 @@ public class CompanyServiceImpl implements CompanyService {
 
 	}
 
+	@Override
+	public int updateScore(int companyId){
+		try {
+			return companyDao.updateCompanyScore(companyId);
+		} catch (Exception e) {
+			logger.error("회사 평점 실패.. | {} ", e.toString());
+			return 0;
+		}
+	}
+
 }

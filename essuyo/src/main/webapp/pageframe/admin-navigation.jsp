@@ -6,9 +6,6 @@
   <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-       <title>프로필</title>
     <link href="../resources/css/style.min.css" rel="stylesheet">
     <link href="../resources/css/style.css" rel="stylesheet">
     <link rel="stylesheet" href="../resources/css/simple-line-icons.css">
@@ -28,9 +25,7 @@
                             <b class="logo-icon">
                                 <img  style="width:50px;height:50px" src="/resources/images/backpack.png" alt="homepage" class="light-logo" /> 
                             </b>
-                            <span class="logo-text">
-                                		<i class="icon-home"></i>
-                            </span>
+                       
                         </a>
                     </div> 
                     <a class="topbartoggler d-block d-md-none waves-effect waves-light" href="javascript:void(0)" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -91,14 +86,14 @@
                         </li>
                         <li class="sidebar-item">
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/notice/listPage" aria-expanded="false">
-                                <i class="icon-briefcase"></i>
+                                <i class="icon-bell"></i>
                                 <span class="hide-menu">공지사항</span>
                             </a>
                         </li>
                         
                          <li class="sidebar-item">
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/qna/listPage" aria-expanded="false">
-                                <i class="icon-briefcase"></i>
+                                <i class="icon-earphones-alt"></i>
                                 <span class="hide-menu">Q&A</span>
                             </a>
                         </li>

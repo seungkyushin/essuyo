@@ -4,13 +4,11 @@
 <!DOCTYPE html>
 <html>
 <head>
+<title>Essuyo</title>
+<link rel="icon" type="image/png" sizes="16x16" href="/resources/images/backpack.png">
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="">
-<meta name="author" content="">
-<link rel="icon" type="image/png" sizes="16x16" href="../resources/images/favicon.png">
-<title>사업내용 수정</title>
 <link href="../resources/css/style.min.css" rel="stylesheet">
 <link href="../resources/css/style.css" rel="stylesheet">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+KR">
@@ -152,8 +150,8 @@
 									<label>[영업 상태]</label> <select class="custom-select col-12"
 										id="state" name="state" required>
 										<option selected="selected" value="">영업상태</option>
-										<option value="OPEN">영업중</option>
-										<option value="CLOSED">휴업중</option>
+										<option value="영업중">영업중</option>
+										<option value="영업종료">영업종료</option>
 									</select>
 								</div>
 

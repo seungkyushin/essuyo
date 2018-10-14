@@ -82,11 +82,12 @@ public class RestApiController {
 				
 		if( commentList != null && commentList.size() != 0 ) {
 			resultMap.put("commentList", commentList);
-			resultMap.put("maxCount", reservationService.getAllReservationCount(type, id));
+			resultMap.put("maxCount", commentService.getAllCommentCount(type,id));
 			
+			return resultMap;
 		}
 	
-		return resultMap;
+		return null;
 	}
 
 
@@ -102,10 +103,11 @@ public class RestApiController {
 	
 		if( resultList != null && resultList.size() != 0 ) {
 			resultMap.put("reservationList", resultList);
-			resultMap.put("maxCount", reservationService.getAllReservationCount(type, id));
-		
+			resultMap.put("maxCount",  reservationService.getAllReservationCount(type, id) );
+			return resultMap;
 		}
-		return resultMap;
+		return null;
+		
 	}
 	
 	@GetMapping("/disableDate/{productId}")

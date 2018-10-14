@@ -286,7 +286,7 @@ public class UserController {
 		UserVO user = service.getUserVO(email);
 
 		model.addAttribute("userType", "user");
-		model.addAttribute("userId", user.getId());
+		model.addAttribute("id", user.getId());
 		setUserDashboard(email, "user", user.getId(), model);
 
 		return "/user/dashboard";
@@ -357,7 +357,7 @@ public class UserController {
 		model.addAttribute("MonthsPaymentList", MonthsPaymentList);
 
 		// < 3. 화면단 표시 문자열
-		model.addAttribute("sparkLineName", "한해 수입");
+		model.addAttribute("sparkLineName", "수입");
 
 	}
 
@@ -401,7 +401,7 @@ public class UserController {
 		model.addAttribute("MonthsPaymentList", MonthsPaymentList);
 
 		// < 3. 화면단 표시 문자열
-		model.addAttribute("sparkLineName", "올해 지출");
+		model.addAttribute("sparkLineName", "지출");
 
 	}
 

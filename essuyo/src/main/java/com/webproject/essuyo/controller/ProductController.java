@@ -148,19 +148,5 @@ public class ProductController {
 		return "redirect:/product/admin";
 
 	}
-	
-	
-	@GetMapping("/update")
-	public String updateProduct(@RequestParam int  id, RedirectAttributes redirectAttr,
-			HttpSession httpSession, Model model) {
 
-		model.addAttribute("product", productService.getProduct(id));
-		
-		return "/product/productRegister";
-	}
-	
-	
-	
-	
-	
 }

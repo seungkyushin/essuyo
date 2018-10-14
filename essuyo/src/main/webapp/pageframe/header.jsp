@@ -16,7 +16,6 @@
 	<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/resources/css/themify-icons.css">
 	<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/resources/css/style.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.34.7/css/bootstrap-dialog.min.css">
-	<link rel="icon" type="image/png" sizes="16x16" href="../resources/images/favicon.png">
 </head>
 <body>
     <div class="dark-bg sticky-top">

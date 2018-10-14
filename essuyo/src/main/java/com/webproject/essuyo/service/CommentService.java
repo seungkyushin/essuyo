@@ -23,7 +23,7 @@ public interface CommentService {
 	public Integer helpful(Integer commentId) throws Exception;
 
 	//< 댓글 개수 구하기
-	public int getAllCompanyCommentCount(int id) throws Exception;
-	public int getAllUserCommentCount(int id) throws Exception;
+	public int getAllCommentCount(String type, int id) ;
+
 
 }

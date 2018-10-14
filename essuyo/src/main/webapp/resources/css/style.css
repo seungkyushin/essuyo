@@ -684,7 +684,22 @@ footer {
   vertical-align: top; }
 
 .reserve-rating-red {
-  background: #ff5a5a !important; }
+  background: #ff5a5a ; 
+  font-size: 23px;
+  padding: 10px 14px;
+  color: #fff;
+  border-radius: 3px;
+  display: inline-block;
+  vertical-align: top; }
+  
+.reserve-rating-orange {
+ 	background: #ffae00;
+  font-size: 23px;
+  padding: 10px 14px;
+  color: #fff;
+  border-radius: 3px;
+  display: inline-block;
+  vertical-align: top; }
   
 .review-btn {
   display: inline-block;

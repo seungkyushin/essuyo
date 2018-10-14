@@ -4,14 +4,11 @@
 <!DOCTYPE html>
 <html>
 <head>
+<title>Essuyo</title>
+<link rel="icon" type="image/png" sizes="16x16" href="/resources/images/backpack.png">
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="">
-<meta name="author" content="">
-<link rel="icon" type="image/png" sizes="16x16"
-	href="/resources/images/favicon.png">
-<title>관리자페이지</title>
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css?family=Noto+Sans+KR">
 <link href="../resources/css/chartist/chartist.min.css" rel="stylesheet">
@@ -136,7 +133,7 @@
 	<td>{{name}}</td>
 	<td>{{saleDate}}</td>
 	<td>{{price}} 원</td>
-	<td><a href="/product/update?id={{number}}">수정</a> / <a href="javascript:deleteProduct({{number}})">삭제</a></td>
+	<td><a href="javascript:deleteProduct({{number}})">삭제</a></td>
 </tr>
 </script>
 

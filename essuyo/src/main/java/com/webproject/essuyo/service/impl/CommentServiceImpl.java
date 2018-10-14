@@ -99,17 +99,40 @@ public class CommentServiceImpl implements CommentService {
 	}
 	
 	@Override
-	public int getAllCompanyCommentCount(int id) throws Exception {
-		return commentDao.selectAllCompanyCommentCount(id);
+	public int getAllCommentCount(String type, int id) {
+		
+			try {
+				int max = 0;
+				if(type.equals("user") == true ) {
+					max =  commentDao.selectAllUserCommentCount(id);
+				}else {
+					max =  commentDao.selectAllCompanyCommentCount(id);
+				}
+				
+				int resultCount = max/SEARCH_LIMIT;
+				
+				if( max%SEARCH_LIMIT > 0)
+					resultCount += 1;
+				
+				return resultCount;
+				
+			} catch (Exception e) {
+				logger.error("댓글 카운트 조회 실패.. | {} ", e.toString());
+				return 0 ;
+			}
+		
+		
 	}
-	public int getAllUserCommentCount(int id) throws Exception {
-		return commentDao.selectAllUserCommentCount(id);
-	}
+
 
 	@Override
 	public Integer helpful(Integer commentId) throws Exception {
-		
-		return commentDao.helpful(commentId);
+		int result =  commentDao.helpful(commentId);
+		if( result > 0 ) {
+			List<CommentVO> commentList =  commentDao.selectById(new SQLParamVO("comment",commentId));
+			return commentList.get(0).getHelpful();
+		}
+		return 0;
 	}
 
 }

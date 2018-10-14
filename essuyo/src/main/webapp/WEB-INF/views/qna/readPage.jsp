@@ -6,18 +6,14 @@
 <!DOCTYPE html>
 <html>
 <head>
+<title>Essuyo</title>
+<link rel="icon" type="image/png" sizes="16x16" href="/resources/images/backpack.png">
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="">
-<meta name="author" content="">
-<link rel="icon" type="image/png" sizes="16x16"
-	href="../resources/images/favicon.png">
-<title>Q&A</title>
 <link href="../resources/css/style.min.css" rel="stylesheet">
 <link href="../resources/css/style.css" rel="stylesheet">
-<link rel="stylesheet"
-	href="https://fonts.googleapis.com/css?family=Noto+Sans+KR">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+KR">
 <link rel="stylesheet" href="../resources/css/simple-line-icons.css">
 <link rel="stylesheet" href="../resources/css/themify-icons.css">
 <link rel="stylesheet" href="../resources/css/set1.css">

@@ -31,5 +31,7 @@ public interface CompanyService {
 	public int selectId() throws Exception;
 	
 	public void companyImgInsert(int cId) throws Exception;
+	
+	public int updateScore(int companyId);
 
 }

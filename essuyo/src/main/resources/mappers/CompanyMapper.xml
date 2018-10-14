@@ -77,12 +77,10 @@ FROM company WHERE id = #{companyId};
 	</select>
 
 	<!-- 가게평점구하기 -->
-	<update id="score" parameterType="CompanyVO">
-		update company
-		set score =
-		(select round(AVG(score),1) from comment where
-		company_id=#{companyId})
-		where id=#{id};
+	<update id="score" parameterType="Integer">
+		UPDATE company SET score =
+		(SELECT ROUND(AVG(score),1) FROM comment WHERE company_id=#{id})	
+		WHERE id=#{id};
 	</update>
 
 <!--  판매리스트 갯수 구하기 -->

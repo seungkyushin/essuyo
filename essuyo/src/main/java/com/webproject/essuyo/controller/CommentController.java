@@ -72,8 +72,9 @@ public class CommentController {
 		service.writerComment(comment);
 		
 		int companyId = comment.getCompanyId();
-		companyService.getDetailCompanyInfo(companyId);
 		
+		companyService.updateScore(companyId);
+			
 		return "redirect:/company/detail?id=" + companyId;
 	}
 	

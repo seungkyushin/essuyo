@@ -46,8 +46,8 @@ public class CompanyDao {
 	}
 	
 	
-	public Map<String, Object> getDetailCompanyInfo(int companyId) throws Exception {
-		return session.selectOne(namespace + ".score", companyId);
+	public Integer updateCompanyScore(int id) throws Exception {
+		return session.update(namespace + ".score", id);
 
 	}
 

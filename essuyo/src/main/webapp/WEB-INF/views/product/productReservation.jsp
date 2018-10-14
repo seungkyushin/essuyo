@@ -1,37 +1,28 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!DOCTYPE html>
 <html>
-
 <head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="author" content="Colorlib">
-<meta name="description" content="자리있어요?">
-<meta name="keywords" content="이써요">
-
-<link rel="shortcut icon" href="#">
-<title>자리 있어요?</title>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" 
+	<title>Essuyo</title>
+	<link rel="icon" type="image/png" sizes="16x16" href="/resources/images/backpack.png">
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" 
 	  integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-<link rel="stylesheet" href="/resources/css/simple-line-icons.css">
-<link rel="stylesheet" href="/resources/css/themify-icons.css">
-<link rel="stylesheet" href="/resources/css/set1.css">
-<link rel="stylesheet" href="/resources/css/swiper.min.css">
-<link rel="stylesheet" href="/resources/css/magnific-popup.css">
-<link rel="stylesheet" href="/resources/css/style.css">
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
- 
+	<link rel="stylesheet" href="/resources/css/simple-line-icons.css">
+	<link rel="stylesheet" href="/resources/css/themify-icons.css">
+	<link rel="stylesheet" href="/resources/css/set1.css">
+	<link rel="stylesheet" href="/resources/css/swiper.min.css">
+	<link rel="stylesheet" href="/resources/css/magnific-popup.css">
+	<link rel="stylesheet" href="/resources/css/style.css">
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 </head>
-
-<body>
+<body>	
 	<%@ include file="/pageframe/header.jsp"%>
-      
-	<!--============================= RESERVE A SEAT =============================-->
-	<section class="reserve-block">
+
+<section class="reserve-block">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-6">
@@ -58,10 +49,7 @@
 			</div>
 		</div>
 	</section>
-
-
-    
-	<!--============================= BOOKING DETAILS =============================-->
+	
 	<section class="light-bg booking-details_wrap">
 		<div class="container">
 		
@@ -172,10 +160,6 @@
 			
 			<div class="row">
 				<div class="col-md-12 responsive-wrap">
-					<div class="booking-checkbox_wrap">
-						<h5>할인</h5>
-					</div>
-					<hr>
 
 					<div  class="booking-checkbox_wrap">
 						<h5>취소규정 및 약관동의</h5>
@@ -206,8 +190,7 @@
 		</div>
 	</section>
 	
-	   
-	<!--//END BOOKING DETAILS -->
+	<%@ include file="/pageframe/footer.jsp"%>
 
 	<script src="https://code.jquery.com/jquery-3.3.1.js"
   			integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
@@ -221,17 +204,9 @@
 
 	<script src="/resources/js/datepicker-ko.js"></script>
 	<script src="/resources/js/utility.js"></script>
-	<script type="template" id="imageList-template">
-		<div class="swiper-slide">
-			<a href="{{url}}" class="grid image-link"> 
-				<img src="{{url}}" class="img-fluid" alt="#">
-			</a>
-		</div>
-	</script>
 
 <script>
-var disabledDays = [];
-
+	var disabledDays = [];
 $(document).ready(function() {
 		
 			Ajax("GET","/api/disableDate/${product.id}", function(data){
@@ -247,7 +222,6 @@ $(document).ready(function() {
 						 calReserveResult();
 					}
 			});
-
 			$("#endDate").datepicker({
 					showAnim : "slideDown",
 					minDate : 0,
@@ -257,7 +231,6 @@ $(document).ready(function() {
 						calReserveResult();
 					}
 			});
-
 	
 			$("#plus").on("click", function() {
 				var count = parseInt($("#count").val());
@@ -287,7 +260,6 @@ $(document).ready(function() {
 				
 				var productCount = $("#productCount").val();
 				var agree = $('input:checkbox[id="customCheck1"]').is(":checked");
-
 				if(productCount != "" && agree == true){
 					  $("#reservation-info").submit();
 				}else{
@@ -301,7 +273,6 @@ $(document).ready(function() {
 			});
 			
 });
-
 		function disableAllTheseDays(date) {
 			var m = date.getMonth(), d = date.getDate(), y = date.getFullYear();
 				for (i = 0; i < disabledDays.length; i++) {
@@ -392,25 +363,22 @@ $(document).ready(function() {
 				$(".toggle-string2").show();
 				$("#reservation-date").text(startDate);
 			}
-
 		}
 		
 		
 		function calDayCount(startDate, endDate){
 			var startDateAry = startDate.split("-");
 			var endDateAry = endDate.split("-");
-
 			var start = new Date(startDateAry[0],
 					startDateAry[1], startDateAry[2]);
 			var end = new Date(endDateAry[0],
 					endDateAry[1], endDateAry[2]);
-
 			var result = end - start;
 			var day = 1000 * 60 * 60 * 24;
-
 			return parseInt(result /= day);
 		}
 	</script>
+	
 	<script>
 		var swiper = new Swiper('.swiper-container', {
 			slidesPerView : 3,
@@ -445,8 +413,6 @@ $(document).ready(function() {
 			});
 		}
 	</script>
-	<%@ include file="/pageframe/footer.jsp"%>
 </body>
 
 </html>
-

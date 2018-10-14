@@ -4,13 +4,14 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+	<title>Essuyo</title>
+	<link rel="icon" type="image/png" sizes="16x16" href="/resources/images/backpack.png">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" type="image/png" sizes="16x16" href="/resources/images/favicon.png">
-    <title>관리자페이지</title>
     <link href="../resources/css/chartist/chartist.min.css" rel="stylesheet">
     <link href="../resources/css/style.min.css" rel="stylesheet">
     <link href="../resources/css/simple-line-icons.css" rel="stylesheet">
@@ -31,25 +32,7 @@
         
         <div class="page-wrapper">
 
-            <div class="page-breadcrumb">
-                <div class="row">
-                    <div class="col-5 align-self-center">
-                        <h4 class="page-title">Dashboard</h4>
-                    </div>
-                    <div class="col-7 align-self-center">
-                        <div class="d-flex align-items-center justify-content-end">
-                            <nav aria-label="breadcrumb">
-                                <ol class="breadcrumb">
-                                    <li class="breadcrumb-item">
-                                        <a href="#">Home</a>
-                                    </li>
-                                    <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
-                                </ol>
-                            </nav>
-                        </div>
-                    </div>
-                </div>
-            </div>
+ 
 
             <div class="container-fluid">
                 <div class="row">
@@ -67,7 +50,7 @@
                                     </c:when>
                                 	
                                 	<c:when test="${userType == 'company'}">
-                                		<span style="background-color:#137eff" class="font-16 font-medium label label-rounded">예약횟수</span>
+                                		<span style="background-color:#137eff" class="font-16 font-medium label label-rounded">예약건수</span>
                                 	</c:when>
                                 	
                                 </c:choose>
@@ -304,73 +287,81 @@
   });
     
     function requestReservationList(type,startPageNum){
-    	var requestURL = "/api/reservationList/" + type + "/" + startPageNum +"/" + ${userId};
+    	var requestURL = "/api/reservationList/" + type + "/" + startPageNum +"/" + ${id};
     	Ajax("GET",requestURL,function(responseData){
     		
-    		reservationMaxNum = responseData.maxCount;
+    		if( responseData != ""){
+    			
+    			reservationMaxNum = responseData.maxCount;
+        		
+       		 responseData.reservationList.forEach(function(data){
+   				var tempData = {};
+   				
+   				tempData['id'] = data.id;
+   				tempData['typeId'] = data.typeId;
+   				tempData['typeName'] = data.typeName;
+   				tempData['companyId'] = data.companyId;
+   				tempData['productId'] = data.productId;
+   				tempData['productName'] = data.productName;
+   				tempData['state'] = data.state;
+   			
+   				if(  data.state == "성공" ){
+   					tempData['stateClass'] = "success";
+   				}else if(  data.state == "취소" ){
+   					tempData['stateClass'] = "danger";
+   				}else if(  data.state == "완료" ){
+   					tempData['stateClass'] = "info";
+   				}
+   				tempData['resDate'] = data.resDate;
+   				tempData['totalPrice'] = dotSplit(data.totalPrice);
+   						
+   				if( type == "user")
+   					makeHTML("#reservation-company-template", "#reservation-list", tempData);
+   				else
+   					makeHTML("#reservation-user-template", "#reservation-list", tempData);
+   				
+   			
+   			});
+       			if( reservationStartNum == 1)
+       			 	$("#scroll-reservation").scrollTop(0);
+    			
+    		}
     		
-    		 responseData.reservationList.forEach(function(data){
-				var tempData = {};
-				
-				tempData['id'] = data.id;
-				tempData['typeId'] = data.typeId;
-				tempData['typeName'] = data.typeName;
-				tempData['companyId'] = data.companyId;
-				tempData['productId'] = data.productId;
-				tempData['productName'] = data.productName;
-				tempData['state'] = data.state;
-			
-				if(  data.state == "성공" ){
-					tempData['stateClass'] = "success";
-				}else if(  data.state == "취소" ){
-					tempData['stateClass'] = "danger";
-				}else if(  data.state == "완료" ){
-					tempData['stateClass'] = "info";
-				}
-				tempData['resDate'] = data.resDate;
-				tempData['totalPrice'] = dotSplit(data.totalPrice);
-						
-				if( type == "user")
-					makeHTML("#reservation-company-template", "#reservation-list", tempData);
-				else
-					makeHTML("#reservation-user-template", "#reservation-list", tempData);
-				
-			
-			});
-    			if( reservationStartNum == 1)
-    			 	$("#scroll-reservation").scrollTop(0);
 		});
     }
 	function requestCommentList(type,startPageNum){
-		var requestURL = "/api/commentList/" + type + "/" + startPageNum +"/" + ${userId};
+		var requestURL = "/api/commentList/" + type + "/" + startPageNum +"/" + ${id};
 		Ajax("GET",requestURL,function(responseData){
 			
-			commentMaxNum = responseData.maxCount;
-		
-			responseData.commentList.forEach(function(data){
+			if( responseData != ""){
 				
-    				var tempData = {};
-        			tempData['imageUrl'] = data.imageUrl;
-        			tempData['title'] = data.title;
-        			tempData['content'] = data.content;
-        			tempData['regDate'] = data.regDate;
+				commentMaxNum = responseData.maxCount;
+			
+				responseData.commentList.forEach(function(data){
+					
+	    				var tempData = {};
+	        			tempData['imageUrl'] = data.imageUrl;
+	        			tempData['title'] = data.title;
+	        			tempData['content'] = data.content;
+	        			tempData['regDate'] = data.regDate;
 
-        			if( type == "user"){
-        				tempData['companyId'] = data.companyId;
-        				makeHTML("#comment-user-template", "#comment-list", tempData);
-        			}else{
-        				makeHTML("#comment-company-template", "#comment-list", tempData);
-        			}
-       
-        			
-        				
-				});
-			
-			if( commentStartNum == 1)
-			 	$("#scroll-reservation").scrollTop(0);
-			
-    			
-			}); 
+	        			if( type == "user"){
+	        				tempData['companyId'] = data.companyId;
+	        				makeHTML("#comment-user-template", "#comment-list", tempData);
+	        			}else{
+	        				makeHTML("#comment-company-template", "#comment-list", tempData);
+	        			}
+	       
+	        			
+	        				
+					});
+				
+				if( commentStartNum == 1)
+				 	$("#scroll-reservation").scrollTop(0);
+				
+			}
+ 	
+		}); 
     }
     
     function refreshList(type){

@@ -8,12 +8,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="author" content="Colorlib">
-<meta name="description" content="자리있어요?">
-<meta name="keywords" content="이써요">
-<!-- Page Title -->
-<title>판매 리스트</title>
-<!-- Bootstrap CSS -->
+<title>Essuyo</title>
+<link rel="icon" type="image/png" sizes="16x16" href="/resources/images/backpack.png">
 <link rel="stylesheet" href="/resources/css/bootstrap/bootstrap.min.css">
 <!-- Google Fonts -->
 <link
