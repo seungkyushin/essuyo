@@ -11,8 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.webproject.essuyo.dao.MessageDao;
-import com.webproject.essuyo.domain.MessageListCri;
-import com.webproject.essuyo.domain.MessagePageMaker;
+import com.webproject.essuyo.domain.MessageListCriVO;
+import com.webproject.essuyo.domain.MessagePageMakerVO;
 import com.webproject.essuyo.domain.MessageVO;
 import com.webproject.essuyo.service.MessageService;
 
@@ -50,31 +50,30 @@ public class MessageServiceImpl implements MessageService {
 	}
 
 	@Override
-	public List<MessageVO> listCriteria(MessageListCri cri) throws Exception {
+	public List<MessageVO> listCriteria(MessageListCriVO cri) throws Exception {
 		
 		return dao.listCriteria(cri);
 	}
 
 	@Override
-	public int listCountCriteria(MessageListCri cri) throws Exception {
+	public int listCountCriteria(MessageListCriVO cri) throws Exception {
 		
 		return dao.countPaging(cri);
 	}
 	
 	
-	
 	// 보낸 쪽지함 페이징 처리	
 	@Override
-	public List<MessageVO> sendCri(MessageListCri listCri) throws Exception {
+	public List<MessageVO> sendCri(MessageListCriVO listCri) throws Exception {
 		
 		return dao.sendCri(listCri);
 	}
 
 	// 받은 쪽지함 페이징 처리
 	@Override
-	public List<MessageVO> recevieCri(MessageListCri cri) throws Exception {
+	public List<MessageVO> recevieCri(MessageListCriVO listCri) throws Exception {
 		
-		return dao.recevieCri(cri);
+		return dao.recevieCri(listCri);
 	}
 	
 	// 받은 쪽지함 게시물 수 검색
@@ -92,9 +91,9 @@ public class MessageServiceImpl implements MessageService {
 	}
 
 	@Override
-	public Map<String, Object> getMegList(MessageListCri listCri) throws Exception {
+	public Map<String, Object> getMegList(MessageListCriVO listCri) throws Exception {
 
-		MessagePageMaker pageMaker = new MessagePageMaker();
+		MessagePageMakerVO pageMaker = new MessagePageMakerVO();
 		int sPage = (listCri.getPage()-1)*10;
 		listCri.setPage(sPage);
 		pageMaker.setListCri(listCri);

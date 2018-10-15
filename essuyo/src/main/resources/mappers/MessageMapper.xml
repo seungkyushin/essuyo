@@ -51,7 +51,7 @@
     	from message
     	where megNum > 0 AND user_id = #{userID} OR receiver_id = #{userID}
     	order by megNum desc, sendDate desc
-    	limit #{page}, #{perPageNum}
+    	limit #{pageStart}, #{perPageNum}
     ]]>
     </select>
     
@@ -77,7 +77,7 @@
     	from message
     	where megNum > 0 AND user_id = #{userID}
     	order by megNum desc, sendDate desc
-    	limit #{page}, #{perPageNum}
+    	limit #{pageStart}, #{perPageNum}
     ]]>
     </select>
     
@@ -89,7 +89,7 @@
     	from message
     	where megNum > 0 AND receiver_id = #{userID}
     	order by megNum desc, sendDate desc
-    	limit #{page}, #{perPageNum}
+    	limit #{pageStart}, #{perPageNum}
     ]]>
     </select>
    

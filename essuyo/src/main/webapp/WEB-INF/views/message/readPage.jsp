@@ -76,7 +76,7 @@
 											<button type="submit" class="btn btn-info" name="btn-info" Onclick="javascript:history.listCheck()">
 												목록</button>
 											
-												<button type="submit" class="btn btn-warning" name="btn-warning">
+												<button type="submit" class="btn btn-warning" name="btn-warning" id="replyBtn">
 													<a href="/message/replyPage?userID=${messageVO.receiverID }&receiverID=${messageVO.userID }"
 														style="color: white">
 														답장
@@ -137,6 +137,16 @@
 			formObj.attr("action", "/message/removePage");
 			formObj.submit();
 		});
+		
+		// 답장 버튼
+		var sender = $('#userID').val();
+		var nowUserID = "<%=session.getAttribute("login") %>"
+		
+		if(sender == nowUserID){
+			$("#replyBtn").hide();
+		}else{
+			$("#replyBtn").show();
+		}
 	});
 	
 	function listCheck(){
@@ -162,6 +172,7 @@
 			});
 		}
 	}
+	
 	</script>
 </body>
 </html>

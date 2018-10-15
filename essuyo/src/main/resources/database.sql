@@ -242,7 +242,3 @@ INSERT INTO facility(name)  VALUES("와이파이/인터넷");
 INSERT INTO facility(name)  VALUES("금연구역");
 INSERT INTO facility(name)  VALUES("신용카드");
 
-
-
-
-

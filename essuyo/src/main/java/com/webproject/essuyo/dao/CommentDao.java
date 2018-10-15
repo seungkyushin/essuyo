@@ -53,4 +53,5 @@ public class CommentDao {
 		
 		return sqlSession.update(NAME_SAPACE + ".helpful", commentId);
 	}
+
 }

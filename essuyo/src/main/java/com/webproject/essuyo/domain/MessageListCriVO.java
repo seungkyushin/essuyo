@@ -2,11 +2,9 @@ package com.webproject.essuyo.domain;
 
 import java.io.Serializable;
 
-public class MessageListCri implements Serializable{
+public class MessageListCriVO implements Serializable{
 	
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 	private int page;
 	private int perPageNum;
@@ -14,13 +12,14 @@ public class MessageListCri implements Serializable{
 	
 	
 	
-	public MessageListCri() {
+	public MessageListCriVO() {
 		this.page = 1;
 		this.perPageNum = 10;
 	}
-	public MessageListCri(String userID, MessageListCri cri) {
+	
+	public MessageListCriVO(String userID, MessageListCriVO cri) {
 		this.userID = userID;
-		this.page = 0;
+		this.page = 1;
 		this.perPageNum = 10;
 	}
 
@@ -29,12 +28,15 @@ public class MessageListCri implements Serializable{
 	}
 
 	public void setPage(int page) {
-		
-		this.page = page;
+		if(page <= 0) {
+			this.page =1;
+			return;
+		}
+		this.page=page;
 	}
 
 	public int getPerPageNum() {
-		return perPageNum;
+		return this.perPageNum;
 	}
 
 	public void setPerPageNum(int perPageNum) {

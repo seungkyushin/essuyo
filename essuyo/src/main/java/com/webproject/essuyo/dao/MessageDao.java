@@ -7,7 +7,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
-import com.webproject.essuyo.domain.MessageListCri;
+import com.webproject.essuyo.domain.MessageListCriVO;
 import com.webproject.essuyo.domain.MessageReadVO;
 import com.webproject.essuyo.domain.MessageVO;
 
@@ -48,13 +48,13 @@ public class MessageDao {
 	}*/
 	
 	
-	public List<MessageVO> listCriteria(MessageListCri cri)throws Exception{
+	public List<MessageVO> listCriteria(MessageListCriVO cri)throws Exception{
 				
 		return session.selectList(namespace + ".listCriteria", cri);
 		
 	}
 	
-	public int countPaging(MessageListCri cri) throws Exception{
+	public int countPaging(MessageListCriVO cri) throws Exception{
 		
 		return session.selectOne(namespace + ".countPaging", cri);
 	}
@@ -69,13 +69,13 @@ public class MessageDao {
 	
 	
 	// 보낸 쪽지함 페이징 처리
-	public List<MessageVO> sendCri(MessageListCri listCri)throws Exception{
+	public List<MessageVO> sendCri(MessageListCriVO listCri)throws Exception{
 		
 		return session.selectList(namespace + ".sendCri", listCri);
 		
 	}
 	// 받은 쪽지함 페이징 처리
-	public List<MessageVO> recevieCri(MessageListCri listCri)throws Exception{
+	public List<MessageVO> recevieCri(MessageListCriVO listCri)throws Exception{
 		
 		return session.selectList(namespace + ".recevieCri", listCri);
 	

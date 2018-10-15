@@ -3,7 +3,7 @@ package com.webproject.essuyo.domain;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
-public class MessagePageMaker {
+public class MessagePageMakerVO {
 	
 	private int totalCount;
 	private int startPage;
@@ -13,8 +13,8 @@ public class MessagePageMaker {
 	
 	private int displayPageNum = 10;
 	
-	private MessageCriteria cri;
-	private MessageListCri listCri;
+	private MessageCriteriaVO cri;
+	private MessageListCriVO listCri;
 
 	// 전체 게시물
 	public void setTotalCount(int totalCount) {
@@ -34,15 +34,17 @@ public class MessagePageMaker {
 			endPage = tempEndPage;
 		}
 		
-		prev = startPage == 0 ? false : true;
+		prev = startPage == 1 ? false : true;
+		
 		next = endPage * cri.getPerPageNum() >= totalCount ? false : true;
+	
 	}
 	
 	public String makeQuery(int page) {
 		
 		UriComponents uriComponents = UriComponentsBuilder.newInstance()
 									  .queryParam("page", page)
-									  .queryParam("perPageNum", listCri.getPerPageNum())
+									  .queryParam("perPageNum", cri.getPerPageNum())
 									  .build();
 		return uriComponents.toUriString();
 	}
@@ -55,19 +57,19 @@ public class MessagePageMaker {
 	}
 		
 	public void listCalcData() {
-		endPage = (int) (Math.ceil((listCri.getPage()+1) / (double) displayPageNum) * displayPageNum);
+		endPage = (int) (Math.ceil(listCri.getPage() / (double) displayPageNum) * displayPageNum);
 		
-		//startPage = (endPage - displayPageNum) + 1;
-		startPage = startPage +1;
+		startPage = (endPage - displayPageNum) + 1;
+		
 		int tempEndPage = (int) (Math.ceil(totalCount / (double) listCri.getPerPageNum()));
 		
 		if(endPage > tempEndPage) {
 			endPage = tempEndPage;
 		}
 				
-		prev = startPage == 10 ? false : true;
-//		prev = listCri.getPage() == 10 ? false : true;
-		next = endPage * listCri.getPerPageNum() >= totalCount ? true : false;
+		prev = startPage == 1 ? false : true;
+
+		next = endPage * listCri.getPerPageNum() >= totalCount ? false : true;
 	}
 	
 	public String listMakeQuery(int page) {
@@ -124,20 +126,20 @@ public class MessagePageMaker {
 	}
 
 	// 전체 쪽지
-	public MessageCriteria getCri() {
+	public MessageCriteriaVO getCri() {
 		return cri;
 	}
 
-	public void setCri(MessageCriteria cri) {
+	public void setCri(MessageCriteriaVO cri) {
 		this.cri = cri;
 	}
 	
 	// 보낸, 받은 쪽지
-	public MessageListCri  getListCri() {
+	public MessageListCriVO  getListCri() {
 		return listCri;
 	}
 
-	public void setListCri(MessageListCri  listCri) {
+	public void setListCri(MessageListCriVO  listCri) {
 		this.listCri = listCri;
 	}
 	
