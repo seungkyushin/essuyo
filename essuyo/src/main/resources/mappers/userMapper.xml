@@ -32,7 +32,7 @@
 	<insert id="regist">
 		insert into user(name, email, password,
 		fail_password, age, gender, cre_date, image_info_id)
-		values(#{name},#{email},#{password}, 0, #{age},#{gender}, NOW(), 1);
+		values(#{name},#{email},#{password}, 0, #{age},#{gender}, NOW(), 61);
 	</insert>
 
 

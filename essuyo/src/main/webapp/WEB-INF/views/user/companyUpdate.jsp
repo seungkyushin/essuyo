@@ -123,7 +123,7 @@
 								</div>
 								<div class="form-group">
 
-								<label>[사업장 시설 구비 여부]  <br><span class="help"> ※ 해당 사항이 없으실 경우 체크하지 않으시면 됩니다.</span><br><span class="help">※ ${facStr }</span></label><br>
+								<label>[사업장 시설 구비 여부]  <br><span class="help"> ※ 해당 사항이 없으실 경우 체크하지 않으시면 됩니다.</span><br><span class="help"> ${facStr }</span></label><br>
 								
 									<input type="hidden" name="facIds" value="no">
 									<input type='checkbox' name='facIds' value='1' />주차공간<br>

@@ -117,14 +117,14 @@ public class UserController {
 			session.setAttribute("cvo", cvo);
 			List<String> faList = FAService.selectById(cvo.getId());
 			if (!faList.isEmpty()) {
-				String facStr = "현재 선택된 시설은";
+				String facStr = "※ 현재 선택된 시설은";
 				for (String fac : faList) {
 					facStr += ", " + fac;
 				}
 				facStr += " 입니다.";
 				model.addAttribute("facStr", facStr);
 			} else {
-				String facStr = "현재 아무런 시설도 선택되지 않은 상태입니다.";
+				String facStr = "※ 현재 아무런 시설도 선택되지 않은 상태입니다.";
 				model.addAttribute("facStr", facStr);
 			}
 
