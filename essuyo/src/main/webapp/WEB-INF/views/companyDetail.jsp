@@ -529,7 +529,7 @@ function searchAddressToCoordinate(address) {
             point = new naver.maps.Point(item.point.x, item.point.y);
              infoWindow.setContent([
             	  '<div class="iw_inner">',
-                  '<h4>${company.name}</h4>',	
+                  '<h5>${company.name}</h5>',	
                   '<p>' + item.addrdetail.sido + '</p>',
                   '<p>${company.homepage}</p>',
                   '</div>'

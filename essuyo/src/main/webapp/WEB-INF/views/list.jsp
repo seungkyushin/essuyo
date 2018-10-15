@@ -28,8 +28,8 @@
 <!-- 맵 정보창 css -->
  <style type="text/css">
 @import url(http://fonts.googleapis.com/css?family=Reenie+Beanie);
-#stickynote {
-	width:100px;
+#detailInfo {
+	width:180px;
 	padding:5px;
 	margin:auto;
 	position:relative;
@@ -41,12 +41,9 @@
 	-webkit-box-shadow:0 0 5px rgba(0,0,0,.2);
 	-moz-box-shadow:0 0 5px rgba(0,0,0,.2);
 	font-style:italic;
+	text-align:center;
 }
 </style>
-
-
-
-
 </head>
 <body>
 	<!--============================= HEADER =============================-->
@@ -157,7 +154,7 @@
 			}	
 	}
 	
-		function test() {
+		function ajax_fuc() {
 			
 			var values = document.getElementsByName("filter");
 			var value = "";
@@ -214,47 +211,37 @@
 						} else {
 							$(".state-info").attr('class','closed-now');
 						}
-
 					});
 					initGeocoder(data);
 				}
-				}
-				
-			});
-	
-		}
-		
+				}				
+			});	
+		}		
 		
 		var map = new naver.maps.Map("map", {
-		    center: new naver.maps.LatLng(37.556777 , 126.942118),
-		    zoom: 12,
-		    mapTypeControl: true
-		    
+		    zoom: 9,
+		    mapTypeControl: true	    
 		});
-
-		map.setCursor('pointer');
+		map.setCursor(point);
 
 		
 		function searchAddressToCoordinate(address, name, id) {
-
 		    naver.maps.Service.geocode({
 		        address: address
 		    }, function(status, response) {
 		        if (status === naver.maps.Service.Status.ERROR) {
 		            return myAlert('ERROR !' ,"찾을 수 없는 주소 입니다!");
 		        }
-
 		        
 		        var infoWindow = new naver.maps.InfoWindow({
 		            anchorSkew: true
-		        });
-		        
+		        });	        
 		        
 		        var item = response.result.items[0],
 		            addrType = item.isRoadAddress ? '[도로명 주소]' : '[지번 주소]',
 		            point = new naver.maps.Point(item.point.x, item.point.y);
 		             infoWindow.setContent([
-		            	  '<div id="stickynote">',
+		            	  '<div id="detailInfo">',
 		                  '<a href="/company/detail?id='+id+'"><h6>' + name +'</h6></a>',            
 		                  '</div>'
 		                  
@@ -273,36 +260,31 @@
 		        
 		    });
 		}
-
-	
-
 	</script>
-
-
+	
 	<script>
 		var start = 0;
 		var value="";
 		var type=${type};
 		var name=${name};
-		
-		
+				
 		$(document).ready(function() {
-			test();				
-		
+			ajax_fuc();	
+			
 // 		$(document).height()  -> 현재 내가 보고 있는 문서의 높이
 // 		$(window).height() -> 현재 내가 키고 있는 브라우저의 높이
 // 		$(window).scrollTop() -> 현재 브라우저 스크롤이 있는 위치
 	    $(window).scroll(function() {
 		if ($(window).scrollTop() == $(document).height()- $(window).height()) {
 		start++;	
-	    test();			
+		ajax_fuc();			
 	    }
+	    });	  
 
-	    });	    
 	    if(type != "전체"){	    	
 		$("#search").click(function() {
 		$("#salesList").html("");      
- 		test();
+		ajax_fuc();
  		});
 	    }					
 		});
