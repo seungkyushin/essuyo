@@ -144,7 +144,18 @@
 
 
 	<!-- ajaxJQuery -->
-	<script>	
+	<script>
+	
+	function initGeocoder() {
+		for(var i =0; i<data.sales.length; i++){
+				var address1 = data.sales[i].address;
+				var name1 = data.sales[i].name;
+				var id1 = data.sales[i].id;
+				
+   	 			searchAddressToCoordinate(address1, name1, id1);	
+			}	
+	}
+	
 		function test() {
 			
 			var values = document.getElementsByName("filter");
@@ -204,15 +215,8 @@
 						}
 
 					})
-					function initGeocoder() {
-						
-					for(var i =0; i<data.sales.length; i++){
-						var address1 = data.sales[i].address;
-						var name1 = data.sales[i].name;
-						var id1 = data.sales[i].id;
-				    searchAddressToCoordinate(address1, name1, id1);	
-					}	
-					}
+		
+
 					naver.maps.onJSContentLoaded = initGeocoder;
 					
 				} //여기
