@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.webproject.essuyo.domain.MessageListCri;
+import com.webproject.essuyo.domain.MessageListCriVO;
 import com.webproject.essuyo.service.CommentService;
 import com.webproject.essuyo.service.CompanyService;
 import com.webproject.essuyo.service.ImageAdminService;
@@ -173,7 +173,7 @@ public class RestApiController {
 	public Map<String,Object> getSendMegList() throws Exception{
 		
 		String userID = (String) session.getAttribute("login");
-		MessageListCri listCri = new MessageListCri();
+		MessageListCriVO listCri = new MessageListCriVO();
 		listCri.setUserID(userID);
 		
 		return messageService.getMegList(listCri);

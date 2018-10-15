@@ -249,6 +249,7 @@ INSERT INTO facility(name)  VALUES("와이파이/인터넷");
 INSERT INTO facility(name)  VALUES("금연구역");
 INSERT INTO facility(name)  VALUES("신용카드");
 
+
 /* 카테고리(레스토랑) */
 INSERT INTO company(name, type, score, discription, address,number, homepage, state, time, area_list_id)
 VALUES("해운대 식당", "식당", 4.2 , "부산 해운대 근처", "부산광역시 해운대구 해운대해변로 52","010-6291-2938",

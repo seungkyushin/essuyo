@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.webproject.essuyo.domain.MessageCriteria;
-import com.webproject.essuyo.domain.MessageListCri;
-import com.webproject.essuyo.domain.MessagePageMaker;
+import com.webproject.essuyo.domain.MessageCriteriaVO;
+import com.webproject.essuyo.domain.MessageListCriVO;
+import com.webproject.essuyo.domain.MessagePageMakerVO;
 import com.webproject.essuyo.domain.NoticeVO;
 import com.webproject.essuyo.domain.QnACriteriaVO;
 import com.webproject.essuyo.domain.QnAPageMakerVO;
@@ -60,7 +60,7 @@ public class QnAController {
 	}
 
 	@RequestMapping(value = "/readPage", method = RequestMethod.GET)
-	public void read(@RequestParam("id") int id, @ModelAttribute("cri") MessageCriteria cri, Model model)
+	public void read(@RequestParam("id") int id, @ModelAttribute("cri") MessageCriteriaVO cri, Model model)
 			throws Exception {
 
 		String userId = (String) session.getAttribute("login");
@@ -69,7 +69,7 @@ public class QnAController {
 	}
 
 	@RequestMapping(value = "/remove", method = RequestMethod.GET)
-	public String remove(@RequestParam("id") int id, MessageCriteria cri, RedirectAttributes rttr) throws Exception {
+	public String remove(@RequestParam("id") int id, MessageCriteriaVO cri, RedirectAttributes rttr) throws Exception {
 		logger.info("----- 삭제 remove() -----");
 		service.remove(id);
 

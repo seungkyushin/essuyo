@@ -101,7 +101,7 @@
 														<tr>
 															<td>${MessageVO.megNum }</td>
 															<td><a
-																href='/message/readPage${pageMaker.listMakeQuery(pageMaker.cri.page)}&megNum=${MessageVO.megNum }'>
+																href='/message/readPage${pageMaker.listMakeQuery(pageMaker.listCri.page)}&megNum=${MessageVO.megNum }'>
 																	${MessageVO.title } </a></td>
 															<td>${MessageVO.receiverID }</td>
 															<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"
@@ -123,23 +123,19 @@
 											<ul class="pagination">
 												<c:if test="${pageMaker.prev }">
 													<li><a
-														href="sendMeg${pageMaker.listMakeQuery(pageMaker.startPage) }">&laquo;</a>
+														href="listPage${pageMaker.listMakeQuery(pageMaker.startPage -1) }">&laquo;</a>
 													</li>
 												</c:if>
 
-												<c:forEach begin="${pageMaker.startPage }"
-													end="${pageMaker.endPage }" var="idx">
-													<li
-														<c:out value="${pageMaker.cri.page == idx?'class =active':'' }"/>>
-														<a href="sendMeg${pageMaker.listMakeQuery(idx)}">${idx }</a>
+												<c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="idx">
+													<li>
+														<a href="listPage${pageMaker.listMakeQuery(idx)}">${idx }</a>
 													</li>
 												</c:forEach>
 
-												<c:if test="${pageMaker.next && pageMaker.endPage > 0} ">
-													<li><a
-														href="sendMeg${pageMaker.listMakeQuery(pageMaker.endPage) }">&raquo;</a>
-													</li>
-												</c:if>
+												<c:if test="${pageMaker.next && pageMaker.endPage > 0 }">
+												<li><a href="listPage${pageMaker.listMakeQuery(pageMaker.endPage+1)}">&raquo;</a></li>
+											</c:if>
 											</ul>
 										</div>
 									</form>

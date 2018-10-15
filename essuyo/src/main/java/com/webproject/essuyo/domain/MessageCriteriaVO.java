@@ -2,17 +2,13 @@ package com.webproject.essuyo.domain;
 
 import java.io.Serializable;
 
-public class MessageCriteria implements Serializable{
+public class MessageCriteriaVO implements Serializable{
 	private int page;
 	private int perPageNum;
 	
-	public MessageCriteria() {
-		this.page = 0;
+	public MessageCriteriaVO() {
+		this.page = 1;
 		this.perPageNum = 10;
-	}
-
-	public int getPage() {
-		return page;
 	}
 
 	public void setPage(int page) {
@@ -23,9 +19,9 @@ public class MessageCriteria implements Serializable{
 		
 		this.page = page;
 	}
-
-	public int getPerPageNum() {
-		return perPageNum;
+	
+	public int getPage() {
+		return page;
 	}
 
 	public void setPerPageNum(int perPageNum) {
@@ -41,6 +37,10 @@ public class MessageCriteria implements Serializable{
 	// MyBatis SQL Mapper
 	public int getPageStart() {
 		return (this.page - 1) * perPageNum;
+	}
+
+	public int getPerPageNum() {
+		return perPageNum;
 	}
 	
 	@Override
