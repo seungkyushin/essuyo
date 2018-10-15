@@ -199,7 +199,7 @@ public class CompanyServiceImpl implements CompanyService {
 			
 			return resultList;
 		} catch (Exception e) {
-			logger.error("comapny rank 실패.. {}", e.toString());
+			logger.error("company rank 실패.. {}", e.toString());
 			return null;
 		}
 	}

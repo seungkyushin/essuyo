@@ -229,6 +229,7 @@
 		    center: new naver.maps.LatLng(37.556777 , 126.942118),
 		    zoom: 12,
 		    mapTypeControl: true
+		    
 		});
 
 		map.setCursor('pointer');

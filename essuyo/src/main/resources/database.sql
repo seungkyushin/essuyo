@@ -204,7 +204,7 @@ CREATE TABLE qna (
     content text, /* 내용 */
     reg_date timestamp not null default now(), /* 등록날짜 */	
     user_id VARCHAR(255) NOT NULL, /* 사용자_번호*/    
-    view_count INTEGER, /* 조회수 */
+    view_count INTEGER default 0 , /* 조회수 */
     
     FOREIGN KEY (user_id) REFERENCES user(email)
 )DEFAULT CHARSET=utf8;
@@ -689,6 +689,18 @@ INSERT INTO user(name, age, gender, email, password, fail_password, cre_date, bu
 INSERT INTO user(name, age, gender, email, password, fail_password, cre_date, business_id, image_info_id) VALUES("엿대여", 44, "여", "car13@rent.com", SHA2('1234',512), 0, NOW(), 58, 61);
 INSERT INTO user(name, age, gender, email, password, fail_password, cre_date, business_id, image_info_id) VALUES("연대여", 50, "남", "car14@rent.com", SHA2('1234',512), 0, NOW(), 59, 61);
 INSERT INTO user(name, age, gender, email, password, fail_password, cre_date, business_id, image_info_id) VALUES("달대여", 63, "여", "car15@rent.com", SHA2('1234',512), 0, NOW(), 60, 1);
+INSERT INTO user(name, age, gender, email, password, fail_password, cre_date, image_info_id) VALUES("한대여", 24, "남", "abcde61@rent.com", SHA2('1234',512), 0, NOW(), 61);
+INSERT INTO user(name, age, gender, email, password, fail_password, cre_date, image_info_id) VALUES("두대여", 34, "남", "abcde62@rent.com", SHA2('1234',512), 0, NOW(), 61);
+INSERT INTO user(name, age, gender, email, password, fail_password, cre_date, image_info_id) VALUES("세대여", 52, "남", "abcde63@rent.com", SHA2('1234',512), 0, NOW(), 61);
+INSERT INTO user(name, age, gender, email, password, fail_password, cre_date, image_info_id) VALUES("네대여", 55, "남", "abcde64@rent.com", SHA2('1234',512), 0, NOW(), 61);
+INSERT INTO user(name, age, gender, email, password, fail_password, cre_date, image_info_id) VALUES("다대여", 43, "남", "abcde65@rent.com", SHA2('1234',512), 0, NOW(), 61);
+INSERT INTO user(name, age, gender, email, password, fail_password, cre_date, image_info_id) VALUES("여대여", 37, "남", "abcde66@rent.com", SHA2('1234',512), 0, NOW(), 61);
+INSERT INTO user(name, age, gender, email, password, fail_password, cre_date, image_info_id) VALUES("일대여", 39, "여", "abcde67@rent.com", SHA2('1234',512), 0, NOW(), 61);
+INSERT INTO user(name, age, gender, email, password, fail_password, cre_date, image_info_id) VALUES("엳대여", 50, "남", "abcde68@rent.com", SHA2('1234',512), 0, NOW(), 61);
+INSERT INTO user(name, age, gender, email, password, fail_password, cre_date, image_info_id) VALUES("아대여", 67, "남", "abcde69@rent.com", SHA2('1234',512), 0, NOW(), 61);
+INSERT INTO user(name, age, gender, email, password, fail_password, cre_date, image_info_id) VALUES("열대여", 36, "여", "abcde70@rent.com", SHA2('1234',512), 0, NOW(), 61);
+INSERT INTO user(name, age, gender, email, password, fail_password, cre_date, image_info_id) VALUES("옇대여", 40, "여", "abcde71@rent.com", SHA2('1234',512), 0, NOW(), 61);
+
 
 
 
@@ -1062,3 +1074,57 @@ INSERT INTO product_image_admin(product_id ,image_info_id) VALUES(61, 49);
 INSERT INTO product_image_admin(product_id ,image_info_id) VALUES(62, 50);
 INSERT INTO product_image_admin(product_id ,image_info_id) VALUES(62, 51);
 INSERT INTO product_image_admin(product_id ,image_info_id) VALUES(62, 52);
+
+/*Comment*/
+/* 숙박 */
+INSERT INTO comment (`title`, `content`, `score`, `mod_date`, `user_id`, `company_id`) VALUES ('완전쨩쨩쨩', '공주공주풍 한 느낌도 괜찮구 깨끗하고 조용하고 좋아요!', 3.3, now(),  61, 1);
+INSERT INTO comment (`title`, `content`, `score`, `mod_date`, `user_id`, `company_id`) VALUES ('너무좋아요', '대실시간 엄청길어서 가성비 개굿', 4.2, now(), 62, 1);
+INSERT INTO comment (`title`, `content`, `score`, `mod_date`, `user_id`, `company_id`) VALUES ('완전 인생 숙소', '프런트직원분도 친절하셔서 기분좋게 갑니당 뿅', 5.0, now(), 63, 1);
+INSERT INTO comment (`title`, `content`, `score`, `mod_date`, `user_id`, `company_id`) VALUES ('가격대비 짱짱', '좋았습니다! 방도 깨끗하고 화장실도 깨끗했어요', 2.1, now(),  64, 1);
+INSERT INTO comment (`title`, `content`, `score`, `mod_date`, `user_id`, `company_id`) VALUES ('완소 나만 알고 싶은 곳', '특실에는 스팀 기능도 있어서 같이 사우나도 했습니다.', 3.5, now(),  65, 1);
+INSERT INTO comment (`title`, `content`, `score`, `mod_date`, `user_id`, `company_id`) VALUES ('언제나 항상', '아늑하니 좋았습니다 두번째 들리는거였는데 좋았어요', 3.4, now(),  66, 1);
+INSERT INTO comment (`title`, `content`, `score`, `mod_date`, `user_id`, `company_id`) VALUES ('좋아요', '공주공주풍 한 느낌도 괜찮구 깨끗하고 조용하고 좋아요!', 4.3, now(),  67, 1);
+INSERT INTO comment (`title`, `content`, `score`, `mod_date`, `user_id`, `company_id`) VALUES ('가격대비 이만한 곳이 없어요', '공주공주풍 한 느낌도 괜찮구 깨끗하고 조용하고 좋아요!', 2.7, now(),  68, 1);
+INSERT INTO comment (`title`, `content`, `score`, `mod_date`, `user_id`, `company_id`) VALUES ('비품 때문에 재방문하겠어요', '비품과 용품이 생각했던 것보다 퀄리티가 높아서 좋았습니다~ 객실도 살짝 낡긴했지만 깔끔했습니다ㅎㅎ', 3.2, now(),  69, 1);
+INSERT INTO comment (`title`, `content`, `score`, `mod_date`, `user_id`, `company_id`) VALUES ('너무 좋았어요', '넓고 쾌적하고 좋았어요! 다만 배게가 너무 높아서 불편했다는 거ㅠㅠㅠㅠ그 것 빼곤 욕조도 샤워하는 것도 침대두 다 좋았네용!', 4.1, now(),  70, 1);
+INSERT INTO comment (`title`, `content`, `score`, `mod_date`, `user_id`, `company_id`) VALUES ('기념일에 갔는데 완전 만족', '깔끔하고요 심플합니다!욕조도 있고요 금고도 있네요ㅋㅋㅋ직원분들 친절하시고요 음료가 콜라랑 이온음료에요 굿~', 5.0, now(),  71, 1);
+
+/* 식당 */
+INSERT INTO comment (`title`, `content`, `score`, `mod_date`, `user_id`, `company_id`) VALUES ('깐쇼새우 짱짱맨입니다 ㅎ ㅎ ㅎ', '굿굿이에용 양도 많고 배달하시는분이 친절해서 기분이 좋았네요', 3.3, now(),  61, 16);
+INSERT INTO comment (`title`, `content`, `score`, `mod_date`, `user_id`, `company_id`) VALUES ('무난무난한 전형적인 볶음밥이네요', '새우볶음밥 맛있었어요 양도 많고 굿굿 ^^', 4.6, now(),  62, 16);
+INSERT INTO comment (`title`, `content`, `score`, `mod_date`, `user_id`, `company_id`) VALUES ('맛있습니다~!!!!!!', '맛있게 잘먹었어요ㅎㅎ 오늘은 짜장보다 짬뽕이 맛있네요 그냥 짬뽕 한그릇 시킬걸그랬네영ㅠㅠㅋㅋ', 5.0, now(),  63, 16);
+INSERT INTO comment (`title`, `content`, `score`, `mod_date`, `user_id`, `company_id`) VALUES ('전보다 좀 매워졋네요 ㅠ', '정말 맛있네요~~배달도 빠르고~~~쿠폰도 주고 최소 배달 금액도 강남 최고입니다~~^^', 5.0, now(),  64, 16);
+INSERT INTO comment (`title`, `content`, `score`, `mod_date`, `user_id`, `company_id`) VALUES ('굴짬뽕은 첨 시켜봤는데 괜찮네요', '맛있어요 ㅎㅎ 근데 짬뽕국물은 주는건지 마는건짘..ㅋㅋ좀 아쉬움!', 5.0, now(),  65, 16);
+INSERT INTO comment (`title`, `content`, `score`, `mod_date`, `user_id`, `company_id`) VALUES ('짱맛나야ㅏㅏㅏㅏㅏㅏㅏ', '탕수육 튀겨놓은거 전자렌지 돌려서 보내셨나봅니다건조하고 딱딱하고 질기고 ㅎㅎㅎ', 2.9, now(),  66, 16);
+INSERT INTO comment (`title`, `content`, `score`, `mod_date`, `user_id`, `company_id`) VALUES ('맛잇어요. 잘먹엇습니다', '맛있었습니다! 마파두부밥에 고추 많아요 ㅎ 참고하세요!', 2.7, now(),  67, 16);
+INSERT INTO comment (`title`, `content`, `score`, `mod_date`, `user_id`, `company_id`) VALUES ('콩나물.홍합.북어 끝그외해물 없음', '잡탕밥에 해물 많고 맛있네요 쟁반짜장도 괜찮았습니다', 3.3, now(),  68, 16);
+INSERT INTO comment (`title`, `content`, `score`, `mod_date`, `user_id`, `company_id`) VALUES ('맛나게잘먹었어요 해장짱', '리뷰 늦었네요..늘 맛있게 먹습니다.수고하세요', 4.7, now(),  69, 16);
+INSERT INTO comment (`title`, `content`, `score`, `mod_date`, `user_id`, `company_id`) VALUES ('맛있음. 먹어보면 알아요', '네 맛있게 먹었습니다 진짜!', 3.5, now(),  70, 16);
+INSERT INTO comment (`title`, `content`, `score`, `mod_date`, `user_id`, `company_id`) VALUES ('맛있음 ㅎㅎㅎㅎㅎㅎㅎㅎ', '조금 비싼듯 하지만 먹을만은 합니다초밥 나름 괜춘 우동은 걍 먹을만한정도가격이 좀 비싼듯한 느낌은 사라지지가 않음', 5.0, now(),  71, 16);
+
+/* 문화 */
+INSERT INTO comment (`title`, `content`, `score`, `mod_date`, `user_id`, `company_id`) VALUES ('연기짱 멋있어요 ㅎㅎ두배우역시', '김윤석, 주지훈 두 배우의 연기. 말이 필요없음', 3.7, now(),  61, 31);
+INSERT INTO comment (`title`, `content`, `score`, `mod_date`, `user_id`, `company_id`) VALUES ('돟앗어요ㅠㅠㅠㅠㅠㅠㅠㅠㅠ', '그냥 아쉽습니다. 저예산 치면 괜찮고 진지하게 생각하면 베놈이 너무 아쉽고 특히 여주는 리얼 무의미한 역활 인듯...', 3.3, now(),  62, 31);
+INSERT INTO comment (`title`, `content`, `score`, `mod_date`, `user_id`, `company_id`) VALUES ('배우 연기에 집중됐어요~', '만화영화임..... 외계생물이 지구에 남는 이유도 개연성도 없구...아깝다 시간,돈', 4.8, now(),  63, 31);
+INSERT INTO comment (`title`, `content`, `score`, `mod_date`, `user_id`, `company_id`) VALUES ('다들 연기력들 대단해요~~', '액션이 좀 짧은거 같지만 내용이 재미있네요', 2.1, now(),  64, 31);
+INSERT INTO comment (`title`, `content`, `score`, `mod_date`, `user_id`, `company_id`) VALUES ('사건의 전개와 심리적 긴장감을 잘 표현 했음.', '평이 안좋은 이유를 모르겠는 1인. 쿠키영상은 속편스포라면 감사합니다', 1.3, now(),  65, 31);
+INSERT INTO comment (`title`, `content`, `score`, `mod_date`, `user_id`, `company_id`) VALUES ('재미있었어요 좋아요 다음에 또 볼게요', '소니라서 그런지 기생수를 카피한. 느낌.마블아 정신차리자 디씨가 간다', 3.3, now(),  66, 31);
+INSERT INTO comment (`title`, `content`, `score`, `mod_date`, `user_id`, `company_id`) VALUES ('별 기대 않하고 봤는데 재밌네요', '재미있게봤에요!다음편도기대되네요!', 2.3, now(),  67, 31);
+INSERT INTO comment (`title`, `content`, `score`, `mod_date`, `user_id`, `company_id`) VALUES ('시간가는줄 모르고 봤습니다. 연기력 쩔었어요', '개연성은 밥말아먹었지만 베놈이가 그렇게 하고싶다니까 모..', 4.2, now(),  68, 31);
+INSERT INTO comment (`title`, `content`, `score`, `mod_date`, `user_id`, `company_id`) VALUES ('연기력이 너무 좋았습니다.', '후속이 기다려지는영화', 3.1, now(),  69, 31);
+INSERT INTO comment (`title`, `content`, `score`, `mod_date`, `user_id`, `company_id`) VALUES ('두분 연기 진짜 좋았어요', '사라진 30분만 있었다면 완벽했을듯', 5.0, now(),  70, 31);
+INSERT INTO comment (`title`, `content`, `score`, `mod_date`, `user_id`, `company_id`) VALUES ('시간가는줄 모르고 봤습니다. 연기력 쩔었어요', '기대를 많이 안하고 봤는데 볼만했다. 새로운 캐릭터 등장물이라 재밌었음.', 1.8, now(),  71, 31);
+
+/* 차량 */
+INSERT INTO comment (`title`, `content`, `score`, `mod_date`, `user_id`, `company_id`) VALUES ('신형 스파크^^', '일본으로 가야되서 서울에서 인천공항까지 편도로 사용했네요^^', 3.6, now(),  61, 46);
+INSERT INTO comment (`title`, `content`, `score`, `mod_date`, `user_id`, `company_id`) VALUES ('편도 처음 이용해 보는데 오늘도 역시', '편도가 되어서 정말 편하게 갈 수 있을 것 같아요^^', 4.4, now(),  62, 46);
+INSERT INTO comment (`title`, `content`, `score`, `mod_date`, `user_id`, `company_id`) VALUES ('편도핫딜 이용해 출장 다녀왔습니다.', '출근길에 들러야 할 곳이 있어서 쏘카 이용했어요^^', 1.1, now(),  63, 46);
+INSERT INTO comment (`title`, `content`, `score`, `mod_date`, `user_id`, `company_id`) VALUES ('친절하게해주셔서고맙습니다.항상애용하겠습니다', '도착시간이 너무 빠듯해 주유도 못하고 다음 쏘친에게 불쾌함이 전달되지 않길 빌어봅니다.', 2.2, now(),  64, 46);
+INSERT INTO comment (`title`, `content`, `score`, `mod_date`, `user_id`, `company_id`) VALUES ('가성비 굿이네요', '가격적인 부분이나 거리적인 부분에서 정말 이만한 서비스가 없을 것이라고 장담합니다', 5.0, now(),  65, 46);
+INSERT INTO comment (`title`, `content`, `score`, `mod_date`, `user_id`, `company_id`) VALUES ('큰불편함 없었던거같아요', '집 주차장에서 쏘카를 사용하고 있어 편리하게 이용하고 있습니다. ', 4.3, now(),  66, 46);
+INSERT INTO comment (`title`, `content`, `score`, `mod_date`, `user_id`, `company_id`) VALUES ('차 상태 좋았습니다', '정기적으로 차량관리까지 해줘서 관리부담이 전혀 없습니다.', 3.7, now(),  67, 46);
+INSERT INTO comment (`title`, `content`, `score`, `mod_date`, `user_id`, `company_id`) VALUES ('히터에서 냄새가 나네요', '집 주차장에 쏘카가 있으니까 엘리베이터 타고 내려오기만 하면 이용할 수 있다는게 너무 좋아요!', 4.1, now(),  68, 46);
+INSERT INTO comment (`title`, `content`, `score`, `mod_date`, `user_id`, `company_id`) VALUES ('최대한 저렴한걸루 찾아 무탈하게 잘 사용하고 돌아왔습니다.', '차량 상태 진짜 별로였습니다 뒷타이어 얼마 안남아있었고 얼라이먼트도 안맞아서 운전하는동안 진짜 피곤했습니다.', 1.1, now(),  69, 46);
+INSERT INTO comment (`title`, `content`, `score`, `mod_date`, `user_id`, `company_id`) VALUES ('가격대비 만족해요. 이가격에 완전자차까지..', '차량 내부 냄새없이 깨끗했구 저렴한 가격에 좋은차 이용 잘했습니다다음에도 여기서 이용 예정^^.', 1.6, now(),  70, 46);
+INSERT INTO comment (`title`, `content`, `score`, `mod_date`, `user_id`, `company_id`) VALUES ('가격대비 최고입니다!', '공항에서 가깝고 직원분들도 친절했습니다', 4.8, now(),  71, 46);
+
