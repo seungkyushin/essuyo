@@ -227,9 +227,25 @@ CREATE TABLE qna (
 /*********************************************************************************/
 
 
-/*이미지*/
+/* 이미지 */
 INSERT INTO image_info ( save_path, type ,name, cre_date ) VALUES("/resources/images/default-user.png","image/png","default-user.png", now());
 
+/* 이미지 (레스토랑) */
+INSERT INTO image_info ( save_path, type ,name, cre_date ) VALUES("/resources/images/restraunt/restraunt1.jpg","image/jpg","restraunt1.jpg", now());
+INSERT INTO image_info ( save_path, type ,name, cre_date ) VALUES("/resources/images/restraunt/restraunt2.jpg","image/jpg","restraunt2.jpg", now());
+INSERT INTO image_info ( save_path, type ,name, cre_date ) VALUES("/resources/images/restraunt/restraunt3.jpg","image/jpg","restraunt3.jpg", now());
+INSERT INTO image_info ( save_path, type ,name, cre_date ) VALUES("/resources/images/restraunt/restraunt4.jpg","image/jpg","restraunt4.jpg", now());
+INSERT INTO image_info ( save_path, type ,name, cre_date ) VALUES("/resources/images/restraunt/restraunt5.jpg","image/jpg","restraunt5.jpg", now());
+INSERT INTO image_info ( save_path, type ,name, cre_date ) VALUES("/resources/images/restraunt/restraunt6.jpg","image/jpg","restraunt6.jpg", now());
+INSERT INTO image_info ( save_path, type ,name, cre_date ) VALUES("/resources/images/restraunt/restraunt7.jpg","image/jpg","restraunt7.jpg", now());
+INSERT INTO image_info ( save_path, type ,name, cre_date ) VALUES("/resources/images/restraunt/restraunt8.jpg","image/jpg","restraunt8.jpg", now());
+INSERT INTO image_info ( save_path, type ,name, cre_date ) VALUES("/resources/images/restraunt/restraunt9.jpg","image/jpg","restraunt9.jpg", now());
+INSERT INTO image_info ( save_path, type ,name, cre_date ) VALUES("/resources/images/restraunt/restraunt10.jpg","image/jpg","restraunt10.jpg", now());
+INSERT INTO image_info ( save_path, type ,name, cre_date ) VALUES("/resources/images/restraunt/restraunt11.jpg","image/jpg","restraunt11.jpg", now());
+INSERT INTO image_info ( save_path, type ,name, cre_date ) VALUES("/resources/images/restraunt/restraunt12.jpg","image/jpg","restraunt12.jpg", now());
+INSERT INTO image_info ( save_path, type ,name, cre_date ) VALUES("/resources/images/restraunt/restraunt13.jpg","image/jpg","restraunt13.jpg", now());
+INSERT INTO image_info ( save_path, type ,name, cre_date ) VALUES("/resources/images/restraunt/restraunt14.jpg","image/jpg","restraunt14.jpg", now());
+INSERT INTO image_info ( save_path, type ,name, cre_date ) VALUES("/resources/images/restraunt/restraunt15.jpg","image/jpg","restraunt15.jpg", now());
 
 /* 지역명목록 */
 INSERT INTO area_list (name)  VALUES("서울");
@@ -242,7 +258,179 @@ INSERT INTO facility(name)  VALUES("와이파이/인터넷");
 INSERT INTO facility(name)  VALUES("금연구역");
 INSERT INTO facility(name)  VALUES("신용카드");
 
+/* 카테고리(레스토랑) */
+INSERT INTO company(name, type, score, discription, address,number, homepage, state, time, area_list_id)
+VALUES("해운대 식당", "식당", 4.2 , "부산 해운대 근처", "부산광역시 해운대구 해운대해변로 52","010-6291-2938",
+"http://restrauntOne.com/","영업중","ALL TIME",2);
+INSERT INTO company(name, type, score, discription, address,number, homepage, state, time, area_list_id)
+VALUES("센텀 식당", "식당", 3.1 , "부산 해운대 근처", "부산광역시 해운대구 센텀남대로 76","02-803-1405",
+"http://restrauntTwo.com/","영업중","ALL TIME",2);
+INSERT INTO company(name, type, score, discription, address,number, homepage, state, time, area_list_id)
+VALUES("광안해변 식당", "식당", 3.6 , "부산 해운대 근처", "부산광역시 수영구 광안해변로 386","010-3048-1246",
+"http://restrauntThree.co.kr/","영업종료","ALL TIME",2);
+INSERT INTO company(name, type, score, discription, address,number, homepage, state, time, area_list_id)
+VALUES("우동로 식당", "식당", 1.8 , "부산 해운대 근처", "부산광역시 해운대구 우동1로85번길 25","010-3009-1833",
+"http://restrauntFour.co.kr/","영업종료","ALL TIME",2);
+INSERT INTO company(name, type, score, discription, address,number, homepage, state, time, area_list_id)
+VALUES("수영 식당", "식당", 2.6 , "부산 해운대 근처", "부산광역시 수영구 수영동 432-1","010-7090-1092",
+"http://restrauntFive.com/","영업중","ALL TIME",2);
+INSERT INTO company(name, type, score, discription, address,number, homepage, state, time, area_list_id)
+VALUES("구남로 식당", "식당", 4.8 , "부산 해운대 근처", "부산광역시 해운대구 구남로29번길 21","010-5097-1021",
+"http://restrauntSix.com/","영업중","ALL TIME",2);
+INSERT INTO company(name, type, score, discription, address,number, homepage, state, time, area_list_id)
+VALUES("천일사 식당", "식당", 1.5 , "부산 해운대 근처", "부산광역시 해운대구 우동 1104-1","010-6079-9065",
+"http://restrauntSeven.co.kr/","영업종료","ALL TIME",2);
+INSERT INTO company(name, type, score, discription, address,number, homepage, state, time, area_list_id)
+VALUES("광안 식당", "식당", 3.6 , "부산 해운대 근처", "부산광역시 수영구 광안동 140-18","010-9854-1457",
+"http://restrauntEight.co.kr/","영업종료","ALL TIME",2);
+INSERT INTO company(name, type, score, discription, address,number, homepage, state, time, area_list_id)
+VALUES("동백 식당", "식당", 4.9 , "돈만 있으면 쾌적한 곳1", "부산광역시 해운대구 동백로 116","010-5831-2947",
+"http://restrauntNine.com/","영업중","ALL TIME",2);
+INSERT INTO company(name, type, score, discription, address,number, homepage, state, time, area_list_id)
+VALUES("한화 식당", "식당", 4.1 , "부산 해운대 근처", "부산광역시 해운대구 마린시티3로 52 한화리조트","010-6421-1268",
+"http://restrauntTen.com/","영업중","ALL TIME",2);
+INSERT INTO company(name, type, score, discription, address,number, homepage, state, time, area_list_id)
+VALUES("이마트 식당", "식당", 1.4 , "부산 해운대 근처", "부산광역시 해운대구 좌동순환로 511 E-마트해운대점","010-3446-3312",
+"http://restrauntEleven.co.kr/","영업종료","ALL TIME",2);
+INSERT INTO company(name, type, score, discription, address,number, homepage, state, time, area_list_id)
+VALUES("좌동 식당", "식당", 3.1 , "부산 해운대 근처", "부산광역시 해운대구 좌동순환로99번길 7","010-2235-6684",
+"http://restrauntTwelve.co.kr/","영업종료","ALL TIME",2);
+INSERT INTO company(name, type, score, discription, address,number, homepage, state, time, area_list_id)
+VALUES("이대 식당", "식당", 1.6 , "서울 이대역 근처", "서울특별시 서대문구 연세로2길 98","010-2241-7784",
+"http://restrauntThirteen.co.kr/","영업중","ALL TIME",1);
+INSERT INTO company(name, type, score, discription, address,number, homepage, state, time, area_list_id)
+VALUES("광주 월드컵 식당", "식당", 3.7 , "광주 월드컵 경기장", "광주광역시 서구 금화로 240 월드컵경기장","010-2256-4451",
+"http://www.restrauntFourteen.com/","영업중","ALL TIME",3);
+INSERT INTO company(name, type, score, discription, address,number, homepage, state, time, area_list_id)
+VALUES("한림 식당", "식당", 4.2 , "강원도 한림대 변화가", "강원도 춘천시 한림대학길 1","010-6774-2231",
+"http://restrauntfifteen.co.kr/","영업중","ALL TIME",4);
+
+/* 사업 (레스토랑) */
+INSERT INTO business (good, comment, company_id) VALUES(48,"해운대 식당입니다. 잘부탁드립니다.",16);
+INSERT INTO business (good, comment, company_id) VALUES(553,"센텀 식당입니다. 잘부탁드립니다.",17);
+INSERT INTO business (good, comment, company_id) VALUES(332,"광안해변 식당입니다. 잘부탁드립니다.",18);
+INSERT INTO business (good, comment, company_id) VALUES(1,"우동로 식당입니다. 잘부탁드립니다.",19);
+INSERT INTO business (good, comment, company_id) VALUES(80,"수영 식당입니다. 잘부탁드립니다.",20);
+INSERT INTO business (good, comment, company_id) VALUES(999,"구남로 식당입니다. 잘부탁드립니다.",21);
+INSERT INTO business (good, comment, company_id) VALUES(556,"천일사 식당입니다. 잘부탁드립니다.",22);
+INSERT INTO business (good, comment, company_id) VALUES(332,"광안 식당입니다. 잘부탁드립니다.",23);
+INSERT INTO business (good, comment, company_id) VALUES(551,"동백 식당입니다. 잘부탁드립니다.",24);
+INSERT INTO business (good, comment, company_id) VALUES(223,"한화 식당입니다. 잘부탁드립니다.",25);
+INSERT INTO business (good, comment, company_id) VALUES(467,"이마트 식당입니다. 잘부탁드립니다.",26);
+INSERT INTO business (good, comment, company_id) VALUES(111,"좌동 식당입니다. 잘부탁드립니다.",27);
+INSERT INTO business (good, comment, company_id) VALUES(56,"이대 식당입니다. 잘부탁드립니다.",28);
+INSERT INTO business (good, comment, company_id) VALUES(75,"광주 월드컵 식당입니다. 잘부탁드립니다.",29);
+INSERT INTO business (good, comment, company_id) VALUES(10,"한림 식당입니다. 잘부탁드립니다.",30);
+
+/* 사용자, 판매자 (레스토랑) */
+INSERT INTO user(name, age, gender, email, password, fail_password, cre_date, business_id, image_info_id) VALUES("홍길동16", 20, "남", "hong@naver16.com", SHA2('1234',512), 0,"2018-10-01", 16, 16);
+INSERT INTO user(name, age, gender, email, password, fail_password, cre_date, business_id, image_info_id) VALUES("홍길동17", 20, "남", "hong@naver17.com", SHA2('1234',512), 0,"2018-10-01", 17, 17);
+INSERT INTO user(name, age, gender, email, password, fail_password, cre_date, business_id, image_info_id) VALUES("홍길동18", 20, "남", "hong@naver18.com", SHA2('1234',512), 0,"2018-10-01", 18, 18);
+INSERT INTO user(name, age, gender, email, password, fail_password, cre_date, business_id, image_info_id) VALUES("홍길동19", 20, "남", "hong@naver19.com", SHA2('1234',512), 0,"2018-10-01", 19, 19);
+INSERT INTO user(name, age, gender, email, password, fail_password, cre_date, business_id, image_info_id) VALUES("홍길동20", 20, "남", "hong@naver20.com", SHA2('1234',512), 0,"2018-10-01", 20, 20);
+INSERT INTO user(name, age, gender, email, password, fail_password, cre_date, business_id, image_info_id) VALUES("홍길동21", 20, "남", "hong@naver21.com", SHA2('1234',512), 0,"2018-10-01", 21, 21);
+INSERT INTO user(name, age, gender, email, password, fail_password, cre_date, business_id, image_info_id) VALUES("홍길동22", 20, "남", "hong@naver22.com", SHA2('1234',512), 0,"2018-10-01", 22, 22);
+INSERT INTO user(name, age, gender, email, password, fail_password, cre_date, business_id, image_info_id) VALUES("홍길동23", 20, "남", "hong@naver23.com", SHA2('1234',512), 0,"2018-10-01", 23, 23);
+INSERT INTO user(name, age, gender, email, password, fail_password, cre_date, business_id, image_info_id) VALUES("홍길동24", 20, "남", "hong@naver24.com", SHA2('1234',512), 0,"2018-10-01", 24, 24);
+INSERT INTO user(name, age, gender, email, password, fail_password, cre_date, business_id, image_info_id) VALUES("홍길동25", 20, "남", "hong@naver25.com", SHA2('1234',512), 0,"2018-10-01", 25, 25);
+INSERT INTO user(name, age, gender, email, password, fail_password, cre_date, business_id, image_info_id) VALUES("홍길동26", 20, "남", "hong@naver26.com", SHA2('1234',512), 0,"2018-10-01", 26, 26);
+INSERT INTO user(name, age, gender, email, password, fail_password, cre_date, business_id, image_info_id) VALUES("홍길동27", 20, "남", "hong@naver27.com", SHA2('1234',512), 0,"2018-10-01", 27, 27);
+INSERT INTO user(name, age, gender, email, password, fail_password, cre_date, business_id, image_info_id) VALUES("홍길동28", 20, "남", "hong@naver28.com", SHA2('1234',512), 0,"2018-10-01", 28, 28);
+INSERT INTO user(name, age, gender, email, password, fail_password, cre_date, business_id, image_info_id) VALUES("홍길동29", 20, "남", "hong@naver29.com", SHA2('1234',512), 0,"2018-10-01", 29, 29);
+INSERT INTO user(name, age, gender, email, password, fail_password, cre_date, business_id, image_info_id) VALUES("홍길동30", 20, "남", "hong@naver30.com", SHA2('1234',512), 0,"2018-10-01", 30, 30);
+
+/* 회사 이미지 관리 3개 (레스토랑) */
+INSERT INTO company_image_admin(16,16);
+INSERT INTO company_image_admin(16,30);
+INSERT INTO company_image_admin(16,29);
+INSERT INTO company_image_admin(17,17);
+INSERT INTO company_image_admin(17,29);
+INSERT INTO company_image_admin(17,28);
+INSERT INTO company_image_admin(18,18);
+INSERT INTO company_image_admin(18,28);
+INSERT INTO company_image_admin(18,27);
+INSERT INTO company_image_admin(19,19);
+INSERT INTO company_image_admin(19,27);
+INSERT INTO company_image_admin(19,26);
+INSERT INTO company_image_admin(20,20);
+INSERT INTO company_image_admin(20,26);
+INSERT INTO company_image_admin(20,25);
+INSERT INTO company_image_admin(21,21);
+INSERT INTO company_image_admin(21,25);
+INSERT INTO company_image_admin(21,24);
+INSERT INTO company_image_admin(22,22);
+INSERT INTO company_image_admin(22,24);
+INSERT INTO company_image_admin(22,23);
+INSERT INTO company_image_admin(23,23);
+INSERT INTO company_image_admin(23,16);
+INSERT INTO company_image_admin(23,17);
+INSERT INTO company_image_admin(24,24);
+INSERT INTO company_image_admin(24,17);
+INSERT INTO company_image_admin(24,18);
+INSERT INTO company_image_admin(25,25);
+INSERT INTO company_image_admin(25,18);
+INSERT INTO company_image_admin(25,19);
+INSERT INTO company_image_admin(26,26);
+INSERT INTO company_image_admin(26,19);
+INSERT INTO company_image_admin(26,20);
+INSERT INTO company_image_admin(27,27);
+INSERT INTO company_image_admin(27,21);
+INSERT INTO company_image_admin(27,22);
+INSERT INTO company_image_admin(28,28);
+INSERT INTO company_image_admin(28,22);
+INSERT INTO company_image_admin(28,23);
+INSERT INTO company_image_admin(29,29);
+INSERT INTO company_image_admin(29,23);
+INSERT INTO company_image_admin(29,24);
+INSERT INTO company_image_admin(30,30);
+INSERT INTO company_image_admin(30,24);
+INSERT INTO company_image_admin(30,25);
+
+/* 상품 (레스토랑) */
+INSERT INTO product(name, sale_start_date, sale_end_date, discription, price) VALUES("식당예약자리", "2018-10-17", "2018-10-31", "몇명인지 말씀해주세요", 100000);
+INSERT INTO product(name, sale_start_date, sale_end_date, discription, price) VALUES("식당예약자리", "2018-10-17", "2018-10-31", "몇명인지 말씀해주세요", 100000);
+INSERT INTO product(name, sale_start_date, sale_end_date, discription, price) VALUES("식당예약자리", "2018-10-17", "2018-10-31", "몇명인지 말씀해주세요", 100000);
+INSERT INTO product(name, sale_start_date, sale_end_date, discription, price) VALUES("식당예약자리", "2018-10-17", "2018-10-31", "몇명인지 말씀해주세요", 100000);
+INSERT INTO product(name, sale_start_date, sale_end_date, discription, price) VALUES("식당예약자리", "2018-10-17", "2018-10-31", "몇명인지 말씀해주세요", 100000);
+INSERT INTO product(name, sale_start_date, sale_end_date, discription, price) VALUES("식당예약자리", "2018-10-17", "2018-10-31", "몇명인지 말씀해주세요", 100000);
+INSERT INTO product(name, sale_start_date, sale_end_date, discription, price) VALUES("식당예약자리", "2018-10-17", "2018-10-31", "몇명인지 말씀해주세요", 100000);
+INSERT INTO product(name, sale_start_date, sale_end_date, discription, price) VALUES("식당예약자리", "2018-10-17", "2018-10-31", "몇명인지 말씀해주세요", 100000);
+INSERT INTO product(name, sale_start_date, sale_end_date, discription, price) VALUES("식당예약자리", "2018-10-17", "2018-10-31", "몇명인지 말씀해주세요", 100000);
+INSERT INTO product(name, sale_start_date, sale_end_date, discription, price) VALUES("식당예약자리", "2018-10-17", "2018-10-31", "몇명인지 말씀해주세요", 100000);
+INSERT INTO product(name, sale_start_date, sale_end_date, discription, price) VALUES("식당예약자리", "2018-10-17", "2018-10-31", "몇명인지 말씀해주세요", 100000);
+INSERT INTO product(name, sale_start_date, sale_end_date, discription, price) VALUES("식당예약자리", "2018-10-17", "2018-10-31", "몇명인지 말씀해주세요", 100000);
+INSERT INTO product(name, sale_start_date, sale_end_date, discription, price) VALUES("식당예약자리", "2018-10-17", "2018-10-31", "몇명인지 말씀해주세요", 100000);
+INSERT INTO product(name, sale_start_date, sale_end_date, discription, price) VALUES("식당예약자리", "2018-10-17", "2018-10-31", "몇명인지 말씀해주세요", 100000);
+INSERT INTO product(name, sale_start_date, sale_end_date, discription, price) VALUES("식당예약자리", "2018-10-17", "2018-10-31", "몇명인지 말씀해주세요", 100000);
+
+/* 상품관리 (레스토랑) */
+INSERT INTO product_admin(company_id,product_id) VALUES(16,31);
+INSERT INTO product_admin(company_id,product_id) VALUES(17,32);
+INSERT INTO product_admin(company_id,product_id) VALUES(18,33);
+INSERT INTO product_admin(company_id,product_id) VALUES(19,34);
+INSERT INTO product_admin(company_id,product_id) VALUES(20,35);
+INSERT INTO product_admin(company_id,product_id) VALUES(21,36);
+INSERT INTO product_admin(company_id,product_id) VALUES(22,37);
+INSERT INTO product_admin(company_id,product_id) VALUES(23,38);
+INSERT INTO product_admin(company_id,product_id) VALUES(24,39);
+INSERT INTO product_admin(company_id,product_id) VALUES(25,40);
+INSERT INTO product_admin(company_id,product_id) VALUES(26,41);
+INSERT INTO product_admin(company_id,product_id) VALUES(27,42);
+INSERT INTO product_admin(company_id,product_id) VALUES(28,43);
+INSERT INTO product_admin(company_id,product_id) VALUES(29,44);
+INSERT INTO product_admin(company_id,product_id) VALUES(30,45);
 
 
+/* 상품 관리(레스토랑) */
+INSERT INTO product_manager(sale_date, count , product_id) VALUES("2018-10-17",1,31);
+INSERT INTO product_manager(sale_date, count , product_id) VALUES("2018-10-18",1,31);
+INSERT INTO product_manager(sale_date, count , product_id) VALUES("2018-10-19",0,31);
+INSERT INTO product_manager(sale_date, count , product_id) VALUES("2018-10-20",2,31);
+INSERT INTO product_manager(sale_date, count , product_id) VALUES("2018-10-21",10,31);
+INSERT INTO product_manager(sale_date, count , product_id) VALUES("2018-10-22",0,31);
+INSERT INTO product_manager(sale_date, count , product_id) VALUES("2018-10-23",10,31);
 
-
+/* 상품 이미지 관리 */
+INSERT INTO product_image_admin(product_id ,image_info_id) VALUES(31,30);
+INSERT INTO product_image_admin(product_id ,image_info_id) VALUES(31,25);
+INSERT INTO product_image_admin(product_id ,image_info_id) VALUES(31,24);
