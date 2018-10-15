@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ page session="false"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -184,8 +184,7 @@
 	<script>
 		$(document).ready(function() {
 			var formObj = $("form[role='form']");
-
-			console.log(formObj);
+			
 			$(".allBtn").on("click", function() {
 				formObj.attr("action", "/qna/register");
 				formObj.submit();

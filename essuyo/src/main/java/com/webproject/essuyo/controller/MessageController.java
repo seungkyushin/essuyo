@@ -33,11 +33,9 @@ public class MessageController {
 	@Autowired
 	private UserService userService;
 
-	@Inject
-	private HttpSession session;
 
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
-	public void registerGET(MessageVO message, RedirectAttributes rttr, Model model) throws Exception {
+	public void registerGET(MessageVO message, RedirectAttributes rttr, Model model, HttpSession session) throws Exception {
 		logger.info("register get...");
 		
 		// 현재 로그인 된 ID 가져오기
@@ -102,7 +100,7 @@ public class MessageController {
 	}
 
 	@RequestMapping(value = "/listPage", method = RequestMethod.GET)
-	public void listPage(@ModelAttribute("cri") MessageListCriVO cri, Model model) 
+	public void listPage(@ModelAttribute("cri") MessageListCriVO cri, Model model, HttpSession session) 
 			throws Exception {
 		logger.info("----- 전체 쪽지함 listPage() -----");
 	
@@ -121,7 +119,7 @@ public class MessageController {
 	@RequestMapping(value = "/readPage", method = RequestMethod.GET)
 	public void read(@RequestParam("megNum") int megNum, 
 			@ModelAttribute("cri") MessageCriteriaVO cri,
-			Model model) throws Exception {
+			Model model, HttpSession session) throws Exception {
 		logger.info("----- 읽기 readPage() -----");
 		// 현재 로그인 된 ID 가져오기
 		String userID = (String) session.getAttribute("login");
@@ -133,7 +131,7 @@ public class MessageController {
 
 	// 보낸 쪽지함
 	@RequestMapping(value = "/sendMeg", method = RequestMethod.GET)
-	public void sendMeg(@ModelAttribute("listCri") MessageListCriVO listCri, Model model) 
+	public void sendMeg(@ModelAttribute("listCri") MessageListCriVO listCri, Model model, HttpSession session) 
 			throws Exception {
 		logger.info("----- 보낸 쪽지함 sendMeg() -----");
 
@@ -154,7 +152,7 @@ public class MessageController {
 
 	// 받은 편지함
 	@RequestMapping(value = "/recevieMeg", method = RequestMethod.GET)
-	public void recevieMeg(@ModelAttribute("listCri") MessageListCriVO listCri, Model model) 
+	public void recevieMeg(@ModelAttribute("listCri") MessageListCriVO listCri, Model model, HttpSession session) 
 			throws Exception {
 		logger.info("----- 받은 쪽지함 recevieMeg() -----");
 

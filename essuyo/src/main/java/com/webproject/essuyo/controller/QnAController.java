@@ -32,11 +32,9 @@ public class QnAController {
 	@Inject
 	private QnAService service;
 
-	@Inject
-	private HttpSession session;
 
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
-	public void registerGET(QnAVO vo, RedirectAttributes rttr, Model model) throws Exception {
+	public void registerGET(QnAVO vo, RedirectAttributes rttr, Model model, HttpSession session) throws Exception {
 		logger.info("register get..........");
 
 		String userId = (String) session.getAttribute("login");
@@ -60,7 +58,7 @@ public class QnAController {
 	}
 
 	@RequestMapping(value = "/readPage", method = RequestMethod.GET)
-	public void read(@RequestParam("id") int id, @ModelAttribute("cri") MessageCriteriaVO cri, Model model)
+	public void read(@RequestParam("id") int id, @ModelAttribute("cri") MessageCriteriaVO cri, Model model, HttpSession session)
 			throws Exception {
 
 		String userId = (String) session.getAttribute("login");
@@ -82,7 +80,7 @@ public class QnAController {
 	}
 	
 	@RequestMapping(value = "/update", method = RequestMethod.GET)
-	public void updateGET(QnAVO vo, RedirectAttributes rttr, Model model) throws Exception {
+	public void updateGET(QnAVO vo, RedirectAttributes rttr, Model model, HttpSession session) throws Exception {
 		
 		String userId = (String) session.getAttribute("login");
 		vo.setUserId(userId);

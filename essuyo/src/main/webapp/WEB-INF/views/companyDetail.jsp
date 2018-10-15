@@ -73,21 +73,21 @@
 				<div class="col-md-6">
 					<div class="reserve-seat-block">
 					<c:choose>
-						<c:when test="${company.score <= 3}">
+						<c:when test="${company.score <= 2}">
 							<div class="reserve-rating-red">
 								<span>${company.score}</span>
 							</div>
 						</c:when>
-						<c:when test="${company.score < 7}">
+						<c:when test="${company.score <= 4}">
 							<div class="reserve-rating-orange">
 								<span>${company.score}</span>
 							</div>
 						</c:when>
-						<c:when test="${company.score >= 7}">
+						<c:otherwise>
 							<div class="reserve-rating">
 								<span>${company.score}</span>
 							</div>
-						</c:when>
+						</c:otherwise>
 					</c:choose>
 						
 					</div>
