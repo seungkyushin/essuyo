@@ -147,7 +147,7 @@
 	<!-- ajaxJQuery -->
 	<script>
 	
-	function initGeocoder() {
+	function initGeocoder(data) {
 		for(var i =0; i<data.sales.length; i++){
 				var address1 = data.sales[i].address;
 				var name1 = data.sales[i].name;
@@ -215,64 +215,64 @@
 							$(".state-info").attr('class','closed-now');
 						}
 
-					})
-		
-
-					naver.maps.onJSContentLoaded = initGeocoder;
-					
+					});
+					initGeocoder(data);
 				}
 				}
 				
 			});
-			
-			var map = new naver.maps.Map("map", {
-			    center: new naver.maps.LatLng(37.556777 , 126.942118),
-			    zoom: 12,
-			    mapTypeControl: true
-			});
-
-			map.setCursor('pointer');
-
-			function searchAddressToCoordinate(address, name, id) {
-
-			    naver.maps.Service.geocode({
-			        address: address
-			    }, function(status, response) {
-			        if (status === naver.maps.Service.Status.ERROR) {
-			            return myAlert('ERROR !' ,"찾을 수 없는 주소 입니다!");
-			        }
-
-			        
-			        var infoWindow = new naver.maps.InfoWindow({
-			            anchorSkew: true
-			        });
-			        
-			        
-			        var item = response.result.items[0],
-			            addrType = item.isRoadAddress ? '[도로명 주소]' : '[지번 주소]',
-			            point = new naver.maps.Point(item.point.x, item.point.y);
-			             infoWindow.setContent([
-			            	  '<div id="stickynote">',
-			                  '<a href="/company/detail?id='+id+'"><h6>' + name +'</h6></a>',            
-			                  '</div>'
-			                  
-			            ].join(''));
-
-			             var marker = new naver.maps.Marker({
-			                 map: map,
-			                 position: point
-			             });
-			     		
-			        map.setCenter(point);  
-			       
-			        naver.maps.Event.addListener(marker, "click", function(e) {
-			        	infoWindow.open(map, point);        	
-			        });
-			        
-			    });
-			}
-
+	
 		}
+		
+		
+		var map = new naver.maps.Map("map", {
+		    center: new naver.maps.LatLng(37.556777 , 126.942118),
+		    zoom: 12,
+		    mapTypeControl: true
+		});
+
+		map.setCursor('pointer');
+
+		
+		function searchAddressToCoordinate(address, name, id) {
+
+		    naver.maps.Service.geocode({
+		        address: address
+		    }, function(status, response) {
+		        if (status === naver.maps.Service.Status.ERROR) {
+		            return myAlert('ERROR !' ,"찾을 수 없는 주소 입니다!");
+		        }
+
+		        
+		        var infoWindow = new naver.maps.InfoWindow({
+		            anchorSkew: true
+		        });
+		        
+		        
+		        var item = response.result.items[0],
+		            addrType = item.isRoadAddress ? '[도로명 주소]' : '[지번 주소]',
+		            point = new naver.maps.Point(item.point.x, item.point.y);
+		             infoWindow.setContent([
+		            	  '<div id="stickynote">',
+		                  '<a href="/company/detail?id='+id+'"><h6>' + name +'</h6></a>',            
+		                  '</div>'
+		                  
+		            ].join(''));
+
+		             var marker = new naver.maps.Marker({
+		                 map: map,
+		                 position: point
+		             });
+		     		
+		        map.setCenter(point);  
+		       
+		        naver.maps.Event.addListener(marker, "click", function(e) {
+		        	infoWindow.open(map, point);        	
+		        });
+		        
+		    });
+		}
+
 	
 
 	</script>
