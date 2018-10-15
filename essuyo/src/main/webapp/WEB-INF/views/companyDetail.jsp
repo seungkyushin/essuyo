@@ -12,11 +12,33 @@
 	<link rel="stylesheet" href="/resources/css/bootstrap/bootstrap.min.css">
 	<link rel="stylesheet" href="/resources/css/simple-line-icons.css">
 	<link rel="stylesheet" href="/resources/css/themify-icons.css">
-	<link rel="stylesheet" href="/resources/css/set1.css">
+	<link rel="stylesheet"	 href="/resources/css/set1.css">
 	<link rel="stylesheet" href="/resources/css/swiper.min.css">
 	<link rel="stylesheet" href="/resources/css/magnific-popup.css">
 	<link rel="stylesheet" href="/resources/css/style.css">
 	<link rel="stylesheet" href="/resources/css/tab.css">
+	
+	
+<!-- 맵 정보창 css -->
+ <style type="text/css">
+@import url(http://fonts.googleapis.com/css?family=Reenie+Beanie);
+.iw_inner {
+	width:300px;
+	padding:5px;
+	margin:auto;
+	position:relative;
+	background-color:#fe6;
+	background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#fe6), to(#f6ef97), color-stop(.6,#f5da41));
+	background:-moz-linear-gradient(top, #fe6, #f5da41, #f6ef97);
+	text-shadow:0 1px 0 #F6EF97;
+	box-shadow:0 0 5px rgba(0,0,0,.2);
+	-webkit-box-shadow:0 0 5px rgba(0,0,0,.2);
+	-moz-box-shadow:0 0 5px rgba(0,0,0,.2);
+	font-style:italic;
+}
+</style>
+
+	
 </head>
 <body>	
 	<%@ include file="/pageframe/header.jsp"%>
@@ -507,7 +529,7 @@ function searchAddressToCoordinate(address) {
             point = new naver.maps.Point(item.point.x, item.point.y);
              infoWindow.setContent([
             	  '<div class="iw_inner">',
-                  '<h3>${company.name}</h3>',
+                  '<h4>${company.name}</h4>',	
                   '<p>' + item.addrdetail.sido + '</p>',
                   '<p>${company.homepage}</p>',
                   '</div>'
