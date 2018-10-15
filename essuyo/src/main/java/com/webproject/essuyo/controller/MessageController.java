@@ -88,8 +88,8 @@ public class MessageController {
 	}
 	
 	@RequestMapping(value = "/removePage", method = RequestMethod.GET)
-	public String remove(@RequestParam("megNum") int megNum, MessageCriteriaVO cri, RedirectAttributes rttr)
-			throws Exception {
+	public String remove(@RequestParam("megNum") int megNum, MessageCriteriaVO cri,
+			RedirectAttributes rttr) throws Exception {
 		logger.info("----- 삭제 remove() -----");
 		service.remove(megNum);
 
@@ -102,7 +102,8 @@ public class MessageController {
 	}
 
 	@RequestMapping(value = "/listPage", method = RequestMethod.GET)
-	public void listPage(@ModelAttribute("cri") MessageListCriVO cri, Model model) throws Exception {
+	public void listPage(@ModelAttribute("cri") MessageListCriVO cri, Model model) 
+			throws Exception {
 		logger.info("----- 전체 쪽지함 listPage() -----");
 	
 		// 현재 로그인 된 ID 가져오기
@@ -118,7 +119,8 @@ public class MessageController {
 	}
 
 	@RequestMapping(value = "/readPage", method = RequestMethod.GET)
-	public void read(@RequestParam("megNum") int megNum, @ModelAttribute("cri") MessageCriteriaVO cri,
+	public void read(@RequestParam("megNum") int megNum, 
+			@ModelAttribute("cri") MessageCriteriaVO cri,
 			Model model) throws Exception {
 		logger.info("----- 읽기 readPage() -----");
 		// 현재 로그인 된 ID 가져오기
@@ -131,7 +133,8 @@ public class MessageController {
 
 	// 보낸 쪽지함
 	@RequestMapping(value = "/sendMeg", method = RequestMethod.GET)
-	public void sendMeg(@ModelAttribute("listCri") MessageListCriVO listCri, Model model) throws Exception {
+	public void sendMeg(@ModelAttribute("listCri") MessageListCriVO listCri, Model model) 
+			throws Exception {
 		logger.info("----- 보낸 쪽지함 sendMeg() -----");
 
 		// 현재 로그인 된 ID 가져오기
@@ -140,10 +143,7 @@ public class MessageController {
 		// 페이징 처리를 위한 설정
 		MessagePageMakerVO pageMaker = new MessagePageMakerVO();
 		listCri.setUserID(userID);
-		//int sPage = (listCri.getPage()-1)*10;
-		//listCri.setPage(sPage);
 		pageMaker.setListCri(listCri);
-
 		pageMaker.setListTotalCount(service.sendCountPaging(userID));
 
 		model.addAttribute("pageMaker", pageMaker);
@@ -154,7 +154,8 @@ public class MessageController {
 
 	// 받은 편지함
 	@RequestMapping(value = "/recevieMeg", method = RequestMethod.GET)
-	public void recevieMeg(@ModelAttribute("listCri") MessageListCriVO listCri, Model model) throws Exception {
+	public void recevieMeg(@ModelAttribute("listCri") MessageListCriVO listCri, Model model) 
+			throws Exception {
 		logger.info("----- 받은 쪽지함 recevieMeg() -----");
 
 		// 현재 로그인 된 ID 가져오기
@@ -163,10 +164,7 @@ public class MessageController {
 		// 페이징 처리를 위한 설정
 		MessagePageMakerVO pageMaker = new MessagePageMakerVO();
 		listCri.setUserID(userID);
-		//int sPage = (listCri.getPage()-1)*10;
-		//listCri.setPage(sPage);
 		pageMaker.setListCri(listCri);
-
 		pageMaker.setListTotalCount(service.recevieCountPaging(userID));
 
 		model.addAttribute("pageMaker", pageMaker);
