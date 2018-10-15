@@ -146,7 +146,8 @@
 
 	<!-- ajaxJQuery -->
 	<script>
-	
+	var markers = [];
+
 	function initGeocoder(data) {
 		for(var i =0; i<data.sales.length; i++){
 				var address1 = data.sales[i].address;
@@ -156,6 +157,13 @@
    	 			searchAddressToCoordinate(address1, name1, id1);	
 			}	
 	}
+	var map = new naver.maps.Map("map", {
+	    center: new naver.maps.LatLng(37.556777 , 126.942118),
+	    zoom: 12,
+	    mapTypeControl: true
+	    
+	});
+	
 	
 		function test() {
 			
@@ -223,17 +231,7 @@
 			});
 	
 		}
-		
-		
-		var map = new naver.maps.Map("map", {
-		    center: new naver.maps.LatLng(37.556777 , 126.942118),
-		    zoom: 12,
-		    mapTypeControl: true
-		    
-		});
-
-		map.setCursor('pointer');
-
+			
 		
 		function searchAddressToCoordinate(address, name, id) {
 
@@ -248,7 +246,7 @@
 		        var infoWindow = new naver.maps.InfoWindow({
 		            anchorSkew: true
 		        });
-		        
+		       
 		        
 		        var item = response.result.items[0],
 		            addrType = item.isRoadAddress ? '[도로명 주소]' : '[지번 주소]',
@@ -260,13 +258,17 @@
 		                  
 		            ].join(''));
 
-		             var marker = new naver.maps.Marker({
+		          
+		             
+		          var marker = new naver.maps.Marker({
 		                 map: map,
 		                 position: point
-		             });
-		     		
+		             }); 
+		          		  
 		        map.setCenter(point);  
 		       
+		        markers.push(marker);
+		
 		        naver.maps.Event.addListener(marker, "click", function(e) {
 		        	infoWindow.open(map, point);        	
 		        });
@@ -289,22 +291,29 @@
 		$(document).ready(function() {
 			test();				
 		
-// 		$(document).height()  -> 현재 내가 보고 있는 문서의 높이
-// 		$(window).height() -> 현재 내가 키고 있는 브라우저의 높이
-// 		$(window).scrollTop() -> 현재 브라우저 스크롤이 있는 위치
+	// 		$(document).height()  -> 현재 내가 보고 있는 문서의 높이
+	// 		$(window).height() -> 현재 내가 키고 있는 브라우저의 높이
+	// 		$(window).scrollTop() -> 현재 브라우저 스크롤이 있는 위치
 	    $(window).scroll(function() {
-		if ($(window).scrollTop() == $(document).height()- $(window).height()) {
-		start++;	
-	    test();			
-	    }
-
-	    });	    
+			if ($(window).scrollTop() == $(document).height()- $(window).height()) {
+				start++;	
+	   			 test();			
+	   		 }
+	    });
+	
 	    if(type != "전체"){	    	
-		$("#search").click(function() {
-		$("#salesList").html("");      
- 		test();
- 		});
-	    }					
+			$("#search").click(function() {
+				$("#salesList").html("");
+				
+				 for (var i = 0; i < markers.length; i++) {
+				        markers[i].setMap(null);
+			    }
+				 
+				start = 0;
+ 				test();
+ 			});
+	    }
+	    
 		});
 	</script>
  
