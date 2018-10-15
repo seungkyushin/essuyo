@@ -40,6 +40,7 @@
 	box-shadow:0 0 5px rgba(0,0,0,.2);
 	-webkit-box-shadow:0 0 5px rgba(0,0,0,.2);
 	-moz-box-shadow:0 0 5px rgba(0,0,0,.2);
+	font-style:italic;
 }
 </style>
 
@@ -219,7 +220,7 @@
 
 					naver.maps.onJSContentLoaded = initGeocoder;
 					
-				} //여기
+				}
 				}
 				
 			});
