@@ -411,7 +411,7 @@ INSERT INTO company(name, type,  discription, score, address, number, homepage, 
 INSERT INTO company(name, type,  discription, score, address, number, homepage, state, time, area_list_id ) VALUES("열두 렌트카", "차량대여", "강원도 열두번째 렌트카", 4.8, "강원도 양양군 서면 떡마을길 85-10", "010-5656-8323", "www.rentCar12.com", "영업중", "09:00 ~ 18:00", 4);
 INSERT INTO company(name, type,  discription, score, address, number, homepage, state, time, area_list_id ) VALUES("열세 렌트카", "차량대여", "서울 열세번째 렌트카", 2.3, "서울특별시 중구 동호로33길 24", "010-5656-7923", "www.rentCar13.com", "영업중", "09:00 ~ 18:00", 1);
 INSERT INTO company(name, type,  discription, score, address, number, homepage, state, time, area_list_id ) VALUES("열네 렌트카", "차량대여", "부산 열네번째 렌트카", 1.7, "부산광역시 연제구 거제대로74번길 71", "010-5656-8323", "www.rentCar14.com", "영업중", "09:00 ~ 18:00", 2);
-INSERT INTO company(name, type,  discription, score, address, number, homepage, state, time, area_list_id ) VALUES("열다 렌트카", "차량대여", "광주 열닷번째 렌트카", .1.1, "광주광역시 서구 월드컵4강로 223", "010-5656-4443", "www.rentCar15.com", "영업중", "09:00 ~ 18:00", 3);
+INSERT INTO company(name, type,  discription, score, address, number, homepage, state, time, area_list_id ) VALUES("열다 렌트카", "차량대여", "광주 열닷번째 렌트카", 1.1, "광주광역시 서구 월드컵4강로 223", "010-5656-4443", "www.rentCar15.com", "영업중", "09:00 ~ 18:00", 3);
 
 
 INSERT INTO facility_admin(company_id, facility_id) VALUES(1,1);
