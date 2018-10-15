@@ -25,12 +25,10 @@ public class NoticeController {
 	
 	@Inject
 	private NoticeService service;
-	
-	@Inject
-	private HttpSession session;
+
 	
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
-	public void registerGET(NoticeVO notice, Model model) throws Exception {
+	public void registerGET(NoticeVO notice, Model model, HttpSession session) throws Exception {
 
 		// 현재 로그인 된 ID 가져오기
 		String userID = (String) session.getAttribute("login");

@@ -126,15 +126,15 @@
 								<div class="featured-place-wrap">
 									<a href="/company/detail?id=${company.id}"> <img	src="${company.image}" class="img-fluid" alt="#">
 										<c:choose>
-											<c:when test="${company.score <= 3}">
+											<c:when test="${company.score <= 2}">
 												<span class="featured-rating">${company.score}</span>
 											</c:when>
-											<c:when test="${company.score < 7}">
+											<c:when test="${company.score <= 4}">
 												<span class="featured-rating-orange">${company.score}</span>
 											</c:when>
-											<c:when test="${company.score >= 7}">
+											<c:otherwise>
 												<span class="featured-rating-green">${company.score}</span>
-											</c:when>
+											</c:otherwise>
 										</c:choose>
 										
 										<div class="featured-title-box">

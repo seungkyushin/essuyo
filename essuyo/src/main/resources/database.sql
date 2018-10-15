@@ -291,113 +291,113 @@ INSERT INTO image_info (save_path, type ,name, cre_date ) VALUES("/resources/ima
 
 
 INSERT INTO company(name, type, score, discription, address, number, homepage, state, time, area_list_id ) 
-	VALUES("롯데 호텔", "숙박", 4.5,"쇼핑몰과 연결되는 2개의 호텔 건물","중구 을지로 30","02-771-1000", "https://www.lottehotel.com/seoul-hotel/ko.html", "영업중", "ALL TIME", 1);
+VALUES("롯데 호텔", "숙박", 4.5,"쇼핑몰과 연결되는 2개의 호텔 건물","중구 을지로 30","02-771-1000", "www.lottehotel.com", "영업중", "ALL TIME", 1);
 INSERT INTO company(name, type, score, discription,  address, number, homepage, state, time, area_list_id ) 
-	VALUES("롯데시티호텔", "숙박", 5.0,"서울특별시청 근처에 위치한 4성급 호텔" , "서울특별시 중구 장교동 74", "02-6112-1000", "https://www.lottehotel.com/myeongdong-city/ko.html", "영업중", "ALL TIME", 1);
+VALUES("롯데시티호텔", "숙박", 5.0,"서울특별시청 근처에 위치한 4성급 호텔" , "서울특별시 중구 장교동 74", "02-6112-1000", "www.lottehotel.com", "영업중", "ALL TIME", 1);
 INSERT INTO company(name, type, score, discription,  address, number, homepage, state, time, area_list_id ) 
-	VALUES("호텔 베뉴지", "숙박", 3.5, "서울의 종로에 위치한 3.5성급 호텔","서울특별시 종로구 청계천로 117",  "02-2223-6500", "www.hotelvenueg.com/", "영업중", "ALL TIME" ,1);
+VALUES("호텔 베뉴지", "숙박", 3.5, "서울의 종로에 위치한 3.5성급 호텔","서울특별시 종로구 청계천로 117",  "02-2223-6500", "www.hotelvenueg.com", "영업중", "ALL TIME" ,1);
 INSERT INTO company(name, type, score, discription,  address, number, homepage, state, time, area_list_id ) 
-	VALUES("르와지르 호텔 서울", "숙박", 4.0, "숭례문 근처에 위치한 3.5성급 호텔", "서울특별시 중구 충무로1가 24-1", "02-6936-6000", "www.loisir-md.com/", "영업중", "ALL TIME", 1);
+VALUES("르와지르 호텔 서울", "숙박", 4.0, "숭례문 근처에 위치한 3.5성급 호텔", "서울특별시 중구 충무로1가 24-1", "02-6936-6000", "www.loisir-md.com", "영업중", "ALL TIME", 1);
 INSERT INTO company(name, type, score, discription,  address, number, homepage, state, time, area_list_id ) 
-	VALUES("L7 명동 바이 롯데","숙박", 4.8, "명동에 위치한 4성급 호텔","서울특별시 중구 퇴계로 137", "02-3480-0166", "www.lottehotel.com/myeongdong-l7/ko.html", "영업중", "ALL TIME", 1);
+VALUES("L7 명동 바이 롯데","숙박", 1.8, "명동에 위치한 4성급 호텔","서울특별시 중구 퇴계로 137", "02-3480-0166", "www.lottehotel.com", "영업중", "ALL TIME", 1);
 INSERT INTO company(name, type, score, discription,  address, number, homepage, state, time, area_list_id ) 
-	VALUES("호텔 피제이","숙박", 3.7,"서울의 인기 관광 명소로 무료 셔틀을 운행하고 대중교통도 편리하게 이용 가능", "서울특별시 중구 마른내로 71 (주)오일관광풍전호텔",  "02-2266-2151", "www.hotelpj.co.kr/", "영업중", "ALL TIME", 1);
+VALUES("호텔 피제이","숙박", 3.7,"서울의 인기 관광 명소로 무료 셔틀을 운행하고 대중교통도 편리하게 이용 가능", "서울특별시 중구 마른내로 71 (주)오일관광풍전호텔",  "02-2266-2151", "www.hotelpj.co.kr/", "영업중", "ALL TIME", 1);
 INSERT INTO company(name, type, score, discription,  address, number, homepage, state, time, area_list_id ) 
-	VALUES("이그제큐티브 타워","숙박", 2.5, "도시 전망을 자랑합니다", " 서울 중구 을지로 30",  "02-759-7311", "https://www.lottehotel.com/seoul-hotel/ko/rooms/executive-tower.html", "영업중", "ALL TIME", 1);
+VALUES("이그제큐티브 타워","숙박", 2.5, "도시 전망을 자랑합니다", " 서울 중구 을지로 30",  "02-759-7311", "www.lottehotel.com", "영업중", "ALL TIME", 1);
 INSERT INTO company(name, type, score, discription,  address, number, homepage, state, time, area_list_id ) 
-	VALUES("이비스 앰배서더","숙박", 4.4, "객실은 넓은 창문을 갖추고 있어 서울시를 조망해 보시기에 좋습니다","서울특별시 중구 남대문로 78",  "02-6361-8888", "ibis.ambatel.com/myeongdong/main.amb ", "영업중", "ALL TIME", 1);
+VALUES("이비스 앰배서더","숙박", 4.4, "객실은 넓은 창문을 갖추고 있어 서울시를 조망해 보시기에 좋습니다","서울특별시 중구 남대문로 78",  "02-6361-8888", "ibis.ambatel.com ", "영업중", "ALL TIME", 1);
 INSERT INTO company(name, type, score, discription,  address, number, homepage, state, time, area_list_id ) 
-	VALUES("호텔 스카이파크 센트럴","숙박", 2.9, "서울 지하철 2호선 을지로1가역에서 250m 거리", "서울특별시 중구 명동9길 16 명동 센트럴빌딩",  "02-752-0022", "www.skyparkhotel.com/", "영업중", "ALL TIME", 1);
+VALUES("호텔 스카이파크 센트럴","숙박", 1.9, "서울 지하철 2호선 을지로1가역에서 250m 거리", "서울특별시 중구 명동9길 16 명동 센트럴빌딩",  "02-752-0022", "www.skyparkhotel.com", "영업중", "ALL TIME", 1);
 INSERT INTO company(name, type, score, discription,  address, number, homepage, state, time, area_list_id ) 
-	VALUES("솔라리아 니시테츠 호텔","숙박", 3.2, "눈스퀘어에서 200m", "서울특별시 중구 명동8길 27 엠 플라자", "02-773-1555", "nnr-h.com/solaria/seoul/", "영업중", "ALL TIME", 1);
+VALUES("솔라리아 니시테츠 호텔","숙박", 3.2, "눈스퀘어에서 200m", "서울특별시 중구 명동8길 27 엠 플라자", "02-773-1555", "www.nnr-h.com/", "영업중", "ALL TIME", 1);
 INSERT INTO company(name, type, score, discription,  address, number, homepage, state, time, area_list_id ) 
-	VALUES("세종 호텔","숙박", 5.0, "남산 건너편에 위치한 4성급 호텔", "서울특별시 중구 퇴계로 145 세종호텔",  "02-773-6000", "www.sejong.co.kr/", "영업중", "ALL TIME", 1);
+VALUES("세종 호텔","숙박", 5.0, "남산 건너편에 위치한 4성급 호텔", "서울특별시 중구 퇴계로 145 세종호텔",  "02-773-6000", "www.sejong.co.kr/", "영업중", "ALL TIME", 1);
 INSERT INTO company(name, type, score, discription,  address, number, homepage, state, time, area_list_id ) 
-	VALUES("ENA 스위트 호텔","숙박", 4.4, "일품요리 조식","서울특별시 중구 세종대로11길 36",  "02-6020-7000", "www.enahotel.co.kr","영업중", "ALL TIME", 1);
+VALUES("ENA 스위트 호텔","숙박", 4.4, "일품요리 조식","서울특별시 중구 세종대로11길 36",  "02-6020-7000", "www.enahotel.co.kr","영업중", "ALL TIME", 1);
 INSERT INTO company(name, type, score, discription,  address, number, homepage, state, time, area_list_id ) 
-	VALUES("라마다 앙코르","숙박", 4.7, "부산의 해운대에 위치한 4성급 호텔", "부산광역시 해운대구 구남로 9", "051-610-3000", "www.ramadaencorehaeundae.com/", "영업중", "ALL TIME", 2);
+VALUES("라마다 앙코르","숙박", 4.7, "부산의 해운대에 위치한 4성급 호텔", "부산광역시 해운대구 구남로 9", "051-610-3000", "www.ramadaencorehaeundae.com/", "영업중", "ALL TIME", 2);
 INSERT INTO company(name, type, score, discription,  address, number, homepage, state, time, area_list_id ) 
-	VALUES("세인트존스 호텔","숙박", 5.0,"신나는 해변의 호텔 사우나 이용 가능","강원도 강릉시 창해로 307",  "033-660-9000", "stjohns.co.kr/", "영업중", "ALL TIME", 3);
+VALUES("세인트존스 호텔","숙박", 5.0,"신나는 해변의 호텔 사우나 이용 가능","강원도 강릉시 창해로 307",  "033-660-9000", "stjohns.co.kr", "영업중", "ALL TIME", 3);
 INSERT INTO company(name, type, score, discription,  address, number, homepage, state, time, area_list_id ) 
-	VALUES("라마다 플라자","숙박", 3.8,  "4성급 호텔, 2 개의 레스토랑 및 2 개의 스파 욕조 이용 가능","광주광역시 서구 상무자유로 149 라마다프라자호텔", "062-717-7000", "www.ramadagwangju.com/", "영업중", "ALL TIME", 4);
+VALUES("라마다 플라자","숙박", 0.8,  "4성급 호텔, 2 개의 레스토랑 및 2 개의 스파 욕조 이용 가능","광주광역시 서구 상무자유로 149 라마다프라자호텔", "062-717-7000", "www.ramadagwangju.com", "영업중", "ALL TIME", 4);
 	
 /* 카테고리(레스토랑) */
 INSERT INTO company(name, type, score, discription, address,number, homepage, state, time, area_list_id)
 VALUES("해운대 식당", "식당", 4.2 , "부산 해운대 근처", "부산광역시 해운대구 해운대해변로 52","010-6291-2938",
-"http://restrauntOne.com/","영업중","ALL TIME",2);
+"restrauntOne.com","영업중","ALL TIME",2);
 INSERT INTO company(name, type, score, discription, address,number, homepage, state, time, area_list_id)
 VALUES("센텀 식당", "식당", 3.1 , "부산 해운대 근처", "부산광역시 해운대구 센텀남대로 76","02-803-1405",
-"http://restrauntTwo.com/","영업중","ALL TIME",2);
+"restrauntTwo.com","영업중","ALL TIME",2);
 INSERT INTO company(name, type, score, discription, address,number, homepage, state, time, area_list_id)
 VALUES("광안해변 식당", "식당", 3.6 , "부산 해운대 근처", "부산광역시 수영구 광안해변로 386","010-3048-1246",
-"http://restrauntThree.co.kr/","영업종료","ALL TIME",2);
+"restrauntThree.co.kr","영업종료","ALL TIME",2);
 INSERT INTO company(name, type, score, discription, address,number, homepage, state, time, area_list_id)
 VALUES("우동로 식당", "식당", 1.8 , "부산 해운대 근처", "부산광역시 해운대구 우동1로85번길 25","010-3009-1833",
-"http://restrauntFour.co.kr/","영업종료","ALL TIME",2);
+"restrauntFour.co.kr","영업종료","ALL TIME",2);
 INSERT INTO company(name, type, score, discription, address,number, homepage, state, time, area_list_id)
 VALUES("수영 식당", "식당", 2.6 , "부산 해운대 근처", "부산광역시 수영구 수영동 432-1","010-7090-1092",
-"http://restrauntFive.com/","영업중","ALL TIME",2);
+"restrauntFive.com","영업중","ALL TIME",2);
 INSERT INTO company(name, type, score, discription, address,number, homepage, state, time, area_list_id)
 VALUES("구남로 식당", "식당", 4.8 , "부산 해운대 근처", "부산광역시 해운대구 구남로29번길 21","010-5097-1021",
-"http://restrauntSix.com/","영업중","ALL TIME",2);
+"restrauntSix.com","영업중","ALL TIME",2);
 INSERT INTO company(name, type, score, discription, address,number, homepage, state, time, area_list_id)
 VALUES("천일사 식당", "식당", 1.5 , "부산 해운대 근처", "부산광역시 해운대구 우동 1104-1","010-6079-9065",
-"http://restrauntSeven.co.kr/","영업종료","ALL TIME",2);
+"restrauntSeven.co.kr","영업종료","ALL TIME",2);
 INSERT INTO company(name, type, score, discription, address,number, homepage, state, time, area_list_id)
 VALUES("광안 식당", "식당", 3.6 , "부산 해운대 근처", "부산광역시 수영구 광안동 140-18","010-9854-1457",
-"http://restrauntEight.co.kr/","영업종료","ALL TIME",2);
+"restrauntEight.co.kr","영업종료","ALL TIME",2);
 INSERT INTO company(name, type, score, discription, address,number, homepage, state, time, area_list_id)
 VALUES("동백 식당", "식당", 4.9 , "돈만 있으면 쾌적한 곳1", "부산광역시 해운대구 동백로 116","010-5831-2947",
-"http://restrauntNine.com/","영업중","ALL TIME",2);
+"restrauntNine.com","영업중","ALL TIME",2);
 INSERT INTO company(name, type, score, discription, address,number, homepage, state, time, area_list_id)
 VALUES("한화 식당", "식당", 4.1 , "부산 해운대 근처", "부산광역시 해운대구 마린시티3로 52 한화리조트","010-6421-1268",
-"http://restrauntTen.com/","영업중","ALL TIME",2);
+"restrauntTen.com","영업중","ALL TIME",2);
 INSERT INTO company(name, type, score, discription, address,number, homepage, state, time, area_list_id)
 VALUES("이마트 식당", "식당", 1.4 , "부산 해운대 근처", "부산광역시 해운대구 좌동순환로 511 E-마트해운대점","010-3446-3312",
-"http://restrauntEleven.co.kr/","영업종료","ALL TIME",2);
+"restrauntEleven.co.kr","영업종료","ALL TIME",2);
 INSERT INTO company(name, type, score, discription, address,number, homepage, state, time, area_list_id)
 VALUES("좌동 식당", "식당", 3.1 , "부산 해운대 근처", "부산광역시 해운대구 좌동순환로99번길 7","010-2235-6684",
-"http://restrauntTwelve.co.kr/","영업종료","ALL TIME",2);
+"restrauntTwelve.co.kr","영업종료","ALL TIME",2);
 INSERT INTO company(name, type, score, discription, address,number, homepage, state, time, area_list_id)
 VALUES("이대 식당", "식당", 1.6 , "서울 이대역 근처", "서울특별시 서대문구 연세로2길 98","010-2241-7784",
-"http://restrauntThirteen.co.kr/","영업중","ALL TIME",1);
+"restrauntThirteen.co.kr","영업중","ALL TIME",1);
 INSERT INTO company(name, type, score, discription, address,number, homepage, state, time, area_list_id)
 VALUES("광주 월드컵 식당", "식당", 3.7 , "광주 월드컵 경기장", "광주광역시 서구 금화로 240 월드컵경기장","010-2256-4451",
-"http://www.restrauntFourteen.com/","영업중","ALL TIME",3);
+"www.restrauntFourteen.com","영업중","ALL TIME",3);
 INSERT INTO company(name, type, score, discription, address,number, homepage, state, time, area_list_id)
 VALUES("한림 식당", "식당", 4.2 , "강원도 한림대 변화가", "강원도 춘천시 한림대학길 1","010-6774-2231",
-"http://restrauntfifteen.co.kr/","영업중","ALL TIME",4);
+"restrauntfifteen.co.kr","영업중","ALL TIME",4);
 INSERT INTO company(name, type,  discription, score, address, number, homepage, state, time, area_list_id ) 
-VALUES("국립광주 박물관", "문화", "광주광역시 대표 박물관", 4, "광주 북구 하서로 110", "062-570-7001", "http://gwangju.museum.go.kr/", "영업중", "평일 10:00 ~ 18:00", 3);
+VALUES("국립광주 박물관", "문화", "광주광역시 대표 박물관", 4, "광주 북구 하서로 110", "062-570-7001", "gwangju.museum.go.kr", "영업중", "평일 10:00 ~ 18:00", 3);
 INSERT INTO company(name, type,  discription, score, address, number, homepage, state, time, area_list_id ) 
-VALUES("남도향토음식박물관", "문화", "남도음식 대표 박물관", 3.5, "광주 북구 설죽로 477", "062-570-7002", "http://gwangju.museum.go.kr/", "영업중", "평일 10:00 ~ 18:00", 3);
+VALUES("남도향토음식박물관", "문화", "남도음식 대표 박물관", 3.5, "광주 북구 설죽로 477", "062-570-7002", "gwangju.museum.go.kr", "영업중", "평일 10:00 ~ 18:00", 3);
 INSERT INTO company(name, type,  discription, score, address, number, homepage, state, time, area_list_id ) 
 VALUES("비움 박물관", "문화", "마음을 비웁니다", 2, "광주 동구 제봉로 143-1", "062-570-7003", "http://gwangju.museum.go.kr/", "영업중", "평일 10:00 ~ 18:00", 3);
 INSERT INTO company(name, type,  discription, score, address, number, homepage, state, time, area_list_id ) 
-VALUES("전남대학교 박물관", "문화", "전남대학교 대표 박물관", 1, "광주 북구 용봉로 77 전남대학교", "062-570-7004", "http://gwangju.museum.go.kr/", "영업중", "평일 10:00 ~ 18:00", 3);
+VALUES("전남대학교 박물관", "문화", "전남대학교 대표 박물관", 1, "광주 북구 용봉로 77 전남대학교", "062-570-7004", "gwangju.museum.go.kr", "영업중", "평일 10:00 ~ 18:00", 3);
 INSERT INTO company(name, type,  discription, score, address, number, homepage, state, time, area_list_id ) 
-VALUES("국립광주 어린이박물관", "문화", "어린이를 위한 박물관", 5, "광주 북구 하서로 110", "062-570-7005", "http://gwangju.museum.go.kr/", "영업중", "평일 10:00 ~ 18:00", 3);
+VALUES("국립광주 어린이박물관", "문화", "어린이를 위한 박물관", 5, "광주 북구 하서로 110", "062-570-7005", "gwangju.museum.go.kr", "영업중", "평일 10:00 ~ 18:00", 3);
 INSERT INTO company(name, type,  discription, score, address, number, homepage, state, time, area_list_id ) 
-VALUES("광주광역시립민속박물관", "문화", "광주의 민속 대표 박물관", 3, "광주 북구 서하로 48-25", "062-570-7006", "http://gwangju.museum.go.kr/", "영업중", "평일 10:00 ~ 18:00", 3);
+VALUES("광주광역시립민속박물관", "문화", "광주의 민속 대표 박물관", 3, "광주 북구 서하로 48-25", "062-570-7006", "gwangju.museum.go.kr/", "영업중", "평일 10:00 ~ 18:00", 3);
 INSERT INTO company(name, type,  discription, score, address, number, homepage, state, time, area_list_id ) 
-VALUES("한국미용박물관", "문화", "한국의 미용을 알수있습니다.", 2, "광주 북구 용봉로 116", "062-570-7007", "http://gwangju.museum.go.kr/", "영업중", "평일 10:00 ~ 18:00", 3);
+VALUES("한국미용박물관", "문화", "한국의 미용을 알수있습니다.", 2, "광주 북구 용봉로 116", "062-570-7007", "gwangju.museum.go.kr", "영업중", "평일 10:00 ~ 18:00", 3);
 INSERT INTO company(name, type,  discription, score, address, number, homepage, state, time, area_list_id ) 
-VALUES("세계카메라영화박물관", "문화", "세계의 카메라로 찍은 영화", 3.5, "광주 동구 동계로 5", "062-570-7008", "http://gwangju.museum.go.kr/", "영업중", "평일 10:00 ~ 18:00", 3);
+VALUES("세계카메라영화박물관", "문화", "세계의 카메라로 찍은 영화", 3.5, "광주 동구 동계로 5", "062-570-7008", "gwangju.museum.go.kr", "영업중", "평일 10:00 ~ 18:00", 3);
 INSERT INTO company(name, type,  discription, score, address, number, homepage, state, time, area_list_id ) 
-VALUES("광주교육대학교 교육박물관", "문화", "광주교대 대표 박물관", 3, "광주 북구 필문대로 55 광주교육대학교", "062-570-7009", "http://gwangju.museum.go.kr/", "영업중", "평일 10:00 ~ 18:00", 3);
+VALUES("광주교육대학교 교육박물관", "문화", "광주교대 대표 박물관", 3, "광주 북구 필문대로 55 광주교육대학교", "062-570-7009", "gwangju.museum.go.kr", "영업중", "평일 10:00 ~ 18:00", 3);
 INSERT INTO company(name, type,  discription, score, address, number, homepage, state, time, area_list_id ) 
-VALUES("전남대학교 의학박물관", "문화", "의학대학 대표 박물관", 1.4, "광주 동구 백서로 160", "062-570-7010", "http://gwangju.museum.go.kr/", "영업중", "평일 10:00 ~ 18:00", 3);
+VALUES("전남대학교 의학박물관", "문화", "의학대학 대표 박물관", 1.4, "광주 동구 백서로 160", "062-570-7010", "gwangju.museum.go.kr", "영업중", "평일 10:00 ~ 18:00", 3);
 INSERT INTO company(name, type,  discription, score, address, number, homepage, state, time, area_list_id ) 
-VALUES("조선대학교 장황남정보통신박물관", "문화", "조선대학교 대표 박물관", 4, "광주 동구 필문대로 309 조선대학교", "062-570-7011", "http://gwangju.museum.go.kr/", "영업중", "평일 10:00 ~ 18:00", 3);
+VALUES("조선대학교 장황남정보통신박물관", "문화", "조선대학교 대표 박물관", 4, "광주 동구 필문대로 309 조선대학교", "062-570-7011", "gwangju.museum.go.kr", "영업중", "평일 10:00 ~ 18:00", 3);
 INSERT INTO company(name, type,  discription, score, address, number, homepage, state, time, area_list_id ) 
-VALUES("518민주화운동기록관", "문화", "518민주화운동 대표 기록관", 3.2, "광주 동구 금남로 221", "062-570-7012", "http://gwangju.museum.go.kr/", "영업중", "평일 10:00 ~ 18:00", 3);
+VALUES("518민주화운동기록관", "문화", "518민주화운동 대표 기록관", 3.2, "광주 동구 금남로 221", "062-570-7012", "gwangju.museum.go.kr", "영업중", "평일 10:00 ~ 18:00", 3);
 INSERT INTO company(name, type,  discription, score, address, number, homepage, state, time, area_list_id ) 
-VALUES("부산박물관", "문화", "부산광역시 대표 박물관", 3, "부산 남구 유엔평화로 63 부산광역시시립박물관", "051-610-7111", "http://gwangju.museum.go.kr/", "영업중", "평일 10:00 ~ 18:00", 2);
+VALUES("부산박물관", "문화", "부산광역시 대표 박물관", 3, "부산 남구 유엔평화로 63 부산광역시시립박물관", "051-610-7111", "gwangju.museum.go.kr", "영업중", "평일 10:00 ~ 18:00", 2);
 INSERT INTO company(name, type,  discription, score, address, number, homepage, state, time, area_list_id ) 
-VALUES("국립춘천박물관", "문화", "강원도의 대표 박물관", 4.5, "강원 춘천시 우석로 70 국립춘천박물관", "033-260-1500", "http://gwangju.museum.go.kr/", "영업중", "평일 10:00 ~ 18:00", 4);
+VALUES("국립춘천박물관", "문화", "강원도의 대표 박물관", 4.5, "강원 춘천시 우석로 70 국립춘천박물관", "033-260-1500", "gwangju.museum.go.kr", "영업중", "평일 10:00 ~ 18:00", 4);
 INSERT INTO company(name, type,  discription, score, address, number, homepage, state, time, area_list_id ) 
-VALUES("서울 역사박물관", "문화", "대한민국 대표 역시박물관", 4.7, "서울 종로구 새문안로 55", "02-123-1234", "http://gwangju.museum.go.kr/", "영업중", "평일 10:00 ~ 18:00", 1);
-INSERT INTO company(name, type,  discription, score, address, number, homepage, state, time, area_list_id ) VALUES("하나 렌트카", "차량대여", "강원도 제일의 렌트카", 4.2, "강원도 양양군 양양읍 관아길 13-32", "010-5656-2225", "www.rentCar1.com", "영업중", "09:00 ~ 18:00", 4);
+VALUES("서울 역사박물관", "문화", "대한민국 대표 역시박물관", 4.7, "서울 종로구 새문안로 55", "02-123-1234", "gwangju.museum.go.kr", "영업중", "평일 10:00 ~ 18:00", 1);
+INSERT INTO company(name, type,  discription, score, address, number, homepage, state, time, area_list_id ) VALUES("하나 렌트카", "차량대여", "강원도 제일의 렌트카", 2.7, "강원도 양양군 양양읍 관아길 13-32", "010-5656-2225", "www.rentCar1.com", "영업중", "09:00 ~ 18:00", 4);
 INSERT INTO company(name, type,  discription, score, address, number, homepage, state, time, area_list_id ) VALUES("두리 렌트카", "차량대여", "강원도 두번째 렌트카", 3.7, "강원도 양양군 양양읍 군청길 15", "010-5656-5675", "www.rentCar2.com", "영업중", "09:00 ~ 18:00", 4);
 INSERT INTO company(name, type,  discription, score, address, number, homepage, state, time, area_list_id ) VALUES("세니 렌트카", "차량대여", "강원도 셋째가는 렌트카", 4.9, "강원도 양양군 양양읍 월리 449-1", "010-5656-2323", "www.rentCar3.com", "영업중", "09:00 ~ 18:00", 4);
 INSERT INTO company(name, type,  discription, score, address, number, homepage, state, time, area_list_id ) VALUES("네시 렌트카", "차량대여", "강원도 넷째 렌트카", 1.2, "강원도 양양군 양양읍 동해대로 2996", "010-5656-3467", "www.rentCar4.com", "영업중", "09:00 ~ 18:00", 4);
@@ -411,7 +411,7 @@ INSERT INTO company(name, type,  discription, score, address, number, homepage, 
 INSERT INTO company(name, type,  discription, score, address, number, homepage, state, time, area_list_id ) VALUES("열두 렌트카", "차량대여", "강원도 열두번째 렌트카", 4.8, "강원도 양양군 서면 떡마을길 85-10", "010-5656-8323", "www.rentCar12.com", "영업중", "09:00 ~ 18:00", 4);
 INSERT INTO company(name, type,  discription, score, address, number, homepage, state, time, area_list_id ) VALUES("열세 렌트카", "차량대여", "서울 열세번째 렌트카", 2.3, "서울특별시 중구 동호로33길 24", "010-5656-7923", "www.rentCar13.com", "영업중", "09:00 ~ 18:00", 1);
 INSERT INTO company(name, type,  discription, score, address, number, homepage, state, time, area_list_id ) VALUES("열네 렌트카", "차량대여", "부산 열네번째 렌트카", 1.7, "부산광역시 연제구 거제대로74번길 71", "010-5656-8323", "www.rentCar14.com", "영업중", "09:00 ~ 18:00", 2);
-INSERT INTO company(name, type,  discription, score, address, number, homepage, state, time, area_list_id ) VALUES("열다 렌트카", "차량대여", "광주 열닷번째 렌트카", .1.1, "광주광역시 서구 월드컵4강로 223", "010-5656-4443", "www.rentCar15.com", "영업중", "09:00 ~ 18:00", 3);
+INSERT INTO company(name, type,  discription, score, address, number, homepage, state, time, area_list_id ) VALUES("열다 렌트카", "차량대여", "광주 열닷번째 렌트카", 1.1, "광주광역시 서구 월드컵4강로 223", "010-5656-4443", "www.rentCar15.com", "영업중", "09:00 ~ 18:00", 3);
 
 
 INSERT INTO facility_admin(company_id, facility_id) VALUES(1,1);
@@ -419,7 +419,36 @@ INSERT INTO facility_admin(company_id, facility_id) VALUES(1,3);
 INSERT INTO facility_admin(company_id, facility_id) VALUES(1,4);
 INSERT INTO facility_admin(company_id, facility_id) VALUES(2,2);
 INSERT INTO facility_admin(company_id, facility_id) VALUES(2,3);
-INSERT INTO facility_admin(company_id, facility_id) VALUES(2,4);
+INSERT INTO facility_admin(company_id, facility_id) VALUES(2,1);
+INSERT INTO facility_admin(company_id, facility_id) VALUES(3,2);
+INSERT INTO facility_admin(company_id, facility_id) VALUES(3,3);
+INSERT INTO facility_admin(company_id, facility_id) VALUES(3,4);
+INSERT INTO facility_admin(company_id, facility_id) VALUES(3,1);
+INSERT INTO facility_admin(company_id, facility_id) VALUES(3,2);
+INSERT INTO facility_admin(company_id, facility_id) VALUES(3,3);
+INSERT INTO facility_admin(company_id, facility_id) VALUES(4,4);
+INSERT INTO facility_admin(company_id, facility_id) VALUES(4,1);
+INSERT INTO facility_admin(company_id, facility_id) VALUES(4,2);
+INSERT INTO facility_admin(company_id, facility_id) VALUES(5,3);
+INSERT INTO facility_admin(company_id, facility_id) VALUES(5,4);
+INSERT INTO facility_admin(company_id, facility_id) VALUES(6,1);
+INSERT INTO facility_admin(company_id, facility_id) VALUES(6,2);
+INSERT INTO facility_admin(company_id, facility_id) VALUES(7,3);
+INSERT INTO facility_admin(company_id, facility_id) VALUES(7,4);
+INSERT INTO facility_admin(company_id, facility_id) VALUES(8,1);
+INSERT INTO facility_admin(company_id, facility_id) VALUES(8,2);
+INSERT INTO facility_admin(company_id, facility_id) VALUES(9,3);
+INSERT INTO facility_admin(company_id, facility_id) VALUES(9,4);
+INSERT INTO facility_admin(company_id, facility_id) VALUES(10,1);
+INSERT INTO facility_admin(company_id, facility_id) VALUES(11,2);
+INSERT INTO facility_admin(company_id, facility_id) VALUES(11,3);
+INSERT INTO facility_admin(company_id, facility_id) VALUES(11,4);
+INSERT INTO facility_admin(company_id, facility_id) VALUES(12,1);
+INSERT INTO facility_admin(company_id, facility_id) VALUES(12,2);
+INSERT INTO facility_admin(company_id, facility_id) VALUES(13,3);
+INSERT INTO facility_admin(company_id, facility_id) VALUES(13,4);
+INSERT INTO facility_admin(company_id, facility_id) VALUES(14,1);
+INSERT INTO facility_admin(company_id, facility_id) VALUES(15,2);
 INSERT INTO facility_admin(company_id, facility_id) VALUES(16,1);
 INSERT INTO facility_admin(company_id, facility_id) VALUES(16,2);
 INSERT INTO facility_admin(company_id, facility_id) VALUES(16,4);
@@ -690,16 +719,16 @@ INSERT INTO user(name, age, gender, email, password, fail_password, cre_date, bu
 INSERT INTO user(name, age, gender, email, password, fail_password, cre_date, business_id, image_info_id) VALUES("연대여", 50, "남", "car14@rent.com", SHA2('1234',512), 0, NOW(), 59, 61);
 INSERT INTO user(name, age, gender, email, password, fail_password, cre_date, business_id, image_info_id) VALUES("달대여", 63, "여", "car15@rent.com", SHA2('1234',512), 0, NOW(), 60, 1);
 INSERT INTO user(name, age, gender, email, password, fail_password, cre_date, image_info_id) VALUES("한대여", 24, "남", "abcde61@rent.com", SHA2('1234',512), 0, NOW(), 61);
-INSERT INTO user(name, age, gender, email, password, fail_password, cre_date, image_info_id) VALUES("두대여", 34, "남", "abcde62@rent.com", SHA2('1234',512), 0, NOW(), 61);
+INSERT INTO user(name, age, gender, email, password, fail_password, cre_date, image_info_id) VALUES("두대여", 34, "여", "abcde62@rent.com", SHA2('1234',512), 0, NOW(), 61);
 INSERT INTO user(name, age, gender, email, password, fail_password, cre_date, image_info_id) VALUES("세대여", 52, "남", "abcde63@rent.com", SHA2('1234',512), 0, NOW(), 61);
-INSERT INTO user(name, age, gender, email, password, fail_password, cre_date, image_info_id) VALUES("네대여", 55, "남", "abcde64@rent.com", SHA2('1234',512), 0, NOW(), 61);
+INSERT INTO user(name, age, gender, email, password, fail_password, cre_date, image_info_id) VALUES("네대여", 55, "여", "abcde64@rent.com", SHA2('1234',512), 0, NOW(), 61);
 INSERT INTO user(name, age, gender, email, password, fail_password, cre_date, image_info_id) VALUES("다대여", 43, "남", "abcde65@rent.com", SHA2('1234',512), 0, NOW(), 61);
-INSERT INTO user(name, age, gender, email, password, fail_password, cre_date, image_info_id) VALUES("여대여", 37, "남", "abcde66@rent.com", SHA2('1234',512), 0, NOW(), 61);
-INSERT INTO user(name, age, gender, email, password, fail_password, cre_date, image_info_id) VALUES("일대여", 39, "여", "abcde67@rent.com", SHA2('1234',512), 0, NOW(), 61);
-INSERT INTO user(name, age, gender, email, password, fail_password, cre_date, image_info_id) VALUES("엳대여", 50, "남", "abcde68@rent.com", SHA2('1234',512), 0, NOW(), 61);
+INSERT INTO user(name, age, gender, email, password, fail_password, cre_date, image_info_id) VALUES("여대여", 37, "여", "abcde66@rent.com", SHA2('1234',512), 0, NOW(), 61);
+INSERT INTO user(name, age, gender, email, password, fail_password, cre_date, image_info_id) VALUES("일대여", 39, "남", "abcde67@rent.com", SHA2('1234',512), 0, NOW(), 61);
+INSERT INTO user(name, age, gender, email, password, fail_password, cre_date, image_info_id) VALUES("엳대여", 50, "여", "abcde68@rent.com", SHA2('1234',512), 0, NOW(), 61);
 INSERT INTO user(name, age, gender, email, password, fail_password, cre_date, image_info_id) VALUES("아대여", 67, "남", "abcde69@rent.com", SHA2('1234',512), 0, NOW(), 61);
 INSERT INTO user(name, age, gender, email, password, fail_password, cre_date, image_info_id) VALUES("열대여", 36, "여", "abcde70@rent.com", SHA2('1234',512), 0, NOW(), 61);
-INSERT INTO user(name, age, gender, email, password, fail_password, cre_date, image_info_id) VALUES("옇대여", 40, "여", "abcde71@rent.com", SHA2('1234',512), 0, NOW(), 61);
+INSERT INTO user(name, age, gender, email, password, fail_password, cre_date, image_info_id) VALUES("옇대여", 40, "남", "abcde71@rent.com", SHA2('1234',512), 0, NOW(), 61);
 
 
 
@@ -1101,7 +1130,10 @@ INSERT INTO comment (`title`, `content`, `score`, `mod_date`, `user_id`, `compan
 INSERT INTO comment (`title`, `content`, `score`, `mod_date`, `user_id`, `company_id`) VALUES ('맛나게잘먹었어요 해장짱', '리뷰 늦었네요..늘 맛있게 먹습니다.수고하세요', 4.7, now(),  69, 16);
 INSERT INTO comment (`title`, `content`, `score`, `mod_date`, `user_id`, `company_id`) VALUES ('맛있음. 먹어보면 알아요', '네 맛있게 먹었습니다 진짜!', 3.5, now(),  70, 16);
 INSERT INTO comment (`title`, `content`, `score`, `mod_date`, `user_id`, `company_id`) VALUES ('맛있음 ㅎㅎㅎㅎㅎㅎㅎㅎ', '조금 비싼듯 하지만 먹을만은 합니다초밥 나름 괜춘 우동은 걍 먹을만한정도가격이 좀 비싼듯한 느낌은 사라지지가 않음', 5.0, now(),  71, 16);
-
+INSERT INTO comment (`title`, `content`, `score`, `mod_date`, `user_id`, `company_id`) VALUES ('나름 괜춘', '나름 괜춘 우동은 걍 먹을만한정도가격이 좀 비싼듯한 느낌은 사라지지가 않음', 1.0, now(),  63, 16);
+INSERT INTO comment (`title`, `content`, `score`, `mod_date`, `user_id`, `company_id`) VALUES ('나름 괜춘2', '나름 괜춘 우동은 걍 먹을만한정도가격이 좀 비싼듯한 느낌은 사라지지가 않음', 2.0, now(),  64, 16);
+INSERT INTO comment (`title`, `content`, `score`, `mod_date`, `user_id`, `company_id`) VALUES ('나름 괜춘3', '나름 괜춘 우동은 걍 먹을만한정도가격이 좀 비싼듯한 느낌은 사라지지가 않음', 3.0, now(),  65, 16);
+INSERT INTO comment (`title`, `content`, `score`, `mod_date`, `user_id`, `company_id`) VALUES ('나름 괜춘3', '나름 괜춘 우동은 걍 먹을만한정도가격이 좀 비싼듯한 느낌은 사라지지가 않음', 4.0, now(),  66, 16);
 /* 문화 */
 INSERT INTO comment (`title`, `content`, `score`, `mod_date`, `user_id`, `company_id`) VALUES ('연기짱 멋있어요 ㅎㅎ두배우역시', '김윤석, 주지훈 두 배우의 연기. 말이 필요없음', 3.7, now(),  61, 31);
 INSERT INTO comment (`title`, `content`, `score`, `mod_date`, `user_id`, `company_id`) VALUES ('돟앗어요ㅠㅠㅠㅠㅠㅠㅠㅠㅠ', '그냥 아쉽습니다. 저예산 치면 괜찮고 진지하게 생각하면 베놈이 너무 아쉽고 특히 여주는 리얼 무의미한 역활 인듯...', 3.3, now(),  62, 31);
@@ -1125,6 +1157,152 @@ INSERT INTO comment (`title`, `content`, `score`, `mod_date`, `user_id`, `compan
 INSERT INTO comment (`title`, `content`, `score`, `mod_date`, `user_id`, `company_id`) VALUES ('차 상태 좋았습니다', '정기적으로 차량관리까지 해줘서 관리부담이 전혀 없습니다.', 3.7, now(),  67, 46);
 INSERT INTO comment (`title`, `content`, `score`, `mod_date`, `user_id`, `company_id`) VALUES ('히터에서 냄새가 나네요', '집 주차장에 쏘카가 있으니까 엘리베이터 타고 내려오기만 하면 이용할 수 있다는게 너무 좋아요!', 4.1, now(),  68, 46);
 INSERT INTO comment (`title`, `content`, `score`, `mod_date`, `user_id`, `company_id`) VALUES ('최대한 저렴한걸루 찾아 무탈하게 잘 사용하고 돌아왔습니다.', '차량 상태 진짜 별로였습니다 뒷타이어 얼마 안남아있었고 얼라이먼트도 안맞아서 운전하는동안 진짜 피곤했습니다.', 1.1, now(),  69, 46);
-INSERT INTO comment (`title`, `content`, `score`, `mod_date`, `user_id`, `company_id`) VALUES ('가격대비 만족해요. 이가격에 완전자차까지..', '차량 내부 냄새없이 깨끗했구 저렴한 가격에 좋은차 이용 잘했습니다다음에도 여기서 이용 예정^^.', 1.6, now(),  70, 46);
-INSERT INTO comment (`title`, `content`, `score`, `mod_date`, `user_id`, `company_id`) VALUES ('가격대비 최고입니다!', '공항에서 가깝고 직원분들도 친절했습니다', 4.8, now(),  71, 46);
+
+
+INSERT INTO reservation (state, product_type, total_price, res_date, product_count,reg_date, company_id, product_id,user_id)
+VALUES('성공', '숙박', 200000,'2018-01-01',2,'2018-01-01',1,1,61);
+INSERT INTO reservation (state, product_type, total_price, res_date, product_count,reg_date, company_id, product_id,user_id)
+VALUES('성공', '숙박', 200000,'2018-01-01',2,'2018-01-01',1,2,62);
+INSERT INTO reservation (state, product_type, total_price, res_date, product_count,reg_date, company_id, product_id,user_id)
+VALUES('성공', '식당', 80000,'2018-01-01',2,'2018-01-01',16,1,61);
+INSERT INTO reservation (state, product_type, total_price, res_date, product_count,reg_date, company_id, product_id,user_id)
+VALUES('성공', '식당', 80000,'2018-01-01',2,'2018-01-01',17,2,61);
+INSERT INTO reservation (state, product_type, total_price, res_date, product_count,reg_date, company_id, product_id,user_id)
+VALUES('성공', '식당', 80000,'2018-01-01',2,'2018-01-01',18,1,61);
+INSERT INTO reservation (state, product_type, total_price, res_date, product_count,reg_date, company_id, product_id,user_id)
+VALUES('성공', '문화', 20000,'2018-01-01',2,'2018-01-01',31,1,61);
+INSERT INTO reservation (state, product_type, total_price, res_date, product_count,reg_date, company_id, product_id,user_id)
+VALUES('성공', '숙박', 300000,'2018-02-01',2,'2018-02-01',1,1,63);
+INSERT INTO reservation (state, product_type, total_price, res_date, product_count,reg_date, company_id, product_id,user_id)
+VALUES('성공', '숙박', 300000,'2018-02-01',2,'2018-02-01',1,2,64);
+INSERT INTO reservation (state, product_type, total_price, res_date, product_count,reg_date, company_id, product_id,user_id)
+VALUES('성공', '숙박', 10000,'2018-02-01',2,'2018-02-01',1,1,65);
+INSERT INTO reservation (state, product_type, total_price, res_date, product_count,reg_date, company_id, product_id,user_id)
+VALUES('성공', '식당', 80000,'2018-02-01',2,'2018-02-01',16,1,61);
+INSERT INTO reservation (state, product_type, total_price, res_date, product_count,reg_date, company_id, product_id,user_id)
+VALUES('성공', '식당', 38000,'2018-02-01',2,'2018-02-01',17,2,61);
+INSERT INTO reservation (state, product_type, total_price, res_date, product_count,reg_date, company_id, product_id,user_id)
+VALUES('성공', '식당', 18000,'2018-02-01',2,'2018-02-01',18,1,61);
+INSERT INTO reservation (state, product_type, total_price, res_date, product_count,reg_date, company_id, product_id,user_id)
+VALUES('성공', '문화', 10000,'2018-02-01',2,'2018-02-01',31,2,61);
+INSERT INTO reservation (state, product_type, total_price, res_date, product_count,reg_date, company_id, product_id,user_id)
+VALUES('성공', '문화', 16000,'2018-02-01',2,'2018-02-01',32,1,61);
+INSERT INTO reservation (state, product_type, total_price, res_date, product_count,reg_date, company_id, product_id,user_id)
+VALUES('성공', '문화', 14000,'2018-02-01',2,'2018-02-01',33,2,61);
+INSERT INTO reservation (state, product_type, total_price, res_date, product_count,reg_date, company_id, product_id,user_id)
+VALUES('성공', '문화', 6000,'2018-02-01',2,'2018-02-01',34,1,61);
+INSERT INTO reservation (state, product_type, total_price, res_date, product_count,reg_date, company_id, product_id,user_id)
+VALUES('성공', '차량대여', 20000,'2018-02-01',2,'2018-02-01',46,1,61);
+INSERT INTO reservation (state, product_type, total_price, res_date, product_count,reg_date, company_id, product_id,user_id)
+VALUES('성공', '숙박', 25000,'2018-03-01',2,'2018-03-01',1,2,66);
+INSERT INTO reservation (state, product_type, total_price, res_date, product_count,reg_date, company_id, product_id,user_id)
+VALUES('성공', '숙박', 33000,'2018-03-01',2,'2018-03-01',1,1,67);
+INSERT INTO reservation (state, product_type, total_price, res_date, product_count,reg_date, company_id, product_id,user_id)
+VALUES('성공', '숙박', 30000,'2018-03-01',2,'2018-03-01',1,2,68);
+INSERT INTO reservation (state, product_type, total_price, res_date, product_count,reg_date, company_id, product_id,user_id)
+VALUES('성공', '숙박', 42000,'2018-03-01',2,'2018-03-01',1,1,69);
+INSERT INTO reservation (state, product_type, total_price, res_date, product_count,reg_date, company_id, product_id,user_id)
+VALUES('성공', '숙박', 7000,'2018-03-01',2,'2018-03-01',1,2,70);
+INSERT INTO reservation (state, product_type, total_price, res_date, product_count,reg_date, company_id, product_id,user_id)
+VALUES('성공', '숙박', 10000,'2018-03-01',2,'2018-03-01',1,1,71);
+INSERT INTO reservation (state, product_type, total_price, res_date, product_count,reg_date, company_id, product_id,user_id)
+VALUES('성공', '식당', 5000,'2018-03-01',2,'2018-03-01',19,1,61);
+INSERT INTO reservation (state, product_type, total_price, res_date, product_count,reg_date, company_id, product_id,user_id)
+VALUES('성공', '문화', 2000,'2018-03-01',2,'2018-03-01',38,2,61);
+INSERT INTO reservation (state, product_type, total_price, res_date, product_count,reg_date, company_id, product_id,user_id)
+VALUES('성공', '차량대여', 10000,'2018-03-01',2,'2018-03-01',46,2,61);
+INSERT INTO reservation (state, product_type, total_price, res_date, product_count,reg_date, company_id, product_id,user_id)
+VALUES('성공', '차량대여', 16000,'2018-03-01',2,'2018-03-01',47,1,61);
+INSERT INTO reservation (state, product_type, total_price, res_date, product_count,reg_date, company_id, product_id,user_id)
+VALUES('성공', '식당', 28000,'2018-04-01',2,'2018-04-01',19,2,61);
+INSERT INTO reservation (state, product_type, total_price, res_date, product_count,reg_date, company_id, product_id,user_id)
+VALUES('성공', '식당', 138000,'2018-04-01',2,'2018-04-01',20,1,61);
+INSERT INTO reservation (state, product_type, total_price, res_date, product_count,reg_date, company_id, product_id,user_id)
+VALUES('성공', '식당', 31000,'2018-04-01',2,'2018-04-01',21,2,61);
+INSERT INTO reservation (state, product_type, total_price, res_date, product_count,reg_date, company_id, product_id,user_id)
+VALUES('성공', '식당', 36000,'2018-04-01',2,'2018-04-01',22,1,61);
+INSERT INTO reservation (state, product_type, total_price, res_date, product_count,reg_date, company_id, product_id,user_id)
+VALUES('성공', '문화', 33000,'2018-04-01',2,'2018-04-01',39,1,61);
+INSERT INTO reservation (state, product_type, total_price, res_date, product_count,reg_date, company_id, product_id,user_id)
+VALUES('성공', '차량대여', 14000,'2018-04-01',2,'2018-04-01',49,2,61);
+INSERT INTO reservation (state, product_type, total_price, res_date, product_count,reg_date, company_id, product_id,user_id)
+VALUES('성공', '차량대여', 6000,'2018-04-01',2,'2018-04-01',50,1,61);
+INSERT INTO reservation (state, product_type, total_price, res_date, product_count,reg_date, company_id, product_id,user_id)
+VALUES('성공', '차량대여', 2000,'2018-04-01',2,'2018-04-01',51,2,61);
+INSERT INTO reservation (state, product_type, total_price, res_date, product_count,reg_date, company_id, product_id,user_id)
+VALUES('성공', '식당', 98000,'2018-05-01',2,'2018-05-01',22,1,61);
+INSERT INTO reservation (state, product_type, total_price, res_date, product_count,reg_date, company_id, product_id,user_id)
+VALUES('성공', '식당', 58000,'2018-05-01',2,'2018-05-01',23,2,61);
+INSERT INTO reservation (state, product_type, total_price, res_date, product_count,reg_date, company_id, product_id,user_id)
+VALUES('성공', '식당', 68000,'2018-05-01',2,'2018-05-01',24,1,61);
+INSERT INTO reservation (state, product_type, total_price, res_date, product_count,reg_date, company_id, product_id,user_id)
+VALUES('성공', '식당', 78000,'2018-05-01',2,'2018-05-01',25,2,61);
+INSERT INTO reservation (state, product_type, total_price, res_date, product_count,reg_date, company_id, product_id,user_id)
+VALUES('성공', '문화', 30000,'2018-05-01',2,'2018-05-01',31,2,61);
+INSERT INTO reservation (state, product_type, total_price, res_date, product_count,reg_date, company_id, product_id,user_id)
+VALUES('성공', '차량대여', 33000,'2018-05-01',2,'2018-05-01',46,1,61);
+INSERT INTO reservation (state, product_type, total_price, res_date, product_count,reg_date, company_id, product_id,user_id)
+VALUES('성공', '차량대여', 30000,'2018-05-01',2,'2018-05-01',46,2,61);
+INSERT INTO reservation (state, product_type, total_price, res_date, product_count,reg_date, company_id, product_id,user_id)
+VALUES('성공', '차량대여', 42000,'2018-05-01',2,'2018-05-01',46,1,61);
+INSERT INTO reservation (state, product_type, total_price, res_date, product_count,reg_date, company_id, product_id,user_id)
+VALUES('성공', '숙박', 51250,'2018-06-01',2,'2018-06-01',1,2,61);
+INSERT INTO reservation (state, product_type, total_price, res_date, product_count,reg_date, company_id, product_id,user_id)
+VALUES('성공', '숙박', 22354,'2018-06-01',2,'2018-06-01',1,1,62);
+INSERT INTO reservation (state, product_type, total_price, res_date, product_count,reg_date, company_id, product_id,user_id)
+VALUES('성공', '숙박', 678970,'2018-06-01',2,'2018-06-01',1,2,63);
+INSERT INTO reservation (state, product_type, total_price, res_date, product_count,reg_date, company_id, product_id,user_id)
+VALUES('성공', '숙박', 34444,'2018-06-01',2,'2018-06-01',1,1,64);
+INSERT INTO reservation (state, product_type, total_price, res_date, product_count,reg_date, company_id, product_id,user_id)
+VALUES('성공', '식당', 68000,'2018-06-01',2,'2018-06-01',16,1,61);
+INSERT INTO reservation (state, product_type, total_price, res_date, product_count,reg_date, company_id, product_id,user_id)
+VALUES('성공', '식당', 78000,'2018-06-01',2,'2018-06-01',16,2,61);
+INSERT INTO reservation (state, product_type, total_price, res_date, product_count,reg_date, company_id, product_id,user_id)
+VALUES('성공', '문화', 42000,'2018-06-01',2,'2018-06-01',31,1,61);
+INSERT INTO reservation (state, product_type, total_price, res_date, product_count,reg_date, company_id, product_id,user_id)
+VALUES('성공', '문화', 7000,'2018-06-01',2,'2018-06-01',31,2,61);
+INSERT INTO reservation (state, product_type, total_price, res_date, product_count,reg_date, company_id, product_id,user_id)
+VALUES('성공', '차량대여', 7000,'2018-06-01',2,'2018-06-01',46,2,61);
+INSERT INTO reservation (state, product_type, total_price, res_date, product_count,reg_date, company_id, product_id,user_id)
+VALUES('성공', '차량대여', 10000,'2018-06-01',2,'2018-06-01',46,1,61);
+INSERT INTO reservation (state, product_type, total_price, res_date, product_count,reg_date, company_id, product_id,user_id)
+VALUES('성공', '차량대여', 51250,'2018-06-01',2,'2018-06-01',46,2,61);
+INSERT INTO reservation (state, product_type, total_price, res_date, product_count,reg_date, company_id, product_id,user_id)
+VALUES('성공', '숙박', 111111,'2018-07-01',2,'2018-07-01',1,2,65);
+INSERT INTO reservation (state, product_type, total_price, res_date, product_count,reg_date, company_id, product_id,user_id)
+VALUES('성공', '문화', 10000,'2018-07-01',2,'2018-07-01',41,1,61);
+INSERT INTO reservation (state, product_type, total_price, res_date, product_count,reg_date, company_id, product_id,user_id)
+VALUES('성공', '문화', 51250,'2018-07-01',2,'2018-07-01',40,2,61);
+INSERT INTO reservation (state, product_type, total_price, res_date, product_count,reg_date, company_id, product_id,user_id)
+VALUES('성공', '차량대여', 22354,'2018-07-01',2,'2018-07-01',52,1,61);
+INSERT INTO reservation (state, product_type, total_price, res_date, product_count,reg_date, company_id, product_id,user_id)
+VALUES('성공', '차량대여', 678970,'2018-07-01',2,'2018-07-01',46,2,61);
+INSERT INTO reservation (state, product_type, total_price, res_date, product_count,reg_date, company_id, product_id,user_id)
+VALUES('성공', '식당', 23000,'2018-08-01',2,'2018-08-01',28,1,61);
+INSERT INTO reservation (state, product_type, total_price, res_date, product_count,reg_date, company_id, product_id,user_id)
+VALUES('성공', '문화', 22354,'2018-08-01',2,'2018-08-01',44,1,61);
+INSERT INTO reservation (state, product_type, total_price, res_date, product_count,reg_date, company_id, product_id,user_id)
+VALUES('성공', '문화', 678970,'2018-08-01',2,'2018-08-01',31,2,61);
+INSERT INTO reservation (state, product_type, total_price, res_date, product_count,reg_date, company_id, product_id,user_id)
+VALUES('성공', '숙박', 23422,'2018-08-01',2,'2018-08-01',1,1,66);
+INSERT INTO reservation (state, product_type, total_price, res_date, product_count,reg_date, company_id, product_id,user_id)
+VALUES('성공', '숙박', 28000,'2018-08-01',2,'2018-08-01',1,2,67);
+INSERT INTO reservation (state, product_type, total_price, res_date, product_count,reg_date, company_id, product_id,user_id)
+VALUES('성공', '숙박', 64000,'2018-08-01',2,'2018-08-01',1,1,68);
+INSERT INTO reservation (state, product_type, total_price, res_date, product_count,reg_date, company_id, product_id,user_id)
+VALUES('성공', '숙박', 80000,'2018-08-01',2,'2018-08-01',1,2,69);
+INSERT INTO reservation (state, product_type, total_price, res_date, product_count,reg_date, company_id, product_id,user_id)
+VALUES('성공', '숙박', 10000,'2018-09-01',2,'2018-09-01',1,1,70);
+INSERT INTO reservation (state, product_type, total_price, res_date, product_count,reg_date, company_id, product_id,user_id)
+VALUES('성공', '숙박', 20000,'2018-09-01',2,'2018-09-01',1,2,71);
+INSERT INTO reservation (state, product_type, total_price, res_date, product_count,reg_date, company_id, product_id,user_id)
+VALUES('성공', '숙박', 30000,'2018-09-01',2,'2018-09-01',8,1,61);
+INSERT INTO reservation (state, product_type, total_price, res_date, product_count,reg_date, company_id, product_id,user_id)
+VALUES('성공', '숙박', 420000,'2018-09-01',2,'2018-09-01',1,2,62);
+INSERT INTO reservation (state, product_type, total_price, res_date, product_count,reg_date, company_id, product_id,user_id)
+VALUES('성공', '숙박', 32000,'2018-09-01',2,'2018-09-01',6,1,61);
+INSERT INTO reservation (state, product_type, total_price, res_date, product_count,reg_date, company_id, product_id,user_id)
+VALUES('성공', '숙박', 3800,'2018-09-01',2,'2018-09-01',1,2,63);
+INSERT INTO reservation (state, product_type, total_price, res_date, product_count,reg_date, company_id, product_id,user_id)
+VALUES('성공', '숙박', 380000,'2018-09-01',2,'2018-09-01',1,1,64);
 
