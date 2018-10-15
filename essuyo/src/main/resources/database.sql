@@ -179,17 +179,6 @@ CREATE TABLE product_image_admin (
 	FOREIGN KEY (image_info_id) REFERENCES image_info(id) ON DELETE CASCADE
 )DEFAULT CHARSET=utf8; 
 
-/* 덧글이미지관리 */
-CREATE TABLE comment_image_admin (
-	id INTEGER PRIMARY KEY auto_increment, /*덧글이미지관리 번호*/
-	image_info_id INTEGER, /* 이미지정보번호 */
-	comment_id INTEGER, /* 덧글번호 */
-	
-	FOREIGN KEY (comment_id) REFERENCES comment(id) ON DELETE CASCADE,
-	FOREIGN KEY (image_info_id) REFERENCES image_info(id) ON DELETE CASCADE
-)DEFAULT CHARSET=utf8; 
-
-
 /* 예약 */
 CREATE TABLE reservation (
 	id INTEGER PRIMARY KEY  auto_increment, /* 번호 */
@@ -229,6 +218,8 @@ CREATE TABLE qna (
 
 /*이미지*/
 INSERT INTO image_info ( save_path, type ,name, cre_date ) VALUES("/resources/images/default-user.png","image/png","default-user.png", now());
+
+
 
 
 /* 지역명목록 */
