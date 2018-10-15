@@ -1,5 +1,6 @@
 package com.webproject.essuyo.service.impl;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,12 @@ public class FacilityAdminServiceImpl implements FacilityAdminService {
 	public void deleteFacAdmin(int companyId) throws Exception {
 		
 		fadao.deleteFacAdmin(companyId);		
+	}
+
+	@Override
+	public List<String> selectById(int companyId) throws Exception {
+		
+		return fadao.selectById(companyId);
 	}
 
 }

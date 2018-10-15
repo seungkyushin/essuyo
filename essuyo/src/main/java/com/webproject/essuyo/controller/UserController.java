@@ -62,7 +62,6 @@ public class UserController {
 	public void registGet(UserVO vo, Model model) throws Exception {
 		logger.info("registGet.......");
 	}
-	
 
 	@GetMapping("/businessStart")
 	public String startBusiness(RedirectAttributes redirectAttr, HttpSession httpSession, Model model)
@@ -70,8 +69,8 @@ public class UserController {
 
 		String email = (String) httpSession.getAttribute("login");
 
-		int businessId =  service.addBusiness(email);
-		if ( businessId != 0) {
+		int businessId = service.addBusiness(email);
+		if (businessId != 0) {
 			httpSession.setAttribute("companyLogin", businessId);
 			redirectAttr.addFlashAttribute("errorMessageTitle", "SUCCESS !");
 			redirectAttr.addFlashAttribute("errorMessage", "회사를 등록해 사업을 시작하세요!");
@@ -103,8 +102,6 @@ public class UserController {
 		return "redirect:/login";
 	}
 
-	
-
 	// 컴퍼니 테이블을 수정하는 서비스의 컨트롤러(미완성)
 	// 테스트 중. 컴퍼니 테이블 작성 페이지로 가는 컨트롤러
 	@RequestMapping(value = "/companyUpdate", method = RequestMethod.GET)
@@ -118,6 +115,18 @@ public class UserController {
 			// 모델 대신 세션에 세트
 			// model.addAttribute("cvo", cvo);
 			session.setAttribute("cvo", cvo);
+			List<String> faList = FAService.selectById(cvo.getId());
+			if (!faList.isEmpty()) {
+				String facStr = "현재 선택된 시설은";
+				for (String fac : faList) {
+					facStr += ", " + fac;
+				}
+				facStr += " 입니다.";
+				model.addAttribute("facStr", facStr);
+			} else {
+				String facStr = "현재 아무런 시설도 선택되지 않은 상태입니다.";
+				model.addAttribute("facStr", facStr);
+			}
 
 		}
 	}
@@ -152,11 +161,11 @@ public class UserController {
 
 			if (facIds.size() >= 2) {
 				for (String facId : facIds) {
-					if(!facId.equals("no")) {
-					Map<String, Object> map = new HashMap<>();
-					map.put("company_id", cId);
-					map.put("facility_id", facId);
-					FAService.insertToAdmin(map);
+					if (!facId.equals("no")) {
+						Map<String, Object> map = new HashMap<>();
+						map.put("company_id", cId);
+						map.put("facility_id", facId);
+						FAService.insertToAdmin(map);
 					}
 				}
 			}
@@ -211,14 +220,14 @@ public class UserController {
 				FAService.deleteFacAdmin(cId);
 			} else {
 				FAService.deleteFacAdmin(cId);
-				
+
 				for (String facId : facIds) {
-					if(!facId.equals("no")) {
-					Map<String, Object> map = new HashMap<>();
-					map.put("company_id", cId);
-					map.put("facility_id", facId);
-					FAService.insertToAdmin(map);
-				}
+					if (!facId.equals("no")) {
+						Map<String, Object> map = new HashMap<>();
+						map.put("company_id", cId);
+						map.put("facility_id", facId);
+						FAService.insertToAdmin(map);
+					}
 				}
 			}
 
@@ -258,11 +267,11 @@ public class UserController {
 		UserVO user = service.getUserVO((String) httpSession.getAttribute("login"));
 
 		newUserInfo.setId(user.getId());
-		
-		if( newUserInfo.getPassword().equals("") == false) {
+
+		if (newUserInfo.getPassword().equals("") == false) {
 			newUserInfo.setPassword(Encryption.SHA512(newUserInfo.getPassword()));
 		}
-		
+
 		newUserInfo.setImageInfoId(user.getImageInfoId());
 
 		int update = service.setUserInfo(newUserInfo, file);
