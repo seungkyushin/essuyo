@@ -44,28 +44,23 @@
 	<%@ include file="/pageframe/header.jsp"%>
 
 	<div>
-	       <div class="swiper-container">
-					<div class="swiper-container">
-						<div id="image-list" class="swiper-wrapper">
-							
-						<c:forEach items="${company.image}" var="imageUrl">
-									<div class="swiper-slide">
-									<a href="${imageUrl}" class="grid image-link"> 
-									<img src="${imageUrl}" class="img-fluid" alt="#">
-								</a>
-									</div>
-							</c:forEach>
-							
-						</div>
-						<!-- Add Pagination -->
-						<div class="swiper-pagination swiper-pagination-white"></div>
-						<!-- Add Arrows -->
-						<div class="swiper-button-next swiper-button-white"></div>
-						<div class="swiper-button-prev swiper-button-white"></div>
+		<!-- Swiper -->
+		<div class="swiper-container">
+			<div class="swiper-wrapper">
+				<c:forEach items="${company.image}" var="imageUrl">
+					<div class="swiper-slide">
+						<a href="${imageUrl}" class="grid image-link"> 
+							<img src="${imageUrl}" class="img-fluid" alt="#">
+						</a>
 					</div>
-				</div>
+				</c:forEach>
+
 			</div>
-			
+			<div class="swiper-pagination swiper-pagination-white"></div>
+			<div class="swiper-button-next swiper-button-white"></div>
+			<div class="swiper-button-prev swiper-button-white"></div>
+		</div>
+	</div>
 	
 	<section class="reserve-block">
 		<div class="container">
@@ -156,7 +151,7 @@
 												<input type="text" name='title' id='title' class="form-control" placeholder="제목">
 											</div>
 											
-											<div class="customer-rating">
+											
 												<select	name="score" id="score">
 													<option value="0">☆☆☆☆☆</option>
 													<option value="1">★☆☆☆☆</option>
@@ -165,7 +160,7 @@
 													<option value="4">★★★★☆</option>
 													<option value="5">★★★★★</option>
 												</select> 
-											</div>
+										
 										</div>
 										<textarea class="form-control" name="content" id='content' rows="3"placeholder="내용"></textarea>
 									</div>
