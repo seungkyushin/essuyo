@@ -1306,3 +1306,18 @@ VALUES('성공', '숙박', 3800,'2018-09-01',2,'2018-09-01',1,2,63);
 INSERT INTO reservation (state, product_type, total_price, res_date, product_count,reg_date, company_id, product_id,user_id)
 VALUES('성공', '숙박', 380000,'2018-09-01',2,'2018-09-01',1,1,64);
 
+/*공지사항*/
+insert into notice (title, content, user_id) values ("공지사항입니다","공지사항 내용입니다","museum01@aaa.com");
+insert into notice (title, content, user_id) values ("공지사항","공지사항 내용입니다","museum02@aaa.com");
+insert into notice (title, content, user_id) values ("공-지","공지사항 내용입니다","museum03@aaa.com");
+insert into notice (title, content, user_id) values ("공지공지","공지사항 내용입니다","museum04@aaa.com");
+insert into notice (title, content, user_id) values ("공지","공지사항 내용입니다","museum05@aaa.com");
+insert into notice (title, content, user_id) values ("공지글","공지사항 내용입니다","museum06@aaa.com");
+insert into notice (title, content, user_id) values ("공지사항 제목","공지사항 내용입니다","museum07@aaa.com");
+insert into notice (title, content, user_id) values ("공지 이야아아아아","공지사항 내용입니다","museum08@aaa.com");
+
+insert into notice (title, content, user_id) (select title, content, user_id from notice);
+insert into notice (title, content, user_id) (select title, content, user_id from notice);
+insert into notice (title, content, user_id) (select title, content, user_id from notice);
+insert into notice (title, content, user_id) (select title, content, user_id from notice);
+insert into notice (title, content, user_id) (select title, content, user_id from notice);
