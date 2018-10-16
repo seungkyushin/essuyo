@@ -44,23 +44,28 @@
 	<%@ include file="/pageframe/header.jsp"%>
 
 	<div>
-		<!-- Swiper -->
-		<div class="swiper-container">
-			<div class="swiper-wrapper">
-				<c:forEach items="${company.image}" var="imageUrl">
-					<div class="swiper-slide">
-						<a href="${imageUrl}" class="grid image-link"> 
-							<img src="${imageUrl}" class="img-fluid" alt="#">
-						</a>
+	       <div class="swiper-container">
+					<div class="swiper-container">
+						<div id="image-list" class="swiper-wrapper">
+							
+						<c:forEach items="${company.image}" var="imageUrl">
+									<div class="swiper-slide">
+									<a href="${imageUrl}" class="grid image-link"> 
+									<img src="${imageUrl}" class="img-fluid" alt="#">
+								</a>
+									</div>
+							</c:forEach>
+							
+						</div>
+						<!-- Add Pagination -->
+						<div class="swiper-pagination swiper-pagination-white"></div>
+						<!-- Add Arrows -->
+						<div class="swiper-button-next swiper-button-white"></div>
+						<div class="swiper-button-prev swiper-button-white"></div>
 					</div>
-				</c:forEach>
-
+				</div>
 			</div>
-			<div class="swiper-pagination swiper-pagination-white"></div>
-			<div class="swiper-button-next swiper-button-white"></div>
-			<div class="swiper-button-prev swiper-button-white"></div>
-		</div>
-	</div>
+			
 	
 	<section class="reserve-block">
 		<div class="container">

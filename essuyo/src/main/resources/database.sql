@@ -1320,4 +1320,38 @@ insert into notice (title, content, user_id) (select title, content, user_id fro
 insert into notice (title, content, user_id) (select title, content, user_id from notice);
 insert into notice (title, content, user_id) (select title, content, user_id from notice);
 insert into notice (title, content, user_id) (select title, content, user_id from notice);
-insert into notice (title, content, user_id) (select title, content, user_id from notice);
+
+insert into qna (title, content, user_id) values ("취소질문","취소질문 내용입니다","abcde61@rent.com");
+insert into qna (title, content, user_id) values ("변경질문","변경질문 내용입니다","abcde62@rent.com");
+insert into qna (title, content, user_id) values ("추가질문","추가질문 내용입니다","abcde63@rent.com");
+insert into qna (title, content, user_id) values ("예약질문","예약질문 내용입니다","abcde64@rent.com");
+insert into qna (title, content, user_id) values ("취소질문","취소질문 내용입니다","abcde65@rent.com");
+insert into qna (title, content, user_id) values ("변경질문","변경질문 내용입니다","abcde66@rent.com");
+insert into qna (title, content, user_id) values ("추가질문","추가질문 내용입니다","abcde67@rent.com");
+insert into qna (title, content, user_id) values ("예약질문","예약질문 내용입니다","abcde68@rent.com");
+insert into qna (title, content, user_id) values ("변경질문","변경질문 내용입니다","abcde69@rent.com");
+insert into qna (title, content, user_id) values ("예약질문","예약질문 내용입니다","abcde70@rent.com");
+insert into qna (title, content, user_id) values ("취소질문","취소질문 내용입니다","abcde71@rent.com")
+
+insert into qna (title, content, user_id) (select title, content, user_id from qna);
+insert into qna (title, content, user_id) (select title, content, user_id from qna);
+insert into qna (title, content, user_id) (select title, content, user_id from qna);
+
+   
+INSERT INTO message( title, content, read_check, user_id, receiver_id) 
+VALUES("판매자가 사용자에게 쪽지 ", "쪽지 내용", 0, "abcde61@rent.com","abc1@gmail.com");
+INSERT INTO message( title, content, read_check, user_id, receiver_id) 
+VALUES("사용자가 판매자에게 쪽지", "쪽지 내용", 0, "abc1@gmail.com" ,"abcde61@rent.com");
+INSERT INTO message( title, content, read_check, user_id, receiver_id) 
+VALUES("판매자가 사용자에게 쪽지 ", "쪽지 내용", 0, "abcde61@rent.com","abc1@gmail.com");
+INSERT INTO message( title, content, read_check, user_id, receiver_id) 
+VALUES("사용자가 판매자에게 쪽지", "쪽지 내용", 0, "abc1@gmail.com" ,"abcde61@rent.com");
+INSERT INTO message( title, content, read_check, user_id, receiver_id) 
+VALUES("판매자가 사용자에게 쪽지 ", "쪽지 내용", 0, "abcde61@rent.com","abc1@gmail.com");
+INSERT INTO message( title, content, read_check, user_id, receiver_id) 
+VALUES("사용자가 판매자에게 쪽지", "쪽지 내용", 0, "abc1@gmail.com" ,"abcde61@rent.com");
+
+insert into message (title, content, read_check, user_id, receiver_id) (select title, content, read_check, user_id, receiver_id from message);
+insert into message (title, content, read_check, user_id, receiver_id) (select title, content, read_check, user_id, receiver_id from message);
+insert into message (title, content, read_check, user_id, receiver_id) (select title, content, read_check, user_id, receiver_id from message);
+
