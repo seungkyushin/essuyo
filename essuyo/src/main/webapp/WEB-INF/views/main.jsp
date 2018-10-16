@@ -46,7 +46,7 @@
 											<option value="차량대여">
 										</datalist>
 													
-										<input type="text" placeholder="ex) 지역" class="btn-group2" id="inputValue">
+										<input type="text" placeholder="ex) 지역:서울,부산,광주,강원도" class="btn-group2" id="inputValue">
 									
 										
 										

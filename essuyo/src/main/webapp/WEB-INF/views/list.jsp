@@ -293,6 +293,7 @@
 			$("#search").click(function() {
 				$("#salesList").html("");
 				
+				//마커 지우기
 				 for (var i = 0; i < markers.length; i++) {
 				        markers[i].setMap(null);
 			    }
