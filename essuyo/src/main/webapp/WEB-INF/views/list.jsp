@@ -225,8 +225,9 @@
 		    mapTypeControl: true	    
 		});
 		
-		map.setCursor(point);
+		map.setCursor('pointer');
 
+		
 		function searchAddressToCoordinate(address, name, id) {
 		    naver.maps.Service.geocode({
 		        address: address
@@ -237,6 +238,7 @@
 		        
 		        var infoWindow = new naver.maps.InfoWindow({
 		            anchorSkew: true
+		        });
 		        
 		        var item = response.result.items[0],
 		            addrType = item.isRoadAddress ? '[도로명 주소]' : '[지번 주소]',
@@ -248,8 +250,7 @@
 		                  
 		            ].join(''));
 
-		          
-		             
+		          	             
 		          var marker = new naver.maps.Marker({
 		                 map: map,
 		                 position: point
@@ -265,7 +266,7 @@
 		        
 		    });
 		}
-	</script>
+	</script>	
 	
 	<script>
 		var start = 0;
